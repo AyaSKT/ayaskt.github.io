@@ -15,28 +15,23 @@ hero:
   actions:
 
     - theme: brand
-      text: 非课内学习笔记目录
+      text: 课外学习笔记目录
       link: /Guides/Outclass
     
     - theme: brand
-      text: 第三学年笔记目录
-      link: /Guides/Y3
+      text: 数字信号处理 DSP
+      link: /Y3S2/DSP/DSP-README.md
+ 
 
     - theme: alt
-      text: 第二学年笔记目录
-      link: /Guides/Y2
+      text: 通信原理与系统
+      link: /Y3S1/CPS/CPS-README.md
 
     - theme: alt
       text: 第一学年笔记目录
       link: /Guides/Y2
 
-features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+
 
 
 ---
@@ -60,13 +55,10 @@ onMounted(async () => {
 <p
   id="hitokoto"
   style="
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 10rem;   /* 距离底部（footer 上方一点） */
+    margin-top: 13rem;
     text-align: center;
     font-size: 1.05rem;
-    pointer-events: none;
+    opacity: 0.9;
   "
 >
   {{ hitokotoText }}
