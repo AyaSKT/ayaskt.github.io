@@ -75,7 +75,7 @@ features:
     light: 5.jpg
   title: 友情推荐：Cateds
   details: 前端的神 & 后端的神 & Rust的神
-  link: https://ayaskt.github.io/
+  link: https://cateds.github.io/
   linkText: 点击以膜拜
 
 
