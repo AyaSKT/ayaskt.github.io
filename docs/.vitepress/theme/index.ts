@@ -15,8 +15,8 @@ import update from "./components/update.vue"
 import MyLayout from './components/MyLayout.vue'
 
 export default {
-  Layout: MyLayout,
-  extends: DefaultTheme,
+  
+
 
   
   enhanceApp({app , router }) {
@@ -38,6 +38,8 @@ export default {
     app.component('update' , update)
   },
 
+  extends: DefaultTheme,
+  Layout: MyLayout,
   // ...DefaultTheme, //或者这样写也可
 }
 

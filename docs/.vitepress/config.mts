@@ -23,7 +23,9 @@ export default defineConfig({
   title: "Ayaskt 工作站 | 祝你幸福",
   description: "个人博客 / 资源汇总",
   lang: 'zh',
-  head: [['link', { rel: 'icon', href: '/Index-assets/logos/favicon.ico' }]],
+  head: [
+    ['link',{ rel: 'icon', href: '/favicon.ico'}],
+  ],
   lastUpdated: true,
 
   markdown: {

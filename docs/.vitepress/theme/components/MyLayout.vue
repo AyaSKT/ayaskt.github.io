@@ -3,15 +3,21 @@
 import DefaultTheme from 'vitepress/theme'
 import MouseClick from "./MouseClick.vue";
 import MouseFollower from "./MouseFollower.vue";
+import GiscusComment from './GiscusComment.vue' // 评论模块
 </script>
 
 <template>
-  <!-- 2. 使用默认主题的布局 -->
+  <!-- 使用默认主题的布局，并在顶部和文档之后插入自定义组件 -->
   <DefaultTheme.Layout>
-    <!-- 3. 利用“layout-top”插槽，将我们的组件注入到所有页面的顶部 -->
+    <!-- 所有页面顶部的特效组件 -->
     <template #layout-top>
       <MouseFollower />
       <MouseClick />
+    </template>
+
+    <!-- 文档内容之后的评论组件 -->
+    <template #doc-after>
+      <GiscusComment />
     </template>
   </DefaultTheme.Layout>
 </template>

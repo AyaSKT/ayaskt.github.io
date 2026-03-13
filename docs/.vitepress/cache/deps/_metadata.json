@@ -1,53 +1,62 @@
 {
-  "hash": "58baa47c",
+  "hash": "34072e55",
   "configHash": "7b0637d9",
-  "lockfileHash": "ea5cda62",
-  "browserHash": "c2041b40",
+  "lockfileHash": "55dc152c",
+  "browserHash": "3a72d463",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "0027418b",
+      "fileHash": "ac1db81a",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "00b870cf",
+      "fileHash": "08a24484",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/dist/index.js",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "b3da2fc6",
+      "fileHash": "d735b455",
       "needsInterop": false
     },
     "vitepress > @vueuse/integrations/useFocusTrap": {
       "src": "../../../../node_modules/@vueuse/integrations/dist/useFocusTrap.js",
       "file": "vitepress___@vueuse_integrations_useFocusTrap.js",
-      "fileHash": "4a9241c0",
+      "fileHash": "7d6e1c55",
       "needsInterop": false
     },
     "vitepress > mark.js/src/vanilla.js": {
       "src": "../../../../node_modules/mark.js/src/vanilla.js",
       "file": "vitepress___mark__js_src_vanilla__js.js",
-      "fileHash": "d22cb6a7",
+      "fileHash": "5910e930",
       "needsInterop": false
     },
     "vitepress > minisearch": {
       "src": "../../../../node_modules/minisearch/dist/es/index.js",
       "file": "vitepress___minisearch.js",
-      "fileHash": "b20db3b6",
+      "fileHash": "9b745f9d",
       "needsInterop": false
     },
     "canvas-confetti": {
       "src": "../../../../node_modules/canvas-confetti/dist/confetti.module.mjs",
       "file": "canvas-confetti.js",
-      "fileHash": "9ef215c6",
+      "fileHash": "f899f9f2",
+      "needsInterop": false
+    },
+    "@giscus/vue": {
+      "src": "../../../../node_modules/@giscus/vue/dist/index.js",
+      "file": "@giscus_vue.js",
+      "fileHash": "52b16407",
       "needsInterop": false
     }
   },
   "chunks": {
+    "giscus-Ci9LqPcC-MKY463ZR": {
+      "file": "giscus-Ci9LqPcC-MKY463ZR.js"
+    },
     "chunk-BQOVATTU": {
       "file": "chunk-BQOVATTU.js"
     },

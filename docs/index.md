@@ -19,7 +19,6 @@ hero:
       borderRadius: 50%
       boxShadow: 0 10px 40px rgba(0,0,0,0.25)
       object-fit: cover;
-      marginLeft: 40px;
 
 
 
@@ -45,13 +44,42 @@ hero:
       text: Y3S1 人工智能与机器学习 AI&ML
       link: /Y3S1/AIML/AIML-README.md
 
+features:
 
+- icon: 
+    dark: /uog.png
+    light: /uog.png
+  title: Glasgow College, UESTC
+  details: "毋庸置疑，世界上最伟大的学院。\n在格院，你只需要学会享受生活。"
+  link: https://www.gla.uestc.edu.cn/
+  linkText: Click to get CW(s)
+
+- icon: 
+    dark: /3.PNG
+    light: /3.PNG
+  title: Neuro Sama
+  details: 来看看世界第一的AI主播！“爱，死亡与机器人。”
+  link: https://space.bilibili.com/3546729368520811?spm_id_from=333.337.0.0
+  linkText: Bilibili 主页
+
+- icon:
+    dark: 4.jpg
+    light: 4.jpg
+  title: 小红书
+  details: 为什么不来瞅瞅作者的小红书呢？不定时发布发电文案和摄影作品。
+  link: https://xhslink.com/m/3eDcZFwc5a2
+  linkText: 点击观察
+  
+- icon: 
+    dark: 5.jpg
+    light: 5.jpg
+  title: 友情推荐：Cateds
+  details: 前端的神 & 后端的神 & Rust的神
+  link: https://ayaskt.github.io/
+  linkText: 点击以膜拜
 
 
 ---
-
-
-<link rel="icon" type="image/ico" href="favicon.ico">
 
 
 
@@ -74,7 +102,7 @@ onMounted(async () => {
 <p
   id="hitokoto"
   style="
-    margin-top: 13rem;
+    margin-top: 10rem;
     text-align: center;
     font-size: 1.05rem;
     opacity: 0.9;
