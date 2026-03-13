@@ -62,13 +62,11 @@ features:
   link: https://space.bilibili.com/3546729368520811?spm_id_from=333.337.0.0
   linkText: Bilibili 主页
 
-- icon:
-    dark: 4.jpg
-    light: 4.jpg
-  title: 小红书
-  details: 为什么不来瞅瞅作者的小红书呢？不定时发布发电文案和摄影作品。
-  link: https://xhslink.com/m/3eDcZFwc5a2
-  linkText: 点击观察
+- icon: 📝
+  title: Study-hub 学汇
+  details: 一个流淌着知识与蜜的地方。很适合查找各类复习资料。
+  link: https://study-hub.store/
+  linkText: 立刻弯道超车
   
 - icon: 
     dark: 5.jpg
