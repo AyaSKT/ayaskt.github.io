@@ -1,31 +1,52 @@
 {
-  "hash": "580e4238",
-  "configHash": "5e18c949",
-  "lockfileHash": "3842b577",
-  "browserHash": "8f440852",
+  "hash": "26eb6290",
+  "configHash": "7b0637d9",
+  "lockfileHash": "f9ee2359",
+  "browserHash": "00a11075",
   "optimized": {
     "vue": {
-      "src": "../../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "fc4df828",
+      "fileHash": "782dc648",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
-      "src": "../../../../../node_modules/@vue/devtools-api/dist/index.js",
+      "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "1746b6d7",
+      "fileHash": "12b2385e",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
-      "src": "../../../../../node_modules/@vueuse/core/dist/index.js",
+      "src": "../../../../node_modules/@vueuse/core/dist/index.js",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "af0433e6",
+      "fileHash": "28e17608",
+      "needsInterop": false
+    },
+    "vitepress > @vueuse/integrations/useFocusTrap": {
+      "src": "../../../../node_modules/@vueuse/integrations/dist/useFocusTrap.js",
+      "file": "vitepress___@vueuse_integrations_useFocusTrap.js",
+      "fileHash": "58589843",
+      "needsInterop": false
+    },
+    "vitepress > mark.js/src/vanilla.js": {
+      "src": "../../../../node_modules/mark.js/src/vanilla.js",
+      "file": "vitepress___mark__js_src_vanilla__js.js",
+      "fileHash": "2199c785",
+      "needsInterop": false
+    },
+    "vitepress > minisearch": {
+      "src": "../../../../node_modules/minisearch/dist/es/index.js",
+      "file": "vitepress___minisearch.js",
+      "fileHash": "27bb931c",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-A7F4NF5S": {
-      "file": "chunk-A7F4NF5S.js"
+    "chunk-BQOVATTU": {
+      "file": "chunk-BQOVATTU.js"
+    },
+    "chunk-IKY3COGX": {
+      "file": "chunk-IKY3COGX.js"
     }
   }
 }

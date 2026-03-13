@@ -135,13 +135,13 @@ $$
 
 对于有限序列，其定义域为 $N_1 \le n \le N_2$ 。但在其进行时域翻转或者时移等操作时，其非零值可能会被移动到定义域之外，导致有效数据被截断，因此引入循环操作解决这一潜在问题。
 
-定义取模操作 $<m>_N = m \mod N$ ，
+定义取模操作 $ \langle m \rangle _N = m \mod N$ ，
 即取余数。
 
 **循环时间翻转 Circular Time-reversal**
 
 $$
-\{ y[n] \} = \{ x[<-n>_N] \}
+\{ y[n] \} = \{ x[ \langle -n \rangle _N] \}
 $$
 
 ，其中两序列均定义在 $0 \le n \le N-1$ 。
@@ -149,7 +149,7 @@ $$
 **循环时移 Circular Shift**
 
 $$
-x_c[n] = x[<n-n_0>_N]
+x_c[n] = x[ \langle n-n_0 \rangle _N]
 $$
 
 。
