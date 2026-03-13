@@ -27,9 +27,36 @@ export default defineConfig({
     siteTitle: 'Ayaskt 工作站',
 
     nav: [
-      { text: 'Home', link: '/index' },
-      { text: 'Y3 学年', link: '/Guides/Y3' }
+      { text: '主页', link: '/index' },
+      { text: '第三学年', items: [
+        { text: '通信原理与系统 CPS', link: '/item-1' },
+        { text: '人工智能与机器学习 AIML', link: '/item-2' },
+        { text: '信息论 IT', link: '/item-3' },
+        { text: '数字信号处理 DSP', link: '/Y3S2/DSP/DSP Chapter 2' }
+       ] 
+      },
+
+      { text: '第二学年', items: [
+        { text: '敬请期待...', link: '' },
+       ] 
+      },
+
+      { text: '第一学年', items: [
+        { text: '敬请期待...', link: '' },
+       ] 
+      },
     ],
+
+
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2025-present Ayaskt'
+    },
+
+
+
+
+
 
     sidebar: {
       '/Guides/Y3': [

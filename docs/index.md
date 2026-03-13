@@ -6,7 +6,12 @@ hero:
 
   name: "Ayaskt 工作站\nAya's Sky City"
   text: "课堂笔记 / 资源汇总"
-  tagline: My great project tagline
+
+
+  tagline: 今天或许是个不错的日子。
+
+
+
   actions:
 
     - theme: brand
@@ -36,3 +41,33 @@ features:
 
 ---
 
+
+<script setup>
+import { ref, onMounted } from 'vue'
+const hitokotoText = ref(':D 你今天过得如何？')
+onMounted(async () => {
+  try {
+    const res = await fetch('https://v1.hitokoto.cn')
+    const data = await res.json()
+    hitokotoText.value = data.hitokoto
+  } catch (e) {
+    console.error(e)
+    hitokotoText.value = '加载失败，请稍后重试。'
+  }
+})
+</script>
+
+<p
+  id="hitokoto"
+  style="
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 10rem;   /* 距离底部（footer 上方一点） */
+    text-align: center;
+    font-size: 1.05rem;
+    pointer-events: none;
+  "
+>
+  {{ hitokotoText }}
+</p>
