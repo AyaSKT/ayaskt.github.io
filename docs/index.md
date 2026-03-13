@@ -19,23 +19,22 @@ hero:
       link: /Guides/Outclass
     
     - theme: brand
-      text: 数字信号处理 DSP
+      text: Y3S2 数字信号处理 DSP
       link: /Y3S2/DSP/DSP-README.md
- 
-
+  
     - theme: alt
-      text: 通信原理与系统
+      text: Y3S1 通信原理与系统 CPS
       link: /Y3S1/CPS/CPS-README.md
 
     - theme: alt
-      text: 第一学年笔记目录
-      link: /Guides/Y2
+      text: Y3S1 人工智能与机器学习 AI&ML
+      link: /Y3S1/AIML/AIML-README.md
 
 
 
 
 ---
-
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
 
 <script setup>
 import { ref, onMounted } from 'vue'

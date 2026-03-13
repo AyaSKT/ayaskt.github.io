@@ -1,4 +1,4 @@
-# Discrete-Time Signals in the Frequency Domain
+# 3 Discrete-Time Signals in the Frequency Domain
 
 ## 3-1 连续时间傅里叶变换 CTFT
 
