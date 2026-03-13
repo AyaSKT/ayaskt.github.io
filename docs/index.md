@@ -34,7 +34,10 @@ hero:
 
 
 ---
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+
+<head>
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+</head>
 
 <script setup>
 import { ref, onMounted } from 'vue'
