@@ -21,7 +21,7 @@ hero:
       object-fit: cover;
       marginLeft: 40px;
 
-      
+
 
   actions:
 
@@ -51,7 +51,7 @@ hero:
 ---
 
 
-
+<link rel="icon" type="image/ico" href="favicon.ico">
 
 
 
