@@ -18,7 +18,7 @@ const uestcIcon = fs.readFileSync(
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: '/gp-blogs/',
+  
 
   title: "Ayaskt 工作站 | 祝你幸福",
   description: "个人博客 / 资源汇总",

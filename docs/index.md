@@ -21,6 +21,8 @@ hero:
       object-fit: cover;
       marginLeft: 40px;
 
+      
+
   actions:
 
     - theme: brand
