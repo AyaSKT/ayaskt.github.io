@@ -10,7 +10,17 @@ hero:
 
   tagline: 今天或许是个不错的日子。
 
-
+  image:
+    src: /2.jpg # 你的图片路径，放在 docs 下
+    alt: "内卷被我抓住了吧"
+    width: 240
+    height: 240
+    # 加不加都行：圆形 + 阴影效果
+    style:
+      borderRadius: 50%
+      boxShadow: 0 10px 40px rgba(0,0,0,0.25)
+      object-fit: cover;
+      marginLeft: 40px;
 
   actions:
 
@@ -18,6 +28,10 @@ hero:
       text: 课外学习笔记目录
       link: /Guides/Outclass
     
+    - theme: brand
+      text: Y3S2 电磁场与波 EFMT
+      link: 
+
     - theme: brand
       text: Y3S2 数字信号处理 DSP
       link: /Y3S2/DSP/DSP-README.md
@@ -35,9 +49,11 @@ hero:
 
 ---
 
-<head>
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
-</head>
+
+
+
+
+
 
 <script setup>
 import { ref, onMounted } from 'vue'
@@ -49,7 +65,7 @@ onMounted(async () => {
     hitokotoText.value = data.hitokoto
   } catch (e) {
     console.error(e)
-    hitokotoText.value = '加载失败，请稍后重试。'
+    hitokotoText.value = ':D 你今天过得如何？'
   }
 })
 </script>

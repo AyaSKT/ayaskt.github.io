@@ -1,0 +1,61 @@
+import Layout from './Layout.vue'
+import DefaultTheme from 'vitepress/theme'
+import { watch } from 'vue'
+import './style/index.css'
+
+import MouseClick from "./components/MouseClick.vue"
+import MouseFollower from "./components/MouseFollower.vue"
+
+import Mycomponent from './components/Linkcard.vue'
+import Confetti from './components/confetti.vue'
+let homePageStyle: HTMLStyleElement | undefined
+
+import update from "./components/update.vue"
+
+import MyLayout from './components/MyLayout.vue'
+
+export default {
+  Layout: MyLayout,
+  extends: DefaultTheme,
+
+  
+  enhanceApp({app , router }) {
+    // 彩虹背景动画样式
+
+
+    if (typeof window !== 'undefined') {
+      watch(
+        () => router.route.data.relativePath,
+        () => updateHomePageStyle(location.pathname === '/'),
+        { immediate: true },
+      )
+    }
+
+    app.component('Mycomponent' , Mycomponent)
+    app.component('Confetti' , Confetti)
+    app.component('MouseClick' , MouseClick)
+    app.component('MouseFollower' , MouseFollower)
+    app.component('update' , update)
+  },
+
+  // ...DefaultTheme, //或者这样写也可
+}
+
+
+function updateHomePageStyle(value: boolean) {
+    if (value) {
+      if (homePageStyle) return
+  
+      homePageStyle = document.createElement('style')
+      homePageStyle.innerHTML = `
+      :root {
+        animation: rainbow 12s linear infinite;
+      }`
+      document.body.appendChild(homePageStyle)
+    } else {
+      if (!homePageStyle) return
+  
+      homePageStyle.remove()
+      homePageStyle = undefined
+    }
+  }

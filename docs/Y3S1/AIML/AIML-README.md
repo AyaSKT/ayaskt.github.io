@@ -1,4 +1,5 @@
 # AI&ML Lecture Notes
+<confetti />
 
 ## UESTC3006 & UESTCHN 3002
 
