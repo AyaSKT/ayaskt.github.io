@@ -11,7 +11,7 @@ hero:
   tagline: 今天或许是个不错的日子。
 
   image:
-    src: ./2.jpg # 你的图片路径，放在 docs 下
+    src: https://github.com/ayaskt.png # 你的图片路径，放在 docs 下
     width: 240
     height: 240
     # 加不加都行：圆形 + 阴影效果
@@ -24,9 +24,9 @@ hero:
 
   actions:
 
-    - theme: brand
-      text: 课外学习笔记目录
-      link: /Guides/Outclass
+    # - theme: brand
+    #   text: 课外学习笔记目录
+    #   link: /Guides/Outclass
     
     - theme: brand
       text: Y3S2 电磁场与波 EFMT

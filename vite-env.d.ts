@@ -15,6 +15,10 @@ declare module 'node:path' {
   export default path
 }
 
-declare module 'node:url' {
-  export const fileURLToPath: (url: string | URL) => string
+
+
+declare module '*.vue' {
+  import type { DefineComponent } from 'vue'
+  const component: DefineComponent<{}, {}, any>
+  export default component
 }
