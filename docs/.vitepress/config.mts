@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import mathjax3 from 'markdown-it-mathjax3'
 
 
 
@@ -29,7 +30,7 @@ export default defineConfig({
   lastUpdated: true,
 
   markdown: {
-    math: true
+    math: true,
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
