@@ -14,7 +14,7 @@
 
 ## 目录 Index
 
-- [EMFT Chapter 2: Vector Analysis](\EMFT%20Chapter%202.md)
+- [EMFT Chapter 2: Vector Analysis](EMFT%20Chapter%202.md)
 
 **To be continued:**
 
