@@ -45,7 +45,9 @@ export default defineConfig({
         { text: '通信原理与系统 CPS', link: '/Y3S1/CPS/CPS-README.md' },
         { text: '人工智能与机器学习 AIML', link: '/Y3S1/AIML/AIML-README.md' },
         { text: '信息论 IT', link: '/item-3' },
-        { text: '数字信号处理 DSP', link: '/Y3S2/DSP/DSP-README.md' }
+        { text: '数字信号处理 DSP', link: '/Y3S2/DSP/DSP-README.md' },
+        { text: '电磁场与波 EMFT', link: '/Y3S2/EMFT/EMFT-README.md' },
+        { text: '通信电路设计 CCD', link: '/Y3S2/CCD/CCD-README.md' },
        ] 
       },
 
@@ -88,6 +90,26 @@ export default defineConfig({
             { text: 'DSP Chapter 8', link: '/Y3S2/DSP/DSP Chapter 8' },
             { text: 'DSP Chapter 9', link: '/Y3S2/DSP/DSP Chapter 9' },
             { text: 'DSP Chapter 10', link: '/Y3S2/DSP/DSP Chapter 10' }
+          ]
+        }
+      ],
+
+      // 电磁场与波 EMFT：当路径在 /Y3S2/EMFT/ 下时显示
+      '/Y3S2/EMFT/': [
+        {
+          text: '电磁场与波 EMFT 课程总览',
+          collapsed: false,
+          items: [
+            { text: 'Introduction', link: '/Y3S2/EMFT/EMFT-README' },
+            { text: 'Chapter 2 Vector Analysis', link: '/Y3S2/EMFT/EMFT Chapter 2' },
+            { text: 'Chapter 3 Static Electric Fields', link: '/Y3S2/EMFT/EMFT Chapter 3' },
+            { text: 'Chapter 4 Solution of Electrostatic Problems', link: '/Y3S2/EMFT/EMFT Chapter 4' },
+            { text: 'Chapter 5 Steady Electric Currents', link: '/Y3S2/EMFT/EMFT Chapter 5' },
+            { text: 'Chapter 6 Static Magnetic Fields', link: '/Y3S2/EMFT/EMFT Chapter 6' },
+            { text: 'Chapter 7 Time-Varying Fields and Maxwell\'s Equations', link: '/Y3S2/EMFT/EMFT Chapter 7' },
+            { text: 'Chapter 8 Plane Electromagnetic Waves', link: '/Y3S2/EMFT/EMFT Chapter 8' },
+            { text: 'Chapter 9 Transmission Lines', link: '/Y3S2/EMFT/EMFT Chapter 9' },
+            { text: 'Chapter 10 Waveguides and Cavity Resonators', link: '/Y3S2/EMFT/EMFT Chapter 10' }
           ]
         }
       ],

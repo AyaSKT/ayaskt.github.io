@@ -30,11 +30,15 @@ hero:
     
     - theme: brand
       text: Y3S2 电磁场与波 EFMT
-      link: 
+      link: /Y3S2/EMFT/EMFT-README.md
 
     - theme: brand
       text: Y3S2 数字信号处理 DSP
       link: /Y3S2/DSP/DSP-README.md
+
+    - theme: brand
+      text: Y3S2 通信电路设计 CCD
+      link: /Y3S2/CCD/CCD-README.md
   
     - theme: alt
       text: Y3S1 通信原理与系统 CPS
@@ -43,6 +47,10 @@ hero:
     - theme: alt
       text: Y3S1 人工智能与机器学习 AI&ML
       link: /Y3S1/AIML/AIML-README.md
+
+    - theme: alt
+      text: Y3S1 信息论基础 IT
+      link: /Y3S1/IT/IT-README.md
 
 features:
 
