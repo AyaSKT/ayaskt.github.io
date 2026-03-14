@@ -1,3 +1,14 @@
 @import './blur.css';
 @import './var.css';
 @import './rainbow.css';
+
+/* 块级公式（$$...$$）居中，并加大与上下内容的间距 */
+.vp-doc .mathjax-block {
+  display: block;
+  text-align: center;
+  margin: 1.25em 0;
+}
+
+.vp-doc .mathjax-block svg {
+  display: inline-block;
+}
