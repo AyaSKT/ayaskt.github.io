@@ -1156,7 +1156,7 @@ $$
 - $-\nabla u(\vec{r})$ 为**无旋部分**；
 - $\nabla\times \vec{A}(\vec{r})$ 为**无散部分**。
 
----
+
 
 ## 2-7 拉普拉斯算子 Laplacian operation
 

@@ -1,62 +1,47 @@
 {
-  "hash": "bd0063f5",
+  "hash": "f6e3f898",
   "configHash": "7b0637d9",
-  "lockfileHash": "7790fbbc",
-  "browserHash": "02715f50",
+  "lockfileHash": "256fee6b",
+  "browserHash": "7cdc4580",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "bc87be86",
+      "fileHash": "30358774",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "de58eee7",
+      "fileHash": "0b051e7e",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/dist/index.js",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "9820a961",
+      "fileHash": "a1cac6dd",
       "needsInterop": false
     },
     "vitepress > @vueuse/integrations/useFocusTrap": {
       "src": "../../../../node_modules/@vueuse/integrations/dist/useFocusTrap.js",
       "file": "vitepress___@vueuse_integrations_useFocusTrap.js",
-      "fileHash": "491fff8c",
+      "fileHash": "aa84b17f",
       "needsInterop": false
     },
     "vitepress > mark.js/src/vanilla.js": {
       "src": "../../../../node_modules/mark.js/src/vanilla.js",
       "file": "vitepress___mark__js_src_vanilla__js.js",
-      "fileHash": "f13e78be",
+      "fileHash": "e43d7ab5",
       "needsInterop": false
     },
     "vitepress > minisearch": {
       "src": "../../../../node_modules/minisearch/dist/es/index.js",
       "file": "vitepress___minisearch.js",
-      "fileHash": "dcc90812",
-      "needsInterop": false
-    },
-    "canvas-confetti": {
-      "src": "../../../../node_modules/canvas-confetti/dist/confetti.module.mjs",
-      "file": "canvas-confetti.js",
-      "fileHash": "f494323e",
-      "needsInterop": false
-    },
-    "@giscus/vue": {
-      "src": "../../../../node_modules/@giscus/vue/dist/index.js",
-      "file": "@giscus_vue.js",
-      "fileHash": "0e9f8d30",
+      "fileHash": "f8199866",
       "needsInterop": false
     }
   },
   "chunks": {
-    "giscus-Ci9LqPcC-MKY463ZR": {
-      "file": "giscus-Ci9LqPcC-MKY463ZR.js"
-    },
     "chunk-BQOVATTU": {
       "file": "chunk-BQOVATTU.js"
     },

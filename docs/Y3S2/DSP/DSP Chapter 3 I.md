@@ -1,10 +1,22 @@
-# 3 Discrete-Time Signals in the Frequency Domain
+# 3 Discrete-Time Signals in the Frequency Domain Part I
+
+## 章节目录
+
+- [章节目录](#章节目录)
+- [3-1 连续时间傅里叶变换 CTFT](#3-1-连续时间傅里叶变换-ctft)
+- [3-2 离散时间傅里叶变换 DTFT](#3-2-离散时间傅里叶变换-dtft)
+  - [定义](#定义)
+  - [性质](#性质)
+- [3-3 DTFT 定理](#3-3-dtft-定理)
+- [3-4 离散时间序列的能量谱密度 ESD](#3-4-离散时间序列的能量谱密度-esd)
+- [3-5 带限离散时间信号](#3-5-带限离散时间信号)
+- [3-7 展开相位函数 Unwrapped Phase Function](#3-7-展开相位函数-unwrapped-phase-function)
 
 ## 3-1 连续时间傅里叶变换 CTFT
 
-```
-让我们假设你全都会了。如果你不会，去看看信号与系统吧，在你学过信号与系统后，DSP的3-1全是废话。
-```
+> [!TIP]
+> 让我们假设你全都会了。如果你不会，去看看信号与系统吧，在你学过信号与系统后，DSP的3-1全是废话。
+
 
 ## 3-2 离散时间傅里叶变换 DTFT
 
@@ -98,9 +110,35 @@ $$
 
 #### 2. 对称关系
 
-![](Attachments/Pasted%20image%2020260312145547.png)
 
-![](Attachments/Pasted%20image%2020260312145551.png)
+| 序列 | 离散时间傅里叶变换 |
+|---|---|
+| $x[n]$ | $X(e^{j\omega}) = X_{\mathrm{re}}(e^{j\omega}) + jX_{\mathrm{im}}(e^{j\omega})$ |
+| $x_{\mathrm{ev}}[n]$ | $X_{\mathrm{re}}(e^{j\omega})$ |
+| $x_{\mathrm{od}}[n]$ | $jX_{\mathrm{im}}(e^{j\omega})$ |
+| 共轭对称关系 | $X(e^{j\omega}) = X^*(e^{-j\omega})$ |
+| 实部是偶函数 | $X_{\mathrm{re}}(e^{j\omega}) = X_{\mathrm{re}}(e^{-j\omega})$ |
+| 虚部是奇函数 | $X_{\mathrm{im}}(e^{j\omega}) = -X_{\mathrm{im}}(e^{-j\omega})$ |
+| 幅度是偶函数 | $\lvert X(e^{j\omega}) \rvert = \lvert X(e^{-j\omega}) \rvert$ |
+| 相位是奇函数 | $\arg\!\left[X(e^{j\omega})\right] = -\arg\!\left[X(e^{-j\omega})\right]$ |
+
+> [!NOTE]
+> $x_{\mathrm{ev}}[n]$ 和 $x_{\mathrm{od}}[n]$ 分别表示 $x[n]$ 的偶分量和奇分量。
+
+| 序列 | 离散时间傅里叶变换 |
+|---|---|
+| $x[n]$ | $X(e^{j\omega})$ |
+| $x[-n]$ | $X(e^{-j\omega})$ |
+| $x^*[-n]$ | $X^*(e^{j\omega})$ |
+| $\operatorname{Re}\{x[n]\}$ | $X_{\mathrm{cs}}(e^{j\omega}) = \dfrac{1}{2}\left\{X(e^{j\omega}) + X^*(e^{-j\omega})\right\}$ |
+| $j\operatorname{Im}\{x[n]\}$ | $X_{\mathrm{ca}}(e^{j\omega}) = \dfrac{1}{2}\left\{X(e^{j\omega}) - X^*(e^{-j\omega})\right\}$ |
+| $x_{\mathrm{cs}}[n]$ | $X_{\mathrm{re}}(e^{j\omega})$ |
+| $x_{\mathrm{ca}}[n]$ | $jX_{\mathrm{im}}(e^{j\omega})$ |
+
+> [!NOTE]  
+> $X_{\mathrm{cs}}(e^{j\omega})$ 和 $X_{\mathrm{ca}}(e^{j\omega})$ 分别表示 $X(e^{j\omega})$ 的共轭对称部分和共轭反对称部分。  
+> 同样，$x_{\mathrm{cs}}[n]$ 和 $x_{\mathrm{ca}}[n]$ 分别表示 $x[n]$ 的共轭对称部分和共轭反对称部分。
+
 
 #### 3. 收敛情形
 

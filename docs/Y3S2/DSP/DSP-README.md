@@ -16,10 +16,10 @@ Github的公式渲染真是勾勾又史史
 
 - [DSP Chapter 2: Discrete-Time Signals in the Time Domain](DSP%20Chapter%202.md)
 - [DSP Chapter 3 Part I: Discrete-Time Signals in the Frequency Domain](DSP%20Chapter%203%20I.md)
+- [DSP Chapter 3 Part II: Discrete-Time Signals in the Frequency Domain](DSP%20Chapter%203%20II.md)
 
 **To be continued:**
 
-- [DSP Chapter 3 Part II: Discrete-Time Signals in the Frequency Domain](DSP%20Chapter%203%20II.md)
 - [DSP Chapter 4: Discrete-Time Systems](DSP%20Chapter%204.md)
 - [DSP Chapter 5: Finite-Length Discrete Transforms](DSP%20Chapter%205.md)
 - [DSP Chapter 6: z-Transform](DSP%20Chapter%206.md)
