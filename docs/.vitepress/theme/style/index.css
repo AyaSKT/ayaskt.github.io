@@ -12,3 +12,19 @@
 .vp-doc .mathjax-block svg {
   display: inline-block;
 }
+
+/* 文档内所有表格整体居中（覆盖默认 display:block，使表格按内容宽度再水平居中） */
+.vp-doc table {
+  display: table;
+  width: max-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 文档内图片整体居中 */
+.vp-doc img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
