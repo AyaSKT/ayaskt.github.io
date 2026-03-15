@@ -1,5 +1,12 @@
 # 2 Discrete-Time Signals in the Time Domain
 
+时人不识凌云木，直待凌云始道高。
+
+![alt text](<DSP Chapter 2.attachments/1773557886618.PNG>)
+
+
+## 章节目录
+- [章节目录](#章节目录)
 - [2-1 时域表示 Time-Domain Representation](#2-1-时域表示-time-domain-representation)
   - [基本表示方法](#基本表示方法)
   - [离散时间信号的两种类型](#离散时间信号的两种类型)

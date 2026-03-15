@@ -4,7 +4,7 @@
 
 GitHub 预览可能存在公式渲染不正确的问题。  （我应该调好了）
 
-```
+```text
 Github的公式渲染真是勾勾又史史
 ```
 
@@ -17,10 +17,11 @@ Github的公式渲染真是勾勾又史史
 - [DSP Chapter 2: Discrete-Time Signals in the Time Domain](DSP%20Chapter%202.md)
 - [DSP Chapter 3 Part I: Discrete-Time Signals in the Frequency Domain](DSP%20Chapter%203%20I.md)
 - [DSP Chapter 3 Part II: Discrete-Time Signals in the Frequency Domain](DSP%20Chapter%203%20II.md)
+- [DSP Chapter 4: Discrete-Time Systems](DSP%20Chapter%204.md)
 
 **To be continued:**
 
-- [DSP Chapter 4: Discrete-Time Systems](DSP%20Chapter%204.md)
+
 - [DSP Chapter 5: Finite-Length Discrete Transforms](DSP%20Chapter%205.md)
 - [DSP Chapter 6: z-Transform](DSP%20Chapter%206.md)
 - [DSP Chapter 7: LTI Discrete-Time Systems in the Transform Domain](DSP%20Chapter%207.md)
@@ -29,7 +30,6 @@ Github的公式渲染真是勾勾又史史
 - [DSP Chapter 10: FIR Digital Filter Design](DSP%20Chapter%2010.md)
 
 
-**祝所有看到这里的人考试顺利，生活幸福！**
+**要保持希望在每天清晨太阳升起。**
 
-![](Attachments/3BAA204A-F795-44A8-95DF-FC31AA3D7526_1_105_c.jpeg)
-
+![alt text](DSP-README.attachments/1773557775504.PNG)

@@ -1,5 +1,9 @@
 # 3 Discrete-Time Signals in the Frequency Domain Part I
 
+后来，错过也成了人间常态。
+
+![alt text](<DSP Chapter 3 I.attachments/1773557929285.PNG>)
+
 ## 章节目录
 
 - [章节目录](#章节目录)

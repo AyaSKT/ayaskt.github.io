@@ -1,5 +1,8 @@
 # 3 Discrete-Time Signals in the Frequency Domain Part II
 
+有些错误无法犯两次，有些事绝对不会无趣。
+
+![alt text](<DSP Chapter 3 II.attachments/1773557978013.PNG>)
 
 ## 章节目录
 
