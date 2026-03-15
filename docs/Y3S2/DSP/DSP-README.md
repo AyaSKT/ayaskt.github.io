@@ -23,7 +23,7 @@ Github的公式渲染真是勾勾又史史
 
 
 - [DSP Chapter 5: Finite-Length Discrete Transforms](DSP%20Chapter%205.md)
-- [DSP Chapter 6: z-Transform](DSP%20Chapter%206.md)
+- [DSP Chapter 6: Z-Transform](DSP%20Chapter%206.md)
 - [DSP Chapter 7: LTI Discrete-Time Systems in the Transform Domain](DSP%20Chapter%207.md)
 - [DSP Chapter 8: Digital Filter Structures](DSP%20Chapter%208.md)
 - [DSP Chapter 9: IIR Digital Filter Design](DSP%20Chapter%209.md)

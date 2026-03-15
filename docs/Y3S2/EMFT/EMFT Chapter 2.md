@@ -5,6 +5,10 @@
 >
 > 如果你是微积分II高手，其实不需要看这一章。
 
+同是天涯沦落人，相逢何必曾相识。
+
+![alt text](<EMFT Chapter 2.attachments/1773559063473.PNG>)
+
 
 ## Chapter Contents
 
