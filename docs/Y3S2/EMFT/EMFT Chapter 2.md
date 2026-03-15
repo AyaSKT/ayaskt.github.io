@@ -10,9 +10,9 @@
 ![alt text](<EMFT Chapter 2.attachments/1773559063473.PNG>)
 
 
-## Chapter Contents
+## 章节目录
 
-- [Chapter Contents](#chapter-contents)
+- [章节目录](#章节目录)
 - [2-1 向量代数](#2-1-向量代数)
   - [2-1-1 向量的表示](#2-1-1-向量的表示)
   - [2-1-2 向量的代数运算](#2-1-2-向量的代数运算)
@@ -246,7 +246,7 @@ $$
 (\vec{A} \cdot \vec{B}) \vec{C}
 $$
 
----
+
 
 ## 2-2 正交坐标系
 

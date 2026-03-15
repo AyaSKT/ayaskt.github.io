@@ -8,7 +8,7 @@ hero:
   text: "课堂笔记 / 资源汇总"
 
 
-  tagline: 今天或许是个不错的日子。
+  tagline: 你战胜了自己，你爱通信工程。
 
   image:
     src: https://github.com/ayaskt.png # 你的图片路径，放在 docs 下
@@ -51,6 +51,7 @@ hero:
     - theme: alt
       text: Y3S1 信息论基础 IT
       link: /Y3S1/IT/IT-README.md
+
 
 features:
 
