@@ -57,7 +57,7 @@ export default defineConfig({
 
     logo: 'https://github.com/ayaskt.png?size=40',
 
-    siteTitle: 'Ayaskt 工作站 site',
+    siteTitle: 'Ayaskt Workspace',
     
 
     nav: [
@@ -98,23 +98,42 @@ export default defineConfig({
       // 数字信号处理：当路径在 /Y3S2/DSP/ 下时显示
       '/Y3S2/DSP/': [
         {
-          text: '数字信号处理 课程总览',
+          text: '数字信号处理 DSP 课程总览',
           collapsed: false,
           items: [
-            { text: 'DSP Introduction', link: '/Y3S2/DSP/DSP-README.md' },
-            { text: 'DSP Chapter 2', link: '/Y3S2/DSP/DSP Chapter 2' },
-            { text: 'DSP Chapter 3 Part I', link: '/Y3S2/DSP/DSP Chapter 3 I' },
-            { text: 'DSP Chapter 3 Part II', link: '/Y3S2/DSP/DSP Chapter 3 II' },
-            { text: 'DSP Chapter 4', link: '/Y3S2/DSP/DSP Chapter 4' },
-            { text: 'DSP Chapter 5', link: '/Y3S2/DSP/DSP Chapter 5' },
-            { text: 'DSP Chapter 6', link: '/Y3S2/DSP/DSP Chapter 6' },
-            { text: 'DSP Chapter 7', link: '/Y3S2/DSP/DSP Chapter 7' },
-            { text: 'DSP Chapter 8', link: '/Y3S2/DSP/DSP Chapter 8' },
-            { text: 'DSP Chapter 9', link: '/Y3S2/DSP/DSP Chapter 9' },
-            { text: 'DSP Chapter 10', link: '/Y3S2/DSP/DSP Chapter 10' }
-          ]
-        }
+            { text: 'Introduction', link: '/Y3S2/DSP/DSP-README.md' },
+            {
+              text: 'Part I 离散时间信号与系统',
+              collapsed: false,
+              items: [
+                { text: 'Ch 2: 时域离散时间信号', link: '/Y3S2/DSP/DSP Chapter 2' },
+                { text: 'Ch 3 I: 频域离散时间信号', link: '/Y3S2/DSP/DSP Chapter 3 I' },
+                { text: 'Ch 3 II: 频域离散时间信号', link: '/Y3S2/DSP/DSP Chapter 3 II' },
+                { text: 'Ch 4: 离散时间系统', link: '/Y3S2/DSP/DSP Chapter 4' },
+              ],
+            },
+            {
+              text: 'Part II 离散变换',
+              collapsed: false,
+              items: [
+                { text: 'Ch 5: 离散傅里叶变换 DFT', link: '/Y3S2/DSP/DSP Chapter 5' },
+                { text: 'Ch 6: Z 变换', link: '/Y3S2/DSP/DSP Chapter 6' },
+                { text: 'Ch 7: 变换域中的离散 LTI 系统', link: '/Y3S2/DSP/DSP Chapter 7' },
+              ],
+            },
+            {
+              text: 'Part III 数字滤波器设计',
+              collapsed: false,
+              items: [
+                { text: 'Ch 8: 数字滤波器架构', link: '/Y3S2/DSP/DSP Chapter 8' },
+                { text: 'Ch 9: IIR 数字滤波器设计', link: '/Y3S2/DSP/DSP Chapter 9' },
+                { text: 'Ch 10: FIR 数字滤波器设计', link: '/Y3S2/DSP/DSP Chapter 10' },
+              ],
+            },
+          ],
+        },
       ],
+
 
       // 电磁场与波 EMFT：当路径在 /Y3S2/EMFT/ 下时显示
       '/Y3S2/EMFT/': [
@@ -123,15 +142,15 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Introduction', link: '/Y3S2/EMFT/EMFT-README' },
-            { text: 'Chapter 2 Vector Analysis', link: '/Y3S2/EMFT/EMFT Chapter 2' },
-            { text: 'Chapter 3 Static Electric Fields', link: '/Y3S2/EMFT/EMFT Chapter 3' },
-            { text: 'Chapter 4 Solution of Electrostatic Problems', link: '/Y3S2/EMFT/EMFT Chapter 4' },
-            { text: 'Chapter 5 Steady Electric Currents', link: '/Y3S2/EMFT/EMFT Chapter 5' },
-            { text: 'Chapter 6 Static Magnetic Fields', link: '/Y3S2/EMFT/EMFT Chapter 6' },
-            { text: 'Chapter 7 Time-Varying Fields and Maxwell\'s Equations', link: '/Y3S2/EMFT/EMFT Chapter 7' },
-            { text: 'Chapter 8 Plane Electromagnetic Waves', link: '/Y3S2/EMFT/EMFT Chapter 8' },
-            { text: 'Chapter 9 Transmission Lines', link: '/Y3S2/EMFT/EMFT Chapter 9' },
-            { text: 'Chapter 10 Waveguides and Cavity Resonators', link: '/Y3S2/EMFT/EMFT Chapter 10' }
+            { text: 'Ch 2 矢量分析', link: '/Y3S2/EMFT/EMFT Chapter 2' },
+            { text: 'Ch 3 静电场', link: '/Y3S2/EMFT/EMFT Chapter 3' },
+            { text: 'Ch 4 静电场问题求解', link: '/Y3S2/EMFT/EMFT Chapter 4' },
+            { text: 'Ch 5 恒定电流', link: '/Y3S2/EMFT/EMFT Chapter 5' },
+            { text: 'Ch 6 静磁场', link: '/Y3S2/EMFT/EMFT Chapter 6' },
+            { text: 'Ch 7 时变场与 Maxwell 方程组', link: '/Y3S2/EMFT/EMFT Chapter 7' },
+            { text: 'Ch 8 平面电磁波', link: '/Y3S2/EMFT/EMFT Chapter 8' },
+            { text: 'Ch 9 传输线', link: '/Y3S2/EMFT/EMFT Chapter 9' },
+            { text: 'Ch 10 波导与谐振腔', link: '/Y3S2/EMFT/EMFT Chapter 10' }
           ]
         }
       ],
@@ -139,7 +158,7 @@ export default defineConfig({
       // 通信原理与系统 CPS：当路径在 /Y3S1/CPS/ 下时显示
       '/Y3S1/CPS/': [
         {
-          text: '通信原理与系统 课程总览',
+          text: '通信原理与系统 CPS 课程总览',
           collapsed: false,
           items: [
             { text: 'Introduction', link: '/Y3S1/CPS/CPS-README' },

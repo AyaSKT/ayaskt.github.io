@@ -26,21 +26,29 @@
 ## 目录 Index
 
 
-- [DSP Chapter 2: Discrete-Time Signals in the Time Domain](DSP%20Chapter%202.md)
-- [DSP Chapter 3 Part I: Discrete-Time Signals in the Frequency Domain](DSP%20Chapter%203%20I.md)
-- [DSP Chapter 3 Part II: Discrete-Time Signals in the Frequency Domain](DSP%20Chapter%203%20II.md)
-- [DSP Chapter 4: Discrete-Time Systems](DSP%20Chapter%204.md)
-- [DSP Chapter 5: Discrete Fourier Transform](DSP%20Chapter%205.md)
+### Part I 离散时间信号与系统
 
-**To be continued:**
+- [Ch 2: 时域离散时间信号 Discrete-Time Signals in the Time Domain](DSP%20Chapter%202.md)
+- [Ch 3 I: 频域离散时间信号 Discrete-Time Signals in the Frequency Domain](DSP%20Chapter%203%20I.md)
+- [Ch 3 II: 频域离散时间信号 Discrete-Time Signals in the Frequency Domain](DSP%20Chapter%203%20II.md)
+- [Ch 4: 离散时间系统 Discrete-Time Systems](DSP%20Chapter%204.md)
+
+### Part II 离散变换
+
+- [Ch 5: 离散傅里叶变换 Discrete Fourier Transform, DFT](DSP%20Chapter%205.md)
+
+> [!WARNING]
+> 以下笔记暂未完成，敬请期待...
 
 
+- [Ch 6: Z 变换 Z-Transform](DSP%20Chapter%206.md)
+- [Ch 7: 变换域中的离散 LTI 系统 LTI Discrete-Time Systems in the Transform Domain](DSP%20Chapter%207.md)
 
-- [DSP Chapter 6: Z-Transform](DSP%20Chapter%206.md)
-- [DSP Chapter 7: LTI Discrete-Time Systems in the Transform Domain](DSP%20Chapter%207.md)
-- [DSP Chapter 8: Digital Filter Structures](DSP%20Chapter%208.md)
-- [DSP Chapter 9: IIR Digital Filter Design](DSP%20Chapter%209.md)
-- [DSP Chapter 10: FIR Digital Filter Design](DSP%20Chapter%2010.md)
+### Part III 数字滤波器设计
+
+- [Ch 8: 数字滤波器架构 Digital Filter Structures](DSP%20Chapter%208.md)
+- [Ch 9: IIR 数字滤波器设计 IIR Digital Filter Design](DSP%20Chapter%209.md)
+- [Ch 10: FIR 数字滤波器设计 FIR Digital Filter Design](DSP%20Chapter%2010.md)
 
 
 ![alt text](DSP-README.attachments/1773557775504.PNG)

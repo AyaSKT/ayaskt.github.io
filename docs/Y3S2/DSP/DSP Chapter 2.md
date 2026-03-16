@@ -1,6 +1,6 @@
 # 2 Discrete-Time Signals in the Time Domain
 
-时人不识凌云木，直待凌云始道高。
+**时人不识凌云木，直待凌云始道高。**
 
 ![alt text](<DSP Chapter 2.attachments/1773557886618.PNG>)
 
@@ -157,7 +157,7 @@ $$
 
 对于有限序列，其定义域为 $N_1 \le n \le N_2$ 。但在其进行时域翻转或者时移等操作时，其非零值可能会被移动到定义域之外，导致有效数据被截断，因此引入循环操作解决这一潜在问题。
 
-定义取模操作 $ \langle m \rangle _N = m \mod N$ ，
+定义取模操作 $\langle m \rangle _N = m \mod N$ ，
 即取余数。
 
 **循环时间翻转 Circular Time-reversal**

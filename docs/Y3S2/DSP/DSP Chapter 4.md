@@ -1,6 +1,6 @@
-# 4 Discrete Time System
+# 4 Discrete Time Systems
 
-桃之夭夭，其叶蓁蓁。之子于归，宜其家人。
+**桃之夭夭，其叶蓁蓁。之子于归，宜其家人。**
 
 ![alt text](<DSP Chapter 4.attachments/1773557639355.PNG>)
 
