@@ -215,7 +215,7 @@ $$
 同样地，与CTFT类似，通过时频转换简单计算卷积：
 
 $$
-g[n] \circledast h[n] \xleftrightarrow{\text{DTFT}}G(e^{j \omega})H(e^{j \omega})
+g[n] * h[n] \xleftrightarrow{\text{DTFT}}G(e^{j \omega})H(e^{j \omega})
 $$
 
 。

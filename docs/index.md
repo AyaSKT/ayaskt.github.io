@@ -11,7 +11,7 @@ hero:
   tagline: 你战胜了自己，你爱通信工程。
 
   image:
-    src: https://github.com/ayaskt.png # 你的图片路径，放在 docs 下
+    src: /IMG_0478.jpg # 你的图片路径，放在 docs 下
     width: 240
     height: 240
     # 加不加都行：圆形 + 阴影效果

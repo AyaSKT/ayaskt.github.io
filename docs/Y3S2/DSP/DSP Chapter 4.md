@@ -259,7 +259,7 @@ $$
 通常简写为
 
 > [!IMPORTANT]
-> $$y[n] = x[n] \circledast h[n]$$
+> $$y[n] = x[n] * h[n]$$
 
 通过以上的数学推导，我们证明了一个信号通过 LTI 系统的输出信号即为原始信号与该系统冲激响应的卷积和。
 
@@ -328,11 +328,11 @@ $$
 其响应为：
 
 $$
-w[n] = x[n] \circledast h_1[n]
+w[n] = x[n] * h_1[n]
 $$
 
 $$
-y[n] = w[n] \circledast h_2[n]
+y[n] = w[n] * h_2[n]
 $$
 
 $$
@@ -340,12 +340,12 @@ $$
 $$
 
 $$
-y[n] = (x[n] \circledast h_1[n]) \circledast h_2[n] =x[n] \circledast (h_1[n] \circledast h_2[n])
+y[n] = (x[n] * h_1[n]) * h_2[n] =x[n] * (h_1[n] * h_2[n])
 $$
 
 > [!IMPORTANT]
 > 可以得到所以串联系统的冲激响应表达式
-> $$h_{cascade}[n] = h_1[n] \circledast h_2[n]$$
+> $$h_{cascade}[n] = h_1[n] * h_2[n]$$
 
 
 ---
@@ -367,8 +367,8 @@ $$
 $$
 \begin{aligned}
 y[n] &= y_1[n] + y_2[n] \\
-&= x[n] \circledast h_1[n] + x[n] \circledast h_2[n] \\
-&= x[n] \circledast (h_1[n] + h_2[n])
+&= x[n] * h_1[n] + x[n] * h_2[n] \\
+&= x[n] * (h_1[n] + h_2[n])
 \end{aligned}
 $$
 
@@ -701,7 +701,7 @@ $$
 卷积定理：
 
 $$
-y[n] = x[n] \circledast h[n] \xleftrightarrow{DTFT} Y(e^{j \omega}) = X(e^{j \omega}) H(e^{j \omega})
+y[n] = x[n] * h[n] \xleftrightarrow{DTFT} Y(e^{j \omega}) = X(e^{j \omega}) H(e^{j \omega})
 $$
 
 通过卷积定理，我们可以轻松得到频率响应，如：
