@@ -39,6 +39,10 @@ hero:
     - theme: brand
       text: Y3S2 通信电路设计 CCD
       link: /Y3S2/CCD/CCD-README.md
+
+    - theme: brand
+      text: Y3S2 工程项目管理与财务 EPM&F
+      link: 
   
     - theme: alt
       text: Y3S1 通信原理与系统 CPS

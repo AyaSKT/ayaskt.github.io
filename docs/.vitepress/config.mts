@@ -70,6 +70,7 @@ export default defineConfig({
         { text: '数字信号处理 DSP', link: '/Y3S2/DSP/DSP-README.md' },
         { text: '电磁场与波 EMFT', link: '/Y3S2/EMFT/EMFT-README.md' },
         { text: '通信电路设计 CCD', link: '/Y3S2/CCD/CCD-README.md' },
+        { text: '工程项目管理与财务 EPM&F', link: '/Y3S2/EPMF/EPMF-README.md' },
        ] 
       },
 
@@ -200,7 +201,10 @@ export default defineConfig({
       ]
     },
 
-
+    outline: {
+      level: [2, 3],
+      label: 'Contents',
+    },
     
 
     socialLinks: [
