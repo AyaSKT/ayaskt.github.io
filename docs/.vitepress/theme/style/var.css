@@ -1,14 +1,14 @@
 /* var.css */
 :root {
-    --vp-c-brand-1: #18794e;
-    --vp-c-brand-2: #299764;
-    --vp-c-brand-3: #30a46c;
+    --vp-c-brand-1: #5e7ea7; /* 深蓝，主色强调 */
+    --vp-c-brand-2: #89b8d6; /* 浅蓝，常规主色 */
+    --vp-c-brand-3: #d9b0b0; /* 莫兰迪粉，用于浅背景/hover */
   }
   
   .dark {
-    --vp-c-brand-1: #3dd68c;
-    --vp-c-brand-2: #30a46c;
-    --vp-c-brand-3: #298459;
+    --vp-c-brand-1: #5e7ea7;
+    --vp-c-brand-2: #9aa7c2;
+    --vp-c-brand-3: #c8a7ad;
   }
   /* 以前的vp-c-brand已弃用 */
   

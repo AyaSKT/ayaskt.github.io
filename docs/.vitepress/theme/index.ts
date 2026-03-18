@@ -13,6 +13,7 @@ let homePageStyle: HTMLStyleElement | undefined
 import update from "./components/update.vue"
 
 import MyLayout from './components/MyLayout.vue'
+import BackToTop from './components/backtotop.vue'
 
 export default {
   
@@ -36,6 +37,7 @@ export default {
     app.component('MouseClick' , MouseClick)
     app.component('MouseFollower' , MouseFollower)
     app.component('update' , update)
+    app.component('BackToTop', BackToTop)
   },
 
   extends: DefaultTheme,

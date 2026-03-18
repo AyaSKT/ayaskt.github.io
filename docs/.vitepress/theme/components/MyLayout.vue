@@ -4,6 +4,7 @@ import DefaultTheme from 'vitepress/theme'
 import MouseClick from "./MouseClick.vue";
 import MouseFollower from "./MouseFollower.vue";
 import GiscusComment from './GiscusComment.vue' // 评论模块
+import BackToTop from './backtotop.vue'
 </script>
 
 <template>
@@ -18,6 +19,7 @@ import GiscusComment from './GiscusComment.vue' // 评论模块
     <!-- 文档内容之后的评论组件 -->
     <template #doc-after>
       <GiscusComment />
+      <BackToTop />
     </template>
   </DefaultTheme.Layout>
 </template>

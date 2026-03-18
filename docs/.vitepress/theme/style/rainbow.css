@@ -1,424 +1,531 @@
-/* 彩虹动画 */
+/* 彩虹动画（莫兰迪灰蓝系，每 1% 一帧） */
 @keyframes rainbow {
-    0% {
-        --rainbow-prev: #009ff7;
-        --rainbow-next: #c76dd1;
-    }
-
-    1.25% {
-        --rainbow-prev: #009dfa;
-        --rainbow-next: #cf69c9;
-    }
-
-    2.5% {
-        --rainbow-prev: #009bfc;
-        --rainbow-next: #d566c2;
-    }
-
-    3.75% {
-        --rainbow-prev: #0098fd;
-        --rainbow-next: #dc63ba;
-    }
-
-    5% {
-        --rainbow-prev: #0096fd;
-        --rainbow-next: #e160b3;
-    }
-
-    6.25% {
-        --rainbow-prev: #0093fd;
-        --rainbow-next: #e65eab;
-    }
-
-    7.5% {
-        --rainbow-prev: #2e90fc;
-        --rainbow-next: #e95ca2;
-    }
-
-    8.75% {
-        --rainbow-prev: #4d8dfa;
-        --rainbow-next: #ed5a9a;
-    }
-
-    10% {
-        --rainbow-prev: #638af8;
-        --rainbow-next: #ef5992;
-    }
-
-    11.25% {
-        --rainbow-prev: #7587f5;
-        --rainbow-next: #f15989;
-    }
-
-    12.5% {
-        --rainbow-prev: #8583f1;
-        --rainbow-next: #f25981;
-    }
-
-    13.75% {
-        --rainbow-prev: #9280ed;
-        --rainbow-next: #f25a79;
-    }
-
-    15% {
-        --rainbow-prev: #9f7ce9;
-        --rainbow-next: #f25c71;
-    }
-
-    16.25% {
-        --rainbow-prev: #aa78e3;
-        --rainbow-next: #f15e69;
-    }
-
-    17.5% {
-        --rainbow-prev: #b574dd;
-        --rainbow-next: #ef6061;
-    }
-
-    18.75% {
-        --rainbow-prev: #be71d7;
-        --rainbow-next: #ed635a;
-    }
-
-    20% {
-        --rainbow-prev: #c76dd1;
-        --rainbow-next: #eb6552;
-    }
-
-    21.25% {
-        --rainbow-prev: #cf69c9;
-        --rainbow-next: #e8694b;
-    }
-
-    22.5% {
-        --rainbow-prev: #d566c2;
-        --rainbow-next: #e46c44;
-    }
-
-    23.75% {
-        --rainbow-prev: #dc63ba;
-        --rainbow-next: #e06f3d;
-    }
-
-    25% {
-        --rainbow-prev: #e160b3;
-        --rainbow-next: #db7336;
-    }
-
-    26.25% {
-        --rainbow-prev: #e65eab;
-        --rainbow-next: #d77630;
-    }
-
-    27.5% {
-        --rainbow-prev: #e95ca2;
-        --rainbow-next: #d17a2a;
-    }
-
-    28.75% {
-        --rainbow-prev: #ed5a9a;
-        --rainbow-next: #cc7d24;
-    }
-
-    30% {
-        --rainbow-prev: #ef5992;
-        --rainbow-next: #c6811e;
-    }
-
-    31.25% {
-        --rainbow-prev: #f15989;
-        --rainbow-next: #bf8418;
-    }
-
-    32.5% {
-        --rainbow-prev: #f25981;
-        --rainbow-next: #b98713;
-    }
-
-    33.75% {
-        --rainbow-prev: #f25a79;
-        --rainbow-next: #b28a0f;
-    }
-
-    35% {
-        --rainbow-prev: #f25c71;
-        --rainbow-next: #ab8d0c;
-    }
-
-    36.25% {
-        --rainbow-prev: #f15e69;
-        --rainbow-next: #a3900b;
-    }
-
-    37.5% {
-        --rainbow-prev: #ef6061;
-        --rainbow-next: #9c920d;
-    }
-
-    38.75% {
-        --rainbow-prev: #ed635a;
-        --rainbow-next: #949510;
-    }
-
-    40% {
-        --rainbow-prev: #eb6552;
-        --rainbow-next: #8b9715;
-    }
-
-    41.25% {
-        --rainbow-prev: #e8694b;
-        --rainbow-next: #83991b;
-    }
-
-    42.5% {
-        --rainbow-prev: #e46c44;
-        --rainbow-next: #7a9b21;
-    }
-
-    43.75% {
-        --rainbow-prev: #e06f3d;
-        --rainbow-next: #719d27;
-    }
-
-    45% {
-        --rainbow-prev: #db7336;
-        --rainbow-next: #679e2e;
-    }
-
-    46.25% {
-        --rainbow-prev: #d77630;
-        --rainbow-next: #5da035;
-    }
-
-    47.5% {
-        --rainbow-prev: #d17a2a;
-        --rainbow-next: #51a13c;
-    }
-
-    48.75% {
-        --rainbow-prev: #cc7d24;
-        --rainbow-next: #44a244;
-    }
-
-    50% {
-        --rainbow-prev: #c6811e;
-        --rainbow-next: #34a44b;
-    }
-
-    51.25% {
-        --rainbow-prev: #bf8418;
-        --rainbow-next: #1ba553;
-    }
-
-    52.5% {
-        --rainbow-prev: #b98713;
-        --rainbow-next: #00a65b;
-    }
-
-    53.75% {
-        --rainbow-prev: #b28a0f;
-        --rainbow-next: #00a663;
-    }
-
-    55% {
-        --rainbow-prev: #ab8d0c;
-        --rainbow-next: #00a76c;
-    }
-
-    56.25% {
-        --rainbow-prev: #a3900b;
-        --rainbow-next: #00a874;
-    }
-
-    57.5% {
-        --rainbow-prev: #9c920d;
-        --rainbow-next: #00a87d;
-    }
-
-    58.75% {
-        --rainbow-prev: #949510;
-        --rainbow-next: #00a985;
-    }
-
-    60% {
-        --rainbow-prev: #8b9715;
-        --rainbow-next: #00a98e;
-    }
-
-    61.25% {
-        --rainbow-prev: #83991b;
-        --rainbow-next: #00a996;
-    }
-
-    62.5% {
-        --rainbow-prev: #7a9b21;
-        --rainbow-next: #00a99f;
-    }
-
-    63.75% {
-        --rainbow-prev: #719d27;
-        --rainbow-next: #00a9a7;
-    }
-
-    65% {
-        --rainbow-prev: #679e2e;
-        --rainbow-next: #00a9b0;
-    }
-
-    66.25% {
-        --rainbow-prev: #5da035;
-        --rainbow-next: #00a9b8;
-    }
-
-    67.5% {
-        --rainbow-prev: #51a13c;
-        --rainbow-next: #00a9c0;
-    }
-
-    68.75% {
-        --rainbow-prev: #44a244;
-        --rainbow-next: #00a8c7;
-    }
-
-    70% {
-        --rainbow-prev: #34a44b;
-        --rainbow-next: #00a8cf;
-    }
-
-    71.25% {
-        --rainbow-prev: #1ba553;
-        --rainbow-next: #00a7d5;
-    }
-
-    72.5% {
-        --rainbow-prev: #00a65b;
-        --rainbow-next: #00a6dc;
-    }
-
-    73.75% {
-        --rainbow-prev: #00a663;
-        --rainbow-next: #00a6e2;
-    }
-
-    75% {
-        --rainbow-prev: #00a76c;
-        --rainbow-next: #00a4e7;
-    }
-
-    76.25% {
-        --rainbow-prev: #00a874;
-        --rainbow-next: #00a3ec;
-    }
-
-    77.5% {
-        --rainbow-prev: #00a87d;
-        --rainbow-next: #00a2f1;
-    }
-
-    78.75% {
-        --rainbow-prev: #00a985;
-        --rainbow-next: #00a0f4;
-    }
-
-    80% {
-        --rainbow-prev: #00a98e;
-        --rainbow-next: #009ff7;
-    }
-
-    81.25% {
-        --rainbow-prev: #00a996;
-        --rainbow-next: #009dfa;
-    }
-
-    82.5% {
-        --rainbow-prev: #00a99f;
-        --rainbow-next: #009bfc;
-    }
-
-    83.75% {
-        --rainbow-prev: #00a9a7;
-        --rainbow-next: #0098fd;
-    }
-
-    85% {
-        --rainbow-prev: #00a9b0;
-        --rainbow-next: #0096fd;
-    }
-
-    86.25% {
-        --rainbow-prev: #00a9b8;
-        --rainbow-next: #0093fd;
-    }
-
-    87.5% {
-        --rainbow-prev: #00a9c0;
-        --rainbow-next: #2e90fc;
-    }
-
-    88.75% {
-        --rainbow-prev: #00a8c7;
-        --rainbow-next: #4d8dfa;
-    }
-
-    90% {
-        --rainbow-prev: #00a8cf;
-        --rainbow-next: #638af8;
-    }
-
-    91.25% {
-        --rainbow-prev: #00a7d5;
-        --rainbow-next: #7587f5;
-    }
-
-    92.5% {
-        --rainbow-prev: #00a6dc;
-        --rainbow-next: #8583f1;
-    }
-
-    93.75% {
-        --rainbow-prev: #00a6e2;
-        --rainbow-next: #9280ed;
-    }
-
-    95% {
-        --rainbow-prev: #00a4e7;
-        --rainbow-next: #9f7ce9;
-    }
-
-    96.25% {
-        --rainbow-prev: #00a3ec;
-        --rainbow-next: #aa78e3;
-    }
-
-    97.5% {
-        --rainbow-prev: #00a2f1;
-        --rainbow-next: #b574dd;
-    }
-
-    98.75% {
-        --rainbow-prev: #00a0f4;
-        --rainbow-next: #be71d7;
-    }
-
-    100% {
-        --rainbow-prev: #009ff7;
-        --rainbow-next: #c76dd1;
-    }
+  0% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 100%, #929ea6 0%);
+    --rainbow-next: color-mix(in srgb, #929ea6 100%, #d9b0b0 0%);
+  }
+
+  1% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 96%, #929ea6 4%);
+    --rainbow-next: color-mix(in srgb, #929ea6 96%, #d9b0b0 4%);
+  }
+
+  2% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 92%, #929ea6 8%);
+    --rainbow-next: color-mix(in srgb, #929ea6 92%, #d9b0b0 8%);
+  }
+
+  3% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 88%, #929ea6 12%);
+    --rainbow-next: color-mix(in srgb, #929ea6 88%, #d9b0b0 12%);
+  }
+
+  4% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 84%, #929ea6 16%);
+    --rainbow-next: color-mix(in srgb, #929ea6 84%, #d9b0b0 16%);
+  }
+
+  5% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 80%, #929ea6 20%);
+    --rainbow-next: color-mix(in srgb, #929ea6 80%, #d9b0b0 20%);
+  }
+
+  6% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 76%, #929ea6 24%);
+    --rainbow-next: color-mix(in srgb, #929ea6 76%, #d9b0b0 24%);
+  }
+
+  7% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 72%, #929ea6 28%);
+    --rainbow-next: color-mix(in srgb, #929ea6 72%, #d9b0b0 28%);
+  }
+
+  8% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 68%, #929ea6 32%);
+    --rainbow-next: color-mix(in srgb, #929ea6 68%, #d9b0b0 32%);
+  }
+
+  9% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 64%, #929ea6 36%);
+    --rainbow-next: color-mix(in srgb, #929ea6 64%, #d9b0b0 36%);
+  }
+
+  10% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 60%, #929ea6 40%);
+    --rainbow-next: color-mix(in srgb, #929ea6 60%, #d9b0b0 40%);
+  }
+
+  11% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 56%, #929ea6 44%);
+    --rainbow-next: color-mix(in srgb, #929ea6 56%, #d9b0b0 44%);
+  }
+
+  12% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 52%, #929ea6 48%);
+    --rainbow-next: color-mix(in srgb, #929ea6 52%, #d9b0b0 48%);
+  }
+
+  13% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 48%, #929ea6 52%);
+    --rainbow-next: color-mix(in srgb, #929ea6 48%, #d9b0b0 52%);
+  }
+
+  14% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 44%, #929ea6 56%);
+    --rainbow-next: color-mix(in srgb, #929ea6 44%, #d9b0b0 56%);
+  }
+
+  15% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 40%, #929ea6 60%);
+    --rainbow-next: color-mix(in srgb, #929ea6 40%, #d9b0b0 60%);
+  }
+
+  16% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 36%, #929ea6 64%);
+    --rainbow-next: color-mix(in srgb, #929ea6 36%, #d9b0b0 64%);
+  }
+
+  17% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 32%, #929ea6 68%);
+    --rainbow-next: color-mix(in srgb, #929ea6 32%, #d9b0b0 68%);
+  }
+
+  18% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 28%, #929ea6 72%);
+    --rainbow-next: color-mix(in srgb, #929ea6 28%, #d9b0b0 72%);
+  }
+
+  19% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 24%, #929ea6 76%);
+    --rainbow-next: color-mix(in srgb, #929ea6 24%, #d9b0b0 76%);
+  }
+
+  20% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 20%, #929ea6 80%);
+    --rainbow-next: color-mix(in srgb, #929ea6 20%, #d9b0b0 80%);
+  }
+
+  21% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 16%, #929ea6 84%);
+    --rainbow-next: color-mix(in srgb, #929ea6 16%, #d9b0b0 84%);
+  }
+
+  22% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 12%, #929ea6 88%);
+    --rainbow-next: color-mix(in srgb, #929ea6 12%, #d9b0b0 88%);
+  }
+
+  23% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 8%, #929ea6 92%);
+    --rainbow-next: color-mix(in srgb, #929ea6 8%, #d9b0b0 92%);
+  }
+
+  24% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 4%, #929ea6 96%);
+    --rainbow-next: color-mix(in srgb, #929ea6 4%, #d9b0b0 96%);
+  }
+
+  25% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 100%, #d9b0b0 0%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 100%, #5e7ea7 0%);
+  }
+
+  26% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 96%, #d9b0b0 4%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 96%, #5e7ea7 4%);
+  }
+
+  27% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 92%, #d9b0b0 8%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 92%, #5e7ea7 8%);
+  }
+
+  28% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 88%, #d9b0b0 12%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 88%, #5e7ea7 12%);
+  }
+
+  29% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 84%, #d9b0b0 16%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 84%, #5e7ea7 16%);
+  }
+
+  30% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 80%, #d9b0b0 20%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 80%, #5e7ea7 20%);
+  }
+
+  31% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 76%, #d9b0b0 24%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 76%, #5e7ea7 24%);
+  }
+
+  32% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 72%, #d9b0b0 28%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 72%, #5e7ea7 28%);
+  }
+
+  33% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 68%, #d9b0b0 32%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 68%, #5e7ea7 32%);
+  }
+
+  34% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 64%, #d9b0b0 36%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 64%, #5e7ea7 36%);
+  }
+
+  35% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 60%, #d9b0b0 40%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 60%, #5e7ea7 40%);
+  }
+
+  36% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 56%, #d9b0b0 44%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 56%, #5e7ea7 44%);
+  }
+
+  37% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 52%, #d9b0b0 48%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 52%, #5e7ea7 48%);
+  }
+
+  38% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 48%, #d9b0b0 52%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 48%, #5e7ea7 52%);
+  }
+
+  39% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 44%, #d9b0b0 56%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 44%, #5e7ea7 56%);
+  }
+
+  40% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 40%, #d9b0b0 60%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 40%, #5e7ea7 60%);
+  }
+
+  41% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 36%, #d9b0b0 64%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 36%, #5e7ea7 64%);
+  }
+
+  42% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 32%, #d9b0b0 68%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 32%, #5e7ea7 68%);
+  }
+
+  43% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 28%, #d9b0b0 72%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 28%, #5e7ea7 72%);
+  }
+
+  44% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 24%, #d9b0b0 76%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 24%, #5e7ea7 76%);
+  }
+
+  45% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 20%, #d9b0b0 80%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 20%, #5e7ea7 80%);
+  }
+
+  46% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 16%, #d9b0b0 84%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 16%, #5e7ea7 84%);
+  }
+
+  47% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 12%, #d9b0b0 88%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 12%, #5e7ea7 88%);
+  }
+
+  48% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 8%, #d9b0b0 92%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 8%, #5e7ea7 92%);
+  }
+
+  49% {
+    --rainbow-prev: color-mix(in srgb, #929ea6 4%, #d9b0b0 96%);
+    --rainbow-next: color-mix(in srgb, #d9b0b0 4%, #5e7ea7 96%);
+  }
+
+  50% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 100%, #5e7ea7 0%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 100%, #89b8d6 0%);
+  }
+
+  51% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 96%, #5e7ea7 4%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 96%, #89b8d6 4%);
+  }
+
+  52% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 92%, #5e7ea7 8%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 92%, #89b8d6 8%);
+  }
+
+  53% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 88%, #5e7ea7 12%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 88%, #89b8d6 12%);
+  }
+
+  54% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 84%, #5e7ea7 16%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 84%, #89b8d6 16%);
+  }
+
+  55% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 80%, #5e7ea7 20%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 80%, #89b8d6 20%);
+  }
+
+  56% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 76%, #5e7ea7 24%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 76%, #89b8d6 24%);
+  }
+
+  57% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 72%, #5e7ea7 28%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 72%, #89b8d6 28%);
+  }
+
+  58% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 68%, #5e7ea7 32%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 68%, #89b8d6 32%);
+  }
+
+  59% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 64%, #5e7ea7 36%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 64%, #89b8d6 36%);
+  }
+
+  60% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 60%, #5e7ea7 40%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 60%, #89b8d6 40%);
+  }
+
+  61% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 56%, #5e7ea7 44%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 56%, #89b8d6 44%);
+  }
+
+  62% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 52%, #5e7ea7 48%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 52%, #89b8d6 48%);
+  }
+
+  63% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 48%, #5e7ea7 52%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 48%, #89b8d6 52%);
+  }
+
+  64% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 44%, #5e7ea7 56%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 44%, #89b8d6 56%);
+  }
+
+  65% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 40%, #5e7ea7 60%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 40%, #89b8d6 60%);
+  }
+
+  66% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 36%, #5e7ea7 64%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 36%, #89b8d6 64%);
+  }
+
+  67% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 32%, #5e7ea7 68%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 32%, #89b8d6 68%);
+  }
+
+  68% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 28%, #5e7ea7 72%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 28%, #89b8d6 72%);
+  }
+
+  69% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 24%, #5e7ea7 76%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 24%, #89b8d6 76%);
+  }
+
+  70% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 20%, #5e7ea7 80%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 20%, #89b8d6 80%);
+  }
+
+  71% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 16%, #5e7ea7 84%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 16%, #89b8d6 84%);
+  }
+
+  72% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 12%, #5e7ea7 88%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 12%, #89b8d6 88%);
+  }
+
+  73% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 8%, #5e7ea7 92%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 8%, #89b8d6 92%);
+  }
+
+  74% {
+    --rainbow-prev: color-mix(in srgb, #d9b0b0 4%, #5e7ea7 96%);
+    --rainbow-next: color-mix(in srgb, #5e7ea7 4%, #89b8d6 96%);
+  }
+
+  75% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 100%, #89b8d6 0%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 100%, #929ea6 0%);
+  }
+
+  76% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 96%, #89b8d6 4%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 96%, #929ea6 4%);
+  }
+
+  77% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 92%, #89b8d6 8%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 92%, #929ea6 8%);
+  }
+
+  78% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 88%, #89b8d6 12%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 88%, #929ea6 12%);
+  }
+
+  79% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 84%, #89b8d6 16%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 84%, #929ea6 16%);
+  }
+
+  80% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 80%, #89b8d6 20%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 80%, #929ea6 20%);
+  }
+
+  81% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 76%, #89b8d6 24%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 76%, #929ea6 24%);
+  }
+
+  82% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 72%, #89b8d6 28%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 72%, #929ea6 28%);
+  }
+
+  83% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 68%, #89b8d6 32%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 68%, #929ea6 32%);
+  }
+
+  84% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 64%, #89b8d6 36%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 64%, #929ea6 36%);
+  }
+
+  85% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 60%, #89b8d6 40%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 60%, #929ea6 40%);
+  }
+
+  86% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 56%, #89b8d6 44%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 56%, #929ea6 44%);
+  }
+
+  87% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 52%, #89b8d6 48%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 52%, #929ea6 48%);
+  }
+
+  88% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 48%, #89b8d6 52%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 48%, #929ea6 52%);
+  }
+
+  89% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 44%, #89b8d6 56%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 44%, #929ea6 56%);
+  }
+
+  90% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 40%, #89b8d6 60%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 40%, #929ea6 60%);
+  }
+
+  91% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 36%, #89b8d6 64%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 36%, #929ea6 64%);
+  }
+
+  92% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 32%, #89b8d6 68%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 32%, #929ea6 68%);
+  }
+
+  93% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 28%, #89b8d6 72%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 28%, #929ea6 72%);
+  }
+
+  94% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 24%, #89b8d6 76%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 24%, #929ea6 76%);
+  }
+
+  95% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 20%, #89b8d6 80%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 20%, #929ea6 80%);
+  }
+
+  96% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 16%, #89b8d6 84%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 16%, #929ea6 84%);
+  }
+
+  97% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 12%, #89b8d6 88%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 12%, #929ea6 88%);
+  }
+
+  98% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 8%, #89b8d6 92%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 8%, #929ea6 92%);
+  }
+
+  99% {
+    --rainbow-prev: color-mix(in srgb, #5e7ea7 4%, #89b8d6 96%);
+    --rainbow-next: color-mix(in srgb, #89b8d6 4%, #929ea6 96%);
+  }
+
+  100% {
+    --rainbow-prev: color-mix(in srgb, #89b8d6 100%, #929ea6 0%);
+    --rainbow-next: color-mix(in srgb, #929ea6 100%, #d9b0b0 0%);
+  }
+
 }
 
-/* 彩虹色卡初始色 */
+/* 彩虹色卡初始色（如果想启用动画，可在这里打开 animation） */
 :root {
-    --rainbow-prev: #009ff7;
-    --rainbow-next: #c76dd1;
-    /* animation: rainbow 8s linear infinite; */
-}
+  --rainbow-prev: #89b8d6;
+  --rainbow-next: #929ea6;
+  /* animation: rainbow 20s linear infinite; */
 
-:root {
-    /* hero标题渐变色 */
-    --vp-home-hero-name-color: transparent;
-    --vp-home-hero-name-background: -webkit-linear-gradient(120deg, var(--rainbow-prev) 30%, var(--rainbow-next));
+  /* hero标题渐变色 */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(
+    120deg,
+    var(--rainbow-prev) 30%,
+    var(--rainbow-next)
+  );
 
-    /*hero logo背景渐变色 */
-    --vp-home-hero-image-background-image: linear-gradient(-45deg, var(--rainbow-prev) 30%, var(--rainbow-next));
-    --vp-home-hero-image-filter: blur(80px);
+  /* hero logo 背景渐变色 */
+  --vp-home-hero-image-background-image: linear-gradient(
+    -45deg,
+    var(--rainbow-prev) 30%,
+    var(--rainbow-next)
+  );
+  --vp-home-hero-image-filter: blur(80px);
 }

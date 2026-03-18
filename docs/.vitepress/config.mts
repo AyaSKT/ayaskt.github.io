@@ -144,7 +144,8 @@ export default defineConfig({
           items: [
             { text: 'Introduction', link: '/Y3S2/EMFT/EMFT-README' },
             { text: 'Ch 2 矢量分析', link: '/Y3S2/EMFT/EMFT Chapter 2' },
-            { text: 'Ch 3 静电场', link: '/Y3S2/EMFT/EMFT Chapter 3' },
+            { text: 'Ch 3 I 静电场 (上)', link: '/Y3S2/EMFT/EMFT Chapter 3 P I' },
+            { text: 'Ch 3 II 静电场 (下)', link: '/Y3S2/EMFT/EMFT Chapter 3 P II' },
             { text: 'Ch 4 静电场问题求解', link: '/Y3S2/EMFT/EMFT Chapter 4' },
             { text: 'Ch 5 恒定电流', link: '/Y3S2/EMFT/EMFT Chapter 5' },
             { text: 'Ch 6 静磁场', link: '/Y3S2/EMFT/EMFT Chapter 6' },
@@ -201,10 +202,6 @@ export default defineConfig({
       ]
     },
 
-    outline: {
-      level: [2, 3],
-      label: 'Contents',
-    },
     
 
     socialLinks: [

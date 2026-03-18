@@ -31,7 +31,8 @@
 
 **To be continued:**
 
-- [EMFT Chapter 3: Static Electric Fields](EMFT%20Chapter%203.md)
+- [EMFT Chapter 3: Static Electric Fields Part I](EMFT%20Chapter%203%20P%20I.md)
+- [EMFT Chapter 3: Static Electric Fields Part II](EMFT%20Chapter%203%20P%20II.md)
 - [EMFT Chapter 4: Solution of Electrostatic Problems](EMFT%20Chapter%204.md)
 - [EMFT Chapter 5: Steady Electric Currents](EMFT%20Chapter%205.md)
 - [EMFT Chapter 6: Static Magnetic Fields](EMFT%20Chapter%206.md)
