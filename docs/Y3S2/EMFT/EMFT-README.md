@@ -28,10 +28,11 @@
 ## 目录 Index
 
 - [EMFT Chapter 2: Vector Analysis](EMFT%20Chapter%202.md)
+- [EMFT Chapter 3: Static Electric Fields Part I](EMFT%20Chapter%203%20P%20I.md)
 
 **To be continued:**
 
-- [EMFT Chapter 3: Static Electric Fields Part I](EMFT%20Chapter%203%20P%20I.md)
+
 - [EMFT Chapter 3: Static Electric Fields Part II](EMFT%20Chapter%203%20P%20II.md)
 - [EMFT Chapter 4: Solution of Electrostatic Problems](EMFT%20Chapter%204.md)
 - [EMFT Chapter 5: Steady Electric Currents](EMFT%20Chapter%205.md)
@@ -44,4 +45,4 @@
 
 
 
-![alt text](EMFT-README.attachments/1773463099101.png)
+![alt text](<EMFT Chapter 3 P II.attachments/1773799909890.JPG>)
