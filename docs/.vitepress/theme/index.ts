@@ -41,7 +41,7 @@ export default {
   },
 
   extends: DefaultTheme,
-  Layout: MyLayout,
+  Layout: Layout,
   // ...DefaultTheme, //或者这样写也可
 }
 

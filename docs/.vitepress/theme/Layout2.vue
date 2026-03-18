@@ -1,9 +1,8 @@
 <script setup>
 import { useRouter } from "vitepress";
-import DefaultTheme from "vitepress/theme";
+import MyLayout from './components/MyLayout.vue';
 import { watch, ref } from "vue";
 
-const { Layout } = DefaultTheme;
 const { route } = useRouter();
 const isTransitioning = ref(false);
 
@@ -20,13 +19,13 @@ watch(
 </script>
 
 <template>
-  <Layout>
+  <MyLayout>
     <template #doc-top>
       <div class="shade" :class="{ 'shade-active': isTransitioning }">
         &nbsp;
       </div>
     </template>
-  </Layout>
+  </MyLayout>
 </template>
 
 <style>
