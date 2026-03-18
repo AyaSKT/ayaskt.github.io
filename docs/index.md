@@ -52,9 +52,18 @@ hero:
       text: Y3S1 人工智能与机器学习 AI&ML
       link: /Y3S1/AIML/AIML-README.md
 
+
     - theme: alt
-      text: Y3S1 信息论基础 IT
-      link: /Y3S1/IT/IT-README.md
+      text: Y2S2 嵌入式处理器 EP (DT5EDU)
+      link: https://mp.weixin.qq.com/s/Xqwg9KBZHkuYoXQAH-DfGw
+
+    - theme: alt
+      text: Y2S1 电路分析与设计 CAD (DT5EDU)
+      link: https://mp.weixin.qq.com/s/-_oFpk5asMRE_D6sqlMCsw
+
+    - theme: alt
+      text: Y1S2 微电子系统 MS (DT5EDU)
+      link: https://mp.weixin.qq.com/s/-9nZpf5RWmMm46bBMuBrLg
 
 
 features:

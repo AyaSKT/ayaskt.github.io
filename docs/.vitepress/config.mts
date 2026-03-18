@@ -66,7 +66,6 @@ export default defineConfig({
       { text: '第三学年', items: [
         { text: '通信原理与系统 CPS', link: '/Y3S1/CPS/CPS-README.md' },
         { text: '人工智能与机器学习 AIML', link: '/Y3S1/AIML/AIML-README.md' },
-        { text: '信息论 IT', link: '/item-3' },
         { text: '数字信号处理 DSP', link: '/Y3S2/DSP/DSP-README.md' },
         { text: '电磁场与波 EMFT', link: '/Y3S2/EMFT/EMFT-README.md' },
         { text: '通信电路设计 CCD', link: '/Y3S2/CCD/CCD-README.md' },
@@ -75,12 +74,15 @@ export default defineConfig({
       },
 
       { text: '第二学年', items: [
-        { text: '敬请期待...', link: '' },
+        { text: '嵌入式处理器 EP (DT5EDU)', link: 'https://mp.weixin.qq.com/s/Xqwg9KBZHkuYoXQAH-DfGw' },
+        { text: '电路分析与设计 CAD (DT5EDU)', link: 'https://mp.weixin.qq.com/s/-_oFpk5asMRE_D6sqlMCsw' },
+
        ] 
       },
 
       { text: '第一学年', items: [
-        { text: '敬请期待...', link: '' },
+        { text: '微电子系统 MS (DT5EDU)', link: 'https://mp.weixin.qq.com/s/-9nZpf5RWmMm46bBMuBrLg' },
+
        ] 
       },
     ],
