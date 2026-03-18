@@ -104,7 +104,7 @@ export default defineConfig({
           items: [
             { text: 'Introduction', link: '/Y3S2/DSP/DSP-README.md' },
             {
-              text: 'Part I 离散时间信号与系统',
+              text: 'Block 1: 离散时间信号与系统',
               collapsed: false,
               items: [
                 { text: 'Ch 2: 时域离散时间信号', link: '/Y3S2/DSP/DSP Chapter 2' },
@@ -114,7 +114,7 @@ export default defineConfig({
               ],
             },
             {
-              text: 'Part II 离散变换',
+              text: 'Block 2: 离散变换',
               collapsed: false,
               items: [
                 { text: 'Ch 5: 离散傅里叶变换 DFT', link: '/Y3S2/DSP/DSP Chapter 5' },
@@ -123,7 +123,7 @@ export default defineConfig({
               ],
             },
             {
-              text: 'Part III 数字滤波器设计',
+              text: 'Block 3: 数字滤波器设计',
               collapsed: false,
               items: [
                 { text: 'Ch 8: 数字滤波器架构', link: '/Y3S2/DSP/DSP Chapter 8' },

@@ -3,8 +3,7 @@ import DefaultTheme from 'vitepress/theme'
 import { watch } from 'vue'
 import './style/index.css'
 
-import MouseClick from "./components/MouseClick.vue"
-import MouseFollower from "./components/MouseFollower.vue"
+import MouseClick from './components/MouseClick.vue'
 
 import Mycomponent from './components/Linkcard.vue'
 import Confetti from './components/confetti.vue'
@@ -35,7 +34,6 @@ export default {
     app.component('Mycomponent' , Mycomponent)
     app.component('Confetti' , Confetti)
     app.component('MouseClick' , MouseClick)
-    app.component('MouseFollower' , MouseFollower)
     app.component('update' , update)
     app.component('BackToTop', BackToTop)
   },

@@ -85,7 +85,7 @@ features:
     dark: 5.jpg
     light: 5.jpg
   title: 友情推荐：Cateds
-  details: 前端的神 & 后端的神 & Rust的神
+  details: "前端的神 & 后端的神 & Rust的神！ \n 电子信息专业直接去看🌟✌️笔记就可以考99！"
   link: https://cateds.github.io/
   linkText: 点击以膜拜
 
