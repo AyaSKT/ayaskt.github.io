@@ -4,7 +4,7 @@
 
 
 
-## Digital Signal Processing (UESTC4005)
+## Digital Signal Processing (UESTC4005 / UESTCHN4005)
 
 **本笔记基于2026年春季格拉斯哥学院数字信号处理课程文件及教材**
 
