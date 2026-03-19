@@ -74,7 +74,7 @@ $$
 其中
 
 $$
-z = a+jb, \quad a, b \in \R
+z = a+jb, \quad a, b \in \mathbb{R}
 $$
 
 。
