@@ -36,12 +36,12 @@
 ### Part II 离散变换
 
 - [Ch 5: 离散傅里叶变换 Discrete Fourier Transform, DFT](DSP%20Chapter%205.md)
+- [Ch 6: Z 变换 Z-Transform](DSP%20Chapter%206.md)
 
 > [!WARNING]
 > 以下笔记暂未完成，敬请期待...
 
 
-- [Ch 6: Z 变换 Z-Transform](DSP%20Chapter%206.md)
 - [Ch 7: 变换域中的离散 LTI 系统 LTI Discrete-Time Systems in the Transform Domain](DSP%20Chapter%207.md)
 
 ### Part III 数字滤波器设计
