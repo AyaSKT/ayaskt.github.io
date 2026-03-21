@@ -1,9 +1,45 @@
 <script lang="ts" setup>
 // 1. 再次导入必要的组件
 import DefaultTheme from 'vitepress/theme'
+import { computed } from 'vue'
+import { useData } from 'vitepress'
 import MouseClick from './MouseClick.vue'
 import GiscusComment from './GiscusComment.vue' // 评论模块
 import BackToTop from './backtotop.vue'
+import HeroHitokoto from './HeroHitokoto.vue'
+
+const { frontmatter, isDark } = useData()
+
+const heroImageData = computed(() => {
+  const hero = (frontmatter.value as any)?.hero
+  return hero?.image ?? null
+})
+
+const heroImageSrc = computed(() => {
+  const image = heroImageData.value
+  if (!image) return ''
+  if (typeof image === 'string') return image
+  if (image.src) return image.src
+  if (image.light || image.dark) {
+    return isDark.value ? (image.dark ?? image.light ?? '') : (image.light ?? image.dark ?? '')
+  }
+  return ''
+})
+
+const heroImageWidth = computed(() => {
+  const image = heroImageData.value
+  return image && typeof image === 'object' ? image.width : undefined
+})
+
+const heroImageHeight = computed(() => {
+  const image = heroImageData.value
+  return image && typeof image === 'object' ? image.height : undefined
+})
+
+const heroImageStyle = computed(() => {
+  const image = heroImageData.value
+  return image && typeof image === 'object' ? image.style : undefined
+})
 </script>
 
 <template>
@@ -18,6 +54,18 @@ import BackToTop from './backtotop.vue'
     <template #doc-after>
       <GiscusComment />
       <BackToTop />
+    </template>
+
+    <template #home-hero-image>
+      <img
+        v-if="heroImageSrc"
+        class="image-src hero-image-src"
+        :src="heroImageSrc"
+        :width="heroImageWidth"
+        :height="heroImageHeight"
+        :style="heroImageStyle"
+      >
+      <HeroHitokoto />
     </template>
   </DefaultTheme.Layout>
 </template>
