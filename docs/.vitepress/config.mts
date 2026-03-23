@@ -138,6 +138,38 @@ export default defineConfig({
       ],
 
 
+      // 工程项目管理与财务 EPMF：当路径在 /Y3S2/EPMF/ 下时显示
+      '/Y3S2/EPMF/': [
+        {
+          text: '工程项目管理与财务 EPMF 课程总览',
+          collapsed: false,
+          items: [
+            { text: 'Introduction', link: '/Y3S2/EPMF/EPMF-README' },
+            {
+              text: 'Block 1: Project Management',
+              collapsed: false,
+              items: [
+                { text: 'Part 1 / Lec 1', link: '/Y3S2/EPMF/Block 1/Lecture 1' },
+                { text: 'Part 2 / Lec 2', link: '/Y3S2/EPMF/Block 1/Lecture 2' },
+                { text: 'Part 3 / Lec 3', link: '/Y3S2/EPMF/Block 1/Lecture 3' },
+                { text: 'Part 4 / Lec 4', link: '/Y3S2/EPMF/Block 1/Lecture 4' },
+              ],
+            },
+            {
+              text: 'Block 2: Design for Manufacturing',
+              collapsed: false,
+              items: [
+                { text: 'Part 1 / Lec 5', link: '/Y3S2/EPMF/Block 2/Lecture 5' },
+                { text: 'Part 2 / Lec 6', link: '/Y3S2/EPMF/Block 2/Lecture 6' },
+                { text: 'Part 3 / Lec 7', link: '/Y3S2/EPMF/Block 2/Lecture 7' },
+                { text: 'Part 4 / Lec 8', link: '/Y3S2/EPMF/Block 2/Lecture 8' },
+              ],
+            },
+          ],
+        },
+      ],
+
+
       // 电磁场与波 EMFT：当路径在 /Y3S2/EMFT/ 下时显示
       '/Y3S2/EMFT/': [
         {

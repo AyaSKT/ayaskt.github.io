@@ -1,1 +1,0 @@
-import{_ as e,o as t,c as s}from"./chunks/framework.Bbl5ol3_.js";const u=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"Guides/OutClass.md","filePath":"Guides/OutClass.md"}'),a={name:"Guides/OutClass.md"};function r(o,c,n,d,i,l){return t(),s("div")}const _=e(a,[["render",r]]);export{u as __pageData,_ as default};

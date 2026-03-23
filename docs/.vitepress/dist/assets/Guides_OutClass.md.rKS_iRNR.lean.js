@@ -1,0 +1,1 @@
+import{_ as t,o as e,c as s}from"./chunks/framework.DcVeWzII.js";const u=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"Guides/OutClass.md","filePath":"Guides/OutClass.md","lastUpdated":1773384890000}'),a={name:"Guides/OutClass.md"};function r(o,c,d,n,i,l){return e(),s("div")}const _=t(a,[["render",r]]);export{u as __pageData,_ as default};
