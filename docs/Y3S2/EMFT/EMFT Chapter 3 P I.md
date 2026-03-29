@@ -1,8 +1,11 @@
 # 3 Static Electric Field Part I
 
-**倘若真的有那么一瞬间，能够奋不顾身的话...**
+**『やれることやっていけ』**   
+**『去做自己力所能及之事吧』**
 
-![alt text](<EMFT Chapter 3 P I.attachments/1773799938745.JPG>)
+<div align="right">——25時、ナイトコードで。 《限りなく灰色へ》</div>
+
+![alt text](<EMFT Chapter 3 P I.attachments/1774778776536.PNG>)
 
 > [!TIP]
 > 本文覆盖第三章电势及电势之前的小节。
