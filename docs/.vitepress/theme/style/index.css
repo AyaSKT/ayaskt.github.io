@@ -28,3 +28,105 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+/* ================================================================
+   Example Container（例题容器）::: example / ::: stem / ::: solution
+   配色基于主题渐变 #98CBEA → #C2C7F8 → #F1DCE4
+   ================================================================ */
+.custom-block.example {
+  border: 1px solid rgba(194, 199, 248, 0.45);
+  border-radius: 8px;
+  padding: 20px 24px 16px;
+  margin: 16px 0;
+  background: rgba(152, 203, 234, 0.08);
+}
+
+.dark .custom-block.example {
+  border-color: rgba(194, 199, 248, 0.2);
+  background: rgba(152, 203, 234, 0.04);
+}
+
+.custom-block.example > .custom-block-title {
+  font-weight: 700;
+  font-size: 1.05em;
+  color: #5a96b8;
+  margin: 0 0 14px;
+}
+
+.dark .custom-block.example > .custom-block-title {
+  color: #98CBEA;
+}
+
+.example-stem,
+.example-solution {
+  margin: 0;
+  padding: 14px 16px;
+}
+
+.example-stem {
+  border-radius: 6px 6px 0 0;
+  background: rgba(152, 203, 234, 0.12);
+}
+
+.example-solution {
+  border-radius: 0 0 6px 6px;
+  background: rgba(194, 199, 248, 0.12);
+}
+
+.dark .example-stem {
+  background: rgba(152, 203, 234, 0.07);
+}
+
+.dark .example-solution {
+  background: rgba(194, 199, 248, 0.07);
+}
+
+.example-section-title {
+  font-weight: 600;
+  font-size: 0.9em;
+  margin: 0 0 8px;
+  letter-spacing: 0.05em;
+}
+
+.example-stem > .example-section-title {
+  color: #5a96b8;
+}
+
+.example-solution > .example-section-title {
+  color: #7b80c5;
+}
+
+.dark .example-stem > .example-section-title {
+  color: #98CBEA;
+}
+
+.dark .example-solution > .example-section-title {
+  color: #C2C7F8;
+}
+
+/* ================================================================
+   Definition Container（定义容器）::: definition
+   ================================================================ */
+.custom-block.definition {
+  border: 1px solid rgba(237, 155, 64, 0.45);
+  border-radius: 8px;
+  padding: 20px 24px 16px;
+  margin: 16px 0;
+  background: rgba(237, 155, 64, 0.08);
+}
+
+.dark .custom-block.definition {
+  border-color: rgba(237, 155, 64, 0.25);
+  background: rgba(237, 155, 64, 0.06);
+}
+
+.custom-block.definition > .custom-block-title {
+  font-weight: 700;
+  font-size: 1em;
+  color: #c57a1e;
+  margin: 0 0 14px;
+}
+
+.dark .custom-block.definition > .custom-block-title {
+  color: #ed9b40;
+}

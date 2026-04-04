@@ -144,17 +144,15 @@ $$
 
 ### 3-6-3 导体上的电势
 
-在这里我们用一道例题来讨论导体中电势情况：
-
+::: example 导体上的电势
+::: stem
 ![alt text](<EMFT Chapter 3 P II.attachments/1774747795570.png>)
 
 球心点电荷 $+Q$；同心导体壳，内半径 $R_i$、外半径 $R_o$。静电平衡时内表面感应 $-Q$、外表面 $+Q$。取 $V(\infty)=0$。
-
-
+:::
+::: solution
 
 > 推导过程我不想写了，挺简单的
-
-
 
 $$
 \boxed{
@@ -175,6 +173,8 @@ R<R_i:\quad E=\frac{Q}{4\pi\varepsilon_0 R^2},\quad V=\frac{Q}{4\pi\varepsilon_0
 $$
 
 ![alt text](<EMFT Chapter 3 P II.attachments/1774748123197.png>)
+:::
+:::
 
 > [!IMPORTANT]
 > 导体内外的电场强度会发生**突变 Discontinuous Jump**;
@@ -854,99 +854,95 @@ $$
 
 区别只在于：有时先从电荷出发求电压，有时先从电压出发求电荷。
 
->[!NOTE]
->
-> **分层法求电容**
->
-> ![alt text](<EMFT Chapter 3 P II.attachments/1774775436561.png>)
->
-> 这道题中的两种介质是**沿圆柱底面直径切分**的，也就是说，分界面是一个**经过圆柱轴线的平面**，而不是沿半径方向一层一层套起来。
->
-> 因此：
->
-> - 电场线仍然主要沿**径向**分布；
-> - 两个介质区域两端连接的是**同一对导体**；
-> - 两个区域承受的**电压相同**。
->
-> 所以该结构应看成两个半圆柱电容器的**并联**。
->
->
-> 设两种介质的介电常数分别为
->
-> $$
-> \varepsilon_1=\varepsilon_0\varepsilon_{r1},\qquad
-> \varepsilon_2=\varepsilon_0\varepsilon_{r2}
-> $$
->
-> 内、外导体半径分别为 $r_i,\ r_o$，长度为 $L$。
->
-> 先单独求其中一个**半圆柱区域**的电容。设该区域的介电常数为 $\varepsilon$，所带电荷为 $Q$。由于该区域对应的圆心角为 $\pi$，取半径为 $r$、长度为 $L$ 的扇形同轴高斯面，有
->
-> $$
-> \oint_S \vec D\cdot d\vec S = Q
-> $$
->
-> 即
->
-> $$
-> D_r(\pi rL)=Q
-> $$
->
->
-> 所以径向电场为
->
-> $$
-> E_r(r)=\frac{Q}{\pi \varepsilon rL}
-> $$
->
-> 该半圆柱区域两导体间的电压为
->
-> $$
-> U=\int_{r_i}^{r_o} E_r(r)\,dr
-> =\frac{Q}{\pi \varepsilon L}\int_{r_i}^{r_o}\frac{dr}{r}
-> =\frac{Q}{\pi \varepsilon L}\ln\frac{r_o}{r_i}
-> $$
->
-> 因而该半圆柱区域的电容为
->
-> $$
-> C=\frac{Q}{U}
-> =\frac{\pi \varepsilon L}{\ln(r_o/r_i)}
-> $$
->
-> 对两种介质分别应用这一结果，可得
->
-> $$
-> C_1=\frac{\pi \varepsilon_0\varepsilon_{r1}L}{\ln(r_o/r_i)}
-> $$
->
-> $$
-> C_2=\frac{\pi \varepsilon_0\varepsilon_{r2}L}{\ln(r_o/r_i)}
-> $$
->
-> 由于两部分是并联关系，所以总电容为
->
-> $$
-> C=C_1+C_2
-> $$
->
-> 代入得
->
-> $$
-> C=\frac{\pi \varepsilon_0L}{\ln(r_o/r_i)}\left(\varepsilon_{r1}+\varepsilon_{r2}\right)
-> $$
->
-> 
->
-> **最终结果**
->
-> $$
-> \boxed{
-> C=\frac{\pi \varepsilon_0L\left(\varepsilon_{r1}+\varepsilon_{r2}\right)}{\ln(r_o/r_i)}
-> }
-> $$
->
-> 
+::: example 分层法求电容
+::: stem
+![alt text](<EMFT Chapter 3 P II.attachments/1774775436561.png>)
+
+这道题中的两种介质是**沿圆柱底面直径切分**的，也就是说，分界面是一个**经过圆柱轴线的平面**，而不是沿半径方向一层一层套起来。
+:::
+::: solution
+
+因此：
+
+- 电场线仍然主要沿**径向**分布；
+- 两个介质区域两端连接的是**同一对导体**；
+- 两个区域承受的**电压相同**。
+
+所以该结构应看成两个半圆柱电容器的**并联**。
+
+设两种介质的介电常数分别为
+
+$$
+\varepsilon_1=\varepsilon_0\varepsilon_{r1},\qquad
+\varepsilon_2=\varepsilon_0\varepsilon_{r2}
+$$
+
+内、外导体半径分别为 $r_i,\ r_o$，长度为 $L$。
+
+先单独求其中一个**半圆柱区域**的电容。设该区域的介电常数为 $\varepsilon$，所带电荷为 $Q$。由于该区域对应的圆心角为 $\pi$，取半径为 $r$、长度为 $L$ 的扇形同轴高斯面，有
+
+$$
+\oint_S \vec D\cdot d\vec S = Q
+$$
+
+即
+
+$$
+D_r(\pi rL)=Q
+$$
+
+所以径向电场为
+
+$$
+E_r(r)=\frac{Q}{\pi \varepsilon rL}
+$$
+
+该半圆柱区域两导体间的电压为
+
+$$
+U=\int_{r_i}^{r_o} E_r(r)\,dr
+=\frac{Q}{\pi \varepsilon L}\int_{r_i}^{r_o}\frac{dr}{r}
+=\frac{Q}{\pi \varepsilon L}\ln\frac{r_o}{r_i}
+$$
+
+因而该半圆柱区域的电容为
+
+$$
+C=\frac{Q}{U}
+=\frac{\pi \varepsilon L}{\ln(r_o/r_i)}
+$$
+
+对两种介质分别应用这一结果，可得
+
+$$
+C_1=\frac{\pi \varepsilon_0\varepsilon_{r1}L}{\ln(r_o/r_i)}
+$$
+
+$$
+C_2=\frac{\pi \varepsilon_0\varepsilon_{r2}L}{\ln(r_o/r_i)}
+$$
+
+由于两部分是并联关系，所以总电容为
+
+$$
+C=C_1+C_2
+$$
+
+代入得
+
+$$
+C=\frac{\pi \varepsilon_0L}{\ln(r_o/r_i)}\left(\varepsilon_{r1}+\varepsilon_{r2}\right)
+$$
+
+**最终结果**
+
+$$
+\boxed{
+C=\frac{\pi \varepsilon_0L\left(\varepsilon_{r1}+\varepsilon_{r2}\right)}{\ln(r_o/r_i)}
+}
+$$
+:::
+:::
 
 ## 3-11 静电能 Electrostatic Energy
 
