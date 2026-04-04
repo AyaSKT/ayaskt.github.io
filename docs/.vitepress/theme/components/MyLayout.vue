@@ -40,6 +40,11 @@ const heroImageStyle = computed(() => {
   const image = heroImageData.value
   return image && typeof image === 'object' ? image.style : undefined
 })
+
+const heroImageLink = computed(() => {
+  const image = heroImageData.value
+  return image && typeof image === 'object' ? image.link : undefined
+})
 </script>
 
 <template>
@@ -57,8 +62,17 @@ const heroImageStyle = computed(() => {
     </template>
 
     <template #home-hero-image>
+      <a v-if="heroImageSrc && heroImageLink" :href="heroImageLink" target="_blank" rel="noopener noreferrer">
+        <img
+          class="image-src hero-image-src"
+          :src="heroImageSrc"
+          :width="heroImageWidth"
+          :height="heroImageHeight"
+          :style="heroImageStyle"
+        >
+      </a>
       <img
-        v-if="heroImageSrc"
+        v-else-if="heroImageSrc"
         class="image-src hero-image-src"
         :src="heroImageSrc"
         :width="heroImageWidth"

@@ -11,9 +11,10 @@ hero:
   tagline: 你战胜了自己，你爱通信工程。
 
   image:
-    src: /IMG_0478.jpg # 你的图片路径，放在 docs 下
+    src: /IMG_2107.jpeg # 你的图片路径，放在 docs 下
     width: 240
     height: 240
+    link: https://www.mcdonalds.com.cn/page/offical-channels/
     # 加不加都行：圆形 + 阴影效果
     style:
       borderRadius: 50%
