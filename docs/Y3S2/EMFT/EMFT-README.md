@@ -30,10 +30,10 @@
 - [EMFT Chapter 2: Vector Analysis](EMFT%20Chapter%202.md)
 - [EMFT Chapter 3: Static Electric Fields Part I](EMFT%20Chapter%203%20P%20I.md)
 - [EMFT Chapter 3: Static Electric Fields Part II](EMFT%20Chapter%203%20P%20II.md)
-
-**To be continued:**
-
 - [EMFT Chapter 4: Solution of Electrostatic Problems](EMFT%20Chapter%204.md)
+
+**To be Continued...**
+
 - [EMFT Chapter 5: Steady Electric Currents](EMFT%20Chapter%205.md)
 - [EMFT Chapter 6: Static Magnetic Fields](EMFT%20Chapter%206.md)
 - [EMFT Chapter 7: Time-Varying Fields and Maxwell’s Equations](EMFT%20Chapter%207.md)
