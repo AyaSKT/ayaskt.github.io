@@ -14,14 +14,15 @@
       input-position="top"
       lang="zh-CN"
       loading="lazy"
-      theme="preferred_color_scheme"
+      :theme="isDark ? 'dark' : 'light'"
     ></Giscus>
   </div>
 </template>
-  
-  <script setup>
+
+<script setup>
 import Giscus from '@giscus/vue'
-import { useRoute } from 'vitepress'
+import { useRoute, useData } from 'vitepress'
 
 const route = useRoute()
+const { isDark } = useData()
 </script>

@@ -18,8 +18,14 @@
   - [4-4-1 镜像法的基本原理](#4-4-1-镜像法的基本原理)
   - [4-4-2 点电荷镜像导体平面](#4-4-2-点电荷镜像导体平面)
   - [4-4-3 点电荷镜像导体球](#4-4-3-点电荷镜像导体球)
+- [\\frac{1}{\\sqrt{r^2+d^2-2rd\\cos\\theta}}](#frac1sqrtr2d2-2rdcostheta)
+- [\\frac{q}{R}](#fracqr)
+- [\\frac{1}{\\sqrt{r^2+d^2-2rd\\cos\\theta}}](#frac1sqrtr2d2-2rdcostheta-1)
   - [4-4-4 线电荷镜像导体圆柱](#4-4-4-线电荷镜像导体圆柱)
-- [4-5 直角坐标系的边值问题](#4-5-直角坐标系的边值问题)
+- [4-5 直角坐标系的边值问题 (分离变量法)](#4-5-直角坐标系的边值问题-分离变量法)
+  - [4-5-1 分离变量法的基本思想](#4-5-1-分离变量法的基本思想)
+  - [4-5-2 Fourier 正弦级数](#4-5-2-fourier-正弦级数)
+  - [4-5-3 例题](#4-5-3-例题)
 
 
 
@@ -696,16 +702,1416 @@ $$
 
 ### 4-4-3 点电荷镜像导体球
 
+1. **点电荷镜像接地导体球**
+
+:::: example 
+:::: stem
+
+半径为 $a$ 的导体球接地，球心为 $O$ 。在球外距离球心 $d$ 处放置一点电荷 $q$ ，其中
+
+$$
+d>a
+$$
+
+求球外区域的电势分布、导体球表面的感应电荷面密度以及总感应电荷。
+
+![alt text](<EMFT Chapter 4.attachments/1777551562814.png>)
+
+::::
+
+:::: solution
+
+
+球外区域满足的边值问题为：
+
+$$
+\begin{cases}
+\nabla^2 \varphi = 0 \qquad \text{除点电荷 }q\text{ 所在位置外}
+\\
+\left.\varphi\right|_{r=a}=0
+\\
+\left.\varphi\right|_{r\to\infty}<\infty
+\end{cases}
+$$
+
+由于边界是球面，因此镜像电荷应放在球内，并且与真实电荷、球心在同一直线上。
+
+设镜像电荷为 $q'$ ，其到球心的距离为 $d'$ 。对球面上一点 $P$ ，有
+
+$$
+\varphi(P)=\frac{1}{4\pi\varepsilon}
+\left(
+\frac{q}{R}+\frac{q'}{R'}
+\right)
+$$
+
+其中 $R$ 为 $P$ 到真实电荷的距离，$R'$ 为 $P$ 到镜像电荷的距离。
+
+为了使整个球面上均有 $\varphi=0$ ，需要满足
+
+$$
+\left.
+\frac{R'}{R}
+\right|_{r=a}
+=
+-\frac{q'}{q}
+=
+\text{constant}
+$$
+
+由几何关系可得：
+
+$$
+\left.
+\frac{R'}{R}
+\right|_{r=a}
+=
+\frac{a}{d}
+$$
+
+因此镜像电荷的位置和电量分别为
+
+$$
+\boxed{
+d'=\frac{a^2}{d}
+}
+\qquad
+\boxed{
+q'=-\frac{a}{d}q
+}
+$$
+
+![alt text](<EMFT Chapter 4.attachments/1777551597805.png>)
+
+所以球外区域的电势为
+
+$$
+\boxed{
+\varphi
+=
+\frac{q}{4\pi\varepsilon}
+\left[
+\frac{1}{\sqrt{r^2+d^2-2rd\cos\theta}}
+-
+\frac{a}{d}
+\frac{1}{\sqrt{r^2+\left(\dfrac{a^2}{d}\right)^2-2r\dfrac{a^2}{d}\cos\theta}}
+\right]
+}
+\qquad (r\ge a)
+$$
+
+验证边界条件：
+
+当 $r=a$ 时，
+
+$$
+R'=\frac{a}{d}R
+$$
+
+因此
+
+$$
+\frac{q}{R}+\frac{q'}{R'}
+=
+\frac{q}{R}
+-
+\frac{\dfrac{a}{d}q}{\dfrac{a}{d}R}
+=0
+$$
+
+故球面上满足
+
+$$
+\left.\varphi\right|_{r=a}=0
+$$
+
+随后整理得
+
+| 项目 | 表达式 / 说明 |
+| --- | --- |
+| 真实电荷 | $q,\quad d>a$ |
+| 镜像电荷 | $q'=-\dfrac{a}{d}q,\quad d'=\dfrac{a^2}{d}$ |
+| 电势函数 | $\varphi=\dfrac{1}{4\pi\varepsilon}\left(\dfrac{q}{R}+\dfrac{q'}{R'}\right),\quad (r\ge a)$ |
+| 球面边界 | $R'=\dfrac{a}{d}R \;\Rightarrow\; \left.\varphi\right\rvert_{r=a}=0$ |
+
+导体表面的感应电荷面密度可由法向电场求得：
+
+$$
+\rho_s
+=
+-\varepsilon
+\left.
+\frac{\partial \varphi}{\partial r}
+\right|_{r=a}
+$$
+
+代入上式可得
+
+$$
+\boxed{
+\rho_s
+=
+-
+\frac{q(d^2-a^2)}
+{4\pi a\left(a^2+d^2-2ad\cos\theta\right)^{3/2}}
+}
+$$
+
+总感应电荷为
+
+$$
+q_{in}
+=
+\int_S \rho_s\,dS
+=
+\boxed{
+-\frac{a}{d}q
+}
+$$
+
+可以看到，对于接地导体球，导体球表面的总感应电荷等于镜像电荷的电量。
+
+::::
+::::
+
+
+1. **点电荷镜像接地空心导体球壳**
+
+:::: example 
+:::: stem
+
+半径为 $a$ 的空心导体球壳接地，点电荷 $q$ 位于球壳内部，距离球心为 $d$ ，其中
+
+$$
+d<a
+$$
+
+求球壳内部区域的电势分布以及内表面的总感应电荷。
+
+![alt text](<EMFT Chapter 4.attachments/1777551645008.png>)
+
+::::
+
+:::: solution
+
+球壳内部区域满足的边值问题为：
+
+$$
+\begin{cases}
+\nabla^2 \varphi = 0 \qquad \text{除点电荷 }q\text{ 所在位置外}
+\\
+\left.\varphi\right|_{r=a}=0
+\end{cases}
+$$
+
+由于要求解区域是球壳内部，因此镜像电荷必须放在求解区域之外，也就是放在球壳外部。
+
+仍设镜像电荷与真实电荷、球心共线。根据与上一问相同的边界条件，有
+
+$$
+\boxed{
+d'=\frac{a^2}{d}
+}
+\qquad
+\boxed{
+q'=-\frac{a}{d}q
+}
+$$
+
+此时由于 $d<a$ ，所以
+
+$$
+d'>a,\qquad |q'|>|q|
+$$
+
+球壳内部的电势为
+
+$$
+\boxed{
+\varphi
+=
+\frac{q}{4\pi\varepsilon}
+\left[
+\frac{1}{\sqrt{r^2+d^2-2rd\cos\theta}}
+-
+\frac{a}{d}
+\frac{1}{\sqrt{r^2+\left(\dfrac{a^2}{d}\right)^2-2r\dfrac{a^2}{d}\cos\theta}}
+\right]
+}
+\qquad (r\le a)
+$$
+
+当 $r=a$ 时，仍有
+
+$$
+R'=\frac{a}{d}R
+$$
+
+所以球面边界上电势为零。
+
+内表面的感应电荷面密度为
+
+$$
+\rho_s
+=
+\varepsilon
+\left.
+\frac{\partial \varphi}{\partial r}
+\right|_{r=a}
+$$
+
+注意这里的法向取向与外部导体球问题相反，因此符号与上一问不同。
+
+计算得到
+
+$$
+\boxed{
+\rho_s
+=
+-
+\frac{q(a^2-d^2)}
+{4\pi a\left(a^2+d^2-2ad\cos\theta\right)^{3/2}}
+}
+$$
+
+于是内表面总感应电荷为
+
+$$
+q_{in}
+=
+\int_S \rho_s\,dS
+=
+\boxed{-q}
+$$
+
+这里需要注意：
+
+$$
+q_{in}\ne q'
+$$
+
+也就是说，镜像电荷只是为了等效边界条件而引入的辅助电荷，并不总是等于真实导体表面上的总感应电荷。
+
+如果导体球壳还有外半径 $b$ ，内部空腔的解仍然与 $b$ 无关。原因是接地导体本身为零电势体，空腔区域只看到边界
+
+$$
+\left.\varphi\right|_{r=a}=0
+$$
+
+而外表面的形状和半径不会进入空腔内的边值问题。
+
+
+
+::::
+::::
+
+
+1. **点电荷镜像不接地导体球**
+
+:::: example 
+:::: stem
+
+半径为 $a$ 的孤立不接地导体球原来不带电，球外距离球心 $d$ 处放置一点电荷 $q$ ，其中
+
+$$
+d>a
+$$
+
+求球外区域的电势分布。
+
+![alt text](<EMFT Chapter 4.attachments/1777551673622.png>)
+
+::::
+
+:::: solution
+
+不接地导体球仍然是等势体，但其电势不一定为零。
+
+同时，因为导体球原来不带电，所以导体球表面的总感应电荷应满足
+
+$$
+q_{in}=0
+$$
+
+先借用接地导体球的结果，在球内放置镜像电荷
+
+$$
+q'=-\frac{a}{d}q,
+\qquad
+d'=\frac{a^2}{d}
+$$
+
+这一部分保证球面为零电势，但它对应的总感应电荷为
+
+$$
+q'
+=
+-\frac{a}{d}q
+$$
+
+为了使导体球总电荷为零，需要再在球心放置一个补偿镜像电荷
+
+$$
+q''=-q'=\frac{a}{d}q
+$$
+
+球心电荷到球面上任一点的距离都为 $a$ ，因此它只会把整个球面电势整体抬高同一个常数，不会破坏等势边界。
+
+于是球外区域电势为
+
+$$
+\boxed{
+\varphi
+=
+\frac{1}{4\pi\varepsilon}
+\left(
+\frac{q}{R}
++
+\frac{q'}{R'}
++
+\frac{q''}{r}
+\right)
+}
+\qquad (r\ge a)
+$$
+
+其中
+
+$$
+q'=-\frac{a}{d}q,
+\qquad
+d'=\frac{a^2}{d},
+\qquad
+q''=\frac{a}{d}q
+$$
+
+随后整理得
+
+| 项目 | 表达式 / 说明 |
+| --- | --- |
+| 真实电荷 | $q,\quad d>a$ |
+| 第一镜像电荷 | $q'=-\dfrac{a}{d}q,\quad d'=\dfrac{a^2}{d}$ |
+| 补偿镜像电荷 | $q''=\dfrac{a}{d}q,\quad \text{位于球心}$ |
+| 电势函数 | $\varphi=\dfrac{1}{4\pi\varepsilon}\left(\dfrac{q}{R}+\dfrac{q'}{R'}+\dfrac{q''}{r}\right)$ |
+| 总感应电荷 | $q'+q''=0$ |
+
+导体球表面的感应电荷分布可以理解为两部分叠加：
+
+1. 接地导体球对应的非均匀负电荷分布；
+2. 球心补偿电荷对应的均匀正电荷分布。
+
+因此，不接地导体球表面的负电荷分布与接地导体球相同，但为了保证总电荷为零，还会叠加一层均匀的正电荷分布。
+
+![alt text](<EMFT Chapter 4.attachments/1777551689645.png>)
+
+::::
+::::
 
 ---
 
 ### 4-4-4 线电荷镜像导体圆柱
 
+:::: example 
+:::: stem
+
+半径为 $a$ 的无限长导体圆柱接地，圆柱轴线为 $z$ 轴。在圆柱外距离轴线 $f$ 处放置一根无限长直线电荷，线电荷密度为 $\rho_l$ ，且与圆柱轴线平行，其中
+
+$$
+f>a
+$$
+
+求圆柱外区域的电势分布以及导体圆柱表面的感应电荷面密度。
+
+![alt text](<EMFT Chapter 4.attachments/1777551709431.png>)
+
+::::
+
+:::: solution
+
+圆柱外区域满足的边值问题为：
+
+$$
+\begin{cases}
+\nabla^2 \varphi = 0 \qquad \text{除真实线电荷所在位置外}
+\\
+\left.\varphi\right|_{\rho=a}=0
+\\
+\left.\varphi\right|_{\rho\to\infty}<\infty
+\end{cases}
+$$
+
+由于真实电荷是一根无限长线电荷，镜像电荷也应取为一根与其平行的无限长线电荷。
+
+设镜像线电荷密度为 $\rho_l'$ ，其到圆柱轴线的距离为 $d$ 。为了抵消导体表面的电势，取
+
+$$
+\rho_l'=-\rho_l
+$$
+
+设圆柱表面上一点 $P$ 到真实线电荷和镜像线电荷的距离分别为 $R$ 和 $R'$ 。两根线电荷在点 $P$ 处产生的电势可写为
+
+$$
+\varphi_P
+=
+\frac{\rho_l}{2\pi\varepsilon}
+\ln\frac{R'}{R}
+$$
+
+为了使导体圆柱成为等势体，需要有
+
+$$
+\left.
+\frac{R'}{R}
+\right|_{\rho=a}
+=
+\text{constant}
+$$
+
+根据圆柱几何关系，当镜像线电荷放在
+
+$$
+\boxed{
+d=\frac{a^2}{f}
+}
+$$
+
+处时，有
+
+$$
+\left.
+\frac{R'}{R}
+\right|_{\rho=a}
+=
+\frac{a}{f}
+$$
+
+因此圆柱表面确实为等势面。
+
+若要求接地圆柱表面电势为零，只需在电势中加入相应的常数，得到圆柱外区域电势：
+
+$$
+\boxed{
+\varphi
+=
+\frac{\rho_l}{2\pi\varepsilon}
+\ln
+\left(
+\frac{fR'}{aR}
+\right)
+}
+\qquad (\rho\ge a)
+$$
+
+其中
+
+$$
+R=\sqrt{\rho^2+f^2-2\rho f\cos\theta}
+$$
+
+$$
+R'=\sqrt{\rho^2+d^2-2\rho d\cos\theta},
+\qquad
+d=\frac{a^2}{f}
+$$
+
+验证边界条件：
+
+当 $\rho=a$ 时，
+
+$$
+R'=\frac{a}{f}R
+$$
+
+因此
+
+$$
+\left.
+\varphi
+\right|_{\rho=a}
+=
+\frac{\rho_l}{2\pi\varepsilon}
+\ln
+\left(
+\frac{f}{a}\cdot \frac{a}{f}
+\right)
+=0
+$$
+
+随后整理得
+
+| 项目 | 表达式 / 说明 |
+| --- | --- |
+| 真实线电荷 | $\rho_l,\quad f>a$ |
+| 镜像线电荷 | $\rho_l'=-\rho_l,\quad d=\dfrac{a^2}{f}$ |
+| 电势函数 | $\varphi=\dfrac{\rho_l}{2\pi\varepsilon}\ln\left(\dfrac{fR'}{aR}\right),\quad (\rho\ge a)$ |
+| 圆柱面边界 | $R'=\dfrac{a}{f}R \;\Rightarrow\; \left.\varphi\right\rvert_{\rho=a}=0$ |
+
+导体圆柱表面的感应电荷面密度为
+
+$$
+\rho_s
+=
+-\varepsilon
+\left.
+\frac{\partial \varphi}{\partial \rho}
+\right|_{\rho=a}
+$$
+
+代入电势函数可得
+
+$$
+\boxed{
+\rho_s
+=
+-
+\frac{\rho_l(f^2-a^2)}
+{2\pi a\left(a^2+f^2-2af\cos\theta\right)}
+}
+$$
+
+单位长度上的总感应电荷为
+
+$$
+\rho_{in}
+=
+\int_0^{2\pi}\rho_s a\,d\theta
+=
+\boxed{-\rho_l}
+$$
+
+因此，对于接地导体圆柱，每单位长度上的总感应电荷等于镜像线电荷的线电荷密度。
+
+
+::::
+
+
+:::: tip
+
+镜像法处理导体球和导体圆柱时，关键并不是直接猜导体表面上的真实电荷分布，而是先找到能够保持边界条件不变的等效电荷。
+
+常见结果可以记为：
+
+| 原问题 | 镜像位置 | 镜像电荷 |
+| --- | --- | --- |
+| 球外点电荷 $q$ ，接地导体球 | $d'=\dfrac{a^2}{d}$ | $q'=-\dfrac{a}{d}q$ |
+| 球内点电荷 $q$ ，接地球壳 | $d'=\dfrac{a^2}{d}$ | $q'=-\dfrac{a}{d}q$ |
+| 圆柱外线电荷 $\rho_l$ ，接地导体圆柱 | $d=\dfrac{a^2}{f}$ | $\rho_l'=-\rho_l$ |
+
+但要特别注意：镜像电荷只是辅助构造，是否等于总感应电荷，要看具体问题。
+
+::::
+::::
 
 
 
-## 4-5 直角坐标系的边值问题
+## 4-5 直角坐标系的边值问题 (分离变量法)
 
+### 4-5-1 分离变量法的基本思想
+
+**分离变量法 Method of Separation of Variables** 是一种解决边值问题的通用解法。
+
+其基本思想可以总结为：叠加原理+假设变量间可以互相分离。
+
+1. **微分方程**
+
+在一个直角坐标系中，拉普拉斯方程可以被写为：
+
+$$
+\nabla ^2 \varphi = \frac{\partial ^2}{\partial x^2} \varphi + \frac{\partial ^2}{\partial y^2} \varphi + \frac{\partial ^2}{\partial z^2} \varphi =0
+$$
+
+
+然后我们 **假设** （这个词在这里可能难以令人接受，但是要相信待定系数法是前人的智慧，在这里假设那肯定能够解出问题的）电势 $\varphi$ 能够被表示为三个坐标函数的乘积，即：
+
+$$
+\varphi (x, y, z) = X(x)Y(y)Z(z)
+$$
+
+通常待定系数法不会涉及到三个维度，因为这会使得计算极其复杂。所以在这里忽略 z 轴，得到：
+
+$$
+\varphi (x, y) = X(x)Y(y)
+$$
+
+带回拉普拉斯方程，可以得到：
+
+$$
+Y \frac{\partial ^2}{\partial x^2} X + X \frac{\partial ^2}{\partial y^2} Y = 0
+$$
+
+同时除以 $XY$ ，
+
+$$
+\boxed{
+  \frac{1}{X} \frac{\partial ^2}{\partial x^2} X + \frac{1}{Y} \frac{\partial ^2}{\partial y^2} Y = 0
+}
+$$
+
+显然在这个函数中，任何自变量的改变都会导致二者相加不再为0。因此唯一的可能解仅存在于两项均为常数，因此我们令：
+
+$$
+\frac{1}{X} \frac{\partial ^2}{\partial x^2} X = -k^2
+
+\qquad
+
+\frac{1}{Y} \frac{\partial ^2}{\partial y^2} Y = k^2
+$$
+
+:::: tip
+这里正常数和负常数的选取需要根据实际情况判定。
+::::
+
+
+
+> [!IMPORTANT]
+> 根据如下表格（背诵）：
+> 
+> 对于方程
+>
+> $$
+> X''(x)+k_x^2X(x)=0
+> $$
+>
+> 其可能解如下：
+>
+> | $k_x^2$ | $k_x$ | $X(x)$ | $X(x)$ 的指数形式 |
+> | --- | --- | --- | --- |
+> | $0$ | $0$ | $A_0x+B_0$ | 无 |
+> | $+$ | $k$ | $A_1\sin kx+B_1\cos kx$ | $C_1e^{jkx}+D_1e^{-jkx}$ |
+> | $-$ | $jk$ | $A_2\sinh kx+B_2\cosh kx$ | $C_2e^{kx}+D_2e^{-kx}$ |
+>
+> 其中，指数形式与三角函数、双曲函数之间有如下关系：
+>
+> $$
+> e^{\pm jkx}=\cos kx \pm j\sin kx
+> $$
+>
+> $$
+> \cos kx=\frac{1}{2}\left(e^{jkx}+e^{-jkx}\right),
+> \qquad
+> \sin kx=\frac{1}{2j}\left(e^{jkx}-e^{-jkx}\right)
+> $$
+>
+> $$
+> e^{\pm kx}=\cosh kx \pm \sinh kx
+> $$
+>
+> $$
+> \cosh kx=\frac{1}{2}\left(e^{kx}+e^{-kx}\right),
+> \qquad
+> \sinh kx=\frac{1}{2}\left(e^{kx}-e^{-kx}\right)
+> $$
+
+2. **分离常数为 $\lambda=-k^2$**
+
+根据上面的取法，有：
+
+$$
+\frac{d^2X(x)}{dx^2}+k^2X(x)=0
+$$
+
+$$
+\frac{d^2Y(y)}{dy^2}-k^2Y(y)=0
+$$
+
+也就是说，$x$ 方向对应三角函数解，$y$ 方向对应双曲函数解。
+
+当 $k=0$ 时，
+
+$$
+X(x)=X_0(x)=A_0x+B_0
+$$
+
+$$
+Y(y)=Y_0(y)=C_0y+D_0
+$$
+
+因此可得零阶解：
+
+$$
+\boxed{
+\varphi_0(x,y)=X_0(x)Y_0(y)=(A_0x+B_0)(C_0y+D_0)
+}
+$$
+
+当 $k=k_n\ne 0$ 时，
+
+$$
+X(x)=X_n(x)=A_n\sin(k_nx)+B_n\cos(k_nx)
+$$
+
+$$
+Y(y)=Y_n(y)=C_n\sinh(k_ny)+D_n\cosh(k_ny)
+$$
+
+因此第 $n$ 阶解为：
+
+$$
+\boxed{
+\begin{aligned}
+\varphi_n(x,y)
+&=X_n(x)Y_n(y)
+\\
+&=
+\left[
+A_n\sin(k_nx)+B_n\cos(k_nx)
+\right]
+\left[
+C_n\sinh(k_ny)+D_n\cosh(k_ny)
+\right]
+\end{aligned}
+}
+$$
+
+3. **叠加原理**
+
+由于拉普拉斯方程是线性方程，所以所有满足方程的解可以线性叠加。
+
+因此当 $\lambda=-k^2$ 时，电势的一般形式可以写为：
+
+$$
+\boxed{
+\begin{aligned}
+\varphi(x,y)
+&=
+(A_0x+B_0)(C_0y+D_0)
+\\
+&\quad+
+\sum_{n=1}^{\infty}
+\left[
+A_n\sin(k_nx)+B_n\cos(k_nx)
+\right]
+\left[
+C_n\sinh(k_ny)+D_n\cosh(k_ny)
+\right]
+\end{aligned}
+}
+$$
+
+其中分离常数 $k_n$ 以及各个待定系数，都需要由具体边界条件决定。
+
+类似地，如果取
+
+$$
+\lambda=k^2
+$$
+
+则 $x$ 方向和 $y$ 方向的函数形式会互换，即：
+
+$$
+\frac{d^2X(x)}{dx^2}-k^2X(x)=0
+\qquad
+\frac{d^2Y(y)}{dy^2}+k^2Y(y)=0
+$$
+
+此时电势的一般形式为：
+
+$$
+\boxed{
+\begin{aligned}
+\varphi(x,y)
+&=
+(A_0x+B_0)(C_0y+D_0)
+\\
+&\quad+
+\sum_{n=1}^{\infty}
+\left[
+A_n\sinh(k_nx)+B_n\cosh(k_nx)
+\right]
+\left[
+C_n\sin(k_ny)+D_n\cos(k_ny)
+\right]
+\end{aligned}
+}
+$$
+
+4. **待定系数法的基本步骤**
+
+:::: definition
+
+用分离变量法解直角坐标系边值问题时，通常按如下步骤：
+
+1. 写出求解区域内的拉普拉斯方程；
+2. 根据边界形状假设 $\varphi(x,y)=X(x)Y(y)$；
+3. 代入方程并分离变量，得到关于 $X$ 和 $Y$ 的两个常微分方程；
+4. 根据边界条件选择正分离常数或负分离常数；
+5. 写出通解并利用叠加原理构造级数形式；
+6. 将边界条件代入通解，确定 $k_n$ 和所有待定系数。
+
+::::
+
+:::: tip
+
+一般来说，若某个方向上的边界条件要求电势在两个端点取零值，常常会在该方向上选用 $\sin$ 型函数；而另一方向则对应 $\sinh$ 或 $\cosh$ 型函数。
+
+选择哪一个方向放三角函数，核心不是死记，而是看哪个方向的边界条件能自然确定 $k_n$ 。
+
+::::
+
+---
+
+### 4-5-2 Fourier 正弦级数
+
+在分离变量法中，待定系数通常不是直接“看出来”的，而是通过边界条件的 Fourier 级数展开求出来。
+
+最常用的是 **Fourier 正弦级数**。
+
+:::: definition
+
+若函数 $f(x)$ 定义在区间
+
+$$
+0<x<a
+$$
+
+上，并希望把它展开为一组正弦函数的线性组合，则可以写成：
+
+$$
+\boxed{
+f(x)=\sum_{n=1}^{\infty}b_n\sin\left(\frac{n\pi x}{a}\right)
+}
+$$
+
+其中系数为：
+
+$$
+\boxed{
+b_n
+=
+\frac{2}{a}
+\int_0^a
+f(x)
+\sin\left(\frac{n\pi x}{a}\right)
+dx
+}
+$$
+
+::::
+
+这个公式的来源是正弦函数的正交性：
+
+$$
+\int_0^a
+\sin\left(\frac{n\pi x}{a}\right)
+\sin\left(\frac{m\pi x}{a}\right)
+dx
+=
+\begin{cases}
+0, & m\ne n \\
+\dfrac{a}{2}, & m=n
+\end{cases}
+$$
+
+因此，如果边界条件写成
+
+$$
+f(x)=\sum_{n=1}^{\infty}b_n\sin\left(\frac{n\pi x}{a}\right)
+$$
+
+则两边同时乘以
+
+$$
+\sin\left(\frac{m\pi x}{a}\right)
+$$
+
+并在 $0$ 到 $a$ 上积分，即可把第 $m$ 项系数单独“筛”出来。
+
+:::: example 常数函数的 Fourier 正弦展开
+
+若
+
+$$
+f(x)=U_0,\qquad 0<x<a
+$$
+
+则
+
+$$
+U_0=\sum_{n=1}^{\infty}b_n\sin\left(\frac{n\pi x}{a}\right)
+$$
+
+其中
+
+$$
+\begin{aligned}
+b_n
+&=
+\frac{2}{a}
+\int_0^a
+U_0
+\sin\left(\frac{n\pi x}{a}\right)
+dx
+\\
+&=
+\frac{2U_0}{n\pi}
+\left[
+1-(-1)^n
+\right]
+\end{aligned}
+$$
+
+所以
+
+$$
+\boxed{
+b_n=
+\begin{cases}
+\dfrac{4U_0}{n\pi}, & n=1,3,5,\cdots \\
+0, & n=2,4,6,\cdots
+\end{cases}
+}
+$$
+
+也就是说，常数 $U_0$ 的正弦级数展开只保留奇数项。
+
+::::
+
+:::: tip
+
+做待定系数法时，如果某一步得到
+
+$$
+U_0
+=
+\sum_{n=1}^{\infty}
+A_n
+\sinh\left(\frac{n\pi b}{a}\right)
+\sin\left(\frac{n\pi x}{a}\right)
+$$
+
+那么可以先把 $U_0$ 展开成
+
+$$
+U_0
+=
+\sum_{n=1}^{\infty}
+b_n
+\sin\left(\frac{n\pi x}{a}\right)
+$$
+
+再逐项比较，得到
+
+$$
+A_n
+=
+\frac{b_n}
+{\sinh\left(\dfrac{n\pi b}{a}\right)}
+$$
+
+::::
+
+---
+
+### 4-5-3 例题
+
+:::: example 矩形区域三边接地问题
+:::: stem
+
+在矩形区域
+
+$$
+0<x<a,\qquad 0<y<b
+$$
+
+内没有自由电荷。三条边界接地，顶部边界保持电势 $V_0$ ：
+
+$$
+\begin{cases}
+\varphi(0,y)=0 \\
+\varphi(a,y)=0 \\
+\varphi(x,0)=0 \\
+\varphi(x,b)=V_0
+\end{cases}
+$$
+
+求矩形区域内的电势分布。
+
+![alt text](<EMFT Chapter 4.attachments/1777551778822.png>)
+
+::::
+
+:::: solution
+
+区域内部没有自由电荷，所以电势满足拉普拉斯方程：
+
+$$
+\nabla^2\varphi=0
+$$
+
+根据分离变量法，设
+
+$$
+\varphi(x,y)=X(x)Y(y)
+$$
+
+由于边界 $x=0$ 和 $x=a$ 上电势均为零，因此希望 $X(x)$ 在两端为零。
+
+所以选择
+
+$$
+X_n(x)=\sin(k_nx)
+$$
+
+并由边界条件
+
+$$
+X_n(0)=0,\qquad X_n(a)=0
+$$
+
+得到
+
+$$
+\sin(k_na)=0
+$$
+
+因此
+
+$$
+\boxed{
+k_n=\frac{n\pi}{a}
+}
+\qquad
+n=1,2,3,\cdots
+$$
+
+此时对应的 $y$ 方向解为
+
+$$
+Y_n(y)=C_n\sinh(k_ny)+D_n\cosh(k_ny)
+$$
+
+再利用边界条件
+
+$$
+\varphi(x,0)=0
+$$
+
+可知
+
+$$
+Y_n(0)=0
+$$
+
+所以
+
+$$
+D_n=0
+$$
+
+因此通解可以写为
+
+$$
+\varphi(x,y)
+=
+\sum_{n=1}^{\infty}
+A_n\sin\left(\frac{n\pi x}{a}\right)
+\sinh\left(\frac{n\pi y}{a}\right)
+$$
+
+最后代入顶部边界条件：
+
+$$
+\varphi(x,b)=V_0
+$$
+
+即
+
+$$
+V_0
+=
+\sum_{n=1}^{\infty}
+A_n
+\sinh\left(\frac{n\pi b}{a}\right)
+\sin\left(\frac{n\pi x}{a}\right)
+$$
+
+这说明需要把常数 $V_0$ 展开为正弦级数：
+
+$$
+V_0
+=
+\sum_{n=1}^{\infty}
+B_n
+\sin\left(\frac{n\pi x}{a}\right)
+$$
+
+其中
+
+$$
+B_n
+=
+\frac{2}{a}
+\int_0^a
+V_0
+\sin\left(\frac{n\pi x}{a}\right)
+dx
+$$
+
+计算可得
+
+$$
+B_n
+=
+\frac{2V_0}{n\pi}
+\left[
+1-(-1)^n
+\right]
+$$
+
+因此
+
+$$
+A_n
+=
+\frac{B_n}
+{\sinh\left(\dfrac{n\pi b}{a}\right)}
+$$
+
+最终电势分布为
+
+$$
+\boxed{
+\varphi(x,y)
+=
+\sum_{n=1}^{\infty}
+\frac{2V_0\left[1-(-1)^n\right]}
+{n\pi\sinh\left(\dfrac{n\pi b}{a}\right)}
+\sin\left(\frac{n\pi x}{a}\right)
+\sinh\left(\frac{n\pi y}{a}\right)
+}
+$$
+
+由于当 $n$ 为偶数时，
+
+$$
+1-(-1)^n=0
+$$
+
+所以实际上只有奇数项保留下来，也可以写为：
+
+$$
+\boxed{
+\varphi(x,y)
+=
+\frac{4V_0}{\pi}
+\sum_{m=0}^{\infty}
+\frac{1}{2m+1}
+\frac{
+\sinh\left(\dfrac{(2m+1)\pi y}{a}\right)
+}{
+\sinh\left(\dfrac{(2m+1)\pi b}{a}\right)
+}
+\sin\left(\frac{(2m+1)\pi x}{a}\right)
+}
+$$
+
+随后整理得
+
+| 项目 | 表达式 / 说明 |
+| --- | --- |
+| 分离常数 | $k_n=\dfrac{n\pi}{a}$ |
+| $x$ 方向函数 | $X_n(x)=\sin\left(\dfrac{n\pi x}{a}\right)$ |
+| $y$ 方向函数 | $Y_n(y)=\sinh\left(\dfrac{n\pi y}{a}\right)$ |
+| 待定系数来源 | 由顶部边界 $\varphi(x,b)=V_0$ 作傅里叶正弦展开得到 |
+
+::::
+::::
+
+:::: tip
+
+这个例题中，$x=0$ 和 $x=a$ 两条边界都是零电势，所以最自然的选择是让 $x$ 方向出现 $\sin\left(\dfrac{n\pi x}{a}\right)$ 。
+
+如果换成 $y=0$ 和 $y=b$ 两条边界为零电势，那么通常会让 $y$ 方向出现三角函数，而 $x$ 方向出现双曲函数。
+
+::::
+
+
+:::: example 半无限平行导体槽问题
+:::: stem
+
+两块半无限接地导体平面彼此平行，间距为 $d$ 。槽口处由一块电势为 $\varphi_0$ 的导体平面封闭，并且与上下两块接地导体平面之间存在很小间隙而互相绝缘。
+
+取求解区域为
+
+$$
+x>0,\qquad 0<y<d
+$$
+
+边界条件为：
+
+$$
+\begin{cases}
+\varphi(x,0)=0 \\
+\varphi(x,d)=0 \\
+\varphi(0,y)=\varphi_0 \\
+\varphi(\infty,y)=0
+\end{cases}
+$$
+
+求导体槽内的电势分布。
+
+![alt text](<EMFT Chapter 4.attachments/1777551804473.png>)
+
+::::
+
+:::: solution
+
+由于导体槽沿 $z$ 方向无限延伸，因此槽内电势与 $z$ 无关，是一个二维边值问题。
+
+区域内部没有自由电荷，所以满足：
+
+$$
+\frac{\partial^2\varphi}{\partial x^2}
++
+\frac{\partial^2\varphi}{\partial y^2}
+=0
+$$
+
+设
+
+$$
+\varphi(x,y)=X(x)Y(y)
+$$
+
+由于上下边界为零电势：
+
+$$
+\varphi(x,0)=0,
+\qquad
+\varphi(x,d)=0
+$$
+
+因此令 $y$ 方向取正弦函数：
+
+$$
+Y(y)=A\sin(k_yy)+B\cos(k_yy)
+$$
+
+由 $Y(0)=0$ 可得
+
+$$
+B=0
+$$
+
+由 $Y(d)=0$ 可得
+
+$$
+\sin(k_yd)=0
+$$
+
+因此
+
+$$
+\boxed{
+k_y=\frac{n\pi}{d}
+}
+\qquad
+n=1,2,3,\cdots
+$$
+
+所以
+
+$$
+Y_n(y)=\sin\left(\frac{n\pi y}{d}\right)
+$$
+
+由分离变量关系可知，$x$ 方向对应指数函数形式：
+
+$$
+X_n(x)=C_ne^{\frac{n\pi}{d}x}+D_ne^{-\frac{n\pi}{d}x}
+$$
+
+又因为当 $x\to\infty$ 时电势必须趋于零，所以指数增长项不能存在：
+
+$$
+C_n=0
+$$
+
+于是槽内电势可以写为：
+
+$$
+\varphi(x,y)
+=
+\sum_{n=1}^{\infty}
+D_n
+e^{-\frac{n\pi}{d}x}
+\sin\left(\frac{n\pi y}{d}\right)
+$$
+
+再代入左端边界条件：
+
+$$
+\varphi(0,y)=\varphi_0
+$$
+
+得到
+
+$$
+\varphi_0
+=
+\sum_{n=1}^{\infty}
+D_n
+\sin\left(\frac{n\pi y}{d}\right),
+\qquad
+0<y<d
+$$
+
+这说明需要将常数 $\varphi_0$ 在区间 $(0,d)$ 上展开为 Fourier 正弦级数。
+
+由前一小节的结果可得：
+
+$$
+D_n
+=
+\begin{cases}
+\dfrac{4\varphi_0}{n\pi}, & n=1,3,5,\cdots \\
+0, & n=2,4,6,\cdots
+\end{cases}
+$$
+
+因此导体槽内的电势分布为：
+
+$$
+\boxed{
+\varphi(x,y)
+=
+\frac{4\varphi_0}{\pi}
+\sum_{n=1,3,5,\cdots}^{\infty}
+\frac{1}{n}
+e^{-\frac{n\pi}{d}x}
+\sin\left(\frac{n\pi y}{d}\right)
+}
+$$
+
+随后整理得
+
+| 项目 | 表达式 / 说明 |
+| --- | --- |
+| 求解区域 | $x>0,\quad 0<y<d$ |
+| $y$ 方向函数 | $Y_n(y)=\sin\left(\dfrac{n\pi y}{d}\right)$ |
+| $x$ 方向函数 | $X_n(x)=e^{-\frac{n\pi}{d}x}$ |
+| Fourier 系数 | $D_n=\dfrac{4\varphi_0}{n\pi}$，仅保留奇数项 |
+| 最终结果 | $\varphi(x,y)=\dfrac{4\varphi_0}{\pi}\displaystyle\sum_{n=1,3,5,\cdots}^{\infty}\dfrac{1}{n}e^{-\frac{n\pi}{d}x}\sin\left(\dfrac{n\pi y}{d}\right)$ |
+
+::::
+::::
+
+
+:::: tip
+
+这个例题和上一个矩形槽问题的区别在于：这里的 $x$ 方向是半无限区域，所以必须把会随 $x$ 增大的指数项舍去，只保留
+
+$$
+e^{-\frac{n\pi}{d}x}
+$$
+
+这样才能满足远处边界条件
+
+$$
+\varphi(\infty,y)=0
+$$
+
+::::
 
 
 
