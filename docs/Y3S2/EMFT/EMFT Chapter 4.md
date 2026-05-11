@@ -18,9 +18,6 @@
   - [4-4-1 镜像法的基本原理](#4-4-1-镜像法的基本原理)
   - [4-4-2 点电荷镜像导体平面](#4-4-2-点电荷镜像导体平面)
   - [4-4-3 点电荷镜像导体球](#4-4-3-点电荷镜像导体球)
-- [\\frac{1}{\\sqrt{r^2+d^2-2rd\\cos\\theta}}](#frac1sqrtr2d2-2rdcostheta)
-- [\\frac{q}{R}](#fracqr)
-- [\\frac{1}{\\sqrt{r^2+d^2-2rd\\cos\\theta}}](#frac1sqrtr2d2-2rdcostheta-1)
   - [4-4-4 线电荷镜像导体圆柱](#4-4-4-线电荷镜像导体圆柱)
 - [4-5 直角坐标系的边值问题 (分离变量法)](#4-5-直角坐标系的边值问题-分离变量法)
   - [4-5-1 分离变量法的基本思想](#4-5-1-分离变量法的基本思想)
@@ -791,8 +788,7 @@ $$
 =
 \frac{q}{4\pi\varepsilon}
 \left[
-\frac{1}{\sqrt{r^2+d^2-2rd\cos\theta}}
--
+\frac{1}{\sqrt{r^2+d^2-2rd\cos\theta}}-
 \frac{a}{d}
 \frac{1}{\sqrt{r^2+\left(\dfrac{a^2}{d}\right)^2-2r\dfrac{a^2}{d}\cos\theta}}
 \right]
@@ -813,8 +809,7 @@ $$
 $$
 \frac{q}{R}+\frac{q'}{R'}
 =
-\frac{q}{R}
--
+\frac{q}{R}-
 \frac{\dfrac{a}{d}q}{\dfrac{a}{d}R}
 =0
 $$
@@ -850,8 +845,7 @@ $$
 $$
 \boxed{
 \rho_s
-=
--
+=-
 \frac{q(d^2-a^2)}
 {4\pi a\left(a^2+d^2-2ad\cos\theta\right)^{3/2}}
 }
@@ -932,8 +926,7 @@ $$
 =
 \frac{q}{4\pi\varepsilon}
 \left[
-\frac{1}{\sqrt{r^2+d^2-2rd\cos\theta}}
--
+\frac{1}{\sqrt{r^2+d^2-2rd\cos\theta}}-
 \frac{a}{d}
 \frac{1}{\sqrt{r^2+\left(\dfrac{a^2}{d}\right)^2-2r\dfrac{a^2}{d}\cos\theta}}
 \right]
