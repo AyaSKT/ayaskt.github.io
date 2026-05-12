@@ -38,9 +38,9 @@
 }
 
 @keyframes slideIn {
-  0%   { transform: translateX(0); }
-  50%  { transform: translateX(-100%); }
-  100% { transform: translateX(-100%); }
+  0%   { transform: translateX(100%); }
+  50%  { transform: translateX(0); }
+  100% { transform: translateX(0); }
 }
 
 /* Fade: fallback / quick nav */
@@ -71,13 +71,15 @@ a:active, button:active, .VPNavBarMenuLink:active, .VPLink:active {
   border: 1.5px solid rgba(152, 203, 234, 0.5);
   pointer-events: none;
   z-index: 999998;
-  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  transform: translate(-50%, -50%) scale(0);
   animation: rippleExpand var(--dur-ripple) var(--ease-ios-fade) forwards;
 }
 
 @keyframes rippleExpand {
-  0%   { width: 0; height: 0; opacity: 1; }
-  100% { width: 200px; height: 200px; opacity: 0; }
+  0%   { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
 }
 
 /* ---- Scroll Reveal ---- */
@@ -102,8 +104,8 @@ a:active, button:active, .VPNavBarMenuLink:active, .VPLink:active {
     --dur-reveal: 0.4s;
   }
 
-  @keyframes rippleExpand {
-    0%   { width: 0; height: 0; opacity: 1; }
-    100% { width: 140px; height: 140px; opacity: 0; }
+  .ripple-ring {
+    width: 140px;
+    height: 140px;
   }
 }
