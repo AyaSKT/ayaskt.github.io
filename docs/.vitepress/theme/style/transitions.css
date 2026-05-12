@@ -1,57 +1,41 @@
 /* ================================================================
-   iOS Style Transitions — animations, keyframes, utility classes
+   iOS Style Transitions — page crossfade, micro-interactions
    ================================================================ */
 
-/* ---- Page Transition Overlay ---- */
-.page-transition-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  background: var(--vp-c-bg, #fff);
-  transform: translateY(110%);
+/* ---- Page Transition: View Transitions API crossfade ---- */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
-/* Pop-in: Home → Content (slide up from bottom, spring) */
-.page-transition-overlay.pop-in {
-  animation: popIn var(--dur-page) var(--ease-ios-spring) forwards;
+::view-transition-old(root) {
+  animation: vtFadeOut var(--dur-page) var(--ease-ios-fade) forwards;
+  z-index: 1;
 }
 
-@keyframes popIn {
-  0%   { transform: translateY(110%); }
-  100% { transform: translateY(0); }
+::view-transition-new(root) {
+  animation: vtFadeIn var(--dur-page) var(--ease-ios-fade) forwards;
+  z-index: 2;
 }
 
-/* Pop-out: Content → Home (slide down to bottom, spring) */
-.page-transition-overlay.pop-out {
-  animation: popOut var(--dur-page) var(--ease-ios-spring) forwards;
+@keyframes vtFadeOut {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
 }
 
-@keyframes popOut {
-  0%   { transform: translateY(0); }
-  100% { transform: translateY(110%); }
+@keyframes vtFadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
 
-/* Slide: Content → Content (slide from right, then away to left) */
-.page-transition-overlay.slide {
-  animation: slideIn var(--dur-page) var(--ease-ios-slide) forwards;
-}
-
-@keyframes slideIn {
-  0%   { transform: translateX(100%); }
-  50%  { transform: translateX(0); }
-  100% { transform: translateX(0); }
-}
-
-/* Fade: fallback / quick nav */
-.page-transition-overlay.fade {
-  animation: fadeOverlay var(--dur-page) var(--ease-ios-fade) forwards;
-}
-
-@keyframes fadeOverlay {
-  0%   { opacity: 0; transform: translateY(0); }
-  50%  { opacity: 1; }
-  100% { opacity: 0; transform: translateY(0); }
+/* Keep nav / sidebar stable during transition (avoid double-fade) */
+::view-transition-old(vp-nav),
+::view-transition-new(vp-nav),
+::view-transition-old(vp-sidebar),
+::view-transition-new(vp-sidebar) {
+  animation: none;
+  opacity: 1;
 }
 
 /* ---- Button Tap Feedback ---- */
