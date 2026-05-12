@@ -3,20 +3,31 @@
    ================================================================ */
 
 /* ---- Page Transition: View Transitions API crossfade ---- */
-::view-transition-old(root),
-::view-transition-new(root) {
+
+/* Name nav & sidebar so they're excluded from the root snapshot.
+   Root snapshot only covers content — nav/sidebar stay visually stable. */
+.VPNavBar        { view-transition-name: nav; }
+.VPSidebar       { view-transition-name: sidebar; }
+.VPLocalNav      { view-transition-name: local-nav; }
+
+/* Nav & sidebar: instant swap, no flicker */
+::view-transition-old(nav),
+::view-transition-new(nav),
+::view-transition-old(sidebar),
+::view-transition-new(sidebar),
+::view-transition-old(local-nav),
+::view-transition-new(local-nav) {
   animation: none;
-  mix-blend-mode: normal;
+  opacity: 1;
 }
 
+/* Root = content area only (nav & sidebar excluded via view-transition-name) */
 ::view-transition-old(root) {
   animation: vtFadeOut var(--dur-page) var(--ease-ios-fade) forwards;
-  z-index: 1;
 }
 
 ::view-transition-new(root) {
   animation: vtFadeIn var(--dur-page) var(--ease-ios-fade) forwards;
-  z-index: 2;
 }
 
 @keyframes vtFadeOut {
@@ -27,15 +38,6 @@
 @keyframes vtFadeIn {
   0%   { opacity: 0; }
   100% { opacity: 1; }
-}
-
-/* Keep nav / sidebar stable during transition (avoid double-fade) */
-::view-transition-old(vp-nav),
-::view-transition-new(vp-nav),
-::view-transition-old(vp-sidebar),
-::view-transition-new(vp-sidebar) {
-  animation: none;
-  opacity: 1;
 }
 
 /* ---- Button Tap Feedback ---- */
