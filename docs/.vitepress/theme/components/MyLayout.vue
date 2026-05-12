@@ -7,6 +7,7 @@ import MouseClick from './MouseClick.vue'
 import GiscusComment from './GiscusComment.vue' // 评论模块
 import BackToTop from './backtotop.vue'
 import HeroHitokoto from './HeroHitokoto.vue'
+import PageTransition from './PageTransition.vue'
 
 const { frontmatter, isDark } = useData()
 
@@ -52,6 +53,7 @@ const heroImageLink = computed(() => {
   <DefaultTheme.Layout>
     <!-- 所有页面顶部的特效组件 -->
     <template #layout-top>
+      <PageTransition />
       <MouseClick />
     </template>
 
