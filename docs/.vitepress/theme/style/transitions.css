@@ -1,0 +1,109 @@
+/* ================================================================
+   iOS Style Transitions — animations, keyframes, utility classes
+   ================================================================ */
+
+/* ---- Page Transition Overlay ---- */
+.page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: var(--vp-c-bg, #fff);
+  transform: translateY(110%);
+}
+
+/* Pop-in: Home → Content (slide up from bottom, spring) */
+.page-transition-overlay.pop-in {
+  animation: popIn var(--dur-page) var(--ease-ios-spring) forwards;
+}
+
+@keyframes popIn {
+  0%   { transform: translateY(110%); }
+  100% { transform: translateY(0); }
+}
+
+/* Pop-out: Content → Home (slide down to bottom, spring) */
+.page-transition-overlay.pop-out {
+  animation: popOut var(--dur-page) var(--ease-ios-spring) forwards;
+}
+
+@keyframes popOut {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(110%); }
+}
+
+/* Slide: Content → Content (slide from right, then away to left) */
+.page-transition-overlay.slide {
+  animation: slideIn var(--dur-page) var(--ease-ios-slide) forwards;
+}
+
+@keyframes slideIn {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(-100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Fade: fallback / quick nav */
+.page-transition-overlay.fade {
+  animation: fadeOverlay var(--dur-page) var(--ease-ios-fade) forwards;
+}
+
+@keyframes fadeOverlay {
+  0%   { opacity: 0; transform: translateY(0); }
+  50%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(0); }
+}
+
+/* ---- Button Tap Feedback ---- */
+a, button, .VPNavBarMenuLink, .VPLink {
+  transition: transform 0.5s var(--ease-ios-spring);
+}
+
+a:active, button:active, .VPNavBarMenuLink:active, .VPLink:active {
+  transition: transform var(--dur-tap) var(--ease-ios-press);
+  transform: scale(0.94);
+}
+
+/* ---- Ripple Effect ---- */
+.ripple-ring {
+  position: fixed;
+  border-radius: 50%;
+  border: 1.5px solid rgba(152, 203, 234, 0.5);
+  pointer-events: none;
+  z-index: 999998;
+  transform: translate(-50%, -50%);
+  animation: rippleExpand var(--dur-ripple) var(--ease-ios-fade) forwards;
+}
+
+@keyframes rippleExpand {
+  0%   { width: 0; height: 0; opacity: 1; }
+  100% { width: 200px; height: 200px; opacity: 0; }
+}
+
+/* ---- Scroll Reveal ---- */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--dur-reveal) var(--ease-ios-fade),
+    transform var(--dur-reveal) var(--ease-ios-slide);
+}
+
+/* ---- Mobile Optimization ---- */
+@media (max-width: 768px) {
+  :root {
+    --dur-page: 0.35s;
+    --dur-ripple: 0.6s;
+    --dur-reveal: 0.4s;
+  }
+
+  @keyframes rippleExpand {
+    0%   { width: 0; height: 0; opacity: 1; }
+    100% { width: 140px; height: 140px; opacity: 0; }
+  }
+}
