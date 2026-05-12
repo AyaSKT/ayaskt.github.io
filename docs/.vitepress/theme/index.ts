@@ -13,6 +13,8 @@ import update from "./components/update.vue"
 
 import MyLayout from './components/MyLayout.vue'
 import BackToTop from './components/backtotop.vue'
+import PageTransition from './components/PageTransition.vue'
+import ScrollReveal from './components/ScrollReveal.vue'
 
 export default {
   
@@ -36,6 +38,8 @@ export default {
     app.component('MouseClick' , MouseClick)
     app.component('update' , update)
     app.component('BackToTop', BackToTop)
+    app.component('PageTransition', PageTransition)
+    app.component('ScrollReveal', ScrollReveal)
   },
 
   extends: DefaultTheme,
