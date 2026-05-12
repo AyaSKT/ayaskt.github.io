@@ -93,7 +93,7 @@
   --ease-ios-slide:  cubic-bezier(0.25, 0.1, 0.25, 1);
   --ease-ios-fade:   cubic-bezier(0.16, 1, 0.3, 1);
   --ease-ios-press:  cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --dur-page: 0.45s;
+  --dur-page: 0.8s;
   --dur-tap: 0.15s;
   --dur-ripple: 0.8s;
   --dur-reveal: 0.5s;

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>淡入淡出时长调节</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    background: #f2f2f7;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 48px 40px 40px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.08);
+  }
+  h2 { font-size: 1.5em; font-weight: 700; color: #1d1d1f; }
+  .sub {
+    color: #86868b; font-size: 0.95em; margin: 6px 0 36px;
+  }
+
+  /* Layout mock */
+  .mock-nav {
+    height: 44px; background: rgba(0,0,0,0.04); border-radius: 10px;
+    display: flex; align-items: center; padding: 0 16px; gap: 8px;
+    margin-bottom: 20px;
+  }
+  .mock-dot { width: 10px; height: 10px; border-radius: 50%; background: #c4c4c8; }
+  .mock-body {
+    display: flex; gap: 16px;
+  }
+  .mock-sidebar {
+    width: 100px; height: 160px; background: rgba(0,0,0,0.03); border-radius: 10px;
+    flex-shrink: 0;
+  }
+  .mock-content {
+    flex: 1; min-height: 160px;
+    border-radius: 10px; padding: 20px;
+    display: flex; flex-direction: column; gap: 8px;
+    transition: opacity var(--dur) cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.4s;
+  }
+  .mock-content.page-a { background: linear-gradient(135deg, #98CBEA22, #C2C7F822); }
+  .mock-content.page-b { background: linear-gradient(135deg, #F1DCE422, #C2C7F822); }
+  .mock-line {
+    height: 10px; border-radius: 5px; background: rgba(0,0,0,0.08);
+    width: var(--w);
+  }
+
+  /* Controls */
+  .controls {
+    margin-top: 32px; padding-top: 28px; border-top: 1px solid #e5e5ea;
+  }
+  .row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .row label { font-weight: 600; font-size: 0.95em; color: #1d1d1f; }
+  .row .val {
+    font-variant-numeric: tabular-nums;
+    background: #f2f2f7; border-radius: 8px;
+    padding: 4px 12px; font-size: 0.9em; color: #1d1d1f;
+    min-width: 64px; text-align: center;
+  }
+  input[type=range] {
+    width: 100%; -webkit-appearance: none; height: 6px;
+    border-radius: 3px; background: #e5e5ea; outline: none;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 28px; height: 28px;
+    border-radius: 50%; background: #1d1d1f;
+    cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .btn-row { display: flex; gap: 10px; margin-top: 20px; }
+  button {
+    flex: 1; padding: 14px 0; border: none; border-radius: 14px;
+    font-size: 1em; font-weight: 600; cursor: pointer;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  button:active { transform: scale(0.94); }
+  .btn-primary {
+    background: linear-gradient(140deg, #98CBEA, #C2C7F8);
+    color: #fff; box-shadow: 0 4px 16px rgba(152,203,234,0.35);
+  }
+  .btn-secondary { background: #f2f2f7; color: #1d1d1f; }
+
+  .hint {
+    margin-top: 16px; font-size: 0.85em; color: #86868b; text-align: center;
+    min-height: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2>页面淡入淡出时长调节</h2>
+  <p class="sub">点击「切换页面」观察动画效果，拖动滑条找到舒适的速度</p>
+
+  <!-- Mock preview -->
+  <div class="mock-nav"><div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div></div>
+  <div class="mock-body">
+    <div class="mock-sidebar"></div>
+    <div class="mock-content page-a" id="content">
+      <div class="mock-line" style="--w:70%"></div>
+      <div class="mock-line" style="--w:90%"></div>
+      <div class="mock-line" style="--w:55%"></div>
+      <div class="mock-line" style="--w:80%"></div>
+      <div class="mock-line" style="--w:45%"></div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="row">
+      <label for="slider">过渡时长</label>
+      <span class="val" id="label">0.45s</span>
+    </div>
+    <input type="range" id="slider" min="15" max="120" value="45" step="1">
+
+    <div class="btn-row">
+      <button class="btn-primary" id="btnToggle">切换页面</button>
+      <button class="btn-secondary" id="btnAuto">自动循环</button>
+    </div>
+    <p class="hint" id="hint">点击「切换页面」试试当前速度</p>
+  </div>
+</div>
+
+<script>
+const content = document.getElementById('content');
+const slider = document.getElementById('slider');
+const label = document.getElementById('label');
+const hint = document.getElementById('hint');
+const btnToggle = document.getElementById('btnToggle');
+const btnAuto = document.getElementById('btnAuto');
+
+let isPageA = true;
+let autoTimer = null;
+
+function updateDuration() {
+  const ms = parseInt(slider.value) / 100;
+  const s = ms.toFixed(2);
+  label.textContent = s + 's';
+  content.style.setProperty('--dur', s + 's');
+  document.documentElement.style.setProperty('--dur-page', s + 's');
+}
+
+function toggle() {
+  isPageA = !isPageA;
+  content.style.opacity = '0';
+  setTimeout(() => {
+    content.className = 'mock-content ' + (isPageA ? 'page-a' : 'page-b');
+    if (isPageA) {
+      content.innerHTML = `
+        <div class="mock-line" style="--w:70%"></div>
+        <div class="mock-line" style="--w:90%"></div>
+        <div class="mock-line" style="--w:55%"></div>
+        <div class="mock-line" style="--w:80%"></div>
+        <div class="mock-line" style="--w:45%"></div>`;
+    } else {
+      content.innerHTML = `
+        <div class="mock-line" style="--w:85%"></div>
+        <div class="mock-line" style="--w:60%"></div>
+        <div class="mock-line" style="--w:95%"></div>
+        <div class="mock-line" style="--w:50%"></div>
+        <div class="mock-line" style="--w:75%"></div>
+        <div class="mock-line" style="--w:40%"></div>`;
+    }
+    content.style.opacity = '1';
+  }, parseFloat(slider.value) * 10 * 0.6);
+}
+
+slider.addEventListener('input', () => {
+  updateDuration();
+  hint.textContent = '当前时长 ' + (parseInt(slider.value) / 100).toFixed(2) + 's — 点击「切换页面」试试';
+});
+
+btnToggle.addEventListener('click', () => {
+  toggle();
+  if (autoTimer) { clearInterval(autoTimer); autoTimer = null; btnAuto.textContent = '自动循环'; }
+});
+
+btnAuto.addEventListener('click', () => {
+  if (autoTimer) {
+    clearInterval(autoTimer); autoTimer = null;
+    btnAuto.textContent = '自动循环';
+    hint.textContent = '已停止自动循环';
+    return;
+  }
+  btnAuto.textContent = '停止循环';
+  hint.textContent = '自动循环中 — 拖动滑条实时调节速度';
+  toggle();
+  autoTimer = setInterval(toggle, Math.max(parseFloat(slider.value) * 1000 + 600, 1000));
+});
+
+slider.addEventListener('input', () => {
+  if (autoTimer) {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(toggle, Math.max(parseFloat(slider.value) * 1000 + 600, 1000));
+  }
+});
+
+// Init
+updateDuration();
+</script>
+</body>
+</html>

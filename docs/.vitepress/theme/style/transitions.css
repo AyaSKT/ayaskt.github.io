@@ -110,7 +110,7 @@ a:active, button:active, .VPNavBarMenuLink:active, .VPLink:active {
 /* ---- Mobile Optimization ---- */
 @media (max-width: 768px) {
   :root {
-    --dur-page: 0.35s;
+    --dur-page: 0.55s;
     --dur-ripple: 0.6s;
     --dur-reveal: 0.4s;
   }
