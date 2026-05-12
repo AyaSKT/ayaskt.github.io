@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch, ref, nextTick } from 'vue'
+import { watch, ref } from 'vue'
 import { useRouter } from 'vitepress'
 
 const { route } = useRouter()
@@ -20,25 +20,24 @@ function classify(from: string, to: string): 'pop-in' | 'pop-out' | 'slide' | 'f
 watch(
   () => route.path,
   (to, from) => {
-    const type = classify(from, to)
-    transition.value = type
+    transition.value = classify(from ?? '/', to)
     visible.value = true
-    nextTick(() => {
-      // Trigger removal after animation completes
-      setTimeout(() => {
-        visible.value = false
-        transition.value = ''
-      }, 450)
-    })
   }
 )
+
+function onAnimationEnd() {
+  visible.value = false
+  transition.value = ''
+}
 </script>
 
 <template>
   <div
     v-if="visible"
+    :key="route.path"
     class="page-transition-overlay"
     :class="transition"
     aria-hidden="true"
+    @animationend="onAnimationEnd"
   />
 </template>
