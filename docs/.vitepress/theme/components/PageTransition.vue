@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useRouter } from 'vitepress'
 
 const { route, go } = useRouter()
@@ -13,11 +13,10 @@ function isInternalLink(el: Element): HTMLAnchorElement | null {
   if (href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) return null
   // Skip sidebar toggle and UI chrome
   if (a.getAttribute('role') === 'button') return null
-  if (a.closest('.VPSidebar') && !href) return null
   return a
 }
 
-function handleClick(e: MouseEvent) {
+async function handleClick(e: MouseEvent) {
   const a = isInternalLink(e.target as Element)
   if (!a) return
   const href = a.getAttribute('href')!
@@ -27,8 +26,22 @@ function handleClick(e: MouseEvent) {
   e.preventDefault()
 
   if ('startViewTransition' in document) {
+    // Resolve target path for matching
+    const targetPath = new URL(href, window.location.origin).pathname
+
     ;(document as any).startViewTransition(async () => {
-      await go(href)
+      go(href)
+      // Wait for route to land on the target path
+      await new Promise<void>(resolve => {
+        if (route.path === targetPath) return resolve()
+        const unwatch = watch(() => route.path, (p) => {
+          if (p === targetPath) { unwatch(); resolve() }
+        })
+      })
+      // Flush Vue render + 2 frames for paint
+      await nextTick()
+      await new Promise(r => requestAnimationFrame(r))
+      await new Promise(r => requestAnimationFrame(r))
     })
   } else {
     go(href)

@@ -1,5 +1,4 @@
 # DSP 数字信号处理笔记 Introduction & Outline
-<confetti />
 
 
 
