@@ -182,7 +182,7 @@ $$
 \boxed{
 \nabla \times \vec E = 0
 \quad \xLeftrightarrow{} \quad 
-\oint_C \vec E \cdot d \vec l
+\oint_C \vec E \cdot d \vec l = 0
 }
 $$
 

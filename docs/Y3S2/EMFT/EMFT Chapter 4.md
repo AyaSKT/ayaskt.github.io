@@ -49,7 +49,7 @@ $$
 **泊松方程 Possion Equation**
 
 $$
-\boxed{\nabla^2 \varphi = \frac{\rho}{\varepsilon}}
+\boxed{\nabla^2 \varphi = -\frac{\rho}{\varepsilon}}
 $$
 
 当 $\rho = 0$ 时，泊松方程退化为**拉普拉斯方程 Laplace Equation** ：
@@ -157,7 +157,7 @@ $$
 
 $$
 \begin{cases}
-\nabla^2 \varphi = \frac{\rho}{\varepsilon} \\
+\nabla^2 \varphi = -\frac{\rho}{\varepsilon} \\
 \\
 \left. \varphi \right|_{S} = f(s)
 
@@ -176,13 +176,13 @@ $$
 
 $$
 \begin{cases}
-\nabla^2 \varphi_1 = \frac{\rho}{\varepsilon} \\
+\nabla^2 \varphi_1 = -\frac{\rho}{\varepsilon} \\
 \left. \varphi_1 \right|_{S} = f(s)
 
 \end{cases}
 \qquad
 \begin{cases}
-\nabla^2 \varphi_2 = \frac{\rho}{\varepsilon} \\
+\nabla^2 \varphi_2 = -\frac{\rho}{\varepsilon} \\
 \left. \varphi_2 \right|_{S} = f(s)
 
 \end{cases}
