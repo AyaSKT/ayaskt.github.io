@@ -13,3 +13,6 @@ docs/.vitepress/cache/
 
 # 本地 VS Code/Cursor 预览扩展
 .vscode/extensions/
+
+# Superpowers 视觉脑暴临时文件
+.superpowers/
