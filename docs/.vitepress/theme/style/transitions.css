@@ -21,6 +21,21 @@
   opacity: 1;
 }
 
+/* Homepage nav: align search button X position with docs page so the new
+   search covers the old one during the instant nav swap.
+   Docs search = sidebar(272px) + search-padding(32px) = 304px.
+   Homepage search = wrapper(32px) + title(fit-content) + search-padding(32px).
+   Giving the title a fixed sidebar-width and zeroing search padding makes
+   both land at the same X across all viewport widths >= 960px. */
+@media (min-width: 960px) {
+  .VPNavBar.home .title {
+    width: var(--vp-sidebar-width);
+  }
+  .VPNavBar.home .VPNavBarSearch {
+    padding-left: 0;
+  }
+}
+
 /* Root = content area only (nav & sidebar excluded via view-transition-name) */
 ::view-transition-old(root) {
   animation: vtFadeOut var(--dur-page) var(--ease-ios-fade) forwards;
