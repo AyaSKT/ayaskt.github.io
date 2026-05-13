@@ -1,44 +1,70 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, nextTick } from 'vue'
-import { useRouter } from 'vitepress'
+import { nextTick, onMounted, onUnmounted } from 'vue'
+import { useData, useRouter } from 'vitepress'
 
-const { go } = useRouter()
+const router = useRouter()
+const { theme } = useData()
 
-function isInternalLink(el: Element): HTMLAnchorElement | null {
-  const a = el.closest('a')
-  if (!a) return null
-  const href = a.getAttribute('href')
-  if (!href) return null
-  if (href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:')) return null
-  if (a.getAttribute('role') === 'button') return null
-  return a
+let restoreGo: (() => void) | undefined
+
+function sidebarKeyFor(to: string) {
+  const sidebar = theme.value.sidebar
+  if (!sidebar || Array.isArray(sidebar)) return ''
+
+  const pathname = decodeURI(new URL(to, window.location.href).pathname)
+  return Object.keys(sidebar)
+    .filter((key) => pathname.startsWith(key))
+    .sort((a, b) => b.length - a.length)[0] ?? ''
 }
 
-function handleClick(e: MouseEvent) {
-  const a = isInternalLink(e.target as Element)
-  if (!a) return
-  const href = a.getAttribute('href')!
-  if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return
+function canTransition(to: string, options?: { initialLoad?: boolean }) {
+  if (options?.initialLoad) return false
+  if (!('startViewTransition' in document)) return false
+  if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return false
 
-  e.preventDefault()
+  const nextUrl = new URL(to, window.location.href)
+  const currentUrl = new URL(window.location.href)
 
-  if ('startViewTransition' in document) {
-    ;(document as any).startViewTransition(async () => {
-      // navigate first, then wait one tick for Vue to flush DOM
-      await go(href)
-      await nextTick()
-    })
-  } else {
-    go(href)
-  }
+  return (
+    nextUrl.origin === currentUrl.origin &&
+    (nextUrl.pathname !== currentUrl.pathname || nextUrl.search !== currentUrl.search)
+  )
 }
 
 onMounted(() => {
-  document.addEventListener('click', handleClick, { capture: true })
+  const originalGo = router.go.bind(router)
+
+  router.go = async (to, options) => {
+    if (!canTransition(to, options)) {
+      await originalGo(to, options)
+      return
+    }
+
+    const currentSidebarKey = sidebarKeyFor(window.location.href)
+    const nextSidebarKey = sidebarKeyFor(to)
+    const keepsSidebar = currentSidebarKey && currentSidebarKey === nextSidebarKey
+
+    document.documentElement.classList.toggle('vt-keep-sidebar', Boolean(keepsSidebar))
+
+    try {
+      const transition = (document as any).startViewTransition(async () => {
+        await originalGo(to, options)
+        await nextTick()
+      })
+
+      await transition.finished
+    } finally {
+      document.documentElement.classList.remove('vt-keep-sidebar')
+    }
+  }
+
+  restoreGo = () => {
+    router.go = originalGo
+  }
 })
 
 onUnmounted(() => {
-  document.removeEventListener('click', handleClick, { capture: true })
+  restoreGo?.()
 })
 </script>
 

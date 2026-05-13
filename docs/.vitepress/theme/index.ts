@@ -15,6 +15,7 @@ import MyLayout from './components/MyLayout.vue'
 import BackToTop from './components/backtotop.vue'
 import PageTransition from './components/PageTransition.vue'
 import ScrollReveal from './components/ScrollReveal.vue'
+import DocMeta from './components/DocMeta.vue'
 
 export default {
   
@@ -40,6 +41,7 @@ export default {
     app.component('BackToTop', BackToTop)
     app.component('PageTransition', PageTransition)
     app.component('ScrollReveal', ScrollReveal)
+    app.component('DocMeta', DocMeta)
   },
 
   extends: DefaultTheme,

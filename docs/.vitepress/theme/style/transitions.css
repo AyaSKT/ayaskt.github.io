@@ -4,19 +4,34 @@
 
 /* ---- Page Transition: View Transitions API crossfade ---- */
 
-/* Name nav & sidebar so they're excluded from the root snapshot.
-   Root snapshot only covers content — nav/sidebar stay visually stable. */
-.VPNavBar        { view-transition-name: nav; }
-.VPSidebar       { view-transition-name: sidebar; }
-.VPLocalNav      { view-transition-name: local-nav; }
+/* Keep the site title stable while the rest of the page crossfades. */
+.VPNavBarTitle {
+  view-transition-name: nav-title;
+}
 
-/* Nav & sidebar: instant swap, no flicker */
-::view-transition-old(nav),
-::view-transition-new(nav),
+/* Keep the sidebar still only when both pages use the same sidebar group.
+   Otherwise it remains in the root snapshot and fades with the page. */
+.vt-keep-sidebar .VPSidebar {
+  view-transition-name: sidebar;
+}
+
+::view-transition-group(nav-title),
+::view-transition-group(sidebar) {
+  animation: none;
+}
+
+::view-transition-old(nav-title),
+::view-transition-new(nav-title) {
+  animation: none;
+}
+
+::view-transition-old(nav-title) {
+  opacity: 0;
+}
+
+::view-transition-new(nav-title),
 ::view-transition-old(sidebar),
-::view-transition-new(sidebar),
-::view-transition-old(local-nav),
-::view-transition-new(local-nav) {
+::view-transition-new(sidebar) {
   animation: none;
   opacity: 1;
 }
@@ -43,6 +58,13 @@
 
 ::view-transition-new(root) {
   animation: vtFadeIn var(--dur-page) var(--ease-ios-fade) forwards;
+}
+
+.vt-appearance::view-transition-old(root),
+.vt-appearance::view-transition-new(root) {
+  animation: none;
+  opacity: 1;
+  mix-blend-mode: normal;
 }
 
 @keyframes vtFadeOut {

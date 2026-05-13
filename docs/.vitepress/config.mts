@@ -71,6 +71,44 @@ function registerContainer(md: any, name: string, opts: ContainerOpts) {
   md.renderer.rules[`container_${name}_close`] = opts.render
 }
 
+function getReadableWordCount(src: string) {
+  const content = src
+    .replace(/^---[\s\S]*?---\s*/, '')
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`[^`]*`/g, '')
+    .replace(/<[^>]+>/g, '')
+    .replace(/!\[[^\]]*]\([^)]*\)/g, '')
+    .replace(/\[[^\]]*]\([^)]*\)/g, '')
+
+  const cjkCount = (content.match(/[\u3400-\u9fff]/g) ?? []).length
+  const wordCount = (content
+    .replace(/[\u3400-\u9fff]/g, ' ')
+    .match(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*/g) ?? []).length
+
+  return cjkCount + wordCount
+}
+
+function formatDocMeta(md: any, src: string, frontmatter: Record<string, any> = {}) {
+  const words = getReadableWordCount(src)
+  const minutes = Math.max(1, Math.ceil(words / 500))
+  const author = String(frontmatter.author ?? 'Ayaskt')
+
+  return `<DocMeta :words="${words}" :minutes="${minutes}" author="${md.utils.escapeHtml(author)}"></DocMeta>\n`
+}
+
+function registerDocMeta(md: any) {
+  md.core.ruler.after('inline', 'doc_meta', (state: any) => {
+    const h1CloseIndex = state.tokens.findIndex(
+      (token: any) => token.type === 'heading_close' && token.tag === 'h1'
+    )
+    if (h1CloseIndex === -1) return
+
+    const token = new state.Token('html_block', '', 0)
+    token.content = formatDocMeta(md, state.src, state.env?.frontmatter)
+    state.tokens.splice(h1CloseIndex + 1, 0, token)
+  })
+}
+
 // 插件默认 TeX 包列表去掉 bboldx，避免 "Invalid variant: -bboldx"（newcm 字体无此变体）
 const TEX_PACKAGES_WITHOUT_BBOLDX = [
   'action', 'ams', 'amscd', 'bbm', 'bbox', 'begingroup', 'boldsymbol', 'braket', 'bussproofs',
@@ -160,6 +198,8 @@ export default defineConfig({
           return '</div>\n'
         },
       })
+
+      registerDocMeta(md)
     }
   },
   themeConfig: {

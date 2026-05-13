@@ -63,6 +63,10 @@ const heroImageLink = computed(() => {
       <BackToTop />
     </template>
 
+    <template #home-hero-info-after>
+      <HeroHitokoto class="mobile-hitokoto" />
+    </template>
+
     <template #home-hero-image>
       <a v-if="heroImageSrc && heroImageLink" :href="heroImageLink" target="_blank" rel="noopener noreferrer">
         <img
@@ -81,7 +85,7 @@ const heroImageLink = computed(() => {
         :height="heroImageHeight"
         :style="heroImageStyle"
       >
-      <HeroHitokoto />
+      <HeroHitokoto class="desktop-hitokoto" />
     </template>
   </DefaultTheme.Layout>
 </template>

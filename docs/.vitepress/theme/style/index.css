@@ -30,6 +30,14 @@
   margin-right: auto;
 }
 
+.VPDocFooter .last-updated {
+  display: none;
+}
+
+.VPDocFooter .edit-info:has(> .last-updated:only-child) {
+  display: none;
+}
+
 /* ================================================================
    Example Container（例题容器）::: example / ::: stem / ::: solution
    配色基于主题渐变 #98CBEA → #C2C7F8 → #F1DCE4

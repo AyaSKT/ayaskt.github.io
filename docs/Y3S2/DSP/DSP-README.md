@@ -1,6 +1,6 @@
 # DSP 数字信号处理笔记 Introduction & Outline
 
-
+**要保持希望在每天清晨太阳升起。**
 
 
 ## Digital Signal Processing (UESTC4005 / UESTCHN4005)
@@ -20,7 +20,7 @@
 
 如果对你有帮助，就请点个 Star 吧，谢谢喵~
 
-**要保持希望在每天清晨太阳升起。**
+
 
 ## 目录 Index
 

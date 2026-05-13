@@ -23,20 +23,30 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
     )}px at ${x}px ${y}px)`
   ]
 
-  await document.startViewTransition(async () => {
-    isDark.value = !isDark.value
-    await nextTick()
-  }).ready
+  document.documentElement.classList.add('vt-appearance')
 
-  document.documentElement.animate(
-    { clipPath: isDark.value ? clipPath.reverse() : clipPath },
-    {
-      duration: 300,
-      easing: 'ease-in',
-      fill: 'forwards',
-      pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`
-    }
-  )
+  try {
+    const transition = document.startViewTransition(async () => {
+      isDark.value = !isDark.value
+      await nextTick()
+    })
+
+    await transition.ready
+
+    const animation = document.documentElement.animate(
+      { clipPath: isDark.value ? clipPath.reverse() : clipPath },
+      {
+        duration: 300,
+        easing: 'ease-in',
+        fill: 'forwards',
+        pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`
+      }
+    )
+
+    await Promise.allSettled([transition.finished, animation.finished])
+  } finally {
+    document.documentElement.classList.remove('vt-appearance')
+  }
 })
 </script>
 
