@@ -13,7 +13,7 @@
       emit-metadata="0"
       input-position="top"
       lang="zh-CN"
-      loading="lazy"
+      loading="eager"
       :theme="isDark ? 'dark' : 'light'"
     ></Giscus>
   </div>

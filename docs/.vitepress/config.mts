@@ -75,17 +75,42 @@ function getReadableWordCount(src: string) {
   const content = src
     .replace(/^---[\s\S]*?---\s*/, '')
     .replace(/```[\s\S]*?```/g, '')
-    .replace(/`[^`]*`/g, '')
     .replace(/<[^>]+>/g, '')
     .replace(/!\[[^\]]*]\([^)]*\)/g, '')
     .replace(/\[[^\]]*]\([^)]*\)/g, '')
 
-  const cjkCount = (content.match(/[\u3400-\u9fff]/g) ?? []).length
-  const wordCount = (content
-    .replace(/[\u3400-\u9fff]/g, ' ')
-    .match(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*/g) ?? []).length
+  // Count math formula symbols before stripping inline code
+  const displayMath = content.match(/\$\$[\s\S]*?\$\$/g) ?? []
+  const inlineMath = content
+    .replace(/\$\$[\s\S]*?\$\$/g, '')
+    .match(/\$[^$\n]+?\$/g) ?? []
+  const mathSymbolCount = [...displayMath, ...inlineMath]
+    .join('')
+    .replace(/\$/g, '')
+    .replace(/\s+/g, '')
+    .length
 
-  return cjkCount + wordCount
+  // Strip inline code after extracting math
+  const text = content.replace(/`[^`]*`/g, '')
+
+  // Count CJK characters (CJK Unified Ideographs + extensions + compatibility)
+  const cjkCount = (text.match(/[\u3400-\u9fff\uf900-\ufaff]/g) ?? []).length
+
+  // Count kana (hiragana + katakana + phonetic extensions)
+  const kanaCount = (text.match(/[\u3040-\u309f\u30a0-\u30ff\u31f0-\u31ff]/g) ?? []).length
+
+  // Count remaining "words": Latin, digits, Hangul syllables, CJK extensions B+
+  const stripped = text
+    .replace(/[\u3400-\u9fff\uf900-\ufaff\u3040-\u309f\u30a0-\u30ff\u31f0-\u31ff]/g, ' ')
+  let wordCount = 0
+  for (const m of stripped.matchAll(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*/g)) {
+    wordCount++
+  }
+  for (const m of stripped.matchAll(/[\uac00-\ud7a3\u{20000}-\u{2fa1f}]/gu)) {
+    wordCount++
+  }
+
+  return cjkCount + kanaCount + mathSymbolCount + wordCount
 }
 
 function formatDocMeta(md: any, src: string, frontmatter: Record<string, any> = {}) {
