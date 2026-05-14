@@ -366,6 +366,37 @@ export default defineConfig({
         }
       ],
 
+      // 通信电路设计 CCD：当路径在 /Y3S2/CCD/ 下时显示
+      '/Y3S2/CCD/': [
+        {
+          text: '通信电路设计 CCD 课程总览',
+          collapsed: false,
+          items: [
+            { text: 'Introduction', link: '/Y3S2/CCD/CCD-README.md' },
+            {
+              text: 'Part 1',
+              collapsed: false,
+              items: [
+                { text: 'Lec 2 电子通信', link: '/Y3S2/CCD/Part 1/CCD Lecture 2 Electronic Communications' },
+                { text: 'Lec 2b 半导体基础', link: '/Y3S2/CCD/Part 1/CCD Lecture 2b Semiconductors Basics' },
+                { text: 'Lec 3/4 晶体管', link: '/Y3S2/CCD/Part 1/CCD Lecture 3-4 Transistors' },
+                { text: 'Lec 5/6 放大器', link: '/Y3S2/CCD/Part 1/CCD Lecture 5-6 Amplifiers' },
+              ],
+            },
+            {
+              text: 'Part 2',
+              collapsed: false,
+              items: [
+                { text: 'Lec 7 混频器', link: '/Y3S2/CCD/Part 2/CCD Lecture 7 Mixers' },
+                { text: 'Lec 8 LC 电路与匹配网络', link: '/Y3S2/CCD/Part 2/CCD Lecture 8 LC Circuits and Matching Networks' },
+                { text: 'Lec 9 振荡器', link: '/Y3S2/CCD/Part 2/CCD Lecture 9 Oscillators' },
+                { text: 'Lec 10 复习回顾', link: '/Y3S2/CCD/Part 2/CCD Lecture 10 Revision' },
+              ],
+            },
+          ],
+        },
+      ],
+
       // 通信原理与系统 CPS：当路径在 /Y3S1/CPS/ 下时显示
       '/Y3S1/CPS/': [
         {
