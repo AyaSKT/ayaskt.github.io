@@ -1,9 +1,7 @@
 # EPMF 工程项目管理与财务 Introduction & Outline
 <confetti />
 
-
-
-
+**小楼一夜听春雨，深巷明朝卖杏花。**
 ## Engineering Project Management and Finance (UESTC3031 / UESTCHN3012)
 
 **本笔记基于 2026 年春季格拉斯哥学院 Engineering Project Management and Finance 课程文件整理**
@@ -21,7 +19,7 @@
 
 如果对你有帮助，就请点个 Star 吧，谢谢喵~
 
-**小楼一夜听春雨，深巷明朝卖杏花。**
+
 
 ## 目录 Index
 
