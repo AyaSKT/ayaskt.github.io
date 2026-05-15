@@ -1,4 +1,5 @@
-# 高级数据预处理与特征选择 Advanced Data Processing & Feature Selection
+# ML Lecture 4 Part I Feature Selection
+
 ## 特征选择 Feature Selection
 - **定义**: 特征选择是从原始数据集中识别并选择最相关、信息量最大且非冗余特征（变量）子集的过程，同时丢弃无关或嘈杂的特征 。
 - **目的**: 它是机器学习**数据预处理**的关键步骤，旨在提高模型性能、降低计算成本并增强可解释性

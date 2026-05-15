@@ -1,6 +1,6 @@
-# 遗传算法 Genetic Algorithm, GA
+# EC Lecture 2 Genetic Algorithm
 
----
+
 ## GA 简介
 
 - **种群 Population**  
@@ -34,7 +34,7 @@
 4. 通过 **替换 Replacement** 操作，用新解更新种群，得到新的解的种群。  
 5. 重复以上步骤，逐步进化出更优的解。
 
----
+
 ## GA 表示，初始化，与选择 Representation, Initialization & Selection
 
 ### GA 工作流
@@ -234,7 +234,7 @@ $$
 - **仅靠选择 Selection alone 不能解决优化问题 cannot solve the optimization problem**。  
 - 还必须结合 **交叉 Crossover** 与 **变异 Mutation** 等算子，才能持续产生新解并跳出局部最优。
 
----
+
 ## GA 交叉与变异 Crossover & Mutation
 
 ### 交叉 Crossover
@@ -356,7 +356,7 @@ $$
 - 与交叉一起，共同维持种群的多样性并探索搜索空间。
 
 
----
+
 ## GA 停止准则与总结 Stopping Criterion & Summary
 
 ### 停止条件 Stopping condition

@@ -1,6 +1,8 @@
+# CPS Lecture 14 FM Generation
+
 ![](Assests/Pasted%20image%2020251201154641.png)
 
----
+
 ## 直接 FM 生成（Direct FM Generation）
 直接法使用一个 VCO（压控振荡器），其频率由外部电压控制。 
 - VCO 的振荡频率随控制电压线性变化。 
@@ -13,7 +15,7 @@ $$
 
 该公式对应于基本的 FM 信号。
 
----
+
 ## 间接 FM 生成 (Indirect FM Generation) 
 间接 FM 生成利用了窄带 FM (NBFM) 生成的简便性。 
 **阿姆斯特朗间接法 (Armstrong's Indirect Method)** 是一种用于生成宽带 FM (WBFM) 信号的技术。 

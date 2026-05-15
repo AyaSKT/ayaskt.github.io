@@ -1,4 +1,6 @@
-#### SSB的需求
+# CPS Lecture 8 Amplitude Modulation SSB
+
+## SSB的需求
 -   双边带频谱 (DSB spectrum)（包括抑制载波 (suppressed carrier) DSB-SC 和常规调幅 (AM)）包含两个边带 (sidebands)：
     -   上边带 (Upper Sideband, USB)
     -   下边带 (Lower Sideband, LSB)
@@ -7,10 +9,10 @@
 -   由于每一个边带都承载了消息信号 (message signal) 的完整信息，因此其中任意一个都足以在接收端恢复出原始消息信号。
 -   单边带调制 (Single-Sideband modulation, SSB) 通过移除 (removes) 下边带 (LSB) 或上边带 (USB)，使得传输一个消息信号  $m(t)$  仅需要  $B$  Hz 的带宽，从而提高了调幅 (amplitude modulation) 的频谱效率 (spectral efficiency)。
 ![](Assests/Pasted%20image%2020251121083206.png)
-**SSB的transimitter和receiver必须提前约定好使用LSB还是USB**
+**SSB的transmitter和receiver必须提前约定好使用LSB还是USB**
 ![](Assests/Pasted%20image%2020251121083308.png)
 
-#### 希尔伯特变换 Hilbert Transform
+## 希尔伯特变换 Hilbert Transform
 希尔伯特变换或称正交滤波 (quadrature filtering) 是一种全通滤波操作 (all-pass filtering operation)。该变换保持输入信号幅度谱 (magnitude spectrum) 不变，但会对其频谱产生特定相移 (phase shift)：
 - 对信号的正频率部分 (positive frequency spectrum) 产生 -90° 的相移
 - 对信号的负频率部分 (negative frequency spectrum) 产生 +90° 的相移
@@ -59,7 +61,7 @@ $$
 - 通过改变  $m(t)$  每个频率分量的相位来产生其希尔伯特变换  $m_h(t)$
 ![](Assests/Pasted%20image%2020251121084326.png)
 
-#### SSB AM
+## SSB AM
 对于消息信号  $m(t)$  的频谱  $M(f)$ ，可以将其分解为右半部分 (right half) 和左半部分 (left half) 来进行分析。
 
 右半信号定义为消息谱在正频率部分的分量：
@@ -102,11 +104,11 @@ $$
 \varphi_{\mathrm{SSB}}(t) = m(t)\cos\omega_{c}t \mp m_{h}(t)\sin\omega_{c}t
 $$
 
-#### SSB Signal Generation
+## SSB Signal Generation
 ![](Assests/Pasted%20image%2020251121091453.png)
 
-##### 选择性滤波法 (Selective Filtering)
-###### 单步调制 One-step
+### 选择性滤波法 (Selective Filtering)
+#### 单步调制 One-step
 -   **基本原理**：通过一步调制过程 (One-step Modulation Process) 产生双边带 (DSB) 信号，再使用带通滤波器 (BPF) 滤除不需要的边带，保留所需边带 (如上边带 USB)。
 -   **关键参数：间隙带宽 (Gap-band)**
     -   在基带信号中，直流间隙带宽定义为  $\omega_{g}=2\pi f_{g}$ 。
@@ -115,7 +117,7 @@ $$
 -   **滤波器性能要求**：为最小化邻道干扰 (adjacent channel interference)，对不期望边带的衰减应至少达到 40 dB。
 ![](Assests/Pasted%20image%2020251121093146.png)
 
-###### 两步调制 Two-step / Weaver's Method
+#### 两步调制 Two-step / Weaver's Method
 -   当载波频率过高，间隙带 (Gap-band) 小于  $2f_g$  时，采用中间载波频率  $\omega_{c1}$  先生成一个具有有效更宽间隙带的中间单边带信号 (Intermediate SSB signal)。
 ![](Assests/Pasted%20image%2020251121093853.png)
 
@@ -137,7 +139,7 @@ $$
 -   $\omega_{c1}$：中间载波频率 (Intermediate carrier frequency)
 -   $\omega_{c2}$：最终载波频率 (Final carrier frequency)
 
-#### SSB Demodulation
+## SSB Demodulation
 其Demodulator与DSB-SC的synchronous demodulator完全一致
 ![](Assests/Pasted%20image%2020251121110222.png)
 -   单边带抑制载波 (SSB-SC) 信号表达式为：
@@ -170,7 +172,7 @@ $$
     -   同时产生载波频率为  $2\omega_{c}$  的另一 SSB 信号
     -   通过低通滤波器 (low-pass filter) 可抑制不需要的 SSB 分量，得到所需的基带信号  $m(t)$
 
-#### Summary
+## Summary
 -   **advantages**
     -   允许更好的频谱管理 (better management of the frequency spectrum)。在给定的频率范围内，相比 dsb 信号，可以容纳更多的传输 (more transmission can fit)。
     -   所有发射功率都用于传输信息 (all of the transmitted power is message power)，没有功率浪费在载波上 (none is dissipated as carrier power)。

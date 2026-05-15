@@ -1,4 +1,6 @@
-#### DSB-WC/Conventional AM的需求
+# CPS Lecture 7 Amplitude Modulation DSB-WC
+
+## DSB-WC/Conventional AM的需求
 -   DSB-SC已调信号可能已经传输了数百英里，甚至可能遭受未知的多普勒频移 (Doppler frequency shift)。
 -   对DSB-SC信号进行相干解调 (coherent demodulation) 要求receiver拥有一个与输入载波  $\cos(2\pi f_c t)$  同步的载波信号。这一要求在实践中不易实现。
     -   这样的receiver将更难实现，且可能相当昂贵。
@@ -7,7 +9,7 @@
     -   这导致了在广播系统中使用一个昂贵的大功率transmitter，以及多个更简单、更廉价的receivers。
 -   这种将载波与已调信号一同传输的方式，被称为常规调幅 (conventional AM)（或AM，也可称为DSB-WC）。
 
-#### DSB-WC Modulation
+## DSB-WC Modulation
 
 $$
 \varphi_{AM}(t) = [A + m(t)] \cos{(2 \pi f_c t)}
@@ -22,13 +24,13 @@ $$
 
 ![](Assests/Pasted%20image%2020251120143706.png)
 
-#### DSB-WC的缺点
+## DSB-WC的缺点
 
 -   作为双边带系统 (double-sideband system), AM在带宽使用上是浪费的，因为传输消息信号中的信息实际上只需要一个边带 (sideband) 就足够了。
 -   在传输功率 (transmitted power) 方面，AM的效率也很低 (inefficient), 因为它在传输边带 (sidebands) 的同时还传输了一个大幅度的载波 (large carrier amplitude), 而这个载波本身并不传递任何信息。
 -   已调信号 (modulated signal) 的带宽是原始消息信号 (message signal) 带宽的两倍 (double)。如果消息信号带宽为  $B$ Hz, 则AM信号带宽为 $2B$ Hz。
 
-#### AM 信号包络（Envelope）
+## AM 信号包络（Envelope）
 
 载波振幅与消息信号振幅之和称为信号包络，其数学表达式为：
 
@@ -46,7 +48,7 @@ $$
 - 这种情况称为**载波过调制**(over-modulated)，会导致信号严重失真。
 ![](Assests/Pasted%20image%2020251120145341.png)
 
-#### AM 调制指数（Modulation Index）
+## AM 调制指数（Modulation Index）
 The modulation index μ is the ratio of the peak value of the message signal( $m_p$ ) to the amplitude of the carrier：
 
 $$
@@ -56,7 +58,7 @@ $$
 ![](Assests/Pasted%20image%2020251120145953.png)
 **更大的调制指数可以减少功耗，但更难以解调。当 $\mu > 1$ 时出现过调制**
 
-#### AM 功率效率
+## AM 功率效率
 
 AM信号功率包含两个组成部分：
 
@@ -67,7 +69,7 @@ $$
 - 载波分量 (carrier component): $A \cos(2\pi f_c t)$
 - 边带分量 (sidebands component): $m(t) \cos(2\pi f_c t)$
 
-##### 载波功率(Carrier Power)
+### 载波功率(Carrier Power)
 
 $$
 P_c = \frac{1}{2} A^2
@@ -75,7 +77,7 @@ $$
 
 载波功率是固定值，不携带信息。
 
-##### 边带功率 (Sideband Power)
+### 边带功率 (Sideband Power)
 
 $$
 P_s = \frac{1}{2} P_m
@@ -83,7 +85,7 @@ $$
 
 其中 $P_m$ 是消息信号功率，边带功率携带全部有用信息。
 
-##### 功率效率
+### 功率效率
 - 功率效率 (power efficiency) η 衡量调制技术在功耗方面的效率
 - 定义为信息承载部分功率与调制信号总功率的比值
 
@@ -99,7 +101,7 @@ $$
 \eta = \frac{P_s}{P_c + P_s} = \frac{\frac{1}{2} P_m}{P_c + \frac{1}{2} P_m} = \frac{P_m}{A_c^2 + P_m}
 $$
 
-#### AM Demodulation
+## AM Demodulation
 检测 (detection) 指从接收数据中提取信号的过程，在某些情况下等同于解调 (demodulation)。
 包络检测 (envelope detection) 要正常工作需满足两个条件：
 载波频率必须远大于调制信号带宽：

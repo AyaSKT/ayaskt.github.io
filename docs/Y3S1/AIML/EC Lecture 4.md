@@ -1,4 +1,4 @@
-# Lec.5: Combinatorial Optimization (组合优化)
+# EC Lecture 4 Combinatorial Optimization
 
 ## 定义
 

@@ -404,17 +404,17 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Introduction', link: '/Y3S1/CPS/CPS-README' },
-            { text: 'Lecture 6 Amplitude Modulation DSB-SC', link: '/Y3S1/CPS/CPS Lecture 6 Amplitude Modulation DSB-SC' },
-            { text: 'Lecture 7 Amplitude Modulation DSB-WC', link: '/Y3S1/CPS/CPS Lecture 7 Amplitude Modulation DSB-WC' },
-            { text: 'Lecture 8 Amplitude Modulation SSB', link: '/Y3S1/CPS/CPS Lecture 8 Amplitude Modulation SSB' },
-            { text: 'Lecture 9 Amplitude Modulation VSB', link: '/Y3S1/CPS/CPS Lecture 9 Amplitude Modulation VSB' },
-            { text: 'Lecture 11 FM and PM', link: '/Y3S1/CPS/CPS Lecture 11 FM and PM' },
-            { text: 'Lecture 12 FM Bandwidth Analysis', link: '/Y3S1/CPS/CPS Lecture 12 FM Bandwidth Analysis' },
-            { text: 'Lecture 13 FM Demodulation', link: '/Y3S1/CPS/CPS Lecture 13 FM Demodulation' },
-            { text: 'Lecture 14 FM Generation', link: '/Y3S1/CPS/CPS Lecture 14 FM Generation' },
-            { text: 'Lecture 16 & 17 Analog to Digital Conversion', link: '/Y3S1/CPS/CPS Lecture 16 & 17 Analog to Digital Conversion' },
-            { text: 'Lecture 18 Digital Modulation in AWGN Channel', link: '/Y3S1/CPS/CPS Lecture 18 Digital Modulation in AWGN Channel' },
-            { text: 'Lecture 19 Noise in Digital Modulation', link: '/Y3S1/CPS/CPS Lecture 19 Noise in Digital Modulation' }
+            { text: 'Lec 6 抑制载波双边带调幅 DSB-SC', link: '/Y3S1/CPS/CPS Lecture 6 Amplitude Modulation DSB-SC' },
+            { text: 'Lec 7 常规调幅 DSB-WC', link: '/Y3S1/CPS/CPS Lecture 7 Amplitude Modulation DSB-WC' },
+            { text: 'Lec 8 单边带调幅 SSB', link: '/Y3S1/CPS/CPS Lecture 8 Amplitude Modulation SSB' },
+            { text: 'Lec 9 残留边带调幅 VSB', link: '/Y3S1/CPS/CPS Lecture 9 Amplitude Modulation VSB' },
+            { text: 'Lec 11 角度调制 FM 与 PM', link: '/Y3S1/CPS/CPS Lecture 11 FM and PM' },
+            { text: 'Lec 12 FM 带宽分析', link: '/Y3S1/CPS/CPS Lecture 12 FM Bandwidth Analysis' },
+            { text: 'Lec 13 FM 解调', link: '/Y3S1/CPS/CPS Lecture 13 FM Demodulation' },
+            { text: 'Lec 14 FM 生成', link: '/Y3S1/CPS/CPS Lecture 14 FM Generation' },
+            { text: 'Lec 16 & 17 模数转换', link: '/Y3S1/CPS/CPS Lecture 16 & 17 Analog to Digital Conversion' },
+            { text: 'Lec 18 AWGN 信道中的数字调制', link: '/Y3S1/CPS/CPS Lecture 18 Digital Modulation in AWGN Channel' },
+            { text: 'Lec 19 数字调制中的噪声', link: '/Y3S1/CPS/CPS Lecture 19 Noise in Digital Modulation' }
           ]
         }
       ],
@@ -426,20 +426,32 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '课程总览', link: '/Y3S1/AIML/AIML-README' },
-            { text: 'EC Lecture 1', link: '/Y3S1/AIML/EC Lecture 1' },
-            { text: 'EC Lecture 2', link: '/Y3S1/AIML/EC Lecture 2' },
-            { text: 'EC Lecture 3', link: '/Y3S1/AIML/EC Lecture 3' },
-            { text: 'EC Lecture 4', link: '/Y3S1/AIML/EC Lecture 4' },
-            { text: 'ML Lecture 2', link: '/Y3S1/AIML/ML Lecture 2' },
-            { text: 'ML Lecture 3 Part I', link: '/Y3S1/AIML/ML Lecture 3 Part I' },
-            { text: 'ML Lecture 3 Part II', link: '/Y3S1/AIML/ML Lecture 3 Part II' },
-            { text: 'ML Lecture 4 Part I', link: '/Y3S1/AIML/ML Lecture 4 Part I' },
-            { text: 'ML Lecture 4 Part II', link: '/Y3S1/AIML/ML Lecture 4 Part II' },
-            { text: 'ML Lecture 5', link: '/Y3S1/AIML/ML Lecture 5' },
-            { text: 'ML Lecture 6', link: '/Y3S1/AIML/ML Lecture 6' }
-          ]
-        }
-      ]
+            {
+              text: '进化计算 Evolutionary Computation',
+              collapsed: false,
+              items: [
+                { text: 'Lec 1 优化 Optimization', link: '/Y3S1/AIML/EC Lecture 1' },
+                { text: 'Lec 2 遗传算法 GA', link: '/Y3S1/AIML/EC Lecture 2' },
+                { text: 'Lec 3 受约束优化', link: '/Y3S1/AIML/EC Lecture 3' },
+                { text: 'Lec 4 组合优化 CO', link: '/Y3S1/AIML/EC Lecture 4' },
+              ],
+            },
+            {
+              text: '机器学习 Machine Learning',
+              collapsed: false,
+              items: [
+                { text: 'Lec 2 机器学习基础', link: '/Y3S1/AIML/ML Lecture 2' },
+                { text: 'Lec 3 I 模型训练基础', link: '/Y3S1/AIML/ML Lecture 3 Part I' },
+                { text: 'Lec 3 II 数据准备', link: '/Y3S1/AIML/ML Lecture 3 Part II' },
+                { text: 'Lec 4 I 特征选择', link: '/Y3S1/AIML/ML Lecture 4 Part I' },
+                { text: 'Lec 4 II 降维', link: '/Y3S1/AIML/ML Lecture 4 Part II' },
+                { text: 'Lec 5 支持向量机 SVM', link: '/Y3S1/AIML/ML Lecture 5' },
+                { text: 'Lec 6 神经网络 ANN', link: '/Y3S1/AIML/ML Lecture 6' },
+              ],
+            },
+          ],
+        },
+      ],
     },
 
     

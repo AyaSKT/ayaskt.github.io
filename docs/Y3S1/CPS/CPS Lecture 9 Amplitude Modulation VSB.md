@@ -1,4 +1,6 @@
-#### VSB的需求
+# CPS Lecture 9 Amplitude Modulation VSB
+
+## VSB的需求
 -   DSB信号的生成要简单得多，但需要message signal $m(t)$ 两倍的信号带宽。
 -   SSB信号具有频谱效率 (spectrum efficient)，因为它所需带宽更少，但精确生成SSB信号相当困难。
     -   通常，消息信号 $m(t)$ 必须在直流附近有一个零点 (null)。
@@ -18,7 +20,7 @@
     -   磁共振成像 (Magnetic Resonance Imaging, MRI)，用于减少需要采集的数据量。
 
 ![](Assests/Pasted%20image%2020251121112638.png)
-#### VSB Modulation
+## VSB Modulation
 -   VSB 信号的生成采用标准 AM 或 DSB-SC 调制：
 
 $$
@@ -38,12 +40,12 @@ $$
 -   与 SSB 的锐截止滤波器不同，VSB 滤波器是渐变截止滤波器，更易于实现。
 ![](Assests/Pasted%20image%2020251121113106.png)
 
-#### VSB Demodulation
+## VSB Demodulation
 Baseband signal可以被一个有恰当的VSB filter $H_0(f)$ 同步检波器精确还原。
 如果载波足够大，baseband signal甚至可以被包络检波还原。
 ![](Assests/Pasted%20image%2020251121135846.png)
 
-#### VSB Shaping Filter
+## VSB Shaping Filter
 需要通过同步解调 (synchronous demodulation) 从接收到的 VSB 信号中恢复出原始消息信号 $m(t)$。
 
 ## 解调过程
@@ -143,7 +145,7 @@ $$
 
 **结构解读**：此式表明 VSB 信号是**同相分量** ($m(t)\cos$) 和**正交分量** ($m_v(t)\sin$) 的正交合成。
 
-#### VSB 与 SSB 的对比
+## VSB 与 SSB 的对比
 
 -   **共同点**：SSB 和 VSB 调制信号具有相同的**正交形式**。
 -   **核心区别**：
@@ -155,7 +157,7 @@ $$
 -   横轴频率 $f$ 上标注了关键点：$f_c - f_v$, $f_c$, $f_c + f_v$, $f_c + W$。
 -   该图像直观反映了 VSB 滤波器对一个边带（如下边带 LSB）进行部分抑制（残留），而对另一个边带（如上边带 USB）予以保留的特性。滤波器的过渡带（$f_c$ 到 $f_c+f_v$）是实现 VSB 的关键。
 
-#### VSB Signal Generation
+## VSB Signal Generation
 ![](Assests/Pasted%20image%2020251121165014.png)
 -   SSB 和 VSB 的时域表达式具有相似性：
 

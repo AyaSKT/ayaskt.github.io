@@ -1,3 +1,5 @@
+# CPS Lecture 19 Noise in Digital Modulation
+
 ## BER & SNR
 
 ### Bit Error Rate (BER)
@@ -46,7 +48,7 @@
 - 常用于比较不同调制方式在 AWGN 信道下的 BER 性能。
 
 
----
+
 ## 噪声中的单脉冲检测
 
 ### 接收信号模型
@@ -366,4 +368,3 @@ $$
 - $h(t)$：矩形脉冲成形函数
 
 
-$$Price ( \lim_{\Delta 五花肉 \rightarrow 0} 干锅) = 40 元$$

@@ -1,4 +1,5 @@
-# 高级数据预处理与特征选择 Advanced Data Processing & Feature Selection
+# ML Lecture 4 Part II Dimension Reduction
+
 ## 高级数据预处理：降维 Dimension Reduction
 - **定义**: 利用数学或统计方法将高维数据转换为低维表示 。
 - **目的**: 尽可能保留原始数据关键信息，降低复杂性，提高效率 。

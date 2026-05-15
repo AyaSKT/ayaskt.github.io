@@ -1,5 +1,6 @@
+# ML Lecture 3 Part I Model Training Basics
 
----
+
 ## ML 模型训练中的基础概念
 ### 监督学习流程 Supervised Learning Flow
 ![](Assets/Pasted%20image%2020251205102351.png)
@@ -202,7 +203,7 @@ MBGD 是 BGD 和 SGD 的一个结合，故
 - **所需内存较少；**
 - **收敛速度较快。**
 
----
+
 ## ML 模型评估中的基础概念
 ### 训练数据与测试数据 Training & Test Data
 在机器学习中，数据集通常被划分为**训练集和测试集**。

@@ -1,7 +1,6 @@
+# ML Lecture 3 Part II Data Preparation
 
-怎么lecture3这么多...
 
----
 ## 数据准备 Data Preparation
 ### 概览 Overview
 原始数据可能存在的问题
@@ -93,7 +92,7 @@ Z 分数表示该数据点与均值之间相差了多少个标准差。
 | **逻辑**不一致 (Inconsistent **logic**)  | 年龄 “150 岁” 或 “-5 岁”              | 基于业务规则进行修正（例如：截断至合理范围）                           |
 | **数值**不一致 (Inconsistent **values**) | 同一个人的年龄不同                        | 移除样本（如果占比少于 5%）<br>根据实际情况选择一个选项（例如：保留来自权威来源的数据等） |
 
----
+
 ## 数据变换：归一化、标准化、幂变换 Data Transform: Normalization, Standardization, Power Transform  
 **数据变换 Data Transform**就是把数据转换成更接近高斯分布或其他更易学习的形式。
 - 数据归一化 Normalization；数据标准化 Standardization。
@@ -184,7 +183,7 @@ $$
 使数据分布更接近高斯分布；
 - 许多机器学习模型在接近高斯分布的数据上表现更好。
 
----
+
 ## 为模型评估构建训练集与测试集 Construct Training / Test Sets for Model Evaluation
 常用于构建训练集和测试集的方法：
 - 单一划分 A single training and test set

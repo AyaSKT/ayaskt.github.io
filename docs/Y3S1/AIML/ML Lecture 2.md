@@ -1,7 +1,9 @@
+# ML Lecture 2 Machine Learning Fundamentals
+
 传统编程 vs ML
 ![](Assets/Pasted%20image%2020251204135330.png)
 
----
+
 ## ML 中的基础概念
 ### 数据集 Dataset
 - 代表一组数据的集合。
@@ -39,7 +41,7 @@
 标签是模型需要预测的那个值。
 在水果的例子中，标签就是水果的**名字**，比如 apple、orange、banana 等。
 
----
+
 ## 监督学习中的基本概念
 
 ### 监督学习 Supervised Learning
@@ -84,7 +86,7 @@
 
 由于没有标签，无监督学习相较于监督学习更具挑战性。
 
----
+
 ## 把输入映射到输出：数据表示 Mapping Inputs to Outputs: Data Representation
 
 ### ML 流程 ML Procedure
@@ -147,7 +149,7 @@ Dummy Encoding 使用 $k-1$ 位二进制变量。而不是 $k$ 位二进制变�
 
 （其实就是使不使用全0向量的区别（））
 
----
+
 ## 把输入映射到输出：参数化机器学习 Mapping Inputs to Outputs: Parametric ML
 ### 参数化模型 Parametric Model
 - 参数化模型把模型简化为一种已知形式的函数（例如一条直线），用来刻画输入和输出之间的关系。
@@ -183,7 +185,7 @@ $$
 - 只有在“因变量与自变量之间是线性关系”这一假设成立时才有效；
 - 对 **离群点（outliers）** 比较敏感。
 
----
+
 ## 把输入映射到输出：非参数化机器学习 Mapping Inputs to Outputs: Non-parametric ML
 ### 非参数化模型 Non-parametric Model
 - **非参数化模型**不会对模型的形式做很强的假设。
@@ -248,7 +250,7 @@ $K$ 被称为 KNN 的**超参数（hyperparameter）**，在训练前需要预�
 4. **平方根经验法（Square Root Method）：**  
     将 $K$ 设为训练集中样本数的平方根。
 
----
+
 ## 把输入映射到输出：评估输出 Mapping Inputs to Outputs: Evaluate Output
 
 **预测与预测误差**

@@ -1,3 +1,5 @@
+# CPS Lecture 16 & 17 Analog to Digital Conversion
+
 将模拟信号转换为数字信号的步骤
 - Sampling 采样
 - Quantization 量化
@@ -51,12 +53,10 @@ $$
 代入前一个方程，我们得到：
 
 $$
-
 X_{\delta}(f) = X(f) * \frac{1}{T_s} \sum_{n=-\infty}^{\infty} \delta\left(f - \frac{n}{T_s}\right)
 $$
 
 $$
-
 = \frac{1}{T_s} \sum_{n=-\infty}^{\infty} X\left(f - \frac{n}{T_s}\right)
 $$
 
