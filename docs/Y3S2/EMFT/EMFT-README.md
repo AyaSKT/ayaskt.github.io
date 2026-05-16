@@ -38,7 +38,8 @@
 
 - [EMFT Chapter 6: Static Magnetic Fields](EMFT%20Chapter%206.md)
 - [EMFT Chapter 7: Time-Varying Fields and Maxwell’s Equations](EMFT%20Chapter%207.md)
-- [EMFT Chapter 8: Plane Electromagnetic Waves](EMFT%20Chapter%208.md)
+- [EMFT Chapter 8: Plane Electromagnetic Waves Part I](EMFT%20Chapter%208%20P%20I.md)
+- [EMFT Chapter 8: Plane Electromagnetic Waves Part II](EMFT%20Chapter%208%20P%20II.md)
 - [EMFT Chapter 9: Theory and Applications of Transmission Lines](EMFT%20Chapter%209.md)
 - [EMFT Chapter 10: Waveguides and Cavity Resonators](EMFT%20Chapter%2010.md)
 - [EMFT Chapter 11: Antennas and Radiating Systems](EMFT%20Chapter%2011.md)
