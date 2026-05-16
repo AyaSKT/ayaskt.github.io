@@ -2,6 +2,7 @@ import Layout from './Layout.vue'
 import DefaultTheme from 'vitepress/theme'
 import { watch } from 'vue'
 import './style/index.css'
+import { setupSolutionCollapse } from './solution-collapse'
 
 import MouseClick from './components/MouseClick.vue'
 
@@ -33,6 +34,9 @@ export default {
         { immediate: true },
       )
     }
+
+    // Solution 折叠功能
+    setupSolutionCollapse(router)
 
     app.component('Mycomponent' , Mycomponent)
     app.component('Confetti' , Confetti)

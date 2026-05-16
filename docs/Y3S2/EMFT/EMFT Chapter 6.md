@@ -35,8 +35,19 @@
   - [6-5-1 磁场强度与一般形式的安培环路定理](#6-5-1-磁场强度与一般形式的安培环路定理)
   - [6-5-2 相对磁导率 Relative Permeability](#6-5-2-相对磁导率-relative-permeability)
 - [6-6 静磁场的边界条件 Boundary Conditions for Magnetostatic Fields](#6-6-静磁场的边界条件-boundary-conditions-for-magnetostatic-fields)
+  - [6-6-1 磁感应强度的边界条件](#6-6-1-磁感应强度的边界条件)
+  - [6-6-2 磁场强度的边界条件](#6-6-2-磁场强度的边界条件)
+  - [6-6-3 磁矢位的边界条件](#6-6-3-磁矢位的边界条件)
 - [6-7 电感与电感器 Inductances and Inductors](#6-7-电感与电感器-inductances-and-inductors)
+  - [6-7-1 磁通与磁链 Magnetic Flux \& Megnatic Linkage](#6-7-1-磁通与磁链-magnetic-flux--megnatic-linkage)
+  - [6-7-2 自感 Self-Inductance](#6-7-2-自感-self-inductance)
+  - [6-7-3 互感 Mutual Inductance](#6-7-3-互感-mutual-inductance)
+  - [6-7-4 Newman 公式的证明 Proof of the Newman’s Formula](#6-7-4-newman-公式的证明-proof-of-the-newmans-formula)
 - [6-8 磁场能 Magnetic Energy](#6-8-磁场能-magnetic-energy)
+  - [6-8-1 磁场分布求解磁场能](#6-8-1-磁场分布求解磁场能)
+  - [6-8-2 磁矢位求磁场能](#6-8-2-磁矢位求磁场能)
+  - [6-8-3 电感求磁场能](#6-8-3-电感求磁场能)
+- [总结 Summary](#总结-summary)
 
 
 ## 6-1 毕奥-萨伐尔定律 The Biot-Savart Law
@@ -45,7 +56,7 @@
 
 ### 6-1-1 毕奥-萨伐尔定律
 
-![alt text](<EMFT Chapter 6.attachments/1778849075097.png>)
+![alt text](<EMFT Chapter 6.attachments/1778922380235.png>)
 
 ::: definition 
 
@@ -119,7 +130,7 @@ $$
 
 设有限长直线段电流为 $I$，场点 $M$ 到导线的垂直距离为 $\rho$。从导线下端、上端分别指向 $M$ 的矢量与电流方向之间的夹角记为 $\theta_1$、$\theta_2$。
 
-![alt text](<EMFT Chapter 6.attachments/1778851254227.png>)
+![alt text](<EMFT Chapter 6.attachments/1778922450311.png>)
 
 :::
 
@@ -193,7 +204,7 @@ $$
 ::: stem
 无限大电流薄片位于 $xy$ 平面，面电流密度 $\vec{K} = \vec{e}_z K_{s0}$（单位： $\mathrm{A/m}$）。建立坐标系后，利用对称性选择矩形安培环路，计算空间各处的磁感应强度分布。
 
-![alt text](<EMFT Chapter 6.attachments/1778852368979.png>)
+![alt text](<EMFT Chapter 6.attachments/1778922486950.png>)
 
 :::
 ::: solution
@@ -226,7 +237,8 @@ $$
 ::: stem
 无限长同轴电缆内导体半径为 $a$，外导体内半径为 $b$、外半径为 $c$，电流 $I$ 沿轴向流动（内导体流出，外导体返回）。选择圆柱坐标系，分区域应用安培环路定理求解磁场分布。
 
-![alt text](<EMFT Chapter 6.attachments/1778852406092.png>)
+![alt text](<EMFT Chapter 6.attachments/1778922623037.png>)
+
 :::
 ::: solution
 
@@ -863,10 +875,52 @@ $$
 
 ## 6-6 静磁场的边界条件 Boundary Conditions for Magnetostatic Fields
 
+### 6-6-1 磁感应强度的边界条件
+
+---
+
+### 6-6-2 磁场强度的边界条件
+
+---
+
+### 6-6-3 磁矢位的边界条件
+
+
 
 
 ## 6-7 电感与电感器 Inductances and Inductors
 
+### 6-7-1 磁通与磁链 Magnetic Flux & Megnatic Linkage
+
+---
+
+### 6-7-2 自感 Self-Inductance
+
+---
+
+### 6-7-3 互感 Mutual Inductance
+
+---
+
+### 6-7-4 Newman 公式的证明 Proof of the Newman’s Formula
 
 
 ## 6-8 磁场能 Magnetic Energy
+
+### 6-8-1 磁场分布求解磁场能
+
+---
+
+### 6-8-2 磁矢位求磁场能
+
+---
+
+### 6-8-3 电感求磁场能
+
+
+
+
+## 总结 Summary
+
+
+

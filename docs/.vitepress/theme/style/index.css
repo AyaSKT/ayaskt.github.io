@@ -119,6 +119,60 @@
   color: #C2C7F8;
 }
 
+/* Solution 折叠功能 */
+.example-solution > .example-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.solution-content {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+}
+
+.example-solution:not([data-collapsed]) .solution-content {
+  max-height: 6000px;
+}
+
+.solution-toggle {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 0.85em;
+  padding: 2px 6px;
+  line-height: 1;
+  opacity: 0.5;
+  color: inherit;
+  font-family: inherit;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.solution-toggle:hover {
+  opacity: 1;
+}
+
+/* 移动端竖屏适配 */
+@media (max-width: 768px) {
+  .example-solution > .example-section-title {
+    font-size: 0.9em;
+  }
+
+  .solution-toggle {
+    font-size: 0.8em;
+    padding: 2px 4px;
+  }
+
+  .example-stem,
+  .example-solution {
+    padding: 10px 12px;
+    font-size: 0.92em;
+  }
+}
+
 /* ================================================================
    Definition Container（定义容器）::: definition
    ================================================================ */

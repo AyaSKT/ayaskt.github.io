@@ -328,9 +328,9 @@ export default defineConfig({
         validate: (p) => /^solution(\s|$)/.test(p),
         render(tokens, idx) {
           if (tokens[idx].nesting === 1) {
-            return '<div class="example-solution"><p class="example-section-title">SOLUTION</p>\n'
+            return '<div class="example-solution" data-collapsed><p class="example-section-title">SOLUTION <button class="solution-toggle" aria-label="展开/收起">[展开答案]</button></p><div class="solution-content">\n'
           }
-          return '</div>\n'
+          return '</div></div>\n'
         },
       })
 
