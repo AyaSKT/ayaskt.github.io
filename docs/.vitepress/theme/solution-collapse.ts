@@ -43,12 +43,12 @@ function initSolutionCollapse() {
 }
 
 export function setupSolutionCollapse(router: Router) {
-  // 使用 watch 监听路由变化，flush: 'post' 确保 DOM 更新完成后再执行
+  if (typeof document === 'undefined') return
+
   watch(
     () => router.route.data.relativePath,
     () => {
       nextTick(() => {
-        // 额外延迟确保水合完成
         setTimeout(initSolutionCollapse, 50)
       })
     },
