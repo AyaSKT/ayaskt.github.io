@@ -7,6 +7,21 @@
         backdrop-filter: blur(10px);
     }
 
+    /* 移除导航栏滚动后出现的底部分隔线 */
+    .VPNavBar,
+    .VPNavBar.screen-open {
+        border-bottom: none !important;
+    }
+
+    .VPNavBar .divider,
+    .VPNavBar .divider-line {
+        background-color: transparent !important;
+    }
+
+    .VPNavBarTitle.has-sidebar .title {
+        border-bottom-color: transparent !important;
+    }
+
     /* 搜索框透明 */
     .DocSearch-Button {
         background-color: rgba(255, 255, 255, 0);

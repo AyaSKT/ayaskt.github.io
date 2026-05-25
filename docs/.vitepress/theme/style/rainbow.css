@@ -1,53 +1,44 @@
-/* 主页渐变动画（98CBEA / C2C7F8 / F1DCE4）
- * 使用 @property 将颜色变量注册为原生 <color> 类型，
- * 浏览器可直接插值，无需 101 帧 color-mix() 逐帧计算。
- */
-
-@property --rainbow-prev {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #98CBEA;
-}
-
-@property --rainbow-next {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #F1DCE4;
-}
-
-@keyframes rainbow {
-  0%, 100% {
-    --rainbow-prev: #98CBEA;
-    --rainbow-next: #F1DCE4;
-  }
-  50% {
-    --rainbow-prev: #F1DCE4;
-    --rainbow-next: #98CBEA;
-  }
-}
+@import './home-hero-gradient-data.css';
 
 :root {
-  --rainbow-prev: #98CBEA;
-  --rainbow-next: #F1DCE4;
-  --rainbow-mid: #C2C7F8;
-  --rainbow-angle: 140deg;
-  /* animation: rainbow 18s linear infinite; */
-
   /* hero标题渐变色 */
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: -webkit-linear-gradient(
-    var(--rainbow-angle),
-    var(--rainbow-prev) 0%,
-    var(--rainbow-mid) 52%,
-    var(--rainbow-next)
+    var(--home-hero-gradient-angle),
+    var(--home-hero-gradient-start) 0%,
+    var(--home-hero-gradient-middle) 52%,
+    var(--home-hero-gradient-end)
   );
 
   /* hero logo背景渐变色 */
   --vp-home-hero-image-background-image: linear-gradient(
-    var(--rainbow-angle),
-    var(--rainbow-prev) 0%,
-    var(--rainbow-mid) 52%,
-    var(--rainbow-next)
+    var(--home-hero-gradient-angle),
+    var(--home-hero-gradient-start) 0%,
+    var(--home-hero-gradient-middle) 52%,
+    var(--home-hero-gradient-end)
   );
   --vp-home-hero-image-filter: blur(44px);
+}
+
+.VPHome .VPHero .name,
+.VPHome .VPHero .image-bg {
+  animation: homeHeroGradient var(--home-hero-gradient-duration) linear infinite;
+}
+
+.VPHome .VPHero .name {
+  --vp-home-hero-name-background: -webkit-linear-gradient(
+    var(--home-hero-gradient-angle),
+    var(--home-hero-gradient-start) 0%,
+    var(--home-hero-gradient-middle) 52%,
+    var(--home-hero-gradient-end)
+  );
+}
+
+.VPHome .VPHero .image-bg {
+  --vp-home-hero-image-background-image: linear-gradient(
+    var(--home-hero-gradient-angle),
+    var(--home-hero-gradient-start) 0%,
+    var(--home-hero-gradient-middle) 52%,
+    var(--home-hero-gradient-end)
+  );
 }

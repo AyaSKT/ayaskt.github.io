@@ -1,0 +1,32 @@
+/* 首页 hero 渐变动画数据：标题文字与头像光晕共用同一组颜色。 */
+
+@property --home-hero-gradient-start {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #98CBEA;
+}
+
+@property --home-hero-gradient-end {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #F1DCE4;
+}
+
+:root {
+  --home-hero-gradient-start: #98CBEA;
+  --home-hero-gradient-middle: #C2C7F8;
+  --home-hero-gradient-end: #F1DCE4;
+  --home-hero-gradient-angle: 140deg;
+  --home-hero-gradient-duration: 12s;
+}
+
+@keyframes homeHeroGradient {
+  0%, 100% {
+    --home-hero-gradient-start: #98CBEA;
+    --home-hero-gradient-end: #F1DCE4;
+  }
+  50% {
+    --home-hero-gradient-start: #F1DCE4;
+    --home-hero-gradient-end: #98CBEA;
+  }
+}

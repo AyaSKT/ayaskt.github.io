@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, onMounted, onBeforeUnmount, nextTick, watch } from 'vue'
+import { computed, onMounted, onBeforeUnmount, nextTick, ref, watch } from 'vue'
 import { useData, withBase } from 'vitepress'
 
 interface CourseItem {
@@ -24,6 +24,7 @@ interface CourseGroup {
 
 const { frontmatter } = useData()
 const HERO_STACKED_MEDIA = '(max-width: 960px)'
+const actionsRoot = ref<HTMLElement | null>(null)
 
 const groups = computed<CourseGroup[]>(() => {
   const raw: CourseGroup[] = (frontmatter.value as any)?.homeCourseGroups ?? []
@@ -57,9 +58,9 @@ function resolveCourseLink(link: string) {
 }
 
 function updateCircleWrap() {
-  if (typeof window === 'undefined') return
+  if (typeof window === 'undefined' || !actionsRoot.value) return
 
-  const rows = document.querySelectorAll<HTMLElement>('.home-course-row')
+  const rows = actionsRoot.value.querySelectorAll<HTMLElement>('.home-course-row')
 
   if (window.matchMedia(HERO_STACKED_MEDIA).matches) {
     rows.forEach((row) => row.style.removeProperty('--row-width'))
@@ -99,35 +100,60 @@ function updateCircleWrap() {
 
 let resizeObserver: ResizeObserver | null = null
 let resizeHandler: (() => void) | null = null
+let wrapFrame = 0
+let circleWrapSetup = false
+
+function scheduleCircleWrap() {
+  if (typeof window === 'undefined') return
+
+  if (wrapFrame) return
+  wrapFrame = window.requestAnimationFrame(() => {
+    wrapFrame = 0
+    updateCircleWrap()
+  })
+}
+
+function refreshCircleWrapObserver() {
+  if (typeof window === 'undefined' || typeof ResizeObserver === 'undefined') return
+
+  resizeObserver?.disconnect()
+  resizeObserver = null
+
+  if (!actionsRoot.value) return
+
+  const image =
+    document.querySelector('.hero-image-src') ||
+    document.querySelector('.VPHome .VPHero .image-src')
+
+  resizeObserver = new ResizeObserver(scheduleCircleWrap)
+
+  if (image) resizeObserver.observe(image)
+  resizeObserver.observe(actionsRoot.value)
+}
 
 function setupCircleWrap() {
   if (typeof window === 'undefined') return
 
-  resizeHandler = () => updateCircleWrap()
-  window.addEventListener('resize', resizeHandler)
-
-  if (typeof ResizeObserver !== 'undefined') {
-    const image =
-      document.querySelector('.hero-image-src') ||
-      document.querySelector('.VPHome .VPHero .image-src')
-    const actionsRoot = document.querySelector('.home-course-actions')
-
-    resizeObserver = new ResizeObserver(() => {
-      requestAnimationFrame(updateCircleWrap)
-    })
-
-    if (image) resizeObserver.observe(image)
-    if (actionsRoot) resizeObserver.observe(actionsRoot)
+  if (!circleWrapSetup) {
+    resizeHandler = () => scheduleCircleWrap()
+    window.addEventListener('resize', resizeHandler)
+    circleWrapSetup = true
   }
 
-  nextTick(() => updateCircleWrap())
+  refreshCircleWrapObserver()
+  nextTick(scheduleCircleWrap)
 }
 
 function teardownCircleWrap() {
+  if (wrapFrame) {
+    window.cancelAnimationFrame(wrapFrame)
+    wrapFrame = 0
+  }
   if (resizeHandler) {
     window.removeEventListener('resize', resizeHandler)
     resizeHandler = null
   }
+  circleWrapSetup = false
   if (resizeObserver) {
     resizeObserver.disconnect()
     resizeObserver = null
@@ -144,17 +170,23 @@ onBeforeUnmount(() => {
 
 watch(
   () => frontmatter.value?.homeCourseGroups,
-  () => nextTick(updateCircleWrap)
+  () => nextTick(() => {
+    refreshCircleWrapObserver()
+    scheduleCircleWrap()
+  })
 )
 
 watch(
   () => (frontmatter.value as any)?.page?.relativePath,
-  () => nextTick(updateCircleWrap)
+  () => nextTick(() => {
+    refreshCircleWrapObserver()
+    scheduleCircleWrap()
+  })
 )
 </script>
 
 <template>
-  <section v-if="groups.length" class="home-course-actions">
+  <section v-if="groups.length" ref="actionsRoot" class="home-course-actions">
     <div
       v-for="group in groups"
       :key="group.id"
