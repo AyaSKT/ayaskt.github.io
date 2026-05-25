@@ -73,6 +73,8 @@ $$
 
 ![alt text](<EMFT Chapter 7.attachments/faraday-oriented-surface.jpg>)
 
+---
+
 ### 7-1-2 感应电场 Induced Electric Field
 
 感应电动势也可以写成电场沿闭合路径的环流：
@@ -137,6 +139,8 @@ $$
 $$
 
 其中 $\vec E_c$ 来自电荷，$\vec E_{\mathrm{in}}$ 来自变化的磁场。
+
+---
 
 ### 7-1-3 运动电动势 Motional EMF
 
@@ -313,6 +317,8 @@ $$
 它在积分意义上补上了传导电流的连续性。
 ::::
 
+---
+
 ### 7-2-2 麦克斯韦方程组的微分形式与积分形式
 
 :::: definition
@@ -352,6 +358,8 @@ $$
 $$
 \nabla\cdot\vec J_f=-\frac{\partial\rho_f}{\partial t}
 $$
+
+---
 
 ### 7-2-3 线性各向同性介质中的形式
 
@@ -411,6 +419,8 @@ $$
 \vec e_n\cdot(\vec J_1-\vec J_2)
 =-\frac{\partial\rho_s}{\partial t}
 $$
+
+---
 
 ### 7-3-2 理想介质界面与理想导体表面
 
@@ -556,6 +566,8 @@ $$
 ::::
 
 与静态场相比，这里多了 $-\dfrac{\partial\vec A}{\partial t}$ 项。因此时变场中的电场不再只由标量电势决定。
+
+---
 
 ### 7-5-2 洛伦兹规范 Lorenz Gauge
 
@@ -729,6 +741,8 @@ $$
 代回复矢量定义可验证，乘回 $e^{j\omega t}$ 并取实部后，正好回到原来的瞬时电场。
 ::::
 
+---
+
 ### 7-6-2 复数形式的麦克斯韦方程与亥姆霍兹方程
 
 在时谐场中，每一个场量都写成
@@ -811,6 +825,8 @@ $$
 $$
 \nabla\cdot\dot{\vec A}=-j\omega\mu\varepsilon\dot\varphi
 $$
+
+---
 
 ### 7-6-3 复介电常数与损耗角正切
 
