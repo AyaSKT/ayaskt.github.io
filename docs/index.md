@@ -21,50 +21,54 @@ hero:
       boxShadow: 0 10px 40px rgba(0,0,0,0.25)
       object-fit: cover;
 
+  # actions intentionally empty — buttons rendered by HomeCourseActions.vue
 
+homeCourseGroups:
+  - id: y3s2
+    label: Y3S2
+    title: 第三学年第二学期
+    tone: "#5fa8cf"
+    variant: brand
+    rows:
+      - items:
+          - text: 电磁场与波 EMFT
+            link: /Y3S2/EMFT/EMFT-README.md
+          - text: 数字信号处理 DSP
+            link: /Y3S2/DSP/DSP-README.md
+      - items:
+          - text: 通信电路设计 CCD
+            link: /Y3S2/CCD/CCD-README.md
+            variant: alt
+          - text: 工程项目管理与财务 EPMF
+            link: /Y3S2/EPMF/EPMF-README.md
+            variant: alt
 
-  actions:
+  - id: y3s1
+    label: Y3S1
+    title: 第三学年第一学期
+    tone: "#8b8fe8"
+    variant: alt
+    rows:
+      - items:
+          - text: 通信原理与系统 CPS
+            link: /Y3S1/CPS/CPS-README.md
+          - text: 人工智能与机器学习 AI&ML
+            link: /Y3S1/AIML/AIML-README.md
 
-    # - theme: brand
-    #   text: 课外学习笔记目录
-    #   link: /Guides/Outclass
-    
-    - theme: brand
-      text: Y3S2 电磁场与波 EFMT
-      link: /Y3S2/EMFT/EMFT-README.md
-
-    - theme: brand
-      text: Y3S2 数字信号处理 DSP
-      link: /Y3S2/DSP/DSP-README.md
-
-    - theme: brand
-      text: Y3S2 通信电路设计 CCD
-      link: /Y3S2/CCD/CCD-README.md
-
-    - theme: brand
-      text: Y3S2 工程项目管理与财务 EPMF
-      link: /Y3S2/EPMF/EPMF-README.md
-  
-    - theme: alt
-      text: Y3S1 通信原理与系统 CPS
-      link: /Y3S1/CPS/CPS-README.md
-
-    - theme: alt
-      text: Y3S1 人工智能与机器学习 AI&ML
-      link: /Y3S1/AIML/AIML-README.md
-
-
-    - theme: alt
-      text: Y2S2 嵌入式处理器 EP (DT5EDU)
-      link: https://mp.weixin.qq.com/s/Xqwg9KBZHkuYoXQAH-DfGw
-
-    - theme: alt
-      text: Y2S1 电路分析与设计 CAD (DT5EDU)
-      link: https://mp.weixin.qq.com/s/-_oFpk5asMRE_D6sqlMCsw
-
-    - theme: alt
-      text: Y1S2 微电子系统 MS (DT5EDU)
-      link: https://mp.weixin.qq.com/s/-9nZpf5RWmMm46bBMuBrLg
+  - id: y1y2
+    label: Y1 & Y2
+    title: 早期课程 / 外部资料
+    tone: "#ad8bc8"
+    variant: alt
+    rows:
+      - items:
+          - text: 嵌入式处理器 EP (DT5EDU)
+            link: https://mp.weixin.qq.com/s/Xqwg9KBZHkuYoXQAH-DfGw
+          - text: 电路分析与设计 CAD (DT5EDU)
+            link: https://mp.weixin.qq.com/s/-_oFpk5asMRE_D6sqlMCsw
+      - items:
+          - text: 微电子系统 MS (DT5EDU)
+            link: https://mp.weixin.qq.com/s/-9nZpf5RWmMm46bBMuBrLg
 
 
 features:
@@ -81,7 +85,7 @@ features:
     dark: /3.PNG
     light: /3.PNG
   title: Neuro Sama
-  details: 来看看世界第一的AI主播！“爱，死亡与机器人。”
+  details: 来看看世界第一的AI主播！"爱，死亡与机器人。"
   link: https://space.bilibili.com/3546729368520811?spm_id_from=333.337.0.0
   linkText: Bilibili 主页
 

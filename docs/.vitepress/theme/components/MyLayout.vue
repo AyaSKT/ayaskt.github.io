@@ -7,6 +7,7 @@ import MouseClick from './MouseClick.vue'
 import GiscusComment from './GiscusComment.vue' // 评论模块
 import BackToTop from './backtotop.vue'
 import HeroHitokoto from './HeroHitokoto.vue'
+import HomeCourseActions from './HomeCourseActions.vue'
 import PageTransition from './PageTransition.vue'
 
 const { frontmatter, isDark } = useData()
@@ -64,6 +65,7 @@ const heroImageLink = computed(() => {
     </template>
 
     <template #home-hero-info-after>
+      <HomeCourseActions />
       <HeroHitokoto class="mobile-hitokoto" />
     </template>
 
