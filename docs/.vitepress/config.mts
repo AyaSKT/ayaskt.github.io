@@ -482,9 +482,7 @@ export default defineConfig({
             { text: 'Ch 6 静磁场', link: '/Y3S2/EMFT/EMFT Chapter 6' },
             { text: 'Ch 7 时变场与 Maxwell 方程组', link: '/Y3S2/EMFT/EMFT Chapter 7' },
             { text: 'Ch 8 I 平面电磁波 (上)', link: '/Y3S2/EMFT/EMFT Chapter 8 P I' },
-            { text: 'Ch 8 II 平面电磁波 (下)', link: '/Y3S2/EMFT/EMFT Chapter 8 P II' },
-            { text: 'Ch 9 传输线', link: '/Y3S2/EMFT/EMFT Chapter 9' },
-            { text: 'Ch 10 波导与谐振腔', link: '/Y3S2/EMFT/EMFT Chapter 10' }
+            { text: 'Ch 8 II 平面电磁波 (下)', link: '/Y3S2/EMFT/EMFT Chapter 8 P II' }
           ]
         }
       ],
