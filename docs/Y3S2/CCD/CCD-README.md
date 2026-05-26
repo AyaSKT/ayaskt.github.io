@@ -1,6 +1,6 @@
 # CCD 通信电路设计笔记 Introduction & Outline
 
-**请你随意，即便不必认真。**
+**再下一场太阳雨吧。**
 
 ## Communication Circuit Design (UESTC 3029 / UESTCHN3004)
 
@@ -26,6 +26,7 @@
 
 ### Part 1 - Week 6 - Electronic Comms, Semiconductors, Transistors, Amplifiers
 
+- [Lecture 1: Introduction](Part%201/CCD%20Lecture%201%20Introduction.md)
 - [Lecture 2: Electronic Communications](Part%201/CCD%20Lecture%202%20Electronic%20Communications.md)
 - [Lecture 2b: Semiconductors Basics](Part%201/CCD%20Lecture%202b%20Semiconductors%20Basics.md)
 - [Lecture 3-4: Transistors](Part%201/CCD%20Lecture%203-4%20Transistors.md)
@@ -37,3 +38,5 @@
 - [Lecture 8: LC Circuits and Matching Networks](Part%202/CCD%20Lecture%208%20LC%20Circuits%20and%20Matching%20Networks.md)
 - [Lecture 9: Oscillators](Part%202/CCD%20Lecture%209%20Oscillators.md)
 - [Lecture 10: Revision](Part%202/CCD%20Lecture%2010%20Revision.md)
+
+![alt text](CCD-README.attachments/1779782020880.PNG)

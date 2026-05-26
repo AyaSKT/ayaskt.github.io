@@ -495,9 +495,10 @@ export default defineConfig({
           items: [
             { text: 'Introduction', link: '/Y3S2/CCD/CCD-README.md' },
             {
-              text: 'Part 1',
-              collapsed: false,
-              items: [
+            text: 'Part 1',
+            collapsed: false,
+            items: [
+                { text: 'Lec 1 导论', link: '/Y3S2/CCD/Part 1/CCD Lecture 1 Introduction' },
                 { text: 'Lec 2 电子通信', link: '/Y3S2/CCD/Part 1/CCD Lecture 2 Electronic Communications' },
                 { text: 'Lec 2b 半导体基础', link: '/Y3S2/CCD/Part 1/CCD Lecture 2b Semiconductors Basics' },
                 { text: 'Lec 3/4 晶体管', link: '/Y3S2/CCD/Part 1/CCD Lecture 3-4 Transistors' },
