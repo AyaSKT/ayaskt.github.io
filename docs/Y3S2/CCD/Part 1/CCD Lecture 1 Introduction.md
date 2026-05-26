@@ -5,7 +5,7 @@
 
 <div align="right">——Neuro-Sama《LIFE》</div>
 
-![alt text](<../../EMFT/EMFT Chapter 8 P II.attachments/1778848085341.JPG>)
+![alt text](<CCD Lecture 1 Introduction.attachments/1779783811122.PNG>)
 
 
 
