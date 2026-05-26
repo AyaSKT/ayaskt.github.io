@@ -1,8 +1,14 @@
 # Lecture 2b Semiconductors and PN Junction 半导体与 PN 结
 
-**时人不识凌云木，直待凌云始道高。**
+**今日は歩いてみようよ，上を向いて歩いた；**  
+**今天我们一起出去走一走吧，抬起头来缓缓迈步；**  
 
-![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/pn-junction.jpg>)
+**花が夜空に咲いてる，夏の匂いがしてた。**  
+**烟花绽放在夜空之中，散发着阵阵夏日气息。**  
+
+<div align="right">——ヨルシカ《逃亡 (Escape)》</div>
+
+![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/1779784870101.JPG>)
 
 ## 章节目录
 
@@ -14,6 +20,9 @@
 - [2b-5 PN 结 PN Junction](#2b-5-pn-结-pn-junction)
 - [2b-6 二极管 Diode](#2b-6-二极管-diode)
 - [2b-7 二极管偏置 Diode Biasing](#2b-7-二极管偏置-diode-biasing)
+  - [正向偏置 Forward Bias](#正向偏置-forward-bias)
+  - [反向偏置 Reverse Bias](#反向偏置-reverse-bias)
+  - [V-I 特性曲线](#v-i-特性曲线)
 - [2b-8 二极管模型 Diode Models](#2b-8-二极管模型-diode-models)
 - [Summary](#summary)
 

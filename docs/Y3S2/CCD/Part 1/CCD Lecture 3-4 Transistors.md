@@ -1,8 +1,11 @@
 # Lecture 3-4 Transistors 晶体管
 
-**同是天涯沦落人，相逢何必曾相识。**
+**艾蜜莉啊艾蜜莉，夕阳照进我心底；**  
+**我要带你去寻找，散落的星星。**  
 
-![alt text](<CCD Lecture 3-4 Transistors.attachments/bjt-structure.jpg>)
+<div align="right">——回春丹《艾蜜莉》</div>
+
+![alt text](<CCD Lecture 3-4 Transistors.attachments/1779784088824.jpg>)
 
 ## 章节目录
 

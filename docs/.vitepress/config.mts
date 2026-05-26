@@ -430,6 +430,13 @@ export default defineConfig({
                 { text: 'Ch 10: FIR 数字滤波器设计', link: '/Y3S2/DSP/DSP Chapter 10' },
               ],
             },
+            {
+              text: 'Block 4: DSP 算法实现',
+              collapsed: false,
+              items: [
+                { text: 'Ch 11: DSP 算法实现 FFT', link: '/Y3S2/DSP/DSP Chapter 11' },
+              ],
+            },
           ],
         },
       ],

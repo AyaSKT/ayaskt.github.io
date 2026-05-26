@@ -49,5 +49,9 @@
 - [Ch 9: IIR 数字滤波器设计 IIR Digital Filter Design](DSP%20Chapter%209.md)
 - [Ch 10: FIR 数字滤波器设计 FIR Digital Filter Design](DSP%20Chapter%2010.md)
 
+### Part IV DSP 算法实现
+
+- [Ch 11: DSP 算法实现 DSP Algorithm Implementation (FFT)](DSP%20Chapter%2011.md)
+
 
 ![alt text](DSP-README.attachments/1773557775504.PNG)

@@ -39,4 +39,4 @@
 - [Lecture 9: Oscillators](Part%202/CCD%20Lecture%209%20Oscillators.md)
 - [Lecture 10: Revision](Part%202/CCD%20Lecture%2010%20Revision.md)
 
-![alt text](CCD-README.attachments/1779782020880.PNG)
+![alt text](CCD-README.attachments/1779785178403.JPG)
