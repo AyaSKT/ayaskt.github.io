@@ -1,14 +1,22 @@
 # Lecture 1 Introduction 电子通信导论
 
-**请你随意，即便不必认真。**
+**What am I to do when you're gone?**  
+**当你离去，我该如何自处？**  
 
-![alt text](<CCD Lecture 1 Introduction.attachments/communication-system.jpg>)
+<div align="right">——Neuro-Sama《LIFE》</div>
+
+![alt text](<../../EMFT/EMFT Chapter 8 P II.attachments/1778848085341.JPG>)
+
+
 
 ## 章节目录
 
 - [章节目录](#章节目录)
 - [1-1 电子通信系统 Electronic Communication System](#1-1-电子通信系统-electronic-communication-system)
 - [1-2 发射机、信道与接收机 Transmitter, Channel and Receiver](#1-2-发射机信道与接收机-transmitter-channel-and-receiver)
+  - [发射机 Transmitter](#发射机-transmitter)
+  - [信道 Channel](#信道-channel)
+  - [接收机 Receiver](#接收机-receiver)
 - [1-3 噪声 Noise](#1-3-噪声-noise)
 - [1-4 增益与衰减 Gain and Attenuation](#1-4-增益与衰减-gain-and-attenuation)
 - [1-5 分贝 Decibel](#1-5-分贝-decibel)
