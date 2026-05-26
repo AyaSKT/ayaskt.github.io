@@ -20,9 +20,9 @@
 - [2b-5 PN 结 PN Junction](#2b-5-pn-结-pn-junction)
 - [2b-6 二极管 Diode](#2b-6-二极管-diode)
 - [2b-7 二极管偏置 Diode Biasing](#2b-7-二极管偏置-diode-biasing)
-  - [正向偏置 Forward Bias](#正向偏置-forward-bias)
-  - [反向偏置 Reverse Bias](#反向偏置-reverse-bias)
-  - [V-I 特性曲线](#v-i-特性曲线)
+  - [2b-7-1 正向偏置 Forward Bias](#2b-7-1-正向偏置-forward-bias)
+  - [2b-7-2 反向偏置 Reverse Bias](#2b-7-2-反向偏置-reverse-bias)
+  - [2b-7-3 V-I 特性曲线](#2b-7-3-v-i-特性曲线)
 - [2b-8 二极管模型 Diode Models](#2b-8-二极管模型-diode-models)
 - [Summary](#summary)
 
@@ -143,7 +143,7 @@ $$
 
 ## 2b-7 二极管偏置 Diode Biasing
 
-### 正向偏置 Forward Bias
+### 2b-7-1 正向偏置 Forward Bias
 
 正向偏置时，电源正端接 p 区，负端接 n 区。外加电压降低势垒，耗尽层变窄。
 
@@ -151,7 +151,7 @@ $$
 
 若外加电压超过势垒电势，电流显著增加。实际电路中通常需要串联电阻限制电流。
 
-### 反向偏置 Reverse Bias
+### 2b-7-2 反向偏置 Reverse Bias
 
 反向偏置时，电源正端接 n 区，负端接 p 区。外加电压增大势垒，耗尽层变宽。
 
@@ -159,7 +159,7 @@ $$
 
 理想情况下反向电流为零。实际二极管会有很小的反向漏电流；若反向电压超过击穿电压，电流会急剧增大。
 
-### V-I 特性曲线
+### 2b-7-3 V-I 特性曲线
 
 ![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/vi-curve.jpg>)
 

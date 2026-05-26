@@ -14,9 +14,9 @@
 - [章节目录](#章节目录)
 - [1-1 电子通信系统 Electronic Communication System](#1-1-电子通信系统-electronic-communication-system)
 - [1-2 发射机、信道与接收机 Transmitter, Channel and Receiver](#1-2-发射机信道与接收机-transmitter-channel-and-receiver)
-  - [发射机 Transmitter](#发射机-transmitter)
-  - [信道 Channel](#信道-channel)
-  - [接收机 Receiver](#接收机-receiver)
+  - [1-2-1 发射机 Transmitter](#1-2-1-发射机-transmitter)
+  - [1-2-2 信道 Channel](#1-2-2-信道-channel)
+  - [1-2-3 接收机 Receiver](#1-2-3-接收机-receiver)
 - [1-3 噪声 Noise](#1-3-噪声-noise)
 - [1-4 增益与衰减 Gain and Attenuation](#1-4-增益与衰减-gain-and-attenuation)
 - [1-5 分贝 Decibel](#1-5-分贝-decibel)
@@ -43,7 +43,7 @@ $$
 
 ## 1-2 发射机、信道与接收机 Transmitter, Channel and Receiver
 
-### 发射机 Transmitter
+### 1-2-1 发射机 Transmitter
 
 发射机负责把原始电信号变成适合信道传输的形式。常见功能包括：
 
@@ -56,7 +56,7 @@ $$
 
 ![alt text](<CCD Lecture 1 Introduction.attachments/system-with-noise.jpg>)
 
-### 信道 Channel
+### 1-2-2 信道 Channel
 
 信道是信号传播的媒介。常见类型如下。
 
@@ -67,7 +67,7 @@ $$
 | 自由空间 Free space | 无线电、红外、可见光通信 | 依靠电磁波传播 |
 | 其他媒介 | 水、地面 | 声呐或低频通信中会出现 |
 
-### 接收机 Receiver
+### 1-2-3 接收机 Receiver
 
 接收机负责从信道中取出信号，并恢复原始信息。接收机中也会用到放大器、振荡器、混频器、滤波器和解调器。
 
