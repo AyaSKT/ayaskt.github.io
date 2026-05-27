@@ -24,6 +24,7 @@
   - [2-2-5 估算活动持续时间 Estimate Activity Durations](#2-2-5-估算活动持续时间-estimate-activity-durations)
   - [2-2-6 制定进度计划 Develop Schedule](#2-2-6-制定进度计划-develop-schedule)
   - [2-2-7 控制进度 Control Schedule](#2-2-7-控制进度-control-schedule)
+- [Block 1 例题 Examples](#block-1-例题-examples)
 
 
 
@@ -713,3 +714,7 @@ $LF = LS + D$（从 0 开始时）
 > - **偏差分析**：确定进度基准与实际进度绩效之间的差异
 > - **趋势分析**：检查项目绩效随时间的变化趋势
 > - **挣值分析**：使用 SV 和 SPI 等指标评估进度绩效
+
+## Block 1 例题 Examples
+
+Lecture 2 的三点估算、关键路径和后半部分选择题已经整理到 [Block 1 例题](<Block 1 Examples.md#lecture-2-project-scope--schedule-management>)。

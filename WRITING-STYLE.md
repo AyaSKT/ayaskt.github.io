@@ -233,10 +233,10 @@ g[n] \xleftrightarrow{DTFT} G(e^{j\omega})
 
 ### 8.2 例题容器
 
-例题直接用 stem + solution，不要在外面再套 example 容器：
+例题直接用 stem + solution，不要在外面再套 example 容器。题号写在 stem 标记上，不要写成题干第一行的粗体 `**Q1.**`：
 
 ```markdown
-:::: stem
+:::: stem Q1
 题干文本，含已知条件和求解目标。
 ::::
 
@@ -245,6 +245,33 @@ g[n] \xleftrightarrow{DTFT} G(e^{j\omega})
 $$\boxed{\text{最终结果}}$$
 ::::
 ```
+
+计算型 worked example 可以用 `L7-E1` 这类编号：
+
+```markdown
+:::: stem L7-E1
+**交叉阵列稳健设计 Crossed Array Robust Design**
+
+题干文本。
+::::
+```
+
+选择题选项用 `example-options` / `example-option` 包起来，让选项之间有轻微颜色区分：
+
+```html
+<div class="example-options">
+<span class="example-option">A. Option A</span>
+<span class="example-option">B. Option B</span>
+<span class="example-option">C. Option C</span>
+<span class="example-option">D. Option D</span>
+</div>
+```
+
+样式约定：
+- `stem` 与紧贴其后的 `solution` 之间只保留一条线。CSS 中用 `.example-stem + .example-solution { border-top: 0; }`，避免 stem 底边和 solution 顶边重合成粗线。
+- `solution` 后若紧贴下一个 `stem`，CSS 会用 `.example-solution + .example-stem::before` 自动显示淡分割线。
+- 如果中间已经手写 `---`，自动分割线会被禁用，兼容旧笔记。
+- stem / solution 背景要保持很浅，便于长题干阅读。
 
 ### 8.3 tip 容器
 
@@ -308,7 +335,8 @@ CCD 每章末尾有总结表：
 
 ## 十、分隔符
 
-- 连续不同例题之间：`---`
+- 连续不同例题之间：优先依赖 CSS 自动淡分割线；只有需要更强视觉停顿时才手写 `---`
+- 不要写 `---` 紧贴 `##` 二级标题，因为二级标题上方会自动渲染分割线
 - 相邻三级标题之间：`---`
 - 主要概念块之间：`---`
 - 自由使用，不要吝啬
@@ -448,7 +476,7 @@ $$
 
 内容……
 
-:::: stem
+:::: stem Q1
 例题题干。
 ::::
 
@@ -470,8 +498,11 @@ $$\boxed{结果}$$
 - [ ] 段落不超过 4 句
 - [ ] 术语首次出现有中英双语
 - [ ] 重要公式用 \boxed{} 框出
-- [ ] 例题用 :::: stem + :::: solution，不套外层 example
-- [ ] 连续例题之间有 --- 分隔
+- [ ] 例题用 :::: stem <题号> + :::: solution，不套外层 example
+- [ ] 选择题选项用 example-options / example-option 区分
+- [ ] stem 和 solution 中间没有双边框粗线
+- [ ] 没有出现 `---` 紧贴 `##` 二级标题
+- [ ] 连续例题之间有清楚分隔，优先使用自动淡分割线
 - [ ] 表格内容简短，不写长段
 - [ ] 标题格式：中文 + English，编号用短横线
 - [ ] 语气是笔记式的，不是教材式或 AI 式

@@ -318,7 +318,11 @@ export default defineConfig({
         validate: (p) => /^stem(\s|$)/.test(p),
         render(tokens, idx) {
           if (tokens[idx].nesting === 1) {
-            return '<div class="example-stem"><p class="example-section-title">PROBLEM</p>\n'
+            const label = tokens[idx].info.replace(/^stem\s*/, '').trim()
+            const labelHtml = label
+              ? ` <span class="example-stem-label">${md.utils.escapeHtml(label)}</span>`
+              : ''
+            return `<div class="example-stem"><p class="example-section-title">PROBLEM${labelHtml}</p>\n`
           }
           return '</div>\n'
         },
@@ -457,6 +461,7 @@ export default defineConfig({
                 { text: 'Part 2 / Lec 2', link: '/Y3S2/EPMF/Block 1/Lecture 2' },
                 { text: 'Part 3 / Lec 3', link: '/Y3S2/EPMF/Block 1/Lecture 3' },
                 { text: 'Part 4 / Lec 4', link: '/Y3S2/EPMF/Block 1/Lecture 4' },
+                { text: 'Block 1 例题 Examples', link: '/Y3S2/EPMF/Block 1/Block 1 Examples' },
               ],
             },
             {

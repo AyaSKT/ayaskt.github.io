@@ -1,6 +1,8 @@
 # Lec. 8 Six-Sigma & Process Capability
 
-**用数据把变异说清楚，再用流程把缺陷降下去。**
+**穿越流云罅隙,阳光闪烁夺目。**
+
+![alt text](<Lecture 8.attachments/1779870024146.jpg>)
 
 ## Block 2 Part 4 Contents
 

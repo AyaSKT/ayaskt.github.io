@@ -25,6 +25,7 @@
   - [1-2-1 概览 Outline](#1-2-1-概览-outline)
   - [1-2-2 项目经理的影响范围 Sphere of Influence](#1-2-2-项目经理的影响范围-sphere-of-influence)
   - [1-2-3 项目经理的能力 Competency](#1-2-3-项目经理的能力-competency)
+- [Block 1 例题 Examples](#block-1-例题-examples)
 
 
 
@@ -667,8 +668,9 @@ Process Groups to formally complete the project, phase, or contract.
 - 在适当的时候给予他人应有的认可
 - 聚焦真正重要的事情
 
+## Block 1 例题 Examples
 
-
+Lecture 1 的成本效益分析例题已经整理到 [Block 1 例题](<Block 1 Examples.md#lecture-1-introduction--role-of-project-manager>)。
 
 
 

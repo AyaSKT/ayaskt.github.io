@@ -22,6 +22,7 @@
   - [3-2-5 建设团队 Develop Team](#3-2-5-建设团队-develop-team)
   - [3-2-6 管理团队 Manage Team](#3-2-6-管理团队-manage-team)
   - [3-2-7 控制资源 Control Resources](#3-2-7-控制资源-control-resources)
+- [Block 1 例题 Examples](#block-1-例题-examples)
 
 
 
@@ -275,10 +276,6 @@
 > [!TIP]
 > - $CPI > 1$：项目低于预算 —— 好
 > - $SPI < 1$：项目落后于进度 —— 不好
-
----
-
-
 
 ## Lec. 3 - Ses. 2 项目资源管理 Project Resource Management
 
@@ -603,3 +600,7 @@ RAM 的一个典型示例是 **RACI 矩阵**：
 2. 变更请求 Change Requests
 3. 项目管理计划更新 Project Management Plan Updates
 4. 项目文件更新 Project Documents Updates
+
+## Block 1 例题 Examples
+
+Lecture 3 的挣值分析和后半部分选择题已经整理到 [Block 1 例题](<Block 1 Examples.md#lecture-3-project-cost--resource-management>)。

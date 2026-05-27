@@ -1,31 +1,24 @@
-# Block 2 例题 Examples
+# Block 2 例题
 
-**把题目集中起来，复习时就不用在四份 slides 里来回翻了。**
-
-本页汇总 EPMF Block 2, Lecture 5-8 后半部分出现的选择题与计算题。题干用中英双语整理，答案按课堂知识点给出；个别 PDF 题目若与公式计算不一致，会在答案中单独说明。
-
-## 章节目录
-
-- [章节目录](#章节目录)
-- [Lecture 5 Introduction to DFM & Design for Sustainability](#lecture-5-introduction-to-dfm--design-for-sustainability)
-- [Lecture 6 Quality Control & Cost of Quality](#lecture-6-quality-control--cost-of-quality)
+- [Lecture 5 Introduction to DFM \& Design for Sustainability](#lecture-5-introduction-to-dfm--design-for-sustainability)
+- [Lecture 6 Quality Control \& Cost of Quality](#lecture-6-quality-control--cost-of-quality)
 - [Lecture 7 Robust Manufacturing Design](#lecture-7-robust-manufacturing-design)
-  - [L7-E1 交叉阵列稳健设计 Crossed Array Robust Design](#l7-e1-交叉阵列稳健设计-crossed-array-robust-design)
-- [Lecture 8 Six-Sigma & Process Capability](#lecture-8-six-sigma--process-capability)
-  - [L8-E1 电阻器制程能力 Resistor Process Capability](#l8-e1-电阻器制程能力-resistor-process-capability)
+- [Lecture 8 Six-Sigma \& Process Capability](#lecture-8-six-sigma--process-capability)
 
 ## Lecture 5 Introduction to DFM & Design for Sustainability
 
-:::: stem
-**Q1.** 以下哪一项不是可持续设计原则？
+:::: stem Q1
+以下哪一项不是可持续设计原则？
 
 Which item below is **not** an actionable sustainable design principle?
 
-A. Dematerialization  
-B. Migration to product-service systems  
-C. Limit or eliminate long-distance outsourcing  
-D. Design for a shorter period of usage  
-E. Invest in simulation
+<div class="example-options">
+<span class="example-option">A. Dematerialization</span>
+<span class="example-option">B. Migration to product-service systems</span>
+<span class="example-option">C. Limit or eliminate long-distance outsourcing</span>
+<span class="example-option">D. Design for a shorter period of usage</span>
+<span class="example-option">E. Invest in simulation</span>
+</div>
 ::::
 
 :::: solution
@@ -36,16 +29,18 @@ E. Invest in simulation
 DFS aims for longer useful life, fewer resources, and lower environmental impact. Designing for shorter use is therefore not a DFS principle.
 ::::
 
-:::: stem
-**Q2.** 以下哪项最准确描述可持续性的三大支柱？
+:::: stem Q2
+以下哪项最准确描述可持续性的三大支柱？
 
 Which statement best describes the three pillars of sustainability?
 
-A. Only current needs matter.  
-B. Economic growth, environmental care, and social well-being should be balanced while meeting current needs without compromising future generations.  
-C. Sustainability mainly focuses on economic growth.  
-D. Environmental care should override all other pillars.  
-E. Social well-being is the only pillar.
+<div class="example-options">
+<span class="example-option">A. Only current needs matter.</span>
+<span class="example-option">B. Economic growth, environmental care, and social well-being should be balanced while meeting current needs without compromising future generations.</span>
+<span class="example-option">C. Sustainability mainly focuses on economic growth.</span>
+<span class="example-option">D. Environmental care should override all other pillars.</span>
+<span class="example-option">E. Social well-being is the only pillar.</span>
+</div>
 ::::
 
 :::: solution
@@ -56,16 +51,18 @@ E. Social well-being is the only pillar.
 Sustainability balances the economic, environmental, and social pillars while protecting the ability of future generations to meet their own needs.
 ::::
 
-:::: stem
-**Q3.** 关于 DFM，以下哪项说法不正确？
+:::: stem Q3
+关于 DFM，以下哪项说法不正确？
 
 Which statement about DFM is **not** correct?
 
-A. DFM duration depends on product complexity, organization size, and available resources.  
-B. DFM is a continuous process across the product lifecycle.  
-C. DFM is most effective in the initial design stage.  
-D. DFM may impose higher manufacturing costs, but can improve customer satisfaction.  
-E. DFM includes simplicity, standardization, tolerance, material selection, automation, and process integration.
+<div class="example-options">
+<span class="example-option">A. DFM duration depends on product complexity, organization size, and available resources.</span>
+<span class="example-option">B. DFM is a continuous process across the product lifecycle.</span>
+<span class="example-option">C. DFM is most effective in the initial design stage.</span>
+<span class="example-option">D. DFM may impose higher manufacturing costs, but can improve customer satisfaction.</span>
+<span class="example-option">E. DFM includes simplicity, standardization, tolerance, material selection, automation, and process integration.</span>
+</div>
 ::::
 
 :::: solution
@@ -76,16 +73,18 @@ DFM 的核心目标之一就是降低制造成本，同时提升质量、效率�
 One core purpose of DFM is to reduce manufacturing cost while improving quality, efficiency, and customer satisfaction.
 ::::
 
-:::: stem
-**Q4.** 以下哪一项不是 DFM 原则？
+:::: stem Q4
+以下哪一项不是 DFM 原则？
 
 Which item is **not** a principle of DFM?
 
-A. Standardization  
-B. Simplicity  
-C. Material Selection  
-D. Advertising Strategy  
-E. Automation
+<div class="example-options">
+<span class="example-option">A. Standardization</span>
+<span class="example-option">B. Simplicity</span>
+<span class="example-option">C. Material Selection</span>
+<span class="example-option">D. Advertising Strategy</span>
+<span class="example-option">E. Automation</span>
+</div>
 ::::
 
 :::: solution
@@ -96,16 +95,18 @@ E. Automation
 Advertising strategy belongs to marketing, not design for manufacturing.
 ::::
 
-:::: stem
-**Q5.** 以下哪项不是循环经济 4Rs 原则？
+:::: stem Q5
+以下哪项不是循环经济 4Rs 原则？
 
 Which item is **not** one of the 4Rs for circular economy?
 
-A. Reduce  
-B. Reuse  
-C. Repair  
-D. Recycle  
-E. Replace
+<div class="example-options">
+<span class="example-option">A. Reduce</span>
+<span class="example-option">B. Reuse</span>
+<span class="example-option">C. Repair</span>
+<span class="example-option">D. Recycle</span>
+<span class="example-option">E. Replace</span>
+</div>
 ::::
 
 :::: solution
@@ -116,16 +117,18 @@ Block 2 中的 4Rs 为 Reduce, Reuse, Repair, Recycle。
 The 4Rs in this lecture are Reduce, Reuse, Repair, and Recycle.
 ::::
 
-:::: stem
-**Q6.** DFM 在产品开发周期的哪个阶段最有效？
+:::: stem Q6
+DFM 在产品开发周期的哪个阶段最有效？
 
 At which product development stage is DFM most effective in terms of highest impact and lowest cost of changes?
 
-A. Initial design  
-B. Final design  
-C. Fabrication  
-D. Production  
-E. Product launch
+<div class="example-options">
+<span class="example-option">A. Initial design</span>
+<span class="example-option">B. Final design</span>
+<span class="example-option">C. Fabrication</span>
+<span class="example-option">D. Production</span>
+<span class="example-option">E. Product launch</span>
+</div>
 ::::
 
 :::: solution
@@ -136,16 +139,18 @@ E. Product launch
 The initial design stage has the lowest change cost and the highest leverage. Changes become more expensive near production and launch.
 ::::
 
-:::: stem
-**Q7.** 以下哪项不是可持续性的三大支柱之一？
+:::: stem Q7
+以下哪项不是可持续性的三大支柱之一？
 
 Which item is **not** one of the three pillars of sustainability?
 
-A. Economic pillar  
-B. Environmental pillar  
-C. Social pillar  
-D. Technological pillar  
-E. None of the above
+<div class="example-options">
+<span class="example-option">A. Economic pillar</span>
+<span class="example-option">B. Environmental pillar</span>
+<span class="example-option">C. Social pillar</span>
+<span class="example-option">D. Technological pillar</span>
+<span class="example-option">E. None of the above</span>
+</div>
 ::::
 
 :::: solution
@@ -158,16 +163,18 @@ The three pillars are economic, environmental, and social. Technology may suppor
 
 ## Lecture 6 Quality Control & Cost of Quality
 
-:::: stem
-**Q1.** 关于 Pareto chart，哪项说法正确？
+:::: stem Q1
+关于 Pareto chart，哪项说法正确？
 
 Which statement about a Pareto chart is true?
 
-A. It is a bar graph showing relative frequency or size of problems in descending order of importance.  
-B. It is a line graph showing cumulative percentage against total occurrences.  
-C. It is a scatter plot showing correlation between two variables.  
-D. It is a pie chart breaking problems into categories.  
-E. None of the above.
+<div class="example-options">
+<span class="example-option">A. It is a bar graph showing relative frequency or size of problems in descending order of importance.</span>
+<span class="example-option">B. It is a line graph showing cumulative percentage against total occurrences.</span>
+<span class="example-option">C. It is a scatter plot showing correlation between two variables.</span>
+<span class="example-option">D. It is a pie chart breaking problems into categories.</span>
+<span class="example-option">E. None of the above.</span>
+</div>
 ::::
 
 :::: solution
@@ -178,16 +185,18 @@ Pareto chart 用降序条形图突出 "vital few"，帮助优先处理影响最�
 A Pareto chart orders categories from largest to smallest so the vital few causes can be prioritized.
 ::::
 
-:::: stem
-**Q2.** 哪项最符合 control chart 的定义？
+:::: stem Q2
+哪项最符合 control chart 的定义？
 
 Which statement best fits the definition of control charts?
 
-A. They determine whether a process is stable and predictable over time.  
-B. They determine whether a process is profitable.  
-C. They determine whether a process meets customer demand.  
-D. They determine whether a process is efficient.  
-E. None of the above.
+<div class="example-options">
+<span class="example-option">A. They determine whether a process is stable and predictable over time.</span>
+<span class="example-option">B. They determine whether a process is profitable.</span>
+<span class="example-option">C. They determine whether a process meets customer demand.</span>
+<span class="example-option">D. They determine whether a process is efficient.</span>
+<span class="example-option">E. None of the above.</span>
+</div>
 ::::
 
 :::: solution
@@ -198,16 +207,18 @@ Control chart 通过中心线、UCL 和 LCL 监控制程随时间的稳定性。
 Control charts use a center line, UCL, and LCL to monitor whether process variation remains stable over time.
 ::::
 
-:::: stem
-**Q3.** 以下哪项不属于 appraisal cost？
+:::: stem Q3
+以下哪项不属于 appraisal cost？
 
 Which item is **not** classified as an appraisal cost?
 
-A. Test and inspection  
-B. Supplier acceptance sampling  
-C. Product audits  
-D. Equipment upgrades  
-E. Calibration
+<div class="example-options">
+<span class="example-option">A. Test and inspection</span>
+<span class="example-option">B. Supplier acceptance sampling</span>
+<span class="example-option">C. Product audits</span>
+<span class="example-option">D. Equipment upgrades</span>
+<span class="example-option">E. Calibration</span>
+</div>
 ::::
 
 :::: solution
@@ -218,16 +229,18 @@ Equipment upgrades 更接近预防成本，因为它是在缺陷发生前改善�
 Equipment upgrades are closer to prevention cost. Appraisal costs are mainly inspection, testing, audits, and calibration.
 ::::
 
-:::: stem
-**Q4.** 以下哪项不是七大质量工具？
+:::: stem Q4
+以下哪项不是七大质量工具？
 
 Which item is **not** one of the seven basic QC tools?
 
-A. Flowchart  
-B. Pareto chart  
-C. Linear programming  
-D. Scatter diagram  
-E. Control chart
+<div class="example-options">
+<span class="example-option">A. Flowchart</span>
+<span class="example-option">B. Pareto chart</span>
+<span class="example-option">C. Linear programming</span>
+<span class="example-option">D. Scatter diagram</span>
+<span class="example-option">E. Control chart</span>
+</div>
 ::::
 
 :::: solution
@@ -238,16 +251,18 @@ E. Control chart
 Linear programming is an optimization method, not one of the seven basic QC tools.
 ::::
 
-:::: stem
-**Q5.** Cause-and-effect diagram 主要用于什么？
+:::: stem Q5
+Cause-and-effect diagram 主要用于什么？
 
 In quality control, a cause-and-effect diagram is mainly used to:
 
-A. Measure product dimensions during inspection  
-B. Identify and categorize possible root causes of a problem  
-C. Forecast future product demand  
-D. Schedule manufacturing operations  
-E. Calculate production cost
+<div class="example-options">
+<span class="example-option">A. Measure product dimensions during inspection</span>
+<span class="example-option">B. Identify and categorize possible root causes of a problem</span>
+<span class="example-option">C. Forecast future product demand</span>
+<span class="example-option">D. Schedule manufacturing operations</span>
+<span class="example-option">E. Calculate production cost</span>
+</div>
 ::::
 
 :::: solution
@@ -258,16 +273,18 @@ E. Calculate production cost
 A fishbone diagram organizes possible root causes, often through 6M categories.
 ::::
 
-:::: stem
-**Q6.** 质量培训费用和客户收到产品后的召回/保修维修费用应如何分类？
+:::: stem Q6
+质量培训费用和客户收到产品后的召回/保修维修费用应如何分类？
 
 How should quality-related training and product recall/warranty repairs after customer delivery be classified?
 
-A. Training - Prevention Cost; Product recall - External Failure Cost  
-B. Training - Appraisal Cost; Product recall - Internal Failure Cost  
-C. Training - Internal Failure Cost; Product recall - Prevention Cost  
-D. Training - External Failure Cost; Product recall - Appraisal Cost  
-E. Training - Appraisal Cost; Product recall - Prevention Cost
+<div class="example-options">
+<span class="example-option">A. Training - Prevention Cost; Product recall - External Failure Cost</span>
+<span class="example-option">B. Training - Appraisal Cost; Product recall - Internal Failure Cost</span>
+<span class="example-option">C. Training - Internal Failure Cost; Product recall - Prevention Cost</span>
+<span class="example-option">D. Training - External Failure Cost; Product recall - Appraisal Cost</span>
+<span class="example-option">E. Training - Appraisal Cost; Product recall - Prevention Cost</span>
+</div>
 ::::
 
 :::: solution
@@ -278,16 +295,18 @@ E. Training - Appraisal Cost; Product recall - Prevention Cost
 Training prevents defects, so it is a prevention cost. Recall and warranty after delivery are external failure costs.
 ::::
 
-:::: stem
-**Q7.** PCB 制造商想随时间监控缺陷率，判断过程是否受控。最合适的 QC 工具是什么？
+:::: stem Q7
+PCB 制造商想随时间监控缺陷率，判断过程是否受控。最合适的 QC 工具是什么？
 
 A PCB manufacturer wants to monitor defect rate over time and determine whether the process is under control. Which QC tool is most appropriate?
 
-A. Histogram  
-B. Control Chart  
-C. Check Sheet  
-D. Pareto Chart  
-E. Cause-and-Effect Diagram
+<div class="example-options">
+<span class="example-option">A. Histogram</span>
+<span class="example-option">B. Control Chart</span>
+<span class="example-option">C. Check Sheet</span>
+<span class="example-option">D. Pareto Chart</span>
+<span class="example-option">E. Cause-and-Effect Diagram</span>
+</div>
 ::::
 
 :::: solution
@@ -300,11 +319,14 @@ The key clues are "over time" and "under control", which point to a control char
 
 ## Lecture 7 Robust Manufacturing Design
 
-### L7-E1 交叉阵列稳健设计 Crossed Array Robust Design
+
+
+
+
+:::: stem L7-E1
 
 ![交叉阵列例题](<Lecture 7.attachments/lec7_30_crossed_array_example.jpg>)
 
-:::: stem
 有四个可控因子 A, B, C, D，每个因子有三个水准；另有三个噪音因子 E, F, G，每个因子有两个水准。已知目标值 $m=20$，田口损失函数中的 $k=1$。根据交叉阵列实验结果，找出稳健的最优产品设计。
 
 There are four controllable factors A, B, C, D at three levels each, and three noise factors E, F, G at two levels each. The target is $m=20$ and $k=1$ in the quality loss function. Using the crossed array results, find the robust optimal product design.
@@ -348,16 +370,18 @@ $$
 This factor combination is closest to the target while producing the lowest average loss under noise conditions.
 ::::
 
-:::: stem
-**Q1.** 以下哪项不是常见的田口损失函数类型？
+:::: stem Q1
+以下哪项不是常见的田口损失函数类型？
 
 Which item is **not** one of the common Taguchi loss function types?
 
-A. Nominal-the-best  
-B. Smaller-the-better  
-C. Larger-the-better  
-D. Target-the-zero  
-E. None of the above
+<div class="example-options">
+<span class="example-option">A. Nominal-the-best</span>
+<span class="example-option">B. Smaller-the-better</span>
+<span class="example-option">C. Larger-the-better</span>
+<span class="example-option">D. Target-the-zero</span>
+<span class="example-option">E. None of the above</span>
+</div>
 ::::
 
 :::: solution
@@ -368,16 +392,18 @@ E. None of the above
 The common Taguchi loss-function types are nominal-the-best, smaller-the-better, and larger-the-better.
 ::::
 
-:::: stem
-**Q2.** 在 robust design 中，响应 $y$ 可受 Z, M, X 三类参数影响。以下哪项正确代表其中两类？
+:::: stem Q2
+在 robust design 中，响应 $y$ 可受 Z, M, X 三类参数影响。以下哪项正确代表其中两类？
 
 In robust design, response $y$ may be influenced by three classes of parameters Z, M, and X. Which option correctly represents two of these classes?
 
-A. Control factors and Noise factors  
-B. Marketing factors and Economic factors  
-C. Environmental factors and Financial factors  
-D. Human factors and Cost factors  
-E. Demand factors and Supply factors
+<div class="example-options">
+<span class="example-option">A. Control factors and Noise factors</span>
+<span class="example-option">B. Marketing factors and Economic factors</span>
+<span class="example-option">C. Environmental factors and Financial factors</span>
+<span class="example-option">D. Human factors and Cost factors</span>
+<span class="example-option">E. Demand factors and Supply factors</span>
+</div>
 ::::
 
 :::: solution
@@ -388,8 +414,8 @@ P Diagram 的核心分类包括 signal factors, control factors, noise factors�
 The P Diagram classifies inputs into signal factors, control factors, and noise factors.
 ::::
 
-:::: stem
-**Q3.** 某 nominal-the-best 品质特性的目标值为 8.5，损失系数 $k=1$。10 个观测值为：
+:::: stem Q3
+某 nominal-the-best 品质特性的目标值为 8.5，损失系数 $k=1$。10 个观测值为：
 
 For a nominal-the-best quality characteristic, target $m=8.5$ and $k=1$. The 10 observations are:
 
@@ -400,6 +426,14 @@ $$
 平均田口损失是多少？
 
 What is the average Taguchi loss?
+
+<div class="example-options">
+<span class="example-option">A. 0.3762</span>
+<span class="example-option">B. 0.1736</span>
+<span class="example-option">C. 0.0319</span>
+<span class="example-option">D. 0.6790</span>
+<span class="example-option">E. 0.1420</span>
+</div>
 ::::
 
 :::: solution
@@ -435,11 +469,13 @@ $$
 
 ## Lecture 8 Six-Sigma & Process Capability
 
-### L8-E1 电阻器制程能力 Resistor Process Capability
+
+
+
+:::: stem L8-E1
 
 ![电阻器制程能力例题](<Lecture 8.attachments/lec8_32_resistor_example.jpg>)
 
-:::: stem
 某制造商生产目标电阻为 10 ohm 的电阻器，公差为 $\pm 1$ ohm。样本均值为 10.1 ohm，标准差为 0.3 ohm。计算 $C_p$ 和 $C_{pk}$，并讨论结果。
 
 A manufacturer produces resistors with target resistance 10 ohm and tolerance $\pm 1$ ohm. The sample mean is 10.1 ohm and the standard deviation is 0.3 ohm. Calculate $C_p$ and $C_{pk}$ and discuss the result.
@@ -484,16 +520,18 @@ $C_p>C_{pk}$ 表明制程均值偏离目标中心；$C_{pk}=1.00$ 属于中等�
 Since $C_p>C_{pk}$, the process is off-center. With $C_{pk}=1.00$, capability is only moderate; the mean should be recentred at 10.0 ohm and variation should be reduced.
 ::::
 
-:::: stem
-**Q1.** 关于 process capability，哪项说法正确？
+:::: stem Q1
+关于 process capability，哪项说法正确？
 
 Which statement about process capability is true?
 
-A. It measures process efficiency in time and resources.  
-B. It is the degree to which a process can consistently produce output meeting specifications.  
-C. It is determined solely by worker skill.  
-D. It is not relevant for service industries.  
-E. None of the above.
+<div class="example-options">
+<span class="example-option">A. It measures process efficiency in time and resources.</span>
+<span class="example-option">B. It is the degree to which a process can consistently produce output meeting specifications.</span>
+<span class="example-option">C. It is determined solely by worker skill.</span>
+<span class="example-option">D. It is not relevant for service industries.</span>
+<span class="example-option">E. None of the above.</span>
+</div>
 ::::
 
 :::: solution
@@ -504,16 +542,18 @@ Process capability 关注制程输出是否能稳定满足规格要求。
 Process capability asks whether the process can consistently produce outputs within specification limits.
 ::::
 
-:::: stem
-**Q2.** Six Sigma 中 CTQ 指什么？
+:::: stem Q2
+Six Sigma 中 CTQ 指什么？
 
 In Six Sigma, what does Critical-to-Quality (CTQ) refer to?
 
-A. Elements of a process that significantly affect output quality  
-B. The maximum number of defects allowed in a batch  
-C. A financial method for reducing cost  
-D. Production-line speed  
-E. A tool for calculating DPMO
+<div class="example-options">
+<span class="example-option">A. Elements of a process that significantly affect output quality</span>
+<span class="example-option">B. The maximum number of defects allowed in a batch</span>
+<span class="example-option">C. A financial method for reducing cost</span>
+<span class="example-option">D. Production-line speed</span>
+<span class="example-option">E. A tool for calculating DPMO</span>
+</div>
 ::::
 
 :::: solution
@@ -524,16 +564,18 @@ CTQ 是对输出质量有显著影响的关键要素，是把客户要求转化�
 CTQs are key elements that significantly affect output quality and translate customer requirements into measurable characteristics.
 ::::
 
-:::: stem
-**Q3.** 某产品规格为 $20\pm1$ mm，制程均值为 19.8 mm，标准差为 0.2 mm。求 $C_{pk}$。
+:::: stem Q3
+某产品规格为 $20\pm1$ mm，制程均值为 19.8 mm，标准差为 0.2 mm。求 $C_{pk}$。
 
 A process has specification limits $20\pm1$ mm, mean 19.8 mm, and standard deviation 0.2 mm. What is $C_{pk}$?
 
-A. 0.67  
-B. 1.00  
-C. 1.33  
-D. 1.67  
-E. 2.00
+<div class="example-options">
+<span class="example-option">A. 0.67</span>
+<span class="example-option">B. 1.00</span>
+<span class="example-option">C. 1.33</span>
+<span class="example-option">D. 1.67</span>
+<span class="example-option">E. 2.00</span>
+</div>
 ::::
 
 :::: solution
@@ -551,16 +593,18 @@ C_{pk}
 $$
 ::::
 
-:::: stem
-**Q4.** $C_{pk}=1.20$ 表示什么？
+:::: stem Q4
+$C_{pk}=1.20$ 表示什么？
 
 Which statement correctly describes a process with $C_{pk}=1.20$?
 
-A. High risk and not capable  
-B. Moderate risk; improvement is needed for better capability  
-C. Low risk and capable but may still be improved  
-D. Minimal risk and highly capable  
-E. Zero defects
+<div class="example-options">
+<span class="example-option">A. High risk and not capable</span>
+<span class="example-option">B. Moderate risk; improvement is needed for better capability</span>
+<span class="example-option">C. Low risk and capable but may still be improved</span>
+<span class="example-option">D. Minimal risk and highly capable</span>
+<span class="example-option">E. Zero defects</span>
+</div>
 ::::
 
 :::: solution
@@ -571,16 +615,18 @@ E. Zero defects
 In the lecture risk table, $1.00\le C_{pk}<1.33$ is moderate risk and should be improved.
 ::::
 
-:::: stem
-**Q5.** 以下哪个 $C_{pk}$ 表示高度具能力且缺陷风险极低？
+:::: stem Q5
+以下哪个 $C_{pk}$ 表示高度具能力且缺陷风险极低？
 
 Which $C_{pk}$ value indicates a highly capable process with minimal defect risk?
 
-A. 0.85  
-B. 1.10  
-C. 1.30  
-D. 1.70  
-E. 1.00
+<div class="example-options">
+<span class="example-option">A. 0.85</span>
+<span class="example-option">B. 1.10</span>
+<span class="example-option">C. 1.30</span>
+<span class="example-option">D. 1.70</span>
+<span class="example-option">E. 1.00</span>
+</div>
 ::::
 
 :::: solution
@@ -591,16 +637,18 @@ E. 1.00
 The lecture classifies $C_{pk}\ge 1.67$ as highly capable with minimal risk, so 1.70 is the best choice.
 ::::
 
-:::: stem
-**Q6.** DMAIC 中哪项不是五个阶段之一？
+:::: stem Q6
+DMAIC 中哪项不是五个阶段之一？
 
 Which item is **not** one of the DMAIC phases?
 
-A. Improve  
-B. Define  
-C. Analyze  
-D. Calibrate  
-E. Measure
+<div class="example-options">
+<span class="example-option">A. Improve</span>
+<span class="example-option">B. Define</span>
+<span class="example-option">C. Analyze</span>
+<span class="example-option">D. Calibrate</span>
+<span class="example-option">E. Measure</span>
+</div>
 ::::
 
 :::: solution

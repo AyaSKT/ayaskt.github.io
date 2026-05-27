@@ -34,6 +34,8 @@
 
 - [Part 4: Project Communications Management, Project Risk Management](<Block 1/Lecture 4.md>)
 
+- [Block 1 例题 Examples](<Block 1/Block 1 Examples.md>)
+
 
 ### Block 2 为制造而设计 Design for Manufacturing
 

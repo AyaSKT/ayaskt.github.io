@@ -1,12 +1,13 @@
 # Lec. 7 Robust Manufacturing Design
 
-**以稳健之法，造优质之品，降变异之害，达卓越之境。**
+**若时光能永远静止于此，只希望我可以一直待在这里。**
 
-![稳健设计 Robust Design](<Lecture 7.attachments/lec7_07_resistor_example.jpg>)
+![alt text](<Lecture 7.attachments/1779869970627.jpeg>)
 
 
 ## 章节目录
 
+- [章节目录](#章节目录)
 - [7-1 稳健设计基础 Robust Design Basics](#7-1-稳健设计基础-robust-design-basics)
   - [7-1-1 稳健设计导论 Introduction to Robust Design](#7-1-1-稳健设计导论-introduction-to-robust-design)
   - [7-1-2 质量与变异 Quality and Variation](#7-1-2-质量与变异-quality-and-variation)
@@ -21,7 +22,7 @@
   - [7-2-2 全因子设计 Full Factorial Design](#7-2-2-全因子设计-full-factorial-design)
   - [7-2-3 正交阵列 Orthogonal Arrays](#7-2-3-正交阵列-orthogonal-arrays)
   - [7-2-4 正交阵列示例 L9(3^4) Orthogonal Array Example](#7-2-4-正交阵列示例-l934-orthogonal-array-example)
-  - [7-2-5 交叉阵列 Crossed Arrays — Inner & Outer Arrays](#7-2-5-交叉阵列-crossed-arrays--inner--outer-arrays)
+  - [7-2-5 交叉阵列 Crossed Arrays — Inner \& Outer Arrays](#7-2-5-交叉阵列-crossed-arrays--inner--outer-arrays)
   - [7-2-6 交叉阵列示例 Crossed Array Example](#7-2-6-交叉阵列示例-crossed-array-example)
   - [7-2-7 总结 Summary — Robust Design Process](#7-2-7-总结-summary--robust-design-process)
 - [Block 2 例题 Examples](#block-2-例题-examples)

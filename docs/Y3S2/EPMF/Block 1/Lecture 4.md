@@ -22,6 +22,7 @@
   - [4-2-6 规划风险应对 Plan Risk Responses](#4-2-6-规划风险应对-plan-risk-responses)
   - [4-2-7 实施风险应对 Implement Risk Responses](#4-2-7-实施风险应对-implement-risk-responses)
   - [4-2-8 监督风险 Monitor Risks](#4-2-8-监督风险-monitor-risks)
+- [Block 1 例题 Examples](#block-1-例题-examples)
 
 
 
@@ -233,10 +234,6 @@ $$\text{沟通渠道数} = \frac{n(n-1)}{2}$$
 2. 变更请求 Change Requests
 3. 项目管理计划更新 Project Management Plan Updates
 4. 项目文件更新 Project Documents Updates
-
----
-
-
 
 ## Lec. 4 - Ses. 2 项目风险管理 Project Risk Management
 
@@ -678,3 +675,6 @@ $$\text{EMV} = \sum (\text{概率} \times \text{结果值})$$
 
 **储备分析 Reserve Analysis** — 比较已用应急储备与剩余风险量，以确定储备是否充足。
 
+## Block 1 例题 Examples
+
+Lecture 4 的决策树/EMV 和后半部分选择题已经整理到 [Block 1 例题](<Block 1 Examples.md#lecture-4-communications--risk-management>)。
