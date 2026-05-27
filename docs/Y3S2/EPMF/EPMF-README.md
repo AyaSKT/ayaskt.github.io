@@ -50,4 +50,26 @@
 - [Block 2 例题 Examples](<Block 2/Block 2 Examples.md>)
 
 
+### Block 3 工程经济学 Engineering Economics
+
+- [Lecture 9: Introduction to Engineering Economics](<Block 3/Lecture 9.md>)
+
+- [Lecture 10: Engineering Economics (Make or Buy)](<Block 3/Lecture 10.md>)
+
+- [Lecture 11: Engineering Economics (Break-Even Analysis)](<Block 3/Lecture 11.md>)
+
+- [Lecture 12: Engineering Economics (Outsourcing)](<Block 3/Lecture 12.md>)
+
+- [Lecture 13 I: Engineering Economics (Discounted Cash Flow)](<Block 3/Lecture 13 Part 1.md>)
+
+- [Lecture 13 II: Engineering Economics (Capex, Opex, and Total Cost of Ownership)](<Block 3/Lecture 13 Part 2.md>)
+
+- [Lecture 13 Ex.: Extended Version](<Block 3/Lecture 13-2 Extended Version.md>)
+
+- [Lecture 14: What is a Company](<Block 3/Lecture 14.md>)
+
+- [Lecture 15: Company Structure](<Block 3/Lecture 15.md>)
+
+- [Lecture 16: Company Strategy & Engineering Careers](<Block 3/Lecture 16.md>)
+
 ![alt text](EPMF-README.attachments/1774261142070.JPG)
