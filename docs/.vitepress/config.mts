@@ -467,6 +467,7 @@ export default defineConfig({
                 { text: 'Part 2 / Lec 6', link: '/Y3S2/EPMF/Block 2/Lecture 6' },
                 { text: 'Part 3 / Lec 7', link: '/Y3S2/EPMF/Block 2/Lecture 7' },
                 { text: 'Part 4 / Lec 8', link: '/Y3S2/EPMF/Block 2/Lecture 8' },
+                { text: 'Block 2 例题 Examples', link: '/Y3S2/EPMF/Block 2/Block 2 Examples' },
               ],
             },
           ],

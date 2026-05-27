@@ -1,28 +1,27 @@
 # Lec. 8 Six-Sigma & Process Capability
 
-**追求六标准差之极致，以数据为导向，减缺陷于百万，达品质之巅峰。**
-*Pursue the perfection of Six Sigma, data-driven, reduce defects to parts per million, achieve the pinnacle of quality.*
+**用数据把变异说清楚，再用流程把缺陷降下去。**
 
 ## Block 2 Part 4 Contents
 
 - [Block 2 Part 4 Contents](#block-2-part-4-contents)
 - [Lec. 8 - Ses. 1 六西格玛 Six-Sigma](#lec-8---ses-1-六西格玛-six-sigma)
-  - [8-1-1 什么是 Sigma / Six-Sigma](#8-1-1-什么是-sigma--six-sigma)
+  - [8-1-1 什么是 Sigma / Six-Sigma What is Sigma / Six-Sigma](#8-1-1-什么是-sigma--six-sigma-what-is-sigma--six-sigma)
   - [8-1-2 Sigma 水平 Sigma Levels](#8-1-2-sigma-水平-sigma-levels)
   - [8-1-3 应用领域 Field of Application](#8-1-3-应用领域-field-of-application)
   - [8-1-4 低质量成本 Cost of Poor Quality](#8-1-4-低质量成本-cost-of-poor-quality)
-  - [8-1-5 质量关键要素 CTQ](#8-1-5-质量关键要素-ctq)
+  - [8-1-5 质量关键要素 Critical-to-Quality (CTQ)](#8-1-5-质量关键要素-critical-to-quality-ctq)
   - [8-1-6 为什么选择 Six Sigma Why Six Sigma](#8-1-6-为什么选择-six-sigma-why-six-sigma)
   - [8-1-7 DMAIC 模型 DMAIC Model](#8-1-7-dmaic-模型-dmaic-model)
   - [8-1-8 Six Sigma 工具 Tools for Six Sigma](#8-1-8-six-sigma-工具-tools-for-six-sigma)
   - [8-1-9 Six Sigma 关键角色 Key Roles for Six Sigma](#8-1-9-six-sigma-关键角色-key-roles-for-six-sigma)
 - [Lec. 8 - Ses. 2 过程能力 Process Capability](#lec-8---ses-2-过程能力-process-capability)
   - [8-2-1 过程能力概论 Process Capability Overview](#8-2-1-过程能力概论-process-capability-overview)
-  - [8-2-2 过程能力指数 Cp](#8-2-2-过程能力指数-cp)
-  - [8-2-3 过程能力指数 Cpk](#8-2-3-过程能力指数-cpk)
+  - [8-2-2 过程能力指数 Cp Process Capability Index Cp](#8-2-2-过程能力指数-cp-process-capability-index-cp)
+  - [8-2-3 过程能力指数 Cpk Process Capability Index Cpk](#8-2-3-过程能力指数-cpk-process-capability-index-cpk)
   - [8-2-4 计算要求 Calculation Requirements](#8-2-4-计算要求-calculation-requirements)
   - [8-2-5 Cpk 风险评估 Risk Assessment for Cpk](#8-2-5-cpk-风险评估-risk-assessment-for-cpk)
-  - [8-2-6 电阻器示例 Resistor Example](#8-2-6-电阻器示例-resistor-example)
+- [Block 2 例题 Examples](#block-2-例题-examples)
 
 
 
@@ -317,7 +316,6 @@ VOC 闭环流程（8步循环）：
 > [!TIP] 角色层级
 > 从上到下：Executive Leadership → Champions → Master Black Belts → Black Belts → Green Belts。黑带通常需完成至少两个完整专案才能获得认证。
 
----
 
 ## Lec. 8 - Ses. 2 过程能力 Process Capability
 
@@ -385,11 +383,11 @@ Cp/Cpk 五组对比：
 
 | $C_p$ | $C_{pk}$ | 状态 | 说明 |
 |:---:|:---:|:---:|:---|
-| 2.0 | 2.0 | ✅ 有能力 | 统计受控且有能力，在控制限内生产 |
-| 0.7 | 0.7 | ❌ 无能力 | 统计受控但制程能力不足 |
-| 2.0 | 1.5 | ⚠️ 失控 | 潜在能力高但均值偏移 |
-| 2.0 | 1.0 | ⚠️ 失控 | 潜在能力高但均值严重偏移 |
-| 2.0 | 0 | 🔴 完全失控 | 均值完全偏离目标，能力丧失 |
+| 2.0 | 2.0 | 有能力 Capable | 统计受控且有能力，在控制限内生产 |
+| 0.7 | 0.7 | 无能力 Not capable | 统计受控但制程能力不足 |
+| 2.0 | 1.5 | 偏移 Off-center | 潜在能力高但均值偏移 |
+| 2.0 | 1.0 | 严重偏移 Severely off-center | 潜在能力高但均值严重偏移 |
+| 2.0 | 0 | 能力丧失 Lost capability | 均值完全偏离目标，能力丧失 |
 
 后三组 $C_{pk} < C_p$，说明制程均值偏移导致实际能力低于潜在能力，属于 Out of Control 状态。
 
@@ -418,46 +416,15 @@ Cp/Cpk 五组对比：
 
 | $C_{pk}$ 范围 | 风险等级 | 说明 |
 |:---:|:---:|:---:|
-| $< 1.00$ | 🔴 高风险 | 制程不具能力 |
-| $1.00 \sim 1.33$ | 🟡 中等风险 | 需要改善 |
-| $1.33 \sim 1.67$ | 🟢 低风险 | 具备能力，仍有改善空间 |
-| $\geq 1.67$ | 🔵 极低风险 | 高度具能力 |
+| $< 1.00$ | 高风险 High risk | 制程不具能力 |
+| $1.00 \sim 1.33$ | 中等风险 Moderate risk | 需要改善 |
+| $1.33 \sim 1.67$ | 低风险 Low risk | 具备能力，仍有改善空间 |
+| $\geq 1.67$ | 极低风险 Minimal risk | 高度具能力 |
 
 > [!IMPORTANT] 目标值
 > 应追求 $C_{pk} \geq 2.00$，此时制程仅使用规格宽度的 50%，缓冲充足。
 > $$C_{pk} = 2.00 \Rightarrow \text{仅使用 50\% 规格宽度}$$
 
----
+## Block 2 例题 Examples
 
-### 8-2-6 电阻器示例 Resistor Example
-
-**问题设定：**
-
-| 参数 | 值 |
-|:---:|:---:|
-| 目标值 (Target) | 10 Ω |
-| 公差 (Tolerance) | ±1 Ω |
-| USL / LSL | 11 Ω / 9 Ω |
-| 制程均值 $\mu$ | 10.1 Ω |
-| 制程标准差 $\sigma$ | 0.3 Ω |
-
-**步骤 1：计算 Cp**
-
-$$C_p = \frac{USL - LSL}{6\sigma} = \frac{11 - 9}{6 \times 0.3} = \frac{2}{1.8} = 1.11$$
-
-**步骤 2：计算 Cpk**
-
-代入公式得：
-
-$$C_{pk} = \min\left[\frac{11 - 10.1}{3 \times 0.3},\; \frac{10.1 - 9}{3 \times 0.3}\right] = \min\left[\frac{0.9}{0.9},\; \frac{1.1}{0.9}\right] = \min[1.00,\; 1.22] = 1.00$$
-
-$$\boxed{C_p = 1.11, \quad C_{pk} = 1.00}$$
-
-> [!IMPORTANT] 分析
-> - $C_p = 1.11 > 1$：潜在能力尚可
-> - $C_{pk} = 1.00$：中等风险，需要改善
-> - $\mu = 10.1$ 偏离目标 $m = 10$，偏移导致实际能力下降
-> - **改善方向**：将均值调回 10.0，同时减少标准差
-
-> [!TIP] 偏移的影响
-> 均值仅偏移 0.1 Ω（公差的 10%），但 $C_{pk}$ 已从 1.11 降到 1.00。微小偏移也会显著影响制程能力，这正是 Six-Sigma 强调持续监控的原因。
+Lecture 8 的电阻器制程能力计算题和后半部分选择题已经集中整理到 [Block 2 例题](<Block 2 Examples.md#lecture-8-six-sigma--process-capability>)。

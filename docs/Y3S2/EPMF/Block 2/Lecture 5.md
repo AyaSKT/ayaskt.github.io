@@ -2,7 +2,7 @@
 
 **落花风里，春意渐行渐远。**
 
-![alt text](<Lecture 5.attachments/lec5_01.jpg>)
+![alt text](<Lecture 5.attachments/1779869861405.PNG>)
 
 
 ## Block 2 Part 1 Contents
@@ -10,6 +10,7 @@
 - [Block 2 Part 1 Contents](#block-2-part-1-contents)
 - [Lec. 5 - Ses. 1 面向制造的设计 Introduction to DFM](#lec-5---ses-1-面向制造的设计-introduction-to-dfm)
   - [5-1-1 DFM 的定义 Definition of DFM](#5-1-1-dfm-的定义-definition-of-dfm)
+  - [5-1-1a 设计时的考量因素 Design Considerations](#5-1-1a-设计时的考量因素-design-considerations)
   - [5-1-2 DFM 的历史 History of DFM](#5-1-2-dfm-的历史-history-of-dfm)
   - [5-1-3 为什么 DFM 很重要 Why DFM Is Important](#5-1-3-为什么-dfm-很重要-why-dfm-is-important)
   - [5-1-4 DFM 的六项原则 6 Principles of DFM](#5-1-4-dfm-的六项原则-6-principles-of-dfm)
@@ -22,9 +23,12 @@
   - [5-2-2 什么是 DFS What is DFS](#5-2-2-什么是-dfs-what-is-dfs)
   - [5-2-3 电子废弃物 E-Waste](#5-2-3-电子废弃物-e-waste)
   - [5-2-4 设计阶段的重要性 Importance of Design Stage](#5-2-4-设计阶段的重要性-importance-of-design-stage)
-  - [5-2-5 线性经济与循环经济 Linear Economy vs. Circular Economy](#5-2-5-线性经济与循环经济-linear-economy-vs-circular-economy)
-  - [5-2-6 四大原则 The 4Rs](#5-2-6-四大原则-the-4rs)
-  - [5-2-7 DFS 的七项原则 7 DFS Principles](#5-2-7-dfs-的七项原则-7-dfs-principles)
+  - [5-2-4a 可持续性的必要性 The Need for Sustainability](#5-2-4a-可持续性的必要性-the-need-for-sustainability)
+  - [5-2-5 责任归属 Responsibility](#5-2-5-责任归属-responsibility)
+  - [5-2-6 线性经济与循环经济 Linear Economy vs. Circular Economy](#5-2-6-线性经济与循环经济-linear-economy-vs-circular-economy)
+  - [5-2-7 四大原则 The 4Rs](#5-2-7-四大原则-the-4rs)
+  - [5-2-8 DFS 的七项原则 7 DFS Principles](#5-2-8-dfs-的七项原则-7-dfs-principles)
+- [Block 2 例题 Examples](#block-2-例题-examples)
 
 
 
@@ -151,9 +155,6 @@ DFM 通常与其他方法和工具联合使用，以实现最佳效果：
 | **稳健产品设计** Robust Product Design | 确保产品在各种条件下稳定运行 |
 | **质量成本** Cost of Quality | 评估与质量相关的成本 |
 | **质量控制** Quality Control | 监控和保证产品质量 |
-
----
-
 
 
 ## Lec. 5 - Ses. 2 可持续性设计 Design for Sustainability
@@ -304,76 +305,6 @@ DFS 的两个核心目标：
 > [!TIP]
 > 以上七项原则并非互相独立，在实际项目中通常需要综合运用，以实现最佳的可持续性效果。
 
----
+## Block 2 例题 Examples
 
-## 课堂练习 In-Class Quiz
-
-:::: stem
-**Q1.** DFM 最适合在产品开发周期的哪个阶段应用？（最高影响力、最低变更成本）
-:::
-:::: solution
-**C** — 初始设计阶段 Initial Design。设计阶段的变更成本最低、影响力最大。
-::::
-
-:::: stem
-**Q2.** 以下哪项**不是** DFM 的原则？
-A. Standardization　B. Simplicity　C. Material Selection　D. Advertising Strategy　E. Automation
-:::
-:::: solution
-**D** — Advertising Strategy（广告策略）不属于 DFM 原则。DFM 六项原则为：简洁性、标准化、公差设计、材料选择、自动化、工艺集成。
-::::
-
-:::: stem
-**Q3.** 可持续性的三大支柱中，以下哪项**不是**其中之一？
-A. Economic pillar　B. Environmental pillar　C. Social pillar　D. Technological pillar　E. None of the above
-:::
-:::: solution
-**D** — Technological pillar（技术支柱）不是可持续性的三大支柱。三大支柱为：经济、环境、社会。
-::::
-
-:::: stem
-**Q4.** 4Rs 中，以下哪项**不是**其中之一？
-A. Reduce　B. Reuse　C. Repair　D. Recycle　E. Replace
-:::
-:::: solution
-**E** — Replace（替换）不属于 4Rs。4Rs 为：Reduce、Reuse、Repair、Recycle。
-::::
-
-:::: stem
-**Q5.** 以下哪项**不是** DFS 的可持续设计原则？
-A. Dematerialization　B. Migration to product-service systems　C. Limit or eliminate long-distance outsourcing　D. Design for a shorter period of usage　E. Invest in simulation
-:::
-:::: solution
-**D** — "设计更短使用寿命"与可持续设计背道而驰。DFS 强调的是耐久性设计 Design for Longevity。
-::::
-
-:::: stem
-**Q6.** 可持续性要求在满足当代人需求的同时，不损害后代人满足其自身需求的能力，并平衡三大支柱。以下哪项描述最准确？
-A. 只关注经济增长，忽略环境和社会
-B. 同时实现经济增长、环境保护和社会福祉，满足当代且不损害后代需求
-C. 优先环境保护，忽略经济和社会
-D. 以社会福祉为唯一支柱
-:::
-:::: solution
-**B** — 可持续性的核心定义即为同时平衡经济、环境、社会三大支柱。
-::::
-
-:::: stem
-**Q7.** 关于 DFM，以下哪项说法**不正确**？
-A. DFM 实施周期取决于产品复杂度、组织规模和可用资源
-B. DFM 是贯穿整个产品生命周期的持续过程
-C. DFM 在初始设计阶段最有效
-D. DFM 可能增加制造成本，但能提高客户满意度
-E. DFM 包含简洁性、标准化、公差设计、材料选择、自动化和工艺集成等原则
-:::
-:::: solution
-**D** — DFM 的目标恰恰是**降低**制造成本，而非增加。DFM 同时提高产品质量和客户满意度。
-::::
-
-:::: stem
-**Q8.** 产品对环境约 80% 的负面影响在哪个阶段已经确定？
-A. 制造阶段　B. 设计阶段　C. 使用阶段　D. 报废阶段
-:::
-:::: solution
-**B** — 设计阶段。欧盟委员会指出，产品 80% 的环境负面影响在设计阶段就已确定。
-::::
+Lecture 5 后半部分的选择题已经集中整理到 [Block 2 例题](<Block 2 Examples.md#lecture-5-introduction-to-dfm--design-for-sustainability>)。

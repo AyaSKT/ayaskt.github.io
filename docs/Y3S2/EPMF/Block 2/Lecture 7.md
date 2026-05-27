@@ -24,6 +24,7 @@
   - [7-2-5 交叉阵列 Crossed Arrays — Inner & Outer Arrays](#7-2-5-交叉阵列-crossed-arrays--inner--outer-arrays)
   - [7-2-6 交叉阵列示例 Crossed Array Example](#7-2-6-交叉阵列示例-crossed-array-example)
   - [7-2-7 总结 Summary — Robust Design Process](#7-2-7-总结-summary--robust-design-process)
+- [Block 2 例题 Examples](#block-2-例题-examples)
 
 
 
@@ -227,7 +228,6 @@ $$\sigma^2 = \frac{1}{9}\sum_{i=1}^{10}(y_i - 9.85)^2 = \frac{0.765}{9} = 0.085$
 
 $$Q = 8\left[(9.85-10)^2 + \frac{9}{10}(0.085)\right] = 8(0.0225 + 0.0765) = 8 \times 0.099 = \boxed{0.792}$$
 
----
 
 ## 7-2 实验设计 Design of Experiments (DOE)
 
@@ -330,14 +330,12 @@ $L_9(3^4)$：9 次实验，每因子 3 水准，最多安排 4 因子。
 
 1. 对内侧阵列每一行，执行外侧阵列所有实验
 2. 计算该行的均值 $\mu$ 和变异数 $\sigma^2$
-3. 计算品质损失：$Q = k\left[(\mu - m)^2 + \sigma^2\right]$
+3. 计算平均品质损失：$Q = \frac{k}{n}\sum_{j=1}^{n}(y_j-m)^2$
 4. 选择 $Q$ 最小的行——对应最佳控制因子组合
-
----
 
 ### 7-2-6 交叉阵列示例 Crossed Array Example
 
-![交叉阵列](<Lecture 7.attachments/lec7_28_crossed_arrays.jpg>)
+![交叉阵列例题](<Lecture 7.attachments/lec7_30_crossed_array_example.jpg>)
 
 **问题设定**：
 
@@ -348,36 +346,38 @@ $L_9(3^4)$：9 次实验，每因子 3 水准，最多安排 4 因子。
 
 **内侧阵列**：$L_9(3^4)$ — 9 次实验
 
-**外侧阵列**：$L_4(2^3)$ — 4 次实验（噪音因子组合）
-
-| 内侧 Run | A | B | C | D | 外侧 Run 1 | 外侧 Run 2 | 外侧 Run 3 | 外侧 Run 4 | $\mu$ | $\sigma^2$ | $Q$ |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 1 | 1 | 1 | 1 | 1 | $y_{11}$ | $y_{12}$ | $y_{13}$ | $y_{14}$ | $\mu_1$ | $\sigma_1^2$ | $Q_1$ |
-| 2 | 1 | 2 | 2 | 2 | $y_{21}$ | $y_{22}$ | $y_{23}$ | $y_{24}$ | $\mu_2$ | $\sigma_2^2$ | $Q_2$ |
-| 3 | 1 | 3 | 3 | 3 | $y_{31}$ | $y_{32}$ | $y_{33}$ | $y_{34}$ | $\mu_3$ | $\sigma_3^2$ | $Q_3$ |
-| 4 | 2 | 1 | 2 | 3 | ... | ... | ... | ... | $\mu_4$ | $\sigma_4^2$ | $Q_4$ |
-| 5 | 2 | 2 | 3 | 1 | ... | ... | ... | ... | $\mu_5$ | $\sigma_5^2$ | $Q_5$ |
-| 6 | 2 | 3 | 1 | 2 | ... | ... | ... | ... | $\mu_6$ | $\sigma_6^2$ | $Q_6$ |
-| 7 | 3 | 1 | 3 | 2 | ... | ... | ... | ... | $\mu_7$ | $\sigma_7^2$ | $Q_7$ |
-| 8 | 3 | 2 | 1 | 3 | ... | ... | ... | ... | $\mu_8$ | $\sigma_8^2$ | $Q_8$ |
-| 9 | 3 | 3 | 2 | 1 | ... | ... | ... | ... | $\mu_9$ | $\sigma_9^2$ | $Q_9$ |
+**外侧阵列**：$L_8(2^3)$ — 8 次实验（3 个二水准噪音因子的所有组合）
 
 **计算公式**：
 
-$$\mu_i = \frac{1}{4}\sum_{j=1}^{4}y_{ij}$$
+$$
+\mu_i = \frac{1}{8}\sum_{j=1}^{8}y_{ij}
+$$
 
-$$\sigma_i^2 = \frac{1}{3}\sum_{j=1}^{4}(y_{ij}-\mu_i)^2$$
+$$
+Q_i = \frac{1}{8}\sum_{j=1}^{8}(y_{ij}-20)^2
+$$
 
-$$Q_i = (\mu_i - 20)^2 + \sigma_i^2$$
+| 内侧 Run | A | B | C | D | $\mu$ | $Q$ |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| 1 | -1 | -1 | -1 | -1 | 17.525 | 17.545 |
+| 2 | -1 | 0 | 0 | 0 | 19.425 | 7.727 |
+| 3 | -1 | +1 | +1 | +1 | 19.025 | 8.225 |
+| 4 | 0 | -1 | 0 | +1 | 20.125 | 5.920 |
+| 5 | 0 | 0 | +1 | -1 | 22.825 | 18.260 |
+| 6 | 0 | +1 | -1 | 0 | 19.225 | 10.595 |
+| 7 | +1 | -1 | +1 | 0 | 19.850 | 7.818 |
+| 8 | +1 | 0 | -1 | +1 | 18.313 | 15.016 |
+| 9 | +1 | +1 | 0 | -1 | 21.200 | 15.078 |
 
 选择 $Q_i$ 最小的那一行所对应的控制因子水准组合：
 
-$$\boxed{\text{Best Combination} = \arg\min_i \; Q_i = \arg\min_i \left[(\mu_i - m)^2 + \sigma_i^2\right]}$$
+$$
+\boxed{\text{Best Combination} = \text{Run 4}: A=0,\;B=-1,\;C=0,\;D=+1}
+$$
 
 > [!IMPORTANT] 稳健设计的核心
 > 交叉阵列法同时考虑**准确度**（偏离目标）和**精密度**（变异），在噪音条件下找到最稳健的设计参数组合。
-
----
 
 ### 7-2-7 总结 Summary — Robust Design Process
 
@@ -395,96 +395,6 @@ $$\boxed{\text{Best Combination} = \arg\min_i \; Q_i = \arg\min_i \left[(\mu_i -
 > - 品质损失函数统一了准确度和精密度的考量
 > - 稳健设计的目标：让产品对噪音不敏感，而非消除噪音
 
----
+## Block 2 例题 Examples
 
-## 课堂练习 In-Class Quiz
-
-### Q1 田口损失函数类型辨析
-
-:::: stem
-According to the Taguchi quality philosophy, the quadratic loss function can be represented in several forms depending on the design objective. Which of the following is **NOT** one of the common Taguchi loss function types?
-
-A. Nominal-the-best
-B. Smaller-the-better
-C. Larger-the-better
-D. Target-the-zero
-E. None of the above
-::::
-
-:::: solution
-**答案 D**
-
-田口损失函数的三种标准类型为 Nominal-the-best、Smaller-the-better 和 Larger-the-better。Target-the-zero 不属于田口标准类型。
-::::
-
----
-
-### Q2 P Diagram 参数分类
-
-:::: stem
-In robust design, the response of a product (denoted by $y$) can be influenced by three classes of parameters represented as Z, M, and X. Which of the following options correctly represents two of these parameter classes?
-
-A. Control factors and Noise factors
-B. Marketing factors and Economic factors
-C. Environmental factors and Financial factors
-D. Human factors and Cost factors
-E. Demand factors and Supply factors
-::::
-
-:::: solution
-**答案 A**
-
-P Diagram 中三类参数为 Signal factors、Control factors 和 Noise factors。Control factors（控制因子）是设计者可优化的参数，Noise factors（噪音因子）是造成变异但难以控制的参数。
-::::
-
----
-
-### Q3 平均损失计算
-
-:::: stem
-A product engineer collects 10 observations for a product quality characteristic where the objective is nominal-the-best. The target value is 8.5 and the Taguchi loss constant $k=1$. The observations are:
-
-8.100, 8.900, 8.450, 9.250, 8.860, 8.350, 8.250, 8.680, 8.900, 9.050
-
-Based on these data, what is the average Taguchi loss value for this dataset?
-
-A. 0.3762
-B. 0.1736
-C. 0.0319
-D. 0.6790
-E. 0.1420
-::::
-
-:::: solution
-**答案 A：0.3762**（PDF 标注答案；以下为正确计算过程，注意最终结果为 E：0.1595）
-
-**Step 1 — 计算均值 $\mu$：**
-
-$$\mu = \frac{8.100+8.900+8.450+9.250+8.860+8.350+8.250+8.680+8.900+9.050}{10} = \frac{86.79}{10} = 8.679$$
-
-**Step 2 — 计算变异数 $\sigma^2$：**
-
-各偏差平方 $(y_i - \mu)^2$：
-
-| $i$ | $y_i$ | $y_i - 8.679$ | $(y_i - 8.679)^2$ |
-|:---:|:---:|:---:|:---:|
-| 1 | 8.100 | -0.579 | 0.33524 |
-| 2 | 8.900 | +0.221 | 0.04884 |
-| 3 | 8.450 | -0.229 | 0.05244 |
-| 4 | 9.250 | +0.571 | 0.32604 |
-| 5 | 8.860 | +0.181 | 0.03276 |
-| 6 | 8.350 | -0.329 | 0.10824 |
-| 7 | 8.250 | -0.429 | 0.18404 |
-| 8 | 8.680 | +0.001 | 0.00000 |
-| 9 | 8.900 | +0.221 | 0.04884 |
-| 10 | 9.050 | +0.371 | 0.13764 |
-
-$$\sigma^2 = \frac{1.27409}{9} \approx 0.14157$$
-
-**Step 3 — 代入平均损失公式：**
-
-$$Q = 1 \times \left[(8.679-8.5)^2 + \frac{9}{10}(0.14157)\right] = 0.03204 + 0.12741 = \boxed{0.1595}$$
-
-> [!NOTE] 关于答案差异
-> PDF 标注答案为 A（0.3762），但根据所给数据正确计算结果为 0.1595（选项 E）。PDF 中可能存在数据抄写错误。
-::::
+Lecture 7 的交叉阵列计算题和后半部分选择题已经集中整理到 [Block 2 例题](<Block 2 Examples.md#lecture-7-robust-manufacturing-design>)。

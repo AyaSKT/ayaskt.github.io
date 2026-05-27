@@ -45,5 +45,7 @@
 
 - [Part 4: 6-Sigma & Process Capability](<Block 2/Lecture 8.md>)
 
+- [Block 2 例题 Examples](<Block 2/Block 2 Examples.md>)
+
 
 ![alt text](EPMF-README.attachments/1774261142070.JPG)
