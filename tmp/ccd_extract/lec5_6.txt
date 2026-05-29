@@ -1,0 +1,674 @@
+# lec5_6: Lecture5-6_Amplifiers.pdf
+pages=81
+
+
+--- PAGE 1 ---
+
+Dr. Lina Mohjazi
+Senior Lecturer in Green & Sustainable Wireless Communications
+Glasgow College, UESTC
+James Watt School of Engineering
+University of Glasgow, UK
+UESTCHN3004: Communications Circuit Design
+Academic Year 2024/2025 – Semester 2 
+Lecture 5 – Amplifiers Analysis
+
+--- PAGE 2 ---
+
+Scan the QR Code below!
+But first…..attendance!
+2
+
+--- PAGE 3 ---
+
+3 ratings are given:
+PD(max) = 800 mW, 
+VCE(max) = 15 V, and 
+IC(max) = 100 mA. 
+Determine the maximum value 
+to which VCC can be adjusted 
+without exceeding any of the 
+rating? 
+Which rating would be exceeded first? 
+What will happen if the base biasing 
+(i.e. base current) is removed?
+Practice Problem
+3
+
+--- PAGE 4 ---
+
+First, we have to find IB so that you can determine IC.
+IB =
+VBB−VBE
+RB
+=
+5 V−0.7 V
+22 K Ω = 195 μA  
+IC = βDCIB = 100 × 195 μA = 19.5 mA 
+IC is much less than IC(max) and ideally will not change with 
+VCC since it is determined only by βDC and IB. 
+The voltage drop across RC is,
+ VRC = IC × RC = 19.5 mA × 1 KΩ = 19.5 V 
+4
+Solution
+
+--- PAGE 5 ---
+
+Now we can determine the value of VCC when
+ VCE = VCE(max) = 15 V.
+VCC max = VCE max + VRC = 15 V + 19.5 V 
+Thus, VCC can be increased to 34.5 V, 
+under the existing conditions, before VCE(max) is exceeded. 
+To determine which one will exceed first, we need to check at the 
+above condition, whether or not PD(max) has been exceeded.
+PD = VCE max IC = 15V × 19 mA = 293 mW
+5
+Solution
+
+--- PAGE 6 ---
+
+This is less than the PD max . So, 𝑉𝐶𝐸max  is the limiting 
+rating in this case. 
+If the base current is removed causing the transistor to turn 
+off, VCE(max) will be exceeded first because the entire supply 
+voltage, VCC, will be dropped across the transistor. 
+6
+Solution
+
+--- PAGE 7 ---
+
+Lecture Outline
+•
+Identify common transistor amplifier configurations and their 
+applications.
+•
+Perform amplifier circuit analysis using small-signal models.
+•
+Calculate voltage gain, current gain, and input/output resistance.
+•
+Evaluate the impact of biasing and load on amplifier performance.
+7
+
+--- PAGE 8 ---
+
+Theveninising the Amplifier 
+Circuit
+Looking out from the base terminal, the 
+bias circuit can be redrawn as shown in 
+figure b.
+Apply Thevenin’s theorem to the circuit 
+left of point A, with VCC replaced by a 
+short to ground and the transistor 
+disconnected from the circuit. The 
+voltage at point A with respect to ground 
+is 
+8
+
+--- PAGE 9 ---
+
+9
+Theveninising the Amplifier 
+Circuit
+
+--- PAGE 10 ---
+
+10
+Theveninising the Amplifier 
+Circuit
+
+--- PAGE 11 ---
+
+Can you derive 
+the equations for 
+pnp transistor?
+11
+
+--- PAGE 12 ---
+
+Find 𝐼𝐶 and 𝑉𝐶𝐸
+12
+
+--- PAGE 13 ---
+
+Solution:
+13
+
+--- PAGE 14 ---
+
+Solution
+14
+
+--- PAGE 15 ---
+
+Transistor AC Models
+• To visualise the operation of a transistor in an amplifier circuit, it is often 
+useful to represent the device by a model circuit. 
+• A transistor model circuit uses various internal transistor parameters to 
+represent its operation. 
+• Transistor models are described here are based on resistance or r 
+parameters. 
+•
+Another system of parameters, called h parameters are also used.
+15
+
+--- PAGE 16 ---
+
+The five r parameters commonly 
+used for BJTs are given in Table.
+The italic lowercase letter r with a 
+prime denotes resistances 
+internal to the transistor.
+16
+r Parameters
+
+--- PAGE 17 ---
+
+An r-parameter model for a BJT is shown in 
+the Figure. 
+For most general analysis work, it can be 
+simplified as follows: 
+The effect of the ac base resistance is usually small 
+enough to neglect, so it can be replaced by a short. 
+The ac collector resistance is usually several hundred 
+kilohms and can be replaced by an open.
+17
+r-Parameter Transistor Modelc
+
+--- PAGE 18 ---
+
+The resulting simplify r-
+parameter equivalent circuit is 
+shown in Figure
+18
+r-Parameter Transistor Model
+
+--- PAGE 19 ---
+
+The interpretation of this model circuit in terms of a 
+transistor’s ac operation is as follows: 
+A resistance (r’e) appears between the emitter and base 
+terminals. This is the resistance “seen” looking into the 
+emitter of a forward-biased transistor. 
+The collector effectively acts as a dependent current source of          
+or, equivalently      , represented by the diamond-shaped 
+symbol. 
+These factors are shown with a transistor symbol in the Figure.
+19
+r-Parameter Transistor Model
+
+--- PAGE 20 ---
+
+Determining     by a Formula
+(6.1)
+20
+
+--- PAGE 21 ---
+
+21
+
+--- PAGE 22 ---
+
+A manufacturer’s datasheet typically specifies 
+h (hybrid) parameters (hi, hr, hf, and ho) 
+because they are relatively easy to 
+measure.
+Each of the four h parameters carries a second 
+subscript letter to designate the common-
+emitter (e), common-base (b), or common-
+collector (c) amplifier configuration, as 
+listed in bottom Table.
+The term common refers to one of the three 
+terminals (E, B, or C) that is referenced to 
+ac ground for both input and output 
+signals.
+22
+h Parameters
+
+--- PAGE 23 ---
+
+Relationships of h Parameters 
+and r Parameters
+23
+
+--- PAGE 24 ---
+
+Figure shows a common-
+emitter amplifier with voltage-
+divider bias and coupling 
+capacitors C1 and C3 on the 
+input and output and a bypass 
+capacitor, C2, from emitter to 
+ground. 
+The input signal, Vin, is capacitively 
+coupled to the base terminal, the 
+output signal, Vout, is capacitively 
+coupled from the collector to the load.
+Common Emitter Amplifier
+24
+
+--- PAGE 25 ---
+
+Phase Inversion
+•
+The output signal is 180 degree out of phase with the input signal.
+•
+As the input signal voltage changes, it causes the ac base current to change, 
+resulting in a change in the collector current from its Q-point value. 
+•
+If the base current increases, the collector current increases above its Q-point value, 
+causing an increase in the voltage drop across RC. 
+•
+This increase in the voltage across RC means that the voltage at the collector 
+decreases from its Q-point. 
+•
+So, any change in input signal voltage results in an opposite change in collector 
+signal voltage, which is a phase inversion.
+25
+
+--- PAGE 26 ---
+
+To analyse the amplifier in the Figure of previous 
+slide, the dc bias values must first be 
+determined. 
+To do this, a dc equivalent circuit is developed by 
+removing the coupling and bypass capacitors 
+because they appear open as far as the dc bias 
+is concerned. 
+This also removes the load resistor and signal 
+source
+Can you Theveninise the circuit and Calculate RTH, 
+VTH, IE, IC, VE, VC, VB  and VCE?
+26
+DC Analysis
+
+--- PAGE 27 ---
+
+27
+DC Analysis
+
+--- PAGE 28 ---
+
+28
+DC Analysis
+
+--- PAGE 29 ---
+
+To analyse the ac signal operation of an amplifier, an ac equivalent 
+circuit is developed as follows:
+1.
+The capacitors C1, C2, and C3 are replaced by effective shorts because their values are selected so 
+that XC is negligible at the signal frequency and can be considered to be
+2.
+The dc source is replaced by ground.
+Note: A dc voltage source has an internal resistance of near 0 ohm 
+because it holds a constant voltage independent of the load (within 
+limits); no ac voltage can be developed across it so it appears as an 
+ac short. This is why a dc source is called an ac ground.
+29
+AC Analysis
+
+--- PAGE 30 ---
+
+AC Analysis
+30
+
+--- PAGE 31 ---
+
+Signal (AC) Voltage at the Base
+If the internal resistance of the ac source is 0 ohm, then all of the source voltage 
+appears at the base terminal. 
+If, however, the ac source has a nonzero internal resistance, then three factors 
+must be taken into account in determining the actual signal voltage at the base. 
+These are:
+the source resistance (Rs), 
+the bias resistance
+and the ac input resistance at the base of the transistor
+31
+
+--- PAGE 32 ---
+
+Signal (AC) Voltage at the Base
+Total input resistance
+Signal voltage at the base of the transistor,
+32
+
+--- PAGE 33 ---
+
+33
+Input Resistance at the Base
+
+--- PAGE 34 ---
+
+34
+
+--- PAGE 35 ---
+
+Problem to Solve:
+35
+
+--- PAGE 36 ---
+
+Solution:
+36
+
+--- PAGE 37 ---
+
+37
+Solution:
+
+--- PAGE 38 ---
+
+The gain is the ratio of ac output voltage at the collector (Vc) to ac 
+input voltage at the base (Vb).
+38
+Voltage Gain
+
+--- PAGE 39 ---
+
+Attenuation
+39
+
+--- PAGE 40 ---
+
+Base circuit attenuation and 
+overall voltage gain
+40
+
+--- PAGE 41 ---
+
+Effect of Emitter Bypass 
+Capacitor on Voltage Gain
+The emitter bypass capacitor provides an effective short to the ac signal around the 
+emitter resistor, thus keeping the emitter at ac ground, as you have seen. 
+With the bypass capacitor, the gain of a given amplifier is maximum and equal to 
+The value of the bypass capacitor must be large enough so that its reactance over the 
+frequency range of the amplifier is very small (ideally ) compared to RE. 
+A good rule-of-thumb is that the capacitive reactance, XC, of the bypass capacitor should 
+be at least 10 times smaller than RE at the minimum frequency for which the amplifier must 
+operate.
+41
+
+--- PAGE 42 ---
+
+Problem to Solve:
+42
+
+--- PAGE 43 ---
+
+Solution:
+43
+
+--- PAGE 44 ---
+
+Voltage Gain Without the 
+Bypass Capacitor
+• To see how the bypass capacitor affects ac voltage gain, let’s 
+remove it from the circuit in the and compare voltage gains. 
+• Without the bypass capacitor, the emitter is no longer at ac ground. 
+Instead, RE is seen by the ac signal between the emitter and ground 
+and effectively adds to in the voltage gain formula.
+44
+
+--- PAGE 45 ---
+
+Problem to Solve:
+45
+
+--- PAGE 46 ---
+
+Solution:
+46
+
+--- PAGE 47 ---
+
+•
+A load is the amount of current drawn from the 
+output of an amplifier or other circuit through a 
+load resistance.
+•
+When a resistor, RL, is connected to the output 
+through the coupling capacitor C3, as shown in 
+Figure (a), it creates a load on the circuit. 
+•
+The collector resistance at the signal frequency 
+is effectively RC in parallel with RL. 
+•
+Remember, the upper end of RC is effectively at 
+ac ground. 
+•
+The ac equivalent circuit is shown in Figure (b).
+47
+Effect of a Load on the Voltage Gain
+
+--- PAGE 48 ---
+
+Problem to Solve:
+48
+
+--- PAGE 49 ---
+
+Problem to Solve:
+49
+
+--- PAGE 50 ---
+
+Solution:
+50
+
+--- PAGE 51 ---
+
+Stability of the Voltage Gain
+•
+Stability is a measure of how well an amplifier maintains its design values 
+over changes in temperature or for a transistor with a different
+•
+Although bypassing RE does produce the maximum voltage gain, there is a 
+stability problem because the ac voltage gain is dependent on 
+•
+Also r’e depends on IE and on temperature. This causes the gain to be 
+unstable over changes in temperature, because when r’e increases, the gain 
+decreases
+•
+and vice versa.
+51
+
+--- PAGE 52 ---
+
+52
+Problem to Solve:
+
+--- PAGE 53 ---
+
+Solution: DC Analysis
+Step 1: DC equivalent circuit
+Step 2: Thevenin’s equivalent circuit and applying KVL to BE circuit
+53
+
+--- PAGE 54 ---
+
+Solution: AC Analysis
+AC equivalent circuit
+54
+
+--- PAGE 55 ---
+
+Solution: AC Analysis
+AC equivalent circuit
+55
+
+--- PAGE 56 ---
+
+Solution: AC Analysis
+AC equivalent circuit
+56
+
+--- PAGE 57 ---
+
+Solution: AC Analysis
+AC equivalent circuit
+57
+
+--- PAGE 58 ---
+
+Total collector voltage waveform 
+and the total output voltage 
+waveform
+58
+
+--- PAGE 59 ---
+
+Total collector voltage waveform 
+and the total output voltage 
+waveform
+59
+
+--- PAGE 60 ---
+
+60
+
+--- PAGE 61 ---
+
+Current Gain
+61
+
+--- PAGE 62 ---
+
+Power Gain
+62
+
+--- PAGE 63 ---
+
+The common-collector (CC) 
+amplifier
+•
+The common-collector (CC) amplifier is usually referred to as 
+an emitter-follower (EF). 
+•
+The input is applied to the base through a coupling capacitor, 
+and the output is at the emitter.
+•
+The voltage gain of a CC amplifier is approximately 1, and its 
+main advantages are its high input resistance and current gain.
+63
+
+--- PAGE 64 ---
+
+The common-collector (CC) amplifier
+• Notice that the input signal is capacitively coupled to the base, the output signal 
+is capacitively coupled from the emitter, and the collector is at ac ground. 
+• There is no phase inversion, and the output is approximately the same 
+amplitude as the input.
+64
+
+--- PAGE 65 ---
+
+Voltage Gain of CC 
+65
+
+--- PAGE 66 ---
+
+Input Resistance of CC Amplifier
+•
+The emitter-follower is characterized by a high input resistance; this is what makes 
+it a useful circuit. 
+•
+Because of the high input resistance, it can be used as a buffer to minimise 
+loading effects when a circuit is driving a low-resistance load. 
+•
+The derivation of the input resistance, looking in at the base of the common-
+collector amplifier, is similar to that for the common-emitter amplifier. 
+•
+In a common-collector circuit, however, the emitter resistor is never bypassed 
+because the output is taken across Re, which is RE in parallel with RL.
+66
+
+--- PAGE 67 ---
+
+Input Resistance of CC 
+Amplifier
+67
+
+--- PAGE 68 ---
+
+Output Resistance
+Current Gain
+Power Gain
+68
+
+--- PAGE 69 ---
+
+Problem to Solve
+69
+
+--- PAGE 70 ---
+
+Solution
+70
+
+--- PAGE 71 ---
+
+71
+Solution
+
+--- PAGE 72 ---
+
+Solution
+72
+
+--- PAGE 73 ---
+
+Solution
+73
+
+--- PAGE 74 ---
+
+The common-base (CB) 
+amplifier
+• The common-base (CB) amplifier provides high voltage 
+gain with a maximum current gain of 1. 
+• Since it has a low input resistance, the CB amplifier is the 
+most appropriate type for certain applications where 
+sources tend to have very low-resistance outputs.
+74
+
+--- PAGE 75 ---
+
+CB Circuit
+AC equivalent model
+• The base is the common terminal and is at ac ground 
+because of capacitor C2. 
+• The input signal is capacitively coupled to the emitter. 
+The output is capacitively coupled from the collector to 
+a load resistor.
+75
+
+--- PAGE 76 ---
+
+Voltage Gain
+76
+
+--- PAGE 77 ---
+
+Input Resistance
+Output Resistance
+77
+
+--- PAGE 78 ---
+
+Current Gain
+Power Gain
+78
+
+--- PAGE 79 ---
+
+Problem to Solve:
+79
+
+--- PAGE 80 ---
+
+Solution
+80
+
+--- PAGE 81 ---
+
+Multistage Voltage Gain

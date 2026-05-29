@@ -305,3 +305,31 @@
 .dark .custom-block.definition > .custom-block-title {
   color: #ed9b40;
 }
+
+/* ================================================================
+   Hero image clickable link
+   ================================================================ */
+.VPHero a.image-src {
+  cursor: pointer;
+}
+
+.VPHero a.image-src > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: static;
+}
+
+@media (min-width: 640px) {
+  .VPHero a.image-src {
+    max-width: 256px;
+    max-height: 256px;
+  }
+}
+
+@media (min-width: 960px) {
+  .VPHero a.image-src {
+    max-width: 320px;
+    max-height: 320px;
+  }
+}

@@ -70,9 +70,15 @@ const heroImageLink = computed(() => {
     </template>
 
     <template #home-hero-image>
-      <a v-if="heroImageSrc && heroImageLink" :href="heroImageLink" target="_blank" rel="noopener noreferrer">
+      <a
+        v-if="heroImageSrc && heroImageLink"
+        class="image-src"
+        :href="heroImageLink"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
-          class="image-src hero-image-src"
+          class="hero-image-src"
           :src="heroImageSrc"
           :width="heroImageWidth"
           :height="heroImageHeight"
