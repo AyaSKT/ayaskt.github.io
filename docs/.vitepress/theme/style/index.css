@@ -320,6 +320,31 @@
   position: static;
 }
 
+/* Hover 惊喜提示 */
+.VPHero a.image-src::after {
+  content: "点我有惊喜 (≧▽≦)";
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #fff;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.VPHero a.image-src:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 @media (min-width: 640px) {
   .VPHero a.image-src {
     max-width: 256px;

@@ -1,5 +1,12 @@
 # Lecture 8 LC Circuits and Matching Networks LC 电路与匹配网络
 
+**Everything in its right place.**  
+**一切都在合适的位置。**
+
+<div align="right">——Radiohead《Everything In Its Right Place》</div>
+
+![串联 RLC 谐振关系](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/lc_cover_series_resonance.jpg>)
+
 ## 章节目录
 
 - [章节目录](#章节目录)
@@ -30,6 +37,20 @@
 | --- | --- | --- |
 | 电容 Capacitor | 存储电场能量 | 极板间漏电 |
 | 电感 Inductor | 存储磁场能量 | 绕线电阻 |
+
+:::: definition LC 储能 Energy Stored in L and C
+电容储存电场能量，电感储存磁场能量：
+
+$$
+E_C=\frac{1}{2}CV^2
+$$
+
+$$
+E_L=\frac{1}{2}LI^2
+$$
+
+LC 电路中的能量在 $E_C$ 与 $E_L$ 之间周期性交换，实际电阻会把一部分能量耗散掉。
+::::
 
 损耗用品质因数表示。对电感：
 
@@ -111,9 +132,7 @@ $$
 
 因此串联 RLC 可以用作陷波滤波器，也可以换位置做带通滤波器。
 
-![串联谐振与陷波滤波器](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/lc_07_series_resonance_notch.jpg>)
-
-![串联 RLC 电路](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/lc_08_rlc_series.jpg>)
+![串联谐振与带通响应](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/lc_resonance_response_wide.jpg>)
 
 
 ---
@@ -121,8 +140,6 @@ $$
 ### 8-1-3 带通响应与 Q Band-Pass Response and Q
 
 如果把输出取在合适位置，串联谐振电路可以形成带通响应。峰值出现在谐振频率。
-
-![串联谐振响应](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/lc_11_series_response_curve.jpg>)
 
 带宽定义为输出降到最大值 $1/\sqrt{2}$，也就是 $0.707$ 倍时两个频率之间的间隔。
 
@@ -146,12 +163,22 @@ $$
 
 。
 
+若带通响应近似关于中心频率对称，两个 $-3\,\mathrm{dB}$ 截止频率可估算为
+
+$$
+f_1=f_r-\frac{BW}{2}
+$$
+
+$$
+f_2=f_r+\frac{BW}{2}
+$$
+
 $Q$ 越大，频响曲线越窄，选择性越强。
 
-![Q 对频响的影响](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/lc_13_q_effect.jpg>)
+![谐振响应与 Q 对带宽的影响](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/lc_q_bandwidth_wide.jpg>)
 
 :::: tip
-高 $Q$ 不等于“信号更大”。高 $Q$ 的核心是带宽更窄、选择性更强。
+高 $Q$ 不表示信号一定更大，主要表示带宽更窄、选择性更强。
 ::::
 
 
@@ -159,7 +186,7 @@ $Q$ 越大，频响曲线越窄，选择性越强。
 
 ### 8-1-4 并联 LC 与 Tank Circuit
 
-并联 LC 电路常称为**槽路 Tank Circuit**。这里的电阻往往不是外加电阻，而是电感绕线本身的内阻。
+并联 LC 电路常称为槽路 Tank Circuit。这里的电阻往往不是外加电阻，而是电感绕线本身的内阻。
 
 并联 RLC 的精确谐振频率可写为
 
@@ -177,9 +204,15 @@ $$
 
 并联谐振时导纳最小，所以阻抗最大。若把槽路作为负载，它可以在谐振频率附近产生带通滤波。
 
-![Tank circuit band-pass](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/lc_19_tank_circuit_bpf.jpg>)
+![Tank circuit band-pass](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/lc_19_tank_circuit_bpf_wide.jpg>)
 
-槽路这个名字很形象：能量在 $L$ 的磁场和 $C$ 的电场之间来回交换。
+高 $Q$ 近似下，槽路谐振处的最大阻抗常写作
+
+$$
+Z_{\max}\approx Q^2R
+$$
+
+槽路中，能量在 $L$ 的磁场和 $C$ 的电场之间来回交换。
 
 在低于 $100\,\mathrm{kHz}$ 的频率下，RC 滤波器往往更方便；高频射频电路里，RLC 模块更常用。多个 RLC 小节串联时，也常用滤波器阶数或极点数描述。
 
@@ -387,7 +420,7 @@ $$
 - 把寄生电抗吸收到匹配网络中；
 - 或先把电抗谐振掉，再匹配电阻部分。
 
-![复数阻抗匹配](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/lc_36_complex_matching.jpg>)
+![复数阻抗匹配](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/lc_complex_matching_wide.jpg>)
 
 ## 8-3 例题 Exercises
 

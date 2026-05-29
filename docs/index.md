@@ -4,11 +4,11 @@ layout: home
 
 hero:
 
-  name: "Ayaskt 工作站\nAya's Sky City"
-  text: "课堂笔记 / 资源汇总"
+  name: "Ayaskt 工作站\nAyaskt Workspace"
+  text: "笔记 / 资源汇总"
 
 
-  tagline: 你战胜了自己，你爱通信工程。
+  tagline: Daphne, Ficus, Iris, Maackia.
 
   image:
     src: /IMG_4338.jpeg # 你的图片路径，放在 docs 下

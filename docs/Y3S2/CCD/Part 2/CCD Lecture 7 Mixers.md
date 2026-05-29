@@ -1,5 +1,16 @@
 # Lecture 7 Mixers 混频器
 
+**孤独の中，泣いても，**  
+**孤独的内心，即使哭泣，**  
+
+**蝶の羽根で，おやすみなさい。**  
+**也要在蝴蝶的翅膀上，说着晚安。**  
+
+
+<div align="right">——Aiobahn/長瀬有花 《宙でおやすみ (在天空晚安)》</div>
+
+![alt text](<CCD Lecture 7 Mixers.attachments/1780057844904.PNG>)
+
 ## 章节目录
 
 - [章节目录](#章节目录)
@@ -30,7 +41,7 @@
 混频器是一个三端口电路，用非线性器件把两个交流信号相乘，从而在输出端产生新的频率分量。
 ::::
 
-混频的核心不是相加，而是**相乘**。如果两个输入为
+混频按乘法处理。若两个输入为
 
 $$
 v_1(t)=V_1\cos(\omega_1 t)
@@ -48,6 +59,14 @@ $$
 \cos(\omega_1t)\cos(\omega_2t)
 =\frac{1}{2}\cos((\omega_1-\omega_2)t)
 +\frac{1}{2}\cos((\omega_1+\omega_2)t)
+$$
+
+同理，
+
+$$
+\sin(\omega_1t)\sin(\omega_2t)
+=\frac{1}{2}\cos((\omega_1-\omega_2)t)
+-\frac{1}{2}\cos((\omega_1+\omega_2)t)
 $$
 
 也就是说，输出频率约为
@@ -88,7 +107,7 @@ $$
 
 接收端中，收到的射频信号与本地振荡器混频，保留差频后得到较低的中频或基带信号。
 
-如果输入不是单一单音，而是一段带宽内的信号，混频会把整段频谱整体搬移。公式上还是每个频率分量分别与本地振荡器产生和频/差频。
+若输入是一段带宽内的信号，混频会把整段频谱整体搬移。公式上仍可把每个频率分量分别与本地振荡器相乘，再取和频或差频。
 
 
 ---
@@ -142,6 +161,14 @@ $$
 
 其中 $2v_1v_2$ 就给出 $\omega_1+\omega_2$ 和 $|\omega_1-\omega_2|$。
 
+若写出平方项中的频率成分：
+
+$$
+\frac{1}{2}\left(\frac{v_D}{V_T}\right)^2
+\rightarrow
+2\omega_1,\quad 2\omega_2,\quad |\omega_1-\omega_2|,\quad \omega_1+\omega_2
+$$
+
 ![二极管混频器](<CCD Lecture 7 Mixers.attachments/mix_09_diode_mixer.jpg>)
 
 二极管混频器的问题是它还会产生 $2\omega_1$、$2\omega_2$ 等不想要的分量。如果输入不够小，高阶泰勒项还会继续产生更多杂散分量。
@@ -167,7 +194,7 @@ $$
 
 平方项仍然产生 $\omega_1\pm\omega_2$。
 
-![BJT 混频器](<CCD Lecture 7 Mixers.attachments/mix_11_bjt_mixer.jpg>)
+![BJT 混频器](<CCD Lecture 7 Mixers.attachments/mix_11_bjt_mixer_wide.jpg>)
 
 BJT 的优点是有源混频器可以提供转换增益。换句话说，混频同时可能带来放大，这对后级需要一定功率电平的场景很有用。
 
@@ -178,15 +205,34 @@ BJT 的优点是有源混频器可以提供转换增益。换句话说，混频�
 
 ### 7-2-3 JFET 混频器 JFET Mixer
 
-JFET 的电流关系不是指数，而是平方形式：
+JFET 的电流关系为平方形式：
 
 $$
 I_D=I_{DSS}\left(1-\frac{v_{GS}}{V_P}\right)^2
 $$
 
+展开后：
+
+$$
+I_D=I_{DSS}
+\left[
+1-2\frac{v_{GS}}{V_P}
++\frac{v_{GS}^2}{V_P^2}
+\right]
+$$
+
 平方关系天然包含交叉项，因此也能产生和频与差频。
 
-![JFET 混频器](<CCD Lecture 7 Mixers.attachments/mix_12_jfet_mixer.jpg>)
+若 $v_{GS}$ 由两个输入单音叠加而成，平方项近似给出
+
+$$
+I_D\sim
+-I_{DSS}\frac{V_1V_2}{2V_P^2}
+\left[
+\cos(|\omega_1-\omega_2|t)
++\cos((\omega_1+\omega_2)t)
+\right]
+$$
 
 JFET 混频器的一个好处是没有指数展开中的无限高阶项，因此杂散项会少一些，也能接受更大的输入信号。这里的 $I_{DSS}$ 也会带来转换增益。
 
@@ -199,7 +245,18 @@ JFET 混频器的一个好处是没有指数展开中的无限高阶项，因此
 
 ![双栅 MOSFET 混频器](<CCD Lecture 7 Mixers.attachments/mix_13_dual_gate_mosfet.jpg>)
 
-输出中仍然有 $\omega_1+\omega_2$ 和 $|\omega_1-\omega_2|$。转换增益与跨导变化量 $g_{m\Delta}$ 有关，而且与其中一个输入幅度有关，所以本振驱动电平不能随便选。
+输出可近似写成
+
+$$
+V_{out}\sim
+g_{m\Delta}R_DV_1
+\left[
+\cos(|\omega_1-\omega_2|t)
++\cos((\omega_1+\omega_2)t)
+\right]
+$$
+
+因此输出中仍然有 $\omega_1+\omega_2$ 和 $|\omega_1-\omega_2|$。转换增益与跨导变化量 $g_{m\Delta}$ 有关，而且与其中一个输入幅度有关，所以本振驱动电平不能随便选。
 
 ## 7-3 镜像频率与抑制 Image Frequency and Rejection
 
@@ -235,7 +292,7 @@ $$
 如果目标射频频率在本振频率下方，则镜像频率在本振频率上方；反过来也一样。
 
 :::: tip
-镜像频率不是混频器算错，而是混频器的差频机制本来就允许两个对称频率落到同一个中频。
+镜像频率来自差频机制：位于本振两侧且间隔相同的两个频率，会落到同一个中频。
 ::::
 
 
@@ -285,12 +342,15 @@ $$
 | --- | --- | --- |
 | 频率范围 Frequency Range | 射频、本振、中频端口可工作的频率范围 | 三个端口可能范围不同 |
 | 转换损耗 Conversion Loss | 射频到中频的信号损耗 | 无源混频器常见，单位 dB |
+| 转换增益 Conversion Gain | 中频输出功率相对射频输入功率的增益 | 有源混频器可能为正 |
 | 隔离度 Isolation | 本振泄漏到射频/中频端口的程度 | 越大越好 |
 | 最大射频功率 Max RF Power | 射频端口最大允许功率 | 超过可能损坏器件 |
 | 本振电平 LO Level | 本振端所需驱动功率 | 常见 Level 7 Mixer 表示约 +7 dBm |
 | VSWR | 端口匹配程度 | 越接近 1 越好 |
+| $P_{1\mathrm{dB}}$ | 转换增益压缩 $1\,\mathrm{dB}$ 时的输入功率 | 判断大信号能力 |
+| IP3 | 三阶互调外推交点 | 判断线性度，越高越好 |
 
-![Mini-Circuits 混频器例子](<CCD Lecture 7 Mixers.attachments/mix_19_minicircuits_example.jpg>)
+![Mini-Circuits 混频器例子](<CCD Lecture 7 Mixers.attachments/mix_19_minicircuits_example_wide.jpg>)
 
 回波损耗与反射电压比的关系为
 
@@ -315,6 +375,10 @@ $$
 理想无反射时 $|\Gamma|=0$，所以 $VSWR=1$。实际设计中希望 VSWR 尽量接近 1。
 
 ![混频器指标曲线](<CCD Lecture 7 Mixers.attachments/mix_24_mixer_metric_plots.jpg>)
+
+:::: tip
+本振电平偏低会使开关不充分，偏高也可能让损耗、隔离度或杂散变差。因此 LO power 要按数据手册给定范围选。
+::::
 
 ## 7-5 例题 Exercises
 

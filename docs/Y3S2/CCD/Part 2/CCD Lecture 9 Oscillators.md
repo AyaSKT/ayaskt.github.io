@@ -1,5 +1,12 @@
 # Lecture 9 Oscillators 振荡器
 
+**I hear the clock ticking.**  
+**我听见时钟在走。**
+
+<div align="right">——Cyndi Lauper《Time After Time》</div>
+
+![LC 槽路电压电流波形](<CCD Lecture 9 Oscillators.attachments/osc_cover_lc_waveform.jpg>)
+
 ## 章节目录
 
 - [章节目录](#章节目录)
@@ -20,7 +27,9 @@
 
 ## 9-1 LC 振荡与 Barkhausen 条件 LC Oscillation and Barkhausen Criterion
 
-振荡器把直流电源转换成周期性输出信号。通信电路里，本地振荡器、时钟、载波源都依赖振荡器。
+:::: definition 振荡器 Oscillator
+振荡器把直流电源转换为周期性交流输出。通信电路中的本地振荡器、载波源和时钟源都属于这类电路。
+::::
 
 理想正弦振荡器希望输出
 
@@ -91,7 +100,7 @@ $$
 
 也就是 $0^\circ,360^\circ,720^\circ,\ldots$。
 
-严格说，Barkhausen 条件是必要条件，不是充分条件。实际振荡器还需要：
+严格说，Barkhausen 条件是必要条件，实际振荡器还需要：
 
 - 起振时 $|A\beta|>1$，让噪声或开关瞬态能被放大；
 - 稳态时幅度控制让有效增益回到 $|A\beta|=1$；
@@ -137,7 +146,7 @@ $$
 
 ![开环设计视角](<CCD Lecture 9 Oscillators.attachments/osc_14_open_loop_design.jpg>)
 
-直觉上可以分三步：
+开环设计通常分三步：
 
 1. 先认为内部噪声可以触发振荡；
 2. 放大器看到反馈网络等效为一个负载阻抗；
@@ -182,7 +191,7 @@ $$
 
 Hartley 振荡器使用抽头电感反馈网络。放大器通常由 BJT 提供，反馈网络由 $L_1$、$L_2$ 和 $C$ 组成。
 
-![Hartley 振荡器结构](<CCD Lecture 9 Oscillators.attachments/osc_21_hartley_left_clean.jpg>)
+![Hartley 与 Colpitts 振荡器结构对比](<CCD Lecture 9 Oscillators.attachments/osc_hartley_colpitts_wide.jpg>)
 
 其谐振频率近似为
 
@@ -191,8 +200,6 @@ f_r=\frac{1}{2\pi\sqrt{(L_1+L_2)C}}
 $$
 
 Colpitts 振荡器把电感和电容的位置互换，使用抽头电容反馈网络。
-
-![Colpitts 振荡器结构](<CCD Lecture 9 Oscillators.attachments/osc_22_colpitts_clean.jpg>)
 
 两个串联电容的等效电容为
 
@@ -222,7 +229,23 @@ $$
 
 其中反馈衰减 $B$ 主要由 $C_1$ 和 $C_2$ 的比值决定。
 
+对课程中的抽头电容反馈网络，可近似写为
+
+$$
+B=\frac{V_f}{V_{out}}
+\approx\frac{X_{C1}}{X_{C2}}
+=\frac{C_2}{C_1}
+$$
+
+因此自启动时常取
+
+$$
+A_v>\frac{C_1}{C_2}
+$$
+
 ## 9-5 晶体振荡器与压控振荡器 Crystal and Voltage-Controlled Oscillators
+
+![晶体、可变电容与变容二极管 VCO](<CCD Lecture 9 Oscillators.attachments/osc_crystal_vco_wide.jpg>)
 
 
 ---
@@ -236,9 +259,7 @@ $$
 
 由于晶体尺寸和切割方式可以做得非常精确，晶体振荡器能产生很稳定的频率。
 
-晶体的等效电路可看成一个串联 RLC 支路，再并联一个电容 $C_P$。
-
-![晶体等效电路](<CCD Lecture 9 Oscillators.attachments/osc_28_crystal_equivalent_clean.jpg>)
+晶体的等效电路可看成一个串联 RLC 支路，再并联一个电容 $C_P$，对应上图左侧。
 
 晶体的串联谐振与并联谐振频率非常接近，因此总体 $Q$ 很高。普通 LC 电路的高 $Q$ 可能在 $10^3$ 量级，而晶体 $Q$ 常可达到 $2\times10^4$ 左右，所以输出频率成分很纯。
 
@@ -272,7 +293,7 @@ $$
 
 现代电路更多使用变容二极管。变容二极管的结电容 $C_D$ 随反向偏置电压 $V_D$ 改变。
 
-![变容二极管压控振荡器](<CCD Lecture 9 Oscillators.attachments/osc_31_varactor_vco.jpg>)
+上图右侧给出变容二极管 VCO 的简化结构。直流控制电压通过隔直电容与槽路分离，交流上变容二极管电容并入谐振网络。
 
 若变容二极管电容与槽路电容并联，则角频率可写为
 
@@ -282,9 +303,35 @@ $$
 
 因此控制电压 $V_D$ 改变 $C_D$，就改变振荡频率。
 
+课程中常用的近似关系为
+
+$$
+C_D\approx\frac{C_0}{\sqrt{1+\frac{|V_D|}{0.5\,\mathrm{V}}}}
+$$
+
+反向偏置电压越大，结电容通常越小，故谐振频率升高。
+
 Clapp 振荡器可以看成带额外串联电容的 Colpitts 结构。加入变容二极管后，反馈网络总电容由 $C_1$、$C_2$ 和 $C_D$ 的串联组合决定。
 
 ![Clapp 压控振荡器](<CCD Lecture 9 Oscillators.attachments/osc_32_clapp_vco.jpg>)
+
+先把 $C_1$、$C_2$ 串联合并：
+
+$$
+C_S=\frac{C_1C_2}{C_1+C_2}
+$$
+
+再与变容二极管电容串联：
+
+$$
+C_T=\frac{C_DC_S}{C_D+C_S}
+$$
+
+因此
+
+$$
+\omega_0=\frac{1}{\sqrt{LC_T}}
+$$
 
 ## 9-6 振荡器指标与相位噪声 Oscillator Metrics and Phase Noise
 
@@ -364,7 +411,7 @@ $$
 :::: stem L9-E2
 Colpitts 振荡器中，$L=50\,\mathrm{mH}$，$C_1=0.1\,\mu\mathrm{F}$，$C_2=0.01\,\mu\mathrm{F}$。假设反馈网络负载很小且 $Q>10$，求振荡频率。若加载后 $Q=8$，频率变为多少？若 $Q=4$ 呢？
 
-![Colpitts 振荡器例题电路](<CCD Lecture 9 Oscillators.attachments/osc_27_colpitts_circuit_clean.jpg>)
+![Colpitts 振荡器例题电路](<CCD Lecture 9 Oscillators.attachments/osc_colpitts_problem_wide.jpg>)
 ::::
 
 :::: solution

@@ -1,5 +1,11 @@
 # Lecture 10 Revision 复习
 
+**把散开的东西放回原位。**
+
+<div align="right">——Revision Note</div>
+
+![CCD 复习总览](<CCD Lecture 10 Revision.attachments/revision_cover_overview.jpg>)
+
 ## 章节目录
 
 - [章节目录](#章节目录)
@@ -9,6 +15,15 @@
 - [10-4 振荡器 Oscillators](#10-4-振荡器-oscillators)
 - [10-5 综合例题 Review Exercises](#10-5-综合例题-review-exercises)
 - [Summary](#summary)
+
+复习时先判断题目属于哪类模块，再选对应模型。常见入口如下。
+
+| 模块 | 先判断什么 | 常用模型 |
+| --- | --- | --- |
+| 放大器 | 直流偏置还是交流小信号 | Q 点、$r_e'$ 模型、输入/输出电阻 |
+| 混频器 | 上变频、下变频或镜像问题 | 乘法恒等式、超外差频率关系 |
+| LC/匹配 | 谐振、带宽还是功率传输 | $f_r$、$Q$、$\Gamma$、L 型匹配 |
+| 振荡器 | 起振条件还是频率计算 | Barkhausen 条件、反馈网络谐振 |
 
 ## 10-1 放大器 Amplifiers
 
@@ -91,7 +106,7 @@ $$
 
 ## 10-2 混频器 Mixers
 
-混频器的核心是非线性乘法。两个单音相乘：
+混频器用非线性乘法产生新频率。两个单音相乘：
 
 $$
 \cos(\omega_1t)\cos(\omega_2t)

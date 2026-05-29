@@ -9,7 +9,7 @@
 
 <div align="right">——SadSvit《Море (海)》</div>
 
-
+![alt text](<CCD Lecture 5-6 Amplifiers.attachments/1780057676448.JPG>)
 
 ## 章节目录
 
@@ -41,6 +41,16 @@
 - 耦合电容和旁路电容视为开路；
 - 信号源和负载电阻被隔离；
 - 只保留偏置网络、晶体管、集电极电阻和发射极电阻。
+
+:::: definition 直流额定值 DC Ratings
+BJT 直流分析还要检查器件额定值，常见限制有
+
+$$
+P_D=V_{CE}I_C,\qquad V_{CE(\max)},\qquad I_{C(\max)}
+$$
+
+若增大 $V_{CC}$，需要同时比较 $V_{CE}$、$I_C$ 和 $P_D$。去掉基极偏置时晶体管截止，通常有 $V_{CE}\approx V_{CC}$，因此最先需要检查 $V_{CE(\max)}$。
+::::
 
 
 ---
@@ -110,7 +120,7 @@ $$
 
 ## 5-2 晶体管交流模型 AC Transistor Models
 
-交流分析关注信号的小变化，而不是直流总量。因此把晶体管换成小信号模型会更清楚。
+交流分析只保留静态工作点附近的微小变化。因此把晶体管换成小信号模型会更清楚。
 
 
 ---
@@ -153,7 +163,27 @@ $$
 | $h_{ib}$ | 共基输入电阻 | $r_e'$ |
 | $h_{fb}$ | 共基电流增益 | $\alpha_{ac}$ |
 
-![h 参数与 r 参数关系](<CCD Lecture 5-6 Amplifiers.attachments/amp_23_h_to_r.jpg>)
+更完整的换算关系可写为
+
+$$
+\alpha_{ac}=h_{fb}
+$$
+
+$$
+\beta_{ac}=h_{fe}
+$$
+
+$$
+r_e'=\frac{h_{re}}{h_{oe}}
+$$
+
+$$
+r_c'=\frac{h_{re}+1}{h_{oe}}
+$$
+
+$$
+r_b'=h_{ie}-\frac{h_{re}}{h_{oe}}(1+h_{fe})
+$$
 
 ## 5-3 共射放大器 Common-Emitter Amplifier
 
@@ -582,7 +612,7 @@ R_{in(base)}
 =51\,\mathrm{k}\Omega
 $$
 
-这就是发射极跟随器适合做缓冲器的原因：它让前级看到较高输入电阻。
+因此发射极跟随器常用于缓冲级，让前级看到较高输入电阻。
 ::::
 
 ## Summary
@@ -592,6 +622,7 @@ $$
 | 直流分析 | 电容开路，求 $I_C$、$V_{CE}$ 与 Q 点 |
 | 交流分析 | 电容短路，直流源为交流地 |
 | 戴维南等效 | $V_{TH}=V_{CC}R_2/(R_1+R_2)$，$R_{TH}=R_1\parallel R_2$ |
+| 额定值检查 | 同时比较 $V_{CE}$、$I_C$、$P_D=V_{CE}I_C$ |
 | 小信号发射极电阻 | $r_e'\approx25\,\mathrm{mV}/I_E$ |
 | 共射放大器 | 电压增益高，输出反相 |
 | 共射增益 | $A_v=-R_C/r_e'$，带负载时 $R_C$ 换成 $R_C\parallel R_L$ |
