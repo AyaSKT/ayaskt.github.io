@@ -465,7 +465,7 @@ export default defineConfig({
               ],
             },
             {
-              text: 'Block 2 面向制造而设计',
+              text: 'Block 2 面向制造的设计',
               collapsed: false,
               items: [
                 { text: 'Lecture 5', link: '/Y3S2/EPMF/Block 2/Lecture 5' },
