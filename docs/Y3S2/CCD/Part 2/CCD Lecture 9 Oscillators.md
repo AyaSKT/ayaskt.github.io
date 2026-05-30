@@ -40,7 +40,6 @@ $$
 其中频率和幅度都稳定。
 
 
----
 
 ### 9-1-1 LC 槽路与飞轮效应 Tank Circuit and Flywheel Effect
 
@@ -153,7 +152,6 @@ $$
 3. 反馈网络的等效输入阻抗又受放大器输入阻抗影响，因此需要把两者一起考虑。
 
 
----
 
 ### 9-3-1 反馈网络的三个参数 Three Feedback Parameters
 
@@ -248,7 +246,6 @@ $$
 ![晶体、可变电容与变容二极管 VCO](<CCD Lecture 9 Oscillators.attachments/osc_crystal_vco_wide.jpg>)
 
 
----
 
 ### 9-5-1 晶体振荡器 Crystal Oscillators
 

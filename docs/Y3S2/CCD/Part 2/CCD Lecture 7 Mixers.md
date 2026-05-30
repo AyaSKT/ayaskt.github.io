@@ -33,7 +33,6 @@
 ## 7-1 混频原理 Mixing Principle
 
 
----
 
 ### 7-1-1 基本乘法关系 Basic Multiplication Relation
 
@@ -127,7 +126,6 @@ $$
 混频需要非线性。二极管、BJT、JFET 和 MOSFET 都可以用来做混频器，只是产生的附加频率分量和转换增益不一样。
 
 
----
 
 ### 7-2-1 二极管混频器 Diode Mixer
 
@@ -261,7 +259,6 @@ $$
 ## 7-3 镜像频率与抑制 Image Frequency and Rejection
 
 
----
 
 ### 7-3-1 镜像频率 Image Frequency
 

@@ -53,7 +53,6 @@ $$
 ::::
 
 
----
 
 ### 5-1-1 戴维南等效 Thevenin Equivalent
 
@@ -123,7 +122,6 @@ $$
 交流分析只保留静态工作点附近的微小变化。因此把晶体管换成小信号模型会更清楚。
 
 
----
 
 ### 5-2-1 r 参数 r Parameters
 
@@ -192,7 +190,6 @@ $$
 ![共射放大器](<CCD Lecture 5-6 Amplifiers.attachments/amp_24_common_emitter_amp.jpg>)
 
 
----
 
 ### 5-3-1 相位反转 Phase Inversion
 

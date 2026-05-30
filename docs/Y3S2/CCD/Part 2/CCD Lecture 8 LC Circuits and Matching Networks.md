@@ -27,7 +27,6 @@
 ## 8-1 LC 元件与谐振 LC Components and Resonance
 
 
----
 
 ### 8-1-1 实际电容与电感 Practical Capacitors and Inductors
 
@@ -241,7 +240,6 @@ $$
 ## 8-2 阻抗匹配 Impedance Matching
 
 
----
 
 ### 8-2-1 串并联等效转换 Series to Parallel Conversion
 

@@ -195,6 +195,14 @@
   );
 }
 
+.example-solution + hr {
+  display: none;
+}
+
+.example-solution + hr:has(+ .example-stem) {
+  display: block;
+}
+
 .example-solution + hr + .example-stem {
   margin-top: 0;
 }
