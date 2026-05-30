@@ -510,8 +510,8 @@ export default defineConfig({
             { text: 'Ch 5 恒定电流', link: '/Y3S2/EMFT/EMFT Chapter 5' },
             { text: 'Ch 6 静磁场', link: '/Y3S2/EMFT/EMFT Chapter 6' },
             { text: 'Ch 7 时变场与 Maxwell 方程组', link: '/Y3S2/EMFT/EMFT Chapter 7' },
-            { text: 'Ch 8 I 平面电磁波 (上)', link: '/Y3S2/EMFT/EMFT Chapter 8 P I' },
-            { text: 'Ch 8 II 平面电磁波 (下)', link: '/Y3S2/EMFT/EMFT Chapter 8 P II' }
+            { text: 'Ch 8 平面电磁波', link: '/Y3S2/EMFT/EMFT Chapter 8' },
+            { text: 'Ex 1 公式复习', link: '/Y3S2/EMFT/EMFT Chapter 8 Ex 1 公式复习' }
           ]
         }
       ],
