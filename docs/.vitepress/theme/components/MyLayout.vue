@@ -52,18 +52,32 @@ const heroImageLink = computed(() => {
 function setupHeroNameEntrance() {
   if (typeof document === 'undefined') return
   const nameEl = document.querySelector('.VPHero .name') as HTMLElement | null
-  if (nameEl && nameEl.parentElement) {
-    const wrapper = document.createElement('span')
-    wrapper.className = 'hero-name-wrapper animate__animated animate__fadeInLeft'
-    wrapper.style.display = 'inline-block'
-    wrapper.style.animationDelay = '0.48s'
-    wrapper.style.animationDuration = '0.75s'
-    nameEl.parentElement.insertBefore(wrapper, nameEl)
-    wrapper.appendChild(nameEl)
-  }
+  // 防止重复包裹
+  if (!nameEl || nameEl.parentElement?.querySelector('.hero-name-wrapper')) return
+  const wrapper = document.createElement('span')
+  wrapper.className = 'hero-name-wrapper animate__animated animate__fadeInLeft'
+  wrapper.style.display = 'inline-block'
+  wrapper.style.animationDelay = '0.48s'
+  wrapper.style.animationDuration = '0.75s'
+  nameEl.parentElement.insertBefore(wrapper, nameEl)
+  wrapper.appendChild(nameEl)
 }
 
+// 是否从首页进入（仅首次加载时判断）
+const isHomepage = typeof window !== 'undefined'
+  && (window.location.pathname === '/' || window.location.pathname === '/index.html')
+
 onMounted(() => {
+  // 仅在首次进入首页时 nav 从上方淡入，其他页面无入场动画
+  if (isHomepage) {
+    const nav = document.querySelector('.VPNavBar') as HTMLElement | null
+    if (nav) {
+      nav.classList.add('animate__animated', 'animate__fadeInDown')
+      nav.style.animationDuration = '0.5s'
+    }
+  }
+  // 仅首次加载：hero name 入场动画
+  // 导航回到首页时由 View Transitions root crossfade 自然淡入
   setupHeroNameEntrance()
 })
 </script>

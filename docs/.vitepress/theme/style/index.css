@@ -567,7 +567,35 @@
 .home-course-button:nth-child(1) { animation-delay: 0.10s; }
 .home-course-button:nth-child(2) { animation-delay: 0.14s; }
 
-/* ---- NavBar（仅首页） ---- */
-html:has(.VPHome) .VPNavBar {
-  animation: fadeInDown 0.5s ease both;
+/* NavBar 入场动画由 MyLayout.vue onMounted 处理（仅首次加载） */
+
+/* ================================================================
+   Features 入场动画：从右到左依次 fadeInUp
+   ================================================================ */
+.VPFeatures .item .VPFeature {
+  animation-name: fadeInUp;
+  animation-duration: .65s;
+  animation-fill-mode: both;
+}
+
+/* 桌面端 4 列：从右到左依次上升 */
+@media (min-width: 960px) {
+  .VPFeatures .item:nth-child(4) .VPFeature { animation-delay: .08s; }
+  .VPFeatures .item:nth-child(3) .VPFeature { animation-delay: .16s; }
+  .VPFeatures .item:nth-child(2) .VPFeature { animation-delay: .24s; }
+  .VPFeatures .item:nth-child(1) .VPFeature { animation-delay: .32s; }
+}
+
+/* 平板端 2 列：每行从右到左 */
+@media (min-width: 640px) and (max-width: 959px) {
+  .VPFeatures .item:nth-child(even) .VPFeature { animation-delay: .06s; }
+  .VPFeatures .item:nth-child(odd) .VPFeature { animation-delay: .16s; }
+}
+
+/* 移动端 1 列：从上到下依次上升 */
+@media (max-width: 639px) {
+  .VPFeatures .item:nth-child(1) .VPFeature { animation-delay: .04s; }
+  .VPFeatures .item:nth-child(2) .VPFeature { animation-delay: .10s; }
+  .VPFeatures .item:nth-child(3) .VPFeature { animation-delay: .16s; }
+  .VPFeatures .item:nth-child(4) .VPFeature { animation-delay: .22s; }
 }

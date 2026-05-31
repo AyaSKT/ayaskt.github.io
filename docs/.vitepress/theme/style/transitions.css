@@ -1,57 +1,121 @@
 /* ================================================================
    iOS Style Transitions — page crossfade, micro-interactions
+   View Transitions API + Animate.css 关键帧
    ================================================================ */
 
-/* ---- Page Transition: View Transitions API crossfade ---- */
+/* ---- View Transition 元素命名 ----
+   只有 doc 页面才把 sidebar / content / aside 提取出来独立动画
+   homepage 没有 VPDoc，这些元素不参与 view-transition，直接出现
+   侧边栏在所有页面存在（homepage 为隐藏/空），用 :has(.VPDoc) 限定
+   Nav bar / Local nav 始终保持静态，不在页面切换时参与 crossfade
+----------------------------------- */
 
-/* Keep the site title stable while the rest of the page crossfades. */
-.VPNavBarTitle {
-  view-transition-name: nav-title;
+.VPNavBar {
+  view-transition-name: nav-bar;
 }
 
-/* Keep the sidebar still only when both pages use the same sidebar group.
-   Otherwise it remains in the root snapshot and fades with the page. */
-.vt-keep-sidebar .VPSidebar {
-  view-transition-name: sidebar;
+.VPLocalNav {
+  view-transition-name: local-nav;
 }
 
-::view-transition-group(nav-title),
-::view-transition-group(sidebar) {
-  animation: none;
-}
-
-::view-transition-old(nav-title),
-::view-transition-new(nav-title) {
-  animation: none;
-}
-
-::view-transition-old(nav-title) {
-  opacity: 0;
-}
-
-::view-transition-new(nav-title),
-::view-transition-old(sidebar),
-::view-transition-new(sidebar) {
+/* 只展示旧快照，隐藏新快照，避免新旧叠加导致的「淡出 → 闪现」 */
+::view-transition-old(nav-bar),
+::view-transition-old(local-nav) {
   animation: none;
   opacity: 1;
 }
 
-/* Homepage nav: align search button X position with docs page so the new
-   search covers the old one during the instant nav swap.
-   Docs search = sidebar(272px) + search-padding(32px) = 304px.
-   Homepage search = wrapper(32px) + title(fit-content) + search-padding(32px).
-   Giving the title a fixed sidebar-width and zeroing search padding makes
-   both land at the same X across all viewport widths >= 960px. */
-@media (min-width: 960px) {
-  .VPNavBar.home .title {
-    width: var(--vp-sidebar-width);
-  }
-  .VPNavBar.home .VPNavBarSearch {
-    padding-left: 0;
-  }
+::view-transition-new(nav-bar),
+::view-transition-new(local-nav) {
+  animation: none;
+  opacity: 0;
 }
 
-/* Root = content area only (nav & sidebar excluded via view-transition-name) */
+html:has(.VPDoc) .VPSidebar {
+  view-transition-name: sidebar;
+}
+
+.VPDoc .vp-doc {
+  view-transition-name: doc-content;
+}
+
+.VPDoc .aside {
+  view-transition-name: doc-aside;
+}
+
+/* ---- 保持侧边栏不动（同一 sidebar key）---- */
+html.vt-keep-sidebar::view-transition-old(sidebar),
+html.vt-keep-sidebar::view-transition-new(sidebar) {
+  animation: none;
+  opacity: 1;
+}
+
+/* ---- 下一页有 sidebar：旧 sidebar 不退出，新 sidebar 直接覆盖 ---- */
+html.vt-has-next-sidebar::view-transition-old(sidebar) {
+  animation: none;
+  opacity: 1;
+}
+
+/* ---- Sidebar：变化时左侧滑入 / 左侧滑出 ---- */
+::view-transition-new(sidebar) {
+  animation: fadeInLeft 0.8s ease both;
+}
+
+::view-transition-old(sidebar) {
+  animation: fadeOutLeft 0.65s ease both;
+}
+
+/* 短位移右侧淡入（位移比 animate.css fadeInRight 的 100% 小） */
+@keyframes fadeInRightShort {
+  from { opacity: 0; transform: translate3d(24px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* ---- 正文内容 & 目录：sidebar 不变时用简单淡入淡出 ---- */
+html.vt-keep-sidebar::view-transition-new(doc-content) {
+  animation: vtFadeIn 0.55s ease both;
+}
+html.vt-keep-sidebar::view-transition-old(doc-content) {
+  animation: vtFadeOut 0.35s ease both;
+}
+html.vt-keep-sidebar::view-transition-new(doc-aside) {
+  animation: vtFadeIn 0.55s ease both;
+}
+html.vt-keep-sidebar::view-transition-old(doc-aside) {
+  animation: vtFadeOut 0.35s ease both;
+}
+
+/* ---- 正文内容：sidebar 变化 / 非 docs 切入时从右侧淡入 ---- */
+::view-transition-new(doc-content) {
+  animation: fadeInRightShort 0.65s ease 0.08s both;
+}
+::view-transition-old(doc-content) {
+  animation: fadeOut 0.35s ease both;
+}
+
+/* ---- 右侧目录：sidebar 变化 / 非 docs 切入时从右侧淡入 ---- */
+::view-transition-new(doc-aside) {
+  animation: fadeInRightShort 0.65s ease 0.14s both;
+}
+::view-transition-old(doc-aside) {
+  animation: fadeOut 0.35s ease both;
+}
+
+/* ---- 防止内容在 View Transition 中纵向压缩 ---- */
+::view-transition-group(doc-content),
+::view-transition-group(doc-aside) {
+  overflow: clip;
+}
+
+::view-transition-old(doc-content),
+::view-transition-new(doc-content),
+::view-transition-old(doc-aside),
+::view-transition-new(doc-aside) {
+  object-fit: none;
+  object-position: top left;
+}
+
+/* ---- Root（剩余部分，如导航栏背景）：保留原有的淡入淡出 ---- */
 ::view-transition-old(root) {
   animation: vtFadeOut var(--dur-page) var(--ease-ios-fade) forwards;
 }
@@ -60,6 +124,7 @@
   animation: vtFadeIn var(--dur-page) var(--ease-ios-fade) forwards;
 }
 
+/* 外观切换（日/夜模式）时 root 不动画 */
 .vt-appearance::view-transition-old(root),
 .vt-appearance::view-transition-new(root) {
   animation: none;
@@ -77,6 +142,16 @@
   100% { opacity: 1; }
 }
 
+/* ---- Homepage → Doc: 搜索按钮 X 对齐 ---- */
+@media (min-width: 960px) {
+  .VPNavBar.home .title {
+    width: var(--vp-sidebar-width);
+  }
+  .VPNavBar.home .VPNavBarSearch {
+    padding-left: 0;
+  }
+}
+
 /* ---- Button Tap Feedback ---- */
 a, button, .VPNavBarMenuLink, .VPLink {
   transition: transform 0.5s var(--ease-ios-spring);
@@ -87,10 +162,9 @@ a:active, button:active, .VPNavBarMenuLink:active, .VPLink:active {
   transform: scale(0.94);
 }
 
-/* Site title gets a gentler press (no scale jump) */
-.VPNavBarTitle:active {
-  transform: scale(0.97);
-  transition: transform 0.2s var(--ease-ios-press);
+/* Nav bar title 不做点击缩放 */
+.VPNavBarTitle a:active {
+  transform: none;
 }
 
 /* ---- Ripple Effect ---- */

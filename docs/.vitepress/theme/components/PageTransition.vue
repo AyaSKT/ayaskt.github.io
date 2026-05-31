@@ -43,8 +43,10 @@ onMounted(() => {
     const currentSidebarKey = sidebarKeyFor(window.location.href)
     const nextSidebarKey = sidebarKeyFor(to)
     const keepsSidebar = currentSidebarKey && currentSidebarKey === nextSidebarKey
+    const hasNextSidebar = Boolean(nextSidebarKey)
 
     document.documentElement.classList.toggle('vt-keep-sidebar', Boolean(keepsSidebar))
+    document.documentElement.classList.toggle('vt-has-next-sidebar', hasNextSidebar)
 
     try {
       const transition = (document as any).startViewTransition(async () => {
@@ -55,6 +57,8 @@ onMounted(() => {
       await transition.finished
     } finally {
       document.documentElement.classList.remove('vt-keep-sidebar')
+      document.documentElement.classList.remove('vt-has-next-sidebar')
+      window.dispatchEvent(new CustomEvent('vt-transition-done'))
     }
   }
 
