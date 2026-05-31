@@ -52,3 +52,8 @@ Components usable in markdown must be registered in `enhanceApp` and placed in `
 - `docs/superpowers/` and `docs/public/animation-tuner.html` are gitignored (dev artifacts, not deployed)
 - `.superpowers/` is gitignored (Claude Code brainstorms)
 - The site has a GitHub Actions workflow (`.github/`) that auto-deploys on push
+
+## Writing Style
+
+写正文内容（章节笔记、复习讲义、Ex 练习等）时，除非用户特别声明不需要，否则必须参考根目录 `WRITING-STYLE.md`。该文件定义了本项目的语言气质、禁用表达、标题/公式/容器/表格规范、章节模板和写作检查清单。
+- 路径：`/Users/ayaskt/gp-blogs/WRITING-STYLE.md`

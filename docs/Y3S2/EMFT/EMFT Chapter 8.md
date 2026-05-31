@@ -537,9 +537,11 @@ $$
 - 两个正交分量的振幅 $E_{xm},E_{ym}$；
 - 初相差 $\Delta\phi=\phi_y-\phi_x$。
 
+![alt text](<EMFT Chapter 8.attachments/1780208249429.png>)
+
 #### 1. 线极化 Linear Polarization
 
-![线极化](<EMFT Chapter 8 P I.attachments/linear-polarization.jpg>)
+
 
 当：
 
@@ -559,7 +561,7 @@ $$
 
 #### 2. 圆极化 Circular Polarization
 
-![圆极化](<EMFT Chapter 8 P I.attachments/circular-polarization.jpg>)
+
 
 当两个正交分量振幅相等，并且相位差为 $\pm\pi/2$：
 
@@ -588,7 +590,7 @@ $$
 $$
 
 > [!TIP]
-> 先看是不是圆极化：振幅相等，相位差 $\pm\pi/2$。再看旋向。考试里别一上来就盯着左右旋，很容易把前面的条件漏掉。
+> 判断顺序：先确认振幅是否相等、相位差是否为 $\pm\pi/2$（圆极化条件），再判定旋向。跳过第一步直接判旋向容易误判。
 
 #### 3. 椭圆极化 Elliptical Polarization
 
@@ -740,8 +742,6 @@ $$
 \text{右旋椭圆极化}
 $$
 ::::
-
----
 
 ## 8-2 有损媒质中的平面波 Plane Waves in Lossy Media
 
@@ -1118,7 +1118,7 @@ $$
 - 高频电流主要走表面，因此空心铜管、多股绝缘细线、表面镀银都有意义。
 
 > [!TIP]
-> 高频电流集中在导体表面，导线中心部分几乎不承载电流。利用趋肤效应可节省材料（空心铜管、镀银导线），但也会增加高频电阻。
+> 高频电流集中在导体表面，导线中心区域几乎不承载电流。利用趋肤效应可减少导体材料用量（空心铜管、镀银导线），但趋肤深度减小也意味着高频交流电阻增大。
 
 **海水中的电磁波衰减**
 
@@ -1174,8 +1174,6 @@ $$
 
 高频电磁波在海水里衰减很快，因此潜艇通信必须使用极低频率。
 ::::
-
----
 
 ## 8-3 电磁功率流与坡印廷矢量 Poynting Vector
 
@@ -1519,8 +1517,6 @@ P_{\mathrm{av}}\approx65.1\ \mathrm{W}
 $$
 ::::
 
----
-
 ## 8-4 平面导体边界的法向入射 Normal Incidence at a Plane Conducting Boundary
 
 ### 8-4-1 法向入射基本模型
@@ -1855,8 +1851,6 @@ $$
 \quad \mathrm{A/m}
 $$
 ::::
-
----
 
 ## 8-5 平面介质边界的法向入射 Normal Incidence at a Plane Dielectric Boundary
 
