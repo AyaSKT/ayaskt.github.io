@@ -500,7 +500,74 @@
 }
 
 /* ================================================================
-   Hero 入场动画
-   由 MyLayout.vue 的 setupHeroEntrance() 通过 JS 注入 animate.css class
-   （name 有 background-clip:text，需 JS wrapper 绕开 WebKit opacity bug）
+   Hero 入场动画（纯 CSS，避免 JS onMounted 造成闪烁）
+   name 有 background-clip:text，由 MyLayout.vue JS wrapper 处理
    ================================================================ */
+
+/* 右入 + 保留 translate(-50%, -50%) 居中（阴影、头像） */
+@keyframes fadeInRightCentered {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateX(36px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(0);
+  }
+}
+
+/* 右入 + 保留 translateX(-50%) 水平居中（一言 desktop） */
+@keyframes fadeInRightCenteredX {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateX(36px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateX(0);
+  }
+}
+
+/* ---- 右侧元素 ---- */
+.VPHero .image-bg {
+  animation: fadeInRightCentered 0.7s ease 0.05s both;
+}
+
+.VPHero .image-src {
+  animation: fadeInRightCentered 0.7s ease 0.15s both;
+}
+
+.hero-hitokoto.desktop-hitokoto {
+  animation: fadeInRightCenteredX 0.65s ease 0.28s both;
+}
+
+.hero-hitokoto.mobile-hitokoto {
+  animation: fadeInRight 0.65s ease 0.28s both;
+}
+
+/* ---- 左侧元素（除了 name） ---- */
+.VPHero .text {
+  animation: fadeInLeft 0.7s ease 0.36s both;
+}
+
+.VPHero .tagline {
+  animation: fadeInLeft 0.7s ease 0.24s both;
+}
+
+.home-course-group-title {
+  animation: fadeInLeft 0.55s ease both;
+}
+.home-course-group-title:nth-child(1) { animation-delay: 0s; }
+.home-course-group-title:nth-child(2) { animation-delay: 0.04s; }
+.home-course-group-title:nth-child(3) { animation-delay: 0.08s; }
+
+.home-course-button {
+  animation: fadeInLeft 0.55s ease both;
+}
+.home-course-button:nth-child(1) { animation-delay: 0.10s; }
+.home-course-button:nth-child(2) { animation-delay: 0.14s; }
+
+/* ---- NavBar（仅首页） ---- */
+html:has(.VPHome) .VPNavBar {
+  animation: fadeInDown 0.5s ease both;
+}
