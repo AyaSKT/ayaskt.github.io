@@ -39,4 +39,11 @@
 - [Lecture 9: Oscillators](Part%202/CCD%20Lecture%209%20Oscillators.md)
 - [Lecture 10: Revision](Part%202/CCD%20Lecture%2010%20Revision.md)
 
+### Part 3 - Modulation and Antennas
+
+- [Lecture 11-12: Amplitude Modulation](Part%203/CCD%20Lecture%2011-12%20Amplitude%20Modulation.md)
+- [Lecture 13: Single-Sideband Communication (SSB)](Part%203/CCD%20Lecture%2013%20Single-Sideband%20Communication%20SSB.md)
+- [Lecture 14: Frequency Modulation (FM) & Phase Modulation (PM)](Part%203/CCD%20Lecture%2014%20Frequency%20Modulation%20and%20Phase%20Modulation.md)
+- [Lecture 15: Antennas in a Circuit](Part%203/CCD%20Lecture%2015%20Antennas%20in%20a%20Circuit.md)
+
 ![alt text](CCD-README.attachments/1779785178403.JPG)

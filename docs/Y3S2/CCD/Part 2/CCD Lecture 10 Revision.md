@@ -1,10 +1,14 @@
 # Lecture 10 Revision 复习
 
-**把散开的东西放回原位。**
+**Even if the sky is gray your're sunny**  
+**天空阴沉也无妨，你会带来晴天**
 
-<div align="right">——Revision Note</div>
+**Alays finding time to play it's funny**  
+**总在为玩耍寻找时间，这多有趣**
 
-![CCD 复习总览](<CCD Lecture 10 Revision.attachments/revision_cover_overview.jpg>)
+<div align="right">——塞壬唱片-MSR《Before Summer》</div>
+
+![alt text](<CCD Lecture 9 Oscillators.attachments/1780209422588.JPG>)
 
 ## 章节目录
 

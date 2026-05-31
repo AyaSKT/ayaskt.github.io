@@ -1,11 +1,14 @@
 # Lecture 8 LC Circuits and Matching Networks LC 电路与匹配网络
 
-**Everything in its right place.**  
-**一切都在合适的位置。**
+**If I leave here tomorrow**  
+**如果明天我将离开**
 
-<div align="right">——Radiohead《Everything In Its Right Place》</div>
+**Would you still remember me?**  
+**你还会记得我吗？**
 
-![串联 RLC 谐振关系](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/lc_cover_series_resonance.jpg>)
+<div align="right">——Lynyrd Skynrd《Free Bird》</div>
+
+![alt text](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/1780209189821.JPG>)
 
 ## 章节目录
 
@@ -235,7 +238,7 @@ $$
 
 ![高频寄生参数](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/lc_20_high_frequency_parasitics.jpg>)
 
-所以射频 PCB 上要尽量缩短引线长度。很多奇怪的高频现象，最后都能追到寄生 RLC。
+因此射频 PCB 上应尽量缩短引线长度。多数高频异常最终可归因于寄生 RLC 效应。
 
 ## 8-2 阻抗匹配 Impedance Matching
 

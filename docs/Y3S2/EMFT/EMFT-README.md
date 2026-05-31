@@ -35,7 +35,8 @@
 - [EMFT Chapter 6: Static Magnetic Fields](EMFT%20Chapter%206.md)
 - [EMFT Chapter 7: Time-Varying Fields and Maxwell’s Equations](EMFT%20Chapter%207.md)
 - [EMFT Chapter 8: Plane Electromagnetic Waves](EMFT%20Chapter%208.md)
-- [EMFT Chapter 8: Ex 1 公式复习](EMFT%20Chapter%208%20Ex%201%20%E5%85%AC%E5%BC%8F%E5%A4%8D%E4%B9%A0.md)
+
+- [EMFT Extra 1: 公式复习](EMFT%20Chapter%208%20Ex%201%20%E5%85%AC%E5%BC%8F%E5%A4%8D%E4%B9%A0.md)
 
 
 

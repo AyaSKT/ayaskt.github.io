@@ -1,11 +1,13 @@
 # Lecture 9 Oscillators 振荡器
 
-**I hear the clock ticking.**  
-**我听见时钟在走。**
+**问问天 问问地 还有多少里**  
+**求求风 求求雨 快离我远去**  
+**山也多 水也多 分不清东西**  
+**人也多 嘴也多 讲不清道理**  
 
-<div align="right">——Cyndi Lauper《Time After Time》</div>
+<div align="right">——崔健 《新长征路上的摇滚》</div>
 
-![LC 槽路电压电流波形](<CCD Lecture 9 Oscillators.attachments/osc_cover_lc_waveform.jpg>)
+![alt text](<CCD Lecture 9 Oscillators.attachments/1780209759050.jpg>)
 
 ## 章节目录
 
