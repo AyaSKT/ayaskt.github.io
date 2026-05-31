@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 // 1. 再次导入必要的组件
 import DefaultTheme from 'vitepress/theme'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useData } from 'vitepress'
 import MouseClick from './MouseClick.vue'
 import GiscusComment from './GiscusComment.vue' // 评论模块
@@ -46,6 +46,57 @@ const heroImageStyle = computed(() => {
 const heroImageLink = computed(() => {
   const image = heroImageData.value
   return image && typeof image === 'object' ? image.link : undefined
+})
+
+// Hero 入场动画：从下往上逐级进入
+function setupHeroEntrance() {
+  if (typeof document === 'undefined') return
+
+  const nameEl = document.querySelector('.VPHero .name') as HTMLElement | null
+  const textEl = document.querySelector('.VPHero .text') as HTMLElement | null
+  const taglineEl = document.querySelector('.VPHero .tagline') as HTMLElement | null
+
+  // name 有 background-clip:text，不能直接在它上面做 opacity 动画
+  // 所以用 wrapper 包裹，动画挂在 wrapper 上
+  if (nameEl && nameEl.parentElement) {
+    const wrapper = document.createElement('span')
+    wrapper.className = 'hero-name-wrapper animate__animated animate__fadeInLeft'
+    wrapper.style.display = 'inline-block'
+    wrapper.style.animationDelay = '0.48s'
+    wrapper.style.animationDuration = '0.75s'
+    nameEl.parentElement.insertBefore(wrapper, nameEl)
+    wrapper.appendChild(nameEl)
+  }
+
+  if (textEl) {
+    textEl.classList.add('animate__animated', 'animate__fadeInLeft')
+    textEl.style.animationDelay = '0.36s'
+    textEl.style.animationDuration = '0.7s'
+  }
+
+  if (taglineEl) {
+    taglineEl.classList.add('animate__animated', 'animate__fadeInLeft')
+    taglineEl.style.animationDelay = '0.24s'
+    taglineEl.style.animationDuration = '0.7s'
+  }
+
+  // 课程分组标题
+  document.querySelectorAll('.home-course-group-title').forEach((el, i) => {
+    el.classList.add('animate__animated', 'animate__fadeInLeft')
+    ;(el as HTMLElement).style.animationDelay = `${i * 0.04}s`
+    ;(el as HTMLElement).style.animationDuration = '0.55s'
+  })
+
+  // 课程按钮
+  document.querySelectorAll('.home-course-button').forEach((el, i) => {
+    el.classList.add('animate__animated', 'animate__fadeInLeft')
+    ;(el as HTMLElement).style.animationDelay = `${0.08 + i * 0.04}s`
+    ;(el as HTMLElement).style.animationDuration = '0.55s'
+  })
+}
+
+onMounted(() => {
+  setupHeroEntrance()
 })
 </script>
 

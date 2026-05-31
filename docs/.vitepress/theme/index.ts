@@ -1,5 +1,6 @@
 import Layout from './Layout.vue'
 import DefaultTheme from 'vitepress/theme'
+import 'animate.css'
 import './style/index.css'
 import { setupSolutionCollapse } from './solution-collapse'
 

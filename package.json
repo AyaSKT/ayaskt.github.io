@@ -13,6 +13,7 @@
     "vue": "^3.5.30"
   },
   "dependencies": {
-    "@giscus/vue": "^3.1.1"
+    "@giscus/vue": "^3.1.1",
+    "animate.css": "^4.1.1"
   }
 }
