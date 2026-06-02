@@ -511,8 +511,8 @@ export default defineConfig({
             { text: 'Ch 6 静磁场', link: '/Y3S2/EMFT/EMFT Chapter 6' },
             { text: 'Ch 7 时变场与 Maxwell 方程组', link: '/Y3S2/EMFT/EMFT Chapter 7' },
             { text: 'Ch 8 平面电磁波', link: '/Y3S2/EMFT/EMFT Chapter 8' },
-            { text: 'Extra 1 公式复习', link: '/Y3S2/EMFT/EFMT Extra 1' },
-            { text: 'Extra 2 概念默写', link: '/Y3S2/EMFT/EFMT Extra 2' }
+            { text: 'Ex 1 公式复习', link: '/Y3S2/EMFT/EFMT Extra 1' },
+            { text: 'Ex 2 概念复习', link: '/Y3S2/EMFT/EFMT Extra 2' }
           ]
         }
       ],

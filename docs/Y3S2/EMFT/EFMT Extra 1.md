@@ -11,7 +11,7 @@
 ![alt text](<EMFT Chapter 8 P II.attachments/1778848085341.JPG>)
 
 > [!TIP]
-> 本文按问题类型整合 Ch 6—8 考试计算高频公式。先判断问题归属，再定位到对应小节。
+> Assisted with AI generation.
 
 | 知识点 | 2022 | 2023 | 2024 | 2025 | 频率 |
 | --- | :---: | :---: | :---: | :---: | :---: |
@@ -34,6 +34,9 @@
 - [Ex 1-1 麦克斯韦方程组 Maxwell's Equations](#ex-1-1-麦克斯韦方程组-maxwells-equations)
 - [Ex 1-2 边界条件 Boundary Conditions](#ex-1-2-边界条件-boundary-conditions)
 - [Ex 1-3 静磁场分布计算 Magnetostatic Field Distribution](#ex-1-3-静磁场分布计算-magnetostatic-field-distribution)
+  - [毕奥-萨伐尔定律 Biot-Savart Law](#毕奥-萨伐尔定律-biot-savart-law)
+  - [安培环路定理 Ampere's Circuital Law](#安培环路定理-amperes-circuital-law)
+  - [常见几何分布的直接结论](#常见几何分布的直接结论)
 - [Ex 1-4 电感与磁场能 Inductance and Magnetic Energy](#ex-1-4-电感与磁场能-inductance-and-magnetic-energy)
 - [Ex 1-5 电磁感应 Electromagnetic Induction](#ex-1-5-电磁感应-electromagnetic-induction)
 - [Ex 1-6 时谐场与相量法 Time-Harmonic Fields and Phasors](#ex-1-6-时谐场与相量法-time-harmonic-fields-and-phasors)
@@ -42,6 +45,10 @@
 - [Ex 1-9 有损媒质与趋肤效应 Lossy Media and Skin Effect](#ex-1-9-有损媒质与趋肤效应-lossy-media-and-skin-effect)
 - [Ex 1-10 功率与能流 Power and Energy Flow](#ex-1-10-功率与能流-power-and-energy-flow)
 - [Ex 1-11 法向入射与驻波 Normal Incidence and Standing Waves](#ex-1-11-法向入射与驻波-normal-incidence-and-standing-waves)
+  - [反射系数与透射系数](#反射系数与透射系数)
+  - [理想导体边界（全反射）](#理想导体边界全反射)
+  - [驻波比](#驻波比)
+  - [能流守恒](#能流守恒)
 - [总结 Summary](#总结-summary)
 
 ## Ex 1-1 麦克斯韦方程组 Maxwell's Equations

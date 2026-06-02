@@ -1,17 +1,15 @@
-# Ex 2 概念默写 Concept Review
+# Ex 2 概念复习 Concept Review
 
-**I couldn't wait for you to come clear the cupboards,**  
-**我等不到你来清空橱柜，**  
+**「あるべき人間の姿へ」，「正しい人間の姿へ」。**  
+**「做该做的事」，「做正确的事」。**  
 
-**but now you're gone and leaving nothing but a sign.**  
-**如今你离开了，只留下一道痕迹。**  
 
-<div align="right">——Rosa Walton / Hallie Coggins《I Really Want to Stay at Your House》</div>
+<div align="right">——花譜《不可解 (Inexplicable)》</div>
 
-![alt text](<EMFT Chapter 7.attachments/1778750317994.PNG>)
+![alt text](<EFMT Extra 2.attachments/1780388664426.jpg>)
 
 > [!TIP]
-> 本文整理 Ch 2-8 中可能被考成概念题、定义题、区别题和默写题的内容。优先背英文关键词，再用中文理解物理意义。
+> Assisted with AI generation.
 
 | 概念题类型 | 2022 | 2023 | 2024 | 2025 | 频率 |
 | --- | :---: | :---: | :---: | :---: | :---: |
@@ -44,13 +42,14 @@
 - [Ex 2-10 英文答题模板 Answer Templates](#ex-2-10-英文答题模板-answer-templates)
 - [总结 Summary](#总结-summary)
 
+
 ## Ex 2-1 场论与电路理论 Field Theory and Circuit Theory
 
-2022 Q1a 问过这个，属于 Chapter 1 / 总论题。关键词是 **lumped parameters** 和 **distributed parameters**。
+2022 Q1a。Chapter 1 总论题。记住 **lumped parameters** 和 **distributed parameters** 这两个词就行。
 
 :::: definition 电路理论 Circuit Theory
 
-电路理论把元件看成集中参数模型。电压、电流、电阻、电容、电感等参数被认为集中在理想元件上，元件尺寸远小于波长，信号传播延迟可以忽略。
+电路理论用集中参数模型描述。电压、电流、$RLC$ 等都集中在理想元件上，元件尺寸远小于波长，信号传播延迟忽略不计。
 
 ::::
 
@@ -75,7 +74,7 @@ $$
 
 :::: definition 电磁场理论 Electromagnetic Field Theory
 
-电磁场理论把电场和磁场看成空间与时间的函数。电磁现象由场量分布描述，必须考虑传播、边界、能量流和波动效应。
+电磁场理论中，电场和磁场是空间与时间的函数。电磁现象由场量分布描述，需要考虑传播、边界、能量流和波动效应。
 
 ::::
 
@@ -90,26 +89,28 @@ $$
 | $\rho,\ \vec J$ | 电荷密度、电流密度 |
 | $\varepsilon,\ \mu,\ \sigma$ | 介电常数、磁导率、电导率 |
 
-**核心区别：**
+**区别表：**
 
 | 角度 | 电路理论 | 电磁场理论 |
 | --- | --- | --- |
 | 参数特点 | 集中参数 Lumped parameters | 分布参数 Distributed parameters |
 | 变量 | $U,I,R,L,C$ | $\vec E,\vec D,\vec H,\vec B,\rho,\vec J$ |
-| 空间分布 | 通常忽略 | 必须考虑 |
+| 空间分布 | 通常忽略 | 需要考虑 |
 | 时间延迟 | 通常忽略 | 传播速度有限 |
 | 基本规律 | KCL, KVL, Ohm's law | Maxwell's equations |
 | 典型场景 | 低频、小尺寸电路 | 高频、长线、天线、波导、辐射问题 |
 
 可直接写：
 
-> Circuit theory uses lumped parameters such as voltage and current. Electromagnetic field theory uses distributed field quantities such as electric field intensity and magnetic field intensity. When the physical size is comparable with wavelength, propagation delay and field distribution cannot be ignored, so field theory must be applied.
+> Circuit theory uses lumped parameters such as voltage and current. Field theory uses distributed quantities such as $\vec E$ and $\vec H$. When the size is comparable with wavelength, field theory should be applied.
 
 ## Ex 2-2 数学工具 Mathematical Concepts
 
-这部分通常不会单独大题考定义，但会混在边界条件、位函数和波动方程里。
+这部分很少单独考大题，但会混在边界条件、位函数和波动方程里。
 
-### Ex 2-2-1 梯度 Gradient
+
+
+### Ex 2-2-1 梯度 Gradient <!-- omit from toc -->
 
 :::: definition 梯度 Gradient
 
@@ -128,7 +129,9 @@ $$
 
 电场方向是电势下降最快的方向。
 
-### Ex 2-2-2 散度 Divergence
+---
+
+### Ex 2-2-2 散度 Divergence <!-- omit from toc -->
 
 :::: definition 散度 Divergence
 
@@ -147,7 +150,9 @@ $$
 
 $\vec D$ 有电荷源，$\vec B$ 无磁单极源。
 
-### Ex 2-2-3 旋度 Curl
+---
+
+### Ex 2-2-3 旋度 Curl <!-- omit from toc -->
 
 :::: definition 旋度 Curl
 
@@ -165,7 +170,9 @@ $$
 \nabla\times\vec H=\vec J+\frac{\partial\vec D}{\partial t}
 $$
 
-### Ex 2-2-4 Stokes 定理与散度定理
+---
+
+### Ex 2-2-4 Stokes 定理与散度定理 <!-- omit from toc -->
 
 两条定理经常用于微分形式和积分形式互换。
 
@@ -181,7 +188,7 @@ $$
 
 ## Ex 2-3 静电场 Static Electric Field
 
-### Ex 2-3-1 静电场定义
+### Ex 2-3-1 静电场定义 <!-- omit from toc -->
 
 2023 Q1a 问过静电场。
 
@@ -206,7 +213,9 @@ $$
 \vec D=\varepsilon\vec E
 $$
 
-### Ex 2-3-2 导体内部静电场为零
+---
+
+### Ex 2-3-2 导体内部静电场为零 <!-- omit from toc -->
 
 2023 Q1a 问过原因。
 
@@ -230,7 +239,9 @@ $$
 
 > In electrostatic equilibrium, the electric field inside a conductor must be zero. Otherwise free charges would experience electric force and keep moving, which contradicts the electrostatic condition.
 
-### Ex 2-3-3 标量电势 Scalar Potential
+---
+
+### Ex 2-3-3 标量电势 Scalar Potential <!-- omit from toc -->
 
 2022 Q1b 问过静电场和时变场中 scalar potential 的意义。
 
@@ -251,7 +262,9 @@ $$
 
 电势表示单位正电荷从该点移动到参考点时电场力所做的功。
 
-### Ex 2-3-4 时变场中的标量电势
+---
+
+### Ex 2-3-4 时变场中的标量电势 <!-- omit from toc -->
 
 时变场中一般有：
 
@@ -259,7 +272,7 @@ $$
 \nabla\times\vec E=-\frac{\partial\vec B}{\partial t}\ne0
 $$
 
-因此电场不能只由 $-\nabla\varphi$ 表示，需要引入磁矢位：
+因此只用 $-\nabla\varphi$ 不够，需要引入磁矢位：
 
 $$
 \vec B=\nabla\times\vec A
@@ -276,7 +289,9 @@ $$
 | 静电场 | $\vec E=-\nabla\varphi$ | 电势完全决定电场 |
 | 时变场 | $\vec E=-\nabla\varphi-\partial\vec A/\partial t$ | 标量位只描述电场的一部分 |
 
-### Ex 2-3-5 Poisson 方程与 Laplace 方程
+---
+
+### Ex 2-3-5 Poisson 方程与 Laplace 方程 <!-- omit from toc -->
 
 2023 Q1b 和 2025 Q1c 都和电势方程有关。
 
@@ -306,7 +321,9 @@ $$
 
 再配合边界上的电势值或法向导数条件。
 
-### Ex 2-3-6 静电势边界条件
+---
+
+### Ex 2-3-6 静电势边界条件 <!-- omit from toc -->
 
 两种无损介质界面上：
 
@@ -333,7 +350,9 @@ $$
 E_{1t}=E_{2t},\qquad D_{1n}-D_{2n}=\rho_s
 $$
 
-### Ex 2-3-7 电容 Capacitance
+---
+
+### Ex 2-3-7 电容 Capacitance <!-- omit from toc -->
 
 2023 Q1c 问过定义，2025 Q1d 考过同轴线分层介质电容。
 
@@ -370,7 +389,7 @@ $$
 
 ## Ex 2-4 电介质与极化 Dielectrics and Polarization
 
-### Ex 2-4-1 电介质 Dielectric
+### Ex 2-4-1 电介质 Dielectric <!-- omit from toc -->
 
 :::: definition 电介质 Dielectric
 
@@ -385,7 +404,9 @@ $$
 | 导体 | 有自由载流子 | 自由电荷宏观移动 |
 | 电介质 | 主要为束缚电荷 | 束缚电荷微小偏移或取向 |
 
-### Ex 2-4-2 电极化 Polarization of Dielectric
+---
+
+### Ex 2-4-2 电极化 Polarization of Dielectric <!-- omit from toc -->
 
 2025 Q1a 问过 dielectric polarization。
 
@@ -407,7 +428,9 @@ $$
 \vec P=\varepsilon_0\chi_e\vec E
 $$
 
-### Ex 2-4-3 束缚电荷 vs 传导电荷
+---
+
+### Ex 2-4-3 束缚电荷 vs 传导电荷 <!-- omit from toc -->
 
 2025 Q1a 明确要求 differentiate。
 
@@ -433,7 +456,9 @@ $$
 
 > Bound charge is caused by polarization of dielectric molecules and cannot move freely over macroscopic distance. Conducting charge is free charge in a conductor and can move under an electric field to form conduction current.
 
-### Ex 2-4-4 电位移矢量 Electric Displacement Vector
+---
+
+### Ex 2-4-4 电位移矢量 Electric Displacement Vector <!-- omit from toc -->
 
 引入 $\vec D$ 是为了把自由电荷和极化束缚电荷分开处理。
 
@@ -455,7 +480,9 @@ $$
 
 $\vec D$ 的源是自由电荷，不直接把束缚电荷写进右侧。
 
-### Ex 2-4-5 介质分类
+---
+
+### Ex 2-4-5 介质分类 <!-- omit from toc -->
 
 常见默写关键词：
 
@@ -470,7 +497,7 @@ $\vec D$ 的源是自由电荷，不直接把束缚电荷写进右侧。
 
 ## Ex 2-5 恒定电流 Steady Electric Current
 
-### Ex 2-5-1 电流与电流密度
+### Ex 2-5-1 电流与电流密度 <!-- omit from toc -->
 
 :::: definition 电流 Electric Current
 
@@ -490,7 +517,9 @@ I=\iint_S\vec J\cdot d\vec S
 $$
 ::::
 
-### Ex 2-5-2 欧姆定律 Ohm's Law
+---
+
+### Ex 2-5-2 欧姆定律 Ohm's Law <!-- omit from toc -->
 
 微分形式：
 
@@ -506,7 +535,9 @@ $$
 U=IR
 $$
 
-### Ex 2-5-3 连续性方程 Continuity Equation
+---
+
+### Ex 2-5-3 连续性方程 Continuity Equation <!-- omit from toc -->
 
 电荷守恒的微分形式为：
 
@@ -528,14 +559,18 @@ $$
 
 稳恒电流场是无散场。
 
-### Ex 2-5-4 传导电流 vs 运流电流
+---
+
+### Ex 2-5-4 传导电流 vs 运流电流 <!-- omit from toc -->
 
 | 类型 | 来源 | 表达式 |
 | --- | --- | --- |
 | 传导电流 Conduction current | 导体内载流子在电场中漂移 | $\vec J=\sigma\vec E$ |
 | 运流电流 Convection current | 带电粒子整体运动 | $\vec J=\rho\vec v$ |
 
-### Ex 2-5-5 焦耳损耗 Joule Loss
+---
+
+### Ex 2-5-5 焦耳损耗 Joule Loss <!-- omit from toc -->
 
 焦耳损耗功率密度：
 
@@ -547,7 +582,7 @@ $$
 
 ## Ex 2-6 静磁场与磁介质 Magnetostatics and Magnetic Media
 
-### Ex 2-6-1 磁感应强度与磁场强度
+### Ex 2-6-1 磁感应强度与磁场强度 <!-- omit from toc -->
 
 :::: definition 磁感应强度 Magnetic Flux Density
 
@@ -573,7 +608,9 @@ $$
 \vec B=\mu\vec H
 $$
 
-### Ex 2-6-2 安培环路定理
+---
+
+### Ex 2-6-2 安培环路定理 <!-- omit from toc -->
 
 静磁场中：
 
@@ -593,7 +630,9 @@ $$
 \oint_C\vec B\cdot d\vec l=\mu_0 I
 $$
 
-### Ex 2-6-3 磁矢位与 Coulomb Gauge
+---
+
+### Ex 2-6-3 磁矢位与 Coulomb Gauge <!-- omit from toc -->
 
 由于
 
@@ -615,7 +654,9 @@ $$
 
 适用场景：静磁场、低频或无辐射问题中常用。
 
-### Ex 2-6-4 磁化矢量 Magnetization
+---
+
+### Ex 2-6-4 磁化矢量 Magnetization <!-- omit from toc -->
 
 :::: definition 磁化矢量 Magnetization Vector
 
@@ -632,7 +673,9 @@ $$
 \vec M=\chi_m\vec H
 $$
 
-### Ex 2-6-5 磁化电流 Magnetized Current
+---
+
+### Ex 2-6-5 磁化电流 Magnetized Current <!-- omit from toc -->
 
 2023 Q1d 和 2025 Q2a,c 都涉及传导电流与磁化电流。
 
@@ -655,7 +698,7 @@ $$
 | 对象 | 传导电流 Conduction current | 磁化电流 Magnetized current |
 | --- | --- | --- |
 | 来源 | 自由电荷宏观运动 | 磁偶极矩取向等效结果 |
-| 是否真实自由电荷流 | 是 | 不是自由电荷宏观迁移 |
+| 是否真实自由电荷流 | 是 | 否，属于等效电流 |
 | 公式 | $\vec J=\sigma\vec E$ | $\vec J_m=\nabla\times\vec M$ |
 | 边界形式 | $\vec J_s$ | $\vec J_{sm}=\vec M\times\vec e_n$ |
 
@@ -663,7 +706,9 @@ $$
 
 > Conduction current is caused by free charge motion. Magnetized current is an equivalent current introduced to represent the macroscopic effect of magnetization.
 
-### Ex 2-6-6 静磁场边界条件
+---
+
+### Ex 2-6-6 静磁场边界条件 <!-- omit from toc -->
 
 磁感应强度法向连续：
 
@@ -683,7 +728,9 @@ $$
 H_{1t}=H_{2t}
 $$
 
-### Ex 2-6-7 电感 Inductance
+---
+
+### Ex 2-6-7 电感 Inductance <!-- omit from toc -->
 
 磁通：
 
@@ -713,9 +760,9 @@ $$
 
 ## Ex 2-7 时变场与 Maxwell 方程 Time-Varying Fields and Maxwell Equations
 
-### Ex 2-7-1 法拉第电磁感应定律
+### Ex 2-7-1 法拉第电磁感应定律 <!-- omit from toc -->
 
-:::: definition Faraday's Law
+:::: definition 法拉第电磁感应定律 Faraday's Law
 
 闭合回路中的感应电动势等于穿过回路的磁链变化率的负值。
 
@@ -739,7 +786,9 @@ $$
 
 物理意义：时变磁场产生涡旋电场。
 
-### Ex 2-7-2 位移电流 Displacement Current
+---
+
+### Ex 2-7-2 位移电流 Displacement Current <!-- omit from toc -->
 
 2022 Q3a 和 2024 Q1c 都考过。
 
@@ -752,7 +801,7 @@ $$
 $$
 ::::
 
-它不是自由电荷的宏观迁移，而是时变电场对磁场的贡献。
+位移电流没有自由电荷的宏观迁移。它描述时变电场对磁场的贡献。
 
 安培-麦克斯韦定律：
 
@@ -760,15 +809,17 @@ $$
 \nabla\times\vec H=\vec J_f+\frac{\partial\vec D}{\partial t}
 $$
 
-是否说明 electric field is the source of magnetic field？
+考试问 electric field is the source of magnetic field 时：
 
-可以这样答：时变电场是磁场旋度的源之一。更准确地说，传导电流和位移电流共同产生磁场旋涡。
+时变电场是磁场旋度的源之一。传导电流和位移电流共同产生磁场旋涡。
 
 可直接写：
 
 > Displacement current does not mean free charge conduction. It represents the contribution of time-varying electric flux density to magnetic field.
 
-### Ex 2-7-3 Maxwell 方程组
+---
+
+### Ex 2-7-3 Maxwell 方程组 <!-- omit from toc -->
 
 2024 Q1a 问过积分形式、微分形式和区别。
 
@@ -803,7 +854,9 @@ $$
 | 微分形式 | 描述空间一点处的局部关系 |
 | 积分形式 | 描述有限路径、曲面或体积上的整体关系 |
 
-### Ex 2-7-4 电磁边界条件
+---
+
+### Ex 2-7-4 电磁边界条件 <!-- omit from toc -->
 
 设 $\vec e_n$ 从介质 2 指向介质 1。
 
@@ -834,7 +887,9 @@ $$
 \vec e_n\times\vec H=\vec J_s
 $$
 
-### Ex 2-7-5 波动方程 Wave Equation
+---
+
+### Ex 2-7-5 波动方程 Wave Equation <!-- omit from toc -->
 
 无源均匀介质中：
 
@@ -854,7 +909,9 @@ $$
 
 物理意义：时变电场和时变磁场互相激发，并以有限速度传播。
 
-### Ex 2-7-6 Coulomb Gauge 与 Lorenz Gauge
+---
+
+### Ex 2-7-6 Coulomb Gauge 与 Lorenz Gauge <!-- omit from toc -->
 
 2025 Q1b 问过。
 
@@ -881,25 +938,20 @@ $$
 
 ## Ex 2-8 时谐场与平面波 Time-Harmonic Fields and Plane Waves
 
-### Ex 2-8-1 时谐场定义与动机
+### Ex 2-8-1 时谐场定义与动机 <!-- omit from toc -->
 
 2023 Q2a 问过。
 
 :::: definition 时谐场 Time-Harmonic Field
 
-所有场量都随时间按同一角频率 $\omega$ 作正弦变化的电磁场称为时谐场。
+所有场量都以同一角频率 $\omega$ 作正弦变化的电磁场。
 
 $$
 A(\vec r,t)=\operatorname{Re}[\dot A(\vec r)e^{j\omega t}]
 $$
 ::::
 
-研究动机：
-
-1. 单频正弦信号是工程中最基本的激励；
-2. 任意周期信号可分解为多个正弦分量；
-3. 相量法可把时间微分变成代数乘法；
-4. 有利于分析波传播、反射、功率和介质损耗。
+说白了，就是因为单频正弦最好分析。任意周期信号可以拆成多个正弦分量，时谐场把 $\partial_t$ 变成 $j\omega$，微分方程直接变代数方程，算传播、反射、功率、损耗都省事。
 
 相量法规则：
 
@@ -908,7 +960,9 @@ $$
 \int dt\Longleftrightarrow\frac{1}{j\omega}
 $$
 
-### Ex 2-8-2 复介电常数与损耗角正切
+---
+
+### Ex 2-8-2 复介电常数与损耗角正切 <!-- omit from toc -->
 
 导电介质中：
 
@@ -936,7 +990,9 @@ $$
 | 低损耗介质 | $\sigma/(\omega\varepsilon)\ll1$ |
 | 良导体 | $\sigma/(\omega\varepsilon)\gg1$ |
 
-### Ex 2-8-3 均匀平面波 Uniform Plane Wave
+---
+
+### Ex 2-8-3 均匀平面波 Uniform Plane Wave <!-- omit from toc -->
 
 :::: definition 均匀平面波 Uniform Plane Wave
 
@@ -958,7 +1014,9 @@ $$
 
 所以 $e^{-jkz}$ 表示沿 $+z$ 传播，$e^{jkz}$ 表示沿 $-z$ 传播。
 
-### Ex 2-8-4 TEM 波性质
+---
+
+### Ex 2-8-4 TEM 波性质 <!-- omit from toc -->
 
 均匀平面波在理想介质中是 TEM 波：
 
@@ -986,7 +1044,9 @@ $$
 \eta=\sqrt{\frac{\mu}{\varepsilon}}
 $$
 
-### Ex 2-8-5 E 与 H 的相位关系
+---
+
+### Ex 2-8-5 E 与 H 的相位关系 <!-- omit from toc -->
 
 2024 Q2a 问过。
 
@@ -1003,11 +1063,13 @@ $$
 
 因此 $\eta_c$ 相位为 $45^\circ$。因为 $\dot{\vec H}=\dot{\vec E}/\eta_c$，磁场相对电场滞后 $45^\circ$。
 
-### Ex 2-8-6 电磁波极化 Polarization
+---
 
-四年都考过，必须熟。
+### Ex 2-8-6 电磁波极化 Polarization <!-- omit from toc -->
 
-:::: definition Polarization of Electromagnetic Wave
+四年都考过，优先背。
+
+:::: definition 电磁波极化 Polarization of Electromagnetic Wave
 
 电磁波的极化描述空间固定点处电场矢量端点随时间变化形成的轨迹。
 
@@ -1016,11 +1078,11 @@ $$
 沿 $+z$ 传播时：
 
 $$
-E_x=E_{xm}\cos(\omega t-kz+\phi_x)
+E_x=E_{xm}\cos{(\omega t-kz+\phi_x)}
 $$
 
 $$
-E_y=E_{ym}\cos(\omega t-kz+\phi_y)
+E_y=E_{ym}\cos{(\omega t-kz+\phi_y)}
 $$
 
 定义：
@@ -1048,7 +1110,9 @@ $$
 4. 先判断线/圆/椭圆；
 5. 再结合传播方向判断左右旋。
 
-### Ex 2-8-7 圆极化 TEM 波特征
+---
+
+### Ex 2-8-7 圆极化 TEM 波特征 <!-- omit from toc -->
 
 2022 Q3c 问过 circular polarized TEM wave。
 
@@ -1060,11 +1124,13 @@ $$
 4. $\vec E,\vec H,\vec k$ 两两垂直；
 5. $\vec E$ 与 $\vec H$ 的振幅比为本征阻抗 $\eta$。
 
-### Ex 2-8-8 坡印廷定理与坡印廷矢量
+---
+
+### Ex 2-8-8 坡印廷定理与坡印廷矢量 <!-- omit from toc -->
 
 2022 Q3b 和 2023 Q2b 问过。
 
-:::: definition Poynting Vector
+:::: definition 坡印廷矢量 Poynting Vector
 
 坡印廷矢量定义为电场和磁场的叉乘，表示电磁能流密度。
 
@@ -1103,7 +1169,9 @@ $$
 \text{焦耳损耗功率}
 $$
 
-### Ex 2-8-9 行波、驻波、行驻波
+---
+
+### Ex 2-8-9 行波、驻波、行驻波 <!-- omit from toc -->
 
 2024 Q2b 问过。
 
@@ -1115,7 +1183,9 @@ $$
 
 驻波中电场和磁场在空间上错开 $\lambda/4$，时间相位差为 $\pi/2$。
 
-### Ex 2-8-10 有损媒质与趋肤效应
+---
+
+### Ex 2-8-10 有损媒质与趋肤效应 <!-- omit from toc -->
 
 有损媒质中：
 
@@ -1141,7 +1211,7 @@ $$
 
 ## Ex 2-9 法向入射与反射 Normal Incidence and Reflection
 
-### Ex 2-9-1 反射系数与透射系数
+### Ex 2-9-1 反射系数与透射系数 <!-- omit from toc -->
 
 电磁波从介质 1 法向入射到介质 2：
 
@@ -1159,7 +1229,9 @@ $$
 E_{rm}=\Gamma E_{im},\qquad E_{tm}=\tau E_{im}
 $$
 
-### Ex 2-9-2 理想导体边界
+---
+
+### Ex 2-9-2 理想导体边界 <!-- omit from toc -->
 
 理想导体中：
 
@@ -1175,7 +1247,9 @@ $$
 
 物理意义：电场全反射且反相，导体内部透射场为零，导体表面形成感应电流。
 
-### Ex 2-9-3 无反射条件
+---
+
+### Ex 2-9-3 无反射条件 <!-- omit from toc -->
 
 2024 Q4d 和 2025 Q4c 都涉及减少反射或无反射。
 
@@ -1211,7 +1285,9 @@ $$
 2. 使用匹配层或渐变介质；
 3. 调整介质的 $\varepsilon$ 与 $\mu$，使 $\eta$ 接近入射侧。
 
-### Ex 2-9-4 反射能量百分比
+---
+
+### Ex 2-9-4 反射能量百分比 <!-- omit from toc -->
 
 理想介质法向入射时，反射功率比例为：
 
@@ -1233,39 +1309,37 @@ $$
 
 ## Ex 2-10 英文答题模板 Answer Templates
 
-### Ex 2-10-1 State the difference between A and B
+### Ex 2-10-1 State the difference between A and B <!-- omit from toc -->
 
-可以按三句写：
-
-1. A is ...
-2. B is ...
-3. The main difference is ...
+套路：A 是什么 → B 是什么 → 关键区别在哪。
 
 例句：
 
-> Circuit theory is based on lumped parameters such as voltage and current. Electromagnetic field theory is based on distributed field quantities such as electric field intensity and magnetic field intensity. The main difference is that field theory considers spatial distribution and wave propagation, while circuit theory neglects them.
+> Circuit theory uses lumped parameters such as voltage and current. Field theory uses distributed quantities such as $\vec E$ and $\vec H$. Field theory also considers spatial distribution and wave propagation.
 
-### Ex 2-10-2 Define and explain the meaning of ...
+---
 
-可以按三句写：
+### Ex 2-10-2 Define and explain the meaning of <!-- omit from toc -->
 
-1. ... is defined as ...
-2. Mathematically, ...
-3. Physically, it means ...
+套路：先给定义式 → 数学上是什么 → 物理上意味着什么。
 
 例句：
 
-> The Poynting vector is defined as the cross product of electric field and magnetic field. Mathematically, $\vec S=\vec E\times\vec H$. Physically, its direction gives the direction of electromagnetic energy flow and its magnitude gives the power flow density.
+> The Poynting vector is defined as $\vec S=\vec E\times\vec H$. Its direction gives the energy-flow direction, and its magnitude gives the power-flow density.
 
-### Ex 2-10-3 State integral and differential forms
+---
 
-先写公式，再解释区别：
+### Ex 2-10-3 State integral and differential forms <!-- omit from toc -->
+
+套路：先写公式，再解释微分形式是局部关系、积分形式是整体关系。
 
 > The differential form describes the local relation at a point, while the integral form describes the global relation over a path, surface or volume.
 
-### Ex 2-10-4 Explain physical meaning
+---
 
-常用关键词：
+### Ex 2-10-4 Explain physical meaning <!-- omit from toc -->
+
+关键词对应表：
 
 | 关键词 | 可写内容 |
 | --- | --- |
@@ -1277,7 +1351,7 @@ $$
 
 ## 总结 Summary
 
-| 题目关键词 | 先写什么 | 再写什么 |
+| 题目关键词 | 第一步 | 第二步 |
 | --- | --- | --- |
 | Circuit theory vs field theory | lumped / distributed | $U,I$ vs $\vec E,\vec H$ |
 | Static electric field | $\nabla\times\vec E=0$ | conductor 内部 $\vec E=0$ |
