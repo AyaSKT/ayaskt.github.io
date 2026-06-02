@@ -200,7 +200,7 @@ $$
 
 **(3) 磁场变化，回路也运动**
 
-若令回路长度随时间为 $x=vt$，则面积为 $S=bt$ 对应的 $bvt$，总电动势为两部分叠加：
+若令滑动边位置为 $x=a+vt$，则面积为 $S=bx=b(a+vt)$，总电动势为两部分叠加：
 
 $$
 \varepsilon_{\mathrm{in}}
@@ -212,7 +212,7 @@ $$
 
 $$
 \varepsilon_{\mathrm{in}}
-=vb t B_0\omega\sin\omega t-vbB_0\cos\omega t
+=b(a+vt)B_0\omega\sin\omega t-vbB_0\cos\omega t
 $$
 ::::
 
@@ -417,8 +417,11 @@ $$
 
 $$
 \vec e_n\cdot(\vec J_1-\vec J_2)
++\nabla_s\cdot\vec J_s
 =-\frac{\partial\rho_s}{\partial t}
 $$
+
+若界面上 $\vec J_s$ 均匀或不考虑面内散度项，则退化为 $\vec e_n\cdot(\vec J_1-\vec J_2)=-\partial\rho_s/\partial t$。
 
 ---
 
@@ -448,7 +451,7 @@ $$
 
 ![alt text](<EMFT Chapter 7.attachments/medium-interface.jpg>)
 
-若介质与理想导体相接，导体内部电场为零，导体表面满足：
+若介质与理想导体相接，导体内部电场为零。取 $\vec e_n$ 从导体指向外部介质，则导体表面满足：
 
 $$
 \begin{cases}
@@ -603,7 +606,7 @@ $$
 例如
 
 $$
-A(\vec r,t)=A_0(\vec r)\cos[\omega t+\phi(\vec r)]
+A(\vec r,t)=A_0(\vec r)\cos{[\omega t+\phi(\vec r)]}
 $$
 ::::
 
@@ -627,7 +630,7 @@ $$
 例如
 
 $$
-A(\vec r,t)=A_m(\vec r)\cos[\omega t+\phi(\vec r)]
+A(\vec r,t)=A_m(\vec r)\cos{[\omega t+\phi(\vec r)]}
 $$
 
 对应的相量为
@@ -640,7 +643,7 @@ $$
 
 $$
 \mathrm{Re}\left[A_m(\vec r)e^{j\phi(\vec r)}e^{j\omega t}\right]
-=A_m(\vec r)\cos[\omega t+\phi(\vec r)]
+=A_m(\vec r)\cos{[\omega t+\phi(\vec r)]}
 $$
 
 所以，相量实际上同时记录了幅值和相位。
@@ -687,9 +690,9 @@ $$
 
 | 瞬时表达式 | 相量表达式 |
 | --- | --- |
-| $A_m\cos(\omega t+\phi)$ | $\dot A=A_me^{j\phi}$ |
-| $A_m\sin(\omega t+\phi)$ | $\dot A=A_me^{j(\phi-\pi/2)}=-jA_me^{j\phi}$ |
-| $A_m\cos(\omega t-kz+\phi)$ | $\dot A(z)=A_me^{j\phi}e^{-jkz}$ |
+| $A_m\cos{(\omega t+\phi)}$ | $\dot A=A_me^{j\phi}$ |
+| $A_m\sin{(\omega t+\phi)}$ | $\dot A=A_me^{j(\phi-\pi/2)}=-jA_me^{j\phi}$ |
+| $A_m\cos{(\omega t-kz+\phi)}$ | $\dot A(z)=A_me^{j\phi}e^{-jkz}$ |
 
 其中 $e^{-jkz}$ 为沿 $z$ 方向的空间相位因子。
 
@@ -697,8 +700,8 @@ $$
 已知瞬时电场为
 
 $$
-\vec E(z,t)=\vec e_xE_{xm}\cos(\omega t-kz+\phi_x)
-+\vec e_yE_{ym}\sin(\omega t-kz+\phi_y)
+\vec E(z,t)=\vec e_xE_{xm}\cos{(\omega t-kz+\phi_x)}
++\vec e_yE_{ym}\sin{(\omega t-kz+\phi_y)}
 $$
 
 求它的复矢量表示。
@@ -708,7 +711,7 @@ $$
 相量默认使用余弦作为实部，所以先把正弦项写成余弦项：
 
 $$
-\sin(\omega t-kz+\phi_y)
+\sin{(\omega t-kz+\phi_y)}
 =\cos\left(\omega t-kz+\phi_y-\frac{\pi}{2}\right)
 $$
 
@@ -805,7 +808,7 @@ $$
 
 $$
 \mathrm{Re}\left[e^{-jkz}e^{j\omega t}\right]
-=\cos(\omega t-kz)
+=\cos{(\omega t-kz)}
 $$
 
 这对应沿 $+z$ 方向传播的波。
@@ -876,7 +879,7 @@ $$
 已知电场复矢量为
 
 $$
-\dot{\vec E}(z)=\vec e_xjE_{xm}\cos(k_zz)
+\dot{\vec E}(z)=\vec e_xjE_{xm}\cos{(k_zz)}
 $$
 
 求瞬时值 $\vec E(z,t)$。
@@ -893,20 +896,20 @@ $$
 
 $$
 \vec E(z,t)
-=\mathrm{Re}\left[\vec e_xjE_{xm}\cos(k_zz)e^{j\omega t}\right]
+=\mathrm{Re}\left[\vec e_xjE_{xm}\cos{(k_zz)}e^{j\omega t}\right]
 $$
 
 因为 $j=e^{j\pi/2}$，所以乘以 $j$ 表示相位超前 $\pi/2$：
 
 $$
 \vec E(z,t)
-=\vec e_xE_{xm}\cos(k_zz)\cos\left(\omega t+\frac{\pi}{2}\right)
+=\vec e_xE_{xm}\cos{(k_zz)}\cos\left(\omega t+\frac{\pi}{2}\right)
 $$
 
 即
 
 $$
-\vec E(z,t)=-\vec e_xE_{xm}\cos(k_zz)\sin\omega t
+\vec E(z,t)=-\vec e_xE_{xm}\cos{(k_zz)}\sin\omega t
 $$
 ::::
 
@@ -936,4 +939,3 @@ $$
 \nabla\cdot\vec D=\rho_f
 \end{cases}
 $$
-

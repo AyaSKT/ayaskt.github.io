@@ -107,10 +107,10 @@ $$
 
 $$
 \begin{cases}
-\vec e_n \cdot (\vec D_1 - \vec D_2) = \rho_s \\[4pt]
-\vec e_n \cdot (\vec B_1 - \vec B_2) = 0 \\[4pt]
-\vec e_n \times (\vec E_1 - \vec E_2) = 0 \\[4pt]
-\vec e_n \times (\vec H_1 - \vec H_2) = \vec J_s
+\vec e_n \cdot (\dot{\vec D}_1 - \dot{\vec D}_2) = \rho_s \\[4pt]
+\vec e_n \cdot (\dot{\vec B}_1 - \dot{\vec B}_2) = 0 \\[4pt]
+\vec e_n \times (\dot{\vec E}_1 - \dot{\vec E}_2) = 0 \\[4pt]
+\vec e_n \times (\dot{\vec H}_1 - \dot{\vec H}_2) = \vec J_s
 \end{cases}
 $$
 ::::
@@ -122,38 +122,38 @@ $$
 **理想导体表面**（导体内部场为零，$\vec e_n$ 从导体指向外部介质）：
 
 $$
-\vec e_n \cdot \vec D = \rho_s,\qquad
-\vec e_n \cdot \vec B = 0,\qquad
-\vec e_n \times \vec E = 0,\qquad
-\vec e_n \times \vec H = \vec J_s
+\vec e_n \cdot \dot{\vec D} = \rho_s,\qquad
+\vec e_n \cdot \dot{\vec B} = 0,\qquad
+\vec e_n \times \dot{\vec E} = 0,\qquad
+\vec e_n \times \dot{\vec H} = \vec J_s
 $$
 
 **静磁场边界条件**（常用子集）：
 
 | 条件 | 公式 |
 | --- | --- |
-| $\vec B$ 法向连续 | $B_{1n} = B_{2n}$ |
-| $\vec H$ 切向跳变 | $\vec e_n \times (\vec H_1 - \vec H_2) = \vec K_s$ |
-| 无面电流时 $\vec H$ 切向连续 | $H_{1t} = H_{2t}$ |
+| $\dot{\vec B}$ 法向连续 | $B_{1n} = B_{2n}$ |
+| $\dot{\vec H}$ 切向跳变 | $\vec e_n \times (\dot{\vec H}_1 - \dot{\vec H}_2) = \vec K_s$ |
+| 无面电流时 $\dot{\vec H}$ 切向连续 | $H_{1t} = H_{2t}$ |
 
 > [!TIP]
-> 法向分量由散度方程约束（$\vec D,\vec B$），切向分量由旋度方程约束（$\vec E,\vec H$）。有面源时跳变，无面源时连续。
+> 法向分量由散度方程约束（$\dot{\vec D},\dot{\vec B}$），切向分量由旋度方程约束（$\dot{\vec E},\dot{\vec H}$）。有面源时跳变，无面源时连续。
 
 ## Ex 1-3 静磁场分布计算 Magnetostatic Field Distribution
 
 
-由稳恒电流分布求 $\vec B$（或 $\vec H$）。两条主线：毕奥-萨伐尔定律（通用）和安培环路定理（高对称性）。
+由稳恒电流分布求 $\dot{\vec B}$（或 $\dot{\vec H}$）。两条主线：毕奥-萨伐尔定律（通用）和安培环路定理（高对称性）。
 
-**磁感应强度** 单位 $\mathrm{T = Wb/m^2}$。**洛伦兹力**：$\vec F = q(\vec E + \vec v \times \vec B)$，其中 $\vec F_m = q\vec v \times \vec B$ 不做功。
+**磁感应强度** 单位 $\mathrm{T = Wb/m^2}$。**洛伦兹力**：$\vec F = q(\dot{\vec E} + \vec v \times \dot{\vec B})$，其中 $\vec F_m = q\vec v \times \dot{\vec B}$ 不做功。
 
-**本构：** $\vec B = \mu\vec H$，$\mu = \mu_0\mu_r$，$\mu_0 = 4\pi \times 10^{-7}\ \mathrm{H/m}$。
+**本构：** $\dot{\vec B} = \mu\dot{\vec H}$，$\mu = \mu_0\mu_r$，$\mu_0 = 4\pi \times 10^{-7}\ \mathrm{H/m}$。
 
 ### 毕奥-萨伐尔定律 Biot-Savart Law
 
 :::: definition 毕奥-萨伐尔定律
 
 $$
-\vec B(\vec r) = \frac{\mu_0}{4\pi} \oint_C \frac{I\,d\vec l' \times \vec R}{R^3},
+\dot{\vec B}(\vec r) = \frac{\mu_0}{4\pi} \oint_C \frac{I\,d\vec l' \times \vec R}{R^3},
 \qquad \vec R = \vec r - \vec r',\quad R = |\vec R|
 $$
 ::::
@@ -162,21 +162,25 @@ $$
 
 对面电流与体电流，将 $I\,d\vec l'$ 替换为 $\vec K\,dS'$ 或 $\vec J\,dV'$。
 
+---
+
 ### 安培环路定理 Ampere's Circuital Law
 
 :::: definition 安培环路定理
 
 $$
-\oint_C \vec B \cdot d\vec l = \mu_0 I_{\mathrm{enc}},\qquad
-\oint_C \vec H \cdot d\vec l = I_{\mathrm{free}}
+\oint_C \dot{\vec B} \cdot d\vec l = \mu_0 I_{\mathrm{enc}},\qquad
+\oint_C \dot{\vec H} \cdot d\vec l = I_{\mathrm{free}}
 $$
 ::::
 
 右手四指沿积分路径正方向，拇指指向即为正电流方向。只在具有圆柱/平面/螺线管对称性时适用。
 
+---
+
 ### 常见几何分布的直接结论
 
-| 电流分布 | $\vec B$ | 备注 |
+| 电流分布 | $\dot{\vec B}$ | 备注 |
 | --- | --- | --- |
 | 无限长直导线 | $\displaystyle \vec e_\phi \frac{\mu_0 I}{2\pi\rho}$ | 右手定则定方向 |
 | 有限长直导线 | $\displaystyle \vec e_\phi \frac{\mu_0 I}{4\pi\rho}(\cos\theta_1 - \cos\theta_2)$ | $\theta_1,\theta_2$ 为两端到场点张角 |
@@ -197,7 +201,7 @@ $$
 ## Ex 1-4 电感与磁场能 Inductance and Magnetic Energy
 
 
-**磁通：** $\displaystyle \Phi = \iint_S \vec B \cdot d\vec S = \oint_C \vec A \cdot d\vec l$
+**磁通：** $\displaystyle \Phi = \iint_S \dot{\vec B} \cdot d\vec S = \oint_C \vec A \cdot d\vec l$
 
 **磁链：** $\Psi = N\Phi$。粗导体需分内外磁链 $\Psi = \Psi_i + \Psi_o$。
 
@@ -225,13 +229,13 @@ $$
 **磁场能密度：**
 
 $$
-w_m = \frac{1}{2}\vec B \cdot \vec H = \frac{1}{2}\mu H^2 = \frac{B^2}{2\mu}
+w_m = \frac{1}{2}\dot{\vec B} \cdot \dot{\vec H} = \frac{1}{2}\mu H^2 = \frac{B^2}{2\mu}
 $$
 
 **总磁场能：**
 
 $$
-W_m = \frac{1}{2}\iiint_V \vec B \cdot \vec H\,dV
+W_m = \frac{1}{2}\iiint_V \dot{\vec B} \cdot \dot{\vec H}\,dV
 $$
 
 **电感-能量关系：**
@@ -262,8 +266,8 @@ $$
 
 | 情况 | 表达式 | 典型场景 |
 | --- | --- | --- |
-| 回路静止，$\vec B$ 时变 | $\displaystyle \varepsilon = -\iint_S \frac{\partial \vec B}{\partial t} \cdot d\vec S$ | 变压器 |
-| $\vec B$ 恒定，回路运动 | $\displaystyle \varepsilon = \oint_C (\vec v \times \vec B) \cdot d\vec l$ | 发电机 |
+| 回路静止，$\dot{\vec B}$ 时变 | $\displaystyle \varepsilon = -\iint_S \frac{\partial \vec B}{\partial t} \cdot d\vec S$ | 变压器 |
+| $\dot{\vec B}$ 恒定，回路运动 | $\displaystyle \varepsilon = \oint_C (\vec v \times \dot{\vec B}) \cdot d\vec l$ | 发电机 |
 | 两者共同作用 | $\displaystyle \varepsilon = \oint_C (\vec v \times \vec B) \cdot d\vec l - \iint_S \frac{\partial \vec B}{\partial t} \cdot d\vec S$ | 一般情形 |
 
 ## Ex 1-6 时谐场与相量法 Time-Harmonic Fields and Phasors
@@ -282,8 +286,8 @@ $$
 
 | 瞬时表达式 | 相量 |
 | --- | --- |
-| $A_m\cos(\omega t + \phi)$ | $\dot A = A_m e^{j\phi}$ |
-| $A_m\sin(\omega t + \phi)$ | $\dot A = A_m e^{j(\phi - \pi/2)} = -jA_m e^{j\phi}$ |
+| $A_m\cos{(\omega t + \phi)}$ | $\dot A = A_m e^{j\phi}$ |
+| $A_m\sin{(\omega t + \phi)}$ | $\dot A = A_m e^{j(\phi - \pi/2)} = -jA_m e^{j\phi}$ |
 
 **亥姆霍兹方程**（无源区）：
 
@@ -334,27 +338,27 @@ $$
 $$
 ::::
 
-**TEM 波性质：** $\vec k \cdot \vec E = \vec k \cdot \vec H = \vec E \cdot \vec H = 0$，三者两两垂直，右手螺旋。
+**TEM 波性质：** $\vec k \cdot \dot{\vec E} = \vec k \cdot \dot{\vec H} = \dot{\vec E} \cdot \dot{\vec H} = 0$，三者两两垂直，右手螺旋。
 
 ![E、H、k 的右手关系](<EMFT Chapter 8 P I.attachments/ehk-right-hand.jpg>)
 
 **E-H 关系**——已知一个场和传播方向即可求另一个：
 
 $$
-\boxed{\vec H = \frac{1}{\eta}\vec e_n \times \vec E,\qquad
-\vec E = -\eta\,\vec e_n \times \vec H}
+\boxed{\dot{\vec H} = \frac{1}{\eta}\vec e_n \times \dot{\vec E},\qquad
+\dot{\vec E} = -\eta\,\vec e_n \times \dot{\vec H}}
 $$
 
-**任意方向传播：** $\vec E(\vec r) = \vec E_m e^{-j\vec k \cdot \vec r}$，其中 $\vec k = k\vec e_n$。对这种平面波 $\nabla \to -j\vec k$。
+**任意方向传播：** $\dot{\vec E}(\vec r) = \dot{\vec E}_m e^{-j\vec k \cdot \vec r}$，其中 $\vec k = k\vec e_n$。对这种平面波 $\nabla \to -j\vec k$。
 
-沿 $+z$ 方向：$\vec E(z) = \vec E_m e^{-jkz}$，瞬时形式 $\vec E(z,t) = \vec E_m \cos(\omega t - kz + \phi)$。
+沿 $+z$ 方向：$\dot{\vec E}(z) = \dot{\vec E}_m e^{-jkz}$，瞬时形式 $\vec E(z,t) = \dot{\vec E}_m \cos{(\omega t - kz + \phi)}$。
 
 ## Ex 1-8 极化 Polarization
 
 
 极化描述空间固定点处电场矢量端点随时间的运动轨迹。判断时先统一成余弦形式，再读振幅和相位。
 
-沿 $+z$ 传播的波，令 $E_x = E_{xm}\cos(\omega t - kz + \phi_x)$，$E_y = E_{ym}\cos(\omega t - kz + \phi_y)$，$\Delta\phi = \phi_y - \phi_x$：
+沿 $+z$ 传播的波，令 $E_x = E_{xm}\cos{(\omega t - kz + \phi_x)}$，$E_y = E_{ym}\cos{(\omega t - kz + \phi_y)}$，$\Delta\phi = \phi_y - \phi_x$：
 
 | 条件 | 极化方式 |
 | --- | --- |
@@ -386,10 +390,10 @@ k_c = \omega\sqrt{\mu\varepsilon_c} = \beta - j\alpha,\qquad
 $$
 
 $$
-\vec E(z) = \vec E_m e^{-jk_c z} = \vec E_m e^{-\alpha z} e^{-j\beta z}
+\dot{\vec E}(z) = \dot{\vec E}_m e^{-jk_c z} = \dot{\vec E}_m e^{-\alpha z} e^{-j\beta z}
 $$
 
-**复本征阻抗：** $\eta_c = \sqrt{\mu/\varepsilon_c} = |\eta_c| e^{j\phi}$。此时 $\vec E$ 与 $\vec H$ 不再同相，磁场相对电场滞后 $\phi$。
+**复本征阻抗：** $\eta_c = \sqrt{\mu/\varepsilon_c} = |\eta_c| e^{j\phi}$。此时 $\dot{\vec E}$ 与 $\dot{\vec H}$ 不再同相，磁场相对电场滞后 $\phi$。
 
 ![理想介质中 E 与 H 同相](<EMFT Chapter 8 P I.attachments/ideal-medium-eh.jpg>)
 
@@ -423,7 +427,7 @@ $$
 ## Ex 1-10 功率与能流 Power and Energy Flow
 
 
-**电磁能量密度：**
+**电磁能量密度（瞬时量，用实数场）：**
 
 $$
 w_e = \frac{1}{2}\vec E \cdot \vec D,\qquad
@@ -431,13 +435,20 @@ w_m = \frac{1}{2}\vec H \cdot \vec B,\qquad
 w = w_e + w_m
 $$
 
-理想介质中均匀平面波 $w_e = w_m$，故 $w = \varepsilon|\vec E|^2 = \mu|\vec H|^2$。
+**峰值相量的时均能量密度：**
+
+$$
+w_{E,\mathrm{av}} = \frac{1}{4}\operatorname{Re}[\dot{\vec D}\cdot\dot{\vec E}^*],\qquad
+w_{M,\mathrm{av}} = \frac{1}{4}\operatorname{Re}[\dot{\vec B}\cdot\dot{\vec H}^*]
+$$
+
+理想介质中均匀平面波瞬时满足 $w_e = w_m$，故 $w = \varepsilon|\vec E|^2 = \mu|\vec H|^2$；若用峰值相量，时均总能量密度为 $w_{\mathrm{av}}=\frac{1}{2}\varepsilon|\dot{\vec E}|^2=\frac{1}{2}\mu|\dot{\vec H}|^2$。
 
 :::: definition 坡印廷矢量 Poynting Vector
 
 瞬时：$\vec S = \vec E \times \vec H\quad(\mathrm{W/m^2})$
 
-时均：$\displaystyle \boxed{\vec S_{\mathrm{av}} = \frac{1}{2}\operatorname{Re}[\vec E \times \vec H^*]}$
+时均：$\displaystyle \boxed{\vec S_{\mathrm{av}} = \frac{1}{2}\operatorname{Re}[\dot{\vec E} \times \dot{\vec H}^*]}$
 ::::
 
 ![坡印廷矢量方向关系](<EMFT Chapter 8 P I.attachments/poynting-vector-wide.jpg>)
@@ -452,7 +463,7 @@ $$
 \vec S_{\mathrm{av}} = \vec e_n \frac{E_m^2}{2\eta}
 $$
 
-**平均焦耳损耗功率密度：** $p_{J,\mathrm{av}} = \frac{1}{2}\sigma\vec E \cdot \vec E^*$
+**平均焦耳损耗功率密度：** $p_{J,\mathrm{av}} = \frac{1}{2}\sigma\dot{\vec E} \cdot \dot{\vec E}^*$
 
 ## Ex 1-11 法向入射与驻波 Normal Incidence and Standing Waves
 
@@ -482,27 +493,31 @@ $E_{rm} = \Gamma E_{im}$，$E_{tm} = \tau E_{im}$
 
 ![介质界面行驻波振幅变化](<EMFT Chapter 8 P II.attachments/dielectric-amplitude-wide.jpg>)
 
+---
+
 ### 理想导体边界（全反射）
 
 $\eta_{2c} = 0 \ \Longrightarrow\ \Gamma = -1,\ \tau = 0$。反射波与入射波等幅反相，合成纯驻波：
 
 $$
-\vec E_1(z) = -\vec e_x j2E_{im}\sin(\beta_1 z),\qquad
-\vec H_1(z) = \vec e_y \frac{2E_{im}}{\eta_1}\cos(\beta_1 z)
+\dot{\vec E}_1(z) = -\vec e_x j2E_{im}\sin{(\beta_1 z)},\qquad
+\dot{\vec H}_1(z) = \vec e_y \frac{2E_{im}}{\eta_1}\cos{(\beta_1 z)}
 $$
 
 ![理想导体前的驻波分布](<EMFT Chapter 8 P II.attachments/standing-wave-wide.jpg>)
 
-波腹 $z_{\max} = -(2n+1)\lambda_1/4$，波节 $z_{\min} = -n\lambda_1/2$（$n=0,1,2,\dots$）。$\vec E$ 与 $\vec H$ 时间相位差 $\pi/2$，空间错开 $\lambda_1/4$。平均坡印廷矢量为零。
+波腹 $z_{\max} = -(2n+1)\lambda_1/4$，波节 $z_{\min} = -n\lambda_1/2$（$n=0,1,2,\dots$）。$\dot{\vec E}$ 与 $\dot{\vec H}$ 时间相位差 $\pi/2$，空间错开 $\lambda_1/4$。平均坡印廷矢量为零。
 
-**表面电流密度：** $\vec J_S = \vec e_n \times \vec H_1|_{z=0}$
+**表面电流密度：** $\vec J_S = \vec e_n \times \dot{\vec H}_1|_{z=0}$
+
+---
 
 ### 驻波比
 
 :::: definition 驻波比 Standing-Wave Ratio
 
 $$
-\boxed{S = \frac{|\vec E|_{\max}}{|\vec E|_{\min}} = \frac{1 + |\Gamma|}{1 - |\Gamma|}},\qquad
+\boxed{S = \frac{|\dot{\vec E}|_{\max}}{|\dot{\vec E}|_{\min}} = \frac{1 + |\Gamma|}{1 - |\Gamma|}},\qquad
 |\Gamma| = \frac{S-1}{S+1}
 $$
 ::::
@@ -514,6 +529,8 @@ $$
 | $0 < \lvert\Gamma\rvert < 1$ | $1 < S < \infty$ | 行驻波 | 部分反射 |
 
 由 $S$ 反求 $|\Gamma|$，再结合界面处是波腹还是波节判断 $\Gamma$ 符号。
+
+---
 
 ### 能流守恒
 
@@ -529,12 +546,12 @@ $$
 | 问题类型 | 第一步判断 | 核心公式 |
 | --- | --- | --- |
 | 由电流求磁场 | 对称性如何？ | 毕奥-萨伐尔定律 / 安培环路定理 |
-| 边界条件 | 有无面源？哪种介质？ | $\vec e_n \times (\vec H_1 - \vec H_2) = \vec J_s$ 等 |
+| 边界条件 | 有无面源？哪种介质？ | $\vec e_n \times (\dot{\vec H}_1 - \dot{\vec H}_2) = \vec J_s$ 等 |
 | 电感 / 磁能 | 要不要内自感？ | $L = \Psi/I$，$W_m = \frac{1}{2}LI^2$ |
-| 感应电动势 | 谁在变？$\vec B$ 还是回路形状？ | $\varepsilon = -\frac{d\Psi}{dt}$ |
+| 感应电动势 | 谁在变？$\dot{\vec B}$ 还是回路形状？ | $\varepsilon = -\frac{d\Psi}{dt}$ |
 | 时谐转换 | 给定瞬时还是相量？ | $\partial_t \leftrightarrow j\omega$，$\varepsilon_c = \varepsilon - j\sigma/\omega$ |
 | 波参数 | 介质参数 $\mu_r,\varepsilon_r,\sigma$？ | $\eta = \sqrt{\mu/\varepsilon}$，$k = \omega\sqrt{\mu\varepsilon}$ |
 | 极化 | $\Delta\phi$ 和 $E_{xm},E_{ym}$？ | 先判线/圆/椭圆，再判旋向 |
 | 良导体 / 趋肤 | $\sigma/(\omega\varepsilon) \gg 1$？ | $\delta = 1/\sqrt{\pi f\mu\sigma}$ |
-| 平均功率 | 有复矢量吗？ | $\vec S_{\mathrm{av}} = \frac{1}{2}\operatorname{Re}[\vec E \times \vec H^*]$ |
+| 平均功率 | 有复矢量吗？ | $\vec S_{\mathrm{av}} = \frac{1}{2}\operatorname{Re}[\dot{\vec E} \times \dot{\vec H}^*]$ |
 | 反射 / 驻波 | 界面两侧 $\eta$？导体还是介质？ | $\Gamma = \frac{\eta_2-\eta_1}{\eta_2+\eta_1}$，$S = \frac{1+\lvert\Gamma\rvert}{1-\lvert\Gamma\rvert}$ |

@@ -57,7 +57,7 @@
 时谐场的一般实数形式可以写成：
 
 $$
-A(\vec r,t)=A_0(\vec r)\cos[\omega t+\phi(\vec r)+\phi_0]
+A(\vec r,t)=A_0(\vec r)\cos{{[\omega t+\phi(\vec r)+\phi_0]}}
 $$
 
 其中：
@@ -70,17 +70,17 @@ $$
 用复矢量表示时：
 
 $$
-\vec E(\vec r,t)=\operatorname{Re}[\vec E(\vec r)e^{j\omega t}]
+\vec E(\vec r,t)=\operatorname{Re}[\dot{\vec E}(\vec r)e^{j\omega t}]
 $$
 
 $$
-\vec E(\vec r)
+\dot{\vec E}(\vec r)
 =\vec e_xE_x(\vec r)e^{j\phi_x(\vec r)}
 +\vec e_yE_y(\vec r)e^{j\phi_y(\vec r)}
 +\vec e_zE_z(\vec r)e^{j\phi_z(\vec r)}
 $$
 
-复矢量 $\vec E(\vec r)$ 把空间变化、振幅、相位都收进去了。时谐场里经常直接令：
+复矢量 $\dot{\vec E}(\vec r)$ 把空间变化、振幅、相位都收进去了。时谐场里经常直接令：
 
 $$
 \frac{\partial}{\partial t}=j\omega
@@ -91,7 +91,7 @@ $$
 在无源区域，电场满足亥姆霍兹方程：
 
 $$
-\nabla^2\vec E(\vec r)+k_c^2\vec E(\vec r)=0
+\nabla^2\dot{\vec E}(\vec r)+k_c^2\dot{\vec E}(\vec r)=0
 $$
 
 若媒质为理想介质：
@@ -107,7 +107,7 @@ $$
 于是：
 
 $$
-\nabla^2\vec E(\vec r)+k^2\vec E(\vec r)=0
+\nabla^2\dot{\vec E}(\vec r)+k^2\dot{\vec E}(\vec r)=0
 $$
 
 若媒质有损耗：
@@ -139,19 +139,19 @@ $$
 取等相位面为 $xOy$ 平面，波沿 $z$ 方向传播，场量只与 $z$ 有关：
 
 $$
-\vec E(\vec r)=\vec E(z)
+\dot{\vec E}(\vec r)=\dot{\vec E}(z)
 $$
 
 代入亥姆霍兹方程：
 
 $$
-\nabla^2\vec E+k^2\vec E=0
+\nabla^2\dot{\vec E}+k^2\dot{\vec E}=0
 $$
 
 可得：
 
 $$
-\frac{d^2\vec E}{dz^2}+k^2\vec E=0
+\frac{d^2\dot{\vec E}}{dz^2}+k^2\dot{\vec E}=0
 $$
 
 对每一个分量都有：
@@ -189,44 +189,44 @@ $$
 若只考虑沿 $+z$ 方向传播的波：
 
 $$
-\vec E(z)=\vec E_m e^{-jkz}
+\dot{\vec E}(z)=\dot{\vec E}_m e^{-jkz}
 $$
 
 $$
-\vec H(z)=\vec H_m e^{-jkz}
+\dot{\vec H}(z)=\dot{\vec H}_m e^{-jkz}
 $$
 
 瞬时电场为：
 
 $$
-\vec E(z,t)=\operatorname{Re}[\vec E(z)e^{j\omega t}]
+\vec E(z,t)=\operatorname{Re}[\dot{\vec E}(z)e^{j\omega t}]
 $$
 
 若某一分量为 $E_i(z)=E_{im}e^{j\phi_i}e^{-jkz}$，则：
 
 $$
-E_i(z,t)=E_{im}\cos(\omega t-kz+\phi_i)
+E_i(z,t)=E_{im}\cos{(\omega t-kz+\phi_i)}
 $$
 
 均匀平面波在理想介质中的关键结论：
 
 $$
 \boxed{
-\vec e_z\cdot \vec E=0,\qquad \vec e_z\cdot \vec H=0
+\vec e_z\cdot \dot{\vec E}=0,\qquad \vec e_z\cdot \dot{\vec H}=0
 }
 $$
 
 即它是**横电磁波 Transverse Electromagnetic Wave, TEM Wave**。
 
-这里的“横”指场矢量没有传播方向上的分量。若波沿 $z$ 方向传播，$\vec E$ 和 $\vec H$ 都只在横截面内振动。
+这里的“横”指场矢量没有传播方向上的分量。若波沿 $z$ 方向传播，$\dot{\vec E}$ 和 $\dot{\vec H}$ 都只在横截面内振动。
 
 由 Maxwell 方程可得：
 
 $$
 \boxed{
-\vec E=-\eta\,\vec e_n\times\vec H,
+\dot{\vec E}=-\eta\,\vec e_n\times\dot{\vec H},
 \qquad
-\vec H=\frac{1}{\eta}\vec e_n\times\vec E
+\dot{\vec H}=\frac{1}{\eta}\vec e_n\times\dot{\vec E}
 }
 $$
 
@@ -255,9 +255,9 @@ $$
 > \vec E\cdot\vec H=0
 > $$
 >
-> $\vec E,\vec H,\vec k$ 两两垂直，并满足右手螺旋关系。电场与磁场同相，振幅相差 $\eta$ 倍。
+> $\dot{\vec E},\dot{\vec H},\vec k$ 两两垂直，并满足右手螺旋关系。电场与磁场同相，振幅相差 $\eta$ 倍。
 
-这组关系用于从一个场求另一个场。已知传播方向和 $\vec E$ 时，用 $\vec H=\dfrac{1}{\eta}\vec e_n\times\vec E$；已知传播方向和 $\vec H$ 时，用 $\vec E=-\eta\vec e_n\times\vec H$。
+这组关系用于从一个场求另一个场。已知传播方向和 $\dot{\vec E}$ 时，用 $\dot{\vec H}=\dfrac{1}{\eta}\vec e_n\times\dot{\vec E}$；已知传播方向和 $\dot{\vec H}$ 时，用 $\dot{\vec E}=-\eta\vec e_n\times\dot{\vec H}$。
 
 ---
 
@@ -272,7 +272,7 @@ $$
 于是沿 $\vec e_n$ 方向传播的均匀平面波为：
 
 $$
-\vec E(\vec r)=\vec E_m e^{-jk\vec e_n\cdot\vec r}
+\dot{\vec E}(\vec r)=\dot{\vec E}_m e^{-jk\vec e_n\cdot\vec r}
 $$
 
 :::: definition
@@ -286,11 +286,11 @@ $$
 则：
 
 $$
-\vec E(\vec r)=\vec E_m e^{-j\vec k\cdot\vec r}
+\dot{\vec E}(\vec r)=\dot{\vec E}_m e^{-j\vec k\cdot\vec r}
 $$
 
 $$
-\vec H(\vec r)=\vec H_m e^{-j\vec k\cdot\vec r}
+\dot{\vec H}(\vec r)=\dot{\vec H}_m e^{-j\vec k\cdot\vec r}
 $$
 
 由于：
@@ -310,10 +310,10 @@ $$
 $$
 \left\{
 \begin{aligned}
-\nabla\times\vec H&=j\omega\vec D\\
-\nabla\times\vec E&=-j\omega\vec B\\
-\nabla\cdot\vec D&=0\\
-\nabla\cdot\vec B&=0
+\nabla\times\dot{\vec H}&=j\omega\dot{\vec D}\\
+\nabla\times\dot{\vec E}&=-j\omega\dot{\vec B}\\
+\nabla\cdot\dot{\vec D}&=0\\
+\nabla\cdot\dot{\vec B}&=0
 \end{aligned}
 \right.
 $$
@@ -323,10 +323,10 @@ $$
 $$
 \left\{
 \begin{aligned}
-\vec k\times\vec H_m&=-\omega\vec D_m\\
-\vec k\times\vec E_m&=\omega\vec B_m\\
-\vec k\cdot\vec D_m&=0\\
-\vec k\cdot\vec B_m&=0
+\vec k\times\dot{\vec H}_m&=-\omega\dot{\vec D}_m\\
+\vec k\times\dot{\vec E}_m&=\omega\dot{\vec B}_m\\
+\vec k\cdot\dot{\vec D}_m&=0\\
+\vec k\cdot\dot{\vec B}_m&=0
 \end{aligned}
 \right.
 $$
@@ -337,7 +337,7 @@ $$
 空气中某均匀平面波的磁场强度复矢量为：
 
 $$
-\vec H=(-\vec e_xA+2\vec e_y+4\vec e_z)e^{-j\pi(4x+3z)}
+\dot{\vec H}=(-\vec e_xA+2\vec e_y+4\vec e_z)e^{-j\pi(4x+3z)}
 $$
 
 求：
@@ -345,7 +345,7 @@ $$
 1. $\vec k$；
 2. $\lambda$ 与 $f$；
 3. 常数 $A$；
-4. 电场复矢量 $\vec E$。
+4. 电场复矢量 $\dot{\vec E}$。
 ::::
 
 :::: solution
@@ -380,7 +380,7 @@ $$
 由于均匀平面波满足：
 
 $$
-\vec k\cdot\vec H_m=0
+\vec k\cdot\dot{\vec H}_m=0
 $$
 
 代入：
@@ -404,13 +404,13 @@ $$
 空气中 $\eta_0=120\pi\ \Omega$，由
 
 $$
-\vec E=-\eta_0\vec e_n\times\vec H
+\dot{\vec E}=-\eta_0\vec e_n\times\dot{\vec H}
 $$
 
 可得：
 
 $$
-\vec E
+\dot{\vec E}
 =120\pi(1.2\vec e_x+5\vec e_y-1.6\vec e_z)
 e^{-j\pi(4x+3z)}
 $$
@@ -471,7 +471,7 @@ $$
 $$
 k=\frac{2\pi}{\lambda}=\omega\sqrt{\mu\varepsilon}
 $$
-::::
+
 
 #### 3. 相速度
 
@@ -526,8 +526,8 @@ $$
 $$
 \left\{
 \begin{aligned}
-E_x(t)&=E_{xm}\cos(\omega t-kz+\phi_x)\\
-E_y(t)&=E_{ym}\cos(\omega t-kz+\phi_y)
+E_x(t)&=E_{xm}\cos{(\omega t-kz+\phi_x)}\\
+E_y(t)&=E_{ym}\cos{(\omega t-kz+\phi_y)}
 \end{aligned}
 \right.
 $$
@@ -632,11 +632,11 @@ $$
 例如，线极化波可以分解为两个等幅、反旋向的圆极化波：
 
 $$
-\vec E=\vec e_xE_me^{-jkz}
+\dot{\vec E}=\vec e_xE_me^{-jkz}
 $$
 
 $$
-\vec E
+\dot{\vec E}
 =(\vec e_x+j\vec e_y)\frac{E_m}{2}e^{-jkz}
 +(\vec e_x-j\vec e_y)\frac{E_m}{2}e^{-jkz}
 $$
@@ -656,19 +656,19 @@ $$
 
 $$
 (1)\quad
-\vec E=\vec e_xE_me^{-jkz}-j\vec e_yE_me^{-jkz}
+\dot{\vec E}=\vec e_xE_me^{-jkz}-j\vec e_yE_me^{-jkz}
 $$
 
 $$
 (2)\quad
-\vec E=\vec e_xE_m\sin\left(\omega t-kz+\frac{\pi}{4}\right)
+\dot{\vec E}=\vec e_xE_m\sin\left(\omega t-kz+\frac{\pi}{4}\right)
 +\vec e_yE_m\cos\left(\omega t-kz-\frac{\pi}{4}\right)
 $$
 
 $$
 (3)\quad
-\vec E=\vec e_xE_m\sin(\omega t+kz)
-+2\vec e_yE_m\cos(\omega t+kz)
+\dot{\vec E}=\vec e_xE_m\sin{(\omega t+kz)}
++2\vec e_yE_m\cos{(\omega t+kz)}
 $$
 ::::
 
@@ -760,7 +760,7 @@ $$
 场表达式为：
 
 $$
-\vec E(\vec r)=\vec E_m e^{-jk\vec e_n\cdot\vec r}
+\dot{\vec E}(\vec r)=\dot{\vec E}_m e^{-jk\vec e_n\cdot\vec r}
 $$
 
 有损媒质中：
@@ -786,13 +786,13 @@ $$
 于是：
 
 $$
-\vec E(\vec r)=\vec E_me^{-jk_c\vec e_n\cdot\vec r}
+\dot{\vec E}(\vec r)=\dot{\vec E}_me^{-jk_c\vec e_n\cdot\vec r}
 $$
 
 展开：
 
 $$
-\vec E(\vec r)=\vec E_me^{-\alpha\vec e_n\cdot\vec r}
+\dot{\vec E}(\vec r)=\dot{\vec E}_me^{-\alpha\vec e_n\cdot\vec r}
 e^{-j\beta\vec e_n\cdot\vec r}
 $$
 
@@ -817,20 +817,20 @@ $$
 若波沿 $+z$ 方向传播：
 
 $$
-\vec E(z)=\vec E_me^{-jk_cz}
+\dot{\vec E}(z)=\dot{\vec E}_me^{-jk_cz}
 $$
 
 即：
 
 $$
-\vec E(z)=\vec E_me^{-\gamma z}
-=\vec E_me^{-\alpha z}e^{-j\beta z}
+\dot{\vec E}(z)=\dot{\vec E}_me^{-\gamma z}
+=\dot{\vec E}_me^{-\alpha z}e^{-j\beta z}
 $$
 
 对应瞬时形式可写为：
 
 $$
-\vec E(z,t)=\vec E_me^{-\alpha z}\cos(\omega t-\beta z)
+\vec E(z,t)=\dot{\vec E}_me^{-\alpha z}\cos{(\omega t-\beta z)}
 $$
 
 其中：
@@ -849,7 +849,7 @@ $$
 有损媒质中的磁场仍可由：
 
 $$
-\vec H=\frac{1}{\eta_c}\vec e_z\times\vec E
+\dot{\vec H}=\frac{1}{\eta_c}\vec e_z\times\dot{\vec E}
 $$
 
 得到。
@@ -864,8 +864,8 @@ $$
 因此磁场为：
 
 $$
-\vec H(z)
-=\frac{1}{|\eta_c|}\vec e_z\times\vec E_m
+\dot{\vec H}(z)
+=\frac{1}{|\eta_c|}\vec e_z\times\dot{\vec E}_m
 e^{-\alpha z}e^{-j(\beta z+\phi)}
 $$
 
@@ -873,15 +873,15 @@ $$
 
 $$
 \vec H(z,t)
-=\frac{\vec e_z\times\vec E_m}{|\eta_c|}
-e^{-\alpha z}\cos(\omega t-\beta z-\phi)
+=\frac{\vec e_z\times\dot{\vec E}_m}{|\eta_c|}
+e^{-\alpha z}\cos{(\omega t-\beta z-\phi)}
 $$
 
 ![理想介质中 E 与 H 同相](<EMFT Chapter 8 P I.attachments/ideal-medium-eh.jpg>)
 
 ![导电媒质中 E 与 H 不同相](<EMFT Chapter 8 P I.attachments/lossy-medium-eh.jpg>)
 
-在导电媒质中，$\vec E$ 与 $\vec H$ 不再同相。若 $\eta_c=|\eta_c|e^{j\phi}$，则磁场相对电场滞后 $\phi$。
+在导电媒质中，$\dot{\vec E}$ 与 $\dot{\vec H}$ 不再同相。若 $\eta_c=|\eta_c|e^{j\phi}$，则磁场相对电场滞后 $\phi$。
 
 传播参数由：
 
@@ -1426,9 +1426,9 @@ $$
 $$
 \vec S(\vec r,t)
 =
-\operatorname{Re}[\vec E(\vec r)e^{j\omega t}]
+\operatorname{Re}[\dot{\vec E}(\vec r)e^{j\omega t}]
 \times
-\operatorname{Re}[\vec H(\vec r)e^{j\omega t}]
+\operatorname{Re}[\dot{\vec H}(\vec r)e^{j\omega t}]
 $$
 
 如果求时间平均值，则可以直接用复矢量。对周期函数：
@@ -1440,10 +1440,10 @@ $$
 
 | 物理量 | 一般形式 | 线性媒质中 |
 |--------|---------|-----------|
-| 平均坡印廷矢量 | $\displaystyle \vec S_{\mathrm{av}}=\frac12\operatorname{Re}[\vec E\times\vec H^*]$ | — |
-| 平均电场能量密度 | $\displaystyle w_{E,\mathrm{av}}=\frac14\operatorname{Re}[\vec D\cdot\vec E^*]$ | $\displaystyle w_{E,\mathrm{av}}=\frac14\varepsilon'\vec E\cdot\vec E^*$ |
-| 平均磁场能量密度 | $\displaystyle w_{M,\mathrm{av}}=\frac14\operatorname{Re}[\vec B\cdot\vec H^*]$ | — |
-| 平均焦耳损耗功率密度 | $\displaystyle p_{J,\mathrm{av}}=\frac12\sigma\vec E\cdot\vec E^*$ | — |
+| 平均坡印廷矢量 | $\displaystyle \vec S_{\mathrm{av}}=\frac12\operatorname{Re}[\dot{\vec E}\times\dot{\vec H}^*]$ | — |
+| 平均电场能量密度 | $\displaystyle w_{E,\mathrm{av}}=\frac14\operatorname{Re}[\dot{\vec D}\cdot\dot{\vec E}^*]$ | $\displaystyle w_{E,\mathrm{av}}=\frac14\varepsilon'\dot{\vec E}\cdot\dot{\vec E}^*$ |
+| 平均磁场能量密度 | $\displaystyle w_{M,\mathrm{av}}=\frac14\operatorname{Re}[\dot{\vec B}\cdot\dot{\vec H}^*]$ | — |
+| 平均焦耳损耗功率密度 | $\displaystyle p_{J,\mathrm{av}}=\frac12\sigma\dot{\vec E}\cdot\dot{\vec E}^*$ | — |
 
 > [!WARNING]
 > 瞬时量必须用实数场计算；求时均值才可直接使用复矢量公式，注意 $\vec S_{\mathrm{av}}$ 中的 $\dfrac12$ 因子。
@@ -1454,7 +1454,7 @@ $$
 自由空间中平面波电场为：
 
 $$
-\vec E=\vec e_x50\cos(\omega t-kz)\ \mathrm{V/m}
+\vec E=\vec e_x50\cos{(\omega t-kz)}\ \mathrm{V/m}
 $$
 
 求其垂直穿过半径 $R=2.5\ \mathrm{m}$ 圆面的平均功率。
@@ -1464,7 +1464,7 @@ $$
 复电场为：
 
 $$
-\vec E=\vec e_x50e^{-jkz}
+\dot{\vec E}=\vec e_x50e^{-jkz}
 $$
 
 自由空间本征阻抗：
@@ -1476,7 +1476,7 @@ $$
 磁场复矢量：
 
 $$
-\vec H=\vec e_y\frac{50}{120\pi}e^{-jkz}
+\dot{\vec H}=\vec e_y\frac{50}{120\pi}e^{-jkz}
 =\vec e_y\frac{5}{12\pi}e^{-jkz}\ \mathrm{A/m}
 $$
 
@@ -1484,7 +1484,7 @@ $$
 
 $$
 \vec S_{\mathrm{av}}
-=\frac12\operatorname{Re}(\vec E\times\vec H^*)
+=\frac12\operatorname{Re}(\dot{\vec E}\times\dot{\vec H}^*)
 $$
 
 $$
@@ -1532,34 +1532,34 @@ $$
 若入射电场取 $x$ 方向线极化，则：
 
 $$
-\vec E_i(z)=\vec e_xE_{im}e^{-\gamma_1z}
+\dot{\vec E}_i(z)=\vec e_xE_{im}e^{-\gamma_1z}
 $$
 
 $$
-\vec H_i(z)=\vec e_y\frac{E_{im}}{\eta_{1c}}e^{-\gamma_1z}
+\dot{\vec H}_i(z)=\vec e_y\frac{E_{im}}{\eta_{1c}}e^{-\gamma_1z}
 $$
 
 反射波为：
 
 $$
-\vec E_r(z)=\vec e_xE_{rm}e^{\gamma_1z}
+\dot{\vec E}_r(z)=\vec e_xE_{rm}e^{\gamma_1z}
 $$
 
 $$
-\vec H_r(z)=-\vec e_y\frac{E_{rm}}{\eta_{1c}}e^{\gamma_1z}
+\dot{\vec H}_r(z)=-\vec e_y\frac{E_{rm}}{\eta_{1c}}e^{\gamma_1z}
 $$
 
 透射波为：
 
 $$
-\vec E_t(z)=\vec e_xE_{tm}e^{-\gamma_2z}
+\dot{\vec E}_t(z)=\vec e_xE_{tm}e^{-\gamma_2z}
 $$
 
 $$
-\vec H_t(z)=\vec e_y\frac{E_{tm}}{\eta_{2c}}e^{-\gamma_2z}
+\dot{\vec H}_t(z)=\vec e_y\frac{E_{tm}}{\eta_{2c}}e^{-\gamma_2z}
 $$
 
-反射波的磁场前面有负号，因为反射波传播方向为 $-\vec e_z$，而 $\vec E,\vec H,\vec k$ 仍必须满足右手关系。
+反射波的磁场前面有负号，因为反射波传播方向为 $-\vec e_z$，而 $\dot{\vec E},\dot{\vec H},\vec k$ 仍必须满足右手关系。
 
 ---
 
@@ -1570,11 +1570,11 @@ $$
 在无面电流、无面磁流的普通界面上，切向电场和切向磁场连续：
 
 $$
-\left.\vec e_n\times(\vec E_1-\vec E_2)\right|_S=0
+\left.\vec e_n\times(\dot{\vec E}_1-\dot{\vec E}_2)\right|_S=0
 $$
 
 $$
-\left.\vec e_n\times(\vec H_1-\vec H_2)\right|_S=0
+\left.\vec e_n\times(\dot{\vec H}_1-\dot{\vec H}_2)\right|_S=0
 $$
 
 在 $z=0$ 处：
@@ -1650,15 +1650,15 @@ $$
 入射波与反射波可写为：
 
 $$
-\vec E_i(z)=\vec e_xE_{im}e^{-j\beta_1z},
+\dot{\vec E}_i(z)=\vec e_xE_{im}e^{-j\beta_1z},
 \qquad
-\vec H_i(z)=\vec e_y\frac{E_{im}}{\eta_1}e^{-j\beta_1z}
+\dot{\vec H}_i(z)=\vec e_y\frac{E_{im}}{\eta_1}e^{-j\beta_1z}
 $$
 
 $$
-\vec E_r(z)=-\vec e_xE_{im}e^{j\beta_1z},
+\dot{\vec E}_r(z)=-\vec e_xE_{im}e^{j\beta_1z},
 \qquad
-\vec H_r(z)=\vec e_y\frac{E_{im}}{\eta_1}e^{j\beta_1z}
+\dot{\vec H}_r(z)=\vec e_y\frac{E_{im}}{\eta_1}e^{j\beta_1z}
 $$
 
 注意磁场没有反相。电场反相来自理想导体表面切向电场必须为零；磁场相加后在表面形成最大值，对应表面感应电流。
@@ -1670,33 +1670,33 @@ $$
 理想导体前方区域的总场为：
 
 $$
-\vec E_1(z)=\vec E_i(z)+\vec E_r(z)
+\dot{\vec E}_1(z)=\dot{\vec E}_i(z)+\dot{\vec E}_r(z)
 $$
 
 代入：
 
 $$
-\vec E_1(z)
+\dot{\vec E}_1(z)
 =\vec e_xE_{im}(e^{-j\beta_1z}-e^{j\beta_1z})
-=-\vec e_xj2E_{im}\sin(\beta_1z)
+=-\vec e_xj2E_{im}\sin{(\beta_1z)}
 $$
 
 磁场总场为：
 
 $$
-\vec H_1(z)
+\dot{\vec H}_1(z)
 =\vec e_y\frac{E_{im}}{\eta_1}(e^{-j\beta_1z}+e^{j\beta_1z})
-=\vec e_y\frac{2E_{im}}{\eta_1}\cos(\beta_1z)
+=\vec e_y\frac{2E_{im}}{\eta_1}\cos{(\beta_1z)}
 $$
 
 对应瞬时形式：
 
 $$
-\vec E_1(z,t)=\vec e_x2E_{im}\sin(\beta_1z)\sin\omega t
+\vec E_1(z,t)=\vec e_x2E_{im}\sin{(\beta_1z)}\sin\omega t
 $$
 
 $$
-\vec H_1(z,t)=\vec e_y\frac{2E_{im}}{\eta_1}\cos(\beta_1z)\cos\omega t
+\vec H_1(z,t)=\vec e_y\frac{2E_{im}}{\eta_1}\cos{(\beta_1z)}\cos\omega t
 $$
 
 ![理想导体前的驻波分布](<EMFT Chapter 8 P II.attachments/standing-wave-wide.jpg>)
@@ -1730,7 +1730,7 @@ $$
 
 $$
 \vec S_{av}
-=\frac12\operatorname{Re}[\vec E_1\times\vec H_1^*]
+=\frac12\operatorname{Re}[\dot{\vec E}_1\times\dot{\vec H}_1^*]
 =0
 $$
 
@@ -1755,7 +1755,7 @@ $$
 理想导体表面的感应电流密度为：
 
 $$
-\vec J_S=\vec e_n\times\vec H_1\big|_{z=0}
+\vec J_S=\vec e_n\times\dot{\vec H}_1\big|_{z=0}
 $$
 
 在本节坐标中，指向区域 1 的法向量为 $-\vec e_z$，于是：
@@ -1773,8 +1773,8 @@ $$
 
 $$
 \vec E_i
-=\vec e_x100\sin(\omega t-\beta z)
-+\vec e_y200\cos(\omega t-\beta z)
+=\vec e_x100\sin{(\omega t-\beta z)}
++\vec e_y200\cos{(\omega t-\beta z)}
 \quad \mathrm{V/m}
 $$
 
@@ -1785,7 +1785,7 @@ $$
 先写复电场：
 
 $$
-\vec E_i(z)
+\dot{\vec E}_i(z)
 =\vec e_x100e^{-j\beta z}e^{-j\pi/2}
 +\vec e_y200e^{-j\beta z}
 $$
@@ -1793,14 +1793,14 @@ $$
 入射磁场：
 
 $$
-\vec H_i(z)
-=\frac{1}{\eta_0}\vec e_z\times\vec E_i
+\dot{\vec H}_i(z)
+=\frac{1}{\eta_0}\vec e_z\times\dot{\vec E}_i
 $$
 
 反射电场在理想导体表面反相：
 
 $$
-\vec E_r(z)
+\dot{\vec E}_r(z)
 =-\vec e_x100e^{j\beta z}e^{-j\pi/2}
 -\vec e_y200e^{j\beta z}
 $$
@@ -1808,31 +1808,31 @@ $$
 反射磁场为：
 
 $$
-\vec H_r(z)
-=\frac{1}{\eta_0}(-\vec e_z)\times\vec E_r
+\dot{\vec H}_r(z)
+=\frac{1}{\eta_0}(-\vec e_z)\times\dot{\vec E}_r
 $$
 
 相加得：
 
 $$
-\vec E_1(z)
-=-j\vec e_x200e^{-j\pi/2}\sin(\beta z)
--j\vec e_y400\sin(\beta z)
+\dot{\vec E}_1(z)
+=-j\vec e_x200e^{-j\pi/2}\sin{(\beta z)}
+-j\vec e_y400\sin{(\beta z)}
 $$
 
 $$
-\vec H_1(z)
+\dot{\vec H}_1(z)
 =\frac{1}{\eta_0}
 \left[
--\vec e_x400\cos(\beta z)
-+\vec e_y200e^{-j\pi/2}\cos(\beta z)
+-\vec e_x400\cos{(\beta z)}
++\vec e_y200e^{-j\pi/2}\cos{(\beta z)}
 \right]
 $$
 
 表面电流密度：
 
 $$
-\vec J_S=-\vec e_z\times\vec H_1\big|_{z=0}
+\vec J_S=-\vec e_z\times\dot{\vec H}_1\big|_{z=0}
 $$
 
 代入：
@@ -1901,8 +1901,8 @@ $$
 在区域 1 中：
 
 $$
-\vec E_1(z)
-=\vec E_i(z)+\vec E_r(z)
+\dot{\vec E}_1(z)
+=\dot{\vec E}_i(z)+\dot{\vec E}_r(z)
 =\vec e_xE_{im}
 \left(
 e^{-j\beta_1z}
@@ -1913,11 +1913,11 @@ $$
 可写成：
 
 $$
-\vec E_1(z)
+\dot{\vec E}_1(z)
 =\vec e_xE_{im}
 \left[
 (1+\Gamma)e^{-j\beta_1z}
-+j2\Gamma\sin(\beta_1z)
++j2\Gamma\sin{(\beta_1z)}
 \right]
 $$
 
@@ -1930,27 +1930,27 @@ $$
 总电场振幅为：
 
 $$
-|\vec E_1(z)|
+|\dot{\vec E}_1(z)|
 =E_{im}\left|1+\Gamma e^{j2\beta_1z}\right|
 $$
 
 即：
 
 $$
-|\vec E_1(z)|
-=E_{im}\sqrt{1+\Gamma^2+2\Gamma\cos(2\beta_1z)}
+|\dot{\vec E}_1(z)|
+=E_{im}\sqrt{1+\Gamma^2+2\Gamma\cos{(2\beta_1z)}}
 $$
 
 若 $\Gamma<0$：
 
 $$
-|\vec E_1|_{\max}=E_{im}|1-\Gamma|,
+|\dot{\vec E}_1|_{\max}=E_{im}|1-\Gamma|,
 \qquad
 z=-\left(\frac n2+\frac14\right)\lambda_1
 $$
 
 $$
-|\vec E_1|_{\min}=E_{im}|1+\Gamma|,
+|\dot{\vec E}_1|_{\min}=E_{im}|1+\Gamma|,
 \qquad
 z=-\frac{n\lambda_1}{2}
 $$
@@ -1958,13 +1958,13 @@ $$
 若 $\Gamma>0$：
 
 $$
-|\vec E_1|_{\max}=E_{im}|1+\Gamma|,
+|\dot{\vec E}_1|_{\max}=E_{im}|1+\Gamma|,
 \qquad
 z=-\frac{n\lambda_1}{2}
 $$
 
 $$
-|\vec E_1|_{\min}=E_{im}|1-\Gamma|,
+|\dot{\vec E}_1|_{\min}=E_{im}|1-\Gamma|,
 \qquad
 z=-\left(\frac n2+\frac14\right)\lambda_1
 $$
@@ -1979,7 +1979,7 @@ $$
 **驻波比 Standing-Wave Ratio, SWR** 定义为总场最大振幅与最小振幅之比：
 
 $$
-S=\frac{|\vec E|_{\max}}{|\vec E|_{\min}}
+S=\frac{|\dot{\vec E}|_{\max}}{|\dot{\vec E}|_{\min}}
 $$
 ::::
 
@@ -2015,7 +2015,7 @@ $$
 
 $$
 \vec S_{iav}
-=\frac12\operatorname{Re}[\vec E_i\times\vec H_i^*]
+=\frac12\operatorname{Re}[\dot{\vec E}_i\times\dot{\vec H}_i^*]
 =\vec e_z\frac{E_{im}^2}{2\eta_1}
 $$
 
@@ -2117,7 +2117,7 @@ $$
 空气中入射波电场为：
 
 $$
-\vec E_i=\vec e_x10\cos(3\pi\times10^9t-10\pi z)\quad \mathrm{V/m}
+\vec E_i=\vec e_x10\cos{(3\pi\times10^9t-10\pi z)}\quad \mathrm{V/m}
 $$
 
 电磁波从空气区域 $z<0$ 法向入射到 $z>0$ 的无损介质中。介质参数为 $\mu_r=1,\varepsilon_r=4$。求 $z>0$ 区域中的电场和磁场。
@@ -2157,29 +2157,30 @@ $$
 
 $$
 \vec E_2(z,t)
-=\vec e_x\tau E_{im}\cos(\omega t-\beta_2z)
+=\vec e_x\tau E_{im}\cos{(\omega t-\beta_2z)}
 $$
 
 即：
 
 $$
 \vec E_2(z,t)
-=\vec e_x6.67\cos(3\pi\times10^9t-20\pi z)\quad \mathrm{V/m}
+=\vec e_x6.67\cos{(3\pi\times10^9t-20\pi z)}\quad \mathrm{V/m}
 $$
 
 透射磁场：
 
 $$
-\vec H_2=\frac{1}{\eta_2}\vec e_z\times\vec E_2
+\dot{\vec H}_2=\frac{1}{\eta_2}\vec e_z\times\dot{\vec E}_2
 $$
 
 所以：
 
 $$
 \vec H_2(z,t)
-=\vec e_y0.036\cos(3\pi\times10^9t-20\pi z)\quad \mathrm{A/m}
+=\vec e_y0.036\cos{(3\pi\times10^9t-20\pi z)}\quad \mathrm{A/m}
 $$
 ::::
+
 
 ---
 
@@ -2222,12 +2223,12 @@ $$
 
 **8.1 — 8.3 主要结论：**
 
-1. 无损媒质中，均匀平面波满足 TEM 特性，$\vec E,\vec H,\vec k$ 两两垂直，并且 $\vec E$ 与 $\vec H$ 同相；
+1. 无损媒质中，均匀平面波满足 TEM 特性，$\dot{\vec E},\dot{\vec H},\vec k$ 两两垂直，并且 $\dot{\vec E}$ 与 $\dot{\vec H}$ 同相；
 2. 任意方向传播时，核心表达式是 $e^{-j\vec k\cdot\vec r}$；
 3. 极化看固定点处电场矢量端点轨迹，由振幅和相位差决定；
 4. 有损媒质中，$k_c=\beta-j\alpha$，波传播时同时发生相位变化与指数衰减；
 5. 良导体中 $\alpha\approx\beta\approx\sqrt{\pi f\mu\sigma}$，趋肤深度 $\delta=1/\alpha$；
-6. 电磁能量流用坡印廷矢量 $\vec S=\vec E\times\vec H$ 描述，平均功率用 $\frac12\operatorname{Re}(\vec E\times\vec H^*)$。
+6. 电磁能量流用坡印廷矢量 $\vec S=\vec E\times\vec H$ 描述，平均功率用 $\frac12\operatorname{Re}(\dot{\vec E}\times\dot{\vec H}^*)$。
 
 **8.4 — 8.5 主要结论：**
 

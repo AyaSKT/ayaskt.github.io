@@ -247,6 +247,28 @@ $\qquad (A)$
 g[n] \xleftrightarrow{DTFT} G(e^{j\omega})
 ```
 
+### 7.5 三角函数括号
+
+三角函数（`\cos`, `\sin`, `\tan` 等）表达式后，先使用大括号 `{}` 括住内部内容，内部括号保持原样：
+
+```markdown
+\cos{(\omega t - kz)}
+\sin{(\beta_1 z)}
+\cos{[\omega t+\phi(\vec r)+\phi_0]}
+```
+
+### 7.6 括号自动缩放
+
+对于含分式、求和、积分等高度较大的内容，使用 `\left` `\right` 保持括号自动缩放：
+
+```markdown
+\left( \frac{a}{b} \right)
+\left[ \sum_{n=0}^\infty x_n \right]
+\left| \frac{\partial f}{\partial x} \right|
+```
+
+对其他括号（`[]`、`{}`、`||`）和竖线同样适用。普通短内容无需 `\left` `\right`。
+
 ---
 
 ## 八、容器使用规范
