@@ -8,7 +8,7 @@
 
 ![alt text](<EFMT Extra 2.attachments/1780388664426.jpg>)
 
-> [!TIP]
+> [!CAUTION]
 > Assisted with AI generation.
 
 | 概念题类型 | 2022 | 2023 | 2024 | 2025 | 频率 |

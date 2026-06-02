@@ -10,7 +10,7 @@
 
 ![alt text](<EMFT Chapter 8 P II.attachments/1778848085341.JPG>)
 
-> [!TIP]
+> [!CAUTION]
 > Assisted with AI generation.
 
 | 知识点 | 2022 | 2023 | 2024 | 2025 | 频率 |
