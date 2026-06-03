@@ -34,11 +34,12 @@
 - [EMFT Chapter 5: Steady Electric Currents](EMFT%20Chapter%205.md)
 - [EMFT Chapter 6: Static Magnetic Fields](EMFT%20Chapter%206.md)
 - [EMFT Chapter 7: Time-Varying Fields and Maxwell’s Equations](EMFT%20Chapter%207.md)
-- [EMFT Chapter 8: Plane Electromagnetic Waves](EMFT%20Chapter%208.md)
+- [EMFT Chapter 8: Plane Electromagnetic Waves Part I](EMFT%20Chapter%208%20P%20I.md)
+- [EMFT Chapter 8: Plane Electromagnetic Waves Part II](EMFT%20Chapter%208%20P%20II.md)
 
 - [EMFT Extra 1: 公式复习](EFMT%20Extra%201.md)
 - [EMFT Extra 2: 概念默写](EFMT%20Extra%202.md)
 
 
 
-![alt text](<EMFT Chapter 3 P II.attachments/1773799909890.JPG>)
+![alt text](EMFT-README.attachments/1780470999867.JPG)
