@@ -259,6 +259,32 @@ $$
 
 这组关系用于从一个场求另一个场。已知传播方向和 $\dot{\vec E}$ 时，用 $\dot{\vec H}=\dfrac{1}{\eta}\vec e_n\times\dot{\vec E}$；已知传播方向和 $\dot{\vec H}$ 时，用 $\dot{\vec E}=-\eta\vec e_n\times\dot{\vec H}$。
 
+> [!NOTE]
+> 一维平面波 $E(z,t)=E_0\cos{(\omega t-kz)}$ 中，相位 $\Phi=\omega t-kz$ 由时间相位项 $\omega t$ 与空间相位项 $kz$ 组成。时间侧与空间侧参数存在对偶关系：
+>
+> $$
+> \boxed{\omega \leftrightarrow k},\qquad \boxed{T \leftrightarrow \lambda}
+> $$
+>
+> $\omega$ 是"时间上的相位变化率"（rad/s），$k$ 是"空间上的相位变化率"（rad/m）；$T$ 是"时间上的一个周期"（s），$\lambda$ 是"空间上的一个周期"（m）。
+>
+> 两侧关系结构相同：
+>
+> $$
+> \boxed{\omega=\frac{2\pi}{T}}
+> \quad \leftrightarrow \quad
+> \boxed{k=\frac{2\pi}{\lambda}}
+> $$
+>
+> | 时间侧 | 空间侧 | 含义 |
+> | --- | --- | --- |
+> | $t$ | $z$（或 $\vec r$） | 变量 |
+> | $T$ | $\lambda$ | 周期 |
+> | $f=1/T$ | $1/\lambda$ | 频率 |
+> | $\omega=2\pi f$ | $k=2\pi/\lambda$ | 角频率 |
+>
+> 相速度 $v_p=\omega/k$ 就是把时间周期"换算"成空间周期的比例。
+
 ---
 
 ### 8-1-4 任意传播方向的平面波
@@ -800,6 +826,39 @@ $$
 
 $\sigma\ne0$ 时，电场驱动传导电流，部分电磁能转化为焦耳热，波幅随传播距离衰减。引入 $\varepsilon_c$ 将位移电流与传导电流统一处理，波数由实数 $k$ 变为复数 $k_c$。
 
+> [!NOTE]
+> 有损介质中，电磁波的传播有三种等价的数学描述，本质是同一物理规律在不同表示下的形式：
+>
+> **波动方程 Wave Equation**（时域，直接对 $\vec E,\vec H$）：
+>
+> $$
+> \nabla^2\vec E-\mu\sigma\frac{\partial\vec E}{\partial t}-\mu\varepsilon\frac{\partial^2\vec E}{\partial t^2}=0
+> $$
+>
+> 无损时 $\sigma=0$，只剩第二项 $\nabla^2\vec E-\mu\varepsilon\frac{\partial^2\vec E}{\partial t^2}=0$。有损只是多了一个一阶时间导数项 $-\mu\sigma\frac{\partial\vec E}{\partial t}$。
+>
+> **亥姆霍兹方程 Helmholtz Equation**（频域/相量形式）：
+>
+> $$
+> \nabla^2\dot{\vec E}+k_c^2\dot{\vec E}=0
+> $$
+>
+> 用 $k_c=\beta-j\alpha$ 替代实数 $k$，适合单频稳态问题（平面波、边界条件）。
+>
+> **达朗贝尔方程 d'Alembert Equation**（对位函数 $\vec A,\phi$，含源）：
+>
+> $$
+> \nabla^2\vec A-\mu\sigma\frac{\partial\vec A}{\partial t}-\mu\varepsilon\frac{\partial^2\vec A}{\partial t^2}=-\mu\vec J_s
+> $$
+>
+> $$
+> \nabla^2\phi-\mu\sigma\frac{\partial\phi}{\partial t}-\mu\varepsilon\frac{\partial^2\phi}{\partial t^2}=-\frac{\rho_s}{\varepsilon}
+> $$
+>
+> 用广义洛伦兹规范 $\nabla\cdot\vec A+\mu\sigma\phi+\mu\varepsilon\frac{\partial\phi}{\partial t}=0$ 使方程解耦。适合从源 $\vec J_s,\rho_s$ 出发求场。
+>
+> 三者算符结构一致（$\nabla^2-\mu\sigma\frac{\partial}{\partial t}-\mu\varepsilon\frac{\partial^2}{\partial t^2}$），只是作用对象不同——$\vec E,\vec H$ 或 $\vec A,\phi$。
+
 ---
 
 ### 8-2-2 导电媒质中的均匀平面波
@@ -841,6 +900,28 @@ $$
 - $\beta$：相位常数，单位 $\mathrm{rad/m}$。
 
 导电媒质中的波在传播的同时不断衰减。
+
+> [!NOTE]
+> 有损介质中，$\gamma=\alpha+j\beta$ 将两个物理效应分开：
+>
+> $$
+> \vec E(z,t)=\vec E_0 e^{-\alpha z}\cos{(\omega t-\beta z)}
+> $$
+>
+> $$
+> \dot{ \vec E}(z) = \vec E_0 e^{-(\alpha + j \beta) z}
+> $$
+>
+> **$\alpha$**：控制振幅衰减。传播 $z=1/\alpha$ 后振幅降至 $1/e\approx 36.8\%$。$1\ \mathrm{Np}\approx 8.686\ \mathrm{dB}$。$\alpha$ 越大，介质损耗越强，波传得越浅。
+>
+> **$\beta$**：控制空间相位变化。与波长的关系为 $\lambda=2\pi/\beta$，与相速度的关系为 $v_p=\omega/\beta$。$\beta$ 越大，波长越短，相位变得越快。
+>
+> 两者由同一复传播常数 $\gamma^2=j\omega\mu(\sigma+j\omega\varepsilon)$ 决定，具体取值与 $\sigma/(\omega\varepsilon)$ 密切相关（见 8-2-4、8-2-5 的近似）。核心形式：
+>
+> $$
+> \boxed{\alpha:\ \text{振幅衰减}}\qquad
+> \boxed{\beta:\ \text{相位变化}}
+> $$
 
 ---
 
