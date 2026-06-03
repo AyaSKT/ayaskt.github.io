@@ -460,6 +460,15 @@
   position: static;
 }
 
+/* 预加载 hero image，不可见但触发浏览器请求 */
+.hero-preload {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Hero image wrapper（供 tooltip 定位，填满父级 .image-container） */
 .hero-image-wrap {
   position: absolute;

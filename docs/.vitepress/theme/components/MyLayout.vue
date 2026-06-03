@@ -108,6 +108,10 @@ const isHomepage = typeof window !== 'undefined'
 onMounted(() => {
   // 仅在首次进入首页时 nav 从上方淡入，其他页面无入场动画
   if (isHomepage) {
+    // 首次加载时随机选一张 hero image
+    if (!randomHeroSrc.value) {
+      randomHeroSrc.value = heroImagePool[Date.now() % heroImagePool.length]
+    }
     const nav = document.querySelector('.VPNavBar') as HTMLElement | null
     if (nav) {
       nav.classList.add('animate__animated', 'animate__fadeInDown')
@@ -174,6 +178,8 @@ onMounted(() => {
           class="hero-tooltip"
           :style="{ left: tooltipX + 'px', top: tooltipY + 'px' }"
         >点我有惊喜 (≧▽≦)</span>
+        <!-- 预加载全部 hero image，避免切换时重新请求 -->
+        <img v-for="src in heroImagePool" :key="src" :src="src" class="hero-preload" aria-hidden="true">
         <HeroHitokoto class="desktop-hitokoto" />
       </div>
     </template>
