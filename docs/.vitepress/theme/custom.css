@@ -1,0 +1,158 @@
+/* ================================================================
+   Academic Callout Styles
+   覆盖 VitePress 原生 custom-block 样式为学术讲义风格
+   不影响：example / stem / solution 容器
+   适用：info / tip / warning / danger / details / note / important /
+         caution / definition
+   ================================================================ */
+
+/* ---- Definition 专用橙色（比默认更亮） ---- */
+:root {
+  --aya-c-definition-1: #d4851f;
+  --aya-c-definition-soft: rgba(237, 155, 64, 0.12);
+}
+
+.dark {
+  --aya-c-definition-1: #f5b860;
+  --aya-c-definition-soft: rgba(240, 168, 72, 0.14);
+}
+
+/* ---- 基础容器：扁平矩形 + 左侧强调线 + 右侧细线 ---- */
+.vp-doc .custom-block:not(.example) {
+  border: none;
+  border-radius: 0;
+  border-left: 4px solid var(--vp-c-border);
+  border-right: 2px solid var(--vp-c-divider);
+  margin: 1.5em 0;
+  padding: 1.25em 1.5em 1em;
+  font-size: inherit;
+  line-height: 1.8;
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-default-soft);
+}
+
+/* ---- 标题：紧凑小标题 ---- */
+.vp-doc .custom-block:not(.example) .custom-block-title {
+  font-weight: 600;
+  font-size: 0.92em;
+  margin: 0 0 0.5em;
+  line-height: 1.4;
+  color: var(--vp-c-text-2);
+  letter-spacing: 0.02em;
+}
+
+/* ---- 段间距 ---- */
+.vp-doc .custom-block:not(.example) p {
+  margin: 0.4em 0;
+}
+
+.vp-doc .custom-block:not(.example) p + p {
+  margin: 0.5em 0;
+}
+
+/* ================================================================
+   各类型：左侧强调线颜色 + 半透明主题色背景
+   ================================================================ */
+
+/* info — 品牌色 */
+.vp-doc .custom-block.info {
+  border-left-color: var(--vp-c-brand-1);
+  border-right-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+}
+
+/* note — 中性灰，避免偏紫 */
+.vp-doc .custom-block.note {
+  border-left-color: var(--vp-c-text-2);
+  border-right-color: var(--vp-c-text-2);
+  background: var(--vp-c-default-soft);
+}
+
+/* tip — 绿色 */
+.vp-doc .custom-block.tip {
+  border-left-color: var(--vp-c-green-1);
+  border-right-color: var(--vp-c-green-1);
+  background: var(--vp-c-green-soft);
+}
+
+/* warning — 黄色 */
+.vp-doc .custom-block.warning {
+  border-left-color: var(--vp-c-yellow-1);
+  border-right-color: var(--vp-c-yellow-1);
+  background: var(--vp-c-yellow-soft);
+}
+
+/* danger — 红色 */
+.vp-doc .custom-block.danger {
+  border-left-color: var(--vp-c-red-1);
+  border-right-color: var(--vp-c-red-1);
+  background: var(--vp-c-red-soft);
+}
+
+/* caution — 红色 */
+.vp-doc .custom-block.caution {
+  border-left-color: var(--vp-c-red-1);
+  border-right-color: var(--vp-c-red-1);
+  background: var(--vp-c-red-soft);
+}
+
+/* important — 紫色 */
+.vp-doc .custom-block.important {
+  border-left-color: var(--vp-c-purple-1);
+  border-right-color: var(--vp-c-purple-1);
+  background: var(--vp-c-purple-soft);
+}
+
+/* details — 品牌色 */
+.vp-doc .custom-block.details {
+  border-left-color: var(--vp-c-brand-1);
+  border-right-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+}
+
+/* definition — 自定义橙色（亮） */
+.vp-doc .custom-block.definition {
+  border-left-color: var(--aya-c-definition-1);
+  border-right-color: var(--aya-c-definition-1);
+  background: var(--aya-c-definition-soft);
+}
+
+/* ---- 链接 ---- */
+.vp-doc .custom-block a {
+  color: inherit;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s;
+}
+
+.vp-doc .custom-block a:hover {
+  opacity: 0.75;
+}
+
+/* ---- details 展开/折叠 ---- */
+.vp-doc .custom-block.details summary {
+  font-weight: 600;
+  font-size: 0.92em;
+  margin: 0 0 0.5em;
+  cursor: pointer;
+  user-select: none;
+  color: var(--vp-c-text-2);
+}
+
+/* ================================================================
+   移动端响应式
+   ================================================================ */
+@media (max-width: 768px) {
+  .vp-doc .custom-block:not(.example) {
+    padding: 1em 1em 0.85em;
+    margin: 1em 0;
+    line-height: 1.7;
+    border-left-width: 3px;
+  }
+
+  .vp-doc .custom-block:not(.example) .custom-block-title {
+    font-size: 0.88em;
+    margin: 0 0 0.4em;
+  }
+}

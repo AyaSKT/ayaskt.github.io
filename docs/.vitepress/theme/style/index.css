@@ -1,7 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@200;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap');
 @import './transitions.css';
 @import './blur.css';
 @import './var.css';
 @import './rainbow.css';
+
+/* 正文字体 */
+.vp-doc {
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
+  font-weight: 400;
+}
+
+/* 标题字体 */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4,
+.vp-doc h5,
+.vp-doc h6 {
+  font-family: 'Noto Serif SC', 'SimSun', 'Songti SC', 'STSong', serif;
+}
+
+/* Sidebar / 文章目录字体 */
+.VPSidebar,
+.VPDocAsideOutline {
+  font-family: 'Noto Serif SC', 'SimSun', 'Songti SC', 'STSong', serif;
+}
 
 /* 块级公式（$$...$$）居中，并加大与上下内容的间距 */
 .vp-doc .mathjax-block {
