@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 // 1. 再次导入必要的组件
 import DefaultTheme from 'vitepress/theme'
-import { computed, onMounted } from 'vue'
-import { useData } from 'vitepress'
+import { computed, onMounted, ref, watch } from 'vue'
+import { useData, useRoute } from 'vitepress'
 import MouseClick from './MouseClick.vue'
 import GiscusComment from './GiscusComment.vue' // 评论模块
 import BackToTop from './backtotop.vue'
@@ -11,6 +11,24 @@ import HomeCourseActions from './HomeCourseActions.vue'
 import PageTransition from './PageTransition.vue'
 
 const { frontmatter, isDark } = useData()
+const route = useRoute()
+
+const isHome = computed(() => route.path === '/' || route.path === '/index.html')
+
+const heroImagePool = [
+  '/IMG_4338.jpeg',
+  '/IMG_4520.png',
+  '/IMG_4521.png',
+  '/IMG_4522.png',
+]
+
+const randomHeroSrc = ref('')
+
+watch(() => route.path, (path) => {
+  if (path === '/' || path === '/index.html') {
+    randomHeroSrc.value = heroImagePool[Date.now() % heroImagePool.length]
+  }
+})
 
 const heroImageData = computed(() => {
   const hero = (frontmatter.value as any)?.hero
@@ -18,6 +36,7 @@ const heroImageData = computed(() => {
 })
 
 const heroImageSrc = computed(() => {
+  if (isHome.value && randomHeroSrc.value) return randomHeroSrc.value
   const image = heroImageData.value
   if (!image) return ''
   if (typeof image === 'string') return image
@@ -47,6 +66,25 @@ const heroImageLink = computed(() => {
   const image = heroImageData.value
   return image && typeof image === 'object' ? image.link : undefined
 })
+
+// Hero 图片 hover tooltip 跟随光标
+const heroImageRef = ref<HTMLElement | null>(null)
+const showTooltip = ref(false)
+const tooltipX = ref(0)
+const tooltipY = ref(0)
+
+function onHeroMouseMove(e: MouseEvent) {
+  showTooltip.value = true
+  const wrapperRect = heroImageRef.value?.getBoundingClientRect()
+  if (wrapperRect) {
+    tooltipX.value = e.clientX - wrapperRect.left
+    tooltipY.value = e.clientY - wrapperRect.top
+  }
+}
+
+function onHeroMouseLeave() {
+  showTooltip.value = false
+}
 
 // name 的入场动画需要 JS wrapper（background-clip:text 不能做 opacity 动画）
 function setupHeroNameEntrance() {
@@ -103,30 +141,41 @@ onMounted(() => {
     </template>
 
     <template #home-hero-image>
-      <a
-        v-if="heroImageSrc && heroImageLink"
-        class="image-src"
-        :href="heroImageLink"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <div ref="heroImageRef" class="hero-image-wrap">
+        <a
+          v-if="heroImageSrc && heroImageLink"
+          class="image-src"
+          :href="heroImageLink"
+          target="_blank"
+          rel="noopener noreferrer"
+          @mousemove="onHeroMouseMove"
+          @mouseleave="onHeroMouseLeave"
+        >
+          <img
+            class="hero-image-src"
+            :src="heroImageSrc"
+            :width="heroImageWidth"
+            :height="heroImageHeight"
+            :style="heroImageStyle"
+          >
+        </a>
         <img
-          class="hero-image-src"
+          v-else-if="heroImageSrc"
+          class="image-src hero-image-src"
           :src="heroImageSrc"
           :width="heroImageWidth"
           :height="heroImageHeight"
           :style="heroImageStyle"
+          @mousemove="onHeroMouseMove"
+          @mouseleave="onHeroMouseLeave"
         >
-      </a>
-      <img
-        v-else-if="heroImageSrc"
-        class="image-src hero-image-src"
-        :src="heroImageSrc"
-        :width="heroImageWidth"
-        :height="heroImageHeight"
-        :style="heroImageStyle"
-      >
-      <HeroHitokoto class="desktop-hitokoto" />
+        <span
+          v-if="showTooltip && heroImageLink"
+          class="hero-tooltip"
+          :style="{ left: tooltipX + 'px', top: tooltipY + 'px' }"
+        >点我有惊喜 (≧▽≦)</span>
+        <HeroHitokoto class="desktop-hitokoto" />
+      </div>
     </template>
   </DefaultTheme.Layout>
 </template>

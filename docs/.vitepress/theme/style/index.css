@@ -460,13 +460,15 @@
   position: static;
 }
 
-/* Hover 惊喜提示 */
-.VPHero a.image-src::after {
-  content: "点我有惊喜 (≧▽≦)";
+/* Hero image wrapper（供 tooltip 定位，填满父级 .image-container） */
+.hero-image-wrap {
   position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%) translateY(8px);
+  inset: 0;
+}
+
+/* Hover 惊喜提示 — 跟随光标 */
+.hero-tooltip {
+  position: absolute;
   background: rgba(0, 0, 0, 0.72);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -475,14 +477,9 @@
   border-radius: 999px;
   font-size: 13px;
   white-space: nowrap;
-  opacity: 0;
   pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-.VPHero a.image-src:hover::after {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  transform: translate(-50%, calc(-100% - 12px));
+  z-index: 10;
 }
 
 @media (min-width: 640px) {
