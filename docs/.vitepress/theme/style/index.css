@@ -80,14 +80,6 @@
     color: #1f2328 !important;
   }
 
-  html[data-pdf-theme="dark"],
-  html[data-pdf-theme="dark"] body,
-  html[data-pdf-theme="dark"] .VPDoc,
-  html[data-pdf-theme="dark"] .vp-doc {
-    background: #101216 !important;
-    color: #f1f3f5 !important;
-  }
-
   .VPNavBar,
   .VPSidebar,
   .VPLocalNav,
@@ -168,25 +160,6 @@
     color: #245c8f !important;
   }
 
-  html[data-pdf-theme="dark"] .vp-doc a {
-    color: #98cbea !important;
-  }
-
-  html[data-pdf-theme="dark"] .vp-doc tr,
-  html[data-pdf-theme="dark"] .vp-doc th,
-  html[data-pdf-theme="dark"] .vp-doc td,
-  html[data-pdf-theme="dark"] .custom-block,
-  html[data-pdf-theme="dark"] .example-stem,
-  html[data-pdf-theme="dark"] .example-solution {
-    border-color: rgba(255, 255, 255, 0.22) !important;
-  }
-
-  html[data-pdf-theme="dark"] .vp-doc div[class*='language-'],
-  html[data-pdf-theme="dark"] .vp-doc pre,
-  html[data-pdf-theme="dark"] .vp-doc code {
-    background-color: #171b21 !important;
-    color: #f1f3f5 !important;
-  }
 }
 
 .VPDocFooter .last-updated {

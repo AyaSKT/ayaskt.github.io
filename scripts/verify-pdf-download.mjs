@@ -19,22 +19,24 @@ test('markdown injects the pdf prop from frontmatter', () => {
   )
 })
 
-test('DocMeta exposes an accessible light and dark PDF dropdown', () => {
+test('DocMeta exposes a plain text PDF print button', () => {
   const docMeta = read('docs/.vitepress/theme/components/DocMeta.vue')
 
   assert.match(docMeta, /pdf\?: boolean/, 'DocMeta should accept an optional pdf prop')
-  assert.match(docMeta, /const showPdfMenu = ref\(false\)/, 'DocMeta should track menu state')
   assert.match(docMeta, /data-pdf-theme/, 'DocMeta should set a temporary print theme marker')
+  assert.match(docMeta, /setAttribute\('data-pdf-theme', 'light'\)/, 'DocMeta should print with the light theme directly')
   assert.match(docMeta, /window\.print\(\)/, 'DocMeta should call the browser print dialog')
   assert.match(docMeta, /originalTitle = document\.title/, 'DocMeta should remember the page title before printing')
   assert.match(docMeta, /document\.title = ''/, 'DocMeta should clear the browser print header title while printing')
-  assert.match(docMeta, /aria-haspopup="menu"/, 'PDF trigger should expose menu semantics')
-  assert.match(docMeta, />白色 PDF</, 'Light PDF option should be present')
-  assert.match(docMeta, />黑色 PDF</, 'Dark PDF option should be present')
-  assert.match(docMeta, /@keydown\.escape/, 'Escape should close the dropdown')
+  assert.match(docMeta, />\s*下载 PDF\s*</, 'Plain PDF text button should be present')
+  assert.doesNotMatch(docMeta, /黑色 PDF/, 'Black PDF option should not be present')
+  assert.doesNotMatch(docMeta, /doc-meta-pdf-menu/, 'PDF dropdown menu should not be present')
+  assert.doesNotMatch(docMeta, /aria-haspopup="menu"/, 'PDF trigger should not expose removed menu semantics')
+  assert.doesNotMatch(docMeta, /border: 1px/, 'Plain PDF text button should not have a border')
+  assert.match(docMeta, /\.doc-meta-pdf-trigger:hover[\s\S]*color: var\(--vp-c-brand-1\)/, 'PDF text should change color on hover')
 })
 
-test('print CSS hides site chrome and supports light and dark themes', () => {
+test('print CSS hides site chrome and supports the light print theme', () => {
   const css = read('docs/.vitepress/theme/style/index.css')
   const giscusComment = read('docs/.vitepress/theme/components/GiscusComment.vue')
 
@@ -48,7 +50,7 @@ test('print CSS hides site chrome and supports light and dark themes', () => {
   assert.match(css, /\.giscus[\s\S]*display: none !important/, 'print should hide comments')
   assert.match(giscusComment, /class="giscus-comment"/, 'Giscus should have a wrapper class for print hiding')
   assert.match(css, /\[data-pdf-theme="light"\]/, 'light PDF theme selector should exist')
-  assert.match(css, /\[data-pdf-theme="dark"\]/, 'dark PDF theme selector should exist')
+  assert.doesNotMatch(css, /\[data-pdf-theme="dark"\]/, 'dark PDF theme selector should not remain')
   assert.match(css, /\.doc-meta-pdf[\s\S]*display: none !important/, 'print should hide the PDF dropdown itself')
   assert.match(css, /\.example-solution\[data-collapsed\] \.solution-content[\s\S]*max-height: none !important/, 'print should expand collapsed solutions')
   assert.match(css, /\.solution-toggle[\s\S]*display: none !important/, 'print should hide solution toggle buttons')
