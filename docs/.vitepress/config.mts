@@ -117,8 +117,9 @@ function formatDocMeta(md: any, src: string, frontmatter: Record<string, any> = 
   const words = getReadableWordCount(src)
   const minutes = Math.max(1, Math.ceil(words / 500))
   const author = String(frontmatter.author ?? 'Ayaskt')
+  const pdf = frontmatter.pdf === false ? 'false' : 'true'
 
-  return `<DocMeta :words="${words}" :minutes="${minutes}" author="${md.utils.escapeHtml(author)}"></DocMeta>\n`
+  return `<DocMeta :words="${words}" :minutes="${minutes}" author="${md.utils.escapeHtml(author)}" :pdf="${pdf}"></DocMeta>\n`
 }
 
 function registerDocMeta(md: any) {

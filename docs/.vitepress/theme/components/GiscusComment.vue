@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 2rem">
+  <div class="giscus-comment" style="margin-top: 2rem">
     <Giscus
       id="comments"
       :key="route.path"

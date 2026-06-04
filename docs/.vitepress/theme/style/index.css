@@ -53,6 +53,142 @@
   margin-right: auto;
 }
 
+@media print {
+  @page {
+    margin: 0;
+  }
+
+  html,
+  body {
+    width: auto !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  body {
+    box-sizing: border-box;
+    padding: 22mm 18mm !important;
+  }
+
+  html[data-pdf-theme="light"],
+  html[data-pdf-theme="light"] body,
+  html[data-pdf-theme="light"] .VPDoc,
+  html[data-pdf-theme="light"] .vp-doc {
+    background: #ffffff !important;
+    color: #1f2328 !important;
+  }
+
+  html[data-pdf-theme="dark"],
+  html[data-pdf-theme="dark"] body,
+  html[data-pdf-theme="dark"] .VPDoc,
+  html[data-pdf-theme="dark"] .vp-doc {
+    background: #101216 !important;
+    color: #f1f3f5 !important;
+  }
+
+  .VPNavBar,
+  .VPSidebar,
+  .VPLocalNav,
+  .VPDoc .aside,
+  .VPDocFooter,
+  .giscus-comment,
+  .giscus,
+  #comments,
+  .giscus-frame,
+  .back-to-top,
+  .mouse-click,
+  .doc-meta-pdf {
+    display: none !important;
+  }
+
+  .VPDoc {
+    padding: 0 !important;
+  }
+
+  .VPDoc .container,
+  .VPDoc .content,
+  .VPDoc .content-container,
+  .VPDoc .main {
+    display: block !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .vp-doc {
+    max-width: none !important;
+    font-size: 12pt;
+    line-height: 1.7;
+  }
+
+  .vp-doc h1,
+  .vp-doc h2,
+  .vp-doc h3,
+  .vp-doc h4,
+  .vp-doc h5,
+  .vp-doc h6 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .vp-doc img,
+  .vp-doc svg,
+  .vp-doc table,
+  .custom-block,
+  .example-stem,
+  .example-solution {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .vp-doc img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  .vp-doc table {
+    width: auto;
+    max-width: 100%;
+  }
+
+  .example-solution[data-collapsed] .solution-content,
+  .solution-content {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .solution-toggle {
+    display: none !important;
+  }
+
+  html[data-pdf-theme="light"] .vp-doc a {
+    color: #245c8f !important;
+  }
+
+  html[data-pdf-theme="dark"] .vp-doc a {
+    color: #98cbea !important;
+  }
+
+  html[data-pdf-theme="dark"] .vp-doc tr,
+  html[data-pdf-theme="dark"] .vp-doc th,
+  html[data-pdf-theme="dark"] .vp-doc td,
+  html[data-pdf-theme="dark"] .custom-block,
+  html[data-pdf-theme="dark"] .example-stem,
+  html[data-pdf-theme="dark"] .example-solution {
+    border-color: rgba(255, 255, 255, 0.22) !important;
+  }
+
+  html[data-pdf-theme="dark"] .vp-doc div[class*='language-'],
+  html[data-pdf-theme="dark"] .vp-doc pre,
+  html[data-pdf-theme="dark"] .vp-doc code {
+    background-color: #171b21 !important;
+    color: #f1f3f5 !important;
+  }
+}
+
 .VPDocFooter .last-updated {
   display: none;
 }
