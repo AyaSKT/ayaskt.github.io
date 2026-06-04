@@ -9,6 +9,7 @@ import BackToTop from './backtotop.vue'
 import HeroHitokoto from './HeroHitokoto.vue'
 import HomeCourseActions from './HomeCourseActions.vue'
 import PageTransition from './PageTransition.vue'
+import MathCopy from './MathCopy.vue'
 
 const { frontmatter, isDark } = useData()
 const route = useRoute()
@@ -131,6 +132,7 @@ onMounted(() => {
     <template #layout-top>
       <PageTransition />
       <MouseClick />
+      <MathCopy />
     </template>
 
     <!-- 文档内容之后的评论组件 -->

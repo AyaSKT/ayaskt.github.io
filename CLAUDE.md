@@ -12,6 +12,8 @@ npm run docs:preview   # Preview production build
 
 VitePress v2.0.0-alpha.16. Build output goes to `docs/.vitepress/dist/`.
 
+External CSS: `animate.css` (pre-built animation library, imported in `index.ts`).
+
 ## Architecture
 
 This is a **VitePress blog** for university engineering course notes (Chinese). Custom theme extends VitePress default — not a simple config override.
@@ -23,7 +25,9 @@ This is a **VitePress blog** for university engineering course notes (Chinese). 
 - `rainbow.css` — `@property`-based gradient animation for hero title. Uses registered `<color>` custom properties so the browser interpolates directly (no 101-frame color-mix hack)
 - `transitions.css` — all animation keyframes. Page crossfade via View Transitions API, button tap feedback, ripple, scroll reveal, search modal entrance
 - `blur.css` — glassmorphism (backdrop-filter blur on nav, search, sidebar)
-- `index.css` — imports all of the above, plus table/image centering, MathJax block display, custom `::: example` / `::: definition` container styles
+- `index.css` — imports all of the above + Google Fonts (Noto Sans SC for body, Noto Serif SC for headings), table/image centering, MathJax block display, custom `::: example` container styles
+
+**`custom.css`** (imported directly in `index.ts`, NOT in `index.css`) — academic callout restyling for VitePress built-in containers (`info`, `tip`, `warning`, `danger`, `caution`, `important`, `note`, `details`, `definition`). Flattened rectangle with left accent border + right thin border, using VitePress semantic color variables. Definition uses custom orange (`--aya-c-definition-1`). Does NOT affect `::: example` / `::: stem` / `::: solution`.
 
 **Named view-transition elements** (`transitions.css`): `.VPNavBar`, `.VPSidebar`, `.VPLocalNav` have `view-transition-name` set so they're excluded from the root crossfade snapshot — nav and sidebar stay visually stable during page transitions, only content area fades.
 
@@ -36,9 +40,11 @@ This is a **VitePress blog** for university engineering course notes (Chinese). 
 - `::: definition [title]` — definition blocks
 
 **Custom components** registered globally in `index.ts`:
-- `Mycomponent` (Linkcard), `Confetti` (canvas-confetti), `MouseClick` (DOM ripple), `update`, `BackToTop`, `PageTransition`, `ScrollReveal`
+- `Mycomponent` (Linkcard), `Confetti` (canvas-confetti), `MouseClick` (DOM ripple), `update`, `BackToTop`, `PageTransition`, `ScrollReveal`, `DocMeta` (word count / reading time)
 
 Components usable in markdown must be registered in `enhanceApp` and placed in `MyLayout.vue` slots (or used inline in `.md` files).
+
+**`solution-collapse.ts`** — client-side solution toggle with `localStorage` state persistence. Initialized via `setupSolutionCollapse(router)` in `enhanceApp`. Watches route changes, finds `.example-solution` elements, and attaches click handlers to `.solution-toggle` buttons.
 
 ## Page Transition System (V3.3)
 

@@ -17,6 +17,17 @@
   --aya-c-definition-soft: rgba(240, 168, 72, 0.14);
 }
 
+/* ---- Warning 专用黄色（比 VitePress 默认更亮） ---- */
+:root {
+  --aya-c-warning-1: #b0780c;
+  --aya-c-warning-soft: rgba(200, 150, 20, 0.12);
+}
+
+.dark {
+  --aya-c-warning-1: #fcc850;
+  --aya-c-warning-soft: rgba(252, 200, 80, 0.14);
+}
+
 /* ---- 基础容器：扁平矩形 + 左侧强调线 + 右侧细线 ---- */
 .vp-doc .custom-block:not(.example) {
   border: none;
@@ -75,11 +86,11 @@
   background: var(--vp-c-green-soft);
 }
 
-/* warning — 黄色 */
+/* warning — 自定义亮黄色 */
 .vp-doc .custom-block.warning {
-  border-left-color: var(--vp-c-yellow-1);
-  border-right-color: var(--vp-c-yellow-1);
-  background: var(--vp-c-yellow-soft);
+  border-left-color: var(--aya-c-warning-1);
+  border-right-color: var(--aya-c-warning-1);
+  background: var(--aya-c-warning-soft);
 }
 
 /* danger — 红色 */

@@ -37,6 +37,10 @@
   display: inline-block;
 }
 
+.vp-doc mjx-container[jax="SVG"] {
+  cursor: pointer;
+}
+
 /* 文档内所有表格整体居中（覆盖默认 display:block，使表格按内容宽度再水平居中） */
 .vp-doc table {
   display: table;
