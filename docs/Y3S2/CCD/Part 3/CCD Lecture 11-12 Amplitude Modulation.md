@@ -1,5 +1,26 @@
 # Lecture 11-12 Amplitude Modulation 幅度调制
 
+**これは これは 誰のため？**  
+**这一切 这一切 到底是为谁？**
+
+**なにが なにが 君のため？**  
+**该如何 才算是 真正为了你？**
+
+
+<div align="right">——LonePi/初音ミク 《幸福刑》</div>
+
+![alt text](<CCD Lecture 11-12 Amplitude Modulation.attachments/1780674328208.JPG>)
+
+> [!TIP]
+>
+> 嘿，小朋友们大家好，是我，CPS。
+>
+> 想不想进我的妙妙屋？
+>
+> 噢，差点忘了，要进入妙妙屋，必须要念奇妙的咒语；
+>
+> Misika Mosika CPS
+
 ## 章节目录
 
 - [章节目录](#章节目录)
