@@ -38,8 +38,6 @@ $$
 \text{Resource Alignment}
 $$
 
-。
-
 战略需要知道两类信息：
 
 - **Internal knowledge**：自己的 strengths、limitations、resources、capabilities

@@ -56,8 +56,6 @@ $$
 d = 10 \text{ days}
 $$
 
-。
-
 判断：
 
 | 使用天数 | 较优方案 |
@@ -94,8 +92,6 @@ Florida Spring Break 的 drive / fly 案例：
 $$
 \Delta C = 500 - 200 = 300
 $$
-
-。
 
 问题就变成：多花 $\$300$ 飞过去，换 Florida 多待两天，值不值。
 
@@ -160,8 +156,6 @@ $$
 (25 - 15) \times 20000 = 200000
 $$
 
-。
-
 ---
 
 ### 10-2-3 机会成本改变决策 Opportunity Cost Changes the Decision
@@ -199,8 +193,6 @@ $$
 \text{What is the best use of Exitel's facilities?}
 $$
 
-。
-
 ---
 
 ### 10-2-4 Make / Partnership / Buy
@@ -233,5 +225,3 @@ Lecture 10 的计算习惯：
 $$
 \text{Decision cost} = \text{Costs that change} - \text{Benefits that change}
 $$
-
-。

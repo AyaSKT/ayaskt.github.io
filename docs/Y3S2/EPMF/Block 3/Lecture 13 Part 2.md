@@ -58,8 +58,6 @@ $$
 \frac{\text{Capital cost}}{5}
 $$
 
-。
-
 ---
 
 ### 13-3-3 CapEx 定义 Capital Expenditure
@@ -247,12 +245,8 @@ TCO_{PV} \approx \$16.3M
 }
 $$
 
-。
-
 Lecture 13 Part 2 的记忆线索：
 
 $$
 \text{TCO} = \text{CapEx} + \text{PV(OpEx and lifecycle costs)}
 $$
-
-。

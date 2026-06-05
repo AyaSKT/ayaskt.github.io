@@ -169,8 +169,6 @@ C_{\text{in-house}}
 \end{aligned}
 $$
 
-。
-
 **Outsource total cost** 可写成：
 
 $$
@@ -182,8 +180,6 @@ C_{\text{outsource}}
 &+ \text{Ongoing outsourcing costs}
 \end{aligned}
 $$
-
-。
 
 决策比较：
 
@@ -230,5 +226,3 @@ Lecture 12 的判断句：
 $$
 \text{Outsource only when it improves cost, capability, or strategic focus after full-cost analysis.}
 $$
-
-。

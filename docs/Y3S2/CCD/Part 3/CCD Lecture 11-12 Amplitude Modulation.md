@@ -64,8 +64,6 @@ $$
 e_c(t)=E_c\cos{(\omega_c t)}
 $$
 
-。
-
 若改变 $E_c$，得到 AM；若改变 $\omega_c$ 或相位，进入 FM/PM。
 
 ---
@@ -88,8 +86,6 @@ $$
 e_c(t)=E_c\cos{(\omega_c t)}
 $$
 
-。
-
 标准 AM 信号可写为
 
 $$
@@ -105,8 +101,6 @@ $$
 $$
 E_{\mathrm{env}}(t)=E_c\left[1+m\cos{(\omega_m t)}\right]
 $$
-
-。
 
 AM 的信息在包络里，因此调制完成后的功率放大器必须保持包络形状。
 
@@ -128,15 +122,11 @@ $$
 m=\frac{E_{\max}-E_{\min}}{E_{\max}+E_{\min}}
 $$
 
-。
-
 调制百分比为
 
 $$
 M=m\times 100\%
 $$
-
-。
 
 ![AM 包络](<CCD Lecture 11-12 Amplitude Modulation.attachments/am_envelope.jpg>)
 
@@ -176,8 +166,6 @@ e_{\mathrm{AM}}(t)
 \end{aligned}
 $$
 
-。
-
 所以单音 AM 频谱含三个分量：
 
 | 分量 | 频率 | 幅度 |
@@ -202,23 +190,17 @@ $$
 f_{\mathrm{LSB}}=f_c-f_m
 $$
 
-。
-
 若消息最高频率为 $f_{m,\max}$，AM 带宽为
 
 $$
 \boxed{\mathrm{BW}_{\mathrm{AM}}=2f_{m,\max}}
 $$
 
-。
-
 例如音频最高到 $3\,\mathrm{kHz}$，则常规 AM 需要
 
 $$
 \mathrm{BW}_{\mathrm{AM}}=2\times 3\,\mathrm{kHz}=6\,\mathrm{kHz}
 $$
-
-。
 
 ## 11-4 AM 功率 AM Power
 
@@ -230,15 +212,11 @@ $$
 P_c=\frac{E_c^2}{2R}
 $$
 
-。
-
 每个边带的电压幅度为 $mE_c/2$，所以单个边带功率为
 
 $$
 P_{\mathrm{USB}}=P_{\mathrm{LSB}}=\frac{m^2}{4}P_c
 $$
-
-。
 
 总边带功率为
 
@@ -246,15 +224,11 @@ $$
 P_{\mathrm{SB}}=P_{\mathrm{USB}}+P_{\mathrm{LSB}}=\frac{m^2}{2}P_c
 $$
 
-。
-
 总发射功率：
 
 $$
 \boxed{P_T=P_c\left(1+\frac{m^2}{2}\right)}
 $$
-
-。
 
 当 $m=1$ 时，
 
@@ -274,15 +248,11 @@ $$
 I_T=I_c\sqrt{1+\frac{m^2}{2}}
 $$
 
-。
-
 反过来可由电流测量调制度：
 
 $$
 m=\sqrt{2\left[\left(\frac{I_T}{I_c}\right)^2-1\right]}
 $$
-
-。
 
 这个公式适合发射机调试时估计调制度。
 
@@ -295,8 +265,6 @@ $$
 $$
 e_{\mathrm{out}}(t)=e_c(t)+e_m(t)
 $$
-
-。
 
 它没有产生 $f_c\pm f_m$，所以不能形成 AM 频谱。
 

@@ -31,8 +31,6 @@ $$
 }
 $$
 
-。
-
 Microcontroller Supplier 示例：
 
 | Assets | Amount | Liabilities / Equity | Amount |
@@ -106,8 +104,6 @@ $$
 = 0.30
 $$
 
-。
-
 ---
 
 ### 13-2E-3 Cash Flow Statement 现金流量表
@@ -127,8 +123,6 @@ $$
 &+ \text{Cash from Financing Activities}
 \end{aligned}
 $$
-
-。
 
 Microcontroller Supplier 示例：
 
@@ -284,7 +278,5 @@ $$
 $$
 TCO_{PV} = 16.30M
 $$
-
-。
 
 现值口径更适合长期设备比较，因为它把未来费用换到了同一时间基准。

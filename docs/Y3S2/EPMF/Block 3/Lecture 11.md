@@ -82,16 +82,12 @@ $$
 \boxed{Q = \frac{F}{SP - VC}}
 $$
 
-。
-
 也可以写成：
 
 $$
 \text{Break-even output} =
 \frac{\text{Fixed Cost}}{\text{Contribution per unit}}
 $$
-
-。
 
 例：固定成本 $\$200,000$，单位贡献 $\$50$。
 
@@ -133,8 +129,6 @@ $$
 P = 100000 - 88000 = 12000
 $$
 
-。
-
 
 
 ## Lec. 11 - Ses. 2 表格法与图像法 Table and Graphical Methods
@@ -169,8 +163,6 @@ $$
 $$
 Q = \frac{500}{2 - 1} = 500
 $$
-
-。
 
 ---
 
@@ -234,8 +226,6 @@ Q = \frac{F + \text{Target Profit}}{SP - VC}
 }
 $$
 
-。
-
 例：
 
 - Target profit: $\$25,000$
@@ -249,8 +239,6 @@ $$
 $$
 Q = 4500 \text{ units}
 $$
-
-。
 
 ---
 
@@ -285,8 +273,6 @@ $$
 $$
 R_{BE} = 120000
 $$
-
-。
 
 需要 bill 的小时数：
 
@@ -350,8 +336,6 @@ $$
 P = 3000000 - 2800000 = 200000
 $$
 
-。
-
 敏感性分析：若 concession 只有 $\$0.50 / \text{patron}$。
 
 $$
@@ -373,8 +357,6 @@ $$
 $$
 \frac{400000}{600000} = 66.67\% \approx 67\%
 $$
-
-。
 
 ---
 
@@ -401,5 +383,3 @@ Lecture 11 的核心公式就是：
 $$
 Q_{BE} = \frac{F}{SP - VC}
 $$
-
-。

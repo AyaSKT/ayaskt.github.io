@@ -81,23 +81,17 @@ $$
 \lambda=\frac{c}{f}
 $$
 
-。
-
 对最大尺寸为 $D$ 的天线，常用远场边界估算：
 
 $$
 \boxed{R_0\ge \frac{2D^2}{\lambda}}
 $$
 
-。
-
 另一个常见近场边界估算为
 
 $$
 R_{\mathrm{reactive}}\approx0.62\sqrt{\frac{D^3}{\lambda}}
 $$
-
-。
 
 这里 $D$ 是天线最大物理尺寸。频率越高，波长越短，同样尺寸天线的远场距离越大。
 
@@ -143,8 +137,6 @@ $$
 \mathrm{FNBW}\approx2\times\mathrm{HPBW}
 $$
 
-。
-
 HPBW 越小，波束越窄，方向性通常越强。但覆盖区域也会更窄。
 
 ## 15-4 天线参数 Antenna Parameters
@@ -157,16 +149,12 @@ $$
 4\pi R^2
 $$
 
-。
-
 功率密度为
 
 $$
 W_0=\frac{P_{\mathrm{rad}}}{4\pi R^2}
 \qquad \mathrm{(W/m^2)}
 $$
-
-。
 
 辐射强度定义为单位立体角功率：
 
@@ -179,8 +167,6 @@ $$
 $$
 U=\frac{P_{\mathrm{rad}}}{4\pi}
 $$
-
-。
 
 功率密度随距离平方衰减，辐射强度只与方向有关。
 
@@ -202,8 +188,6 @@ $$
 D=1=0\,\mathrm{dB}
 $$
 
-。
-
 :::: definition 天线增益 Antenna Gain
 **天线增益 Antenna Gain** 用输入功率作参考，描述天线在某方向上的有效辐射能力。
 
@@ -222,8 +206,6 @@ $$
 G=\eta D
 $$
 
-。
-
 天线增益不是放大器增益。天线不能凭空增加输入功率，只能把功率集中到某些方向。
 
 ---
@@ -236,23 +218,17 @@ $$
 \mathrm{BW}=f_H-f_L
 $$
 
-。
-
 前后比为主瓣方向功率与反方向功率的比值，常用 dB 表示：
 
 $$
 \mathrm{F/B}=G_{\mathrm{front}}(\mathrm{dB})-G_{\mathrm{back}}(\mathrm{dB})
 $$
 
-。
-
 例如主方向增益为 $12\,\mathrm{dB}$，后向为 $-3\,\mathrm{dB}$：
 
 $$
 \mathrm{F/B}=12-(-3)=15\,\mathrm{dB}
 $$
-
-。
 
 前后比在需要抑制后向干扰或控制覆盖区域时很有用。
 
@@ -268,23 +244,17 @@ $$
 W(R)=\frac{P_tG_t}{4\pi R^2}
 $$
 
-。
-
 接收天线用有效孔径 $A_e$ 收集功率：
 
 $$
 P_r=W(R)A_e
 $$
 
-。
-
 有效孔径与接收天线增益关系为
 
 $$
 A_e=\frac{G_r\lambda^2}{4\pi}
 $$
-
-。
 
 代入得到 Friis 传输公式：
 
@@ -294,15 +264,11 @@ P_r=P_tG_tG_r\left(\frac{\lambda}{4\pi R}\right)^2
 }
 $$
 
-。
-
 以 dB 形式看，自由空间路径损耗为
 
 $$
 L_{\mathrm{fs}}(\mathrm{dB})=20\log_{10}{\left(\frac{4\pi R}{\lambda}\right)}
 $$
-
-。
 
 ## Summary
 

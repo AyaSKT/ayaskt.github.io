@@ -127,15 +127,11 @@ $$
 \frac{300}{800}=37.5\%
 $$
 
-。
-
 如果公司后来价值变为 21,400 RMB，该股东对应的权益价值为：
 
 $$
 \frac{300}{800}\times 21400=8025\text{ RMB}
 $$
-
-。
 
 常用计算关系：
 
@@ -144,8 +140,6 @@ $$
 =
 \frac{\text{Shares Owned}}{\text{Total Shares}}
 $$
-
-。
 
 ---
 
@@ -162,8 +156,6 @@ $$
 $$
 \text{Valuation}=\text{Founders' Investment}
 $$
-
-。
 
 公司开始运营后，价值可能来自：
 
@@ -212,15 +204,11 @@ $$
 \frac{50000}{100}=500\text{ shares}
 $$
 
-。
-
 总股份变为：
 
 $$
 1000+500=1500\text{ shares}
 $$
-
-。
 
 所有权：
 
@@ -239,15 +227,11 @@ $$
 \frac{50000}{200}=250\text{ shares}
 $$
 
-。
-
 总股份变为：
 
 $$
 1000+250=1250\text{ shares}
 $$
-
-。
 
 所有权：
 
@@ -275,8 +259,6 @@ $$
 =
 \text{Number of Shares}\times\text{Share Price}
 $$
-
-。
 
 市值可以一夜之间变化，因为 share price 受 market sentiment 影响。它不是固定的物理量，更像投资者对公司未来价值的集体判断。
 

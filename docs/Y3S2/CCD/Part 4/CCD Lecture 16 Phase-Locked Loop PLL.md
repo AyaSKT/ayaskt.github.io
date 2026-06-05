@@ -421,5 +421,3 @@ v_{\phi}=K_D\phi_e,
 \qquad
 H(s)=\frac{K_DK_OF(s)}{s+K_DK_OF(s)}
 $$
-
-。

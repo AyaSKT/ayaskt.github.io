@@ -65,8 +65,6 @@ $$
 \text{Which alternative gives the best economic result under the same assumptions?}
 $$
 
-。
-
 ---
 
 ### 9-1-3 公司财务报表 Company Financial Records
@@ -171,8 +169,6 @@ $$
 \text{Net Income} = \text{EBITDA} - \text{ITDA}
 $$
 
-。
-
 ---
 
 ### 9-2-4 Gross Profit 与 EBITDA
@@ -234,5 +230,3 @@ Lecture 9 的记忆线索：
 $$
 \text{Engineering decision} \rightarrow \text{Cash flow} \rightarrow \text{P\&L impact}
 $$
-
-。

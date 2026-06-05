@@ -29,8 +29,6 @@ $$
 f_c-f_m,\qquad f_c,\qquad f_c+f_m
 $$
 
-。
-
 其中：
 
 - 载波 $f_c$ 幅度和频率恒定，不携带消息；
@@ -61,8 +59,6 @@ $$
 f_{\mathrm{LSB}}=f_c-f_m
 $$
 
-。
-
 ![边带选择](<CCD Lecture 13 Single-Sideband Communication SSB.attachments/ssb_sideband_choice.jpg>)
 
 SSB 仍能恢复消息，因为一个边带已经包含完整消息信息。
@@ -91,15 +87,11 @@ $$
 \mathrm{BW}_{\mathrm{AM}}=2f_{m,\max}
 $$
 
-。
-
 SSB 只保留一个边带，带宽为消息带宽：
 
 $$
 \boxed{\mathrm{BW}_{\mathrm{SSB}}\approx f_{m,\max}-f_{m,\min}}
 $$
-
-。
 
 语音若取 $300\,\mathrm{Hz}$ 到 $3\,\mathrm{kHz}$：
 
@@ -112,8 +104,6 @@ $$
 $$
 \mathrm{BW}_{\mathrm{AM}}=2\times 3000=6\,\mathrm{kHz}
 $$
-
-。
 
 噪声功率与接收机带宽近似成正比。SSB 带宽更窄，进入接收机的噪声也更少。
 
@@ -152,8 +142,6 @@ s_{\mathrm{DSB}}(t)
 +\frac{A_cA_m}{2}\cos{[(\omega_c-\omega_m)t]}
 \end{aligned}
 $$
-
-。
 
 载波项 $f_c$ 被平衡电路抵消。
 
@@ -249,8 +237,6 @@ $$
 (f_c+f_m)-f_c=f_m
 $$
 
-。
-
 BFO 频率偏差会直接造成音调偏移，所以 SSB 接收对频率稳定性要求更高。
 
 ## 13-5 例题 Exercises
@@ -272,7 +258,6 @@ $$
 \mathrm{BW}_{\mathrm{SSB}}=3000-300=2700\,\mathrm{Hz}=2.7\,\mathrm{kHz}
 $$
 
-。
 ::::
 
 :::: stem L13-E2
@@ -293,8 +278,6 @@ Q=\frac{10^6\left(10^{80/20}\right)^{1/2}}{4\times200}
 =\frac{10^6\times100}{800}
 =125000
 $$
-
-。
 
 这个 $Q$ 很高，所以通常先在较低、固定的中频处做滤波。
 ::::

@@ -31,8 +31,6 @@ c(t)=E_c\cos{(\omega_c t+\phi)}
 =E_c\cos{\theta(t)}
 $$
 
-。
-
 AM 改变 $E_c$；FM 和 PM 保持幅度近似恒定，改变 $\theta(t)$。
 
 :::: definition 角度调制 Angle Modulation
@@ -55,8 +53,6 @@ $$
 \omega_i(t)=\frac{d\theta(t)}{dt}
 $$
 
-。
-
 因此频率和相位不能完全分开看。相位变化的快慢就是频率变化。
 
 FM 的一般形式：
@@ -70,8 +66,6 @@ PM 的一般形式：
 $$
 \theta_{\mathrm{PM}}(t)=\omega_c t+k_p m(t)
 $$
-
-。
 
 所以：
 
@@ -120,8 +114,6 @@ $$
 \boxed{m_f=\frac{\Delta f}{f_m}}
 $$
 
-。
-
 其中 $f_m$ 是消息频率。消息幅度决定 $\Delta f$，消息频率决定频率摆动的快慢。
 
 > [!TIP]
@@ -137,23 +129,17 @@ $$
 e_{\mathrm{FM}}(t)=E_c\cos{(\omega_c t+m_f\sin{(\omega_m t)})}
 $$
 
-。
-
 FM 频谱含无限多个边频：
 
 $$
 f_c\pm nf_m,\qquad n=1,2,3,\ldots
 $$
 
-。
-
 各分量幅度由 Bessel 函数 $J_n(m_f)$ 决定：
 
 $$
 E_n=E_cJ_n(m_f)
 $$
-
-。
 
 实际计算中，幅度很小的高阶边频可忽略。课程表格里常把相对幅度低于约 $0.01$ 的项看成不显著。
 
@@ -175,8 +161,6 @@ $$
 \mathrm{BW}_{\mathrm{FM}}\approx 2f_m(m_f+1)
 $$
 
-。
-
 窄带 FM 满足 $m_f\ll1$，主要只有一阶边频。宽带 FM 的边频数量多，带宽也明显增大。
 
 ## 14-4 调频与调相电路 FM and PM Circuits
@@ -188,8 +172,6 @@ LC 振荡器频率为
 $$
 f_c=\frac{1}{2\pi\sqrt{LC}}
 $$
-
-。
 
 改变 $L$ 或 $C$ 都能改变频率，实际电路中更常改变电容。
 
@@ -210,8 +192,6 @@ $$
 $$
 f_c(t)=\frac{1}{2\pi\sqrt{LC_T(t)}}
 $$
-
-。
 
 ![变容二极管 FM 调制器](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_varactor_modulator.jpg>)
 
@@ -235,8 +215,6 @@ $$
 X_C=\frac{1}{2\pi fC}
 $$
 
-。
-
 ![相移电路](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_phase_shifter.jpg>)
 
 若把相移网络中的电容换成变容二极管，消息信号改变电容，相移也随消息变化，于是得到 PM。
@@ -250,8 +228,6 @@ $$
 $$
 \Delta f_{\mathrm{out}}=N\Delta f_{\mathrm{in}}
 $$
-
-。
 
 ## 14-5 FM 解调与抗噪 FM Demodulation and Noise
 
