@@ -7,16 +7,15 @@
 **本笔记基于 2026 年春季格拉斯哥学院通信电路设计课程文件及教材整理。**
 
 > [!TIP]
-> 从半导体基础到振荡器，CCD 是一门贯通模拟电路与通信系统的课程。
-> 
-> 循序渐进，不必着急。
+> 人生的意义是什么呢？
+
 
 > [!CAUTION]
 > 本笔记的内容受限于本人的水平和老旧的课程资料，可能会存在某些知识错误或者讲解不完全。
 > 
 > 如果你发现类似的错误或者有改进建议，请直接在评论区评论或者联系我修改，非常感谢！
 >
-> **顺带一提，请关注初星学园谢谢喵**
+> **顺带一提，请关注虹咲学园谢谢喵**
 
 如果对你有帮助，就请留下一些评论或者表情吧，我会非常感谢的（真的非常非常感谢！）
 
@@ -45,5 +44,11 @@
 - [Lecture 13: Single-Sideband Communication (SSB)](Part%203/CCD%20Lecture%2013%20Single-Sideband%20Communication%20SSB.md)
 - [Lecture 14: Frequency Modulation (FM) & Phase Modulation (PM)](Part%203/CCD%20Lecture%2014%20Frequency%20Modulation%20and%20Phase%20Modulation.md)
 - [Lecture 15: Antennas in a Circuit](Part%203/CCD%20Lecture%2015%20Antennas%20in%20a%20Circuit.md)
+
+### Part 4 - PLL, DAC, ADC and Converter Errors
+
+- [Lecture 16: Phase-Locked Loop (PLL)](Part%204/CCD%20Lecture%2016%20Phase-Locked%20Loop%20PLL.md)
+- [Lecture 18: Digital to Analog Conversion](Part%204/CCD%20Lecture%2018%20Digital%20to%20Analog%20Conversion.md)
+- [Lecture 19-20: ADC and Converter Errors](Part%204/CCD%20Lecture%2019-20%20ADC%20and%20Converter%20Errors.md)
 
 ![alt text](CCD-README.attachments/1779785178403.JPG)

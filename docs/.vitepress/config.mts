@@ -5,6 +5,10 @@ import { fileURLToPath } from 'node:url'
 // 使用 MathJax 4 渲染数学公式（@mdit/plugin-mathjax 依赖 @mathjax/src@4）
 import { mathjax, createMathjaxInstance } from '@mdit/plugin-mathjax'
 
+type MathJaxTexInputOptionsWithMacros = import('@mdit/plugin-mathjax').MathJaxTexInputOptions & {
+  macros: Record<string, string | [string, number]>
+}
+
 // ---------------------------------------------------------------------------
 // Minimal markdown-it container plugin (replaces external markdown-it-container)
 // ---------------------------------------------------------------------------
@@ -142,6 +146,10 @@ const TEX_PACKAGES_WITHOUT_BBOLDX = [
   'enclose', 'extpfeil', 'gensymb', 'html', 'mathtools', 'mhchem', 'newcommand', 'noerrors', 'noundefined',
   'physics', 'setoptions', 'tagformat', 'texhtml', 'textcomp', 'textmacros', 'unicode', 'units', 'upgreek', 'verb'
 ] as const
+
+const TEX_MACROS = {
+  pounds: '\\unicode{xA3}',
+} as const
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const isDevCommand = process.argv.includes('dev') || process.argv.includes('serve')
@@ -292,7 +300,10 @@ export default defineConfig({
         output: 'svg',
         delimiters: 'dollars',
         a11y: false, // 关闭辅助输出，避免与主 SVG 同时显示导致公式“重影”
-        tex: { packages: ['base', ...TEX_PACKAGES_WITHOUT_BBOLDX] as unknown as import('@mdit/plugin-mathjax').TexPackage[] },
+        tex: {
+          packages: ['base', ...TEX_PACKAGES_WITHOUT_BBOLDX] as unknown as import('@mdit/plugin-mathjax').TexPackage[],
+          macros: TEX_MACROS,
+        } as MathJaxTexInputOptionsWithMacros,
         transformer: (html, displayMode) =>
           displayMode
             ? `<span class="mathjax-block" v-pre>${html}</span>`
@@ -487,9 +498,15 @@ export default defineConfig({
                 { text: 'Lecture 13 I', link: '/Y3S2/EPMF/Block 3/Lecture 13 Part 1' },
                 { text: 'Lecture 13 II', link: '/Y3S2/EPMF/Block 3/Lecture 13 Part 2' },
                 { text: 'Lecture 13 II Ex.', link: '/Y3S2/EPMF/Block 3/Lecture 13-2 Extended Version' },
-                { text: 'Lecture 14', link: '/Y3S2/EPMF/Block 3/Lecture 14' },
-                { text: 'Lecture 15', link: '/Y3S2/EPMF/Block 3/Lecture 15' },
-                { text: 'Lecture 16', link: '/Y3S2/EPMF/Block 3/Lecture 16' },
+              ],
+            },
+            {
+              text: 'Block 4 公司管理',
+              collapsed: false,
+              items: [
+                { text: 'Lecture 14', link: '/Y3S2/EPMF/Block 4/Lecture 14' },
+                { text: 'Lecture 15', link: '/Y3S2/EPMF/Block 4/Lecture 15' },
+                { text: 'Lecture 16', link: '/Y3S2/EPMF/Block 4/Lecture 16' },
               ],
             },
           ],
@@ -555,6 +572,15 @@ export default defineConfig({
                 { text: 'Lec 13 单边带通信', link: '/Y3S2/CCD/Part 3/CCD Lecture 13 Single-Sideband Communication SSB' },
                 { text: 'Lec 14 FM与PM', link: '/Y3S2/CCD/Part 3/CCD Lecture 14 Frequency Modulation and Phase Modulation' },
                 { text: 'Lec 15 天线', link: '/Y3S2/CCD/Part 3/CCD Lecture 15 Antennas in a Circuit' },
+              ],
+            },
+            {
+              text: 'Part 4 — PLL 与数模转换',
+              collapsed: false,
+              items: [
+                { text: 'Lec 16 锁相环', link: '/Y3S2/CCD/Part 4/CCD Lecture 16 Phase-Locked Loop PLL' },
+                { text: 'Lec 18 数模转换', link: '/Y3S2/CCD/Part 4/CCD Lecture 18 Digital to Analog Conversion' },
+                { text: 'Lec 19-20 模数转换与转换误差', link: '/Y3S2/CCD/Part 4/CCD Lecture 19-20 ADC and Converter Errors' },
               ],
             },
           ],

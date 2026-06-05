@@ -66,10 +66,12 @@
 
 - [Lecture 13 Ex.: Extended Version](<Block 3/Lecture 13-2 Extended Version.md>)
 
-- [Lecture 14: What is a Company](<Block 3/Lecture 14.md>)
+### Block 4 公司管理 Company Management
 
-- [Lecture 15: Company Structure](<Block 3/Lecture 15.md>)
+- [Lecture 14: What is a Company](<Block 4/Lecture 14.md>)
 
-- [Lecture 16: Company Strategy & Engineering Careers](<Block 3/Lecture 16.md>)
+- [Lecture 15: Company Structure](<Block 4/Lecture 15.md>)
+
+- [Lecture 16: Company Strategy & Engineering Careers](<Block 4/Lecture 16.md>)
 
 ![alt text](EPMF-README.attachments/1774261142070.JPG)
