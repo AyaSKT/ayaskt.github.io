@@ -1,5 +1,16 @@
 # Lecture 13 Single-Sideband Communication (SSB) 单边带通信
 
+**だって D/N/A じゃ騙れない，**  
+**毕竟 D/N/A 不会骗人，**
+
+**この心は私の中，紅く，紅く。**  
+**这颗心脏在我心中，变得泛红，泛红。**
+
+<div align="right">——Azari 《D/N/A》</div>
+
+![alt text](<CCD Lecture 13 Single-Sideband Communication SSB.attachments/1780727188147.JPG>)
+
+
 ## 章节目录
 
 - [章节目录](#章节目录)
