@@ -1,5 +1,15 @@
 # Lecture 14 Frequency Modulation (FM) & Phase Modulation (PM) 调频与调相
 
+**星のない夜，**  
+**不见星辰的夜幕，**
+
+**どこにも無いふつう それが素敵なので。**  
+**无处可寻的平凡 才更显美好。**
+
+<div align="right">——花譜 《ありふれてたい》</div>
+
+![alt text](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/1780839332491.png>)
+
 ## 章节目录
 
 - [章节目录](#章节目录)

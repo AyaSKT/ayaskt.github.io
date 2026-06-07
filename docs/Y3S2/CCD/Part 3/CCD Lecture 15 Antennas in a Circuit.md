@@ -1,5 +1,15 @@
 # Lecture 15 Antennas in a Circuit 天线
 
+**Will that urging within me grow bigger someday?**  
+**栖息于我内心的冲动最终仍会膨胀失控吗？**
+
+**This wasn't magic as I knew it.**  
+**这不是我所知的魔法。**
+
+<div align="right">——三木谷奈々 《bloom》</div>
+
+![alt text](<CCD Lecture 15 Antennas in a Circuit.attachments/1780840132059.JPG>)
+
 ## 章节目录
 
 - [章节目录](#章节目录)
@@ -27,7 +37,7 @@
 **天线 Antenna** 是发射或接收电磁波的系统部件。它把传输线中的 guided wave 转换为空间中的 free-space wave，也可反向把空间电磁能量耦合回传输线。
 ::::
 
-![天线定义](<CCD Lecture 15 Antennas in a Circuit.attachments/antenna_definition.jpg>)
+
 
 从电路角度看，天线是 guided wave 与 free-space wave 之间的能量接口：
 
