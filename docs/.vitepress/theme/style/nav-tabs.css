@@ -1,34 +1,29 @@
 /* SwiftUI-inspired glass tab treatment for the right side of the desktop nav. */
 :root {
-  --aya-nav-tab-bg: rgb(255 255 255 / 36%);
-  --aya-nav-tab-bg-strong: rgb(255 255 255 / 76%);
-  --aya-nav-tab-line: rgb(255 255 255 / 68%);
-  --aya-nav-tab-line-strong: rgb(255 255 255 / 76%);
+  --aya-nav-tab-bg: rgb(255 255 255 / 26%);
+  --aya-nav-tab-bg-strong: rgb(255 255 255 / 64%);
+  --aya-nav-tab-border: rgb(255 255 255 / 54%);
   --aya-nav-tab-text: rgb(56 69 83 / 70%);
   --aya-nav-tab-selected: #405769;
-  --aya-nav-tab-hover: rgb(255 255 255 / 22%);
-  --aya-nav-tab-shadow: 0 14px 34px rgb(54 87 113 / 10%);
-  --aya-nav-tab-inner-shadow: inset 0 1px 0 var(--aya-nav-tab-line-strong);
-  --aya-nav-tab-glass: blur(18px) saturate(1.22);
-  --aya-nav-menu-glass: blur(26px) saturate(1.24);
-  --aya-nav-outline-angle: 135deg;
-  --aya-nav-outline-a: rgb(255 255 255 / 82%);
-  --aya-nav-outline-b: rgb(255 255 255 / 54%);
-  --aya-nav-outline-c: rgb(255 255 255 / 72%);
+  --aya-nav-tab-hover: rgb(255 255 255 / 18%);
+  --aya-nav-tab-shadow: 0 14px 34px rgb(54 87 113 / 12%);
+  --aya-nav-tab-glass: blur(24px);
+  --aya-nav-pill-glass: blur(12px);
+  --aya-nav-menu-bg: rgb(255 255 255 / 46%);
+  --aya-nav-menu-glass: blur(30px);
+  --aya-nav-menu-shadow: 0 24px 64px rgb(54 87 113 / 14%);
 }
 
 .dark {
-  --aya-nav-tab-bg: rgb(255 255 255 / 12%);
-  --aya-nav-tab-bg-strong: rgb(255 255 255 / 16%);
-  --aya-nav-tab-line: rgb(255 255 255 / 20%);
-  --aya-nav-tab-line-strong: rgb(255 255 255 / 16%);
+  --aya-nav-tab-bg: rgb(9 13 20 / 48%);
+  --aya-nav-tab-bg-strong: rgb(18 24 34 / 62%);
+  --aya-nav-tab-border: rgb(255 255 255 / 18%);
   --aya-nav-tab-text: rgb(223 232 244 / 68%);
   --aya-nav-tab-selected: #f8fbff;
-  --aya-nav-tab-hover: rgb(255 255 255 / 11%);
-  --aya-nav-tab-shadow: 0 16px 36px rgb(0 0 0 / 34%);
-  --aya-nav-outline-a: rgb(255 255 255 / 30%);
-  --aya-nav-outline-b: rgb(255 255 255 / 18%);
-  --aya-nav-outline-c: rgb(255 255 255 / 24%);
+  --aya-nav-tab-hover: rgb(255 255 255 / 7%);
+  --aya-nav-tab-shadow: 0 16px 36px rgb(0 0 0 / 40%);
+  --aya-nav-menu-bg: rgb(13 18 26 / 62%);
+  --aya-nav-menu-shadow: 0 24px 62px rgb(0 0 0 / 44%);
 }
 
 .VPNavBarTitle .title,
@@ -50,37 +45,13 @@
   .VPNavBar .VPNavBarMenu,
   .VPNavBar .VPNavBarSearchButton,
   .VPNavBar .VPNavBarExtra > .button {
-    border: 1px solid transparent;
-    background:
-      linear-gradient(145deg, rgb(255 255 255 / 34%), transparent 45%) padding-box,
-      linear-gradient(135deg, var(--aya-nav-tab-bg), var(--aya-nav-tab-bg)) padding-box,
-      linear-gradient(
-        var(--aya-nav-outline-angle),
-        var(--aya-nav-outline-a),
-        var(--aya-nav-outline-b) 48%,
-        var(--aya-nav-outline-c)
-      ) border-box;
-    box-shadow:
-      var(--aya-nav-tab-shadow),
-      var(--aya-nav-tab-inner-shadow);
+    border: 1px solid var(--aya-nav-tab-border);
+    background: var(--aya-nav-tab-bg);
+    box-shadow: var(--aya-nav-tab-shadow);
     backdrop-filter: var(--aya-nav-tab-glass);
     -webkit-backdrop-filter: var(--aya-nav-tab-glass);
     transform: translateZ(0);
     backface-visibility: hidden;
-  }
-
-  .dark .VPNavBar .VPNavBarMenu,
-  .dark .VPNavBar .VPNavBarSearchButton,
-  .dark .VPNavBar .VPNavBarExtra > .button {
-    background:
-      linear-gradient(145deg, rgb(255 255 255 / 10%), transparent 46%) padding-box,
-      linear-gradient(135deg, var(--aya-nav-tab-bg), var(--aya-nav-tab-bg)) padding-box,
-      linear-gradient(
-        var(--aya-nav-outline-angle),
-        var(--aya-nav-outline-a),
-        var(--aya-nav-outline-b) 48%,
-        var(--aya-nav-outline-c)
-      ) border-box;
   }
 
   .VPNavBar.home .VPNavBarMenu,
@@ -137,26 +108,24 @@
   .VPNavBar .VPNavBarMenuLink.active,
   .VPNavBar .VPNavBarMenuGroup.active > .button {
     color: var(--aya-nav-tab-selected);
-    background:
-      linear-gradient(135deg, var(--aya-nav-tab-bg-strong), rgb(255 255 255 / 34%));
-    box-shadow:
-      0 7px 16px rgb(54 87 113 / 9%),
-      inset 0 1px 0 rgb(255 255 255 / 72%);
+    background: var(--aya-nav-tab-bg-strong);
+    box-shadow: 0 7px 16px rgb(54 87 113 / 9%);
+    backdrop-filter: var(--aya-nav-pill-glass);
+    -webkit-backdrop-filter: var(--aya-nav-pill-glass);
   }
 
   .dark .VPNavBar .VPNavBarMenuLink.active,
   .dark .VPNavBar .VPNavBarMenuGroup.active > .button {
-    background:
-      linear-gradient(135deg, var(--aya-nav-tab-bg-strong), rgb(255 255 255 / 8%));
-    box-shadow:
-      0 8px 18px rgb(0 0 0 / 24%),
-      inset 0 1px 0 rgb(255 255 255 / 16%);
+    background: var(--aya-nav-tab-bg-strong);
+    box-shadow: 0 8px 18px rgb(0 0 0 / 24%);
   }
 
   .VPNavBar .VPNavBarMenuLink:hover,
   .VPNavBar .VPNavBarMenuGroup:hover > .button {
     color: var(--vp-c-text-1);
     background-color: var(--aya-nav-tab-hover);
+    backdrop-filter: var(--aya-nav-pill-glass);
+    -webkit-backdrop-filter: var(--aya-nav-pill-glass);
   }
 
   .VPNavBar .VPNavBarMenuLink:focus-visible,
@@ -176,37 +145,17 @@
 
   .VPNavBar .VPNavBarSearchButton:hover {
     color: var(--vp-c-text-1);
-    background:
-      linear-gradient(145deg, rgb(255 255 255 / 40%), transparent 45%) padding-box,
-      linear-gradient(135deg, var(--aya-nav-tab-hover), var(--aya-nav-tab-hover)) padding-box,
-      linear-gradient(
-        var(--aya-nav-outline-angle),
-        var(--aya-nav-outline-a),
-        var(--aya-nav-outline-b) 48%,
-        var(--aya-nav-outline-c)
-      ) border-box;
-  }
-
-  .dark .VPNavBar .VPNavBarSearchButton:hover {
-    background:
-      linear-gradient(145deg, rgb(255 255 255 / 12%), transparent 45%) padding-box,
-      linear-gradient(135deg, var(--aya-nav-tab-hover), var(--aya-nav-tab-hover)) padding-box,
-      linear-gradient(
-        var(--aya-nav-outline-angle),
-        var(--aya-nav-outline-a),
-        var(--aya-nav-outline-b) 48%,
-        var(--aya-nav-outline-c)
-      ) border-box;
+    background: var(--aya-nav-tab-hover);
   }
 
   .VPNavBar .VPNavBarSearchButton .keys {
-    border-color: var(--aya-nav-tab-line);
+    border-color: var(--aya-nav-tab-border);
     border-radius: 999px;
     background: rgb(255 255 255 / 20%);
   }
 
   .dark .VPNavBar .VPNavBarSearchButton .keys {
-    background: rgb(255 255 255 / 8%);
+    background: rgb(8 12 18 / 40%);
   }
 
   .VPNavBar .VPNavBarExtra {
@@ -223,15 +172,7 @@
 
   .VPNavBar .VPNavBarExtra > .button:hover {
     color: var(--vp-c-text-1);
-    background:
-      linear-gradient(145deg, rgb(255 255 255 / 36%), transparent 45%) padding-box,
-      linear-gradient(135deg, var(--aya-nav-tab-hover), var(--aya-nav-tab-hover)) padding-box,
-      linear-gradient(
-        var(--aya-nav-outline-angle),
-        var(--aya-nav-outline-a),
-        var(--aya-nav-outline-b) 48%,
-        var(--aya-nav-outline-c)
-      ) border-box;
+    background: var(--aya-nav-tab-hover);
   }
 
   .VPNavBar .VPNavBarExtra > .button .icon {
@@ -247,7 +188,6 @@
       visibility 0s linear 0.12s,
       transform 0.16s var(--ease-ios-fade) !important;
     will-change: transform;
-    backface-visibility: hidden;
   }
 
   .VPNavBar .VPFlyout:not(:hover) > .button[aria-expanded="false"] + .menu {
@@ -270,68 +210,19 @@
     position: relative;
     isolation: isolate;
     overflow: hidden auto;
-    border: 1px solid transparent;
+    border: 1px solid var(--aya-nav-tab-border);
     border-radius: 16px;
-    background:
-      linear-gradient(
-        var(--aya-nav-outline-angle),
-        var(--aya-nav-outline-a),
-        var(--aya-nav-outline-b) 48%,
-        var(--aya-nav-outline-c)
-      ) border-box;
-    box-shadow:
-      0 24px 64px rgb(54 87 113 / 14%),
-      0 6px 22px rgb(255 255 255 / 18%),
-      inset 0 1px 0 var(--aya-nav-tab-line-strong);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    transform: translateZ(0);
-    transition: none;
-  }
-
-  .VPNavBar .VPMenu::before {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    content: "";
-    background:
-      linear-gradient(145deg, rgb(255 255 255 / 58%), rgb(255 255 255 / 34%) 48%, rgb(255 255 255 / 22%)),
-      var(--aya-nav-tab-bg);
+    background: var(--aya-nav-menu-bg);
+    box-shadow: var(--aya-nav-menu-shadow);
     backdrop-filter: var(--aya-nav-menu-glass);
     -webkit-backdrop-filter: var(--aya-nav-menu-glass);
     transform: translateZ(0);
-  }
-
-  .VPNavBar .VPMenu::after {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    content: "";
-    box-shadow:
-      inset 0 1px 0 var(--aya-nav-tab-line-strong),
-      inset 0 -18px 34px rgb(255 255 255 / 12%);
+    transition: none;
   }
 
   .VPNavBar .VPMenu > * {
     position: relative;
     z-index: 1;
-  }
-
-  .dark .VPNavBar .VPMenu {
-    box-shadow:
-      0 24px 62px rgb(0 0 0 / 44%),
-      0 8px 26px rgb(255 255 255 / 5%),
-      inset 0 1px 0 var(--aya-nav-tab-line-strong);
-  }
-
-  .dark .VPNavBar .VPMenu::before {
-    background:
-      linear-gradient(145deg, rgb(255 255 255 / 16%), rgb(35 45 60 / 54%) 48%, rgb(18 24 34 / 44%)),
-      rgb(22 29 40 / 58%);
   }
 }
 
@@ -367,37 +258,14 @@
   .VPNavBar .VPNavBarSocialLinks {
     height: 38px;
     padding: 0 4px;
-    border: 1px solid transparent;
+    border: 1px solid var(--aya-nav-tab-border);
     border-radius: 999px;
-    background:
-      linear-gradient(145deg, rgb(255 255 255 / 34%), transparent 45%) padding-box,
-      linear-gradient(135deg, var(--aya-nav-tab-bg), var(--aya-nav-tab-bg)) padding-box,
-      linear-gradient(
-        var(--aya-nav-outline-angle),
-        var(--aya-nav-outline-a),
-        var(--aya-nav-outline-b) 48%,
-        var(--aya-nav-outline-c)
-      ) border-box;
-    box-shadow:
-      var(--aya-nav-tab-shadow),
-      var(--aya-nav-tab-inner-shadow);
+    background: var(--aya-nav-tab-bg);
+    box-shadow: var(--aya-nav-tab-shadow);
     backdrop-filter: var(--aya-nav-tab-glass);
     -webkit-backdrop-filter: var(--aya-nav-tab-glass);
     transform: translateZ(0);
     backface-visibility: hidden;
-  }
-
-  .dark .VPNavBar .VPNavBarAppearance,
-  .dark .VPNavBar .VPNavBarSocialLinks {
-    background:
-      linear-gradient(145deg, rgb(255 255 255 / 10%), transparent 46%) padding-box,
-      linear-gradient(135deg, var(--aya-nav-tab-bg), var(--aya-nav-tab-bg)) padding-box,
-      linear-gradient(
-        var(--aya-nav-outline-angle),
-        var(--aya-nav-outline-a),
-        var(--aya-nav-outline-b) 48%,
-        var(--aya-nav-outline-c)
-      ) border-box;
   }
 
   .VPNavBar.home .VPNavBarAppearance,
@@ -416,6 +284,8 @@
 
   .VPNavBar .VPNavBarAppearance .VPSwitchAppearance:hover {
     background: var(--aya-nav-tab-hover);
+    backdrop-filter: var(--aya-nav-pill-glass);
+    -webkit-backdrop-filter: var(--aya-nav-pill-glass);
   }
 
   .VPNavBar .VPNavBarAppearance .VPSwitchAppearance .check {
@@ -438,6 +308,8 @@
   .VPNavBar .VPSocialLink:hover {
     color: var(--vp-c-text-1);
     background: var(--aya-nav-tab-hover);
+    backdrop-filter: var(--aya-nav-pill-glass);
+    -webkit-backdrop-filter: var(--aya-nav-pill-glass);
   }
 
   .VPNavBar .VPSocialLink > svg,
@@ -458,22 +330,16 @@
   .VPNavBar .VPNavBarSearchButton,
   .VPNavBar .VPNavBarExtra > .button,
   .VPNavBar .VPNavBarHamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
     min-width: 34px;
     height: 34px;
-    border: 1px solid transparent;
+    border: 1px solid var(--aya-nav-tab-border);
     border-radius: 999px;
-    background:
-      linear-gradient(145deg, rgb(255 255 255 / 36%), transparent 46%) padding-box,
-      linear-gradient(135deg, var(--aya-nav-tab-bg), var(--aya-nav-tab-bg)) padding-box,
-      linear-gradient(
-        var(--aya-nav-outline-angle),
-        var(--aya-nav-outline-a),
-        var(--aya-nav-outline-b) 48%,
-        var(--aya-nav-outline-c)
-      ) border-box;
-    box-shadow:
-      0 10px 24px rgb(54 87 113 / 12%),
-      var(--aya-nav-tab-inner-shadow);
+    background: var(--aya-nav-tab-bg);
+    box-shadow: 0 10px 24px rgb(54 87 113 / 12%);
     backdrop-filter: var(--aya-nav-tab-glass);
     -webkit-backdrop-filter: var(--aya-nav-tab-glass);
     transform: translateZ(0);
@@ -483,18 +349,8 @@
   .dark .VPNavBar .VPNavBarSearchButton,
   .dark .VPNavBar .VPNavBarExtra > .button,
   .dark .VPNavBar .VPNavBarHamburger {
-    background:
-      linear-gradient(145deg, rgb(255 255 255 / 10%), transparent 46%) padding-box,
-      linear-gradient(135deg, var(--aya-nav-tab-bg), var(--aya-nav-tab-bg)) padding-box,
-      linear-gradient(
-        var(--aya-nav-outline-angle),
-        var(--aya-nav-outline-a),
-        var(--aya-nav-outline-b) 48%,
-        var(--aya-nav-outline-c)
-      ) border-box;
-    box-shadow:
-      0 12px 26px rgb(0 0 0 / 28%),
-      var(--aya-nav-tab-inner-shadow);
+    background: var(--aya-nav-tab-bg);
+    box-shadow: 0 12px 26px rgb(0 0 0 / 28%);
   }
 }
 
@@ -511,9 +367,4 @@
     -webkit-backdrop-filter: none;
   }
 
-  .VPNavBar .VPMenu::before {
-    background: var(--vp-c-bg-elv);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
 }

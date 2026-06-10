@@ -1,19 +1,19 @@
 /* .vitepress\theme\style\blur.css */
 :root {
-    --aya-liquid-search-bg: rgb(255 255 255 / 18%);
-    --aya-liquid-search-bg-strong: rgb(255 255 255 / 28%);
-    --aya-liquid-search-line: rgb(255 255 255 / 38%);
+    --aya-liquid-search-backdrop: rgb(247 250 253 / 10%);
+    --aya-liquid-search-bg: rgb(255 255 255 / 48%);
+    --aya-liquid-search-bg-strong: rgb(255 255 255 / 64%);
+    --aya-liquid-search-line: rgb(255 255 255 / 42%);
     --aya-liquid-search-line-soft: rgb(152 203 234 / 30%);
     --aya-liquid-search-shadow: rgb(54 87 113 / 18%);
-    --aya-liquid-search-inner-shadow: rgb(255 255 255 / 44%);
     --aya-liquid-search-text-soft: rgb(61 72 85 / 72%);
-    --aya-liquid-search-result: rgb(255 255 255 / 12%);
-    --aya-liquid-search-result-hover: rgb(255 255 255 / 22%);
+    --aya-liquid-search-result: rgb(255 255 255 / 34%);
+    --aya-liquid-search-result-hover: rgb(255 255 255 / 52%);
     --aya-liquid-search-highlight: rgb(152 203 234 / 68%);
     --aya-liquid-search-highlight-text: #1d4258;
-    --aya-liquid-search-glow-a: rgb(152 203 234 / 14%);
-    --aya-liquid-search-glow-b: rgb(194 199 248 / 12%);
-    --aya-liquid-search-glow-c: rgb(241 220 228 / 14%);
+    --aya-liquid-search-backdrop-blur: blur(4px);
+    --aya-liquid-search-panel-blur: blur(26px);
+    --aya-liquid-search-control-blur: blur(14px);
 
     /* 首页下滑后导航透明 */
     .VPNavBar:not(.screen-open),
@@ -83,20 +83,17 @@
 }
 
 .dark {
-    --aya-liquid-search-bg: rgb(20 25 33 / 22%);
-    --aya-liquid-search-bg-strong: rgb(28 34 44 / 34%);
+    --aya-liquid-search-backdrop: rgb(5 9 14 / 22%);
+    --aya-liquid-search-bg: rgb(14 19 27 / 62%);
+    --aya-liquid-search-bg-strong: rgb(23 30 41 / 72%);
     --aya-liquid-search-line: rgb(255 255 255 / 18%);
     --aya-liquid-search-line-soft: rgb(152 203 234 / 24%);
     --aya-liquid-search-shadow: rgb(0 0 0 / 42%);
-    --aya-liquid-search-inner-shadow: rgb(255 255 255 / 14%);
     --aya-liquid-search-text-soft: rgb(220 230 242 / 72%);
-    --aya-liquid-search-result: rgb(255 255 255 / 6%);
-    --aya-liquid-search-result-hover: rgb(255 255 255 / 9%);
+    --aya-liquid-search-result: rgb(255 255 255 / 8%);
+    --aya-liquid-search-result-hover: rgb(255 255 255 / 12%);
     --aya-liquid-search-highlight: rgb(152 203 234 / 54%);
     --aya-liquid-search-highlight-text: #eef8ff;
-    --aya-liquid-search-glow-a: rgb(152 203 234 / 14%);
-    --aya-liquid-search-glow-b: rgb(194 199 248 / 12%);
-    --aya-liquid-search-glow-c: rgb(241 220 228 / 10%);
 }
 
 .VPLocalSearchBox[aria-expanded="true"] {
@@ -111,21 +108,13 @@
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .backdrop {
-    background:
-        radial-gradient(circle at 20% 12%, var(--aya-liquid-search-glow-a), transparent 34%),
-        radial-gradient(circle at 78% 18%, var(--aya-liquid-search-glow-b), transparent 32%),
-        radial-gradient(circle at 50% 86%, var(--aya-liquid-search-glow-c), transparent 38%),
-        rgb(247 250 253 / 8%);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    background: var(--aya-liquid-search-backdrop);
+    backdrop-filter: var(--aya-liquid-search-backdrop-blur);
+    -webkit-backdrop-filter: var(--aya-liquid-search-backdrop-blur);
 }
 
 .dark .VPLocalSearchBox[aria-expanded="true"] .backdrop {
-    background:
-        radial-gradient(circle at 18% 12%, var(--aya-liquid-search-glow-a), transparent 34%),
-        radial-gradient(circle at 82% 18%, var(--aya-liquid-search-glow-b), transparent 34%),
-        radial-gradient(circle at 50% 86%, var(--aya-liquid-search-glow-c), transparent 42%),
-        rgb(5 9 14 / 22%);
+    background: var(--aya-liquid-search-backdrop);
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .shell {
@@ -137,55 +126,15 @@
     gap: 14px;
     border: 1px solid var(--aya-liquid-search-line);
     border-radius: 28px;
-    background:
-        linear-gradient(135deg, rgb(255 255 255 / 22%), transparent 32%),
-        linear-gradient(152deg, var(--aya-liquid-search-bg-strong), var(--aya-liquid-search-bg) 48%, rgb(255 255 255 / 8%)),
-        radial-gradient(circle at 12% 0%, rgb(255 255 255 / 24%), transparent 32%);
-    box-shadow:
-        0 34px 90px var(--aya-liquid-search-shadow),
-        0 14px 38px rgb(152 203 234 / 10%),
-        inset 0 1px 0 var(--aya-liquid-search-inner-shadow),
-        inset 0 -24px 54px rgb(255 255 255 / 8%);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    background: var(--aya-liquid-search-bg);
+    box-shadow: 0 34px 90px var(--aya-liquid-search-shadow);
+    backdrop-filter: var(--aya-liquid-search-panel-blur);
+    -webkit-backdrop-filter: var(--aya-liquid-search-panel-blur);
 }
 
 .dark .VPLocalSearchBox[aria-expanded="true"] .shell {
-    background:
-        linear-gradient(135deg, rgb(255 255 255 / 8%), transparent 34%),
-        linear-gradient(152deg, rgb(30 38 50 / 30%), var(--aya-liquid-search-bg) 48%, rgb(14 18 25 / 16%)),
-        radial-gradient(circle at 14% 0%, rgb(152 203 234 / 9%), transparent 34%);
-    box-shadow:
-        0 34px 90px var(--aya-liquid-search-shadow),
-        0 12px 40px rgb(152 203 234 / 8%),
-        inset 0 1px 0 var(--aya-liquid-search-inner-shadow),
-        inset 0 -24px 54px rgb(0 0 0 / 18%);
-}
-
-.VPLocalSearchBox[aria-expanded="true"] .shell::before,
-.VPLocalSearchBox[aria-expanded="true"] .shell::after {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    content: "";
-}
-
-.VPLocalSearchBox[aria-expanded="true"] .shell::before {
-    background:
-        linear-gradient(115deg, rgb(255 255 255 / 34%) 0%, rgb(255 255 255 / 7%) 18%, transparent 34%),
-        radial-gradient(90% 38% at 50% -12%, rgb(255 255 255 / 26%), transparent 72%),
-        radial-gradient(28% 60% at 101% 44%, rgb(241 220 228 / 16%), transparent 74%),
-        radial-gradient(24% 54% at -2% 62%, rgb(152 203 234 / 16%), transparent 72%);
-    opacity: 0.68;
-}
-
-.VPLocalSearchBox[aria-expanded="true"] .shell::after {
-    border-radius: inherit;
-    box-shadow:
-        inset 0 0 0 1px rgb(255 255 255 / 24%),
-        inset 10px 0 26px rgb(255 255 255 / 16%),
-        inset -12px -16px 32px rgb(152 203 234 / 14%);
+    background: var(--aya-liquid-search-bg);
+    box-shadow: 0 34px 90px var(--aya-liquid-search-shadow);
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .shell > * {
@@ -198,16 +147,10 @@
     padding: 0 12px;
     border: 1px solid var(--aya-liquid-search-line);
     border-radius: 18px;
-    background:
-        linear-gradient(135deg, rgb(255 255 255 / 30%), transparent 40%),
-        var(--aya-liquid-search-result);
-    box-shadow:
-        0 14px 34px rgb(54 87 113 / 13%),
-        0 2px 10px rgb(152 203 234 / 12%),
-        inset 0 1px 0 rgb(255 255 255 / 36%),
-        inset 0 -12px 24px rgb(152 203 234 / 7%);
-    backdrop-filter: blur(10px) saturate(1.14);
-    -webkit-backdrop-filter: blur(10px) saturate(1.14);
+    background: var(--aya-liquid-search-result);
+    box-shadow: 0 14px 34px rgb(54 87 113 / 13%);
+    backdrop-filter: var(--aya-liquid-search-control-blur);
+    -webkit-backdrop-filter: var(--aya-liquid-search-control-blur);
     transition:
         border-color 0.22s var(--ease-ios-fade),
         box-shadow 0.22s var(--ease-ios-fade),
@@ -215,23 +158,15 @@
 }
 
 .dark .VPLocalSearchBox[aria-expanded="true"] .search-bar {
-    background:
-        linear-gradient(135deg, rgb(255 255 255 / 16%), transparent 42%),
-        var(--aya-liquid-search-result);
-    box-shadow:
-        0 14px 34px rgb(0 0 0 / 24%),
-        0 2px 10px rgb(152 203 234 / 8%),
-        inset 0 1px 0 rgb(255 255 255 / 12%),
-        inset 0 -12px 24px rgb(0 0 0 / 12%);
+    background: var(--aya-liquid-search-result);
+    box-shadow: 0 14px 34px rgb(0 0 0 / 24%);
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .search-bar:focus-within {
     border-color: rgb(152 203 234 / 86%);
     box-shadow:
         0 0 0 3px rgb(152 203 234 / 18%),
-        0 18px 40px rgb(54 87 113 / 14%),
-        0 4px 16px rgb(152 203 234 / 18%),
-        inset 0 1px 0 rgb(255 255 255 / 42%);
+        0 18px 40px rgb(54 87 113 / 14%);
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .search-input {
@@ -273,14 +208,10 @@
     overflow: hidden;
     border: 1px solid var(--aya-liquid-search-line-soft);
     border-radius: 18px;
-    background:
-        linear-gradient(135deg, rgb(255 255 255 / 16%), transparent 42%),
-        var(--aya-liquid-search-result);
-    box-shadow:
-        inset 0 1px 0 rgb(255 255 255 / 24%),
-        inset 0 -10px 24px rgb(152 203 234 / 5%);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    background: var(--aya-liquid-search-result);
+    box-shadow: 0 8px 18px rgb(54 87 113 / 7%);
+    backdrop-filter: var(--aya-liquid-search-control-blur);
+    -webkit-backdrop-filter: var(--aya-liquid-search-control-blur);
     transition:
         border-color 0.2s var(--ease-ios-fade),
         background 0.2s var(--ease-ios-fade),
@@ -289,42 +220,16 @@
 }
 
 .dark .VPLocalSearchBox[aria-expanded="true"] .result {
-    background:
-        linear-gradient(135deg, rgb(255 255 255 / 8%), transparent 48%),
-        var(--aya-liquid-search-result);
-    box-shadow:
-        inset 0 1px 0 rgb(255 255 255 / 10%),
-        inset 0 -10px 24px rgb(0 0 0 / 10%);
-}
-
-.VPLocalSearchBox[aria-expanded="true"] .result::before {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    content: "";
-    background:
-        radial-gradient(circle at 12% 0%, rgb(255 255 255 / 32%), transparent 36%),
-        linear-gradient(100deg, transparent, rgb(255 255 255 / 20%), transparent);
-    opacity: 0;
-    transition: opacity 0.2s var(--ease-ios-fade);
+    background: var(--aya-liquid-search-result);
+    box-shadow: 0 8px 18px rgb(0 0 0 / 18%);
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .result:hover,
 .VPLocalSearchBox[aria-expanded="true"] .result.selected {
     transform: translateY(-1px);
     border-color: rgb(152 203 234 / 70%);
-    background:
-        linear-gradient(135deg, rgb(152 203 234 / 15%), rgb(194 199 248 / 10%) 48%, rgb(241 220 228 / 12%)),
-        var(--aya-liquid-search-result-hover);
-    box-shadow:
-        0 12px 26px rgb(54 87 113 / 12%),
-        inset 0 1px 0 rgb(255 255 255 / 48%),
-        inset 0 -16px 30px rgb(152 203 234 / 12%);
-}
-
-.VPLocalSearchBox[aria-expanded="true"] .result:hover::before,
-.VPLocalSearchBox[aria-expanded="true"] .result.selected::before {
-    opacity: 1;
+    background: var(--aya-liquid-search-result-hover);
+    box-shadow: 0 12px 26px rgb(54 87 113 / 12%);
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .result > div {
@@ -371,10 +276,9 @@
 .VPLocalSearchBox[aria-expanded="true"] .excerpt mark {
     border-radius: 5px;
     padding: 0 3px;
-    background:
-        linear-gradient(135deg, rgb(152 203 234 / 72%), rgb(194 199 248 / 62%));
+    background: var(--aya-liquid-search-highlight);
     color: var(--aya-liquid-search-highlight-text);
-    box-shadow: 0 0 0 1px rgb(255 255 255 / 28%) inset;
+    box-shadow: none;
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .search-keyboard-shortcuts {
@@ -385,9 +289,7 @@
     border: 1px solid var(--aya-liquid-search-line-soft);
     border-radius: 8px;
     background: var(--aya-liquid-search-result);
-    box-shadow:
-        inset 0 1px 0 rgb(255 255 255 / 30%),
-        0 3px 10px rgb(54 87 113 / 8%);
+    box-shadow: 0 3px 10px rgb(54 87 113 / 8%);
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .no-results {
@@ -405,8 +307,8 @@
         border-width: 0;
         padding: 12px;
         max-height: none;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
+        backdrop-filter: var(--aya-liquid-search-panel-blur);
+        -webkit-backdrop-filter: var(--aya-liquid-search-panel-blur);
     }
 
     .VPLocalSearchBox[aria-expanded="true"] .search-bar {

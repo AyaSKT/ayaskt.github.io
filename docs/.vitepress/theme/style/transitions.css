@@ -44,25 +44,44 @@ html:has(.VPDoc) .VPSidebar {
 }
 
 /* ---- 保持侧边栏不动（同一 sidebar key）---- */
-html.vt-keep-sidebar::view-transition-old(sidebar),
+html.vt-keep-sidebar::view-transition-old(sidebar) {
+  animation: none;
+  opacity: 0;
+}
+
 html.vt-keep-sidebar::view-transition-new(sidebar) {
   animation: none;
   opacity: 1;
 }
 
-/* ---- 下一页有 sidebar：旧 sidebar 不退出，新 sidebar 直接覆盖 ---- */
-html.vt-has-next-sidebar::view-transition-old(sidebar) {
-  animation: none;
-  opacity: 1;
-}
-
-/* ---- Sidebar：变化时左侧滑入 / 左侧滑出 ---- */
+/* ---- Sidebar：变化时使用 animate.css 左侧淡入/淡出 ---- */
 ::view-transition-new(sidebar) {
-  animation: fadeInLeft 0.8s ease both;
+  animation: fadeInLeft 0.65s ease both;
 }
 
 ::view-transition-old(sidebar) {
-  animation: fadeOutLeft 0.65s ease both;
+  animation: fadeOutLeft 0.45s ease both;
+}
+
+/* ---- Sidebar key 切换：旧窗口先快速左淡出，新窗口再重新进场 ---- */
+html.vt-switch-sidebar::view-transition-old(sidebar) {
+  z-index: 2;
+  animation: fadeOutLeft 0.18s var(--ease-ios-press) both;
+}
+
+html.vt-switch-sidebar::view-transition-new(sidebar) {
+  z-index: 1;
+  animation: fadeInLeft 0.5s var(--ease-ios-fade) 0.18s both;
+}
+
+::view-transition-group(sidebar) {
+  overflow: visible;
+}
+
+::view-transition-old(sidebar),
+::view-transition-new(sidebar) {
+  object-fit: none;
+  object-position: top left;
 }
 
 /* 短位移右侧淡入（位移比 animate.css fadeInRight 的 100% 小） */
@@ -130,6 +149,17 @@ html.vt-keep-sidebar::view-transition-old(doc-aside) {
   animation: none;
   opacity: 1;
   mix-blend-mode: normal;
+}
+
+/* 外观切换：navbar 先向上淡出，再从上方淡入 */
+.vt-appearance::view-transition-old(nav-bar) {
+  animation: fadeOutUp 0.35s ease both;
+  opacity: 1;
+}
+
+.vt-appearance::view-transition-new(nav-bar) {
+  animation: fadeInDown 0.45s ease 0.05s both;
+  opacity: 1;
 }
 
 @keyframes vtFadeOut {
