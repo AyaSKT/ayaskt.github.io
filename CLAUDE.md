@@ -16,50 +16,63 @@ External CSS: `animate.css` (pre-built animation library, imported in `index.ts`
 
 ## Architecture
 
-This is a **VitePress blog** for university engineering course notes (Chinese). Custom theme extends VitePress default — not a simple config override.
+This is a **VitePress blog** for university engineering course notes (Chinese). Custom theme extends VitePress default.
 
-**Theme chain**: `index.ts` → `Layout.vue` → `MyLayout.vue` → wraps `DefaultTheme.Layout` with custom components via slots (`#layout-top`, `#doc-after`, `#home-hero-image`).
+**Theme chain**: `index.ts` → `Layout.vue` → `MyLayout.vue` → wraps `DefaultTheme.Layout` with custom components via slots (`#layout-top`, `#doc-after`, `#home-hero-image`, `#home-hero-info-after`).
 
-**CSS architecture** (`docs/.vitepress/theme/style/`):
-- `var.css` — brand colors (`#98CBEA → #C2C7F8 → #F1DCE4`), VitePress CSS variable overrides, iOS animation easing curves and durations
-- `rainbow.css` — `@property`-based gradient animation for hero title. Uses registered `<color>` custom properties so the browser interpolates directly (no 101-frame color-mix hack)
-- `transitions.css` — all animation keyframes. Page crossfade via View Transitions API, button tap feedback, ripple, scroll reveal, search modal entrance
-- `blur.css` — glassmorphism (backdrop-filter blur on nav, search, sidebar)
-- `index.css` — imports all of the above + Google Fonts (Noto Sans SC for body, Noto Serif SC for headings), table/image centering, MathJax block display, custom `::: example` container styles
+`Layout.vue` provides the appearance toggle using View Transitions API with a circular clip-path reveal. `vt-appearance` class on `<html>` disables root crossfade during mode switch.
 
-**`custom.css`** (imported directly in `index.ts`, NOT in `index.css`) — academic callout restyling for VitePress built-in containers (`info`, `tip`, `warning`, `danger`, `caution`, `important`, `note`, `details`, `definition`). Flattened rectangle with left accent border + right thin border, using VitePress semantic color variables. Definition uses custom orange (`--aya-c-definition-1`). Does NOT affect `::: example` / `::: stem` / `::: solution`.
+## CSS Architecture (`docs/.vitepress/theme/style/`)
 
-**Named view-transition elements** (`transitions.css`): `.VPNavBar`, `.VPSidebar`, `.VPLocalNav` have `view-transition-name` set so they're excluded from the root crossfade snapshot — nav and sidebar stay visually stable during page transitions, only content area fades.
+- `var.css` — brand colors (`#98CBEA → #C2C7F8 → #F1DCE4`), VitePress CSS variable overrides, iOS animation easing curves/durations, hero button gradient
+- `rainbow.css` — `@property`-based gradient animation for hero title
+- `home-hero-gradient-data.css` — `@property` registration for `--color-stop-*` custom properties (used by `rainbow.css`)
+- `transitions.css` — animation keyframes, View Transitions API rules for page crossfade, sidebar transitions (keep/switch), appearance toggle navbar animation (`fadeOutUp`/`fadeInDown`), button tap feedback, ripple, scroll reveal, search modal entrance
+- `blur.css` — glassmorphism for nav search, local search panel (full restyle with glass capsules)
+- `nav-tabs.css` — SwiftUI-style glass capsules for desktop nav items (menu pills, search button, extra buttons, appearance/social at wide width). Includes flyout dropdown menu with glass blur, hamburger centering, mobile capsule styles. Border and shadow are slightly enhanced from defaults.
+- `sidebar-window.css` — desktop sidebar as floating glass window (rounded squircle, scrollbar on left via `direction: rtl`, cross-browser thin scrollbar with `scrollbar-width: thin` + `::-webkit-scrollbar`). Active item uses brand blue tint with floating indicator pill. Mobile `VPNavScreen` restyled as floating window.
+- `index.css` — imports all above + Google Fonts (Noto Sans SC body, Noto Serif SC headings), table/image centering, MathJax block display, custom `::: example/stem/solution` container styles, hero entrance animations, print styles
+
+**`custom.css`** (imported in `index.ts`, NOT in `index.css`) — academic callout restyling for VitePress built-in containers (`info`, `tip`, `warning`, `danger`, `caution`, `important`, `note`, `details`, `definition`). Flattened rectangle with left accent border. Does NOT affect `::: example` / `::: stem` / `::: solution`.
+
+**Named view-transition elements** (`transitions.css`):
+- `.VPNavBar`, `.VPLocalNav` — always static (old snapshot shown, new hidden)
+- `.VPSidebar` — extracted for docs pages only (`html:has(.VPDoc)`). Same sidebar: old hidden, new shown (prevents backdrop-filter/shadow doubling). Switched sidebar: animated with `fadeInLeft`/`fadeOutLeft`.
+- Appearance toggle: navbar uses `fadeOutUp`/`fadeInDown` from animate.css
+
+## Sidebar Active Indicator (FLIP animation)
+
+`PageTransition.vue` manages a floating `<div class="sidebar-active-indicator">` inside `.VPSidebar .nav`. On same-sidebar navigation, the indicator slides from old to new active item via CSS transitions (`left/top/width/height 0.38s`). On homepage→docs or sidebar switch, the indicator is positioned instantly inside `startViewTransition` callback (no animation, appears in same frame as `.is-active` text). Uses `getBoundingClientRect()` relative to `.nav` for position calculation — independent of scroll and RTL direction. A `MutationObserver` on `.VPSidebar` watches class changes (group expand/collapse) and repositions. Resize updates are debounced.
 
 ## Custom Markdown Infrastructure
 
-**Math rendering** (in `config.mts`): MathJax 4 via `@mdit/plugin-mathjax`. Server-side SVG output. `$...$` and `$$...$$` delimiters. A custom `tex.packages` list excludes `bboldx` to avoid font variant errors. A `transformer` wraps output in `<span v-pre>` to prevent Vue hydration double-rendering.
+**Math rendering** (`config.mts`): MathJax 4 via `@mdit/plugin-mathjax`. Server-side SVG output. `$...$` and `$$...$$` delimiters. Custom `tex.packages` excludes `bboldx`. A `transformer` wraps output in `<span v-pre>` to prevent Vue hydration double-rendering.
 
-**Custom containers** (in `config.mts`, self-contained `registerContainer` function — no external markdown-it-container dependency):
+**Custom containers** (in `config.mts`, self-contained `registerContainer` function):
 - `::: example [title]` / `::: stem` / `::: solution` — example/problem/solution blocks
 - `::: definition [title]` — definition blocks
 
 **Custom components** registered globally in `index.ts`:
-- `Mycomponent` (Linkcard), `Confetti` (canvas-confetti), `MouseClick` (DOM ripple), `update`, `BackToTop`, `PageTransition`, `ScrollReveal`, `DocMeta` (word count / reading time)
+`Mycomponent` (Linkcard), `Confetti`, `MouseClick` (DOM ripple), `update`, `BackToTop`, `PageTransition`, `ScrollReveal`, `DocMeta` (word count / reading time)
 
-Components usable in markdown must be registered in `enhanceApp` and placed in `MyLayout.vue` slots (or used inline in `.md` files).
+**`solution-collapse.ts`** — client-side solution toggle with `localStorage` state persistence. Initialized in `enhanceApp`.
 
-**`solution-collapse.ts`** — client-side solution toggle with `localStorage` state persistence. Initialized via `setupSolutionCollapse(router)` in `enhanceApp`. Watches route changes, finds `.example-solution` elements, and attaches click handlers to `.solution-toggle` buttons.
+## Page Transition System
 
-## Page Transition System (V3.3)
+`PageTransition.vue` intercepts internal link clicks, calls `document.startViewTransition()`, navigates via `useRouter().go()`. Three modes:
+- **Same sidebar** (`vt-keep-sidebar`): content crossfades while sidebar stays static (old sidebar snapshot hidden, new shown). After transition, sidebar indicator slides to new active item.
+- **Sidebar switch** (`vt-switch-sidebar`): old sidebar fades out left, new fades in left with stagger. Indicator is rebuilt and positioned instantly.
+- **No sidebar change** (e.g. homepage → docs): default root crossfade. Indicator appears in new snapshot.
 
-`PageTransition.vue` intercepts internal link clicks on `capture` phase, calls `document.startViewTransition()`, navigates via `useRouter().go()`, and the browser crossfades between old/new snapshots. Zero dependencies. Duration: `--dur-page: 0.8s` (mobile: `0.55s`).
-
-`ScrollReveal.vue` uses `IntersectionObserver` to add `reveal-visible` class to `[data-reveal]` elements on enter with staggered delay.
+`ScrollReveal.vue` uses `IntersectionObserver` for `[data-reveal]` elements.
 
 ## Deploy Notes
 
-- No framework build step needed beyond `npm run docs:build`
-- `docs/superpowers/` and `docs/public/animation-tuner.html` are gitignored (dev artifacts, not deployed)
+- No framework build step beyond `npm run docs:build`
+- `docs/superpowers/` and `docs/public/animation-tuner.html` are gitignored
 - `.superpowers/` is gitignored (Claude Code brainstorms)
-- The site has a GitHub Actions workflow (`.github/`) that auto-deploys on push
+- GitHub Actions workflow (`.github/`) auto-deploys on push
 
 ## Writing Style
 
-写正文内容（章节笔记、复习讲义、Ex 练习等）时，除非用户特别声明不需要，否则必须参考根目录 `WRITING-STYLE.md`。该文件定义了本项目的语言气质、禁用表达、标题/公式/容器/表格规范、章节模板和写作检查清单。
-- 路径：`/Users/ayaskt/gp-blogs/WRITING-STYLE.md`
+写正文内容时，除非用户特别声明不需要，否则必须参考 `WRITING-STYLE.md`。该文件定义了语言气质、禁用表达、标题/公式/容器/表格规范、章节模板和写作检查清单。

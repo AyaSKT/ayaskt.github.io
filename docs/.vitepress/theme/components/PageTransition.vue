@@ -137,6 +137,12 @@ onMounted(() => {
 
   // 初始定位 + 监听器
   setTimeout(updateSidebarIndicator, 300)
+
+  // 字体加载完成后重新定位（字体切换可能导致文本换行，指示器错位）
+  if ('fonts' in document) {
+    document.fonts.ready.then(() => updateSidebarIndicator())
+  }
+
   window.addEventListener('resize', onResize)
 
   // 观察 sidebar 内 is-active 变更（展开/折叠分组导致位置变化）
