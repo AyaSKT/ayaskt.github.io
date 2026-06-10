@@ -1,0 +1,8 @@
+{
+  "strictLineBreaks": true,
+  "smartIndentList": false,
+  "useTab": false,
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true,
+  "alwaysUpdateLinks": true
+}

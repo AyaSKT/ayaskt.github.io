@@ -1,0 +1,194 @@
+{
+  "main": {
+    "id": "980b337b1db7048b",
+    "type": "split",
+    "children": [
+      {
+        "id": "e6ebbba5c413b949",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1ce8cbbebb36de4b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "EMFT/EMFT Chapter 8 P II.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "EMFT Chapter 8 P II"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "73bd8efc70dcedf2",
+    "type": "split",
+    "children": [
+      {
+        "id": "dc34bd57cce67d15",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7670f761837b200b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "692eb6c22669d7c3",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "4da0ee08b4a2d976",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "eb058d5ccc90bad2",
+    "type": "split",
+    "children": [
+      {
+        "id": "4309d1ae98ac1943",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0097b90df0b19481",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "EMFT/EMFT Chapter 7.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "EMFT Chapter 7 的反向链接列表"
+            }
+          },
+          {
+            "id": "2daea8d7bea978f1",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "EMFT/EMFT Chapter 7.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "EMFT Chapter 7 的出链列表"
+            }
+          },
+          {
+            "id": "fe217880d280ec2c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "34eee80c29fd70f0",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "0c4aea8a05fb86f0",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "EMFT/EMFT Chapter 7.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "EMFT Chapter 7 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "1ce8cbbebb36de4b",
+  "lastOpenFiles": [
+    "EMFT/EMFT Chapter 4.md",
+    "EMFT/EMFT Chapter 2.md",
+    "EMFT/EMFT Chapter 7.md",
+    "EMFT/EMFT Chapter 8 P I.md",
+    "EMFT/EMFT Chapter 3 P I.md"
+  ]
+}

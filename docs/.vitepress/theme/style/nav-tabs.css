@@ -1,0 +1,519 @@
+/* SwiftUI-inspired glass tab treatment for the right side of the desktop nav. */
+:root {
+  --aya-nav-tab-bg: rgb(255 255 255 / 36%);
+  --aya-nav-tab-bg-strong: rgb(255 255 255 / 76%);
+  --aya-nav-tab-line: rgb(255 255 255 / 68%);
+  --aya-nav-tab-line-strong: rgb(255 255 255 / 76%);
+  --aya-nav-tab-text: rgb(56 69 83 / 70%);
+  --aya-nav-tab-selected: #405769;
+  --aya-nav-tab-hover: rgb(255 255 255 / 22%);
+  --aya-nav-tab-shadow: 0 14px 34px rgb(54 87 113 / 10%);
+  --aya-nav-tab-inner-shadow: inset 0 1px 0 var(--aya-nav-tab-line-strong);
+  --aya-nav-tab-glass: blur(18px) saturate(1.22);
+  --aya-nav-menu-glass: blur(26px) saturate(1.24);
+  --aya-nav-outline-angle: 135deg;
+  --aya-nav-outline-a: rgb(255 255 255 / 82%);
+  --aya-nav-outline-b: rgb(255 255 255 / 54%);
+  --aya-nav-outline-c: rgb(255 255 255 / 72%);
+}
+
+.dark {
+  --aya-nav-tab-bg: rgb(255 255 255 / 12%);
+  --aya-nav-tab-bg-strong: rgb(255 255 255 / 16%);
+  --aya-nav-tab-line: rgb(255 255 255 / 20%);
+  --aya-nav-tab-line-strong: rgb(255 255 255 / 16%);
+  --aya-nav-tab-text: rgb(223 232 244 / 68%);
+  --aya-nav-tab-selected: #f8fbff;
+  --aya-nav-tab-hover: rgb(255 255 255 / 11%);
+  --aya-nav-tab-shadow: 0 16px 36px rgb(0 0 0 / 34%);
+  --aya-nav-outline-a: rgb(255 255 255 / 30%);
+  --aya-nav-outline-b: rgb(255 255 255 / 18%);
+  --aya-nav-outline-c: rgb(255 255 255 / 24%);
+}
+
+.VPNavBarTitle .title,
+.VPNavBarTitle a {
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .VPNavBar .content-body {
+    gap: 8px;
+  }
+
+  .VPNavBar .VPNavBarSearch {
+    flex-grow: 0;
+    padding-left: 0;
+  }
+
+  .VPNavBar .VPNavBarMenu,
+  .VPNavBar .VPNavBarSearchButton,
+  .VPNavBar .VPNavBarExtra > .button {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(145deg, rgb(255 255 255 / 34%), transparent 45%) padding-box,
+      linear-gradient(135deg, var(--aya-nav-tab-bg), var(--aya-nav-tab-bg)) padding-box,
+      linear-gradient(
+        var(--aya-nav-outline-angle),
+        var(--aya-nav-outline-a),
+        var(--aya-nav-outline-b) 48%,
+        var(--aya-nav-outline-c)
+      ) border-box;
+    box-shadow:
+      var(--aya-nav-tab-shadow),
+      var(--aya-nav-tab-inner-shadow);
+    backdrop-filter: var(--aya-nav-tab-glass);
+    -webkit-backdrop-filter: var(--aya-nav-tab-glass);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .dark .VPNavBar .VPNavBarMenu,
+  .dark .VPNavBar .VPNavBarSearchButton,
+  .dark .VPNavBar .VPNavBarExtra > .button {
+    background:
+      linear-gradient(145deg, rgb(255 255 255 / 10%), transparent 46%) padding-box,
+      linear-gradient(135deg, var(--aya-nav-tab-bg), var(--aya-nav-tab-bg)) padding-box,
+      linear-gradient(
+        var(--aya-nav-outline-angle),
+        var(--aya-nav-outline-a),
+        var(--aya-nav-outline-b) 48%,
+        var(--aya-nav-outline-c)
+      ) border-box;
+  }
+
+  .VPNavBar.home .VPNavBarMenu,
+  .VPNavBar.home .VPNavBarSearchButton,
+  .VPNavBar.home .VPNavBarExtra > .button {
+    backdrop-filter: var(--aya-nav-tab-glass) !important;
+    -webkit-backdrop-filter: var(--aya-nav-tab-glass) !important;
+  }
+
+  .VPNavBar .VPNavBarMenu {
+    position: relative;
+    align-items: center;
+    isolation: isolate;
+    gap: 2px;
+    height: 38px;
+    padding: 4px;
+    border-radius: 999px;
+  }
+
+  .VPNavBar .VPNavBarMenu > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .VPNavBar .VPNavBarMenuLink,
+  .VPNavBar .VPNavBarMenuGroup > .button {
+    height: 28px;
+    min-width: 58px;
+    padding: 0 12px;
+    border-radius: 999px;
+    color: var(--aya-nav-tab-text);
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 28px;
+    transition:
+      color 0.2s var(--ease-ios-fade),
+      background-color 0.2s var(--ease-ios-fade),
+      box-shadow 0.2s var(--ease-ios-fade),
+      transform 0.16s var(--ease-ios-press);
+  }
+
+  .VPNavBar .VPNavBarMenuGroup > .button .text {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: 28px;
+  }
+
+  .VPNavBar .VPNavBarMenuGroup > .button .text-icon {
+    color: inherit;
+    font-size: 12px;
+  }
+
+  .VPNavBar .VPNavBarMenuLink.active,
+  .VPNavBar .VPNavBarMenuGroup.active > .button {
+    color: var(--aya-nav-tab-selected);
+    background:
+      linear-gradient(135deg, var(--aya-nav-tab-bg-strong), rgb(255 255 255 / 34%));
+    box-shadow:
+      0 7px 16px rgb(54 87 113 / 9%),
+      inset 0 1px 0 rgb(255 255 255 / 72%);
+  }
+
+  .dark .VPNavBar .VPNavBarMenuLink.active,
+  .dark .VPNavBar .VPNavBarMenuGroup.active > .button {
+    background:
+      linear-gradient(135deg, var(--aya-nav-tab-bg-strong), rgb(255 255 255 / 8%));
+    box-shadow:
+      0 8px 18px rgb(0 0 0 / 24%),
+      inset 0 1px 0 rgb(255 255 255 / 16%);
+  }
+
+  .VPNavBar .VPNavBarMenuLink:hover,
+  .VPNavBar .VPNavBarMenuGroup:hover > .button {
+    color: var(--vp-c-text-1);
+    background-color: var(--aya-nav-tab-hover);
+  }
+
+  .VPNavBar .VPNavBarMenuLink:focus-visible,
+  .VPNavBar .VPNavBarMenuGroup > .button:focus-visible,
+  .VPNavBar .VPNavBarSearchButton:focus-visible,
+  .VPNavBar .VPNavBarExtra > .button:focus-visible {
+    outline: 2px solid rgb(255 255 255 / 78%);
+    outline-offset: 2px;
+  }
+
+  .VPNavBar .VPNavBarSearchButton {
+    height: 38px;
+    padding: 0 12px;
+    border-radius: 999px;
+    color: var(--aya-nav-tab-text);
+  }
+
+  .VPNavBar .VPNavBarSearchButton:hover {
+    color: var(--vp-c-text-1);
+    background:
+      linear-gradient(145deg, rgb(255 255 255 / 40%), transparent 45%) padding-box,
+      linear-gradient(135deg, var(--aya-nav-tab-hover), var(--aya-nav-tab-hover)) padding-box,
+      linear-gradient(
+        var(--aya-nav-outline-angle),
+        var(--aya-nav-outline-a),
+        var(--aya-nav-outline-b) 48%,
+        var(--aya-nav-outline-c)
+      ) border-box;
+  }
+
+  .dark .VPNavBar .VPNavBarSearchButton:hover {
+    background:
+      linear-gradient(145deg, rgb(255 255 255 / 12%), transparent 45%) padding-box,
+      linear-gradient(135deg, var(--aya-nav-tab-hover), var(--aya-nav-tab-hover)) padding-box,
+      linear-gradient(
+        var(--aya-nav-outline-angle),
+        var(--aya-nav-outline-a),
+        var(--aya-nav-outline-b) 48%,
+        var(--aya-nav-outline-c)
+      ) border-box;
+  }
+
+  .VPNavBar .VPNavBarSearchButton .keys {
+    border-color: var(--aya-nav-tab-line);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 20%);
+  }
+
+  .dark .VPNavBar .VPNavBarSearchButton .keys {
+    background: rgb(255 255 255 / 8%);
+  }
+
+  .VPNavBar .VPNavBarExtra {
+    margin-right: 0;
+  }
+
+  .VPNavBar .VPNavBarExtra > .button {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border-radius: 999px;
+    color: var(--aya-nav-tab-text);
+  }
+
+  .VPNavBar .VPNavBarExtra > .button:hover {
+    color: var(--vp-c-text-1);
+    background:
+      linear-gradient(145deg, rgb(255 255 255 / 36%), transparent 45%) padding-box,
+      linear-gradient(135deg, var(--aya-nav-tab-hover), var(--aya-nav-tab-hover)) padding-box,
+      linear-gradient(
+        var(--aya-nav-outline-angle),
+        var(--aya-nav-outline-a),
+        var(--aya-nav-outline-b) 48%,
+        var(--aya-nav-outline-c)
+      ) border-box;
+  }
+
+  .VPNavBar .VPNavBarExtra > .button .icon {
+    color: inherit;
+    fill: currentColor;
+  }
+
+  .VPNavBar .VPFlyout > .menu {
+    top: calc(var(--vp-nav-height) / 2 + 16px);
+    pointer-events: none;
+    transform: translate3d(0, -3px, 0);
+    transition:
+      visibility 0s linear 0.12s,
+      transform 0.16s var(--ease-ios-fade) !important;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  .VPNavBar .VPFlyout:not(:hover) > .button[aria-expanded="false"] + .menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0, -3px, 0);
+    pointer-events: none;
+  }
+
+  .VPNavBar .VPFlyout:hover > .button + .menu,
+  .VPNavBar .VPFlyout > .button[aria-expanded="true"] + .menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+
+  .VPNavBar .VPMenu {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden auto;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    background:
+      linear-gradient(
+        var(--aya-nav-outline-angle),
+        var(--aya-nav-outline-a),
+        var(--aya-nav-outline-b) 48%,
+        var(--aya-nav-outline-c)
+      ) border-box;
+    box-shadow:
+      0 24px 64px rgb(54 87 113 / 14%),
+      0 6px 22px rgb(255 255 255 / 18%),
+      inset 0 1px 0 var(--aya-nav-tab-line-strong);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transform: translateZ(0);
+    transition: none;
+  }
+
+  .VPNavBar .VPMenu::before {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    content: "";
+    background:
+      linear-gradient(145deg, rgb(255 255 255 / 58%), rgb(255 255 255 / 34%) 48%, rgb(255 255 255 / 22%)),
+      var(--aya-nav-tab-bg);
+    backdrop-filter: var(--aya-nav-menu-glass);
+    -webkit-backdrop-filter: var(--aya-nav-menu-glass);
+    transform: translateZ(0);
+  }
+
+  .VPNavBar .VPMenu::after {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    content: "";
+    box-shadow:
+      inset 0 1px 0 var(--aya-nav-tab-line-strong),
+      inset 0 -18px 34px rgb(255 255 255 / 12%);
+  }
+
+  .VPNavBar .VPMenu > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .dark .VPNavBar .VPMenu {
+    box-shadow:
+      0 24px 62px rgb(0 0 0 / 44%),
+      0 8px 26px rgb(255 255 255 / 5%),
+      inset 0 1px 0 var(--aya-nav-tab-line-strong);
+  }
+
+  .dark .VPNavBar .VPMenu::before {
+    background:
+      linear-gradient(145deg, rgb(255 255 255 / 16%), rgb(35 45 60 / 54%) 48%, rgb(18 24 34 / 44%)),
+      rgb(22 29 40 / 58%);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1040px) {
+  .VPNavBar .VPNavBarMenuLink,
+  .VPNavBar .VPNavBarMenuGroup > .button {
+    min-width: auto;
+    padding: 0 9px;
+    font-size: 12px;
+  }
+
+  .VPNavBar .VPNavBarSearchButton {
+    width: 38px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .VPNavBar .VPNavBarSearchButton .text,
+  .VPNavBar .VPNavBarSearchButton .keys {
+    display: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .VPNavBar .menu + .appearance::before,
+  .VPNavBar .menu + .social-links::before,
+  .VPNavBar .translations + .appearance::before,
+  .VPNavBar .appearance + .social-links::before {
+    display: none !important;
+  }
+
+  .VPNavBar .VPNavBarAppearance,
+  .VPNavBar .VPNavBarSocialLinks {
+    height: 38px;
+    padding: 0 4px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background:
+      linear-gradient(145deg, rgb(255 255 255 / 34%), transparent 45%) padding-box,
+      linear-gradient(135deg, var(--aya-nav-tab-bg), var(--aya-nav-tab-bg)) padding-box,
+      linear-gradient(
+        var(--aya-nav-outline-angle),
+        var(--aya-nav-outline-a),
+        var(--aya-nav-outline-b) 48%,
+        var(--aya-nav-outline-c)
+      ) border-box;
+    box-shadow:
+      var(--aya-nav-tab-shadow),
+      var(--aya-nav-tab-inner-shadow);
+    backdrop-filter: var(--aya-nav-tab-glass);
+    -webkit-backdrop-filter: var(--aya-nav-tab-glass);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .dark .VPNavBar .VPNavBarAppearance,
+  .dark .VPNavBar .VPNavBarSocialLinks {
+    background:
+      linear-gradient(145deg, rgb(255 255 255 / 10%), transparent 46%) padding-box,
+      linear-gradient(135deg, var(--aya-nav-tab-bg), var(--aya-nav-tab-bg)) padding-box,
+      linear-gradient(
+        var(--aya-nav-outline-angle),
+        var(--aya-nav-outline-a),
+        var(--aya-nav-outline-b) 48%,
+        var(--aya-nav-outline-c)
+      ) border-box;
+  }
+
+  .VPNavBar.home .VPNavBarAppearance,
+  .VPNavBar.home .VPNavBarSocialLinks {
+    backdrop-filter: var(--aya-nav-tab-glass) !important;
+    -webkit-backdrop-filter: var(--aya-nav-tab-glass) !important;
+  }
+
+  .VPNavBar .VPNavBarAppearance .VPSwitchAppearance {
+    width: 30px !important;
+    height: 30px;
+    border-color: transparent;
+    border-radius: 999px;
+    background: transparent;
+  }
+
+  .VPNavBar .VPNavBarAppearance .VPSwitchAppearance:hover {
+    background: var(--aya-nav-tab-hover);
+  }
+
+  .VPNavBar .VPNavBarAppearance .VPSwitchAppearance .check {
+    top: 5px;
+    left: 5px;
+    width: 18px;
+    height: 18px;
+    background: transparent;
+    box-shadow: none;
+    transform: none !important;
+  }
+
+  .VPNavBar .VPSocialLink {
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    color: var(--aya-nav-tab-text);
+  }
+
+  .VPNavBar .VPSocialLink:hover {
+    color: var(--vp-c-text-1);
+    background: var(--aya-nav-tab-hover);
+  }
+
+  .VPNavBar .VPSocialLink > svg,
+  .VPNavBar .VPSocialLink > [class^="vpi-social-"] {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+@media (max-width: 767px) {
+  .VPNavBarTitle .title {
+    max-width: min(58vw, 260px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .VPNavBar .VPNavBarSearchButton,
+  .VPNavBar .VPNavBarExtra > .button,
+  .VPNavBar .VPNavBarHamburger {
+    min-width: 34px;
+    height: 34px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background:
+      linear-gradient(145deg, rgb(255 255 255 / 36%), transparent 46%) padding-box,
+      linear-gradient(135deg, var(--aya-nav-tab-bg), var(--aya-nav-tab-bg)) padding-box,
+      linear-gradient(
+        var(--aya-nav-outline-angle),
+        var(--aya-nav-outline-a),
+        var(--aya-nav-outline-b) 48%,
+        var(--aya-nav-outline-c)
+      ) border-box;
+    box-shadow:
+      0 10px 24px rgb(54 87 113 / 12%),
+      var(--aya-nav-tab-inner-shadow);
+    backdrop-filter: var(--aya-nav-tab-glass);
+    -webkit-backdrop-filter: var(--aya-nav-tab-glass);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .dark .VPNavBar .VPNavBarSearchButton,
+  .dark .VPNavBar .VPNavBarExtra > .button,
+  .dark .VPNavBar .VPNavBarHamburger {
+    background:
+      linear-gradient(145deg, rgb(255 255 255 / 10%), transparent 46%) padding-box,
+      linear-gradient(135deg, var(--aya-nav-tab-bg), var(--aya-nav-tab-bg)) padding-box,
+      linear-gradient(
+        var(--aya-nav-outline-angle),
+        var(--aya-nav-outline-a),
+        var(--aya-nav-outline-b) 48%,
+        var(--aya-nav-outline-c)
+      ) border-box;
+    box-shadow:
+      0 12px 26px rgb(0 0 0 / 28%),
+      var(--aya-nav-tab-inner-shadow);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .VPNavBar .VPNavBarMenu,
+  .VPNavBar .VPNavBarSearchButton,
+  .VPNavBar .VPNavBarExtra > .button,
+  .VPNavBar .VPNavBarAppearance,
+  .VPNavBar .VPNavBarSocialLinks,
+  .VPNavBar .VPNavBarHamburger,
+  .VPNavBar .VPMenu {
+    background: var(--vp-c-bg-elv);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .VPNavBar .VPMenu::before {
+    background: var(--vp-c-bg-elv);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

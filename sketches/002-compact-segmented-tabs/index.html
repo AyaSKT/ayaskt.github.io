@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compact Segmented Tabs Preview</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { color-scheme: light; }
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Segoe UI", sans-serif;
+      color: #1b2430;
+      background:
+        linear-gradient(180deg, rgba(250,252,255,0.96), rgba(246,248,252,0.86)),
+        linear-gradient(142deg, #e2f2fb 0%, #edf0ff 54%, #fff3f7 100%);
+      overflow-x: hidden;
+    }
+    body.dark {
+      color: #eef6ff;
+      background:
+        linear-gradient(180deg, rgba(10,15,22,0.94), rgba(16,22,31,0.90)),
+        linear-gradient(142deg, #143144 0%, #222842 54%, #392735 100%);
+    }
+    a, button { font: inherit; }
+    button { border: 0; cursor: pointer; }
+    .page {
+      min-height: 100dvh;
+      padding: 0 28px 52px;
+    }
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      width: min(1180px, 100%);
+      height: 64px;
+      margin: 0 auto;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 218px;
+      color: inherit;
+      text-decoration: none;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(140deg, #98cbea, #c2c7f8 54%, #f1dce4);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.72), 0 8px 20px rgba(96,128,154,0.14);
+    }
+    .nav-right {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px;
+      border: 1px solid rgba(255,255,255,0.58);
+      border-radius: 999px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.66), rgba(255,255,255,0.30)),
+        rgba(255,255,255,0.24);
+      box-shadow:
+        0 16px 50px rgba(76,106,134,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.82),
+        inset 0 -10px 24px rgba(152,203,234,0.08);
+      backdrop-filter: blur(18px) saturate(1.28);
+      -webkit-backdrop-filter: blur(18px) saturate(1.28);
+    }
+    body.dark .nav-right {
+      border-color: rgba(255,255,255,0.15);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.13), rgba(255,255,255,0.05)),
+        rgba(13,18,27,0.50);
+      box-shadow:
+        0 18px 58px rgba(0,0,0,0.36),
+        inset 0 1px 0 rgba(255,255,255,0.14),
+        inset 0 -10px 24px rgba(0,0,0,0.14);
+    }
+    .search {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      height: 34px;
+      padding: 0 11px;
+      border-radius: 999px;
+      color: rgba(39,53,70,0.68);
+      background: rgba(255,255,255,0.30);
+      transition: color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+    }
+    body.dark .search {
+      color: rgba(232,240,250,0.72);
+      background: rgba(255,255,255,0.06);
+    }
+    .search:hover,
+    .search:focus-visible {
+      color: #1e465d;
+      background: rgba(255,255,255,0.54);
+      outline: none;
+    }
+    body.dark .search:hover,
+    body.dark .search:focus-visible {
+      color: #f7fbff;
+      background: rgba(255,255,255,0.12);
+    }
+    .search-mark {
+      width: 14px;
+      height: 14px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      position: relative;
+    }
+    .search-mark::after {
+      position: absolute;
+      right: -5px;
+      bottom: -4px;
+      width: 6px;
+      height: 2px;
+      border-radius: 2px;
+      background: currentColor;
+      transform: rotate(45deg);
+      content: "";
+    }
+    .tabs {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      padding: 2px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.045);
+      box-shadow: inset 0 1px 1px rgba(50,70,90,0.06);
+    }
+    body.dark .tabs {
+      background: rgba(255,255,255,0.06);
+      box-shadow: inset 0 1px 1px rgba(0,0,0,0.22);
+    }
+    .tab {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+      min-width: 58px;
+      padding: 0 11px;
+      border-radius: 999px;
+      color: rgba(35,48,64,0.70);
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 14px;
+      font-weight: 560;
+      transition: color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+    }
+    body.dark .tab { color: rgba(232,240,250,0.74); }
+    .tab:hover,
+    .tab.open {
+      color: #1d4258;
+      background: rgba(255,255,255,0.30);
+    }
+    body.dark .tab:hover,
+    body.dark .tab.open {
+      color: #f6fbff;
+      background: rgba(255,255,255,0.09);
+    }
+    .tab.active {
+      color: #17384d;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.70));
+      box-shadow:
+        0 6px 16px rgba(74,101,126,0.14),
+        inset 0 1px 0 rgba(255,255,255,0.94);
+    }
+    body.dark .tab.active {
+      color: #f7fbff;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.10));
+      box-shadow:
+        0 8px 20px rgba(0,0,0,0.28),
+        inset 0 1px 0 rgba(255,255,255,0.14);
+    }
+    .tab.has-menu::after {
+      width: 4px;
+      height: 4px;
+      margin-left: 7px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: translateY(-1px) rotate(45deg);
+      opacity: 0.72;
+      content: "";
+    }
+    .divider {
+      width: 1px;
+      height: 22px;
+      background: rgba(38,55,72,0.11);
+    }
+    body.dark .divider { background: rgba(255,255,255,0.12); }
+    .tool-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      color: rgba(35,48,64,0.68);
+      background: transparent;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 680;
+      transition: color 0.18s ease, background 0.18s ease;
+    }
+    body.dark .tool-button { color: rgba(232,240,250,0.72); }
+    .tool-button:hover,
+    .tool-button:focus-visible {
+      color: #1d4258;
+      background: rgba(255,255,255,0.46);
+      outline: none;
+    }
+    body.dark .tool-button:hover,
+    body.dark .tool-button:focus-visible {
+      color: #f7fbff;
+      background: rgba(255,255,255,0.12);
+    }
+    .dropdown {
+      position: absolute;
+      top: 58px;
+      right: 112px;
+      display: none;
+      width: 268px;
+      padding: 8px;
+      border: 1px solid rgba(255,255,255,0.50);
+      border-radius: 18px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.78), rgba(255,255,255,0.42)),
+        rgba(255,255,255,0.24);
+      box-shadow:
+        0 20px 56px rgba(76,106,134,0.20),
+        inset 0 1px 0 rgba(255,255,255,0.82);
+      backdrop-filter: blur(22px) saturate(1.30);
+      -webkit-backdrop-filter: blur(22px) saturate(1.30);
+    }
+    body.dark .dropdown {
+      border-color: rgba(255,255,255,0.15);
+      background:
+        linear-gradient(145deg, rgba(31,40,55,0.76), rgba(15,21,31,0.58)),
+        rgba(14,19,28,0.50);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+    .dropdown.show { display: block; }
+    .menu-link {
+      display: block;
+      padding: 9px 11px;
+      border-radius: 12px;
+      color: inherit;
+      text-decoration: none;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+    .menu-link:hover { background: rgba(152,203,234,0.18); }
+    body.dark .menu-link:hover { background: rgba(152,203,234,0.13); }
+    .content {
+      width: min(960px, 100%);
+      margin: 98px auto 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 32px;
+      align-items: start;
+    }
+    .doc {
+      padding: 8px 0;
+    }
+    .eyebrow {
+      margin-bottom: 12px;
+      color: #517b93;
+      font-size: 13px;
+      font-weight: 650;
+    }
+    body.dark .eyebrow { color: #98cbea; }
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(34px, 6vw, 62px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+    p {
+      max-width: 64ch;
+      margin: 0;
+      color: rgba(35,48,64,0.70);
+      line-height: 1.82;
+    }
+    body.dark p { color: rgba(226,237,250,0.72); }
+    .aside {
+      border: 1px solid rgba(255,255,255,0.50);
+      border-radius: 20px;
+      padding: 18px;
+      background: rgba(255,255,255,0.40);
+      box-shadow: 0 18px 60px rgba(84,113,140,0.12), inset 0 1px 0 rgba(255,255,255,0.74);
+      backdrop-filter: blur(16px) saturate(1.16);
+      -webkit-backdrop-filter: blur(16px) saturate(1.16);
+    }
+    body.dark .aside {
+      border-color: rgba(255,255,255,0.13);
+      background: rgba(20,27,38,0.44);
+      box-shadow: 0 20px 64px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.10);
+    }
+    .aside-title {
+      margin: 0 0 10px;
+      font-size: 13px;
+      color: rgba(35,48,64,0.58);
+      font-weight: 650;
+    }
+    body.dark .aside-title { color: rgba(232,240,250,0.60); }
+    .progress {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+    body.dark .progress { background: rgba(255,255,255,0.08); }
+    .progress span {
+      display: block;
+      width: 62%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #98cbea, #c2c7f8 55%, #f1dce4);
+    }
+    @media (max-width: 900px) {
+      .page { padding: 0 16px 46px; }
+      .site-nav { height: auto; padding-top: 12px; align-items: flex-start; }
+      .brand span:last-child { display: none; }
+      .nav-right {
+        max-width: calc(100vw - 78px);
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .nav-right::-webkit-scrollbar { display: none; }
+      .search .text,
+      .search .shortcut,
+      .divider,
+      .hide-mobile { display: none; }
+      .content {
+        margin-top: 72px;
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="site-nav" aria-label="Preview navigation">
+      <a class="brand" href="#">
+        <span class="brand-logo" aria-hidden="true"></span>
+        <span>Ayaskt Workspace</span>
+      </a>
+      <div class="nav-right">
+        <button class="search" type="button">
+          <span class="search-mark" aria-hidden="true"></span>
+          <span class="text">Search</span>
+          <span class="shortcut">⌘K</span>
+        </button>
+        <div class="tabs" role="tablist" aria-label="Main navigation">
+          <a class="tab active" href="#" role="tab" aria-selected="true">主页</a>
+          <button class="tab has-menu" type="button" data-menu="year3">第三学年</button>
+          <button class="tab has-menu" type="button" data-menu="year2">第二学年</button>
+          <button class="tab has-menu" type="button" data-menu="year1">第一学年</button>
+        </div>
+        <span class="divider" aria-hidden="true"></span>
+        <button class="tool-button" type="button" id="themeToggle" aria-label="Toggle theme">月</button>
+        <a class="tool-button hide-mobile" href="#" aria-label="GitHub">GH</a>
+        <a class="tool-button hide-mobile" href="#" aria-label="UESTC">U</a>
+      </div>
+      <div class="dropdown" id="year3">
+        <a class="menu-link" href="#">通信原理与系统 CPS</a>
+        <a class="menu-link" href="#">人工智能与机器学习 AIML</a>
+        <a class="menu-link" href="#">数字信号处理 DSP</a>
+        <a class="menu-link" href="#">电磁场与波 EMFT</a>
+        <a class="menu-link" href="#">通信电路设计 CCD</a>
+        <a class="menu-link" href="#">工程项目管理与财务 EPM&F</a>
+      </div>
+      <div class="dropdown" id="year2">
+        <a class="menu-link" href="#">嵌入式处理器 EP</a>
+        <a class="menu-link" href="#">电路分析与设计 CAD</a>
+      </div>
+      <div class="dropdown" id="year1">
+        <a class="menu-link" href="#">微电子系统 MS</a>
+      </div>
+    </nav>
+    <section class="content">
+      <article class="doc">
+        <div class="eyebrow">VitePress navigation preview</div>
+        <h1>Compact SwiftUI segmented tab bar</h1>
+        <p>这个方向更像可直接放进当前博客的版本。右侧区域是一个紧凑毛玻璃容器，主导航是 SwiftUI segmented control 语气，搜索和工具按钮保留原有信息密度。</p>
+      </article>
+      <aside class="aside">
+        <p class="aside-title">阅读进度</p>
+        <div class="progress" aria-hidden="true"><span></span></div>
+      </aside>
+    </section>
+  </main>
+  <script>
+    const buttons = document.querySelectorAll('[data-menu]')
+    const menus = document.querySelectorAll('.dropdown')
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const id = button.dataset.menu
+        const menu = document.getElementById(id)
+        const willOpen = !menu.classList.contains('show')
+        menus.forEach((item) => item.classList.remove('show'))
+        buttons.forEach((item) => item.classList.remove('open'))
+        if (willOpen) {
+          menu.classList.add('show')
+          button.classList.add('open')
+        }
+      })
+    })
+    document.getElementById('themeToggle').addEventListener('click', (event) => {
+      document.body.classList.toggle('dark')
+      event.currentTarget.textContent = document.body.classList.contains('dark') ? '日' : '月'
+    })
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.site-nav')) {
+        menus.forEach((item) => item.classList.remove('show'))
+        buttons.forEach((item) => item.classList.remove('open'))
+      }
+    })
+  </script>
+</body>
+</html>

@@ -10,6 +10,7 @@ import HeroHitokoto from './HeroHitokoto.vue'
 import HomeCourseActions from './HomeCourseActions.vue'
 import PageTransition from './PageTransition.vue'
 import MathCopy from './MathCopy.vue'
+import TopProgress from './TopProgress.vue'
 
 const { frontmatter, isDark } = useData()
 const route = useRoute()
@@ -131,6 +132,7 @@ onMounted(() => {
     <!-- 所有页面顶部的特效组件 -->
     <template #layout-top>
       <PageTransition />
+      <TopProgress />
       <MouseClick />
       <MathCopy />
     </template>
