@@ -71,7 +71,7 @@
   html:has(.VPDoc) .VPSidebar .nav {
     position: relative;
     width: auto;
-    padding: 4px 0 0;
+    padding: 4px 0 10px;
   }
 
   /* 活跃条目浮动指示器 */
