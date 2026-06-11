@@ -17,31 +17,36 @@ pageClass: course-index-page
       items: [
         {
           code: 'Chapter 2',
-          title: 'Vector Analysis',
+          title: '矢量分析',
+          subtitle: 'Vector Analysis',
           link: 'EMFT Chapter 2.md',
           cover: 'EMFT Chapter 2.attachments/1773559063473.PNG'
         },
         {
           code: 'Chapter 3 I',
-          title: 'Static Electric Fields Part I',
+          title: '静电场（上）',
+          subtitle: 'Static Electric Fields Part I',
           link: 'EMFT Chapter 3 P I.md',
           cover: 'EMFT Chapter 3 P I.attachments/1774778776536.PNG'
         },
         {
           code: 'Chapter 3 II',
-          title: 'Static Electric Fields Part II',
+          title: '静电场（下）',
+          subtitle: 'Static Electric Fields Part II',
           link: 'EMFT Chapter 3 P II.md',
           cover: 'EMFT Chapter 3 P II.attachments/1774776875485.jpg'
         },
         {
           code: 'Chapter 4',
-          title: 'Solution of Electrostatic Problems',
+          title: '静电场问题求解',
+          subtitle: 'Solution of Electrostatic Problems',
           link: 'EMFT Chapter 4.md',
           cover: 'EMFT Chapter 4.attachments/1774777767457.jpg'
         },
         {
           code: 'Chapter 5',
-          title: 'Steady Electric Currents',
+          title: '恒定电流',
+          subtitle: 'Steady Electric Currents',
           link: 'EMFT Chapter 5.md',
           cover: 'EMFT Chapter 5.attachments/1774778411631.jpg'
         }
@@ -52,25 +57,29 @@ pageClass: course-index-page
       items: [
         {
           code: 'Chapter 6',
-          title: 'Static Magnetic Fields',
+          title: '静磁场',
+          subtitle: 'Static Magnetic Fields',
           link: 'EMFT Chapter 6.md',
           cover: 'EMFT Chapter 6.attachments/1778749796338.jpg'
         },
         {
           code: 'Chapter 7',
-          title: 'Time-Varying Fields and Maxwell’s Equations',
+          title: '时变场与 Maxwell 方程组',
+          subtitle: 'Time-Varying Fields and Maxwell’s Equations',
           link: 'EMFT Chapter 7.md',
           cover: 'EMFT Chapter 7.attachments/1778750317994.PNG'
         },
         {
           code: 'Chapter 8 I',
-          title: 'Plane Electromagnetic Waves Part I',
+          title: '平面电磁波（上）',
+          subtitle: 'Plane Electromagnetic Waves Part I',
           link: 'EMFT Chapter 8 P I.md',
           cover: 'EMFT Chapter 8 P I.attachments/1778750856565.JPG'
         },
         {
           code: 'Chapter 8 II',
-          title: 'Plane Electromagnetic Waves Part II',
+          title: '平面电磁波（下）',
+          subtitle: 'Plane Electromagnetic Waves Part II',
           link: 'EMFT Chapter 8 P II.md',
           cover: 'EMFT Chapter 8 P II.attachments/1778848085341.JPG'
         }
@@ -82,12 +91,14 @@ pageClass: course-index-page
         {
           code: 'Extra 1',
           title: '公式复习',
+          subtitle: 'Formula Review',
           link: 'EFMT Extra 1.md',
           cover: 'EFMT Extra 1.attachments/1780475410244.jpg'
         },
         {
           code: 'Extra 2',
           title: '概念默写',
+          subtitle: 'Concept Review',
           link: 'EFMT Extra 2.md',
           cover: 'EFMT Extra 2.attachments/1780388664426.jpg'
         }
