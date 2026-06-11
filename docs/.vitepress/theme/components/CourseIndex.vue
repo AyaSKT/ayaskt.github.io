@@ -181,6 +181,7 @@ const resolvedGroups = computed(() =>
   --course-index-cover-h: 98px;
   --course-index-radius: 8px;
   --course-index-gap: 14px;
+  container-type: inline-size;
   display: grid;
   gap: 34px;
   margin: 30px 0 36px;
@@ -225,7 +226,17 @@ const resolvedGroups = computed(() =>
   overflow: visible;
 }
 
-@media (min-width: 769px) {
+.course-index-grid.is-short-row {
+  grid-template-columns: 1fr;
+}
+
+@container (min-width: 474px) {
+  .course-index-grid.is-short-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 718px) {
   .course-index-grid.is-short-row {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -401,7 +412,8 @@ const resolvedGroups = computed(() =>
     font-size: 1.18rem;
   }
 
-  .course-index-grid {
+  .course-index-grid,
+  .course-index-grid.is-short-row {
     grid-template-columns: 1fr;
     gap: 10px;
   }
