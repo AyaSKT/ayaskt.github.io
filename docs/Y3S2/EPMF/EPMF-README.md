@@ -1,3 +1,8 @@
+---
+aside: false
+pageClass: course-index-page
+---
+
 # EPMF 工程项目管理与财务 Introduction & Outline
 <confetti />
 
@@ -23,55 +28,140 @@
 
 ## 目录 Index
 
-
-### Block 1 项目管理 Project Management
-
-- [Part 1: Introduction, The Role of the Project Manager](<Block 1/Lecture 1.md>)
-
-- [Part 2: Project Scope Management, Project Schedule Management](<Block 1/Lecture 2.md>)
-
-- [Part 3: Project Cost Management, Project Resource Management](<Block 1/Lecture 3.md>)
-
-- [Part 4: Project Communications Management, Project Risk Management](<Block 1/Lecture 4.md>)
-
-- [Block 1 例题 Examples](<Block 1/Block 1 Examples.md>)
-
-
-### Block 2 为制造而设计 Design for Manufacturing
-
-- [Part 1: Introduction to DFM & Design for Sustainability](<Block 2/Lecture 5.md>)
-
-- [Part 2: Quality Control & Cost of Quality](<Block 2/Lecture 6.md>)
-
-- [Part 3: Robust Manufacturing Design](<Block 2/Lecture 7.md>)
-
-- [Part 4: 6-Sigma & Process Capability](<Block 2/Lecture 8.md>)
-
-- [Block 2 例题 Examples](<Block 2/Block 2 Examples.md>)
-
-
-### Block 3 工程经济学 Engineering Economics
-
-- [Lecture 9: Introduction to Engineering Economics](<Block 3/Lecture 9.md>)
-
-- [Lecture 10: Engineering Economics (Make or Buy)](<Block 3/Lecture 10.md>)
-
-- [Lecture 11: Engineering Economics (Break-Even Analysis)](<Block 3/Lecture 11.md>)
-
-- [Lecture 12: Engineering Economics (Outsourcing)](<Block 3/Lecture 12.md>)
-
-- [Lecture 13 I: Engineering Economics (Discounted Cash Flow)](<Block 3/Lecture 13 Part 1.md>)
-
-- [Lecture 13 II: Engineering Economics (Capex, Opex, and Total Cost of Ownership)](<Block 3/Lecture 13 Part 2.md>)
-
-- [Lecture 13 Ex.: Extended Version](<Block 3/Lecture 13-2 Extended Version.md>)
-
-### Block 4 公司管理 Company Management
-
-- [Lecture 14: What is a Company](<Block 4/Lecture 14.md>)
-
-- [Lecture 15: Company Structure](<Block 4/Lecture 15.md>)
-
-- [Lecture 16: Company Strategy & Engineering Careers](<Block 4/Lecture 16.md>)
+<CourseIndex
+  course="EPMF"
+  basePath="Y3S2/EPMF"
+  :groups="[
+    {
+      title: 'Block 1 项目管理 Project Management',
+      items: [
+        {
+          code: 'Part 1',
+          title: 'Introduction, The Role of the Project Manager',
+          link: 'Block 1/Lecture 1.md',
+          cover: 'Block 1/Lecture 1.attachments/1774261171457.PNG'
+        },
+        {
+          code: 'Part 2',
+          title: 'Project Scope Management, Project Schedule Management',
+          link: 'Block 1/Lecture 2.md',
+          cover: 'Block 1/Lecture 2.attachments/1774261367954.PNG'
+        },
+        {
+          code: 'Part 3',
+          title: 'Project Cost Management, Project Resource Management',
+          link: 'Block 1/Lecture 3.md',
+          cover: 'Block 1/Lecture 3.attachments/1774261437434.PNG'
+        },
+        {
+          code: 'Part 4',
+          title: 'Project Communications Management, Project Risk Management',
+          link: 'Block 1/Lecture 4.md',
+          cover: 'Block 1/Lecture 4.attachments/1774261531679.PNG'
+        },
+        {
+          code: 'Examples',
+          title: 'Block 1 例题 Examples',
+          link: 'Block 1/Block 1 Examples.md'
+        }
+      ]
+    },
+    {
+      title: 'Block 2 为制造而设计 Design for Manufacturing',
+      items: [
+        {
+          code: 'Part 1',
+          title: 'Introduction to DFM \u0026 Design for Sustainability',
+          link: 'Block 2/Lecture 5.md',
+          cover: 'Block 2/Lecture 5.attachments/1779869861405.PNG'
+        },
+        {
+          code: 'Part 2',
+          title: 'Quality Control \u0026 Cost of Quality',
+          link: 'Block 2/Lecture 6.md',
+          cover: 'Block 2/Lecture 6.attachments/1779869882048.jpg'
+        },
+        {
+          code: 'Part 3',
+          title: 'Robust Manufacturing Design',
+          link: 'Block 2/Lecture 7.md',
+          cover: 'Block 2/Lecture 7.attachments/1779869970627.jpeg'
+        },
+        {
+          code: 'Part 4',
+          title: '6-Sigma \u0026 Process Capability',
+          link: 'Block 2/Lecture 8.md',
+          cover: 'Block 2/Lecture 8.attachments/1779870024146.jpg'
+        },
+        {
+          code: 'Examples',
+          title: 'Block 2 例题 Examples',
+          link: 'Block 2/Block 2 Examples.md',
+          cover: 'Block 2/Lecture 7.attachments/lec7_30_crossed_array_example.jpg'
+        }
+      ]
+    },
+    {
+      title: 'Block 3 工程经济学 Engineering Economics',
+      items: [
+        {
+          code: 'Lecture 9',
+          title: 'Introduction to Engineering Economics',
+          link: 'Block 3/Lecture 9.md'
+        },
+        {
+          code: 'Lecture 10',
+          title: 'Engineering Economics (Make or Buy)',
+          link: 'Block 3/Lecture 10.md'
+        },
+        {
+          code: 'Lecture 11',
+          title: 'Engineering Economics (Break-Even Analysis)',
+          link: 'Block 3/Lecture 11.md'
+        },
+        {
+          code: 'Lecture 12',
+          title: 'Engineering Economics (Outsourcing)',
+          link: 'Block 3/Lecture 12.md'
+        },
+        {
+          code: 'Lecture 13 I',
+          title: 'Engineering Economics (Discounted Cash Flow)',
+          link: 'Block 3/Lecture 13 Part 1.md'
+        },
+        {
+          code: 'Lecture 13 II',
+          title: 'Engineering Economics (Capex, Opex, and Total Cost of Ownership)',
+          link: 'Block 3/Lecture 13 Part 2.md'
+        },
+        {
+          code: 'Lecture 13 Ex.',
+          title: 'Extended Version',
+          link: 'Block 3/Lecture 13-2 Extended Version.md'
+        }
+      ]
+    },
+    {
+      title: 'Block 4 公司管理 Company Management',
+      items: [
+        {
+          code: 'Lecture 14',
+          title: 'What is a Company',
+          link: 'Block 4/Lecture 14.md'
+        },
+        {
+          code: 'Lecture 15',
+          title: 'Company Structure',
+          link: 'Block 4/Lecture 15.md'
+        },
+        {
+          code: 'Lecture 16',
+          title: 'Company Strategy \u0026 Engineering Careers',
+          link: 'Block 4/Lecture 16.md'
+        }
+      ]
+    }
+  ]"
+/>
 
 ![alt text](EPMF-README.attachments/1774261142070.JPG)
