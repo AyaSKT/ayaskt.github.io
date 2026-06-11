@@ -112,7 +112,10 @@ const resolvedGroups = computed(() =>
         <span>{{ group.title }}</span>
       </h2>
 
-      <div class="course-index-grid">
+      <div
+        class="course-index-grid"
+        :class="{ 'is-short-row': group.items.length < 3 }"
+      >
         <a
           v-for="item in group.items"
           :key="item.link"
@@ -220,6 +223,12 @@ const resolvedGroups = computed(() =>
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
   gap: var(--course-index-gap);
   overflow: visible;
+}
+
+@media (min-width: 769px) {
+  .course-index-grid.is-short-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .course-index-card {
