@@ -32,12 +32,12 @@
 
 @media (min-width: 960px) {
   html:has(.VPDoc) .VPSidebar {
-    top: calc(var(--vp-nav-height) + 14px);
+    top: calc(var(--vp-nav-height) + 44px);
     bottom: auto;
     left: var(--aya-sidebar-layout-offset);
     width: var(--vp-sidebar-width);
     height: auto;
-    max-height: calc(100dvh - var(--vp-nav-height) - 32px);
+    max-height: calc(100dvh - var(--vp-nav-height) - 62px);
     padding: 14px 21px 10px;
     direction: rtl;
     overflow: hidden auto;

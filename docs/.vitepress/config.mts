@@ -256,7 +256,7 @@ function renderSearchHtml(src: string) {
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  
+
 
   title: "Ayaskt 工作站 | 祝你幸福",
   description: "个人博客 / 资源汇总",
@@ -371,13 +371,13 @@ export default defineConfig({
     logo: '/IMG_4825_transparent.png',
 
     siteTitle: 'Ayaskt Workspace',
-    
+
 
     nav: [
       { text: '主页', link: '/index' },
 
       { text: '第四学年', items: [] },
-      
+
       { text: '第三学年', items: [
         { text: '通信原理与系统 CPS', link: '/Y3S1/CPS/CPS-README.md' },
         { text: '人工智能与机器学习 AIML', link: '/Y3S1/AIML/AIML-README.md' },
@@ -385,20 +385,20 @@ export default defineConfig({
         { text: '电磁场与波 EMFT', link: '/Y3S2/EMFT/EMFT-README.md' },
         { text: '通信电路设计 CCD', link: '/Y3S2/CCD/CCD-README.md' },
         { text: '工程项目管理与财务 EPM&F', link: '/Y3S2/EPMF/EPMF-README.md' },
-       ] 
+       ]
       },
 
       { text: '第二学年', items: [
         { text: '嵌入式处理器 EP (DT5EDU)', link: 'https://mp.weixin.qq.com/s/Xqwg9KBZHkuYoXQAH-DfGw' },
         { text: '电路分析与设计 CAD (DT5EDU)', link: 'https://mp.weixin.qq.com/s/-_oFpk5asMRE_D6sqlMCsw' },
 
-       ] 
+       ]
       },
 
       { text: '第一学年', items: [
         { text: '微电子系统 MS (DT5EDU)', link: 'https://mp.weixin.qq.com/s/-9nZpf5RWmMm46bBMuBrLg' },
 
-       ] 
+       ]
       },
     ],
 
@@ -410,7 +410,7 @@ export default defineConfig({
 
 
 
-    
+
 
     sidebar: {
       // 数字信号处理：当路径在 /Y3S2/DSP/ 下时显示
@@ -523,17 +523,35 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Introduction', link: '/Y3S2/EMFT/EMFT-README' },
-            { text: 'Ch 2 矢量分析', link: '/Y3S2/EMFT/EMFT Chapter 2' },
-            { text: 'Ch 3 I 静电场 (上)', link: '/Y3S2/EMFT/EMFT Chapter 3 P I' },
-            { text: 'Ch 3 II 静电场 (下)', link: '/Y3S2/EMFT/EMFT Chapter 3 P II' },
-            { text: 'Ch 4 静电场问题求解', link: '/Y3S2/EMFT/EMFT Chapter 4' },
-            { text: 'Ch 5 恒定电流', link: '/Y3S2/EMFT/EMFT Chapter 5' },
-            { text: 'Ch 6 静磁场', link: '/Y3S2/EMFT/EMFT Chapter 6' },
-            { text: 'Ch 7 时变场与 Maxwell 方程组', link: '/Y3S2/EMFT/EMFT Chapter 7' },
-            { text: 'Ch 8 I 平面电磁波 (上)', link: '/Y3S2/EMFT/EMFT Chapter 8 P I' },
-            { text: 'Ch 8 II 平面电磁波 (下)', link: '/Y3S2/EMFT/EMFT Chapter 8 P II' },
-            { text: 'Ex 1 公式复习', link: '/Y3S2/EMFT/EFMT Extra 1' },
-            { text: 'Ex 2 概念复习', link: '/Y3S2/EMFT/EFMT Extra 2' }
+            {
+              text: 'Part I 电场',
+              collapsed: false,
+              items: [
+                { text: 'Ch 2 矢量分析', link: '/Y3S2/EMFT/EMFT Chapter 2' },
+                { text: 'Ch 3 I 静电场 (上)', link: '/Y3S2/EMFT/EMFT Chapter 3 P I' },
+                { text: 'Ch 3 II 静电场 (下)', link: '/Y3S2/EMFT/EMFT Chapter 3 P II' },
+                { text: 'Ch 4 静电场问题求解', link: '/Y3S2/EMFT/EMFT Chapter 4' },
+                { text: 'Ch 5 恒定电流', link: '/Y3S2/EMFT/EMFT Chapter 5' },
+              ],
+            },
+            {
+              text: 'Part II 磁场与电磁波',
+              collapsed: false,
+              items: [
+                { text: 'Ch 6 静磁场', link: '/Y3S2/EMFT/EMFT Chapter 6' },
+                { text: 'Ch 7 时变场与 Maxwell 方程组', link: '/Y3S2/EMFT/EMFT Chapter 7' },
+                { text: 'Ch 8 I 平面电磁波 (上)', link: '/Y3S2/EMFT/EMFT Chapter 8 P I' },
+                { text: 'Ch 8 II 平面电磁波 (下)', link: '/Y3S2/EMFT/EMFT Chapter 8 P II' },
+              ],
+            },
+            {
+              text: 'Extra 复习',
+              collapsed: false,
+              items: [
+                { text: 'Ex 1 公式复习', link: '/Y3S2/EMFT/EFMT Extra 1' },
+                { text: 'Ex 2 概念复习', link: '/Y3S2/EMFT/EFMT Extra 2' },
+              ],
+            },
           ]
         }
       ],
@@ -646,7 +664,7 @@ export default defineConfig({
       ],
     },
 
-    
+
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/ayaskt' },
@@ -666,8 +684,8 @@ export default defineConfig({
           },
         }
   },
- 
 
-  
+
+
 
 })

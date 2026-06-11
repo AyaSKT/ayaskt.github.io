@@ -423,7 +423,7 @@ JFET 常见偏置方式如下。
 | Voltage-divider bias | 稳定性更好 | gate 电压由分压器设置 |
 | Current-source bias | 电流更稳定 | drain current 对 $V_{GS}$ 变化不敏感 |
 
-自偏置中，对 n-channel JFET：
+**自偏置 Self-Bias**：对 n-channel JFET，gate 通过 $R_G$ 接地，故
 
 $$
 V_G \approx 0
@@ -444,6 +444,21 @@ $$
 $$
 R_S = \left|\frac{V_{GS}}{I_D}\right|
 $$
+
+> [!NOTE]
+> **分压偏置 Voltage-Divider Bias** 的 gate 电压由 $R_1$、$R_2$ 分压设定，不依赖于 $I_D$：
+>
+> $$
+> V_G = V_{DD}\frac{R_2}{R_1+R_2}
+> $$
+>
+> source 电压仍为 $V_S=I_DR_S$，故
+>
+> $$
+> V_{GS} = V_G - I_DR_S
+> $$
+>
+> 与 Shockley 方程 $I_D=I_{DSS}(1-V_{GS}/V_{GS(\mathrm{off})})^2$ 联立可解出 Q 点。分压偏置比自偏置的 $I_D$ 对器件参数变化更不敏感，因为 $V_G$ 被分压器固定。
 
 ## 4-5 MOSFET
 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { withBase } from 'vitepress'
+import coursePreviews from '../generated/course-previews.json'
 
 interface CourseIndexItem {
   code: string
@@ -13,7 +14,7 @@ interface CourseIndexItem {
 interface ResolvedCourseIndexItem extends CourseIndexItem {
   coverUrl: string
   notePath: string
-  previewKey: string
+  previewText: string
 }
 
 interface CourseIndexGroup {
@@ -30,34 +31,20 @@ const props = withDefaults(defineProps<{
   basePath: '',
 })
 
-const courseImageUrls = import.meta.glob('../../../Y3S*/**/*.{png,jpg,jpeg,PNG,JPG,JPEG}', {
+const courseThumbnailUrls = import.meta.glob('../../../Y3S*/**/*.thumb.webp', {
   eager: true,
   query: '?url',
   import: 'default',
 }) as Record<string, string>
 
-const courseNoteLoaders = import.meta.glob('../../../Y3S*/**/*.md', {
-  query: '?raw',
-  import: 'default',
-}) as Record<string, () => Promise<string>>
-
-const courseImageUrlByPath = new Map(
-  Object.entries(courseImageUrls).map(([path, url]) => [
+const courseThumbnailUrlByPath = new Map(
+  Object.entries(courseThumbnailUrls).map(([path, url]) => [
     normalizeDocsPath(path.replace(/^\.\.\/\.\.\/\.\.\//, '')),
     url,
   ]),
 )
 
-const courseNoteLoaderByPath = new Map(
-  Object.entries(courseNoteLoaders).map(([path, loader]) => [
-    normalizeDocsPath(path.replace(/^\.\.\/\.\.\/\.\.\//, '')),
-    loader,
-  ]),
-)
-
-const previewTexts = ref<Record<string, string>>({})
-const previewLoading = ref<Record<string, boolean>>({})
-const previewFailures = ref<Record<string, boolean>>({})
+const coursePreviewByPath = coursePreviews as Record<string, string>
 
 function stripAngleBrackets(value: string) {
   return value.trim().replace(/^<|>$/g, '')
@@ -101,6 +88,10 @@ function joinDocsPath(basePath: string, cover: string) {
   return normalizeDocsPath(`${basePath}/${cover}`)
 }
 
+function thumbnailPathFor(imagePath: string) {
+  return imagePath.replace(/\.[^.]+$/, '.thumb.webp')
+}
+
 function resolveNotePath(link: string) {
   const clean = stripAngleBrackets(link)
   if (isSpecialLink(clean)) return ''
@@ -130,149 +121,12 @@ function resolveCover(cover?: string) {
   const clean = stripAngleBrackets(cover)
   if (/^(?:[a-z][a-z0-9+.-]*:|\/\/|data:)/i.test(clean)) return clean
 
-  return courseImageUrlByPath.get(joinDocsPath(props.basePath, clean)) ?? ''
-}
-
-function isTocHeading(value: string) {
-  const headingText = value.trim().replace(/^#{1,6}\s+/, '')
-  return /(?:章节目录|目录|Table of Contents|Contents)/i.test(headingText)
-}
-
-function headingLevel(value: string) {
-  return value.trim().match(/^(#{1,6})\s+/)?.[1].length ?? 0
-}
-
-function withoutFrontmatter(markdown: string) {
-  return markdown.replace(/^\uFEFF?---\r?\n[\s\S]*?\r?\n---\r?\n/, '')
-}
-
-function getLinesAfterToc(lines: string[]) {
-  const tocIndex = lines.findIndex((line) => isTocHeading(line))
-  if (tocIndex === -1) return { lines, hasToc: false }
-
-  const tocLevel = headingLevel(lines[tocIndex]) || 2
-  const bodyStart = lines.findIndex((line, index) => {
-    const level = headingLevel(line)
-    return index > tocIndex && level > 0 && level <= tocLevel
-  })
-
-  return {
-    lines: bodyStart >= 0 ? lines.slice(bodyStart) : [],
-    hasToc: true,
-  }
-}
-
-function cleanMarkdownLine(line: string) {
-  let text = line.trim()
-  if (!text || /^---+$/.test(text) || /^!\[[^\]]*]/.test(text)) return ''
-  if (/^<\/?(?:div|span|p|br)\b/i.test(text)) return ''
-
-  if (/^\|/.test(text)) {
-    const cells = text
-      .split('|')
-      .map((cell) => cell.trim())
-      .filter(Boolean)
-
-    if (!cells.length || cells.every((cell) => /^:?-{3,}:?$/.test(cell))) return ''
-    text = cells.slice(0, 2).join(': ')
-  }
-
-  return text
-    .replace(/^#{1,6}\s+/, '')
-    .replace(/^>{1,}\s*/, '')
-    .replace(/^\[!(?:NOTE|TIP|IMPORTANT|CAUTION|WARNING)\]\s*/i, '')
-    .replace(/^:{3,4}\s*\w*\s*/, '')
-    .replace(/^[-*+]\s+/, '')
-    .replace(/^\d+\.\s+/, '')
-    .replace(/!\[[^\]]*]\([^)]+\)/g, '')
-    .replace(/\[([^\]]+)]\([^)]+\)/g, '$1')
-    .replace(/`([^`]+)`/g, '$1')
-    .replace(/\*\*([^*]+)\*\*/g, '$1')
-    .replace(/\*([^*]+)\*/g, '$1')
-    .replace(/\$([^$]+)\$/g, '$1')
-    .replace(/<[^>]+>/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-}
-
-function excerptMarkdown(markdown: string) {
-  const { lines, hasToc } = getLinesAfterToc(withoutFrontmatter(markdown).split(/\r?\n/))
-  const firstBodyHeading = hasToc ? 0 : lines.findIndex((line) => /^##\s+/.test(line.trim()))
-  const bodyLines = firstBodyHeading >= 0 ? lines.slice(firstBodyHeading) : lines
-  const parts: string[] = []
-  let inFence = false
-  let inMath = false
-
-  for (const line of bodyLines) {
-    const trimmed = line.trim()
-
-    if (/^```/.test(trimmed)) {
-      inFence = !inFence
-      continue
-    }
-
-    if (/^\$\$/.test(trimmed)) {
-      inMath = !inMath
-      continue
-    }
-
-    if (inFence || inMath) continue
-
-    const text = cleanMarkdownLine(line)
-    if (!text) continue
-
-    parts.push(text)
-    if (parts.join(' ').length >= 260 || parts.length >= 5) break
-  }
-
-  const preview = parts.join(' / ')
-  if (!preview) return '暂无正文预览'
-
-  return preview.length > 280 ? `${preview.slice(0, 277)}...` : preview
-}
-
-function setPreviewText(key: string, value: string) {
-  previewTexts.value = { ...previewTexts.value, [key]: value }
-}
-
-function setPreviewLoading(key: string, value: boolean) {
-  previewLoading.value = { ...previewLoading.value, [key]: value }
-}
-
-function setPreviewFailure(key: string, value: boolean) {
-  previewFailures.value = { ...previewFailures.value, [key]: value }
-}
-
-async function loadPreview(item: ResolvedCourseIndexItem) {
-  if (!item.previewKey || previewTexts.value[item.previewKey] || previewLoading.value[item.previewKey]) {
-    return
-  }
-
-  const loader = courseNoteLoaderByPath.get(item.notePath)
-  if (!loader) {
-    setPreviewText(item.previewKey, '暂无正文预览')
-    return
-  }
-
-  setPreviewLoading(item.previewKey, true)
-  setPreviewFailure(item.previewKey, false)
-
-  try {
-    const markdown = await loader()
-    setPreviewText(item.previewKey, excerptMarkdown(markdown))
-  } catch {
-    setPreviewFailure(item.previewKey, true)
-  } finally {
-    setPreviewLoading(item.previewKey, false)
-  }
+  const imagePath = joinDocsPath(props.basePath, clean)
+  return courseThumbnailUrlByPath.get(thumbnailPathFor(imagePath)) ?? ''
 }
 
 function getPreviewText(item: ResolvedCourseIndexItem) {
-  if (previewTexts.value[item.previewKey]) return previewTexts.value[item.previewKey]
-  if (previewLoading.value[item.previewKey]) return '正在读取正文预览...'
-  if (previewFailures.value[item.previewKey]) return '暂时无法读取正文预览'
-
-  return '正在读取正文预览...'
+  return item.previewText || '暂无正文预览'
 }
 
 const resolvedGroups = computed(() =>
@@ -285,7 +139,7 @@ const resolvedGroups = computed(() =>
         ...item,
         coverUrl: resolveCover(item.cover),
         notePath,
-        previewKey: notePath || item.link,
+        previewText: coursePreviewByPath[notePath] ?? '',
       }
     }),
   })),
@@ -314,8 +168,6 @@ const resolvedGroups = computed(() =>
           :key="item.link"
           class="course-index-card"
           :href="resolveLink(item.link)"
-          @focus="loadPreview(item)"
-          @pointerenter="loadPreview(item)"
         >
           <span class="course-index-cover" :class="{ 'is-fallback': !item.coverUrl }">
             <img
