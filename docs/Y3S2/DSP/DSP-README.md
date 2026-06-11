@@ -1,3 +1,8 @@
+---
+aside: false
+pageClass: course-index-page
+---
+
 # DSP 数字信号处理笔记 Introduction & Outline
 
 **要保持希望在每天清晨太阳升起。**
@@ -24,34 +29,107 @@
 
 ## 目录 Index
 
-
-### Part I 离散时间信号与系统
-
-- [Ch 2: 时域离散时间信号 Discrete-Time Signals in the Time Domain](DSP%20Chapter%202.md)
-- [Ch 3 I: 频域离散时间信号 Discrete-Time Signals in the Frequency Domain](DSP%20Chapter%203%20I.md)
-- [Ch 3 II: 频域离散时间信号 Discrete-Time Signals in the Frequency Domain](DSP%20Chapter%203%20II.md)
-- [Ch 4: 离散时间系统 Discrete-Time Systems](DSP%20Chapter%204.md)
-
-### Part II 离散变换
-
-- [Ch 5: 离散傅里叶变换 Discrete Fourier Transform, DFT](DSP%20Chapter%205.md)
-- [Ch 6: Z 变换 Z-Transform](DSP%20Chapter%206.md)
-
-> [!WARNING]
-> 以下笔记暂未完成，敬请期待...
-
-
-- [Ch 7: 变换域中的离散 LTI 系统 LTI Discrete-Time Systems in the Transform Domain](DSP%20Chapter%207.md)
-
-### Part III 数字滤波器设计
-
-- [Ch 8: 数字滤波器架构 Digital Filter Structures](DSP%20Chapter%208.md)
-- [Ch 9: IIR 数字滤波器设计 IIR Digital Filter Design](DSP%20Chapter%209.md)
-- [Ch 10: FIR 数字滤波器设计 FIR Digital Filter Design](DSP%20Chapter%2010.md)
-
-### Part IV DSP 算法实现
-
-- [Ch 11: DSP 算法实现 DSP Algorithm Implementation (FFT)](DSP%20Chapter%2011.md)
+<CourseIndex
+  course="DSP"
+  :groups="[
+    {
+      title: 'Part I 离散时间信号与系统',
+      items: [
+        {
+          code: 'Ch 2',
+          title: '时域离散时间信号',
+          subtitle: 'Discrete-Time Signals in the Time Domain',
+          link: 'DSP Chapter 2.md',
+          cover: 'DSP Chapter 2.attachments/1773557886618.PNG'
+        },
+        {
+          code: 'Ch 3 I',
+          title: '频域离散时间信号',
+          subtitle: 'Discrete-Time Signals in the Frequency Domain',
+          link: 'DSP Chapter 3 I.md',
+          cover: 'DSP Chapter 3 I.attachments/1773557929285.PNG'
+        },
+        {
+          code: 'Ch 3 II',
+          title: '频域离散时间信号',
+          subtitle: 'Discrete-Time Signals in the Frequency Domain',
+          link: 'DSP Chapter 3 II.md',
+          cover: 'DSP Chapter 3 II.attachments/1773557978013.PNG'
+        },
+        {
+          code: 'Ch 4',
+          title: '离散时间系统',
+          subtitle: 'Discrete-Time Systems',
+          link: 'DSP Chapter 4.md',
+          cover: 'DSP Chapter 4.attachments/1773557639355.PNG'
+        }
+      ]
+    },
+    {
+      title: 'Part II 离散变换',
+      items: [
+        {
+          code: 'Ch 5',
+          title: '离散傅里叶变换',
+          subtitle: 'Discrete Fourier Transform, DFT',
+          link: 'DSP Chapter 5.md',
+          cover: 'DSP Chapter 5.attachments/1773562401264.png'
+        },
+        {
+          code: 'Ch 6',
+          title: 'Z 变换',
+          subtitle: 'Z-Transform',
+          link: 'DSP Chapter 6.md',
+          cover: 'DSP Chapter 6.attachments/1773645596770.JPG'
+        },
+        {
+          code: 'Ch 7',
+          title: '变换域中的离散 LTI 系统',
+          subtitle: 'LTI Discrete-Time Systems in the Transform Domain',
+          link: 'DSP Chapter 7.md',
+          cover: 'DSP Chapter 7.attachments/1773645635605.JPG'
+        }
+      ]
+    },
+    {
+      title: 'Part III 数字滤波器设计',
+      items: [
+        {
+          code: 'Ch 8',
+          title: '数字滤波器架构',
+          subtitle: 'Digital Filter Structures',
+          link: 'DSP Chapter 8.md',
+          cover: 'DSP Chapter 8.attachments/1773652978344.JPG'
+        },
+        {
+          code: 'Ch 9',
+          title: 'IIR 数字滤波器设计',
+          subtitle: 'IIR Digital Filter Design',
+          link: 'DSP Chapter 9.md',
+          cover: 'DSP Chapter 9.attachments/1773653064083.JPG'
+        },
+        {
+          code: 'Ch 10',
+          title: 'FIR 数字滤波器设计',
+          subtitle: 'FIR Digital Filter Design',
+          link: 'DSP Chapter 10.md',
+          cover: '../EMFT/EMFT-README.attachments/1773463099101.png'
+        }
+      ]
+    },
+    {
+      title: 'Part IV DSP 算法实现',
+      items: [
+        {
+          code: 'Ch 11',
+          title: 'DSP 算法实现',
+          subtitle: 'DSP Algorithm Implementation (FFT)',
+          link: 'DSP Chapter 11.md'
+        }
+      ]
+    }
+  ]"
+/>
 
 
 ![alt text](DSP-README.attachments/1773557775504.PNG)
