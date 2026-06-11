@@ -89,13 +89,29 @@
 
 /* iOS 风格过渡变量 */
 :root {
-  --ease-ios-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-ios-slide:  cubic-bezier(0.25, 0.1, 0.25, 1);
-  --ease-ios-fade:   cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-ios-press:  cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --dur-page: 0.48s;
-  --dur-tap: 0.15s;
+  --ease-ios-spring: var(--ease-spring-2, cubic-bezier(0.34, 1.56, 0.64, 1));
+  --ease-ios-slide:  var(--ease-out-4, cubic-bezier(0.25, 0.1, 0.25, 1));
+  --ease-ios-fade:   var(--ease-out-3, cubic-bezier(0.16, 1, 0.3, 1));
+  --ease-ios-press:  var(--ease-quad-out, cubic-bezier(0.25, 0.46, 0.45, 0.94));
+  --dur-page: 0.76s;
+  --dur-page-exit: 0.48s;
+  --dur-doc-enter: 0.74s;
+  --dur-sidebar-enter: 0.72s;
+  --dur-sidebar-exit: 0.46s;
+  --dur-appearance-enter: 0.68s;
+  --dur-appearance-exit: 0.42s;
+  --dur-appearance-gap: 0.14s;
+  --dur-panel: 0.62s;
+  --dur-overlay: 0.34s;
+  --dur-menu: 0.32s;
+  --dur-list-item: 0.52s;
+  --dur-tap: var(--duration-quick-2, 0.12s);
   --dur-ripple: 0.8s;
-  --dur-reveal: 0.5s;
+  --dur-reveal: 0.64s;
+  --animate-duration: var(--dur-page);
+  --animate-delay: 0.08s;
+  --xyz-duration-default: var(--dur-reveal);
+  --xyz-stagger-default: 0.04s;
+  --xyz-ease-default: var(--ease-ios-fade);
 }
   

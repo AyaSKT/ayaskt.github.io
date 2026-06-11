@@ -9,7 +9,7 @@ onMounted(() => {
       for (const entry of entries) {
         if (entry.isIntersecting) {
           const el = entry.target as HTMLElement
-          el.classList.add('reveal-visible')
+          el.classList.add('reveal-visible', 'xyz-in')
           observer?.unobserve(el)
         }
       }
@@ -19,10 +19,12 @@ onMounted(() => {
 
   // Observe all elements with data-reveal attribute
   document.querySelectorAll('[data-reveal]').forEach((el, i) => {
-    ;(el as HTMLElement).classList.add('reveal-hidden')
-    ;(el as HTMLElement).style.setProperty('--reveal-i', String(i))
-    ;(el as HTMLElement).style.transitionDelay = `calc(var(--reveal-i) * 60ms)`
-    observer?.observe(el)
+    const element = el as HTMLElement
+    element.setAttribute('xyz', element.getAttribute('xyz') ?? 'fade duration-6 ease-out')
+    element.classList.add('reveal-hidden')
+    element.style.setProperty('--xyz-index', String(i))
+    element.style.setProperty('--xyz-stagger', '60ms')
+    observer?.observe(element)
   })
 })
 

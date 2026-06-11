@@ -1,0 +1,65 @@
+/* Library adapters: Animate.css keyframes + AnimXYZ utility animations. */
+
+.aya-xyz-root.xyz-in,
+.aya-xyz-root.xyz-out,
+.aya-xyz-root.xyz-appear {
+  animation: none !important;
+}
+
+.aya-xyz-nested {
+  transform-origin: center top;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-course-actions:not(.xyz-in) .home-course-group-title,
+  .home-course-actions:not(.xyz-in) .home-course-button {
+    opacity: 0;
+  }
+}
+
+.VPLocalSearchBox[aria-expanded="true"] .backdrop {
+  animation: fadeIn var(--dur-overlay) var(--ease-ios-fade) both;
+}
+
+.VPLocalSearchBox[aria-expanded="true"] .shell {
+  transform-origin: center 12%;
+  animation: fadeIn var(--dur-panel) var(--ease-ios-fade) both;
+}
+
+.VPLocalSearchBox[aria-expanded="true"] .result {
+  animation: fadeIn var(--dur-list-item) var(--ease-ios-fade) both;
+}
+
+.VPLocalSearchBox[aria-expanded="true"] .result:nth-child(1) { animation-delay: 40ms; }
+.VPLocalSearchBox[aria-expanded="true"] .result:nth-child(2) { animation-delay: 64ms; }
+.VPLocalSearchBox[aria-expanded="true"] .result:nth-child(3) { animation-delay: 88ms; }
+.VPLocalSearchBox[aria-expanded="true"] .result:nth-child(4) { animation-delay: 112ms; }
+.VPLocalSearchBox[aria-expanded="true"] .result:nth-child(5) { animation-delay: 136ms; }
+.VPLocalSearchBox[aria-expanded="true"] .result:nth-child(6) { animation-delay: 160ms; }
+.VPLocalSearchBox[aria-expanded="true"] .result:nth-child(7) { animation-delay: 184ms; }
+.VPLocalSearchBox[aria-expanded="true"] .result:nth-child(8) { animation-delay: 208ms; }
+
+.VPNavBar .VPFlyout:hover > .button + .menu,
+.VPNavBar .VPFlyout > .button[aria-expanded="true"] + .menu {
+  animation: fadeIn var(--dur-menu) var(--ease-ios-fade) both;
+}
+
+.reveal-hidden:not(.xyz-in) {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aya-xyz-root,
+  .aya-xyz-nested,
+  .VPLocalSearchBox[aria-expanded="true"] .backdrop,
+  .VPLocalSearchBox[aria-expanded="true"] .shell,
+  .VPLocalSearchBox[aria-expanded="true"] .result,
+  .VPNavBar .VPFlyout:hover > .button + .menu,
+  .VPNavBar .VPFlyout > .button[aria-expanded="true"] + .menu {
+    animation: none !important;
+  }
+
+  .reveal-hidden {
+    opacity: 1;
+  }
+}

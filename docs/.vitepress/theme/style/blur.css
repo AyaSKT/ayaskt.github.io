@@ -14,21 +14,14 @@
     --aya-liquid-search-backdrop-blur: blur(4px);
     --aya-liquid-search-panel-blur: blur(26px);
     --aya-liquid-search-control-blur: blur(14px);
-
-    /* 首页下滑后导航透明 */
-    .VPNavBar:not(.screen-open),
-    .VPNavBar:not(.screen-open) .content-body {
-        background: transparent !important;
-        background-color: transparent !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-    }
-
-    .VPNavBar:not(.has-sidebar):not(.home.top) {
-        background-color: transparent;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-    }
+    --aya-nav-shadow-band-height: calc(var(--vp-nav-height, 64px) + 14px);
+    --aya-nav-shadow-band-bg: linear-gradient(
+        to bottom,
+        rgb(74 83 96 / 14%) 0%,
+        rgb(74 83 96 / 9%) 38%,
+        rgb(74 83 96 / 4%) 68%,
+        rgb(74 83 96 / 0%) 100%
+    );
 
     /* 移除导航栏滚动后出现的底部分隔线 */
     .VPNavBar,
@@ -94,6 +87,51 @@
     --aya-liquid-search-result-hover: rgb(255 255 255 / 12%);
     --aya-liquid-search-highlight: rgb(152 203 234 / 54%);
     --aya-liquid-search-highlight-text: #eef8ff;
+    --aya-nav-shadow-band-bg: linear-gradient(
+        to bottom,
+        rgb(152 160 172 / 12%) 0%,
+        rgb(152 160 172 / 7%) 38%,
+        rgb(152 160 172 / 3%) 68%,
+        rgb(152 160 172 / 0%) 100%
+    );
+}
+
+/* Navbar shadow band: top-level selectors for Chromium consistency. */
+.VPNavBar:not(.screen-open) {
+    position: relative;
+    overflow: visible;
+    isolation: isolate;
+    background: transparent !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+}
+
+.VPNavBar:not(.screen-open)::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    width: 100%;
+    height: var(--aya-nav-shadow-band-height);
+    z-index: 0;
+    pointer-events: none;
+    background: var(--aya-nav-shadow-band-bg);
+    box-shadow: none !important;
+}
+
+.VPNavBar:not(.screen-open)::after {
+    content: none !important;
+    display: none !important;
+}
+
+.VPNavBar:not(.screen-open) .wrapper,
+.VPNavBar:not(.screen-open) .container,
+.VPNavBar:not(.screen-open) .content,
+.VPNavBar:not(.screen-open) .content-body {
+    position: relative;
+    z-index: 2;
+    overflow: visible;
 }
 
 .VPLocalSearchBox[aria-expanded="true"] {

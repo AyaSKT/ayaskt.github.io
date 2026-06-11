@@ -222,7 +222,7 @@
 
 @media (min-width: 960px) and (prefers-reduced-motion: no-preference) {
   html:has(.VPDoc) .VPSidebar {
-    animation: fadeInLeft 0.5s var(--ease-ios-fade) both;
+    animation: fadeInLeft var(--dur-sidebar-enter) var(--ease-ios-fade) both;
   }
 }
 
@@ -253,11 +253,14 @@
 
   .VPNavScreen.fade-enter-active .container,
   .VPNavScreen.fade-leave-active .container {
-    transition: transform 0.28s var(--ease-ios-fade), opacity 0.22s var(--ease-ios-fade);
+    transition: none;
   }
 
-  .VPNavScreen.fade-enter-from .container,
-  .VPNavScreen.fade-leave-to .container {
-    transform: translateY(-12px);
+  .VPNavScreen.fade-enter-active .container {
+    animation: fadeInLeft var(--dur-panel) var(--ease-ios-fade) both;
+  }
+
+  .VPNavScreen.fade-leave-active .container {
+    animation: fadeOutLeft var(--dur-page-exit) var(--ease-ios-press) both;
   }
 }

@@ -1,5 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@200;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=block');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@200;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap');
+@import '../vendor/open-props/easings.min.css';
+@import '../vendor/open-props/durations.min.css';
+@import '../vendor/animxyz/animxyz.min.css';
 @import './transitions.css';
+@import './library-motion.css';
 @import './blur.css';
 @import './var.css';
 @import './rainbow.css';
@@ -648,7 +652,6 @@
    name 有 background-clip:text，由 MyLayout.vue JS wrapper 处理
    ================================================================ */
 
-/* 右入 + 保留 translate(-50%, -50%) 居中（阴影、头像） */
 @keyframes fadeInRightCentered {
   from {
     opacity: 0;
@@ -660,7 +663,6 @@
   }
 }
 
-/* 右入 + 保留 translateX(-50%) 水平居中（一言 desktop） */
 @keyframes fadeInRightCenteredX {
   from {
     opacity: 0;
@@ -672,44 +674,47 @@
   }
 }
 
-/* ---- 右侧元素 ---- */
+/* ---- Hero 元素：左侧自下而上错峰，图片从右淡入 ---- */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.home-nav-ready) .VPNavBar.home,
+  .VPHero .name:not(.hero-name-ready) {
+    opacity: 0;
+  }
+
+  html.home-nav-animate .VPNavBar.home {
+    animation: navFadeInDown 0.58s var(--ease-ios-fade) both;
+  }
+}
+
+html.home-nav-ready .VPNavBar.home,
+.hero-name-wrapper .name {
+  opacity: 1;
+}
+
 .VPHero .image-bg {
-  animation: fadeInRightCentered 0.7s ease 0.05s both;
+  animation: fadeInRightCentered 0.9s var(--ease-ios-fade) 0.18s both;
 }
 
 .VPHero .image-src {
-  animation: fadeInRightCentered 0.7s ease 0.15s both;
+  animation: fadeInRightCentered 0.9s var(--ease-ios-fade) 0.24s both;
 }
 
 .hero-hitokoto.desktop-hitokoto {
-  animation: fadeInRightCenteredX 0.65s ease 0.28s both;
+  animation: fadeInRightCenteredX 0.82s var(--ease-ios-fade) 0.34s both;
 }
 
 .hero-hitokoto.mobile-hitokoto {
-  animation: fadeInRight 0.65s ease 0.28s both;
+  animation: fadeInLeft 0.82s var(--ease-ios-fade) 0.18s both;
 }
 
 /* ---- 左侧元素（除了 name） ---- */
 .VPHero .text {
-  animation: fadeInLeft 0.7s ease 0.36s both;
+  animation: fadeInLeft 0.9s var(--ease-ios-fade) 0.34s both;
 }
 
 .VPHero .tagline {
-  animation: fadeInLeft 0.7s ease 0.24s both;
+  animation: fadeInLeft 0.9s var(--ease-ios-fade) 0.24s both;
 }
-
-.home-course-group-title {
-  animation: fadeInLeft 0.55s ease both;
-}
-.home-course-group-title:nth-child(1) { animation-delay: 0s; }
-.home-course-group-title:nth-child(2) { animation-delay: 0.04s; }
-.home-course-group-title:nth-child(3) { animation-delay: 0.08s; }
-
-.home-course-button {
-  animation: fadeInLeft 0.55s ease both;
-}
-.home-course-button:nth-child(1) { animation-delay: 0.10s; }
-.home-course-button:nth-child(2) { animation-delay: 0.14s; }
 
 /* NavBar 入场动画由 MyLayout.vue onMounted 处理（仅首次加载） */
 

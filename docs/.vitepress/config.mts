@@ -368,7 +368,7 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
 
-    logo: 'https://github.com/ayaskt.png?size=40',
+    logo: '/IMG_4825_transparent.png',
 
     siteTitle: 'Ayaskt Workspace',
     

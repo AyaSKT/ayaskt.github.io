@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 // 1. 再次导入必要的组件
 import DefaultTheme from 'vitepress/theme'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { useData, useRoute } from 'vitepress'
 import MouseClick from './MouseClick.vue'
 import GiscusComment from './GiscusComment.vue' // 评论模块
@@ -9,6 +9,7 @@ import BackToTop from './backtotop.vue'
 import HeroHitokoto from './HeroHitokoto.vue'
 import HomeCourseActions from './HomeCourseActions.vue'
 import PageTransition from './PageTransition.vue'
+import LibraryMotion from './LibraryMotion.vue'
 import MathCopy from './MathCopy.vue'
 import TopProgress from './TopProgress.vue'
 
@@ -29,6 +30,10 @@ const randomHeroSrc = ref('')
 watch(() => route.path, (path) => {
   if (path === '/' || path === '/index.html') {
     randomHeroSrc.value = heroImagePool[Date.now() % heroImagePool.length]
+    nextTick(() => {
+      setupHeroNameEntrance()
+      setupHomeNavEntrance()
+    })
   }
 })
 
@@ -93,32 +98,73 @@ function setupHeroNameEntrance() {
   if (typeof document === 'undefined') return
   const nameEl = document.querySelector('.VPHero .name') as HTMLElement | null
   // 防止重复包裹
-  if (!nameEl || nameEl.parentElement?.querySelector('.hero-name-wrapper')) return
+  if (!nameEl) return
+  nameEl.classList.add('hero-name-ready')
+  if (nameEl.parentElement?.querySelector('.hero-name-wrapper')) return
   const wrapper = document.createElement('span')
   wrapper.className = 'hero-name-wrapper animate__animated animate__fadeInLeft'
   wrapper.style.display = 'inline-block'
   wrapper.style.animationDelay = '0.48s'
-  wrapper.style.animationDuration = '0.75s'
+  wrapper.style.animationDuration = '0.9s'
   nameEl.parentElement.insertBefore(wrapper, nameEl)
   wrapper.appendChild(nameEl)
+}
+
+function setupHomeNavEntrance(animate = false) {
+  if (typeof document === 'undefined') return
+  const nav = document.querySelector('.VPNavBar') as HTMLElement | null
+  const root = document.documentElement
+
+  root.classList.add('home-nav-ready')
+  nav?.style.removeProperty('animation')
+  if (!animate) return
+
+  root.classList.add('home-nav-animate')
+  window.setTimeout(() => {
+    root.classList.remove('home-nav-animate')
+  }, 700)
 }
 
 // 是否从首页进入（仅首次加载时判断）
 const isHomepage = typeof window !== 'undefined'
   && (window.location.pathname === '/' || window.location.pathname === '/index.html')
 
+let fontRefreshDone = false
+
+async function refreshLayoutAfterFonts() {
+  if (fontRefreshDone) return
+  fontRefreshDone = true
+
+  await nextTick()
+  setupHeroNameEntrance()
+
+  window.requestAnimationFrame(() => {
+    window.dispatchEvent(new CustomEvent('aya-fonts-ready'))
+    window.dispatchEvent(new Event('resize'))
+  })
+}
+
 onMounted(() => {
+  const fontsReady = document.fonts?.ready
+  if (fontsReady && typeof fontsReady.then === 'function') {
+    fontsReady.then(() => {
+      void refreshLayoutAfterFonts()
+    })
+  } else {
+    window.addEventListener('load', () => {
+      window.setTimeout(() => {
+        void refreshLayoutAfterFonts()
+      }, 120)
+    }, { once: true })
+  }
+
   // 仅在首次进入首页时 nav 从上方淡入，其他页面无入场动画
   if (isHomepage) {
     // 首次加载时随机选一张 hero image
     if (!randomHeroSrc.value) {
       randomHeroSrc.value = heroImagePool[Date.now() % heroImagePool.length]
     }
-    const nav = document.querySelector('.VPNavBar') as HTMLElement | null
-    if (nav) {
-      nav.classList.add('animate__animated', 'animate__fadeInDown')
-      nav.style.animationDuration = '0.5s'
-    }
+    setupHomeNavEntrance(true)
   }
   // 仅首次加载：hero name 入场动画
   // 导航回到首页时由 View Transitions root crossfade 自然淡入
@@ -132,6 +178,7 @@ onMounted(() => {
     <!-- 所有页面顶部的特效组件 -->
     <template #layout-top>
       <PageTransition />
+      <LibraryMotion />
       <TopProgress />
       <MouseClick />
       <MathCopy />

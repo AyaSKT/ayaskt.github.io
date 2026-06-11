@@ -24,6 +24,11 @@ function sidebarKeyFor(to: string) {
     .sort((a, b) => b.length - a.length)[0] ?? ''
 }
 
+function pageKindFor(to: string) {
+  const pathname = new URL(to, window.location.href).pathname
+  return pathname === '/' || pathname === '/index.html' ? 'home' : 'doc'
+}
+
 function canTransition(to: string, options?: { initialLoad?: boolean }) {
   if (options?.initialLoad) return false
   if (!('startViewTransition' in document)) return false
@@ -178,9 +183,11 @@ onMounted(() => {
     const nextSidebarKey = sidebarKeyFor(to)
     const keepsSidebar = currentSidebarKey && currentSidebarKey === nextSidebarKey
     const switchesSidebar = Boolean(currentSidebarKey && nextSidebarKey && currentSidebarKey !== nextSidebarKey)
+    const routeTransitionClass = `vt-${pageKindFor(window.location.href)}-to-${pageKindFor(to)}`
 
     document.documentElement.classList.toggle('vt-keep-sidebar', Boolean(keepsSidebar))
     document.documentElement.classList.toggle('vt-switch-sidebar', switchesSidebar)
+    document.documentElement.classList.add(routeTransitionClass)
 
     try {
       const transition = (document as any).startViewTransition(async () => {
@@ -207,6 +214,7 @@ onMounted(() => {
     } finally {
       document.documentElement.classList.remove('vt-keep-sidebar')
       document.documentElement.classList.remove('vt-switch-sidebar')
+      document.documentElement.classList.remove(routeTransitionClass)
       window.dispatchEvent(new CustomEvent('vt-transition-done'))
     }
   }
@@ -223,16 +231,19 @@ onMounted(() => {
   }, 300)
 
   // 字体加载完成后重新定位（字体切换可能导致文本换行，指示器错位）
-  if ('fonts' in document) {
-    document.fonts.ready.then(() => scheduleSidebarIndicatorUpdate())
+  const fontsReady = document.fonts?.ready
+  if (fontsReady && typeof fontsReady.then === 'function') {
+    fontsReady.then(() => scheduleSidebarIndicatorUpdate())
   }
 
   window.addEventListener('resize', onResize)
+  window.addEventListener('aya-fonts-ready', onResize)
 })
 
 onUnmounted(() => {
   restoreGo?.()
   window.removeEventListener('resize', onResize)
+  window.removeEventListener('aya-fonts-ready', onResize)
   clearTimeout(resizeTimer)
   clearTimeout(sidebarAttachTimer)
   sidebarObserver?.disconnect()

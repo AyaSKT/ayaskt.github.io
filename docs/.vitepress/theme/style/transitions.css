@@ -55,22 +55,22 @@ html.vt-keep-sidebar::view-transition-new(sidebar) {
 
 /* ---- Sidebar：变化时使用 animate.css 左侧淡入/淡出 ---- */
 ::view-transition-new(sidebar) {
-  animation: fadeInLeft 0.65s ease both;
+  animation: fadeInLeft var(--dur-sidebar-enter) var(--ease-ios-fade) both;
 }
 
 ::view-transition-old(sidebar) {
-  animation: fadeOutLeft 0.45s ease both;
+  animation: fadeOutLeft var(--dur-sidebar-exit) var(--ease-ios-press) both;
 }
 
 /* ---- Sidebar key 切换：旧窗口先快速左淡出，新窗口再重新进场 ---- */
 html.vt-switch-sidebar::view-transition-old(sidebar) {
   z-index: 2;
-  animation: fadeOutLeft 0.18s var(--ease-ios-press) both;
+  animation: fadeOutLeft var(--dur-sidebar-exit) var(--ease-ios-press) both;
 }
 
 html.vt-switch-sidebar::view-transition-new(sidebar) {
   z-index: 1;
-  animation: fadeInLeft 0.5s var(--ease-ios-fade) 0.18s both;
+  animation: fadeInLeft var(--dur-sidebar-enter) var(--ease-ios-fade) 0.14s both;
 }
 
 ::view-transition-group(sidebar) {
@@ -85,11 +85,31 @@ html.vt-switch-sidebar::view-transition-new(sidebar) {
 
 /* ---- Root（正文和右侧目录使用视口级快照，避免长文档生成大纹理）---- */
 ::view-transition-old(root) {
-  animation: vtFadeOut var(--dur-page) var(--ease-ios-fade) forwards;
+  animation: fadeOut var(--dur-page-exit) var(--ease-ios-fade) both;
 }
 
 ::view-transition-new(root) {
-  animation: vtFadeIn var(--dur-page) var(--ease-ios-fade) forwards;
+  animation: fadeIn var(--dur-page) var(--ease-ios-fade) both;
+}
+
+html.vt-home-to-doc::view-transition-old(root) {
+  animation: fadeOut var(--dur-page-exit) var(--ease-ios-press) both;
+}
+
+html.vt-home-to-doc::view-transition-new(root) {
+  animation: docFadeInRightShort var(--dur-doc-enter) var(--ease-ios-fade) both;
+}
+
+html.vt-doc-to-home::view-transition-old(root) {
+  animation: fadeOut var(--dur-page-exit) var(--ease-ios-press) both;
+}
+
+html.vt-doc-to-home::view-transition-new(root) {
+  animation: fadeIn var(--dur-page) var(--ease-ios-fade) both;
+}
+
+html.vt-doc-to-doc::view-transition-new(root) {
+  animation: docFadeInRightShort var(--dur-doc-enter) var(--ease-ios-fade) both;
 }
 
 /* 外观切换（日/夜模式）时 root 不动画 */
@@ -111,14 +131,15 @@ html.vt-switch-sidebar::view-transition-new(sidebar) {
   opacity: 1;
 }
 
-@keyframes vtFadeOut {
-  0%   { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-@keyframes vtFadeIn {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
+@keyframes docFadeInRightShort {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* ---- Homepage → Doc: 搜索按钮 X 对齐 ---- */
@@ -165,48 +186,53 @@ a:active, button:active, .VPNavBarMenuLink:active, .VPLink:active {
 }
 
 /* ---- Scroll Reveal ---- */
-.reveal-hidden {
+.reveal-hidden:not(.xyz-in) {
   opacity: 0;
-  transform: translateY(28px);
 }
 
 .reveal-visible {
   opacity: 1;
-  transform: translateY(0);
-  transition:
-    opacity var(--dur-reveal) var(--ease-ios-fade),
-    transform var(--dur-reveal) var(--ease-ios-slide);
 }
 
 /* ---- Search Modal Entrance ---- */
 .VPLocalSearchBox .backdrop {
-  animation: searchBackdropIn 0.2s ease-out forwards;
+  animation: fadeIn var(--dur-overlay) var(--ease-ios-fade) both;
 }
 
 .VPLocalSearchBox .shell {
-  animation: searchShellIn 0.35s var(--ease-ios-spring) forwards;
-}
-
-@keyframes searchBackdropIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes searchShellIn {
-  from { opacity: 0; transform: scale(0.92) translateY(-12px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
+  transform-origin: center 12%;
+  animation: fadeIn var(--dur-panel) var(--ease-ios-fade) both;
 }
 
 /* ---- Mobile Optimization ---- */
 @media (max-width: 768px) {
   :root {
-    --dur-page: 0.55s;
+    --dur-page: 0.66s;
+    --dur-page-exit: 0.42s;
+    --dur-doc-enter: 0.66s;
+    --dur-sidebar-enter: 0.64s;
+    --dur-sidebar-exit: 0.4s;
+    --dur-appearance-enter: 0.6s;
+    --dur-appearance-exit: 0.38s;
+    --dur-panel: 0.56s;
     --dur-ripple: 0.6s;
-    --dur-reveal: 0.4s;
+    --dur-reveal: 0.54s;
   }
 
   .ripple-ring {
     width: 140px;
     height: 140px;
+  }
+}
+
+/* navbar 首载短距离从上淡入 */
+@keyframes navFadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

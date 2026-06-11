@@ -10,6 +10,13 @@ const enableTransitions = () =>
   window.matchMedia('(prefers-reduced-motion: no-preference)').matches
 
 function appearanceCenter(event: MouseEvent) {
+  if (Number.isFinite(event.clientX) && Number.isFinite(event.clientY)) {
+    return {
+      x: event.clientX,
+      y: event.clientY
+    }
+  }
+
   const target = event.target as Element | null
   const switchEl = target?.closest('.VPSwitchAppearance')
     ?? target?.closest('.VPNavBarAppearance')?.querySelector('.VPSwitchAppearance')
@@ -26,8 +33,8 @@ function appearanceCenter(event: MouseEvent) {
   }
 
   return {
-    x: event.clientX,
-    y: event.clientY
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2
   }
 }
 
