@@ -31,6 +31,7 @@ pageClass: course-index-page
 
 <CourseIndex
   course="DSP"
+  basePath="Y3S2/DSP"
   :groups="[
     {
       title: 'Part I 离散时间信号与系统',
@@ -113,7 +114,7 @@ pageClass: course-index-page
           title: 'FIR 数字滤波器设计',
           subtitle: 'FIR Digital Filter Design',
           link: 'DSP Chapter 10.md',
-          cover: '../EMFT/EMFT-README.attachments/1773463099101.png'
+          cover: 'DSP Chapter 10.attachments/1773653226401.JPG'
         }
       ]
     },

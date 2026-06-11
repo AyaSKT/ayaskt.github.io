@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { withBase } from 'vitepress'
 
 interface CourseIndexItem {
@@ -14,12 +15,27 @@ interface CourseIndexGroup {
   items: CourseIndexItem[]
 }
 
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   course?: string
+  basePath?: string
   groups: CourseIndexGroup[]
 }>(), {
   course: 'Course',
+  basePath: '',
 })
+
+const courseImageUrls = import.meta.glob('../../../Y3S*/**/*.{png,jpg,jpeg,PNG,JPG,JPEG}', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+}) as Record<string, string>
+
+const courseImageUrlByPath = new Map(
+  Object.entries(courseImageUrls).map(([path, url]) => [
+    normalizeDocsPath(path.replace(/^\.\.\/\.\.\/\.\.\//, '')),
+    url,
+  ]),
+)
 
 function stripAngleBrackets(value: string) {
   return value.trim().replace(/^<|>$/g, '')
@@ -31,6 +47,28 @@ function isSpecialLink(value: string) {
 
 function replaceMarkdownExtension(value: string) {
   return value.replace(/\.md(?=([?#]|$))/i, '.html')
+}
+
+function normalizeDocsPath(value: string) {
+  const segments: string[] = []
+
+  for (const segment of value.replace(/\\/g, '/').split('/')) {
+    if (!segment || segment === '.') continue
+    if (segment === '..') {
+      segments.pop()
+      continue
+    }
+
+    segments.push(segment)
+  }
+
+  return segments.join('/')
+}
+
+function joinDocsPath(basePath: string, cover: string) {
+  if (cover.startsWith('/')) return normalizeDocsPath(cover.replace(/^\/+/, ''))
+
+  return normalizeDocsPath(`${basePath}/${cover}`)
 }
 
 function resolveLink(link: string) {
@@ -47,15 +85,25 @@ function resolveCover(cover?: string) {
   const clean = stripAngleBrackets(cover)
   if (/^(?:[a-z][a-z0-9+.-]*:|\/\/|data:)/i.test(clean)) return clean
 
-  return clean.startsWith('/') ? withBase(clean) : clean
+  return courseImageUrlByPath.get(joinDocsPath(props.basePath, clean)) ?? ''
 }
+
+const resolvedGroups = computed(() =>
+  props.groups.map((group) => ({
+    ...group,
+    items: group.items.map((item) => ({
+      ...item,
+      coverUrl: resolveCover(item.cover),
+    })),
+  })),
+)
 
 </script>
 
 <template>
-  <section class="course-index" :aria-label="`${course} 课程目录`">
+  <section class="course-index" :aria-label="`${props.course} 课程目录`">
     <section
-      v-for="group in groups"
+      v-for="group in resolvedGroups"
       :key="group.title"
       class="course-index-group"
     >
@@ -71,10 +119,10 @@ function resolveCover(cover?: string) {
           class="course-index-card"
           :href="resolveLink(item.link)"
         >
-          <span class="course-index-cover" :class="{ 'is-fallback': !item.cover }">
+          <span class="course-index-cover" :class="{ 'is-fallback': !item.coverUrl }">
             <img
-              v-if="item.cover"
-              :src="resolveCover(item.cover)"
+              v-if="item.coverUrl"
+              :src="item.coverUrl"
               alt=""
               loading="lazy"
             >
@@ -90,10 +138,10 @@ function resolveCover(cover?: string) {
           </span>
 
           <span class="course-index-preview" aria-hidden="true">
-            <span class="course-index-preview-cover" :class="{ 'is-fallback': !item.cover }">
+            <span class="course-index-preview-cover" :class="{ 'is-fallback': !item.coverUrl }">
               <img
-                v-if="item.cover"
-                :src="resolveCover(item.cover)"
+                v-if="item.coverUrl"
+                :src="item.coverUrl"
                 alt=""
                 loading="lazy"
               >
