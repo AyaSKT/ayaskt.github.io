@@ -35,12 +35,11 @@ html:has(.VPDoc) .VPSidebar {
   view-transition-name: sidebar;
 }
 
-.VPDoc .vp-doc {
-  view-transition-name: doc-content;
-}
-
-.VPDoc .aside {
-  view-transition-name: doc-aside;
+/* 外观切换需要整页一起做圆形裁剪，否则命名元素会脱离 root 动画。 */
+html.vt-appearance .VPNavBar,
+html.vt-appearance .VPLocalNav,
+html.vt-appearance .VPSidebar {
+  view-transition-name: none;
 }
 
 /* ---- 保持侧边栏不动（同一 sidebar key）---- */
@@ -84,57 +83,7 @@ html.vt-switch-sidebar::view-transition-new(sidebar) {
   object-position: top left;
 }
 
-/* 短位移右侧淡入（位移比 animate.css fadeInRight 的 100% 小） */
-@keyframes fadeInRightShort {
-  from { opacity: 0; transform: translate3d(24px, 0, 0); }
-  to   { opacity: 1; transform: translate3d(0, 0, 0); }
-}
-
-/* ---- 正文内容 & 目录：sidebar 不变时用简单淡入淡出 ---- */
-html.vt-keep-sidebar::view-transition-new(doc-content) {
-  animation: vtFadeIn 0.55s ease both;
-}
-html.vt-keep-sidebar::view-transition-old(doc-content) {
-  animation: vtFadeOut 0.35s ease both;
-}
-html.vt-keep-sidebar::view-transition-new(doc-aside) {
-  animation: vtFadeIn 0.55s ease both;
-}
-html.vt-keep-sidebar::view-transition-old(doc-aside) {
-  animation: vtFadeOut 0.35s ease both;
-}
-
-/* ---- 正文内容：sidebar 变化 / 非 docs 切入时从右侧淡入 ---- */
-::view-transition-new(doc-content) {
-  animation: fadeInRightShort 0.65s ease 0.08s both;
-}
-::view-transition-old(doc-content) {
-  animation: fadeOut 0.35s ease both;
-}
-
-/* ---- 右侧目录：sidebar 变化 / 非 docs 切入时从右侧淡入 ---- */
-::view-transition-new(doc-aside) {
-  animation: fadeInRightShort 0.65s ease 0.14s both;
-}
-::view-transition-old(doc-aside) {
-  animation: fadeOut 0.35s ease both;
-}
-
-/* ---- 防止内容在 View Transition 中纵向压缩 ---- */
-::view-transition-group(doc-content),
-::view-transition-group(doc-aside) {
-  overflow: clip;
-}
-
-::view-transition-old(doc-content),
-::view-transition-new(doc-content),
-::view-transition-old(doc-aside),
-::view-transition-new(doc-aside) {
-  object-fit: none;
-  object-position: top left;
-}
-
-/* ---- Root（剩余部分，如导航栏背景）：保留原有的淡入淡出 ---- */
+/* ---- Root（正文和右侧目录使用视口级快照，避免长文档生成大纹理）---- */
 ::view-transition-old(root) {
   animation: vtFadeOut var(--dur-page) var(--ease-ios-fade) forwards;
 }

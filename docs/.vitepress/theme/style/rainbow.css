@@ -42,3 +42,10 @@
     var(--home-hero-gradient-end)
   );
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .VPHome .VPHero .name,
+  .VPHome .VPHero .image-bg {
+    animation: none;
+  }
+}

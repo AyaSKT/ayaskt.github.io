@@ -9,12 +9,16 @@ let restoreGo: (() => void) | undefined
 let sidebarIndicator: HTMLDivElement | null = null
 let indicatorReady = false
 let resizeTimer: ReturnType<typeof setTimeout> | undefined
+let indicatorFrame = 0
+let sidebarObserver: MutationObserver | undefined
+let sidebarAttachTimer: ReturnType<typeof setTimeout> | undefined
+let sidebarAttachAttempts = 0
 
 function sidebarKeyFor(to: string) {
   const sidebar = theme.value.sidebar
   if (!sidebar || Array.isArray(sidebar)) return ''
 
-  const pathname = decodeURI(new URL(to, window.location.href).pathname)
+  const pathname = new URL(to, window.location.href).pathname
   return Object.keys(sidebar)
     .filter((key) => pathname.startsWith(key))
     .sort((a, b) => b.length - a.length)[0] ?? ''
@@ -45,11 +49,34 @@ function ensureIndicator(): HTMLDivElement {
   return sidebarIndicator
 }
 
+function normalizePath(value: string) {
+  const url = new URL(value, window.location.href)
+  const withoutHtml = url.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '')
+  return withoutHtml.length > 1 ? withoutHtml.replace(/\/$/, '') : withoutHtml
+}
+
+function findActiveSidebarLink() {
+  const activeLink = document.querySelector('.VPSidebarItem.is-active > .item > .link') as HTMLElement | null
+  if (activeLink) return activeLink
+
+  const currentPath = normalizePath(window.location.href)
+  const links = document.querySelectorAll<HTMLAnchorElement>('.VPSidebar .link[href]')
+  for (const link of links) {
+    if (normalizePath(link.href) === currentPath) return link
+  }
+
+  return null
+}
+
 function updateSidebarIndicator() {
   const nav = document.querySelector('.VPSidebar .nav') as HTMLElement | null
-  const activeLink = document.querySelector('.VPSidebarItem.is-active > .item > .link') as HTMLElement | null
+  const activeLink = findActiveSidebarLink()
 
   if (!nav || !activeLink) {
+    document
+      .querySelectorAll('.VPSidebar .link[data-sidebar-current]')
+      .forEach((link) => link.removeAttribute('data-sidebar-current'))
+
     if (sidebarIndicator) {
       sidebarIndicator.style.opacity = '0'
     }
@@ -60,6 +87,13 @@ function updateSidebarIndicator() {
     const indicator = ensureIndicator()
     const navRect = nav.getBoundingClientRect()
     const linkRect = activeLink.getBoundingClientRect()
+
+    document
+      .querySelectorAll('.VPSidebar .link[data-sidebar-current]')
+      .forEach((link) => {
+        if (link !== activeLink) link.removeAttribute('data-sidebar-current')
+      })
+    activeLink.setAttribute('data-sidebar-current', 'true')
 
     if (!indicatorReady) {
       indicator.style.transition = 'none'
@@ -81,9 +115,52 @@ function updateSidebarIndicator() {
   }
 }
 
+function scheduleSidebarIndicatorUpdate() {
+  if (indicatorFrame) return
+
+  indicatorFrame = window.requestAnimationFrame(() => {
+    indicatorFrame = 0
+    updateSidebarIndicator()
+  })
+}
+
 function onResize() {
   clearTimeout(resizeTimer)
-  resizeTimer = setTimeout(updateSidebarIndicator, 100)
+  resizeTimer = setTimeout(() => {
+    resizeTimer = undefined
+    scheduleSidebarIndicatorUpdate()
+  }, 100)
+}
+
+function attachSidebarObserver() {
+  if (sidebarObserver) return
+
+  const sidebar = document.querySelector('.VPSidebar')
+  if (!sidebar) {
+    if (sidebarAttachAttempts >= 20) return
+
+    sidebarAttachAttempts += 1
+    sidebarAttachTimer = setTimeout(() => {
+      sidebarAttachTimer = undefined
+      attachSidebarObserver()
+    }, 100)
+    return
+  }
+
+  sidebarObserver = new MutationObserver(() => {
+    scheduleSidebarIndicatorUpdate()
+  })
+  sidebarObserver.observe(sidebar, { attributes: true, subtree: true, attributeFilter: ['class'] })
+  scheduleSidebarIndicatorUpdate()
+}
+
+function resetSidebarObserver() {
+  clearTimeout(sidebarAttachTimer)
+  sidebarAttachTimer = undefined
+  sidebarAttachAttempts = 0
+  sidebarObserver?.disconnect()
+  sidebarObserver = undefined
+  attachSidebarObserver()
 }
 
 onMounted(() => {
@@ -92,6 +169,8 @@ onMounted(() => {
   router.go = async (to, options) => {
     if (!canTransition(to, options)) {
       await originalGo(to, options)
+      await nextTick()
+      resetSidebarObserver()
       return
     }
 
@@ -107,6 +186,7 @@ onMounted(() => {
       const transition = (document as any).startViewTransition(async () => {
         await originalGo(to, options)
         await nextTick()
+        resetSidebarObserver()
 
         // 非同一 sidebar：DOM 更新后立刻定位指示器（无动画），确保出现在快照中
         if (!keepsSidebar) {
@@ -136,30 +216,31 @@ onMounted(() => {
   }
 
   // 初始定位 + 监听器
-  setTimeout(updateSidebarIndicator, 300)
+  attachSidebarObserver()
+  setTimeout(() => {
+    attachSidebarObserver()
+    scheduleSidebarIndicatorUpdate()
+  }, 300)
 
   // 字体加载完成后重新定位（字体切换可能导致文本换行，指示器错位）
   if ('fonts' in document) {
-    document.fonts.ready.then(() => updateSidebarIndicator())
+    document.fonts.ready.then(() => scheduleSidebarIndicatorUpdate())
   }
 
   window.addEventListener('resize', onResize)
-
-  // 观察 sidebar 内 is-active 变更（展开/折叠分组导致位置变化）
-  const sidebar = document.querySelector('.VPSidebar')
-  if (sidebar) {
-    const observer = new MutationObserver(() => {
-      updateSidebarIndicator()
-    })
-    observer.observe(sidebar, { attributes: true, subtree: true, attributeFilter: ['class'] })
-    onUnmounted(() => observer.disconnect())
-  }
 })
 
 onUnmounted(() => {
   restoreGo?.()
   window.removeEventListener('resize', onResize)
   clearTimeout(resizeTimer)
+  clearTimeout(sidebarAttachTimer)
+  sidebarObserver?.disconnect()
+  sidebarObserver = undefined
+  if (indicatorFrame) {
+    window.cancelAnimationFrame(indicatorFrame)
+    indicatorFrame = 0
+  }
   sidebarIndicator?.remove()
   sidebarIndicator = null
 })

@@ -12,8 +12,7 @@ async function loadHitokoto() {
       const res = await fetch('https://v1.hitokoto.cn')
       const data = await res.json()
       sharedHitokotoText.value = data.hitokoto
-    } catch (e) {
-      console.error(e)
+    } catch {
       sharedHitokotoText.value = ':D 你今天过得如何？'
     }
   })()
@@ -28,11 +27,7 @@ import { onMounted } from 'vue'
 const hitokotoText = sharedHitokotoText
 
 onMounted(() => {
-  try {
-    loadHitokoto()
-  } catch (e) {
-    console.error(e)
-  }
+  void loadHitokoto()
 })
 </script>
 

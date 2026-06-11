@@ -18,14 +18,22 @@ function scrollToTop() {
 // 使用更高效的节流函数
 function throttle(fn, delay = 50) {
   let timer = null;
-  return function(...args) {
+  function throttled(...args) {
     if (!timer) {
       timer = setTimeout(() => {
         fn.apply(this, args);
         timer = null;
       }, delay);
     }
-  };
+  }
+
+  throttled.cancel = () => {
+    if (!timer) return
+    clearTimeout(timer)
+    timer = null
+  }
+
+  return throttled;
 }
 
 const updateScrollProgress = () => {
@@ -43,12 +51,13 @@ const handleScroll = throttle(() => {
 });
 
 onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
+  window.addEventListener("scroll", handleScroll, { passive: true });
   updateScrollProgress();
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener("scroll", handleScroll);
+  handleScroll.cancel?.();
 });
 </script>
 

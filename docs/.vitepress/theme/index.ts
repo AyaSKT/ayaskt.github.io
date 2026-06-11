@@ -4,11 +4,11 @@ import 'animate.css'
 import './style/index.css'
 import './custom.css'
 import { setupSolutionCollapse } from './solution-collapse'
+import { defineAsyncComponent } from 'vue'
 
 import MouseClick from './components/MouseClick.vue'
 
 import Mycomponent from './components/Linkcard.vue'
-import Confetti from './components/confetti.vue'
 
 import update from "./components/update.vue"
 
@@ -17,6 +17,7 @@ import BackToTop from './components/backtotop.vue'
 import PageTransition from './components/PageTransition.vue'
 import ScrollReveal from './components/ScrollReveal.vue'
 import DocMeta from './components/DocMeta.vue'
+import { setupLinkWarmup } from './link-warmup'
 
 export default {
   
@@ -26,9 +27,10 @@ export default {
   enhanceApp({app , router }) {
     // Solution 折叠功能
     setupSolutionCollapse(router)
+    setupLinkWarmup(router)
 
     app.component('Mycomponent' , Mycomponent)
-    app.component('Confetti' , Confetti)
+    app.component('Confetti' , defineAsyncComponent(() => import('./components/confetti.vue')))
     app.component('MouseClick' , MouseClick)
     app.component('update' , update)
     app.component('BackToTop', BackToTop)

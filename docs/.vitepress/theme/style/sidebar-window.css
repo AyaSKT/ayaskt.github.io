@@ -169,7 +169,8 @@
     -webkit-backdrop-filter: var(--aya-sidebar-item-glass);
   }
 
-  html:has(.VPDoc) .VPSidebar .VPSidebarItem.is-active > .item > .link {
+  html:has(.VPDoc) .VPSidebar .VPSidebarItem.is-active > .item > .link,
+  html:has(.VPDoc) .VPSidebar .VPSidebarItem .link[data-sidebar-current="true"] {
     color: var(--aya-sidebar-active-text);
     background: transparent;
     box-shadow: none;
@@ -178,7 +179,8 @@
   }
 
   html:has(.VPDoc) .VPSidebar .VPSidebarItem .link .text,
-  html:has(.VPDoc) .VPSidebar .VPSidebarItem.is-active > .item > .link .text {
+  html:has(.VPDoc) .VPSidebar .VPSidebarItem.is-active > .item > .link .text,
+  html:has(.VPDoc) .VPSidebar .VPSidebarItem .link[data-sidebar-current="true"] .text {
     color: inherit;
   }
 

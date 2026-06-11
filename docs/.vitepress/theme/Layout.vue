@@ -9,12 +9,35 @@ const enableTransitions = () =>
   'startViewTransition' in document &&
   window.matchMedia('(prefers-reduced-motion: no-preference)').matches
 
-provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
+function appearanceCenter(event: MouseEvent) {
+  const target = event.target as Element | null
+  const switchEl = target?.closest('.VPSwitchAppearance')
+    ?? target?.closest('.VPNavBarAppearance')?.querySelector('.VPSwitchAppearance')
+    ?? target?.closest('.VPNavScreenAppearance')?.querySelector('.VPSwitchAppearance')
+    ?? document.querySelector('.VPNavBarAppearance .VPSwitchAppearance')
+    ?? document.querySelector('.VPNavScreenAppearance .VPSwitchAppearance')
+
+  if (switchEl instanceof HTMLElement) {
+    const rect = switchEl.getBoundingClientRect()
+    return {
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2
+    }
+  }
+
+  return {
+    x: event.clientX,
+    y: event.clientY
+  }
+}
+
+provide('toggle-appearance', async (event: MouseEvent) => {
   if (!enableTransitions()) {
     isDark.value = !isDark.value
     return
   }
 
+  const { x, y } = appearanceCenter(event)
   const clipPath = [
     `circle(0px at ${x}px ${y}px)`,
     `circle(${Math.hypot(

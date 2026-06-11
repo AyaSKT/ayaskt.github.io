@@ -7,9 +7,16 @@ const router = useRouter()
 const visible = ref(false)
 const progress = ref(0)
 
+const IMAGE_PROGRESS_START = 82
+const IMAGE_PROGRESS_END = 96
+const IMAGE_WAIT_TIMEOUT = 12000
+
 let trickleTimer: number | undefined
 let hideTimer: number | undefined
+let stopImageTracking: (() => void) | undefined
 let restoreHooks: (() => void) | undefined
+let initialLoadHandler: (() => void) | undefined
+let progressSession = 0
 
 function clamp(value: number) {
   return Math.max(0, Math.min(100, value))
@@ -26,7 +33,15 @@ function stopTrickle() {
   }
 }
 
+function clearImageTracking() {
+  const stop = stopImageTracking
+  stopImageTracking = undefined
+  stop?.()
+}
+
 function startProgress() {
+  progressSession += 1
+  clearImageTracking()
   window.clearTimeout(hideTimer)
   stopTrickle()
 
@@ -40,6 +55,7 @@ function startProgress() {
 }
 
 function finishProgress() {
+  clearImageTracking()
   stopTrickle()
   setProgress(100)
 
@@ -47,6 +63,124 @@ function finishProgress() {
     visible.value = false
     setProgress(0)
   }, 360)
+}
+
+function isTrackableImage(image: HTMLImageElement) {
+  if (!image.isConnected) return false
+  if (!image.getAttribute('src') && !image.getAttribute('srcset') && !image.currentSrc) return false
+  if (image.classList.contains('hero-preload')) return false
+  if (image.closest('.hero-preload, [aria-hidden="true"], [hidden]')) return false
+  if (!image.closest('.VPDoc, .VPHome, .VPHero, main')) return false
+
+  if (image.loading === 'lazy' && !image.complete) {
+    const rect = image.getBoundingClientRect()
+    const preloadDistance = window.innerHeight * 2
+    if (rect.bottom < -preloadDistance || rect.top > window.innerHeight + preloadDistance) {
+      return false
+    }
+  }
+
+  return true
+}
+
+function getPageImages() {
+  return Array.from(document.images).filter(isTrackableImage)
+}
+
+function nextFrame() {
+  return new Promise<void>((resolve) => {
+    window.requestAnimationFrame(() => resolve())
+  })
+}
+
+function waitForPageImages(session: number) {
+  clearImageTracking()
+
+  const images = getPageImages()
+  if (!images.length) return Promise.resolve()
+
+  let completed = 0
+  let settled = false
+  let timeout: number | undefined
+  const removeListeners: (() => void)[] = []
+
+  return new Promise<void>((resolve) => {
+    let stop: () => void
+
+    const cleanup = () => {
+      for (const removeListener of removeListeners) removeListener()
+      if (timeout) {
+        window.clearTimeout(timeout)
+        timeout = undefined
+      }
+    }
+
+    const finish = () => {
+      if (settled) return
+      settled = true
+      if (stopImageTracking === stop) stopImageTracking = undefined
+      cleanup()
+      resolve()
+    }
+
+    const updateImageProgress = () => {
+      if (session !== progressSession) {
+        finish()
+        return
+      }
+
+      const ratio = completed / images.length
+      const imageProgress = IMAGE_PROGRESS_START + (IMAGE_PROGRESS_END - IMAGE_PROGRESS_START) * ratio
+      setProgress(Math.max(progress.value, imageProgress))
+
+      if (completed >= images.length) finish()
+    }
+
+    stop = () => {
+      finish()
+    }
+
+    for (const image of images) {
+      if (image.complete) {
+        completed += 1
+        continue
+      }
+
+      let imageSettled = false
+      const markComplete = () => {
+        if (imageSettled) return
+        imageSettled = true
+        completed += 1
+        updateImageProgress()
+      }
+
+      image.addEventListener('load', markComplete, { once: true })
+      image.addEventListener('error', markComplete, { once: true })
+      removeListeners.push(() => {
+        imageSettled = true
+        image.removeEventListener('load', markComplete)
+        image.removeEventListener('error', markComplete)
+      })
+    }
+
+    stopImageTracking = stop
+    timeout = window.setTimeout(finish, IMAGE_WAIT_TIMEOUT)
+    updateImageProgress()
+  })
+}
+
+async function finishAfterPageImages(session = progressSession) {
+  stopTrickle()
+  setProgress(Math.max(progress.value, IMAGE_PROGRESS_START))
+
+  await nextTick()
+  await nextFrame()
+  if (session !== progressSession) return
+
+  await waitForPageImages(session)
+  if (session !== progressSession) return
+
+  finishProgress()
 }
 
 onMounted(() => {
@@ -83,19 +217,24 @@ onMounted(() => {
   }
 
   router.onAfterPageLoad = async (to) => {
-    setProgress(Math.max(progress.value, 82))
+    setProgress(Math.max(progress.value, IMAGE_PROGRESS_START))
     await previousAfterPageLoad?.(to)
   }
 
-  router.onAfterRouteChange = async (to) => {
-    await previousAfterRouteChange?.(to)
-    await nextTick()
-    finishProgress()
+  router.onAfterRouteChange = (to) => {
+    void Promise
+      .resolve(previousAfterRouteChange?.(to))
+      .then(() => finishAfterPageImages())
   }
 
   if (document.readyState !== 'complete') {
     startProgress()
-    window.addEventListener('load', finishProgress, { once: true })
+    const initialSession = progressSession
+    initialLoadHandler = () => {
+      void finishAfterPageImages(initialSession)
+      initialLoadHandler = undefined
+    }
+    window.addEventListener('load', initialLoadHandler, { once: true })
   }
 
   restoreHooks = () => {
@@ -108,9 +247,13 @@ onMounted(() => {
 
 onUnmounted(() => {
   restoreHooks?.()
+  clearImageTracking()
   stopTrickle()
   window.clearTimeout(hideTimer)
-  window.removeEventListener('load', finishProgress)
+  if (initialLoadHandler) {
+    window.removeEventListener('load', initialLoadHandler)
+    initialLoadHandler = undefined
+  }
 })
 </script>
 
