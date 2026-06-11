@@ -14,7 +14,7 @@ interface CourseIndexGroup {
   items: CourseIndexItem[]
 }
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
   course?: string
   groups: CourseIndexGroup[]
 }>(), {
@@ -50,9 +50,6 @@ function resolveCover(cover?: string) {
   return clean.startsWith('/') ? withBase(clean) : clean
 }
 
-function coverAlt(item: CourseIndexItem) {
-  return `${props.course} ${item.code} ${item.title} 封面`
-}
 </script>
 
 <template>
@@ -78,7 +75,7 @@ function coverAlt(item: CourseIndexItem) {
             <img
               v-if="item.cover"
               :src="resolveCover(item.cover)"
-              :alt="coverAlt(item)"
+              alt=""
               loading="lazy"
             >
             <span v-else class="course-index-cover-code">{{ item.code }}</span>
@@ -198,6 +195,7 @@ function coverAlt(item: CourseIndexItem) {
 
 .course-index-card:hover,
 .course-index-card:focus-visible {
+  z-index: 2;
   border-color: color-mix(in srgb, var(--vp-c-brand-1) 58%, var(--vp-c-divider));
   background: color-mix(in srgb, var(--vp-c-brand-1) 10%, var(--vp-c-bg-soft));
   box-shadow: 0 16px 42px rgb(34 42 60 / 11%);
