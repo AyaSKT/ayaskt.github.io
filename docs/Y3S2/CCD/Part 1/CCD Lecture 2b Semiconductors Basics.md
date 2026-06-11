@@ -181,6 +181,15 @@ $$
 | 实用模型 Practical | $V_D\approx0.7\,\mathrm{V}$ for Si | 开路 | 手算硅二极管电流 |
 | 完整模型 Complete | $V_D\approx0.7\,\mathrm{V}+I_Dr_d$ | 有大反向电阻 | 更接近实际器件 |
 
+> [!NOTE]
+> 完整模型中，$r_d$ 为二极管的**动态电阻 Dynamic Resistance**（也称体电阻 Bulk Resistance），其值由 Q 点处 V-I 特性曲线的斜率决定：
+>
+> $$
+> r_d = \frac{\Delta V_D}{\Delta I_D} \approx \frac{26\,\mathrm{mV}}{I_D}
+> $$
+>
+> 其中 $I_D$ 为 Q 点电流。此 $r_d$ 与后续放大器小信号分析中的 $r_e'$ 估算直接相关。
+
 :::: tip
 CCD 手算中若未特别说明，硅二极管通常按 practical model 取 $V_D=0.7\,\mathrm{V}$。
 ::::

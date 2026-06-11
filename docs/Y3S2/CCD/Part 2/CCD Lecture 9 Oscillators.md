@@ -310,6 +310,15 @@ $$
 
 反向偏置电压越大，结电容通常越小，故谐振频率升高。
 
+> [!NOTE]
+> VCO 的**调谐灵敏度 Tuning Sensitivity** 或 **VCO 增益** 定义为
+>
+> $$
+> K_{\mathrm{VCO}}=\frac{\Delta f_{\mathrm{osc}}}{\Delta V_D}\qquad\mathrm{(Hz/V)}
+> $$
+>
+> 此参数直接决定 FM 调制器中给定消息电压产生的频偏大小（参见 Lecture 14）。
+
 Clapp 振荡器可以看成带额外串联电容的 Colpitts 结构。加入变容二极管后，反馈网络总电容由 $C_1$、$C_2$ 和 $C_D$ 的串联组合决定。
 
 ![Clapp 压控振荡器](<CCD Lecture 9 Oscillators.attachments/osc_32_clapp_vco.jpg>)

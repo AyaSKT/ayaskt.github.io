@@ -26,7 +26,7 @@ hero:
 homeCourseGroups:
   - id: y4
     label: Y4
-    title: 第四学年
+    title: 第四学年 2026 Sep - 2027 Jun
     tone: "#4fb69f"
     variant: brand
     rows:
@@ -36,7 +36,7 @@ homeCourseGroups:
 
   - id: y3
     label: Y3
-    title: 第三学年
+    title: '第三学年 2025 Sep - 2026 Jul'
     tone: "#5fa8cf"
     variant: brand
     rows:
@@ -62,7 +62,7 @@ homeCourseGroups:
 
   - id: y1y2
     label: Y1 & Y2
-    title: 早期课程 / 外部资料
+    title: 早期课程 2023 Sep - 2025 Jul
     tone: "#ad8bc8"
     variant: alt
     rows:
@@ -78,7 +78,7 @@ homeCourseGroups:
 
 features:
 
-- icon: 
+- icon:
     dark: /uog.png
     light: /uog.png
   title: Glasgow College, UESTC
@@ -86,7 +86,7 @@ features:
   link: https://www.gla.uestc.edu.cn/
   linkText: Click to get CW(s)
 
-- icon: 
+- icon:
     dark: /3.PNG
     light: /3.PNG
   title: Neuro Sama
@@ -99,8 +99,8 @@ features:
   details: 一个流淌着知识与蜜的地方。很适合查找各类复习资料。
   link: https://study-hub.store/
   linkText: 立刻弯道超车
-  
-- icon: 
+
+- icon:
     dark: 5.jpg
     light: 5.jpg
   title: 友情推荐：Cateds

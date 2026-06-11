@@ -198,6 +198,9 @@ $$
 
 载波频率越高、边带间隔越小，所需 $Q$ 越高。直接在最终 RF 频率做 SSB 滤波通常很难。
 
+> [!NOTE]
+> 以语音信号为例，最低消息频率约 $300\,\mathrm{Hz}$，USB 与 LSB 之间仅隔 $600\,\mathrm{Hz}$。若载波为 $10\,\mathrm{MHz}$，所需 $Q$ 远超常规 LC 滤波器可达到的水平（通常 $Q<200$）。因此实际 SSB 发射机先在固定低中频（如 $455\,\mathrm{kHz}$ 或 $1.65\,\mathrm{MHz}$）生成干净 SSB，再经混频器搬移到目标频率。
+
 ## 13-4 SSB 发射机与接收机 SSB Transmitters and Receivers
 
 ### 13-4-1 滤波法发射机 Filter-Method Transmitter

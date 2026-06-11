@@ -17,6 +17,7 @@ import BackToTop from './components/backtotop.vue'
 import PageTransition from './components/PageTransition.vue'
 import ScrollReveal from './components/ScrollReveal.vue'
 import DocMeta from './components/DocMeta.vue'
+import CourseIndex from './components/CourseIndex.vue'
 import { setupLinkWarmup } from './link-warmup'
 
 export default {
@@ -37,6 +38,7 @@ export default {
     app.component('PageTransition', PageTransition)
     app.component('ScrollReveal', ScrollReveal)
     app.component('DocMeta', DocMeta)
+    app.component('CourseIndex', CourseIndex)
   },
 
   extends: DefaultTheme,

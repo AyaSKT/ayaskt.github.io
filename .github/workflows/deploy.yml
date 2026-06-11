@@ -43,6 +43,8 @@ jobs:
           cache: npm # 或 pnpm / yarn
       - name: Setup Pages
         uses: actions/configure-pages@v4
+      - name: Install thumbnail tools
+        run: sudo apt-get update && sudo apt-get install -y webp imagemagick
       - name: Install dependencies
         run: npm ci # 或 pnpm install / yarn install / bun install
       - name: Build with VitePress

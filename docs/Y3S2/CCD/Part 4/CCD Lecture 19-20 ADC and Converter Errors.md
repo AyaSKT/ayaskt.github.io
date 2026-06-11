@@ -276,6 +276,9 @@ $$
 
 SAR ADC 速度中等，成本低，分辨率常见在 8 到 16 bit。
 
+> [!NOTE]
+> SAR ADC 一次完整的 $N$-bit 转换需要 $N$ 个时钟周期（每 bit 一次比较）。转换时间为 $t_{\mathrm{conv}} = N \cdot T_{\mathrm{clk}}$，其中 $T_{\mathrm{clk}}$ 为时钟周期。
+
 ---
 
 ### 19-4-2 Dual-Slope ADC 双斜率 ADC
@@ -292,6 +295,15 @@ Dual-slope ADC 也叫 integrating ADC。它把输入电压积分一段固定时�
 | 应用 | 数字万用表、慢速精密测量 |
 
 它不适合高速信号，但适合稳定、精确的低速测量。
+
+> [!NOTE]
+> 转换分两阶段。**第一阶段**：积分器对输入电压 $V_{\mathrm{in}}$ 积分固定时间 $T_1$，积分器输出 $V_{\mathrm{int}}(T_1) = -V_{\mathrm{in}}T_1/(RC)$。**第二阶段**：积分器输入端切换到参考电压 $-V_{\mathrm{ref}}$，向零回积，测量回到零所需时间 $T_2$。由 $0 = V_{\mathrm{int}}(T_1) + V_{\mathrm{ref}}T_2/(RC)$ 消去 $RC$ 得
+>
+> $$
+> V_{\mathrm{in}} = V_{\mathrm{ref}}\frac{T_2}{T_1}
+> $$
+>
+> 输入电压正比于 $T_2$，$RC$ 值和时钟频率在比例中约掉，因此 dual-slope ADC 对元件容差不敏感。若 $T_1$ 取工频周期（$20\,\mathrm{ms}$）的整数倍，工频干扰被积分平均为零，这是数字万用表抗 $50/60\,\mathrm{Hz}$ 干扰的原理。
 
 ---
 
