@@ -24,9 +24,19 @@ hero:
   # actions intentionally empty — buttons rendered by HomeCourseActions.vue
 
 homeCourseGroups:
-  - id: y3s2
-    label: Y3S2
-    title: 第三学年第二学期
+  - id: y4
+    label: Y4
+    title: 第四学年
+    tone: "#4fb69f"
+    variant: brand
+    rows:
+      - items:
+          - text: 敬请期待
+            variant: alt
+
+  - id: y3
+    label: Y3
+    title: 第三学年
     tone: "#5fa8cf"
     variant: brand
     rows:
@@ -42,18 +52,13 @@ homeCourseGroups:
           - text: 工程项目管理与财务 EPMF
             link: /Y3S2/EPMF/EPMF-README.md
             variant: alt
-
-  - id: y3s1
-    label: Y3S1
-    title: 第三学年第一学期
-    tone: "#8b8fe8"
-    variant: alt
-    rows:
       - items:
           - text: 通信原理与系统 CPS
             link: /Y3S1/CPS/CPS-README.md
+            variant: alt
           - text: 人工智能与机器学习 AI&ML
             link: /Y3S1/AIML/AIML-README.md
+            variant: alt
 
   - id: y1y2
     label: Y1 & Y2

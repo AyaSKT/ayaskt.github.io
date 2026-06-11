@@ -132,6 +132,18 @@
     padding: 0;
   }
 
+  html:has(.VPDoc) .VPSidebar .VPSidebarItem > .items[data-sidebar-motion],
+  html:has(.VPDoc) .VPSidebar .VPSidebarItem.collapsed > .items[data-sidebar-motion] {
+    display: block !important;
+    overflow: hidden;
+    transform-origin: center top;
+    will-change: height, opacity;
+  }
+
+  html.sidebar-motion-active .sidebar-active-indicator {
+    opacity: 0 !important;
+  }
+
   html:has(.VPDoc) .VPSidebar .VPSidebarItem .item {
     min-width: 0;
     border-radius: var(--aya-sidebar-item-radius);
@@ -223,6 +235,14 @@
 @media (min-width: 960px) and (prefers-reduced-motion: no-preference) {
   html:has(.VPDoc) .VPSidebar {
     animation: fadeInLeft var(--dur-sidebar-enter) var(--ease-ios-fade) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.VPDoc) .VPSidebar .VPSidebarItem > .items[data-sidebar-motion],
+  html:has(.VPDoc) .VPSidebar .VPSidebarItem.collapsed > .items[data-sidebar-motion] {
+    animation: none !important;
+    transition: none !important;
   }
 }
 

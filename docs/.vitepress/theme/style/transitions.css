@@ -4,7 +4,7 @@
    ================================================================ */
 
 /* ---- View Transition 元素命名 ----
-   只有 doc 页面才把 sidebar / content / aside 提取出来独立动画
+   只有 doc 页面才把 sidebar 提取出来独立动画
    homepage 没有 VPDoc，这些元素不参与 view-transition，直接出现
    侧边栏在所有页面存在（homepage 为隐藏/空），用 :has(.VPDoc) 限定
    Nav bar / Local nav 始终保持静态，不在页面切换时参与 crossfade

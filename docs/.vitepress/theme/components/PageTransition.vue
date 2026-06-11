@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { nextTick, onMounted, onUnmounted } from 'vue'
 import { useData, useRouter } from 'vitepress'
+import { createOutlineJumpMotion } from '../outline-jump-motion'
+import { attachSidebarMotion } from '../sidebar-motion'
 
 const router = useRouter()
 const { theme } = useData()
@@ -13,6 +15,9 @@ let indicatorFrame = 0
 let sidebarObserver: MutationObserver | undefined
 let sidebarAttachTimer: ReturnType<typeof setTimeout> | undefined
 let sidebarAttachAttempts = 0
+let outlineJumpMotion: ReturnType<typeof createOutlineJumpMotion> | undefined
+let detachOutlineJumpMotion: (() => void) | undefined
+let detachSidebarMotion: (() => void) | undefined
 
 function sidebarKeyFor(to: string) {
   const sidebar = theme.value.sidebar
@@ -166,12 +171,31 @@ function resetSidebarObserver() {
   sidebarObserver?.disconnect()
   sidebarObserver = undefined
   attachSidebarObserver()
+  resetSidebarMotion()
+}
+
+function resetSidebarMotion() {
+  detachSidebarMotion?.()
+  detachSidebarMotion = attachSidebarMotion(() => {
+    scheduleSidebarIndicatorUpdate()
+  })
 }
 
 onMounted(() => {
   const originalGo = router.go.bind(router)
+  outlineJumpMotion = createOutlineJumpMotion()
+  detachOutlineJumpMotion = outlineJumpMotion.attach()
 
   router.go = async (to, options) => {
+    if (outlineJumpMotion?.shouldAnimate(to, options)) {
+      await outlineJumpMotion.run(to, async () => {
+        await originalGo(to, options)
+        await nextTick()
+        resetSidebarObserver()
+      })
+      return
+    }
+
     if (!canTransition(to, options)) {
       await originalGo(to, options)
       await nextTick()
@@ -225,6 +249,7 @@ onMounted(() => {
 
   // 初始定位 + 监听器
   attachSidebarObserver()
+  resetSidebarMotion()
   setTimeout(() => {
     attachSidebarObserver()
     scheduleSidebarIndicatorUpdate()
@@ -242,10 +267,13 @@ onMounted(() => {
 
 onUnmounted(() => {
   restoreGo?.()
+  detachOutlineJumpMotion?.()
   window.removeEventListener('resize', onResize)
   window.removeEventListener('aya-fonts-ready', onResize)
   clearTimeout(resizeTimer)
   clearTimeout(sidebarAttachTimer)
+  detachSidebarMotion?.()
+  detachSidebarMotion = undefined
   sidebarObserver?.disconnect()
   sidebarObserver = undefined
   if (indicatorFrame) {

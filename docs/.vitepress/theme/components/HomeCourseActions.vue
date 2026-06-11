@@ -4,7 +4,7 @@ import { useData, withBase } from 'vitepress'
 
 interface CourseItem {
   text: string
-  link: string
+  link?: string
   variant?: 'brand' | 'alt'
 }
 
@@ -204,15 +204,24 @@ watch(
           :key="ri"
           class="home-course-row"
         >
-          <a
-            v-for="item in row.items"
-            :key="item.link"
-            class="home-course-button"
-            :class="(item.variant ?? group.variant) === 'brand' ? 'brand' : 'alt'"
-            :href="resolveCourseLink(item.link)"
-          >
-            {{ item.text }}
-          </a>
+          <template v-for="item in row.items" :key="item.link ?? item.text">
+            <a
+              v-if="item.link"
+              class="home-course-button"
+              :class="(item.variant ?? group.variant) === 'brand' ? 'brand' : 'alt'"
+              :href="resolveCourseLink(item.link)"
+            >
+              {{ item.text }}
+            </a>
+            <button
+              v-else
+              class="home-course-button"
+              :class="(item.variant ?? group.variant) === 'brand' ? 'brand' : 'alt'"
+              type="button"
+            >
+              {{ item.text }}
+            </button>
+          </template>
         </div>
       </div>
     </div>
@@ -284,9 +293,11 @@ watch(
 }
 
 .home-course-button {
+  appearance: none;
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
+  font-family: inherit;
   font-size: 14px;
   font-weight: 700;
   padding: 0 18px;

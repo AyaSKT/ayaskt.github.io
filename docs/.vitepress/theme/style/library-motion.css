@@ -39,9 +39,20 @@
 .VPLocalSearchBox[aria-expanded="true"] .result:nth-child(7) { animation-delay: 184ms; }
 .VPLocalSearchBox[aria-expanded="true"] .result:nth-child(8) { animation-delay: 208ms; }
 
-.VPNavBar .VPFlyout:hover > .button + .menu,
-.VPNavBar .VPFlyout > .button[aria-expanded="true"] + .menu {
-  animation: fadeIn var(--dur-menu) var(--ease-ios-fade) both;
+.VPNavBar .VPFlyout > .menu.aya-nav-menu-motion {
+  transform-origin: top right;
+  --xyz-duration: var(--dur-menu);
+  --xyz-out-duration: var(--dur-menu-out, 0.22s);
+  --xyz-ease: var(--ease-ios-fade);
+  --xyz-out-ease: var(--ease-ios-press);
+  --xyz-stagger: 0.018s;
+  --xyz-stagger-rev: 0.006s;
+  will-change: opacity, transform;
+}
+
+.VPNavBar .VPFlyout > .menu.aya-nav-menu-motion .aya-nav-menu-motion-item {
+  transform-origin: left center;
+  will-change: opacity, transform;
 }
 
 .reveal-hidden:not(.xyz-in) {
@@ -54,8 +65,8 @@
   .VPLocalSearchBox[aria-expanded="true"] .backdrop,
   .VPLocalSearchBox[aria-expanded="true"] .shell,
   .VPLocalSearchBox[aria-expanded="true"] .result,
-  .VPNavBar .VPFlyout:hover > .button + .menu,
-  .VPNavBar .VPFlyout > .button[aria-expanded="true"] + .menu {
+  .VPNavBar .VPFlyout > .menu.aya-nav-menu-motion,
+  .VPNavBar .VPFlyout > .menu.aya-nav-menu-motion .aya-nav-menu-motion-item {
     animation: none !important;
   }
 

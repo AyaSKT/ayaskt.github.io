@@ -264,17 +264,21 @@
 
   .VPNavBar .VPFlyout > .menu {
     top: calc(var(--vp-nav-height) / 2 + 16px);
+    opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transform: translate3d(0, -3px, 0);
+    transform: translate3d(0, -6px, 0) scale(0.98);
+    transform-origin: top right;
     transition:
-      visibility 0s linear 0.12s,
-      transform 0.16s var(--ease-ios-fade) !important;
+      visibility 0s linear var(--dur-menu-out),
+      opacity var(--dur-menu-out) var(--ease-ios-press),
+      transform var(--dur-menu-out) var(--ease-ios-press) !important;
   }
 
   .VPNavBar .VPFlyout:not(:hover) > .button[aria-expanded="false"] + .menu {
     opacity: 0;
     visibility: hidden;
-    transform: translate3d(0, -3px, 0);
+    transform: translate3d(0, -6px, 0) scale(0.98);
     pointer-events: none;
   }
 
@@ -282,10 +286,14 @@
   .VPNavBar .VPFlyout > .button[aria-expanded="true"] + .menu {
     opacity: 1;
     visibility: visible;
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) scale(1);
     pointer-events: auto;
+    transition:
+      visibility 0s linear 0s,
+      opacity var(--dur-menu) var(--ease-ios-fade),
+      transform var(--dur-menu) var(--ease-ios-fade) !important;
     transition-delay: 0s;
-    will-change: transform;
+    will-change: opacity, transform;
   }
 
   .VPNavBar .VPMenu {

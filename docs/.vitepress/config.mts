@@ -375,6 +375,8 @@ export default defineConfig({
 
     nav: [
       { text: '主页', link: '/index' },
+
+      { text: '第四学年', items: [] },
       
       { text: '第三学年', items: [
         { text: '通信原理与系统 CPS', link: '/Y3S1/CPS/CPS-README.md' },
