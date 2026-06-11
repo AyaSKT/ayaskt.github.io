@@ -1,50 +1,54 @@
-# Course README Card Index Design
+# 课程 README 卡片式目录设计
 
-## Context
+## 背景
 
-The VitePress site is a Chinese university course-note blog with a custom theme layered on top of the default VitePress layout. Course README pages currently use plain Markdown lists for their indexes. The desired update is to make selected course README pages feel consistent with the site's home `features` cards while keeping the normal document-reading experience.
+这个仓库是一个基于 VitePress 的中文大学课程笔记博客。当前主题是在 VitePress 默认主题之上扩展出来的自定义主题，已经有首页 feature 方框、玻璃效果、渐变色、页面转场、暗色模式等视觉语言。
 
-## Goal
+目前各科目的 README 页面使用普通 Markdown 列表作为课程目录。新的目标是把部分课程 README 的目录区改成更接近首页 feature 方框的卡片式结构，同时保留文档页本身的阅读体验。
 
-Create a reusable course index card container for selected course README pages. The first implementation will cover:
+## 目标
+
+为选定课程 README 页面新增一个可复用的课程目录卡片容器。第一期只覆盖：
 
 - `docs/Y3S2/DSP/DSP-README.md`
 - `docs/Y3S2/CCD/CCD-README.md`
 - `docs/Y3S2/EMFT/EMFT-README.md`
 
-The card index should show chapter groups, chapter cards, and cover images. It must support dark mode, mobile layouts, and desktop hover previews.
+卡片目录需要展示章节分组、章节卡片和章节封面图，并且兼容暗色模式、移动端布局和桌面端 hover 悬浮预览。
 
-## Scope
+## 范围
 
-- Add a reusable `CourseIndex` component and register it for Markdown use.
-- Replace only the index sections in the three README files listed above.
-- Preserve existing README introductions, personal notes, caution blocks, and course-level images unless they conflict with the new index section.
-- Keep the left VitePress sidebar visible and unchanged.
-- Let the selected README pages use the document content area plus the space normally occupied by the right outline.
-- Keep ordinary chapter pages unchanged, including their right outline behavior.
+- 新增一个可复用的 `CourseIndex` 组件，并注册给 Markdown 使用。
+- 只替换上面三份 README 的目录区域。
+- 尽量保留 README 原有开头介绍、个人化句子、提示块和课程级封面图。
+- 左侧 VitePress sidebar 必须正常显示，不被卡片布局占用。
+- 这三份 README 页面可以使用原正文区域加右侧 outline 区域的横向空间。
+- 普通章节页面保持原样，包括右侧 outline 的显示方式。
 
-## Non-Goals
+## 不做什么
 
-- Do not edit any chapter-note body files.
-- Do not rewrite course content, formulas, explanations, headings, or attachments.
-- Do not redesign the global VitePress layout, nav, sidebar, or home page.
-- Do not add runtime filesystem scanning in the browser.
+- 不修改任何章节笔记正文文件。
+- 不重写课程内容、公式、解释、章节标题或附件。
+- 不重做全局 VitePress 布局、导航栏、侧边栏或首页。
+- 不在浏览器运行时扫描文件系统。
 
-## User Decisions
+## 已确认的用户决策
 
-- Desktop visual style uses option A: feature-like cards with the cover image on top and text below.
-- Mobile visual style uses option B: compact horizontal cards with the cover on the left and text on the right.
-- Part or block group headings should be larger and clearer than the first mockups.
-- Chapter covers may be manually specified.
-- If no manual cover is provided during setup, use the first image referenced by the chapter note as the initial cover.
-- If no cover exists, show a gradient numbered fallback.
-- The first implementation covers only DSP, CCD, and EMFT.
+- 桌面端视觉使用方案 A：类似首页 feature 方框，封面图在上，章节文字在下。
+- 移动端视觉使用方案 B：更紧凑的横向卡片，封面图在左，章节文字在右，方便滑动浏览。
+- Part / Block 分组标题需要比最初 mockup 更大、更清楚。
+- 章节封面可以手动指定。
+- 如果没有手动指定，初始实现时默认使用对应章节笔记中引用的第一张本地图片。
+- 如果章节没有可用图片，显示渐变编号 fallback 封面。
+- 第一期只处理 DSP、CCD、EMFT。
 
-## Architecture
+## 架构
 
-Add `docs/.vitepress/theme/components/CourseIndex.vue`.
+新增组件：
 
-Register it globally in `docs/.vitepress/theme/index.ts` so README Markdown can use:
+- `docs/.vitepress/theme/components/CourseIndex.vue`
+
+在 `docs/.vitepress/theme/index.ts` 中全局注册，让 README Markdown 可以直接使用：
 
 ```vue
 <CourseIndex
@@ -66,43 +70,43 @@ Register it globally in `docs/.vitepress/theme/index.ts` so README Markdown can 
 />
 ```
 
-The three README files will keep course-specific data inline. The component owns layout, styling, dark mode behavior, hover previews, and fallback covers.
+三份 README 只维护各自课程的目录数据。组件统一负责布局、样式、暗色模式、hover 预览和无封面 fallback。
 
-## Data Model
+## 数据模型
 
-`CourseIndex` accepts:
+`CourseIndex` 接收：
 
-- `course`: short course label for accessibility and optional UI labels.
-- `groups`: ordered list of course sections.
+- `course`：课程短名称，用于可访问性描述和可选 UI 标签。
+- `groups`：有序课程分组列表。
 
-Each group has:
+每个 group 包含：
 
-- `title`: visible group heading, such as `Part I 离散时间信号与系统`.
-- `items`: ordered chapter card data.
+- `title`：可见分组标题，例如 `Part I 离散时间信号与系统`。
+- `items`：该分组下的章节卡片列表。
 
-Each item has:
+每个 item 包含：
 
-- `code`: short chapter code, such as `Ch 2` or `Lecture 11-12`.
-- `title`: primary chapter title.
-- `subtitle`: secondary title or English title.
-- `link`: original Markdown link target.
-- `cover`: optional cover image path relative to the README.
+- `code`：章节短编号，例如 `Ch 2` 或 `Lecture 11-12`。
+- `title`：主要章节标题。
+- `subtitle`：副标题，通常为英文标题或补充说明。
+- `link`：原始章节 Markdown 链接目标。
+- `cover`：可选封面图路径，相对于当前 README。
 
-The component will not infer course structure at runtime. README data remains explicit so future edits are predictable.
+组件不在运行时推断课程结构。README 里的数据保持显式，这样后续修改更可控。
 
-## Cover Selection
+## 封面选择规则
 
-Implementation will populate initial `cover` values as follows:
+实现时按以下规则填入初始 `cover`：
 
-1. If the user has specified a cover for an item, use that file.
-2. Otherwise, scan the linked chapter Markdown during implementation and use the first referenced local image.
-3. If the chapter has no usable image, omit `cover` and let the component render a gradient fallback with `code`.
+1. 如果用户为某个章节指定了封面图，使用指定图片。
+2. 如果没有指定，实施时扫描该章节 Markdown，取其中引用的第一张本地图片。
+3. 如果章节没有可用图片，不写 `cover`，由组件显示带 `code` 的渐变 fallback 封面。
 
-After implementation, changing a cover only requires editing the corresponding README item.
+实施完成后，如果以后要替换封面，只需要改 README 中对应 item 的 `cover` 字段。
 
-## Layout
+## 页面布局
 
-The selected README pages should add page metadata that makes the card index a wide document index page:
+选定的 README 页面需要增加 frontmatter，使其成为宽文档索引页：
 
 ```yaml
 ---
@@ -111,81 +115,81 @@ pageClass: course-index-page
 ---
 ```
 
-The component or theme CSS will scope width changes to `.course-index-page` only. The left sidebar remains normal. The right outline area is intentionally given to the README card grid on these pages.
+组件或主题 CSS 只对 `.course-index-page` 做宽度调整。左侧 sidebar 保持正常。右侧 outline 区域在这些 README 页面上让位给卡片网格。
 
-Desktop and wide tablet behavior:
+桌面端和宽平板：
 
-- Use feature-style cards.
-- Cover image sits on top.
-- Title and subtitle sit below.
-- Grid adapts to available width.
-- Wide screens may show up to 4 cards per row.
-- Medium widths show 3 or 2 cards per row.
+- 使用 feature 风格卡片。
+- 封面图在卡片上方。
+- 标题和副标题在封面下方。
+- 网格根据可用宽度自适应。
+- 宽屏最多每行 4 张卡片。
+- 中等宽度显示 3 张或 2 张卡片。
 
-Mobile behavior:
+移动端：
 
-- Use compact horizontal list cards.
-- Cover image sits on the left.
-- Text sits on the right.
-- No hover preview is shown.
-- Cards remain easy to scan while scrolling.
+- 使用紧凑横向列表卡片。
+- 封面图在左侧。
+- 文字在右侧。
+- 不显示 hover 悬浮预览。
+- 保持适合连续滑动浏览的密度。
 
-Part or block headings:
+Part / Block 分组标题：
 
-- Use larger serif-like heading treatment consistent with current document headings.
-- Keep spacing large enough to separate groups clearly.
-- Preserve the original group order.
+- 使用更大的标题样式，整体气质接近当前文档标题。
+- 分组之间保留足够间距。
+- 保留原 README 中的分组顺序。
 
-## Interaction
+## 交互
 
-Each card is a full link to its chapter.
+每张卡片整体都是指向章节的链接。
 
-Desktop:
+桌面端：
 
-- Hover raises the card slightly.
-- Keyboard `focus-visible` uses the same discoverable state.
-- Hover or focus shows a lightweight preview popover.
-- The preview shows the cover image, code, title, and subtitle.
+- hover 时卡片轻微上浮。
+- 键盘 `focus-visible` 时展示同样清晰的状态。
+- hover 或 focus 时显示轻量悬浮预览。
+- 预览中展示封面大图、章节编号、标题和副标题。
 
-Mobile:
+移动端：
 
-- No hover popover.
-- Tapping the card navigates directly to the chapter.
+- 不显示 hover 预览。
+- 点击卡片直接进入章节。
 
-Motion:
+动画：
 
-- Respect `prefers-reduced-motion`.
-- With reduced motion enabled, disable translate and scale effects while retaining color and border feedback.
+- 尊重 `prefers-reduced-motion`。
+- 用户开启减少动画时，关闭位移和缩放，只保留颜色、边框等反馈。
 
-## Dark Mode
+## 暗色模式
 
-The component must use VitePress theme variables where practical:
+组件应尽量使用 VitePress 主题变量：
 
-- text: `var(--vp-c-text-*)`
-- surfaces: `var(--vp-c-bg-soft)` and related soft/background variables
-- borders: `var(--vp-c-divider)` or local alpha variants
-- brand accents: existing gradient colors `#98CBEA`, `#C2C7F8`, `#F1DCE4`
+- 文字：`var(--vp-c-text-*)`
+- 表面：`var(--vp-c-bg-soft)` 及相关背景变量
+- 边框：`var(--vp-c-divider)` 或局部透明边框
+- 品牌强调色：现有渐变色 `#98CBEA`、`#C2C7F8`、`#F1DCE4`
 
-Dark mode must cover:
+暗色模式需要覆盖：
 
-- card surface
-- card border
-- title and subtitle text
-- hover/focus state
-- preview popover
-- fallback gradient cover
+- 卡片背景
+- 卡片边框
+- 标题与副标题文字
+- hover / focus 状态
+- 悬浮预览层
+- fallback 渐变封面
 
-## Accessibility
+## 可访问性
 
-- Cards should be semantic links, not clickable `div` wrappers.
-- Images should have descriptive `alt` text or empty `alt` when decorative.
-- Focus states must be visible.
-- Preview content should not be the only way to access chapter information.
-- Mobile users should not need hover behavior.
+- 卡片应使用语义化链接，而不是可点击的 `div`。
+- 图片需要有合适的 `alt`，装饰性图片可使用空 `alt`。
+- focus 状态必须清楚可见。
+- 预览内容不能成为唯一的信息入口。
+- 移动端用户不应依赖 hover 行为。
 
-## Files To Change During Implementation
+## 实施时预计修改的文件
 
-Expected implementation files:
+预计修改：
 
 - `docs/.vitepress/theme/components/CourseIndex.vue`
 - `docs/.vitepress/theme/index.ts`
@@ -193,36 +197,36 @@ Expected implementation files:
 - `docs/Y3S2/CCD/CCD-README.md`
 - `docs/Y3S2/EMFT/EMFT-README.md`
 
-No chapter-note Markdown files should be edited.
+不应修改任何章节笔记 Markdown 文件。
 
-## Verification
+## 验证计划
 
-Run:
+运行：
 
 ```bash
 npm run docs:build
 ```
 
-Then start the dev server:
+然后启动开发服务器：
 
 ```bash
 npm run docs:dev
 ```
 
-Check:
+检查：
 
-- DSP, CCD, and EMFT README pages render card indexes.
-- Left sidebar remains visible on those README pages.
-- Right outline is absent on those README pages and the grid uses the extra width.
-- Ordinary chapter pages still show their normal layout and outline.
-- Desktop widths show 2, 3, or 4 columns depending on available width.
-- Mobile width uses compact horizontal cards.
-- Dark mode looks intentional.
-- Hover and keyboard focus show previews on desktop.
-- Missing-cover fallback does not show broken images.
+- DSP、CCD、EMFT README 页面正常渲染卡片目录。
+- 这些 README 页面左侧 sidebar 仍然显示。
+- 这些 README 页面右侧 outline 不显示，卡片网格使用额外宽度。
+- 普通章节页面仍保持原布局和右侧 outline。
+- 桌面端根据宽度显示 2、3 或 4 列。
+- 移动端显示紧凑横向卡片。
+- 暗色模式观感正常，不刺眼、不破坏层级。
+- 桌面端 hover 和键盘 focus 能显示预览。
+- 无封面 fallback 不出现破图。
 
-## Risks
+## 风险
 
-- Inline README data can become verbose. This is acceptable because it keeps course structure explicit and avoids runtime filesystem assumptions.
-- Hover previews near the right edge need collision handling or conservative positioning so they do not clip.
-- Some chapter first images may be formulas or screenshots that are not ideal covers. Manual `cover` overrides are the intended correction path.
+- README 内联数据会比较长。这个代价可以接受，因为它让课程结构显式、可控，也避免运行时文件系统假设。
+- 靠近右边缘的 hover 预览需要保守定位或碰撞处理，避免被裁切。
+- 某些章节的第一张图可能是公式或截图，不一定适合做封面。预期做法是后续通过手动 `cover` 覆盖。
