@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { withBase } from 'vitepress'
 
 interface CourseIndexItem {
@@ -8,6 +8,12 @@ interface CourseIndexItem {
   subtitle?: string
   link: string
   cover?: string
+}
+
+interface ResolvedCourseIndexItem extends CourseIndexItem {
+  coverUrl: string
+  notePath: string
+  previewKey: string
 }
 
 interface CourseIndexGroup {
@@ -30,12 +36,28 @@ const courseImageUrls = import.meta.glob('../../../Y3S*/**/*.{png,jpg,jpeg,PNG,J
   import: 'default',
 }) as Record<string, string>
 
+const courseNoteLoaders = import.meta.glob('../../../Y3S*/**/*.md', {
+  query: '?raw',
+  import: 'default',
+}) as Record<string, () => Promise<string>>
+
 const courseImageUrlByPath = new Map(
   Object.entries(courseImageUrls).map(([path, url]) => [
     normalizeDocsPath(path.replace(/^\.\.\/\.\.\/\.\.\//, '')),
     url,
   ]),
 )
+
+const courseNoteLoaderByPath = new Map(
+  Object.entries(courseNoteLoaders).map(([path, loader]) => [
+    normalizeDocsPath(path.replace(/^\.\.\/\.\.\/\.\.\//, '')),
+    loader,
+  ]),
+)
+
+const previewTexts = ref<Record<string, string>>({})
+const previewLoading = ref<Record<string, boolean>>({})
+const previewFailures = ref<Record<string, boolean>>({})
 
 function stripAngleBrackets(value: string) {
   return value.trim().replace(/^<|>$/g, '')
@@ -47,6 +69,14 @@ function isSpecialLink(value: string) {
 
 function replaceMarkdownExtension(value: string) {
   return value.replace(/\.md(?=([?#]|$))/i, '.html')
+}
+
+function safeDecodePath(value: string) {
+  try {
+    return decodeURIComponent(value)
+  } catch {
+    return value
+  }
 }
 
 function normalizeDocsPath(value: string) {
@@ -71,6 +101,21 @@ function joinDocsPath(basePath: string, cover: string) {
   return normalizeDocsPath(`${basePath}/${cover}`)
 }
 
+function resolveNotePath(link: string) {
+  const clean = stripAngleBrackets(link)
+  if (isSpecialLink(clean)) return ''
+
+  const pathOnly = safeDecodePath(clean.split(/[?#]/)[0] ?? '')
+  if (!pathOnly) return ''
+
+  const markdownPath = pathOnly.replace(/\.html$/i, '.md')
+  if (markdownPath.startsWith('/')) {
+    return normalizeDocsPath(markdownPath.replace(/^\/+/, ''))
+  }
+
+  return normalizeDocsPath(`${props.basePath}/${markdownPath}`)
+}
+
 function resolveLink(link: string) {
   const clean = stripAngleBrackets(link)
   if (isSpecialLink(clean)) return clean
@@ -88,13 +133,161 @@ function resolveCover(cover?: string) {
   return courseImageUrlByPath.get(joinDocsPath(props.basePath, clean)) ?? ''
 }
 
+function isTocHeading(value: string) {
+  const headingText = value.trim().replace(/^#{1,6}\s+/, '')
+  return /(?:章节目录|目录|Table of Contents|Contents)/i.test(headingText)
+}
+
+function headingLevel(value: string) {
+  return value.trim().match(/^(#{1,6})\s+/)?.[1].length ?? 0
+}
+
+function withoutFrontmatter(markdown: string) {
+  return markdown.replace(/^\uFEFF?---\r?\n[\s\S]*?\r?\n---\r?\n/, '')
+}
+
+function getLinesAfterToc(lines: string[]) {
+  const tocIndex = lines.findIndex((line) => isTocHeading(line))
+  if (tocIndex === -1) return { lines, hasToc: false }
+
+  const tocLevel = headingLevel(lines[tocIndex]) || 2
+  const bodyStart = lines.findIndex((line, index) => {
+    const level = headingLevel(line)
+    return index > tocIndex && level > 0 && level <= tocLevel
+  })
+
+  return {
+    lines: bodyStart >= 0 ? lines.slice(bodyStart) : [],
+    hasToc: true,
+  }
+}
+
+function cleanMarkdownLine(line: string) {
+  let text = line.trim()
+  if (!text || /^---+$/.test(text) || /^!\[[^\]]*]/.test(text)) return ''
+  if (/^<\/?(?:div|span|p|br)\b/i.test(text)) return ''
+
+  if (/^\|/.test(text)) {
+    const cells = text
+      .split('|')
+      .map((cell) => cell.trim())
+      .filter(Boolean)
+
+    if (!cells.length || cells.every((cell) => /^:?-{3,}:?$/.test(cell))) return ''
+    text = cells.slice(0, 2).join(': ')
+  }
+
+  return text
+    .replace(/^#{1,6}\s+/, '')
+    .replace(/^>{1,}\s*/, '')
+    .replace(/^\[!(?:NOTE|TIP|IMPORTANT|CAUTION|WARNING)\]\s*/i, '')
+    .replace(/^:{3,4}\s*\w*\s*/, '')
+    .replace(/^[-*+]\s+/, '')
+    .replace(/^\d+\.\s+/, '')
+    .replace(/!\[[^\]]*]\([^)]+\)/g, '')
+    .replace(/\[([^\]]+)]\([^)]+\)/g, '$1')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/\$([^$]+)\$/g, '$1')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function excerptMarkdown(markdown: string) {
+  const { lines, hasToc } = getLinesAfterToc(withoutFrontmatter(markdown).split(/\r?\n/))
+  const firstBodyHeading = hasToc ? 0 : lines.findIndex((line) => /^##\s+/.test(line.trim()))
+  const bodyLines = firstBodyHeading >= 0 ? lines.slice(firstBodyHeading) : lines
+  const parts: string[] = []
+  let inFence = false
+  let inMath = false
+
+  for (const line of bodyLines) {
+    const trimmed = line.trim()
+
+    if (/^```/.test(trimmed)) {
+      inFence = !inFence
+      continue
+    }
+
+    if (/^\$\$/.test(trimmed)) {
+      inMath = !inMath
+      continue
+    }
+
+    if (inFence || inMath) continue
+
+    const text = cleanMarkdownLine(line)
+    if (!text) continue
+
+    parts.push(text)
+    if (parts.join(' ').length >= 260 || parts.length >= 5) break
+  }
+
+  const preview = parts.join(' / ')
+  if (!preview) return '暂无正文预览'
+
+  return preview.length > 280 ? `${preview.slice(0, 277)}...` : preview
+}
+
+function setPreviewText(key: string, value: string) {
+  previewTexts.value = { ...previewTexts.value, [key]: value }
+}
+
+function setPreviewLoading(key: string, value: boolean) {
+  previewLoading.value = { ...previewLoading.value, [key]: value }
+}
+
+function setPreviewFailure(key: string, value: boolean) {
+  previewFailures.value = { ...previewFailures.value, [key]: value }
+}
+
+async function loadPreview(item: ResolvedCourseIndexItem) {
+  if (!item.previewKey || previewTexts.value[item.previewKey] || previewLoading.value[item.previewKey]) {
+    return
+  }
+
+  const loader = courseNoteLoaderByPath.get(item.notePath)
+  if (!loader) {
+    setPreviewText(item.previewKey, '暂无正文预览')
+    return
+  }
+
+  setPreviewLoading(item.previewKey, true)
+  setPreviewFailure(item.previewKey, false)
+
+  try {
+    const markdown = await loader()
+    setPreviewText(item.previewKey, excerptMarkdown(markdown))
+  } catch {
+    setPreviewFailure(item.previewKey, true)
+  } finally {
+    setPreviewLoading(item.previewKey, false)
+  }
+}
+
+function getPreviewText(item: ResolvedCourseIndexItem) {
+  if (previewTexts.value[item.previewKey]) return previewTexts.value[item.previewKey]
+  if (previewLoading.value[item.previewKey]) return '正在读取正文预览...'
+  if (previewFailures.value[item.previewKey]) return '暂时无法读取正文预览'
+
+  return '正在读取正文预览...'
+}
+
 const resolvedGroups = computed(() =>
   props.groups.map((group) => ({
     ...group,
-    items: group.items.map((item) => ({
-      ...item,
-      coverUrl: resolveCover(item.cover),
-    })),
+    items: group.items.map((item) => {
+      const notePath = resolveNotePath(item.link)
+
+      return {
+        ...item,
+        coverUrl: resolveCover(item.cover),
+        notePath,
+        previewKey: notePath || item.link,
+      }
+    }),
   })),
 )
 
@@ -121,6 +314,8 @@ const resolvedGroups = computed(() =>
           :key="item.link"
           class="course-index-card"
           :href="resolveLink(item.link)"
+          @focus="loadPreview(item)"
+          @pointerenter="loadPreview(item)"
         >
           <span class="course-index-cover" :class="{ 'is-fallback': !item.coverUrl }">
             <img
@@ -141,20 +336,14 @@ const resolvedGroups = computed(() =>
           </span>
 
           <span class="course-index-preview" aria-hidden="true">
-            <span class="course-index-preview-cover" :class="{ 'is-fallback': !item.coverUrl }">
-              <img
-                v-if="item.coverUrl"
-                :src="item.coverUrl"
-                alt=""
-                loading="lazy"
-              >
-              <span v-else class="course-index-cover-code">{{ item.code }}</span>
-            </span>
             <span class="course-index-preview-body">
               <span class="course-index-preview-code">{{ item.code }}</span>
               <span class="course-index-preview-title">{{ item.title }}</span>
               <span v-if="item.subtitle" class="course-index-preview-subtitle">
                 {{ item.subtitle }}
+              </span>
+              <span class="course-index-preview-text">
+                {{ getPreviewText(item) }}
               </span>
             </span>
           </span>
@@ -275,8 +464,7 @@ const resolvedGroups = computed(() =>
   outline-offset: 3px;
 }
 
-.course-index-cover,
-.course-index-preview-cover {
+.course-index-cover {
   position: relative;
   display: block;
   overflow: hidden;
@@ -295,8 +483,7 @@ const resolvedGroups = computed(() =>
   border-radius: var(--course-index-radius) var(--course-index-radius) 0 0;
 }
 
-.course-index-cover::after,
-.course-index-preview-cover::after {
+.course-index-cover::after {
   content: "";
   position: absolute;
   inset: auto -20% -35%;
@@ -307,8 +494,7 @@ const resolvedGroups = computed(() =>
   transform: rotate(-8deg);
 }
 
-.course-index-cover img,
-.course-index-preview-cover img {
+.course-index-cover img {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -318,8 +504,7 @@ const resolvedGroups = computed(() =>
   object-fit: cover;
 }
 
-.course-index-cover.is-fallback,
-.course-index-preview-cover.is-fallback {
+.course-index-cover.is-fallback {
   display: grid;
   place-items: center;
 }
@@ -383,14 +568,20 @@ const resolvedGroups = computed(() =>
     transform 0.18s ease;
 }
 
-.course-index-preview-cover {
-  height: 150px;
-}
-
 .course-index-preview-body {
   display: grid;
-  gap: 6px;
-  padding: 13px 15px 15px;
+  gap: 7px;
+  padding: 14px 15px 15px;
+}
+
+.course-index-preview-text {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--vp-c-text-2);
+  font-size: 0.82rem;
+  line-height: 1.58;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
 }
 
 @media (hover: hover) and (pointer: fine) and (min-width: 769px) {
