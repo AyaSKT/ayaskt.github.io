@@ -109,7 +109,6 @@ pageClass: course-index-page
 
 
 
-![alt text](EMFT-README.attachments/1781196007203.jpg)
 
 
 ## Electromagnetic Field and Microwave Technology (UESTC4002)
