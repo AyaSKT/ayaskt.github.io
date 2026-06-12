@@ -1,5 +1,15 @@
 # Lecture 18 Digital to Analog Conversion 数模转换
 
+**だからどんな時も夢が僕らの太陽さ，**  
+**所以啊 不论何时 梦想都是我们的太阳啊，**
+
+**泣いちゃった後は笑顔で，明日を語ればいいよ。**  
+**拭去泪水后笑着聊起明天，心情就好起来了。**
+
+<div align="right">——虹ヶ咲学園スクールアイドル同好会 《夢が僕らの太陽さ》</div>
+
+![alt text](<CCD Lecture 18 Digital to Analog Conversion.attachments/1781248048842.jpg>)
+
 ## 章节目录
 
 - [章节目录](#章节目录)

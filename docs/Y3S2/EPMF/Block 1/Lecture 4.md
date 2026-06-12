@@ -107,6 +107,9 @@ $$\text{沟通渠道数} = \frac{n(n-1)}{2}$$
 2. 项目管理计划更新 Project Management Plan Updates
 3. 项目文件更新 Project Documents Updates
 
+> [!IMPORTANT]
+> 后续各过程将省略 Input/Tools/Output 的逐条罗列，重点放在过程定义、关键收益与核心概念上。
+
 #### 沟通技术 Communication Technology
 
 影响沟通技术选择的因素包括：
@@ -162,30 +165,6 @@ $$\text{沟通渠道数} = \frac{n(n-1)}{2}$$
 
 此过程的关键收益是在项目团队和相关方之间实现高效的信息流。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 工作绩效报告 Work Performance Reports
-4. 事业环境因素 Enterprise Environmental Factors
-5. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 沟通技术 Communication Technology
-2. 沟通方法 Communication Methods
-3. 沟通技能 Communication Skills
-4. 项目管理信息系统 Project Management Information System
-5. 项目报告 Project Reporting
-6. 人际关系与团队技能 Interpersonal and Team Skills
-7. 会议 Meetings
-
-**输出 Outputs：**
-
-1. 项目沟通 Project Communications
-2. 项目管理计划更新 Project Management Plan Updates
-3. 项目文件更新 Project Documents Updates
-4. 组织过程资产更新 Organizational Process Assets Updates
 
 #### 有效沟通管理的技术和注意事项
 
@@ -212,28 +191,7 @@ $$\text{沟通渠道数} = \frac{n(n-1)}{2}$$
 
 此过程的关键收益是按照沟通管理计划和相关方参与计划中定义的方式实现最佳信息流。此过程在整个项目期间执行。
 
-**输入 Inputs：**
 
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 工作绩效数据 Work Performance Data
-4. 事业环境因素 Enterprise Environmental Factors
-5. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 项目管理信息系统 Project Management Information System
-3. 数据分析 Data Analysis
-4. 人际关系与团队技能 Interpersonal and Team Skills
-5. 会议 Meetings
-
-**输出 Outputs：**
-
-1. 工作绩效信息 Work Performance Information
-2. 变更请求 Change Requests
-3. 项目管理计划更新 Project Management Plan Updates
-4. 项目文件更新 Project Documents Updates
 
 ## Lec. 4 - Ses. 2 项目风险管理 Project Risk Management
 
@@ -274,23 +232,6 @@ $$\text{沟通渠道数} = \frac{n(n-1)}{2}$$
 
 此过程的关键收益是确保风险管理的程度、类型和可见度与风险暴露程度以及项目对组织和其他相关方的重要性相适应。
 
-**输入 Inputs：**
-
-1. 项目章程 Project Charter
-2. 项目管理计划 Project Management Plan
-3. 项目文件 Project Documents
-4. 事业环境因素 Enterprise Environmental Factors
-5. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 数据分析 Data Analysis
-3. 会议 Meetings
-
-**输出 Outputs：**
-
-1. 风险管理计划 Risk Management Plan
 
 #### 风险管理计划内容
 
@@ -360,29 +301,6 @@ $$\text{风险值} = \text{概率} \times \text{影响}$$
 
 此过程的关键收益是记录现有的单个项目风险和整体项目风险的来源。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 协议 Agreements
-4. 采购文档 Procurement Documentation
-5. 事业环境因素 Enterprise Environmental Factors
-6. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 数据收集 Data Gathering
-3. 数据分析 Data Analysis
-4. 人际关系与团队技能 Interpersonal and Team Skills
-5. 提示清单 Prompt Lists
-6. 会议 Meetings
-
-**输出 Outputs：**
-
-1. 风险登记册 Risk Register
-2. 风险报告 Risk Report
-3. 项目文件更新 Project Documents Updates
 
 #### 识别风险 — 数据收集
 
@@ -427,30 +345,6 @@ $$\text{风险值} = \text{概率} \times \text{影响}$$
 
 此过程的关键收益是将精力集中在高优先级风险上。此过程在整个项目期间执行。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 事业环境因素 Enterprise Environmental Factors
-4. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 数据收集 Data Gathering
-3. 数据分析 Data Analysis
-4. 人际关系与团队技能 Interpersonal and Team Skills
-5. 风险分类 Risk Categorization
-6. 数据展示 Data Representation
-7. 会议 Meetings
-
-**输出 Outputs：**
-
-1. 项目文件更新 Project Documents Updates
-   - 假设日志 Assumption Log
-   - 问题日志 Issue Log
-   - 风险登记册 Risk Register
-   - 风险报告 Risk Report
 
 #### 定性分析工具 — 概率和影响矩阵
 
@@ -479,24 +373,6 @@ $$\text{风险值} = \text{概率} \times \text{影响}$$
 
 此过程的关键收益是量化整体项目风险暴露程度，并可提供额外的定量风险信息以支持风险应对规划。此过程并非每个项目都必需，但在使用时会在整个项目期间执行。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 事业环境因素 Enterprise Environmental Factors
-4. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 数据收集 Data Gathering
-3. 人际关系与团队技能 Interpersonal and Team Skills
-4. 不确定性表现方式 Representations of Uncertainty
-5. 数据分析 Data Analysis
-
-**输出 Outputs：**
-
-1. 项目文件更新 Project Documents Updates
 
 #### 不确定性表现方式 — 概率分布
 
@@ -554,30 +430,6 @@ $$\text{EMV} = \sum (\text{概率} \times \text{结果值})$$
 
 此过程的关键收益是确定应对整体项目风险和单个项目风险的适当方式。此过程在整个项目期间执行。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 事业环境因素 Enterprise Environmental Factors
-4. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 数据收集 Data Gathering
-3. 人际关系与团队技能 Interpersonal and Team Skills
-4. 威胁应对策略 Strategies for Threats
-5. 机会应对策略 Strategies for Opportunities
-6. 应急应对策略 Contingent Response Strategies
-7. 整体项目风险应对策略 Strategies for Overall Project Risk
-8. 数据分析 Data Analysis
-9. 决策 Decision Making
-
-**输出 Outputs：**
-
-1. 变更请求 Change Requests
-2. 项目管理计划更新 Project Management Plan Updates
-3. 项目文件更新 Project Documents Updates
 
 #### 威胁应对策略（负面风险）
 
@@ -617,22 +469,7 @@ $$\text{EMV} = \sum (\text{概率} \times \text{结果值})$$
 
 此过程的关键收益是确保商定的风险应对措施按计划执行，以应对整体项目风险暴露、最小化单个项目威胁并最大化单个项目机会。此过程在整个项目期间执行。
 
-**输入 Inputs：**
 
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 人际关系与团队技能 Interpersonal and Team Skills
-3. 项目管理信息系统 Project Management Information System
-
-**输出 Outputs：**
-
-1. 变更请求 Change Requests
-2. 项目文件更新 Project Documents Updates
 
 ---
 
@@ -648,26 +485,6 @@ $$\text{EMV} = \sum (\text{概率} \times \text{结果值})$$
 
 此过程的关键收益是使项目决策能够基于关于整体项目风险暴露和单个项目风险的当前信息。此过程在整个项目期间执行。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 工作绩效数据 Work Performance Data
-4. 工作绩效报告 Work Performance Reports
-
-**工具与技术 Tools & Techniques：**
-
-1. 数据分析 Data Analysis
-2. 审计 Audits
-3. 会议 Meetings
-
-**输出 Outputs：**
-
-1. 工作绩效信息 Work Performance Information
-2. 变更请求 Change Requests
-3. 项目管理计划更新 Project Management Plan Updates
-4. 项目文件更新 Project Documents Updates
-5. 组织过程资产更新 Organizational Process Assets Updates
 
 #### 监督风险 — 数据分析
 

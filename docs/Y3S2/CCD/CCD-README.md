@@ -82,8 +82,8 @@ pageClass: course-index-page
         },
         {
           code: 'Lecture 10',
-          title: '复习',
-          subtitle: 'Revision',
+          title: '中期复习',
+          subtitle: 'Middle Revision',
           link: 'Part 2/CCD Lecture 10 Revision.md',
           cover: 'Part 2/CCD Lecture 9 Oscillators.attachments/1780209422588.JPG'
         }
@@ -130,21 +130,21 @@ pageClass: course-index-page
           title: '锁相环',
           subtitle: 'Phase-Locked Loop (PLL)',
           link: 'Part 4/CCD Lecture 16 Phase-Locked Loop PLL.md',
-          cover: 'Part 4/CCD Lecture 16 Phase-Locked Loop PLL.attachments/pll_slope_detector.jpg'
+          cover: 'Part 4/CCD Lecture 16 Phase-Locked Loop PLL.attachments/1781247638338.PNG'
         },
         {
           code: 'Lecture 18',
           title: '数模转换',
           subtitle: 'Digital to Analog Conversion',
           link: 'Part 4/CCD Lecture 18 Digital to Analog Conversion.md',
-          cover: 'Part 4/CCD Lecture 18 Digital to Analog Conversion.attachments/dac_system_interface.jpg'
+          cover: 'Part 4/CCD Lecture 18 Digital to Analog Conversion.attachments/1781248048842.jpg'
         },
         {
           code: 'Lecture 19-20',
           title: 'ADC 与转换器误差',
           subtitle: 'ADC and Converter Errors',
           link: 'Part 4/CCD Lecture 19-20 ADC and Converter Errors.md',
-          cover: 'Part 4/CCD Lecture 19-20 ADC and Converter Errors.attachments/adc_intro.jpg'
+          cover: 'Part 4/CCD Lecture 19-20 ADC and Converter Errors.attachments/1781248130127.jpg'
         }
       ]
     }

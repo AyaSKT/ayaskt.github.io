@@ -1,5 +1,15 @@
 # Lecture 19-20 ADC and Converter Errors 模数转换与转换器误差
 
+**もっと高く高くまで 羽ばたいてみたい，**  
+**高一点再高一点 想要展翅高飞，**
+
+**今日に未来色の軌道描いて 地平の先まで。**  
+**描绘一条通往 地平线彼端彩色轨迹。**
+
+<div align="right">——初星学園/葛城リーリヤ/ナユタン星人 《白線》</div>
+
+![alt text](<CCD Lecture 19-20 ADC and Converter Errors.attachments/1781248130127.jpg>)
+
 ## 章节目录
 
 - [章节目录](#章节目录)

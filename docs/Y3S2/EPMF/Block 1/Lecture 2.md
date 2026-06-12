@@ -86,6 +86,10 @@
 1. 范围管理计划 Scope Management Plan
 2. 需求管理计划 Requirements Management Plan
 
+> [!IMPORTANT]
+> 后续各过程将省略 Input/Tools/Output 的逐条罗列，重点放在过程定义、关键收益与核心概念上。
+
+
 ---
 
 ### 2-1-3 收集需求 Collect Requirements
@@ -98,31 +102,6 @@
 
 此过程的关键收益是为定义产品范围和项目范围提供基础。
 
-**输入 Inputs：**
-
-1. 项目章程 Project Charter
-2. 项目管理计划 Project Management Plan
-3. 项目文件 Project Documents
-4. 商业文件 Business Documents
-5. 协议 Agreements
-6. 事业环境因素 Enterprise Environmental Factors
-7. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 数据分析 Data Analysis
-3. 数据收集 Data Gathering
-4. 决策 Decision Making
-5. 数据展示 Data Representation
-6. 人际关系与团队技能 Interpersonal and Team Skills
-7. 上下文图 Context Diagram
-8. 原型法 Prototypes
-
-**输出 Outputs：**
-
-1. 需求文件 Requirements Documentation
-2. 需求跟踪矩阵 Requirements Traceability Matrix
 
 #### 收集需求 — 工具与技术
 
@@ -163,26 +142,7 @@
 
 此过程的关键收益是描述产品、服务或成果的边界和验收标准。
 
-**输入 Inputs：**
 
-1. 项目章程 Project Charter
-2. 项目管理计划 Project Management Plan
-3. 项目文件 Project Documents
-4. 事业环境因素 Enterprise Environmental Factors
-5. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 数据分析 Data Analysis
-3. 决策 Decision Making
-4. 人际关系与团队技能 Interpersonal and Team Skills
-5. 产品分析 Product Analysis
-
-**输出 Outputs：**
-
-1. 项目范围说明书 Project Scope Statement
-2. 项目文件更新 Project Documents Updates
 
 ---
 
@@ -197,22 +157,6 @@
 
 此过程的关键收益是提供一个关于必须交付什么的框架。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 事业环境因素 Enterprise Environmental Factors
-4. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 分解 Decomposition
-
-**输出 Outputs：**
-
-1. 范围基准 Scope Baseline
-2. 项目文件更新 Project Documents Updates
 
 #### 分解 Decomposition
 
@@ -252,24 +196,6 @@
 
 此过程的关键收益是通过验证每个可交付成果，使验收过程具有客观性，并增加最终产品、服务或成果被接受的可能性。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 经过验证的可交付成果 Verified Deliverables
-4. 工作绩效数据 Work Performance Data
-
-**工具与技术 Tools & Techniques：**
-
-1. 检查 Inspection
-2. 决策 Decision Making
-
-**输出 Outputs：**
-
-1. 已验收的可交付成果 Accepted Deliverables
-2. 工作绩效信息 Work Performance Information
-3. 变更请求 Change Requests
-4. 项目文件更新 Project Documents Updates
 
 #### 检查 Inspection
 
@@ -292,23 +218,6 @@
 
 此过程的关键收益是在整个项目期间维护范围基准。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 工作绩效数据 Work Performance Data
-4. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 数据分析 Data Analysis
-
-**输出 Outputs：**
-
-1. 工作绩效信息 Work Performance Information
-2. 变更请求 Change Requests
-3. 项目管理计划更新 Project Management Plan Updates
-4. 项目文件更新 Project Documents Updates
 
 #### 数据分析 Data Analysis
 
@@ -367,22 +276,7 @@
 
 此过程的关键收益是为整个项目期间如何管理项目进度提供指导和方向。
 
-**输入 Inputs：**
 
-1. 项目章程 Project Charter
-2. 项目管理计划 Project Management Plan
-3. 事业环境因素 Enterprise Environmental Factors
-4. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 数据分析 Data Analysis
-3. 会议 Meetings
-
-**输出 Outputs：**
-
-1. 进度管理计划 Schedule Management Plan
 
 ---
 
@@ -397,26 +291,7 @@
 
 此过程的关键收益是将工作包分解为活动，为估算、进度安排、执行、监控和控制项目工作提供基础。
 
-**输入 Inputs：**
 
-1. 项目管理计划 Project Management Plan
-2. 事业环境因素 Enterprise Environmental Factors
-3. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 分解 Decomposition
-3. 滚动式规划 Rolling Wave Planning
-4. 会议 Meetings
-
-**输出 Outputs：**
-
-1. 活动列表 Activity List
-2. 活动属性 Activity Attributes
-3. 里程碑清单 Milestone List
-4. 变更请求 Change Requests
-5. 项目管理计划更新 Project Management Plan Updates
 
 ---
 
@@ -431,23 +306,6 @@
 
 此过程的关键收益是定义工作的逻辑顺序，以便在所有项目约束条件下获得最高效率。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 事业环境因素 Enterprise Environmental Factors
-3. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 前导图法 Precedence Diagramming Method (PDM)
-2. 确定和整合依赖关系 Dependency Determination and Integration
-3. 提前量与滞后量 Leads and Lags
-4. 项目管理信息系统 Project Management Information System
-
-**输出 Outputs：**
-
-1. 项目进度网络图 Project Schedule Network Diagrams
-2. 项目文件更新 Project Documents Updates
 
 #### 前导图法 PDM
 
@@ -494,29 +352,6 @@ PDM 包含四种依赖关系类型：
 
 此过程的关键收益是确定每项活动完成所需的时间量。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 事业环境因素 Enterprise Environmental Factors
-4. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 类比估算 Analogous Estimating
-3. 参数估算 Parametric Estimating
-4. 三点估算 Three-Point Estimating
-5. 自下而上估算 Bottom-Up Estimating
-6. 数据分析 Data Analysis
-7. 决策 Decision Making
-8. 会议 Meetings
-
-**输出 Outputs：**
-
-1. 持续时间估算 Duration Estimates
-2. 估算依据 Basis of Estimates
-3. 项目文件更新 Project Documents Updates
 
 #### 三点估算 Three-Point Estimating
 
@@ -567,34 +402,6 @@ $$O = 15 - 2 = 13, \quad M = 15, \quad P = 15 + 5 = 20$$
 
 此过程的关键收益是生成一个包含完成项目活动的计划日期的进度模型。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 协议 Agreements
-4. 事业环境因素 Enterprise Environmental Factors
-5. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 进度网络分析 Schedule Network Analysis
-2. 关键路径法 Critical Path Method
-3. 资源优化 Resource Optimization
-4. 数据分析 Data Analysis
-5. 提前量与滞后量 Leads and Lags
-6. 进度压缩 Schedule Compression
-7. 项目管理信息系统 Project Management Information System
-8. 敏捷发布规划 Agile Release Planning
-
-**输出 Outputs：**
-
-1. 进度基准 Schedule Baseline
-2. 项目进度计划 Project Schedule
-3. 进度数据 Schedule Data
-4. 项目日历 Project Calendars
-5. 变更请求 Change Requests
-6. 项目管理计划更新 Project Management Plan Updates
-7. 项目文件更新 Project Documents Updates
 
 #### 关键路径法 Critical Path Method
 
@@ -685,35 +492,7 @@ $LF = LS + D$（从 0 开始时）
 
 此过程的关键收益是在整个项目期间维护进度基准。
 
-**输入 Inputs：**
 
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 工作绩效数据 Work Performance Data
-4. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 数据分析 Data Analysis
-2. 关键路径法 Critical Path Method
-3. 项目管理信息系统 Project Management Information System
-4. 资源优化 Resource Optimization
-5. 提前量与滞后量 Leads and Lags
-6. 进度压缩 Schedule Compression
-
-**输出 Outputs：**
-
-1. 工作绩效信息 Work Performance Information
-2. 进度预测 Schedule Forecasts
-3. 变更请求 Change Requests
-4. 项目管理计划更新 Project Management Plan Updates
-5. 项目文件更新 Project Documents Updates
-
-> [!NOTE]
-> 控制进度的数据分析技术包括：
-> - **偏差分析**：确定进度基准与实际进度绩效之间的差异
-> - **趋势分析**：检查项目绩效随时间的变化趋势
-> - **挣值分析**：使用 SV 和 SPI 等指标评估进度绩效
 
 ## Block 1 例题 Examples
 

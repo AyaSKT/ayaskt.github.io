@@ -1,5 +1,15 @@
 # Lecture 16 Phase-Locked Loop PLL 锁相环
 
+**歌って聞かせて　この話の続き，**  
+**歌唱给我听吧 关于这段故事的后续，**
+
+**連れて行って見たことない星まで。**  
+**直至抵达我们从未去过的星球。**
+
+<div align="right">——さユり 《花の塔》</div>
+
+![alt text](<CCD Lecture 16 Phase-Locked Loop PLL.attachments/1781247638338.PNG>)
+
 ## 章节目录
 
 - [章节目录](#章节目录)

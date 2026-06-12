@@ -73,6 +73,9 @@
 
 1. 成本管理计划 Cost Management Plan
 
+> [!IMPORTANT]
+> 后续各过程将省略 Input/Tools/Output 的逐条罗列，重点放在过程定义、关键收益与核心概念上。
+
 #### 获取项目资源的方式
 
 - 自制 Making
@@ -108,29 +111,6 @@
 
 应考虑各种替代方案和权衡（如自制 vs 购买 vs 租赁、资源共享等），可能包括人工、材料、设备、服务、设施、IT 等。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 事业环境因素 Enterprise Environmental Factors
-4. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 类比估算 Analogous Estimating
-3. 参数估算 Parametric Estimating
-4. 自下而上估算 Bottom-Up Estimating
-5. 三点估算 Three-Point Estimating
-6. 数据分析 Data Analysis
-7. 项目管理信息系统 Project Management Information System
-8. 决策 Decision Making
-
-**输出 Outputs：**
-
-1. 成本估算 Cost Estimates
-2. 估算依据 Basis of Estimates
-3. 项目文件更新 Project Documents Updates
 
 #### 估算工具与技术
 
@@ -165,29 +145,6 @@
 
 此过程的关键收益是确定可以据此监控和控制项目绩效的成本基准。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 商业文件 Business Documents
-4. 协议 Agreements
-5. 事业环境因素 Enterprise Environmental Factors
-6. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 成本汇总 Cost Aggregation
-3. 数据分析 Data Analysis
-4. 历史信息审查 Historical Information Review
-5. 资金限制平衡 Funding Limit Reconciliation
-6. 融资 Financing
-
-**输出 Outputs：**
-
-1. 成本基准 Cost Baseline
-2. 项目资金需求 Project Funding Requirements
-3. 项目文件更新 Project Documents Updates
 
 #### 项目预算组成
 
@@ -214,28 +171,6 @@
 
 此过程的关键收益是在整个项目期间维护成本基准。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 项目资金需求 Project Funding Requirements
-4. 工作绩效数据 Work Performance Data
-5. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 数据分析 Data Analysis
-3. 完工尚需绩效指数 To-Complete Performance Index (TCPI)
-4. 项目管理信息系统 Project Management Information System
-
-**输出 Outputs：**
-
-1. 工作绩效信息 Work Performance Information
-2. 成本预测 Cost Forecasts
-3. 变更请求 Change Requests
-4. 项目管理计划更新 Project Management Plan Updates
-5. 项目文件更新 Project Documents Updates
 
 #### 挣值分析 Earned Value Analysis (EVA)
 
@@ -317,26 +252,6 @@
 
 此过程的关键收益是根据项目的类型和复杂性，确定管理项目资源所需的方法和管理力度。
 
-**输入 Inputs：**
-
-1. 项目章程 Project Charter
-2. 项目管理计划 Project Management Plan
-3. 项目文件 Project Documents
-4. 事业环境因素 Enterprise Environmental Factors
-5. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 数据展示 Data Representation
-3. 组织理论 Organizational Theory
-4. 会议 Meetings
-
-**输出 Outputs：**
-
-1. 资源管理计划 Resource Management Plan
-2. 团队章程 Team Charter
-3. 项目文件更新 Project Documents Updates
 
 #### 数据展示 — 层级图
 
@@ -381,29 +296,7 @@ RAM 的一个典型示例是 **RACI 矩阵**：
 
 此过程的关键收益是确定完成项目所需资源的类型、数量和特征。
 
-**输入 Inputs：**
 
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 事业环境因素 Enterprise Environmental Factors
-4. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 专家判断 Expert Judgment
-2. 自下而上估算 Bottom-Up Estimating
-3. 类比估算 Analogous Estimating
-4. 参数估算 Parametric Estimating
-5. 数据分析 Data Analysis
-6. 项目管理信息系统 Project Management Information System
-7. 会议 Meetings
-
-**输出 Outputs：**
-
-1. 资源需求 Resource Requirements
-2. 估算依据 Basis of Estimates
-3. 资源分解结构 Resource Breakdown Structure
-4. 项目文件更新 Project Documents Updates
 
 ---
 
@@ -418,30 +311,7 @@ RAM 的一个典型示例是 **RACI 矩阵**：
 
 此过程的关键收益是概述和指导资源的选择，并将其分配到相应的活动中。
 
-**输入 Inputs：**
 
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 事业环境因素 Enterprise Environmental Factors
-4. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 决策 Decision Making
-2. 人际关系与团队技能 Interpersonal and Team Skills
-3. 预分派 Pre-Assignment
-4. 虚拟团队 Virtual Teams
-
-**输出 Outputs：**
-
-1. 物质资源分配 Physical Resource Assignments
-2. 项目团队分配 Project Team Assignments
-3. 资源日历 Resource Calendars
-4. 变更请求 Change Requests
-5. 项目管理计划更新 Project Management Plan Updates
-6. 项目文件更新 Project Documents Updates
-7. 事业环境因素更新 Enterprise Environmental Factors Updates
-8. 组织过程资产更新 Organizational Process Assets Updates
 
 ---
 
@@ -456,32 +326,6 @@ RAM 的一个典型示例是 **RACI 矩阵**：
 
 此过程的关键收益是改善团队合作、增强人际交往能力和 competencies、激励员工、减少人员流失并提高整体项目绩效。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 事业环境因素 Enterprise Environmental Factors
-4. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 集中办公 Colocation
-2. 虚拟团队 Virtual Teams
-3. 沟通技术 Communication Technology
-4. 人际关系与团队技能 Interpersonal and Team Skills
-5. 认可与奖励 Recognition and Rewards
-6. 培训 Training
-7. 个人和团队评估 Individual and Team Assessments
-8. 会议 Meetings
-
-**输出 Outputs：**
-
-1. 团队绩效评估 Team Performance Assessments
-2. 变更请求 Change Requests
-3. 项目管理计划更新 Project Management Plan Updates
-4. 项目文件更新 Project Documents Updates
-5. 事业环境因素更新 Enterprise Environmental Factors Updates
-6. 组织过程资产更新 Organizational Process Assets Updates
 
 #### 塔克曼团队发展模型 Tuckman's Model
 
@@ -522,26 +366,6 @@ RAM 的一个典型示例是 **RACI 矩阵**：
 
 此过程的关键收益是影响团队行为、管理冲突、解决问题。
 
-**输入 Inputs：**
-
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 工作绩效报告 Work Performance Reports
-4. 团队绩效评估 Team Performance Assessments
-5. 事业环境因素 Enterprise Environmental Factors
-6. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 人际关系与团队技能 Interpersonal and Team Skills
-2. 项目管理信息系统 Project Management Information System
-
-**输出 Outputs：**
-
-1. 变更请求 Change Requests
-2. 项目管理计划更新 Project Management Plan Updates
-3. 项目文件更新 Project Documents Updates
-4. 事业环境因素更新 Enterprise Environmental Factors Updates
 
 #### 冲突管理 Conflict Management
 
@@ -579,27 +403,7 @@ RAM 的一个典型示例是 **RACI 矩阵**：
 
 此过程的关键收益是确保分配的实物资源在正确的时间和地点可供项目使用，并在不再需要时释放。
 
-**输入 Inputs：**
 
-1. 项目管理计划 Project Management Plan
-2. 项目文件 Project Documents
-3. 工作绩效数据 Work Performance Data
-4. 协议 Agreements
-5. 组织过程资产 Organizational Process Assets
-
-**工具与技术 Tools & Techniques：**
-
-1. 数据分析 Data Analysis
-2. 问题解决 Problem Solving
-3. 人际关系与团队技能 Interpersonal and Team Skills
-4. 项目管理信息系统 Project Management Information System
-
-**输出 Outputs：**
-
-1. 工作绩效信息 Work Performance Information
-2. 变更请求 Change Requests
-3. 项目管理计划更新 Project Management Plan Updates
-4. 项目文件更新 Project Documents Updates
 
 ## Block 1 例题 Examples
 
