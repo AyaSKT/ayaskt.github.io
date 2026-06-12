@@ -376,13 +376,15 @@ watch(
   .home-course-actions {
     width: 100%;
     max-width: min(760px, 100%);
-    margin: 28px auto 0;
+    margin: 22px auto 0;
     padding-top: 0;
+    gap: 14px;
     justify-items: center;
   }
 
   .home-course-group {
     width: 100%;
+    gap: 7px;
     justify-items: center;
   }
 
@@ -393,12 +395,14 @@ watch(
 
   .home-course-lines {
     width: 100%;
+    gap: 7px;
     justify-items: center;
   }
 
   .home-course-row {
     flex-wrap: wrap;
     justify-content: center;
+    gap: 8px;
     max-width: 100% !important;
   }
 
@@ -407,6 +411,44 @@ watch(
     padding: 0 14px;
     height: 34px;
     border-radius: 17px;
+  }
+}
+
+@media (max-width: 420px) {
+  .home-course-actions {
+    margin-top: 18px;
+    gap: 12px;
+  }
+
+  .home-course-group-title {
+    max-width: 100%;
+  }
+
+  .year-name {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .home-course-row {
+    gap: 7px;
+  }
+
+  .home-course-button {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .home-course-button {
+    flex: 1 1 100%;
+    height: auto;
+    min-height: 34px;
+    justify-content: center;
+    padding: 7px 12px;
+    line-height: 1.25;
+    text-align: center;
+    white-space: normal;
   }
 }
 </style>

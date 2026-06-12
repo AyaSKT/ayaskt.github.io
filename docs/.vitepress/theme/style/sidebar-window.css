@@ -31,6 +31,10 @@
 }
 
 @media (min-width: 960px) {
+  html:has(.VPDoc) .VPLocalNav {
+    display: none !important;
+  }
+
   html:has(.VPDoc) .VPSidebar {
     top: calc(var(--vp-nav-height) + 44px);
     bottom: auto;
@@ -49,9 +53,13 @@
     border-radius: var(--aya-sidebar-radius);
     corner-shape: squircle;
     background: var(--aya-sidebar-bg);
+    background-clip: padding-box;
     box-shadow: var(--aya-sidebar-window-shadow);
+    backdrop-filter: var(--aya-sidebar-glass);
+    -webkit-backdrop-filter: var(--aya-sidebar-glass);
     transform: translateZ(0);
     backface-visibility: hidden;
+    isolation: isolate;
   }
 
   html:has(.VPDoc) .VPSidebar > * {
@@ -260,9 +268,13 @@
     border-radius: var(--aya-sidebar-radius);
     corner-shape: squircle;
     background: var(--aya-sidebar-bg) !important;
+    background-clip: padding-box;
     box-shadow: var(--aya-sidebar-window-shadow);
+    backdrop-filter: var(--aya-sidebar-glass);
+    -webkit-backdrop-filter: var(--aya-sidebar-glass);
     overflow: hidden auto;
     overscroll-behavior: contain;
+    isolation: isolate;
   }
 
   .VPNavScreen .container {

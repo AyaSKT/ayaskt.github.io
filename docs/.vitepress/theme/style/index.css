@@ -35,12 +35,22 @@
 /* 块级公式（$$...$$）居中，并加大与上下内容的间距 */
 .vp-doc .mathjax-block {
   display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
   text-align: center;
   margin: 1.25em 0;
+  padding-bottom: 0.15em;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
 }
 
 .vp-doc .mathjax-block svg {
   display: inline-block;
+}
+
+.vp-doc .mathjax-block mjx-container[jax="SVG"] {
+  max-width: none;
 }
 
 .vp-doc mjx-container[jax="SVG"] {
@@ -59,8 +69,27 @@
 /* 文档内图片整体居中 */
 .vp-doc img {
   display: block;
+  max-width: 100%;
+  height: auto;
   margin-left: auto;
   margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .vp-doc {
+    overflow-wrap: anywhere;
+  }
+
+  .vp-doc .mathjax-block {
+    text-align: left;
+  }
+
+  .vp-doc table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 @media print {
@@ -637,6 +666,27 @@
   .VPHero a.image-src {
     max-width: 256px;
     max-height: 256px;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 959px) {
+  .VPHome .VPHero .image-container {
+    width: min(42vw, 300px) !important;
+    height: min(42vw, 300px) !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .VPHome .VPHero .image-container {
+    width: clamp(220px, 68vw, 280px) !important;
+    height: clamp(220px, 68vw, 280px) !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .VPHome .VPHero .image-container {
+    width: min(58vw, 232px) !important;
+    height: min(58vw, 232px) !important;
   }
 }
 

@@ -45,11 +45,13 @@ const props = withDefaults(defineProps<Props>(), {
 .linkcard a {
     display: flex;
     align-items: center;
+    min-width: 0;
 }
 
 /* 描述链接文字 */
 .linkcard .description {
     flex: 1;
+    min-width: 0;
     font-weight: 500;
     font-size: 16px;
     line-height: 25px;
@@ -66,11 +68,41 @@ const props = withDefaults(defineProps<Props>(), {
 /* logo图片 */
 .linkcard .logo img {
     width: 80px;
+    height: 80px;
     object-fit: contain;
+}
+
+.linkcard .logo {
+    flex: 0 0 auto;
 }
 
 /* 链接下划线去除 */
 .vp-doc a {
     text-decoration: none;
+}
+
+@media (max-width: 480px) {
+    .linkcard {
+        padding: 8px 10px 8px 8px;
+    }
+
+    .linkcard a {
+        gap: 10px;
+    }
+
+    .linkcard .description {
+        margin-left: 8px;
+        font-size: 15px;
+        line-height: 1.55;
+    }
+
+    .linkcard .description span {
+        font-size: 13px;
+    }
+
+    .linkcard .logo img {
+        width: 60px;
+        height: 60px;
+    }
 }
 </style>

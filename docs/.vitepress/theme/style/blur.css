@@ -40,8 +40,20 @@
 
     /* 搜索框透明 */
     .DocSearch-Button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         background-color: rgba(255, 255, 255, 0);
         backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .DocSearch-Button .DocSearch-Search-Icon,
+    .DocSearch-Button svg,
+    .DocSearch-Button .icon,
+    .DocSearch-Button [class^="vpi-"] {
+        flex: 0 0 auto;
+        margin: 0;
     }
 
     /* Feature透明 */

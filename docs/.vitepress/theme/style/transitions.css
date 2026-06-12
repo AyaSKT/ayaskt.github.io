@@ -35,6 +35,11 @@ html:has(.VPDoc) .VPSidebar {
   view-transition-name: sidebar;
 }
 
+/* Doc -> Home 时让 sidebar 跟随 root 快照离场，避免独立玻璃快照残留。 */
+html.vt-doc-to-home:has(.VPDoc) .VPSidebar {
+  view-transition-name: none;
+}
+
 /* 外观切换需要整页一起做圆形裁剪，否则命名元素会脱离 root 动画。 */
 html.vt-appearance .VPNavBar,
 html.vt-appearance .VPLocalNav,
