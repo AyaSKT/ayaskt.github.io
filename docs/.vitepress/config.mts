@@ -388,15 +388,16 @@ export default defineConfig({
        ]
       },
 
-      { text: '第二学年', items: [
+      { text: '早期资料', items: [
         { text: '嵌入式处理器 EP (DT5EDU)', link: 'https://mp.weixin.qq.com/s/Xqwg9KBZHkuYoXQAH-DfGw' },
         { text: '电路分析与设计 CAD (DT5EDU)', link: 'https://mp.weixin.qq.com/s/-_oFpk5asMRE_D6sqlMCsw' },
+        { text: '微电子系统 MS (DT5EDU)', link: 'https://mp.weixin.qq.com/s/-9nZpf5RWmMm46bBMuBrLg' },
 
        ]
       },
 
-      { text: '第一学年', items: [
-        { text: '微电子系统 MS (DT5EDU)', link: 'https://mp.weixin.qq.com/s/-9nZpf5RWmMm46bBMuBrLg' },
+      { text: '杂项', items: [
+        { text: '更新日志', link: '/changelog' },
 
        ]
       },
