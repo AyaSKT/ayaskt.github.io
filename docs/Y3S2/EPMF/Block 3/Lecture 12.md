@@ -1,5 +1,10 @@
 # Lec. 12 Engineering Economics (Outsourcing)
 
+**何もしないで生きていたい，青空だけが見たいのは我儘ですか。**  
+**想要什么都不做地活下去，只想看着蓝天是一种任性吗。**
+
+![alt text](<Lecture 12.attachments/1781256622412.jpg>)
+
 ## Block 3 Part 4 Contents
 
 - [Block 3 Part 4 Contents](#block-3-part-4-contents)

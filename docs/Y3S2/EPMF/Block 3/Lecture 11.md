@@ -1,5 +1,10 @@
 # Lec. 11 Engineering Economics (Break-Even Analysis)
 
+**Поволі звикаєш до неба.**  
+**但你会习惯这片天空。**
+
+![alt text](<Lecture 11.attachments/1781257141092.JPG>)
+
 ## Block 3 Part 3 Contents
 
 - [Block 3 Part 3 Contents](#block-3-part-3-contents)

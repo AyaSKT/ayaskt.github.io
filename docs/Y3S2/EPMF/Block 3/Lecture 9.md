@@ -1,5 +1,10 @@
 # Lec. 9 Introduction to Engineering Economics
 
+**怒ってる？…怒ってない。**  
+**你在生气吗？　…没生气。**
+
+![alt text](<Lecture 9.attachments/1781256522203.jpg>)
+
 ## Block 3 Part 1 Contents
 
 - [Block 3 Part 1 Contents](#block-3-part-1-contents)

@@ -1,5 +1,10 @@
 # Lec. 10 Engineering Economics (Make or Buy)
 
+**In dreams I'm with you.**  
+**让我们在梦中重逢。**
+
+![alt text](<Lecture 10.attachments/1781256840867.JPG>)
+
 ## Block 3 Part 2 Contents
 
 - [Block 3 Part 2 Contents](#block-3-part-2-contents)

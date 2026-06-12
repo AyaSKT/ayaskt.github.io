@@ -66,6 +66,32 @@ This is a **VitePress blog** for university engineering course notes (Chinese). 
 
 `ScrollReveal.vue` uses `IntersectionObserver` for `[data-reveal]` elements.
 
+## Git Commit Workflow
+
+**提交前必须更新 `CHANGELOG.md`。** 将新版本条目写在最上方，格式：
+
+```markdown
+## VX.Y.Z - YYYY-MM-DD
+
+### 新增
+
+- 每条以「-」开头，描述新增内容。无则写「暂无。」。
+
+### 调整
+
+- 描述现有功能的改动。
+
+### 修复
+
+- 描述 bug 修复。
+
+### 删减
+
+- 描述已移除的内容。
+```
+
+版本号遵循 Semantic Versioning（此项目大致以 `V主.次.修订` 递增）。提交信息标题写版本号（如 `V6.4.5`），正文由 changelog 条目概括。
+
 ## Deploy Notes
 
 - No framework build step beyond `npm run docs:build`
