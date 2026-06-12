@@ -66,6 +66,15 @@ $$
 R = SP \cdot Q
 $$
 
+> [!NOTE] 参数说明
+> 其中：
+> - $TC$：总成本 (Total Cost)
+> - $F$：固定成本 (Fixed Cost)
+> - $VC$：单位变动成本 (Variable Cost per unit)
+> - $Q$：产量 (Quantity)
+> - $R$：收入 (Revenue)
+> - $SP$：单位售价 (Selling Price per unit)
+
 盈亏平衡点满足：
 
 $$

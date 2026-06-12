@@ -91,13 +91,19 @@ R&D 需要在品质、成本和速度之间取得平衡。
 
 $$L(y) = \begin{cases} 0, & \text{if } |y-m| \leq \Delta_0 \\ A_0, & \text{otherwise} \end{cases}$$
 
-其中 $A_0$ 是维修/更换成本。
+> [!NOTE] 参数说明
+> 其中：
+> - $y$：产品实际性能值
+> - $m$：目标值 (Target Value)
+> - $\Delta_0$：功能界限 (Functional Limit)，产品还能正常工作的最大偏离量
+> - $A_0$：超出功能界限时的维修或更换成本
 
 **田口观点 — 二次损失函数 Quadratic Loss Function**：
 
 $$L(y) = k(y-m)^2$$
 
-其中 $k = \dfrac{A_0}{\Delta_0^2}$
+> [!NOTE] 参数说明
+> $k = \dfrac{A_0}{\Delta_0^2}$ 为**品质损失系数 (Quality Loss Coefficient)**，由功能界限和维修成本共同决定。
 
 > [!IMPORTANT] 关键特性
 > - 在目标值 $m$ 处损失为零
@@ -251,6 +257,12 @@ $$Q = 8\left[(9.85-10)^2 + \frac{9}{10}(0.085)\right] = 8(0.0225 + 0.0765) = 8 \
 全因子实验的次数公式：
 
 $$\text{Number of Experiments} = (\text{\# levels})^{(\text{\# factors})}$$
+
+> [!NOTE] DOE 术语说明
+> - **因子 Factor**：实验中待考察的独立变量（如温度、压力、材料类型），可能是控制因子或噪音因子
+> - **水准 Level**：因子在实验中可取的不同数值或离散设定（如温度取 $100^\circ\text{C}$、$150^\circ\text{C}$、$200^\circ\text{C}$ 三个水准）
+> - **实验 Run**：按照特定因子水准组合执行的一次试验
+> - **处理 Treatment**：一次实验中所有因子水准的具体组合，在全因子设计中每个处理对应一次 Run
 
 当 $n$ 个因子各取 2 水准时，实验次数 = $2^n$：
 

@@ -12,6 +12,28 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.4.4 - 2026-06-12
+
+### 新增
+
+- CourseIndex 组件新增课程封面 fallback 支持，笔记内封面缺失时回退到课程 README 封面图。
+- 抽取 `course-index-utils.mjs` 公共模块，供缩略图与预览生成脚本复用。
+- 新增 `course-index-utils.test.mjs` 单元测试及 `npm run test:course-index-assets` 测试脚本。
+- EPMF Lecture 7 田口参数设计区域新增 DOE 术语说明 NOTE（因子、水准、实验、处理）。
+- EPMF Lecture 7/11/13 公式首次出现的参数新增 NOTE 说明。
+
+### 调整
+
+- `generate-course-thumbnails.mjs` 重构，路径解析逻辑迁移至 `course-index-utils.mjs`。
+
+### 修复
+
+- 暂无。
+
+### 删减
+
+- 暂无。
+
 ## V6.4.3 - 2026-06-12
 
 ### 新增

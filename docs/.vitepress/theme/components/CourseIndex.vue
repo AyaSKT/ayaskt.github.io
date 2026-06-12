@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { withBase } from 'vitepress'
+import courseCoverFallbacks from '../generated/course-covers.json'
 import coursePreviews from '../generated/course-previews.json'
 
 interface CourseIndexItem {
@@ -45,6 +46,7 @@ const courseThumbnailUrlByPath = new Map(
 )
 
 const coursePreviewByPath = coursePreviews as Record<string, string>
+const courseCoverFallbackByPath = courseCoverFallbacks as Record<string, string>
 
 function stripAngleBrackets(value: string) {
   return value.trim().replace(/^<|>$/g, '')
@@ -115,14 +117,23 @@ function resolveLink(link: string) {
   return normalized.startsWith('/') ? withBase(normalized) : normalized
 }
 
-function resolveCover(cover?: string) {
+function resolveThumbnailUrl(imagePath: string) {
+  return courseThumbnailUrlByPath.get(thumbnailPathFor(imagePath)) ?? ''
+}
+
+function resolveFallbackCover(notePath: string) {
+  const fallbackCover = courseCoverFallbackByPath[notePath]
+  return fallbackCover ? resolveThumbnailUrl(fallbackCover) : ''
+}
+
+function resolveCover(cover: string | undefined, notePath: string) {
   if (!cover) return ''
 
   const clean = stripAngleBrackets(cover)
   if (/^(?:[a-z][a-z0-9+.-]*:|\/\/|data:)/i.test(clean)) return clean
 
   const imagePath = joinDocsPath(props.basePath, clean)
-  return courseThumbnailUrlByPath.get(thumbnailPathFor(imagePath)) ?? ''
+  return resolveThumbnailUrl(imagePath) || resolveFallbackCover(notePath)
 }
 
 function getPreviewText(item: ResolvedCourseIndexItem) {
@@ -137,7 +148,7 @@ const resolvedGroups = computed(() =>
 
       return {
         ...item,
-        coverUrl: resolveCover(item.cover),
+        coverUrl: resolveCover(item.cover, notePath) || resolveFallbackCover(notePath),
         notePath,
         previewText: coursePreviewByPath[notePath] ?? '',
       }
