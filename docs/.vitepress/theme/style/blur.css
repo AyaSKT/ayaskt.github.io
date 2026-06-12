@@ -14,6 +14,10 @@
     --aya-liquid-search-backdrop-blur: blur(4px);
     --aya-liquid-search-panel-blur: blur(26px);
     --aya-liquid-search-control-blur: blur(14px);
+    --aya-card-feather: 0 0 14px 4px rgb(0 0 0 / 3.5%);
+    --aya-card-shadow: 0 14px 34px rgb(92 102 114 / 15%);
+    --aya-card-border: rgb(255 255 255 / 44%);
+
     --aya-nav-shadow-band-height: calc(var(--vp-nav-height, 64px) + 14px);
     --aya-nav-shadow-band-bg: linear-gradient(
         to bottom,
@@ -58,8 +62,8 @@
 
     /* Feature透明 */
     .VPFeature {
-        border: 1px solid transparent;
-        box-shadow: 0 10px 30px 0 rgb(0 0 0 / 15%);
+        border: 1px solid var(--aya-card-border);
+        box-shadow: var(--aya-card-feather), var(--aya-card-shadow);
         background-color: transparent;
     }
 
@@ -99,6 +103,10 @@
     --aya-liquid-search-result-hover: rgb(255 255 255 / 12%);
     --aya-liquid-search-highlight: rgb(152 203 234 / 54%);
     --aya-liquid-search-highlight-text: #eef8ff;
+    --aya-card-feather: 0 0 16px 5px rgb(0 0 0 / 16%);
+    --aya-card-shadow: 0 14px 36px rgb(0 0 0 / 36%);
+    --aya-card-border: rgb(255 255 255 / 12%);
+
     --aya-nav-shadow-band-bg: linear-gradient(
         to bottom,
         rgb(152 160 172 / 12%) 0%,

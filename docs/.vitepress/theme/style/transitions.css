@@ -7,42 +7,27 @@
    只有 doc 页面才把 sidebar 提取出来独立动画
    homepage 没有 VPDoc，这些元素不参与 view-transition，直接出现
    侧边栏在所有页面存在（homepage 为隐藏/空），用 :has(.VPDoc) 限定
-   Nav bar / Local nav 始终保持静态，不在页面切换时参与 crossfade
+   Nav / Local nav 留在 root 快照中，避免 Chrome 对玻璃态导航生成
+   独立命名快照时出现异常缩放或重叠
 ----------------------------------- */
-
-.VPNavBar {
-  view-transition-name: nav-bar;
-}
-
-.VPLocalNav {
-  view-transition-name: local-nav;
-}
-
-/* 只展示旧快照，隐藏新快照，避免新旧叠加导致的「淡出 → 闪现」 */
-::view-transition-old(nav-bar),
-::view-transition-old(local-nav) {
-  animation: none;
-  opacity: 1;
-}
-
-::view-transition-new(nav-bar),
-::view-transition-new(local-nav) {
-  animation: none;
-  opacity: 0;
-}
 
 html:has(.VPDoc) .VPSidebar {
   view-transition-name: sidebar;
 }
 
-/* Doc -> Home 时让 sidebar 跟随 root 快照离场，避免独立玻璃快照残留。 */
-html.vt-doc-to-home:has(.VPDoc) .VPSidebar {
+/* 有 sidebar -> 无 sidebar 时，先关闭真实元素的 backdrop-filter。
+   否则 Chrome 会把玻璃模糊烘进 root 旧快照，sidebar 淡出后留下高矩形残影。 */
+html.vt-hide-sidebar:has(.VPDoc) .VPSidebar {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Doc -> Home 且不涉及真实 sidebar 离场时，才让 sidebar 跟随 root 快照。 */
+html.vt-doc-to-home:not(.vt-hide-sidebar):has(.VPDoc) .VPSidebar {
   view-transition-name: none;
 }
 
-/* 外观切换需要整页一起做圆形裁剪，否则命名元素会脱离 root 动画。 */
-html.vt-appearance .VPNavBar,
-html.vt-appearance .VPLocalNav,
+/* 外观切换需要整页一起做圆形裁剪，否则 sidebar 命名元素会脱离 root 动画。 */
 html.vt-appearance .VPSidebar {
   view-transition-name: none;
 }
@@ -78,6 +63,18 @@ html.vt-switch-sidebar::view-transition-new(sidebar) {
   animation: fadeInLeft var(--dur-sidebar-enter) var(--ease-ios-fade) 0.14s both;
 }
 
+/* ---- 有 sidebar → 无 sidebar：旧窗口向左淡出，新快照不进场 ---- */
+html.vt-hide-sidebar::view-transition-old(sidebar) {
+  z-index: 2;
+  animation: fadeOutLeft var(--dur-sidebar-exit) var(--ease-ios-press) both;
+}
+
+html.vt-hide-sidebar::view-transition-new(sidebar) {
+  z-index: 1;
+  animation: none;
+  opacity: 0;
+}
+
 ::view-transition-group(sidebar) {
   overflow: visible;
 }
@@ -88,7 +85,46 @@ html.vt-switch-sidebar::view-transition-new(sidebar) {
   object-position: top left;
 }
 
-/* ---- Root（正文和右侧目录使用视口级快照，避免长文档生成大纹理）---- */
+/* ---- Doc content：正文横向进出，避免 root 位移带动 nav ---- */
+html.vt-from-doc-content .VPDoc > .container > .content,
+html.vt-to-doc-content .VPDoc > .container > .content {
+  view-transition-name: doc-content;
+}
+
+html.vt-doc-content-transition::view-transition-group(doc-content) {
+  z-index: 1;
+  overflow: visible;
+}
+
+html.vt-doc-content-transition::view-transition-old(doc-content),
+html.vt-doc-content-transition::view-transition-new(doc-content) {
+  object-fit: none;
+  object-position: top left;
+  mix-blend-mode: normal;
+}
+
+html.vt-doc-content-transition::view-transition-old(doc-content) {
+  animation: fadeOut var(--dur-page-exit) var(--ease-ios-fade) both;
+}
+
+html.vt-doc-content-transition::view-transition-new(doc-content) {
+  animation: docFadeInRightShort var(--dur-doc-enter) var(--ease-ios-fade) both;
+}
+
+html.vt-doc-to-contentless::view-transition-old(doc-content) {
+  animation: docFadeOutRightShort var(--dur-page-exit) var(--ease-ios-press) both;
+}
+
+html.vt-doc-to-contentless::view-transition-new(doc-content) {
+  animation: none;
+  opacity: 0;
+}
+
+/* ---- Root：只做淡入淡出，横向正文运动由 doc-content 承担 ---- */
+::view-transition-group(root) {
+  z-index: 0;
+}
+
 ::view-transition-old(root) {
   animation: fadeOut var(--dur-page-exit) var(--ease-ios-fade) both;
 }
@@ -102,7 +138,7 @@ html.vt-home-to-doc::view-transition-old(root) {
 }
 
 html.vt-home-to-doc::view-transition-new(root) {
-  animation: docFadeInRightShort var(--dur-doc-enter) var(--ease-ios-fade) both;
+  animation: fadeIn var(--dur-page) var(--ease-ios-fade) both;
 }
 
 html.vt-doc-to-home::view-transition-old(root) {
@@ -114,7 +150,7 @@ html.vt-doc-to-home::view-transition-new(root) {
 }
 
 html.vt-doc-to-doc::view-transition-new(root) {
-  animation: docFadeInRightShort var(--dur-doc-enter) var(--ease-ios-fade) both;
+  animation: fadeIn var(--dur-page) var(--ease-ios-fade) both;
 }
 
 /* 外观切换（日/夜模式）时 root 不动画 */
@@ -125,17 +161,6 @@ html.vt-doc-to-doc::view-transition-new(root) {
   mix-blend-mode: normal;
 }
 
-/* 外观切换：navbar 先向上淡出，再从上方淡入 */
-.vt-appearance::view-transition-old(nav-bar) {
-  animation: fadeOutUp 0.35s ease both;
-  opacity: 1;
-}
-
-.vt-appearance::view-transition-new(nav-bar) {
-  animation: fadeInDown 0.45s ease 0.05s both;
-  opacity: 1;
-}
-
 @keyframes docFadeInRightShort {
   from {
     opacity: 0;
@@ -144,6 +169,17 @@ html.vt-doc-to-doc::view-transition-new(root) {
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes docFadeOutRightShort {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(18px);
   }
 }
 
@@ -214,7 +250,7 @@ a:active, button:active, .VPNavBarMenuLink:active, .VPLink:active {
   :root {
     --dur-page: 0.66s;
     --dur-page-exit: 0.42s;
-    --dur-doc-enter: 0.66s;
+    --dur-doc-enter: 0.82s;
     --dur-sidebar-enter: 0.64s;
     --dur-sidebar-exit: 0.4s;
     --dur-appearance-enter: 0.6s;

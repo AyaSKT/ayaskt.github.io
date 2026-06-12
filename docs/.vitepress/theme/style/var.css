@@ -95,7 +95,7 @@
   --ease-ios-press:  var(--ease-quad-out, cubic-bezier(0.25, 0.46, 0.45, 0.94));
   --dur-page: 0.76s;
   --dur-page-exit: 0.48s;
-  --dur-doc-enter: 0.74s;
+  --dur-doc-enter: 0.94s;
   --dur-sidebar-enter: 0.72s;
   --dur-sidebar-exit: 0.46s;
   --dur-appearance-enter: 0.68s;

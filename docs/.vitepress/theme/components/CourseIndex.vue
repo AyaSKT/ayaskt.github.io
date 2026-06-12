@@ -233,10 +233,39 @@ const resolvedGroups = computed(() =>
   --course-index-cover-h: 98px;
   --course-index-radius: 8px;
   --course-index-gap: 14px;
+  --course-index-card-bg: color-mix(in srgb, var(--vp-c-bg-soft) 86%, rgb(255 255 255 / 34%));
+  --course-index-card-border: color-mix(in srgb, var(--aya-card-border, rgb(255 255 255 / 44%)) 68%, var(--vp-c-divider));
+  --course-index-card-hover-border: color-mix(in srgb, var(--vp-c-brand-1) 58%, var(--vp-c-divider));
+  --course-index-card-highlight: linear-gradient(135deg, rgb(255 255 255 / 20%), rgb(255 255 255 / 4%));
+  --course-index-card-outline-shadow: 0 0 0 1px rgb(255 255 255 / 32%);
+  --course-index-card-feather-shadow: var(--aya-nav-pill-feather-shadow, 0 0 12px 3px rgb(0 0 0 / 3.5%));
+  --course-index-card-depth-shadow: 0 14px 34px rgb(92 102 114 / 10%);
+  --course-index-card-inner-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 42%),
+    inset 0 -1px 0 rgb(255 255 255 / 9%);
+  --course-index-card-hover-outline-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 22%, rgb(255 255 255 / 72%));
+  --course-index-card-hover-feather-shadow: 0 0 18px 5px rgb(152 203 234 / 11%);
+  --course-index-card-hover-depth-shadow: 0 18px 42px rgb(92 102 114 / 16%);
   container-type: inline-size;
   display: grid;
   gap: 34px;
   margin: 30px 0 36px;
+}
+
+:global(.dark .course-index) {
+  --course-index-card-bg: rgb(10 14 21 / 74%);
+  --course-index-card-border: rgb(17 24 35 / 88%);
+  --course-index-card-hover-border: color-mix(in srgb, var(--vp-c-brand-1) 18%, rgb(17 24 35 / 90%));
+  --course-index-card-highlight: linear-gradient(135deg, rgb(255 255 255 / 4%), rgb(255 255 255 / 0%));
+  --course-index-card-outline-shadow: 0 0 0 1px rgb(0 0 0 / 18%);
+  --course-index-card-feather-shadow: var(--aya-nav-pill-feather-shadow, 0 0 12px 3px rgb(0 0 0 / 12%));
+  --course-index-card-depth-shadow: 0 14px 34px rgb(0 0 0 / 30%);
+  --course-index-card-inner-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 4%),
+    inset 0 -1px 0 rgb(0 0 0 / 12%);
+  --course-index-card-hover-outline-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 18%, rgb(0 0 0 / 26%));
+  --course-index-card-hover-feather-shadow: 0 0 18px 5px rgb(152 203 234 / 8%);
+  --course-index-card-hover-depth-shadow: 0 18px 42px rgb(0 0 0 / 40%);
 }
 
 .course-index-group {
@@ -299,13 +328,22 @@ const resolvedGroups = computed(() =>
   display: grid;
   min-width: 0;
   min-height: 194px;
-  border: 1px solid color-mix(in srgb, var(--vp-c-divider) 84%, transparent);
+  border: 1px solid var(--course-index-card-border);
   border-radius: var(--course-index-radius);
   overflow: visible;
-  background: color-mix(in srgb, var(--vp-c-bg-soft) 88%, transparent);
+  background:
+    var(--course-index-card-highlight),
+    var(--course-index-card-bg);
+  background-clip: padding-box;
   color: var(--vp-c-text-1);
   text-decoration: none;
-  box-shadow: 0 10px 28px rgb(34 42 60 / 5%);
+  box-shadow:
+    var(--course-index-card-outline-shadow),
+    var(--course-index-card-feather-shadow),
+    var(--course-index-card-depth-shadow),
+    var(--course-index-card-inner-shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   transition:
     transform 0.22s var(--ease-ios-fade, ease),
     border-color 0.22s ease,
@@ -316,9 +354,15 @@ const resolvedGroups = computed(() =>
 .course-index-card:hover,
 .course-index-card:focus-visible {
   z-index: 2;
-  border-color: color-mix(in srgb, var(--vp-c-brand-1) 58%, var(--vp-c-divider));
-  background: color-mix(in srgb, var(--vp-c-brand-1) 10%, var(--vp-c-bg-soft));
-  box-shadow: 0 16px 42px rgb(34 42 60 / 11%);
+  border-color: var(--course-index-card-hover-border);
+  background:
+    var(--course-index-card-highlight),
+    color-mix(in srgb, var(--vp-c-brand-1) 10%, var(--course-index-card-bg));
+  box-shadow:
+    var(--course-index-card-hover-outline-shadow),
+    var(--course-index-card-hover-feather-shadow),
+    var(--course-index-card-hover-depth-shadow),
+    var(--course-index-card-inner-shadow);
   transform: translateY(-3px);
 }
 

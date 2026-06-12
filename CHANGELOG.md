@@ -12,6 +12,32 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.4.5 - 2026-06-13
+
+### 新增
+
+- EPMF 笔记页面通过 `transformPageData` 显式限定右侧目录深度为 h2 ~ h3（特例，为后续目录结构预留）。
+- 新增 View Transition CSS 防回归校验脚本，覆盖导航栏命名快照、正文快照选择器、正文快照层级与 doc/contentless 页面切换类名。
+
+### 调整
+
+- 课程索引卡片（CourseIndex）改用双层阴影（羽化光晕 + 投影），营造微悬浮质感，与导航栏胶囊和侧边栏窗口风格统一。
+- 首页 feature 卡片复用统一的玻璃卡片边框、羽化阴影和深度阴影变量。
+- 课程 README 页面（`pageClass: course-index-page`）不再显示字数 / 阅读时间 / 作者 / 下载 PDF（在 `config.mts` 的 `formatDocMeta` 中判断 frontmatter 跳过注入）。
+- 正文切入淡入动画放慢：桌面端 `--dur-doc-enter` 调整为 `0.94s`，移动端调整为 `0.82s`。
+
+### 修复
+
+- 修复页面切换时导航栏 / 本地导航栏因独立 View Transition 快照导致的异常放大、重叠与跟随正文位移动画的问题。
+- 修复正文进入动画被 root 快照承载导致 nav 一起横向运动的问题，改为只对真实正文列建立 `doc-content` 命名快照。
+- 修复 `.VPDoc .content` 过宽选择器同时命中正文与右侧目录，造成重复 `view-transition-name: doc-content` 并让 Chrome 中止正文动画的问题。
+- 修复从有正文页面切换到站内无正文页面时，正文右向淡出动画缺失的问题。
+- 修复从有 sidebar 的 doc 页面切换到无 sidebar 的 doc 页面时，sidebar 淡出后短暂出现玻璃模糊矩形残留的问题（新增 `vt-hide-sidebar` 类将 sidebar 并入 root 快照离场）。
+
+### 删减
+
+- 移除导航栏与本地导航栏的独立命名 View Transition 快照规则，避免玻璃态导航在路由切换时生成额外异常快照。
+
 ## V6.4.4 - 2026-06-12
 
 ### 新增

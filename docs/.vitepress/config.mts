@@ -118,6 +118,9 @@ function getReadableWordCount(src: string) {
 }
 
 function formatDocMeta(md: any, src: string, frontmatter: Record<string, any> = {}) {
+  // 课程 README 页面不显示字数 / 日期 / 作者 / 下载 PDF
+  if (frontmatter.pageClass === 'course-index-page') return ''
+
   const words = getReadableWordCount(src)
   const minutes = Math.max(1, Math.ceil(words / 500))
   const author = String(frontmatter.author ?? 'Ayaskt')
@@ -265,6 +268,14 @@ export default defineConfig({
     'superpowers/**/*.md',
   ],
   buildConcurrency: 4,
+
+  // EPMF 笔记页面：右侧目录显式限定为 h2 ~ h3
+  transformPageData(pageData) {
+    if (pageData.filePath.startsWith('Y3S2/EPMF/') && !pageData.filePath.endsWith('-README.md')) {
+      pageData.frontmatter.outline = [2, 3]
+    }
+  },
+
   vite: {
     server: {
       watch: {
