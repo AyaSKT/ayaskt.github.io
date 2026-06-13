@@ -18,7 +18,7 @@
   - [11-2-3 安全边际 Margin of Safety](#11-2-3-安全边际-margin-of-safety)
 - [Lec. 11 - Ses. 3 决策与敏感性分析 Decision and Sensitivity Analysis](#lec-11---ses-3-决策与敏感性分析-decision-and-sensitivity-analysis)
   - [11-3-1 目标利润 Target Profit](#11-3-1-目标利润-target-profit)
-  - [11-3-2 Break-Even Revenue](#11-3-2-break-even-revenue)
+  - [11-3-2 盈亏平衡收入 Break-Even Revenue](#11-3-2-盈亏平衡收入-break-even-revenue)
   - [11-3-3 电影院案例 Movie Theater Example](#11-3-3-电影院案例-movie-theater-example)
   - [11-3-4 局限 Limitations](#11-3-4-局限-limitations)
 
@@ -29,7 +29,7 @@
 ### 11-1-1 基本术语 Basic Terms
 
 :::definition 盈亏平衡点 Break-Even Point
-总成本等于总收入的产量或销售水平。此时没有 profit，也没有 loss。
+总成本等于总收入的产量或销售水平。此时没有利润 profit，也没有亏损 loss。
 
 **The level of output at which total costs equal total revenue.**
 :::
@@ -52,8 +52,8 @@ $$
 
 其中：
 
-- $SP$：selling price per unit
-- $VC$：variable cost per unit
+- $SP$：单位售价 selling price per unit
+- $VC$：单位变动成本 variable cost per unit
 
 ---
 
@@ -115,9 +115,9 @@ $$
 
 某公司生产鞋类产品：
 
-- Fixed cost: $\$52,000$
-- Variable cost: $\$9 / \text{pair}$
-- Selling price: $\$25 / \text{pair}$
+- 固定成本 Fixed cost: $\$52,000$
+- 单位变动成本 Variable cost: $\$9 / \text{pair}$
+- 单位售价 Selling price: $\$25 / \text{pair}$
 
 盈亏平衡销量：
 
@@ -149,13 +149,13 @@ $$
 
 ### 11-2-1 汉堡摊表格 Hamburger Stand Table
 
-Hamburger stand 数据：
+汉堡摊 Hamburger stand 数据：
 
-- Fixed cost: booth rental $\$500 / \text{day}$
-- Variable cost: $\$1 / \text{hamburger}$
-- Price: $\$2 / \text{hamburger}$
+- 固定成本 Fixed cost: 摊位租金 booth rental $\$500 / \text{day}$
+- 单位变动成本 Variable cost: $\$1 / \text{hamburger}$
+- 单位价格 Price: $\$2 / \text{hamburger}$
 
-| Qty Sold | Fixed Cost | Variable Cost | Total Cost | Revenue | Profit / Loss |
+| 售出数量 Qty Sold | 固定成本 Fixed Cost | 变动成本 Variable Cost | 总成本 Total Cost | 收入 Revenue | 利润 / 亏损 Profit / Loss |
 |---:|---:|---:|---:|---:|---:|
 | 0 | 500 | 0 | 500 | 0 | (500) |
 | 100 | 500 | 100 | 600 | 200 | (400) |
@@ -182,18 +182,18 @@ $$
 
 ### 11-2-2 盈亏平衡图 Break-Even Graph
 
-Break-even graph 通常包含三条线：
+盈亏平衡图 Break-even graph 通常包含三条线：
 
 | 线 | 说明 |
 |---|---|
-| Fixed Costs | 水平线，产量变化时固定成本不变 |
-| Total Costs | 从 fixed cost 起点开始，斜率为 $VC$ |
-| Sales Revenue | 从 0 开始，斜率为 $SP$ |
+| 固定成本 Fixed Costs | 水平线，产量变化时固定成本不变 |
+| 总成本 Total Costs | 从固定成本 fixed cost 起点开始，斜率为 $VC$ |
+| 销售收入 Sales Revenue | 从 0 开始，斜率为 $SP$ |
 
 利润区和亏损区：
 
-- 盈亏平衡点右侧：Revenue > Total Cost，profit
-- 盈亏平衡点左侧：Revenue < Total Cost，loss
+- 盈亏平衡点右侧：收入 Revenue > 总成本 Total Cost，利润 profit
+- 盈亏平衡点左侧：收入 Revenue < 总成本 Total Cost，亏损 loss
 
 最大利润通常出现在最大可售产量处，前提是价格和单位变动成本保持线性。
 
@@ -202,7 +202,7 @@ Break-even graph 通常包含三条线：
 ### 11-2-3 安全边际 Margin of Safety
 
 :::definition 安全边际 Margin of Safety
-实际销售水平超过盈亏平衡销售水平的部分。若 sales drop below break-even level，就会发生亏损。
+实际销售水平超过盈亏平衡销售水平的部分。若销售额 sales 低于盈亏平衡水平 break-even level，就会发生亏损。
 :::
 
 公式：
@@ -220,11 +220,11 @@ $$
 
 判断：
 
-| Margin of Safety | 状态 |
+| 安全边际 Margin of Safety | 状态 |
 |---:|---|
-| Positive | 当前销售高于 break-even |
-| Zero | 刚好 break-even |
-| Negative | 当前销售低于 break-even |
+| 正 Positive | 当前销售高于盈亏平衡 break-even |
+| 零 Zero | 刚好盈亏平衡 break-even |
+| 负 Negative | 当前销售低于盈亏平衡 break-even |
 
 
 
@@ -232,7 +232,7 @@ $$
 
 ### 11-3-1 目标利润 Target Profit
 
-若要求 target profit，公式改成：
+若要求目标利润 target profit，公式改成：
 
 $$
 \boxed{
@@ -242,9 +242,9 @@ $$
 
 例：
 
-- Target profit: $\$25,000$
-- Fixed costs: $\$200,000$
-- Contribution per unit: $\$50$
+- 目标利润 Target profit: $\$25,000$
+- 固定成本 Fixed costs: $\$200,000$
+- 单位贡献 Contribution per unit: $\$50$
 
 $$
 Q = \frac{200000 + 25000}{50}
@@ -256,10 +256,10 @@ $$
 
 ---
 
-### 11-3-2 Break-Even Revenue
+### 11-3-2 盈亏平衡收入 Break-Even Revenue
 
-:::definition Break-Even Revenue
-覆盖固定成本和变动成本所需的收入额，常用于 service business。
+:::definition 盈亏平衡收入 Break-Even Revenue
+覆盖固定成本和变动成本所需的收入额，常用于服务型业务 service business。
 :::
 
 公式：
@@ -274,9 +274,9 @@ $$
 
 工程咨询公司例：
 
-- Monthly fixed costs: $\$60,000$
-- Engineer cost: $\$15 / \text{hour}$
-- Client price: $\$30 / \text{hour}$
+- 月固定成本 Monthly fixed costs: $\$60,000$
+- 工程师成本 Engineer cost: $\$15 / \text{hour}$
+- 客户价格 Client price: $\$30 / \text{hour}$
 
 $$
 R_{BE}
@@ -300,13 +300,13 @@ $$
 
 电影院项目：
 
-- Fixed cost: $\$1,000,000$
-- Seats: 500
-- Showings per day: 4
-- Open days per year: 300
-- Ticket price: $\$8$
-- Concession sales: $\$2 / \text{patron}$
-- Variable cost: $\$6 / \text{patron}$
+- 固定成本 Fixed cost: $\$1,000,000$
+- 座位数 Seats: 500
+- 每天放映场次 Showings per day: 4
+- 每年营业天数 Open days per year: 300
+- 票价 Ticket price: $\$8$
+- 小卖部销售 Concession sales: $\$2 / \text{patron}$
+- 单位变动成本 Variable cost: $\$6 / \text{patron}$
 
 每位顾客收入：
 
@@ -328,7 +328,7 @@ $$
 Q = 250000 \text{ patrons}
 $$
 
-年最大 patron capacity：
+年最大顾客容量 patron capacity：
 
 $$
 500 \times 4 \times 300 = 600000
@@ -376,21 +376,21 @@ $$
 
 ### 11-3-4 局限 Limitations
 
-Break-even analysis 好用，但假设很硬：
+盈亏平衡分析 Break-even analysis 好用，但假设很硬：
 
 - 成本和收入不一定都是直线
-- Variable cost 不一定按产量等比例增加
-- 有些成本是 semi-variable
+- 变动成本 Variable cost 不一定按产量等比例增加
+- 有些成本是半变动 semi-variable
 - 假设生产多少就卖多少，没有库存因素
-- Fixed cost 在不同产量区间可能跳变
+- 固定成本 Fixed cost 在不同产量区间可能跳变
 
 管理决策中的用途：
 
 | 决策 | 图上影响 |
 |---|---|
-| 提价 | Revenue line 斜率增加，但销量可能下降 |
-| 购买低 variable cost 新设备 | Total cost line 斜率降低，fixed cost 可能增加 |
-| 选择不同地点建厂 | 比较 fixed cost 与 variable cost 的组合 |
+| 提价 | 收入线 Revenue line 斜率增加，但销量可能下降 |
+| 购买低变动成本 variable cost 新设备 | 总成本线 Total cost line 斜率降低，固定成本 fixed cost 可能增加 |
+| 选择不同地点建厂 | 比较固定成本 fixed cost 与变动成本 variable cost 的组合 |
 
 Lecture 11 的核心公式就是：
 

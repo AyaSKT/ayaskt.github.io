@@ -9,21 +9,21 @@
 
 - [Block 3 Part 4 Contents](#block-3-part-4-contents)
 - [Lec. 12 - Ses. 1 外包 Outsourcing](#lec-12---ses-1-外包-outsourcing)
-  - [12-1-1 Outsourcing 定义](#12-1-1-outsourcing-定义)
+  - [12-1-1 外包 Outsourcing 定义](#12-1-1-外包-outsourcing-定义)
   - [12-1-2 为什么外包 Why Outsource](#12-1-2-为什么外包-why-outsource)
   - [12-1-3 传统角色与现代角色 Traditional and Modern Roles](#12-1-3-传统角色与现代角色-traditional-and-modern-roles)
 - [Lec. 12 - Ses. 2 外包决策与风险 Outsourcing Decision and Risks](#lec-12---ses-2-外包决策与风险-outsourcing-decision-and-risks)
   - [12-2-1 PwC 模型 PwC Model](#12-2-1-pwc-模型-pwc-model)
   - [12-2-2 外包实施 Outsourcing Implementation](#12-2-2-外包实施-outsourcing-implementation)
   - [12-2-3 外包风险 Outsourcing Risks](#12-2-3-外包风险-outsourcing-risks)
-  - [12-2-4 In-House 与 Outsource 成本比较](#12-2-4-in-house-与-outsource-成本比较)
-  - [12-2-5 Rightsourcing](#12-2-5-rightsourcing)
+  - [12-2-4 内部执行 In-House 与外包 Outsource 成本比较](#12-2-4-内部执行-in-house-与外包-outsource-成本比较)
+  - [12-2-5 适源配置 Rightsourcing](#12-2-5-适源配置-rightsourcing)
 
 
 
 ## Lec. 12 - Ses. 1 外包 Outsourcing
 
-### 12-1-1 Outsourcing 定义
+### 12-1-1 外包 Outsourcing 定义
 
 :::definition 外包 Outsourcing
 战略性使用外部资源，去完成过去通常由内部员工和内部资源处理的活动。
@@ -45,18 +45,18 @@
 
 ### 12-1-2 为什么外包 Why Outsource
 
-Top reasons for outsourcing：
+外包主要原因 Top reasons for outsourcing：
 
-| Reason | Percentage |
+| 原因 Reason | 比例 Percentage |
 |---|---:|
-| Reduce Costs | 36% |
-| Focus on Core | 36% |
-| Improve Quality | 13% |
-| Increase Speed to Market | 10% |
-| Foster Innovation | 4% |
-| Conserve Capital | 1% |
+| 降低成本 Reduce Costs | 36% |
+| 聚焦核心 Focus on Core | 36% |
+| 改善质量 Improve Quality | 13% |
+| 加快上市速度 Increase Speed to Market | 10% |
+| 促进创新 Foster Innovation | 4% |
+| 节约资本 Conserve Capital | 1% |
 
-Nike、Cisco、Apple 的例子都指向同一个逻辑：内部制造如果拖累库存、产能或市场响应，公司会把更多精力放回 research、marketing、product strategy 等核心区域。
+Nike、Cisco、Apple 的例子都指向同一个逻辑：内部制造如果拖累库存、产能或市场响应，公司会把更多精力放回研发 research、市场 marketing、产品战略 product strategy 等核心区域。
 
 ---
 
@@ -70,7 +70,7 @@ Nike、Cisco、Apple 的例子都指向同一个逻辑：内部制造如果拖�
 | Avoid large capital investment costs | 避免大额资本投入 |
 | Insufficient resources available | 内部资源不足 |
 
-现代外包更偏 business strategy：
+现代外包更偏商业战略 business strategy：
 
 | Modern role | 中文 |
 |---|---|
@@ -98,12 +98,12 @@ Nike、Cisco、Apple 的例子都指向同一个逻辑：内部制造如果拖�
 
 PwC 模型可以粗略整理为：
 
-| Activity Type | 倾向 |
+| 活动类型 Activity Type | 倾向 |
 |---|---|
-| Strategic | Not outsourced |
-| Non-strategic | Outsource |
-| Grey area | 进一步分析 |
-| In-house if possible | 保留内部 |
+| 战略性 Strategic | 不外包 Not outsourced |
+| 非战略性 Non-strategic | 外包 Outsource |
+| 灰色区域 Grey area | 进一步分析 |
+| 可内部执行 In-house if possible | 保留内部 |
 
 判断时重点看该活动是否决定公司长期竞争力。
 
@@ -115,14 +115,14 @@ PwC 模型可以粗略整理为：
 
 #### 1. Program initiation
 
-- 识别 critical 和 non-critical business activities
+- 识别关键 critical 和非关键 non-critical 业务活动 business activities
 - 找到可能外包的候选活动
 - 启动方案讨论
 
 #### 2. Program implementation / operations
 
 - 转移员工
-- 制定 Service Level Agreement (SLA)
+- 制定服务级别协议 Service Level Agreement (SLA)
 - 建立双方沟通机制
 - 实际转移服务
 - 建立管理流程
@@ -160,9 +160,9 @@ PwC 模型可以粗略整理为：
 
 ---
 
-### 12-2-4 In-House 与 Outsource 成本比较
+### 12-2-4 内部执行 In-House 与外包 Outsource 成本比较
 
-**In-House total cost** 可写成：
+**内部执行总成本 In-House total cost** 可写成：
 
 $$
 \begin{aligned}
@@ -174,7 +174,7 @@ C_{\text{in-house}}
 \end{aligned}
 $$
 
-**Outsource total cost** 可写成：
+**外包总成本 Outsource total cost** 可写成：
 
 $$
 \begin{aligned}
@@ -194,35 +194,35 @@ $$
 
 若 $\Delta C < 0$，外包在财务上更低；若 $\Delta C > 0$，内部执行更低。战略能力和风险仍需单独判断。
 
-Email hosting 例子中，外包邮件系统可能降低 TCO 约 10% 到 30%，并带来：
+邮件托管 Email hosting 例子中，外包邮件系统可能降低总拥有成本 TCO 约 10% 到 30%，并带来：
 
-- Pay-per-gig pricing
-- Off-site data storage
-- Automated support
-- Free up server space
-- 24/7 support
+- 按容量计费 Pay-per-gig pricing
+- 异地数据存储 Off-site data storage
+- 自动化支持 Automated support
+- 释放服务器空间 Free up server space
+- 全天候支持 24/7 support
 
-云计算出现后，这类业务的 in-house / outsource 边界变得更灵活。
+云计算出现后，这类业务的内部执行 in-house / 外包 outsource 边界变得更灵活。
 
 ---
 
-### 12-2-5 Rightsourcing
+### 12-2-5 适源配置 Rightsourcing
 
-:::definition Rightsourcing
-根据客户需求、战略计划和核心能力，选择内部执行、外包或混合伙伴关系。它强调合适的 sourcing，而不是盲目 outsource everything。
+:::definition 适源配置 Rightsourcing
+根据客户需求、战略计划和核心能力，选择内部执行、外包或混合伙伴关系。它强调合适的来源配置 sourcing，而不是盲目全部外包 outsource everything。
 :::
 
-公司后来发现 outsource everything 并不最优：
+公司后来发现全部外包 outsource everything 并不最优：
 
 - 服务和质量水平可能下降
 - 实际成本不如最初估算低
-- 外包公司会要求 volume 和 ramp agreements
+- 外包公司会要求量承诺 volume 和爬坡协议 ramp agreements
 - 核心活动外包会损害公司价值
 - 裁员和海外供应商可能带来政治或组织压力
 
-properly managed 的外包仍然有价值：
+管理得当 properly managed 的外包仍然有价值：
 
-- 改善 customer / client benefit
+- 改善客户收益 customer / client benefit
 - 借助专业伙伴的强项
 - 把内部资源留给核心能力
 

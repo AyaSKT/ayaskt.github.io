@@ -16,8 +16,8 @@
   - [9-2-1 现金流 Cash Flow](#9-2-1-现金流-cash-flow)
   - [9-2-2 过度交易 Over-Trading](#9-2-2-过度交易-over-trading)
   - [9-2-3 损益表 Profit and Loss Account](#9-2-3-损益表-profit-and-loss-account)
-  - [9-2-4 Gross Profit 与 EBITDA](#9-2-4-gross-profit-与-ebitda)
-  - [9-2-5 Net Income 与报表用途](#9-2-5-net-income-与报表用途)
+  - [9-2-4 毛利润 Gross Profit 与 EBITDA](#9-2-4-毛利润-gross-profit-与-ebitda)
+  - [9-2-5 净收入 Net Income 与报表用途](#9-2-5-净收入-net-income-与报表用途)
 
 
 
@@ -35,7 +35,7 @@
 
 - 做预算 Budgeting
 - 读公司或业务单元报告
-- 和 finance、sales、marketing、CEO 等管理团队沟通
+- 和财务 finance、销售 sales、市场 marketing、CEO 等管理团队沟通
 - 判断某个设计、设备或制造路线是否值得投入
 
 典型工程场景：
@@ -52,17 +52,17 @@
 
 ### 9-1-2 经济决策中的备选方案 Alternatives
 
-工程经济决策一定存在 alternative。找对可行方案，和计算方案一样关键。
+工程经济决策一定存在备选方案 alternative。找对可行方案，和计算方案一样关键。
 
 常见比较变量：
 
 | 变量 | 含义 |
 |---|---|
-| Initial cost 初始成本 | 购买、安装、导入所需费用 |
-| Interest rate / rate of return 利率 / 回报率 | 资金的时间价值或投资要求 |
-| Economic life 经济寿命 | 设备或项目能产生收益的时间 |
-| Annual operating cost 年运营成本 | 维护、人工、能源、消耗品等 |
-| Salvage value 残值 | 项目结束时的转售或回收价值 |
+| 初始成本 Initial cost | 购买、安装、导入所需费用 |
+| 利率 / 回报率 Interest rate / rate of return | 资金的时间价值或投资要求 |
+| 经济寿命 Economic life | 设备或项目能产生收益的时间 |
+| 年运营成本 Annual operating cost | 维护、人工、能源、消耗品等 |
+| 残值 Salvage value | 项目结束时的转售或回收价值 |
 
 工程经济学里经常会问：
 
@@ -82,14 +82,14 @@ $$
 | Cash Flow Statement | 现金流量表 | 某一期间现金从哪里来、用到哪里去 |
 | Profit & Loss / Income Statement | 损益表 / 收入表 | 某一期间销售、成本、费用、利润或亏损 |
 
-英国等地区的 statutory accounts 通常至少包括：
+英国等地区的法定账目 statutory accounts 通常至少包括：
 
-- Balance sheet
-- Profit and loss account
-- Notes about the accounts
-- Director's report
+- 资产负债表 Balance Sheet
+- 损益表 Profit and Loss Account
+- 报表附注 Notes about the Accounts
+- 董事报告 Director's Report
 
-报表需要给出 **true and fair view**。也就是公司年度申报不能故意歪曲财务状态，否则就是 fraud。
+报表需要给出 **真实公允视图 true and fair view**。也就是公司年度申报不能故意歪曲财务状态，否则就是欺诈 fraud。
 
 
 
@@ -98,7 +98,7 @@ $$
 ### 9-2-1 现金流 Cash Flow
 
 :::definition 现金流 Cash Flow
-公司在一定期间内实际收到和付出的现金。现金流量表记录 operating、investing、financing activities 中现金的来源和去向。
+公司在一定期间内实际收到和付出的现金。现金流量表记录经营活动 operating activities、投资活动 investing activities、融资活动 financing activities 中现金的来源和去向。
 
 **Cash flow reports the cash collected and paid out by a company in operating, investing and financing activities over a period of time.**
 :::
@@ -125,7 +125,7 @@ $$
 订单和销售增长过快，导致公司需要提前采购材料、支付人工或扩张产能，但客户回款晚于现金支出，最终现金断裂。
 :::
 
-小公司尤其容易被 over-trading 打穿现金流。订单太少会死，订单太多但回款慢也会死，挺现实。
+小公司尤其容易被过度交易 over-trading 打穿现金流。订单太少会死，订单太多但回款慢也会死，挺现实。
 
 一个典型结构：
 
@@ -143,7 +143,7 @@ $$
 ### 9-2-3 损益表 Profit and Loss Account
 
 :::definition 损益表 Profit and Loss Account / Income Statement
-汇总一个财务期间内的销售收入和费用，显示公司在该期间产生了 profit 还是 loss。
+汇总一个财务期间内的销售收入和费用，显示公司在该期间产生了利润 profit 还是亏损 loss。
 :::
 
 损益表对工程师很有用，因为项目、产品、部门的表现通常会用类似格式管理。
@@ -152,13 +152,13 @@ $$
 
 | 项目 | 计算 |
 |---|---|
-| Sales | 销售收入 |
-| Cost of Sales | 制造成本、采购成本、直接人工等 |
-| Gross Profit | Sales - Cost of Sales |
-| Other Expenses | 工资、租金、广告等非直接制造费用 |
+| 销售收入 Sales | 销售收入 |
+| 销售成本 Cost of Sales | 制造成本、采购成本、直接人工等 |
+| 毛利润 Gross Profit | Sales - Cost of Sales |
+| 其他费用 Other Expenses | 工资、租金、广告等非直接制造费用 |
 | EBITDA | Gross Profit - Other Expenses |
-| ITDA | Interest, Taxes, Depreciation, Amortization |
-| Net Income | EBITDA - ITDA |
+| ITDA | 利息 Interest、税 Taxes、折旧 Depreciation、摊销 Amortization |
+| 净收入 Net Income | EBITDA - ITDA |
 
 写成公式：
 
@@ -176,7 +176,7 @@ $$
 
 ---
 
-### 9-2-4 Gross Profit 与 EBITDA
+### 9-2-4 毛利润 Gross Profit 与 EBITDA
 
 :::definition 毛利润 Gross Profit
 主业务收入减去为产生这些收入直接发生的成本。
@@ -184,10 +184,10 @@ $$
 **Gross Profit = Sales - Cost of Goods Sold / Cost of Sales.**
 :::
 
-小商店里 gross profit 比较好判定：售价减进货成本。制造业和服务业里，哪些人工算 Cost of Sales，哪些算 Other Expenses，可能由公司会计政策决定。
+小商店里毛利润 gross profit 比较好判定：售价减进货成本。制造业和服务业里，哪些人工算销售成本 Cost of Sales，哪些算其他费用 Other Expenses，可能由公司会计政策决定。
 
-:::definition EBITDA
-**Earnings Before Interest, Taxes, Depreciation and Amortization**。它常用来观察公司运营层面的赚钱能力，也叫 operating profit 的近似指标。
+:::definition 息税折旧摊销前利润 EBITDA
+**Earnings Before Interest, Taxes, Depreciation and Amortization**。它常用来观察公司运营层面的赚钱能力，也叫经营利润 operating profit 的近似指标。
 :::
 
 EBITDA 的几个部分：
@@ -197,14 +197,14 @@ EBITDA 的几个部分：
 | Earnings | 收益 / 利润 | 增加功能、降低 BOM、降低制造成本 |
 | Interest | 借款利息 | 多由财务部门处理 |
 | Taxes | 税 | 多由财务和会计处理 |
-| Depreciation | 有形资产折旧 | 减少或优化 capital equipment 投入 |
+| Depreciation | 有形资产折旧 | 减少或优化资本设备 capital equipment 投入 |
 | Amortization | 无形资产或一次性费用摊销 | 多是会计处理 |
 
-Depreciation 的逻辑：设备一次买入，但在有用寿命内逐年分摊成本。比如一台电脑按 3 年写 off，每年在损益表里扣三分之一成本。
+折旧 Depreciation 的逻辑：设备一次买入，但在有用寿命内逐年分摊成本。比如一台电脑按 3 年冲销 write off，每年在损益表里扣三分之一成本。
 
 ---
 
-### 9-2-5 Net Income 与报表用途
+### 9-2-5 净收入 Net Income 与报表用途
 
 :::definition 净收入 Net Income
 公司扣除所有相关成本、费用、利息、税、折旧和摊销后的真实利润或亏损。
@@ -212,23 +212,23 @@ Depreciation 的逻辑：设备一次买入，但在有用寿命内逐年分摊�
 
 例：Golden Win Double Dragon International。
 
-| 项目 | 金额 | 占 Sales |
+| 项目 | 金额 | 占销售额 Sales |
 |---|---:|---:|
-| Sales | 11,330 | 100% |
-| Cost of Sales | 7,200 | 64% |
-| Gross Profit | 4,130 | 36% |
-| Other Expenses | 1,200 | 11% |
+| 销售收入 Sales | 11,330 | 100% |
+| 销售成本 Cost of Sales | 7,200 | 64% |
+| 毛利润 Gross Profit | 4,130 | 36% |
+| 其他费用 Other Expenses | 1,200 | 11% |
 | EBITDA | 2,930 | 26% |
 | ITDA | 800 | 7% |
-| Net Income | 2,130 | 19% |
+| 净收入 Net Income | 2,130 | 19% |
 
 损益表用途：
 
-- 法律要求，tax 基于 profit
+- 法律要求，税 tax 基于利润 profit
 - 汇总年度交易
 - 展示企业财务健康状态
-- 供 managers、shareholders、banks、financiers 阅读
-- 支撑工程项目的 cost-benefit analysis
+- 供管理者 managers、股东 shareholders、银行 banks、融资方 financiers 阅读
+- 支撑工程项目的成本收益分析 cost-benefit analysis
 
 Lecture 9 的记忆线索：
 

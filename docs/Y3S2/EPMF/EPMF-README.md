@@ -5,6 +5,8 @@ pageClass: course-index-page
 
 # EPMF 工程项目管理与财务 Introduction & Outline
 
+---
+
 **小楼一夜听春雨，深巷明朝卖杏花。**
 
 <CourseIndex
@@ -178,12 +180,12 @@ pageClass: course-index-page
 
 
 > [!CAUTION]
-> 本笔记的内容受限于本人的水平和老旧的课程资料，可能会存在某些知识错误或者讲解不完全。
+> 本笔记的内容受限于本人的水平以及课程资料(以及你能想到的一切借口)，（很有）可能会存在某些知识错误或者讲解不完全。
 > 
 > 如果你发现类似的错误或者有改进建议，请直接在评论区评论或者联系我修改，非常感谢！
 >
-> **顺带一提，请关注 “25時、ナイトコードで。”， 谢谢喵**
+> **关注 “25時、ナイトコードで。”**
 
 如果对你有帮助，就请点个 Star 吧，谢谢喵~
 
-![alt text](EPMF-README.attachments/1774261142070.JPG)
+![alt text](EPMF-README.attachments/1781332347395.jpg)

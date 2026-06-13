@@ -12,6 +12,31 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.4.7 - 2026-06-13
+
+### 新增
+
+- EPMF Block 4 Lecture 15 补充事业部结构、扁平结构、矩阵结构等组织结构配图，并生成对应课程封面缩略图。
+- EPMF Block 4 Lecture 16 补充公司战略层级配图。
+- EPMF README 更换结尾展示图。
+
+### 调整
+
+- EPMF Block 3/4 正文中的经济、财务与商业术语统一补充中文标注，采用“中文术语 English Term”格式；公式块保留原样。
+- EPMF Block 3/4 部分标题、目录锚点、定义容器和表格项统一为中文在前、英文在后的写作风格。
+- EPMF Block 3 Lecture 13 Part 1/2 与 13-2 Extended Version 补充 cost、price、interest、asset、depreciation、CapEx、OpEx、TCO 等术语中文。
+- EPMF Block 4 Lecture 14/15/16 补充 ownership、shares、valuation、share price、market share、revenue、profit、strategy、KPI 等术语中文。
+- 刷新课程卡片封面与预览缓存，使 CourseIndex 展示最新 EPMF 封面和正文摘要。
+- 调整 EPMF README 的提示语气与页面分隔。
+
+### 修复
+
+- 修复 EPMF Block 3/4 笔记中部分正文英文经济学名词未标注中文的问题。
+
+### 删减
+
+- 暂无。
+
 ## V6.4.5 - 2026-06-13
 
 ### 新增

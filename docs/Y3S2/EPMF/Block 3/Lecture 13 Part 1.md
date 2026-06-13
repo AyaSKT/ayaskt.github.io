@@ -12,31 +12,31 @@
 
 - [Block 3 Part 5 Contents](#block-3-part-5-contents)
 - [Lec. 13 - Ses. 1 贴现现金流 Discounted Cash Flow](#lec-13---ses-1-贴现现金流-discounted-cash-flow)
-  - [13-1-1 Cost 与 Price](#13-1-1-cost-与-price)
-  - [13-1-2 Discounting 贴现](#13-1-2-discounting-贴现)
-  - [13-1-3 Present Value 单笔现值](#13-1-3-present-value-单笔现值)
-  - [13-1-4 Net Present Value 多期净现值](#13-1-4-net-present-value-多期净现值)
-  - [13-1-5 B/C Ratio 与 IRR](#13-1-5-bc-ratio-与-irr)
+  - [13-1-1 成本 Cost 与价格 Price](#13-1-1-成本-cost-与价格-price)
+  - [13-1-2 贴现 Discounting](#13-1-2-贴现-discounting)
+  - [13-1-3 单笔现值 Present Value](#13-1-3-单笔现值-present-value)
+  - [13-1-4 多期净现值 Net Present Value](#13-1-4-多期净现值-net-present-value)
+  - [13-1-5 收益成本比 B/C Ratio 与内部收益率 IRR](#13-1-5-收益成本比-b-c-ratio-与内部收益率-irr)
 - [Lec. 13 - Ses. 2 现金流图 Cash Flow Diagrams](#lec-13---ses-2-现金流图-cash-flow-diagrams)
   - [13-2-1 工程项目现金流 Project Cash Flows](#13-2-1-工程项目现金流-project-cash-flows)
-  - [13-2-2 Compounding 与 Discounting](#13-2-2-compounding-与-discounting)
+  - [13-2-2 复利 Compounding 与贴现 Discounting](#13-2-2-复利-compounding-与贴现-discounting)
   - [13-2-3 Boney 借款案例 Boney Loan Example](#13-2-3-boney-借款案例-boney-loan-example)
-  - [13-2-4 Equal Payment Series](#13-2-4-equal-payment-series)
-  - [13-2-5 TSMC Fab 决策案例](#13-2-5-tsmc-fab-决策案例)
+  - [13-2-4 等额支付序列 Equal Payment Series](#13-2-4-等额支付序列-equal-payment-series)
+  - [13-2-5 TSMC 晶圆厂 Fab 决策案例](#13-2-5-tsmc-晶圆厂-fab-决策案例)
 
 
 
 ## Lec. 13 - Ses. 1 贴现现金流 Discounted Cash Flow
 
-### 13-1-1 Cost 与 Price
+### 13-1-1 成本 Cost 与价格 Price
 
-工程财务里，cost 和 price 要分开。
+工程财务里，成本 cost 和价格 price 要分开。
 
-| Term | 中文 | 含义 |
-|---|---|---|
-| Cost | 成本 | 生产某物或提供服务所需花费 |
-| Price | 价格 | 客户愿意为该物或服务支付的金额 |
-| Profit | 利润 | Price 与 Cost 的差额，口径可能是税前或税后 |
+| 术语 Term | 含义 |
+|---|---|
+| 成本 Cost | 生产某物或提供服务所需花费 |
+| 价格 Price | 客户愿意为该物或服务支付的金额 |
+| 利润 Profit | 价格 price 与成本 cost 的差额，口径可能是税前或税后 |
 
 关系：
 
@@ -44,11 +44,11 @@ $$
 \text{Price} = \text{Cost} + \text{Profit}
 $$
 
-Price 和 Cost 混在一起，会直接毁掉项目财务判断。
+价格 price 和成本 cost 混在一起，会直接毁掉项目财务判断。
 
 ---
 
-### 13-1-2 Discounting 贴现
+### 13-1-2 贴现 Discounting
 
 :::definition 贴现 Discounting
 把未来某一笔付款或一串付款换算成今天等价值的过程。
@@ -60,10 +60,10 @@ Price 和 Cost 混在一起，会直接毁掉项目财务判断。
 
 原因包括：
 
-- Inflation 通胀
-- Currency depreciation 货币贬值
-- Risk 风险
-- Opportunity cost 机会成本
+- 通胀 Inflation
+- 货币贬值 Currency depreciation
+- 风险 Risk
+- 机会成本 Opportunity cost
 - 人对当前确定收益的偏好
 
 例：今天存入 $\pounds100$，年利率 5%，十年后：
@@ -76,15 +76,15 @@ $$
 
 ---
 
-### 13-1-3 Present Value 单笔现值
+### 13-1-3 单笔现值 Present Value
 
-Future value：
+未来值 Future value：
 
 $$
 F = P(1 + r)^n
 $$
 
-Present value：
+现值 Present value：
 
 $$
 \boxed{
@@ -94,10 +94,10 @@ $$
 
 其中：
 
-- $P$：present equivalent value
-- $F$：future equivalent value
-- $r$：annual interest / discount rate
-- $n$：number of years
+- $P$：现值等价额 present equivalent value
+- $F$：未来值等价额 future equivalent value
+- $r$：年利率 / 折现率 annual interest / discount rate
+- $n$：年数 number of years
 
 例：未来第 1 年支付 $\pounds105$，折现率 5%：
 
@@ -111,17 +111,17 @@ $$
 P = \frac{163.89}{(1.05)^{10}} \approx 100
 $$
 
-所以若项目需要现在支付 $\pounds100$、一年后支付 $\pounds105$、十年后支付 $\pounds163.89$，三笔付款的 PV 合计约：
+所以若项目需要现在支付 $\pounds100$、一年后支付 $\pounds105$、十年后支付 $\pounds163.89$，三笔付款的现值 PV 合计约：
 
 $$
 PV = -100 -100 -100 = -300
 $$
 
-简单相加是 $-368.89$，和 PV 不是同一个口径。
+简单相加是 $-368.89$，和现值 PV 不是同一个口径。
 
 ---
 
-### 13-1-4 Net Present Value 多期净现值
+### 13-1-4 多期净现值 Net Present Value
 
 多期现金流的现值：
 
@@ -142,19 +142,19 @@ $$
 
 判断：
 
-| NPV | 含义 |
+| 净现值 NPV | 含义 |
 |---:|---|
 | $NPV > 0$ | 项目收益现值超过成本现值，可考虑 |
 | $NPV = 0$ | 刚好达到折现率要求 |
 | $NPV < 0$ | 在该折现率下不经济 |
 
-折现率通常不是央行 base lending rate。投资者一般希望回报高于无风险储蓄利率，因为项目有额外风险和管理成本。
+折现率通常不是央行基准贷款利率 base lending rate。投资者一般希望回报高于无风险储蓄利率，因为项目有额外风险和管理成本。
 
 ---
 
-### 13-1-5 B/C Ratio 与 IRR
+### 13-1-5 收益成本比 B/C Ratio 与内部收益率 IRR
 
-Benefit / Cost Ratio：
+收益成本比 Benefit / Cost Ratio：
 
 $$
 B/C = \frac{PV_b}{PV_c}
@@ -162,7 +162,7 @@ $$
 
 判断：
 
-| B/C | 含义 |
+| 收益成本比 B/C | 含义 |
 |---:|---|
 | $B/C > 1$ | 收益现值大于成本现值 |
 | $B/C = 1$ | 收益与成本现值相等 |
@@ -172,7 +172,7 @@ $$
 使项目整体 $NPV = 0$ 的折现率。
 :::
 
-IRR 满足：
+内部收益率 IRR 满足：
 
 $$
 \sum_{i=0}^{n}\frac{V_i}{(1 + r)^i} = 0
@@ -190,41 +190,41 @@ $$
 
 常见支出：
 
-1. Initial expense: 建造、购买、安装
-2. Operations and maintenance (O&M): 电力、人工、小修
-3. Salvage cost: 项目结束出售或转移设备的费用
-4. Overhaul: 使用寿命中的大修资本支出
+1. 初始支出 Initial expense：建造、购买、安装
+2. 运营与维护 Operations and maintenance (O&M)：电力、人工、小修
+3. 残值处理成本 Salvage cost：项目结束出售或转移设备的费用
+4. 大修 Overhaul：使用寿命中的大修资本支出
 
 对应收益：
 
 - 年销售产品或服务的收入
-- Salvage value income
+- 残值收入 Salvage value income
 
 现金流图规则：
 
 | 箭头 | 含义 |
 |---|---|
-| Up arrow | Receipts / benefits |
-| Down arrow | Payments / costs |
-| Horizontal line | Time |
+| 向上箭头 Up arrow | 收入 / 收益 Receipts / benefits |
+| 向下箭头 Down arrow | 付款 / 成本 Payments / costs |
+| 水平线 Horizontal line | 时间 Time |
 
 ---
 
-### 13-2-2 Compounding 与 Discounting
+### 13-2-2 复利 Compounding 与贴现 Discounting
 
-Compounding：
+复利 Compounding：
 
 $$
 F = P(1 + r)^n
 $$
 
-Discounting：
+贴现 Discounting：
 
 $$
 P = \frac{F}{(1 + r)^n}
 $$
 
-如果比较不同产品或机会，需要把所有现金流换算到同一个时间点。最常用的是 present worth。
+如果比较不同产品或机会，需要把所有现金流换算到同一个时间点。最常用的是现值 present worth。
 
 经济等价 economic equivalence 依赖折现率：
 
@@ -238,12 +238,12 @@ $$
 
 Boney 从银行借 $\$1000$，利率 8%。两年末分两次还本金，每年还一半本金加当年利息。
 
-| End of Year | Cash Flow as Boney | Cash Flow as Bank |
+| 年末 End of Year | Boney 现金流 Cash Flow as Boney | 银行现金流 Cash Flow as Bank |
 |---:|---:|---:|
 | 0 | +1000 | -1000 |
 | 1 | -580 | +580 |
 | 2 | -540 | +540 |
-| Total interest | -120 | +120 |
+| 总利息 Total interest | -120 | +120 |
 
 计算：
 
@@ -275,7 +275,7 @@ $$
 
 ---
 
-### 13-2-4 Equal Payment Series
+### 13-2-4 等额支付序列 Equal Payment Series
 
 若每年等额支付 $A$，共 $N$ 年，利率为 $i$，未来值：
 
@@ -293,25 +293,25 @@ $$
 
 选择题里常见三类现金流：
 
-- $\$20,000$ today
-- $\$50,000$ ten years from now
-- $\$8,000$ each year for ten years
+- 今天 $\$20,000$
+- 十年后 $\$50,000$
+- 连续十年每年 $\$8,000$
 
 没有利率，不能直接比较。给定利率后，把它们换算到同一个时间点再比较。
 
 ---
 
-### 13-2-5 TSMC Fab 决策案例
+### 13-2-5 TSMC 晶圆厂 Fab 决策案例
 
-Apple iPhone processor 是否从 10 nm fab 转到 7 nm / 7 nm EUV fab，需要比较 capex contribution per good die。
+Apple iPhone processor 是否从 10 nm 晶圆厂 fab 转到 7 nm / 7 nm EUV 晶圆厂 fab，需要比较每颗合格芯粒的资本性支出贡献 capex contribution per good die。
 
 源材料假设：
 
-- 10 nm 和新 7 nm fab 的 variable costs 近似相同
-- Fab capacity 约 $1M$ wafers / year
-- Yield 约 90%
-- Relevant costs 主要由 fab CapEx 主导
-- Payback period: 24 months，即约 $2M$ wafers
+- 10 nm 和新 7 nm 晶圆厂 fab 的可变成本 variable costs 近似相同
+- 晶圆厂产能 Fab capacity 约 $1M$ wafers / year
+- 良率 Yield 约 90%
+- 相关成本 Relevant costs 主要由晶圆厂 fab 的资本性支出 CapEx 主导
+- 回收期 Payback period：24 months，即约 $2M$ wafers
 
 10 nm：
 
@@ -323,7 +323,7 @@ $$
 \text{Good die} = 792 \times 0.9 \approx 712
 $$
 
-Fab 15 CapEx 为 $\$9.375B$：
+Fab 15 的资本性支出 CapEx 为 $\$9.375B$：
 
 $$
 \text{CapEx per wafer}
@@ -351,7 +351,7 @@ $$
 89.23 \times (1 - 0.43) \approx 50.59 \text{ mm}^2
 $$
 
-Good die 约 1257。Fab 18 CapEx 为 $\$17.08B$：
+合格芯粒 good die 约 1257。Fab 18 的资本性支出 CapEx 为 $\$17.08B$：
 
 $$
 \text{CapEx per wafer}
@@ -365,17 +365,17 @@ $$
 \approx 6.79
 $$
 
-仅看 CapEx per good die：
+仅看每颗合格芯粒的资本性支出 CapEx per good die：
 
-| Fab | CapEx / good die |
+| 晶圆厂 Fab | 每颗合格芯粒的资本性支出 CapEx / good die |
 |---|---:|
 | 10 nm | $\$6.58$ |
 | 7 nm EUV | $\$6.79$ |
 
-CapEx 角度不支持转移。但 good die 数从 712 到 1257，约增加：
+资本性支出 CapEx 角度不支持转移。但合格芯粒 good die 数从 712 到 1257，约增加：
 
 $$
 \frac{1257 - 712}{712} = 76.5\%
 $$
 
-若 variable cost 近似相同，产出提升会支持转移。这个案例的重点是：经济结论依赖假设。
+若可变成本 variable cost 近似相同，产出提升会支持转移。这个案例的重点是：经济结论依赖假设。
