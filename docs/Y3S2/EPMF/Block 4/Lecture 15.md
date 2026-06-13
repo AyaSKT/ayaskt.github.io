@@ -4,7 +4,7 @@
 
 **不一定牵着手，但一定向前走。**
 
-![alt text](<Lecture 15.attachments/1781331702216.jpg>)
+![alt text](<Lecture 15.attachments/1781332300029.jpg>)
 
 ## Block 4 Part 2 Contents
 
