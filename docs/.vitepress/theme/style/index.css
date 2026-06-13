@@ -26,6 +26,13 @@
   font-family: 'Noto Serif SC', 'SimSun', 'Songti SC', 'STSong', serif;
 }
 
+.vp-doc h1 .h2-in-h1 {
+  display: inline-block;
+  font-size: 0.75em;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
 /* Sidebar / 文章目录字体 */
 .VPSidebar,
 .VPDocAsideOutline {

@@ -3,7 +3,7 @@ aside: false
 pageClass: course-index-page
 ---
 
-# EPMF 工程项目管理与财务 Introduction & Outline
+# 工程项目管理与财务<br>Engineering Project Management and Finance<br><span class="h2-in-h1">UESTC3031 / UESTCHN3012</span>
 
 ---
 
@@ -171,7 +171,7 @@ pageClass: course-index-page
 <confetti />
 
 
-## Engineering Project Management and Finance (UESTC3031 / UESTCHN3012)
+
 
 **本笔记基于 2026 年春季格拉斯哥学院 Engineering Project Management and Finance 课程文件整理**
 
