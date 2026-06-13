@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-03-12T19:42:45+08:00
+---
+
 # EC Lecture 1 Optimization
 
 常见的**优化问题 Optimization problem**：  
@@ -115,5 +119,4 @@ $$
 
 - **单峰 / 凸问题 Unimodal / Convex problem**：目标函数的“地形 landscape”只有一个最优值（没有多个局部极小）。  
 - **多峰问题 Multimodal problem**：目标函数存在多个局部极小值 **Local minima**。
-
 

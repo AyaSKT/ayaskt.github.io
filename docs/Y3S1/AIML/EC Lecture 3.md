@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-03-12T19:42:45+08:00
+---
+
 # EC Lecture 3 Constrained Optimization
 
 ## 目标函数 vs. 约束 Objective vs. Constraint

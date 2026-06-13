@@ -1,3 +1,7 @@
+---
+lastUpdated: 2025-12-13T10:23:04+08:00
+---
+
 # EC Lecture 2 Genetic Algorithm
 
 

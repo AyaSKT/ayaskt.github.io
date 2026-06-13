@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-03-12T19:32:17+08:00
+---
+
 # CPS_Lecture_Notes
 <confetti />
 

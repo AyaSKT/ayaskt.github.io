@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-03-12T19:42:45+08:00
+---
+
 # ML Lecture 5 Support Vector Machine
 ## 基础概念与概览
 支持向量机（SVM）是一种强大的监督学习算法，主要用于**分类**（Classification）和**回归**（Regression）问题。

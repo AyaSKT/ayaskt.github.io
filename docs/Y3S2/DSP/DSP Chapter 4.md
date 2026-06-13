@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-03-16T17:38:46+08:00
+---
+
 # 4 Discrete Time Systems
 
 **桃之夭夭，其叶蓁蓁。之子于归，宜其家人。**
@@ -78,7 +82,7 @@ $$
 
 上述定义展示了线性系统的两者性质，分别为：
 
-- 其次性 / 比例性
+- 齐次性 / 比例性
 - 可加性
 
 ---
@@ -91,7 +95,9 @@ $$
 
 $$
 \forall n_0 \in \mathbb{Z}, \quad
-x[n] = x_1[n - n_0] \xrightarrow{H} y[n] = y[n-n_0]
+x_1[n] \xrightarrow{H} y_1[n]
+\Rightarrow
+x_1[n - n_0] \xrightarrow{H} y_1[n-n_0]
 $$
 
 ，则我们称这个系统为时不变系统。
@@ -152,7 +158,9 @@ $$
 对于一个 BIBO 稳定系统，
 
 $$
-\forall n \in \mathbb{Z}, \quad \exists B_y \in \mathbb{R}^+ \quad \text{s.t.} \quad \forall n \in \mathbb{Z}, \quad |y[n]| \le B_y
+\left(\exists B_x \in \mathbb{R}^+, \ \forall n \in \mathbb{Z}, \ |x[n]| \le B_x\right)
+\Rightarrow
+\left(\exists B_y \in \mathbb{R}^+, \ \forall n \in \mathbb{Z}, \ |y[n]| \le B_y\right)
 $$
 
 
@@ -344,7 +352,7 @@ y[n] = (x[n] * h_1[n]) * h_2[n] =x[n] * (h_1[n] * h_2[n])
 $$
 
 > [!IMPORTANT]
-> 可以得到所以串联系统的冲激响应表达式
+> 可以得到串联系统的冲激响应表达式
 > $$h_{cascade}[n] = h_1[n] * h_2[n]$$
 
 
@@ -373,7 +381,7 @@ y[n] &= y_1[n] + y_2[n] \\
 $$
 
 > [!IMPORTANT]
-> 可以得到所以并联系统的冲激响应表达式
+> 可以得到并联系统的冲激响应表达式
 > $$h_{parallel}[n] = h_1[n] + h_2[n]$$
 
 
@@ -400,7 +408,7 @@ $$
 
 > [!IMPORTANT]
 > 用系数线性差分方程描述有限维 LTI 离散系统：
-> $$\sum^N_{k = 0} d_k y[n-k] = \sum^M_{k = 0} p_k x[n]$$
+> $$\sum^N_{k = 0} d_k y[n-k] = \sum^M_{k = 0} p_k x[n-k]$$
 
 **系统阶数 System Order**： $MAX(N, M)$ ，意思是系统所涉及的最大延时深度由输出端延时阶数 $N$ 和输入端延时阶数 $M$ 中较大的那个决定。
 
@@ -567,7 +575,7 @@ $$
 
 如果想从频域的角度分析 LTI 系统，那么只需要分析 **系统对每个频率的响应** 即可。
 
-因此，我们令 $x[n]$ 在每一个时刻仅有仅有单一频率，即
+因此，我们令 $x[n]$ 在每一个时刻只有单一频率，即
 
 $$
 x[n] = e^{j \omega n} = \cos (\omega n) + j \sin (\omega n) \quad n \in \mathbb{Z}
@@ -965,12 +973,12 @@ y[n] &= \frac{A}{2} \left\{ e^{j\phi} H\left(e^{j\omega_0}\right) e^{j\omega_0 n
 \end{aligned}
 $$
 
-输出信号与输入信号的频率 $\omega_0$ 相同，幅度被缩放 $H$ 倍，并且在时间序列上产生了一个相位偏移​ $\theta(\omega)$ 。
+输出信号与输入信号的频率 $\omega_0$ 相同，幅度被缩放 $\left|H(e^{j\omega_0})\right|$ 倍，并且在时间序列上产生了一个相位偏移​ $\theta(\omega_0)$ 。
 
 > [!IMPORTANT]
 > 我们定义频率 $\omega_0$ 上的相位延迟：
 >
-> $$\tau_p (\omega) = - \frac{\theta(\omega_0)}{\omega_0}$$
+> $$\tau_p (\omega_0) = - \frac{\theta(\omega_0)}{\omega_0}$$
 >
 > 其意义为：对频率为 $\omega_0$ 的纯正弦波，系统看起来像是把它延迟了 $\tau_p(\omega_0)$ 个采样。
 
@@ -1025,6 +1033,4 @@ $$
 
 ### 4-9-3 延迟均衡器
 
-当 LTI 系统的群延迟 $\tau_g(\omega)$ 在输入信号 $x[n]$ 的带宽 $\Omega$ 内不是常数时，其重建或对应的连续时间波形 $x_c(t)$ 将发生失真。为纠正此失真，通常将一个**延迟均衡器**（其相位响应与主系统互补）与原始 LTI 系统级联使用。
-
-
+当 LTI 系统的群延迟 $\tau_g(\omega)$ 在输入信号 $x[n]$ 的离散频率带宽内不是常数时，其重建或对应的连续时间波形 $x_c(t)$ 将发生失真。为纠正此失真，通常将一个**延迟均衡器**（其相位响应与主系统互补）与原始 LTI 系统级联使用。

@@ -1,3 +1,7 @@
+---
+lastUpdated: 2025-12-04T19:29:24+08:00
+---
+
 # CPS Lecture 14 FM Generation
 
 ![](Assests/Pasted%20image%2020251201154641.png)

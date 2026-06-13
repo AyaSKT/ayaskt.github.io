@@ -9,6 +9,7 @@
     "docs:thumbs": "node scripts/generate-course-thumbnails.mjs",
     "docs:previews": "node scripts/generate-course-previews.mjs",
     "test:course-index-assets": "node --test scripts/course-index-utils.test.mjs",
+    "test:doc-meta-date": "node --test scripts/doc-meta-date.test.mjs",
     "test:pdf": "node --test scripts/verify-pdf-download.mjs",
     "postinstall": "node scripts/patch-mathjax.mjs"
   },

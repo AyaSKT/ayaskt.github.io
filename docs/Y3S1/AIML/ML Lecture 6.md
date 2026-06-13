@@ -1,3 +1,7 @@
+---
+lastUpdated: 2025-12-12T15:45:20+08:00
+---
+
 # ML Lecture 6 Artificial Neural Network
 ## 人工神经网络结构
 

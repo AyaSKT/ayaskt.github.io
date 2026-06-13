@@ -1,3 +1,7 @@
+---
+lastUpdated: 2025-12-04T19:29:24+08:00
+---
+
 # CPS Lecture 11 FM and PM
 
 ## Angle Modulation 角度调制

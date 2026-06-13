@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount } from 'vue'
 import { useData } from 'vitepress'
+import { formatResolvedLastUpdated } from '../doc-meta-date.mjs'
 
 const props = withDefaults(defineProps<{
   words: number
@@ -11,7 +12,7 @@ const props = withDefaults(defineProps<{
   pdf: true
 })
 
-const { page, theme } = useData()
+const { page, frontmatter } = useData()
 
 let cleanupTimer: ReturnType<typeof window.setTimeout> | undefined
 let originalTitle = ''
@@ -19,19 +20,10 @@ let originalTitle = ''
 const wordText = computed(() => props.words.toLocaleString('zh-CN'))
 
 const lastUpdatedText = computed(() => {
-  if (!page.value.lastUpdated) return ''
-
-  const date = new Date(page.value.lastUpdated)
-  const formatOptions = theme.value.lastUpdated?.formatOptions ?? {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit'
-  }
-  const locale = theme.value.lastUpdated?.formatOptions?.forceLocale ?? 'zh-CN'
-
-  return new Intl.DateTimeFormat(locale, formatOptions).format(date)
+  return formatResolvedLastUpdated(
+    frontmatter.value.lastUpdated,
+    page.value.lastUpdated
+  )
 })
 
 function clearPdfTheme() {
@@ -94,7 +86,7 @@ onBeforeUnmount(() => {
     </div>
 
     <div v-if="lastUpdatedText" class="doc-meta-updated">
-      最后更新：{{ lastUpdatedText }}
+      {{ lastUpdatedText }}
     </div>
   </div>
 </template>

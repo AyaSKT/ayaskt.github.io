@@ -17,7 +17,7 @@
   "Y3S2/CCD/Part 4/CCD Lecture 19-20 ADC and Converter Errors.md": "19-1 ADC 基本概念 ADC Basics / 19-1-1 信号类型 Signal Types / 数字信号只有有限状态，最常见的是 binary 的 on/off。模拟信号随时间连续变化，例如声音、温度、加速度和传感器输出电压。 / 模数转换器 Analog-to-Digital Converter / ADC 把模拟输入电压转换为对应的数字码。它测量输入幅度，并输出与输入大小相关的 binary value。",
   "Y3S2/DSP/DSP Chapter 10.md": "暂无正文预览",
   "Y3S2/DSP/DSP Chapter 11.md": "11 DSP 算法实现 DSP Algorithm Implementation",
-  "Y3S2/DSP/DSP Chapter 2.md": "2-1 时域表示 Time-Domain Representation / 基本表示方法 / 离散信号可以被表示为 x[n] ，其中 n 为正整数； / x[n] 也可以代表序列的第 n 个值； / x[n] 在 n 为非整数时没有定义；",
+  "Y3S2/DSP/DSP Chapter 2.md": "2-1 时域表示 Time-Domain Representation / 基本表示方法 / 离散信号可以被表示为 x[n] ，其中 n \\in \\mathbb{Z}； / x[n] 也可以代表序列的第 n 个值； / x[n] 在 n 为非整数时没有定义；",
   "Y3S2/DSP/DSP Chapter 3 I.md": "3-1 连续时间傅里叶变换 CTFT / 让我们假设你全都会了。如果你不会，去看看信号与系统吧，在你学过信号与系统后，DSP的3-1全是废话。 / 3-2 离散时间傅里叶变换 DTFT / 定义 / 一个离散序列的DTFT定义为：",
   "Y3S2/DSP/DSP Chapter 3 II.md": "3-8 CT 信号的数字处理 / 数字处理基本流程： / 关键概念： / ADC: 模数转换器 / DAC：数模转换器",
   "Y3S2/DSP/DSP Chapter 4.md": "4-2 DT 系统的分类 / 我们可以通过系统的性质，将 DT 系统简单分为以下几类： / Linear System 线性系统 / Shift-invariant System 时不变系统 / Causal System 因果系统",

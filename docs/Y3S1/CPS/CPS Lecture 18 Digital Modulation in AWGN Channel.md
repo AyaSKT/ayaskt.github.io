@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-03-12T19:32:17+08:00
+---
+
 # CPS Lecture 18 Digital Modulation in AWGN Channel
 
 ## 数字通信系统 Digital Communication System

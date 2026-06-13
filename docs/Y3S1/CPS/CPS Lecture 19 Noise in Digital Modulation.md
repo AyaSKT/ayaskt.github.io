@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-03-12T19:32:17+08:00
+---
+
 # CPS Lecture 19 Noise in Digital Modulation
 
 ## BER & SNR
@@ -366,5 +370,4 @@ $$
 - $b_k \in \{+1,-1\}$
 
 - $h(t)$：矩形脉冲成形函数
-
 

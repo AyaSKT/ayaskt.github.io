@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-03-12T19:42:45+08:00
+---
+
 # EC Lecture 4 Combinatorial Optimization
 
 ## 定义

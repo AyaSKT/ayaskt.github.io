@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-03-16T17:38:46+08:00
+---
+
 # 5 Discrete Fourier Transform
 
 **迎着阳光盛大逃亡。**
@@ -72,13 +76,13 @@ $$ \langle T(\mathbf{u}), T(\mathbf{v})\rangle = \langle\mathbf{u},\mathbf{v}\ra
 分析式 Analysis Equation：
 
 $$
-X[k] = \sum_{n = 0}^{N} x[n] \psi^* [k, n]
+X[k] = \sum_{n = 0}^{N-1} x[n] \psi^* [k, n]
 $$
 
 合成式 Synthesis Equation：
 
 $$
-x[n] = \sum_{k = 0}^{N} X[k] \psi[k, n]
+x[n] = \frac{1}{N}\sum_{k = 0}^{N-1} X[k] \psi[k, n]
 $$
 
 $\psi[k,n]$ —— **基序列**，在两个域中都是长度为 $N$ 的序列，并且满足如下正交关系：
@@ -104,7 +108,7 @@ $$
 假设有一个周期 DT 信号：
 
 $$
-\tilde{x} [n] = \tilde{x} [n + rN], \quad   n \in \mathbb{Z}, \quad r \in \mathbb{N^+}
+\tilde{x} [n] = \tilde{x} [n + rN], \quad   n \in \mathbb{Z}, \quad r \in \mathbb{Z}
 $$
 
 我们选用如下正交函数集对其进行变换：
@@ -119,9 +123,9 @@ $$
 
 $$
 \begin{cases}
-\tilde{x}[n] = \frac{1}{N} \sum_{k = 0}^{N-1} \tilde X[k] e^{j (\frac{2\pi}{N})kn} = \frac{1}{N} \sum_{k = 0}^{N-1} \tilde X[k] W_N^{kn} \\
+\tilde{x}[n] = \frac{1}{N} \sum_{k = 0}^{N-1} \tilde X[k] e^{j (\frac{2\pi}{N})kn} = \frac{1}{N} \sum_{k = 0}^{N-1} \tilde X[k] W_N^{-kn} \\
 \\
-\tilde{X} [k] = \sum_{n = 0}^{N-1} \tilde x[n] e^{-j (\frac{2\pi}{N})kn} = \sum_{n = 0}^{N-1} \tilde x[k] W_N^{-kn}
+\tilde{X} [k] = \sum_{n = 0}^{N-1} \tilde x[n] e^{-j (\frac{2\pi}{N})kn} = \sum_{n = 0}^{N-1} \tilde x[n] W_N^{kn}
 \end{cases}
 $$
 
@@ -180,9 +184,9 @@ $$
 | $e^{j 2\pi m n / N}$ | $N \delta[k - m]$ | 复指数序列，$m$ 为整数，$0 \le m \le N-1$ |
 | $\cos(2\pi m n / N + \phi)$ | $\frac{N}{2} [e^{j\phi} \delta[k-m] + e^{-j\phi} \delta[k-(N-m)]]$ | 余弦序列 |
 | $\sin(2\pi m n / N + \phi)$ | $\frac{N}{2j} [e^{j\phi} \delta[k-m] - e^{-j\phi} \delta[k-(N-m)]]$ | 正弦序列 |
-| $a^n$ (若 $\|a\| < 1$) | $\frac{1 - a^N}{1 - a e^{-j 2\pi k / N}}$ | 有限长指数序列，$0 \le n \le N-1$ |
-| $n$ | $\frac{N(N-1)}{2} \delta[k] - \frac{N}{1 - a e^{-j 2\pi k / N}}$ (当 $k \neq 0$) | 斜坡序列，$X[0] = \frac{N(N-1)}{2}$ |
-| 矩形脉冲：<br>$x[n] = 1,\ 0 \le n \le L-1$<br>$L \le N$ | $e^{-j\pi k (L-1)/N} \cdot \frac{\sin(\pi k L / N)}{\sin(\pi k / N)}$ | Dirichlet 核形式 |
+| $a^n$ | $\frac{1 - a^N}{1 - a e^{-j 2\pi k / N}}$ | 有限长指数序列，$0 \le n \le N-1$；当分母为 0 时用极限值 |
+| $n$ | $X[0]=\frac{N(N-1)}{2}$；$X[k]=-\frac{N}{1 - e^{-j 2\pi k / N}}\ (k \neq 0)$ | 斜坡序列 |
+| 矩形脉冲：<br>$x[n] = 1,\ 0 \le n \le L-1$<br>$L \le N$ | $e^{-j\pi k (L-1)/N} \cdot \frac{\sin(\pi k L / N)}{\sin(\pi k / N)}$ | Dirichlet 核形式；$k=0$ 时为 $L$ |
 
 
 
@@ -198,9 +202,9 @@ $$
 $$
 \mathrm{DFT\; /\; IDFT}\;
 \begin{cases}
-{x}[n] = \frac{1}{N} \sum_{k = 0}^{N-1} X[k] W_N^{kn} \\
+{x}[n] = \frac{1}{N} \sum_{k = 0}^{N-1} X[k] W_N^{-kn} \\
 \\
-{X} [k] = \sum_{n = 0}^{N-1} x[k] W_N^{-kn}
+{X} [k] = \sum_{n = 0}^{N-1} x[n] W_N^{kn}
 \end{cases}
 $$
 
@@ -219,11 +223,11 @@ $$
 再次观察 DFT 的计算公式：
 
 $$
-{X} [k] = \sum_{n = 0}^{N-1} x[k] W_N^{-kn}
+{X} [k] = \sum_{n = 0}^{N-1} x[n] W_N^{kn}
 , \quad k \in \{ 0, 1,2,\dots,N-1\}
 $$
 
-我们发现该公式的一个特点，即求序列的 DFT 在计算上等效为对 $k$ 的加权求和。
+我们发现该公式的一个特点，即求序列的 DFT 在计算上等效为对 $n$ 的加权求和。
 
 同时等号左右两侧均为序列运算，因此自然地想到将 $X[k]$ 和 $x[n]$ 等效为两个向量 $\mathbf{X}$ 和 $\mathbf{x}$ ，用一个方阵 $\mathbf D$ 来代替求和。因此原式可改写为：
 
@@ -304,7 +308,7 @@ $$
 
 ### 5-3-1 从 DTFT 得到 DFT
 
-在 DFFT 的频谱上，以 $\frac{2 \pi}{N}$ 为间隔，采样 $N$ 个点，得到的序列即为原序列的 DFT。
+在 DTFT 的频谱上，以 $\frac{2 \pi}{N}$ 为间隔，采样 $N$ 个点，得到的序列即为原序列的 DFT。
 
 #### 1. 数学证明
 
@@ -320,7 +324,7 @@ $$
 X(e^{j\omega})=\sum_{n=0}^{N - 1}x[n]e^{-j\omega n}
 $$
 
-然后，对 $X(e^{j\omega})$ 以 $\frac{2 \pi}{N}$ 为周期采样，即：
+然后，对 $X(e^{j\omega})$ 以 $\frac{2 \pi}{N}$ 为间隔采样，即：
 
 $$
 X[k] = \left. X(e^{j \omega}) \right|_{\omega = \frac{2 \pi k}{N}} 
@@ -460,7 +464,7 @@ y[n] = \sum_{r = -\infty}^{\infty} x[n - rN], \quad 0 \le n \le N-1
 $$
 
 
-把 DTFT 在频域上每隔采一个点，相当于把时域序列按间隔 $\frac{2 \pi}{N}$ 折叠起来，相同模 N 的样本全部加到一起。
+把 DTFT 在频域上每隔 $\frac{2 \pi}{N}$ 采一个点，相当于把时域序列按周期 $N$ 折叠起来，相同模 $N$ 的样本全部加到一起。
 
 
 > [!NOTE]
@@ -492,10 +496,10 @@ $$
 
 | Time domain | Transform | Frequency domain |
 |---|---|---|
-| Continuous Aperiodical | CTFT | Continuous Aperiodical |
-| Continuous Periodical | FS | Aperiodical Discrete |
-| Discrete Aperiodical | DTFT | Periodical Continuous |
-| Discrete & Periodical | DFS | Periodical & Discrete |
+| Continuous Aperiodic | CTFT | Continuous Aperiodic |
+| Continuous Periodic | FS | Discrete Aperiodic |
+| Discrete Aperiodic | DTFT | Continuous Periodic |
+| Discrete Periodic | DFS | Discrete Periodic |
 
 
 
@@ -546,7 +550,7 @@ $$
 x[\langle -n \rangle _N] =
 
 \begin{cases}
-0 & n=0 \\
+x[0] & n=0 \\
 
 \\
 
@@ -573,12 +577,12 @@ $$
 
 #### 1. 定义
 
-假设有两个有限序列 $x[n]$ 和 $h[n]$ ，长度均为 $M$，
+假设有两个有限序列 $x[n]$ 和 $h[n]$ ，长度均为 $N$，
 
 首先看线性卷积：
 
 $$
-y_L[n] = x[n] * h[n] = \sum_{k = -\infty}^{\infty} x[k] h [k-n]
+y_L[n] = x[n] * h[n] = \sum_{k = -\infty}^{\infty} x[k] h [n-k]
 $$
 
 熟悉地，这个卷积会得到一个长度为 $2N -1$ 的序列。
@@ -586,7 +590,7 @@ $$
 通过与前面类似的定义，有圆卷积：
 
 $$
-y_L[n] = x[n] \circledast h[n] = \sum_{k = -\infty}^{\infty} x[k] h [\langle k-n \rangle _N]
+y_C[n] = x[n] \circledast h[n] = \sum_{k = 0}^{N-1} x[k] h [\langle n-k \rangle _N]
 $$
 
 而这个操作会得到一个**长度为 $N$ 的序列**。
@@ -618,7 +622,7 @@ $$
 再次观察圆卷积的数学定义：
 
 $$
-y_L[n] = x[n] * h[n] = \sum_{k = -\infty}^{\infty} x[k] h [k-n]
+y_C[n] = x[n] \circledast h[n] = \sum_{k = 0}^{N-1} x[k] h [\langle n-k \rangle _N]
 $$
 
 与 DFS 类似，可以将圆卷积看作一个 $N$ 输入 $N$ 输出的线性变换。因此可以使用一个矩阵来表示圆卷积的过程：
@@ -715,10 +719,10 @@ $$
 一个 $N$ 点复信号可以被拆分成：
 
 $$
-x[n] = x_{cs} [n] + x_{as} [n]
+x[n] = x_{cs} [n] + x_{ca} [n]
 $$
 
-其中 $x_{cs} [n]$ 和 $x_{as} [n]$ 分别为**其循环共轭对称部分**和**循环反对称部分**。
+其中 $x_{cs} [n]$ 和 $x_{ca} [n]$ 分别为**其循环共轭对称部分**和**循环共轭反对称部分**。
 
 $$
 \boxed{
@@ -728,7 +732,7 @@ x_{cs}[n] = \frac{1}{2}(x[n]+ x^*[\langle -n \rangle _N])
 \\
 
 
-x_{cs}[n] = \frac{1}{2}(x[n]+ x^*[\langle -n \rangle _N])
+x_{ca}[n] = \frac{1}{2}(x[n]- x^*[\langle -n \rangle _N])
 
 \end{aligned}
 }
@@ -744,7 +748,7 @@ $$
 x[n] = x_{ev} [n] + x_{od} [n]
 $$
 
-其中 $x_{ev} [n]$ 和 $x_{od} [n]$ 分别为**其循环奇部分**和**循环偶部分**。
+其中 $x_{ev} [n]$ 和 $x_{od} [n]$ 分别为**其循环偶部分**和**循环奇部分**。
 
 
 $$
@@ -755,7 +759,7 @@ x_{ev}[n] = \frac{1}{2}(x[n]+ x[\langle -n \rangle _N])
 \\
 
 
-x_{od}[n] = \frac{1}{2}(x[n]+ x[\langle -n \rangle _N])
+x_{od}[n] = \frac{1}{2}(x[n]- x[\langle -n \rangle _N])
 
 \end{aligned}
 }
@@ -900,7 +904,7 @@ $$
 对实序列做 DFT 时，注意到其有一非常美丽的性质，即共轭循环对称性：
 
 $$
-X[k] = X[\langle -k \rangle _ N ]
+X[k] = X^*[\langle -k \rangle _ N ]
 $$
 
 通过这种性质，我们可以使用一些优雅且巧妙的方式，简化实际计算中的 DFT 。
@@ -962,7 +966,7 @@ G[k] = \frac{1}{2}(X[k]+ X^*[\langle -k \rangle _N])
 \\
 
 
-H[n] = \frac{1}{2}(X[n]+ X^*[\langle -k \rangle _N])
+H[k] = \frac{1}{2j}(X[k]- X^*[\langle -k \rangle _N])
 
 \end{aligned}
 }
@@ -1200,6 +1204,3 @@ $
 - 输出块不需要相加
 - 每块前面的污染部分直接**丢弃**
 - 只保留后面正确的部分
-
-
-

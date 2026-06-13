@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-03-16T17:38:46+08:00
+---
+
 # 3 Discrete-Time Signals in the Frequency Domain Part II
 
 **有些错误无法犯两次，有些事绝对不会无趣。**
@@ -52,17 +56,23 @@ $$
 
 ![alt text](<DSP Chapter 3 II.attachments/1773479251543.png>)
 
-在实际采样中，完美的冲激函数是无法实现的。因此实际用于采样的函数是一连串占空比 $Duty = \frac{\tau}{t}$ 的方波。
+在实际采样中，完美的冲激函数是无法实现的。因此实际用于采样的函数是一连串占空比 $Duty = \frac{\tau}{T}$ 的方波。
 
 
 #### 2. 频域效应
 
-当 $\tau \ll T$ 时，我们可以认为 $p(t) \approx \delta T$ ，即将实际采样近似为一个理想采样器。
+当 $\tau \ll T$ 且忽略脉冲面积带来的尺度因子时，我们可以认为 $p(t) \approx \delta_T(t)$ ，即将实际采样近似为一个理想采样器。
 
 接下来分别在时域和频域对处理后的信号进行分析，
 
-我们约定 $\delta_T (t)$ 为周期为 $T$ 的冲激串；对单位冲激有 
-$\delta (t) \xleftrightarrow{\text{FT}} \Delta (j \omega)$ 。
+我们约定 $\delta_T (t)$ 为周期为 $T$ 的冲激串；对单位冲激和冲激串有：
+
+$$
+\delta(t) \xleftrightarrow{\text{FT}} 1,\qquad
+\delta_T(t)=\sum_{n=-\infty}^{\infty}\delta(t-nT)
+\xleftrightarrow{\text{FT}}
+\frac{2\pi}{T}\sum_{k=-\infty}^{\infty}\delta(\Omega-k\Omega_T)
+$$
 
 1. 时域
 
@@ -211,7 +221,7 @@ $$
 - **奈奎斯特条件 Nyquist Condition**：$\Omega_s \ge 2 \Omega_m$ ，避免混叠并实现恢复的条件。
 - **折叠频率 Folding Frequency**：$\frac{\Omega_s}{2}$ ，即在当前采样频率下最高的不会发生混叠的频率。
 - **奈奎斯特速率 Nyquist Rate**： $2 \Omega_m$ ，即重建信号所需的最小采样速率。
-- **奈奎斯特频率 Nyquist Frequency**： $\Omega$ ，即信号的带宽。
+- **奈奎斯特频率 Nyquist Frequency**：在很多教材中指 $\frac{\Omega_s}{2}$，即当前采样系统的折叠频率；PPT 中若把它标为 $\Omega_m$，则是在指原信号的最高频率 / 带宽。
 
 > [!WARNING]
 > 在ppt里，奈奎斯特频率被标注为原信号的带宽。但有些教材/资料中将奈奎斯特频率等价于折叠频率。
@@ -222,9 +232,9 @@ $$
 
 #### 3. 过采样 / 欠采样 / 临界采样
 
-- **过采样 Oversampling** - 采样频率高于奈奎斯特频率；
-- **欠采样 Undersampling** - 采样频率低于奈奎斯特频率；
-- **临界采样 Critical Sampling** - 采样频率等于奈奎斯特频率；
+- **过采样 Oversampling** - 采样频率高于奈奎斯特速率 $2\Omega_m$；
+- **欠采样 Undersampling** - 采样频率低于奈奎斯特速率 $2\Omega_m$；
+- **临界采样 Critical Sampling** - 采样频率等于奈奎斯特速率 $2\Omega_m$；
 
 > [!TIP]
 > **注意**：纯正弦波从其临界采样版本可能无法恢复。
@@ -237,7 +247,7 @@ $$
 代入后，我们得到了两个非常相似的式子：
 
 $$
-G_p(e^{j\omega}) = \sum_{n = - \infty}^\infty g_a(nT)e^{-j \omega n}
+G(e^{j\omega}) = \sum_{n = - \infty}^\infty g_a(nT)e^{-j \omega n}
 $$
 
 $$
@@ -483,9 +493,9 @@ $$
 
 在前面的章节中，采样的目标信号讨论的是**低通 Low-pass 信号 / 基带 Baseband 信号**。对于这一类信号，通常直接取其最高频率 $\Omega_m$ 作为信号的带宽。
 
-但是存在着一类信号，它们与 0 频点的距离远大于其真正所占据的带宽，即 $\Omega_center \gg Bandwidth$ 。
+但是存在着一类信号，它们与 0 频点的距离远大于其真正所占据的带宽，即 $\Omega_{\mathrm{center}} \gg \mathrm{Bandwidth}$ 。
 
-对于这一类信号，使用简单的 Nyquist 采样频率速率会造成大量的频谱浪费，因为其在很长一段低频区域没有频谱。同时采样率会非常高，造成不可忽视的资源浪费。
+对于这一类信号，使用简单的奈奎斯特速率会造成大量的频谱浪费，因为其在很长一段低频区域没有频谱。同时采样率会非常高，造成不可忽视的资源浪费。
 
 ---
 
@@ -547,7 +557,7 @@ $$
 1. **采样后频谱副本之间不重叠**
 2. **采样后目标频带能够折叠到较低频区域，便于数字处理**
 
-在一般理论中，可选采样率常写成：
+一种把频带居中折叠到低频的常见采样率选择可写成：
 $$
 f_s=\frac{2(f_L+f_H)}{2n+1}
 $$

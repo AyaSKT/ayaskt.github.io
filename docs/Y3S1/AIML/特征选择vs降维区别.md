@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-03-12T19:42:45+08:00
+---
+
 # 特征选择 vs 数据降维：区别与联系
 
 > 基于 ML Lecture 4 Part I & Part II 内容整理

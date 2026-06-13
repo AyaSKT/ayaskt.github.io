@@ -1,3 +1,7 @@
+---
+lastUpdated: 2025-12-04T19:29:24+08:00
+---
+
 # CPS Lecture 16 & 17 Analog to Digital Conversion
 
 将模拟信号转换为数字信号的步骤
