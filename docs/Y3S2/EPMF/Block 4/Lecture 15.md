@@ -1,5 +1,11 @@
 # Lec. 15 Company Structure
 
+**有共存才有未来可说。**
+
+**不一定牵着手，但一定向前走。**
+
+![alt text](<Lecture 15.attachments/1781331702216.jpg>)
+
 ## Block 4 Part 2 Contents
 
 - [Block 4 Part 2 Contents](#block-4-part-2-contents)

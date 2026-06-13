@@ -1,5 +1,13 @@
 # Lec. 13-2 Extended Version
 
+**Fly broken wings,**  
+**飞呀，破碎的翅膀，**
+
+**I know you are still with me.**  
+**我知道你仍在我身旁。**
+
+![alt text](<Lecture 13-2 Extended Version.attachments/1781331061740.jpg>)
+
 ## Block 3 Part 7 Contents
 
 - [Block 3 Part 7 Contents](#block-3-part-7-contents)

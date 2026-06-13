@@ -1,5 +1,11 @@
 # Lec. 14 What is a Company
 
+**千年之后还剩下什么？**
+
+**灵魂的重量又怎能取舍？**
+
+![alt text](<Lecture 14.attachments/1781331207336.jpg>)
+
 ## Block 4 Part 1 Contents
 
 - [Block 4 Part 1 Contents](#block-4-part-1-contents)

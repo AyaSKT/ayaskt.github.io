@@ -1,5 +1,13 @@
 # Lec. 13 Part 2 Engineering Economics (Capex, Opex, and Total Cost of Ownership)
 
+**Fly perfect wings,**  
+**飞呀，完美的翅膀，**
+
+**Where have you been hiding?**  
+**你至今为止到底藏在哪里？**
+
+![alt text](<Lecture 13 Part 2.attachments/1781330682661.jpg>)
+
 ## Block 3 Part 6 Contents
 
 - [Block 3 Part 6 Contents](#block-3-part-6-contents)

@@ -1,5 +1,13 @@
 # Lec. 13 Part 1 Engineering Economics (Discounted Cash Flow)
 
+**Полюшко-поле,**  
+**草原啊草原，**
+
+**Полюшко, широко поле!**  
+**辽阔草原一望无边!**
+
+![alt text](<Lecture 13 Part 1.attachments/1781331190820.jpg>)
+
 ## Block 3 Part 5 Contents
 
 - [Block 3 Part 5 Contents](#block-3-part-5-contents)

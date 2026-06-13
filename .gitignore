@@ -20,6 +20,7 @@ docs/.vitepress/cache/
 # 开发文档 / 工具，不部署到 GitHub Pages
 docs/superpowers/
 docs/public/animation-tuner.html
+docs/public/archive-gallery.html
 
 # 本地配置文件
 .markdownlint.json

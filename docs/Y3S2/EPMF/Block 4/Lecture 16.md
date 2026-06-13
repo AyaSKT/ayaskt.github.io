@@ -1,5 +1,11 @@
 # Lec. 16 Company Strategy & Engineering Careers
 
+**正确了又能证明什么？**
+
+**就算能从过去找出差错，身世境遇不由人选择。**
+
+![alt text](<Lecture 16.attachments/1781331644700.jpg>)
+
 ## Block 4 Part 3 Contents
 
 - [Block 4 Part 3 Contents](#block-4-part-3-contents)
