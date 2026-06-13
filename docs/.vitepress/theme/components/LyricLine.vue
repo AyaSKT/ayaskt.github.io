@@ -74,8 +74,8 @@ const hasTranslation = computed(() => Boolean(props.translation || slots.transla
   min-width: 0;
   color: var(--vp-c-text-1);
   font-family: var(--lyric-line-original-serif, var(--lyric-card-serif, 'Noto Serif CJK SC', 'Noto Serif SC', 'Songti SC', serif));
-  font-size: 1.06rem;
-  font-weight: 500;
+  font-size: 1.12rem;
+  font-weight: 600;
   letter-spacing: 0;
   line-height: 1.82;
   overflow-wrap: anywhere;
@@ -87,7 +87,7 @@ const hasTranslation = computed(() => Boolean(props.translation || slots.transla
   color: var(--vp-c-text-2);
   font-family: 'Noto Serif CJK SC', 'Noto Serif SC', 'Songti SC', serif;
   font-language-override: 'ZHS';
-  font-size: 0.92rem;
+  font-size: 0.96rem;
   letter-spacing: 0;
   line-height: 1.58;
   overflow-wrap: anywhere;
@@ -109,9 +109,9 @@ const hasTranslation = computed(() => Boolean(props.translation || slots.transla
   font-size: 0.58em;
   font-weight: 500;
   letter-spacing: 0;
-  line-height: 0.88;
+  line-height: 1.2;
   text-align: center;
-  transform: translateY(0.42em);
+  transform: none;
   transition:
     color 0.2s ease,
     font-size 0.2s ease,
@@ -121,12 +121,12 @@ const hasTranslation = computed(() => Boolean(props.translation || slots.transla
 
 @media (max-width: 480px) {
   .lyric-line-original {
-    font-size: 1rem;
+    font-size: 1.05rem;
     line-height: 1.86;
   }
 
   .lyric-line-translation {
-    font-size: 0.88rem;
+    font-size: 0.9rem;
   }
 }
 </style>
