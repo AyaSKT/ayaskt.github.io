@@ -89,7 +89,10 @@ const titleMarks = computed(() => {
   }
 })
 
-const displayedTitle = computed(() => `${titleMarks.value.prefix}${props.title}${titleMarks.value.suffix}`)
+const displayedTitle = computed(() => {
+  if (!props.title) return ''
+  return `${titleMarks.value.prefix}${props.title}${titleMarks.value.suffix}`
+})
 const isTitleItalic = computed(() => resolvedTitleStyle.value === 'italic')
 
 const musicLinks = computed(() => [
@@ -178,7 +181,7 @@ function releaseActionFocus(event: MouseEvent) {
       </div>
 
       <header class="lyric-card-header">
-        <p class="lyric-card-title" :class="{ 'is-italic': isTitleItalic }">
+        <p v-if="displayedTitle" class="lyric-card-title" :class="{ 'is-italic': isTitleItalic }">
           {{ displayedTitle }}
         </p>
         <p v-if="props.artist" class="lyric-card-artist">

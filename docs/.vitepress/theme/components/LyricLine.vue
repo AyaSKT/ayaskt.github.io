@@ -88,6 +88,7 @@ const hasTranslation = computed(() => Boolean(props.translation || slots.transla
   font-family: 'Noto Serif CJK SC', 'Noto Serif SC', 'Songti SC', serif;
   font-language-override: 'ZHS';
   font-size: 0.96rem;
+  font-weight: 500;
   letter-spacing: 0;
   line-height: 1.58;
   overflow-wrap: anywhere;

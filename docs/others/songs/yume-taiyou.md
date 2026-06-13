@@ -1,0 +1,179 @@
+# 夢が僕らの太陽さ——虹ヶ咲学園スクールアイドル同好会
+
+<SongCard
+  cover="yume-taiyou.attachments/cover.JPG"
+  album="夢が僕らの太陽さ"
+  song="夢が僕らの太陽さ"
+  artist="虹ヶ咲学園スクールアイドル同好会"
+  lang="ja"
+>
+</SongCard>
+
+<LyricCard
+  title="夢が僕らの太陽さ"
+  artist="虹ヶ咲学園スクールアイドル同好会"
+  lang="ja"
+  qq-url="https://y.qq.com/n/ryqq/search?w=夢が僕らの太陽さ"
+  netease-url="https://yq3.music.163.com/m/program?id=2500986660"
+>
+  <LyricLine
+    original="見(み)つけた、君(きみ)を！"
+    translation="找到你了！"
+  />
+  <LyricLine
+    original="君(きみ)も僕(ぼく)を見(み)てた"
+    translation="你也看到我啦！"
+  />
+  <LyricLine
+    original="始(はじ)まりはここから？"
+    translation="从这里开始吗？"
+  />
+  <LyricLine
+    original="もう始(はじ)まってる（さあ行(い)こうか）"
+    translation="已经开始了哦（走啦出发咯）"
+  />
+  <LyricLine
+    original="想(おも)いが（たくさんあって）"
+    translation="想法（各种各样的）"
+  />
+  <LyricLine
+    original="つながることで（元気(げんき)になる！）"
+    translation="连在一块儿（就又元气满满了哦！）"
+  />
+  <LyricLine
+    original="こころ強(つよ)く変(か)われもっと頑張(がんば)っちゃおうよ"
+    translation="继续努力吧，让我们的内心变得更加强大"
+  />
+  <LyricLine
+    original="だからどんな時(とき)も夢(ゆめ)が僕(ぼく)らの太陽(たいよう)さ"
+    translation="所以啊 不论何时 梦想都是我们的太阳"
+  />
+  <LyricLine
+    original="泣(な)いちゃった後(あと)は笑顔(えがお)で"
+    translation="拭去泪水后 笑着聊起明天"
+  />
+  <LyricLine
+    original="明日(あした)を語(かた)ればいいよ"
+    translation="心情就好起来了"
+  />
+  <LyricLine
+    original="どんな時(とき)も夢(ゆめ)が僕(ぼく)らの太陽(たいよう)さ"
+    translation="无论何时 梦想都是我们的太阳"
+  />
+  <LyricLine
+    original="風(かぜ)が雨(あめ)が激(はげ)しくても"
+    translation="任凭狂风喧嚣暴雨凌厉"
+  />
+  <LyricLine
+    original="思(おも)いだすんだ僕(ぼく)らを照(て)らす光(ひかり)があるよ"
+    translation="也仍会记得 有一道光一直在照耀着我们"
+  />
+  <LyricLine
+    original="今日(きょう)もいっぱい力(ちから)を出(だ)しきってみるよ"
+    translation="今日也要 拿出自己的全力"
+  />
+  <LyricLine
+    original="会(あ)いたい、君(きみ)に！"
+    translation="想见你！"
+  />
+  <LyricLine
+    original="僕(ぼく)のすなおな感情(かんじょう)"
+    translation="这份真挚的感情"
+  />
+  <LyricLine
+    original="あふれて声(こえ)になったんだ"
+    translation="涌出内心化作声音传向你"
+  />
+  <LyricLine
+    original="とどけ君(きみ)へ（大好(だいす)きさ）"
+    translation="传给最喜欢的你"
+  />
+  <LyricLine
+    original="ぶつかって（なんでなんで？）"
+    translation="或许会有小冲突（怎么了？）"
+  />
+  <LyricLine
+    original="すれ違(ちが)っても（何(なん)とかなる！）"
+    translation="也许会有小分歧（总能解决的！）"
+  />
+  <LyricLine
+    original="いつか分(わ)かりあえる情熱(じょうねつ)を信(しん)じてるよ"
+    translation="但这股逐梦的热情，大家一定能理解的"
+  />
+  <LyricLine
+    original="君(きみ)はどんな夢(ゆめ)の中(なか)で踊(おど)りたいのかな"
+    translation="你想在何种梦想伴奏下起舞呢？"
+  />
+  <LyricLine
+    original="おたがいの道(みち)が交差(こうさ)して"
+    translation="梦想的大道交汇的时候"
+  />
+  <LyricLine
+    original="面白(おもしろ)くなってくんだ"
+    translation="会变得更加有趣哦"
+  />
+  <LyricLine
+    original="どんな夢(ゆめ)の中(なか)で踊(おど)りたいのかな"
+    translation="想在怎样的梦想陪衬下起舞呢？"
+  />
+  <LyricLine
+    original="教(おし)えてよ楽(たの)しそうだよ"
+    translation="告诉我吧 你似乎正乐在其中呢"
+  />
+  <LyricLine
+    original="知(し)りたくなるね君(きみ)の目(め)が探(さが)す虹(にじ)を"
+    translation="真想看到 你眼眸里四处搜寻的彩虹"
+  />
+  <LyricLine
+    original="あきらめないよ"
+    translation="我不会放弃的"
+  />
+  <LyricLine
+    original="全部(ぜんぶ)あきらめたくない"
+    translation="全部的全部，我都不会放弃"
+  />
+  <LyricLine
+    original="おんなじ気持(きも)ちだよねもっと頑張(がんば)っちゃおうよ"
+    translation="抱有同样想法的大家，要更加努力去守护彼此的一切啊"
+  />
+  <LyricLine
+    original="ああだからどんな時(とき)も夢(ゆめ)が僕(ぼく)らの太陽(たいよう)さ"
+    translation="所以啊 不论何时 梦想都是我们的太阳"
+  />
+  <LyricLine
+    original="泣(な)いちゃった後(あと)は笑顔(えがお)で"
+    translation="拭去泪水后 笑着聊起未来"
+  />
+  <LyricLine
+    original="明日(あした)を語(かた)ればいいよ"
+    translation="心情就好起来了"
+  />
+  <LyricLine
+    original="どんな時(とき)も夢(ゆめ)が僕(ぼく)らの太陽(たいよう)さ"
+    translation="无论何时 梦想是我们的太阳"
+  />
+  <LyricLine
+    original="風(かぜ)が雨(あめ)が激(はげ)しくても"
+    translation="任凭狂风作乱暴雨作势"
+  />
+  <LyricLine
+    original="思(おも)いだすんだ僕(ぼく)らを照(て)らす光(ひかり)があるよ"
+    translation="也始终牢记 有一道光一直在照耀着我们"
+  />
+  <LyricLine
+    original="今日(きょう)もいっぱい"
+    translation="今天"
+  />
+  <LyricLine
+    original="明日(あした)もいっぱい力(ちから)を出(だ)しきってみるよ"
+    translation="明天，以后 都要用尽全力拥抱未来"
+  />
+  <LyricLine
+    original="どこまでも行(い)けそうなんだ"
+    translation="不论是哪里 我们都能到那"
+  />
+  <LyricLine
+    original="自分(じぶん)らしくねどこまでも行(い)けそうなんだ！"
+    translation="迈出你无二的脚步 就连天涯海角，我们都能走到。"
+  />
+</LyricCard>

@@ -412,7 +412,8 @@ export default defineConfig({
 
       { text: '杂项', items: [
         { text: '更新日志', link: '/changelog' },
-        { text: '实验室', link: '/others/test' },
+        { text: '金曲', link: '/others/songs/README.md', activeMatch: '^/others/songs/' },
+        { text: '实验室', link: '/others/lab/README.md', activeMatch: '^/others/lab/' },
 
        ]
       },
@@ -429,6 +430,31 @@ export default defineConfig({
 
 
     sidebar: {
+      '/others/songs/': [
+        {
+          text: '金曲',
+          collapsed: false,
+          items: [
+            { text: '金曲首页', link: '/others/songs/README.md' },
+            { text: '自己肯定感爆上げ↑↑しゅきしゅきソング', link: '/others/songs/shuki.md' },
+            { text: 'ヒッチコック', link: '/others/songs/hitchcock.md' },
+            { text: '夢が僕らの太陽さ', link: '/others/songs/yume-taiyou.md' },
+          ],
+        },
+      ],
+
+      '/others/lab/': [
+        {
+          text: '实验室',
+          collapsed: false,
+          items: [
+            { text: '实验室首页', link: '/others/lab/README.md' },
+            { text: '歌词容器', link: '/others/lab/lyric-container' },
+            { text: 'SongCard', link: '/others/lab/song-card' },
+          ],
+        },
+      ],
+
       // 数字信号处理：当路径在 /Y3S2/DSP/ 下时显示
       '/Y3S2/DSP/': [
         {

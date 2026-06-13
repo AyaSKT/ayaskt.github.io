@@ -20,6 +20,7 @@ import DocMeta from './components/DocMeta.vue'
 import CourseIndex from './components/CourseIndex.vue'
 import LyricCard from './components/LyricCard.vue'
 import LyricLine from './components/LyricLine.vue'
+import SongCard from './components/SongCard.vue'
 import { setupLinkWarmup } from './link-warmup'
 
 export default {
@@ -43,6 +44,7 @@ export default {
     app.component('CourseIndex', CourseIndex)
     app.component('LyricCard', LyricCard)
     app.component('LyricLine', LyricLine)
+    app.component('SongCard', SongCard)
   },
 
   extends: DefaultTheme,
