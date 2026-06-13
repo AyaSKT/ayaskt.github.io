@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, useSlots } from 'vue'
-import { withBase } from 'vitepress'
 
 type TitleStyle =
   | 'auto'
@@ -96,11 +95,7 @@ function formatWorkTitle(
 }
 
 function resolveAsset(src: string) {
-  const trimmed = src.trim()
-  if (!trimmed) return ''
-  if (/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(trimmed)) return trimmed
-
-  return trimmed.startsWith('/') ? withBase(trimmed) : trimmed
+  return src.trim()
 }
 
 const resolvedTitleStyle = computed<TitleStyle>(() => {
