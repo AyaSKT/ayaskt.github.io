@@ -1,13 +1,23 @@
+---
+lastUpdated: 2026-05-30T15:33:21+08:00
+---
 # Lecture 5-6 Amplifiers 放大器
 
-**Все забере тихе море,**  
-**宁静的大海会带走一切，**  
-
-**Лиш дай йому свої думи.**  
-**把你的想法告诉它。**  
-
-
-<div align="right">——SadSvit《Море (海)》</div>
+<LyricCard
+  title="Море"
+  artist="SadSvit"
+  lang="uk"
+  netease-url="https://music.163.com/#/song?id=2640351790"
+>
+  <LyricLine
+    original="Все забере тихе море,"
+    translation="宁静的大海会带走一切，"
+  />
+  <LyricLine
+    original="Лиш дай йому свої думи."
+    translation="把你的想法告诉它。"
+  />
+</LyricCard>
 
 ![alt text](<CCD Lecture 5-6 Amplifiers.attachments/1780057676448.JPG>)
 

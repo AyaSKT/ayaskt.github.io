@@ -1,12 +1,23 @@
+---
+lastUpdated: 2026-06-07T21:49:56+08:00
+---
 # Lecture 15 Antennas in a Circuit 天线
 
-**Will that urging within me grow bigger someday?**  
-**栖息于我内心的冲动最终仍会膨胀失控吗？**
-
-**This wasn't magic as I knew it.**  
-**这不是我所知的魔法。**
-
-<div align="right">——三木谷奈々 《bloom》</div>
+<LyricCard
+  title="bloom"
+  artist="三木谷奈々"
+  lang="en"
+  netease-url="https://music.163.com/#/song?id=2750976348"
+>
+  <LyricLine
+    original="Will that urging within me grow bigger someday?"
+    translation="栖息于我内心的冲动最终仍会膨胀失控吗？"
+  />
+  <LyricLine
+    original="This wasn't magic as I knew it."
+    translation="这不是我所知的魔法。"
+  />
+</LyricCard>
 
 ![alt text](<CCD Lecture 15 Antennas in a Circuit.attachments/1780840132059.JPG>)
 

@@ -1,12 +1,25 @@
+---
+lastUpdated: 2026-06-10T18:09:22+08:00
+---
+
 # 8 Plane Electromagnetic Waves Part II
 
-**You know you didn't lose your self-control,**  
-**你深知 你并未失去自制力，**  
-
-**Let's start at the rainbow.**  
-**让我们于彩虹之上开始。**  
-
-<div align="right">——Rosa Walton / Hallie Coggins《I Really Want to Stay at Your House》</div>
+<LyricCard
+  title="I Really Want to Stay at Your House"
+  artist="Rosa Walton / Hallie Coggins"
+  lang="en"
+  qq-url="https://y.qq.com/n/ryqq/songDetail/0011gtqV1AYyOO"
+  netease-url="https://music.163.com/#/song?id=1496089152"
+>
+  <LyricLine
+    original="You know you didn't lose your self-control,"
+    translation="你深知 你并未失去自制力，"
+  />
+  <LyricLine
+    original="Let's start at the rainbow."
+    translation="让我们于彩虹之上开始。"
+  />
+</LyricCard>
 
 ![alt text](<EMFT Chapter 8 P II.attachments/1778848085341.JPG>)
 

@@ -1,9 +1,19 @@
+---
+lastUpdated: 2026-05-26T16:58:59+08:00
+---
 # Lecture 1 Introduction 电子通信导论
 
-**What am I to do when you're gone?**  
-**当你离去，我该如何自处？**  
-
-<div align="right">——Neuro-Sama《LIFE》</div>
+<LyricCard
+  title="LIFE"
+  artist="Neuro-Sama"
+  lang="en"
+  netease-url="https://music.163.com/#/song?id=2657613721"
+>
+  <LyricLine
+    original="What am I to do when you're gone?"
+    translation="当你离去，我该如何自处？"
+  />
+</LyricCard>
 
 ![alt text](<CCD Lecture 1 Introduction.attachments/1779783811122.PNG>)
 

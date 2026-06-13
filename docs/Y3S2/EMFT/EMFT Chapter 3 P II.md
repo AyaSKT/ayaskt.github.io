@@ -1,10 +1,25 @@
+---
+lastUpdated: 2026-04-04T16:23:47+08:00
+---
+
 # 3 Static Electric Field Part II
 
-
-**“对不起，我欺骗了你。”**  
-**“对不起，未能说出口。”**
-
-<div align="right">——25時、ナイトコードで。 《ジェヘナ》</div>
+<LyricCard
+  title="ジェヘナ"
+  artist="wotaku / 初音ミク"
+  lang="ja"
+  qq-url="https://y.qq.com/n/ryqq/songDetail/003uEfL118Srp4"
+  netease-url="https://music.163.com/#/song?id=1452688410"
+>
+  <LyricLine
+    original="騙(だま)してごめんよ"
+    translation="对不起，我欺骗了你。"
+  />
+  <LyricLine
+    original="言(い)えなくてごめんよ"
+    translation="对不起，未能说出口。"
+  />
+</LyricCard>
 
 ![alt text](<EMFT Chapter 3 P II.attachments/1774776875485.jpg>)
 
@@ -1154,9 +1169,6 @@ $$
 | **线性各向同性**介质：能量密度 $w_e$ 与总能量 | $w_e = \dfrac{1}{2}\varepsilon E^2$，$\quad W_e = \dfrac{1}{2}\displaystyle\int_V \varepsilon E^2\,dV$ |
 
 这些公式只是同一静电能在不同问题背景下的不同写法。实际做题时，应根据已知条件选择最方便的形式。
-
-
-
 
 
 

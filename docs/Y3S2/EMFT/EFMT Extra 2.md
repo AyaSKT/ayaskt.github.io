@@ -1,10 +1,21 @@
+---
+lastUpdated: 2026-06-02T16:43:38+08:00
+---
+
 # Ex 2 概念复习 Concept Review
 
-**「あるべき人間の姿へ」，「正しい人間の姿へ」。**  
-**「做该做的事」，「做正确的事」。**  
-
-
-<div align="right">——花譜《不可解 (Inexplicable)》</div>
+<LyricCard
+  title="不可解"
+  artist="花譜"
+  lang="ja"
+  qq-url="https://y.qq.com/n/ryqq/songDetail/004QDc561eiK6t"
+  netease-url="https://music.163.com/#/song?id=1399849876"
+>
+  <LyricLine
+    original="「あるべき人間(にんげん)の姿(すがた)へ」，「正(ただ)しい人間(にんげん)の姿(すがた)へ」。"
+    translation="「做该做的事」，「做正确的事」。"
+  />
+</LyricCard>
 
 ![alt text](<EFMT Extra 2.attachments/1780388664426.jpg>)
 

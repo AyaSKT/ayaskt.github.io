@@ -57,6 +57,10 @@ This is a **VitePress blog** for university engineering course notes (Chinese). 
 
 **`solution-collapse.ts`** — client-side solution toggle with `localStorage` state persistence. Initialized in `enhanceApp`.
 
+## Navigation Active State
+
+Course nav entries in `docs/.vitepress/config.mts` must highlight for the course README **and every note under the same directory, including nested subdirectories**. When adding or changing course nav links, set `activeMatch` to the course directory prefix, for example `^/Y3S2/CCD/`. Dropdown parents such as `第三学年` also need a parent-level `activeMatch` that aggregates all child course directories; otherwise README pages may highlight correctly while lecture pages do not.
+
 ## Page Transition System
 
 `PageTransition.vue` intercepts internal link clicks, calls `document.startViewTransition()`, navigates via `useRouter().go()`. Three modes:

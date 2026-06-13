@@ -1,9 +1,18 @@
+---
+lastUpdated: 2026-05-12T16:26:43+08:00
+---
+
 # 4 Solution of Electrostatic Problems
 
-**我的白马儿呀你慢些跑啊，这一次没有我带你回家。**
-
-
-<div align="right">——福禄寿FloruitShow《马》</div>
+<LyricCard
+  title="马"
+  artist="福禄寿FloruitShow"
+  lang="zh"
+  qq-url="https://y.qq.com/n/ryqq/songDetail/003ziJIO0dXUms"
+  netease-url="https://music.163.com/#/song?id=1345353903"
+>
+  <LyricLine original="我的白马儿呀你慢些跑啊，这一次没有我带你回家。" />
+</LyricCard>
 
 ![alt text](<EMFT Chapter 4.attachments/1774777767457.jpg>)
 
@@ -2105,7 +2114,6 @@ $$
 $$
 
 ::::
-
 
 
 

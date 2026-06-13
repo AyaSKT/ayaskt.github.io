@@ -1,9 +1,22 @@
+---
+lastUpdated: 2026-05-12T16:26:43+08:00
+---
+
 # 3 Static Electric Field Part I
 
-**『やれることやっていけ』**   
-**『去做自己力所能及之事吧』**
-
-<div align="right">——25時、ナイトコードで。 《限りなく灰色へ》</div>
+<LyricCard
+  title="限りなく灰色へ"
+  artist="25時、ナイトコードで。"
+  lang="ja"
+  furigana="none"
+  qq-url="https://y.qq.com/n/ryqq/songDetail/004N3PpI3Nh1CB"
+  netease-url="https://music.163.com/#/song?id=1913268598"
+>
+  <LyricLine
+    original="やれることやっていけ"
+    translation="去做自己力所能及之事吧"
+  />
+</LyricCard>
 
 ![alt text](<EMFT Chapter 3 P I.attachments/1774778776536.PNG>)
 
@@ -931,7 +944,6 @@ $$
 这就是电偶极子电场线的方程。
 
 由以上结果可见，电偶极子的远场电势按 $r^{-2}$ 衰减，电场按 $r^{-3}$ 衰减；同时电场和电势都与角度 $\theta$ 有关，这与点电荷场明显不同。
-
 
 
 

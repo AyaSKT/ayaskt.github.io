@@ -389,14 +389,17 @@ export default defineConfig({
 
       { text: '第四学年', items: [] },
 
-      { text: '第三学年', items: [
-        { text: '通信原理与系统 CPS', link: '/Y3S1/CPS/CPS-README.md' },
-        { text: '人工智能与机器学习 AIML', link: '/Y3S1/AIML/AIML-README.md' },
-        { text: '数字信号处理 DSP', link: '/Y3S2/DSP/DSP-README.md' },
-        { text: '电磁场与波 EMFT', link: '/Y3S2/EMFT/EMFT-README.md' },
-        { text: '通信电路设计 CCD', link: '/Y3S2/CCD/CCD-README.md' },
-        { text: '工程项目管理与财务 EPM&F', link: '/Y3S2/EPMF/EPMF-README.md' },
-       ]
+      {
+        text: '第三学年',
+        activeMatch: '^/(Y3S1/(CPS|AIML)|Y3S2/(DSP|EMFT|CCD|EPMF))/',
+        items: [
+          { text: '通信原理与系统 CPS', link: '/Y3S1/CPS/CPS-README.md', activeMatch: '^/Y3S1/CPS/' },
+          { text: '人工智能与机器学习 AIML', link: '/Y3S1/AIML/AIML-README.md', activeMatch: '^/Y3S1/AIML/' },
+          { text: '数字信号处理 DSP', link: '/Y3S2/DSP/DSP-README.md', activeMatch: '^/Y3S2/DSP/' },
+          { text: '电磁场与波 EMFT', link: '/Y3S2/EMFT/EMFT-README.md', activeMatch: '^/Y3S2/EMFT/' },
+          { text: '通信电路设计 CCD', link: '/Y3S2/CCD/CCD-README.md', activeMatch: '^/Y3S2/CCD/' },
+          { text: '工程项目管理与财务 EPM&F', link: '/Y3S2/EPMF/EPMF-README.md', activeMatch: '^/Y3S2/EPMF/' },
+        ]
       },
 
       { text: '早期资料', items: [
@@ -409,6 +412,7 @@ export default defineConfig({
 
       { text: '杂项', items: [
         { text: '更新日志', link: '/changelog' },
+        { text: '实验室', link: '/others/test' },
 
        ]
       },

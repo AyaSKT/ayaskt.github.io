@@ -1,12 +1,23 @@
+---
+lastUpdated: 2026-06-12T15:16:20+08:00
+---
 # Lecture 18 Digital to Analog Conversion 数模转换
 
-**だからどんな時も夢が僕らの太陽さ，**  
-**所以啊 不论何时 梦想都是我们的太阳啊，**
-
-**泣いちゃった後は笑顔で，明日を語ればいいよ。**  
-**拭去泪水后笑着聊起明天，心情就好起来了。**
-
-<div align="right">——虹ヶ咲学園スクールアイドル同好会 《夢が僕らの太陽さ》</div>
+<LyricCard
+  title="夢が僕らの太陽さ"
+  artist="虹ヶ咲学園スクールアイドル同好会"
+  lang="ja"
+  netease-url="https://music.163.com/#/song?id=1942066993"
+>
+  <LyricLine
+    original="だからどんな時(とき)も夢(ゆめ)が僕(ぼく)らの太陽(たいよう)さ，"
+    translation="所以啊 不论何时 梦想都是我们的太阳啊，"
+  />
+  <LyricLine
+    original="泣(な)いちゃった後(あと)は笑顔(えがお)で，明日(あした)を語(かた)ればいいよ。"
+    translation="拭去泪水后笑着聊起明天，心情就好起来了。"
+  />
+</LyricCard>
 
 ![alt text](<CCD Lecture 18 Digital to Analog Conversion.attachments/1781248048842.jpg>)
 

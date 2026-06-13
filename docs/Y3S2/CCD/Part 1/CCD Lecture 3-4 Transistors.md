@@ -1,9 +1,17 @@
+---
+lastUpdated: 2026-06-12T01:40:38+08:00
+---
 # Lecture 3-4 Transistors 晶体管
 
-**艾蜜莉啊艾蜜莉，夕阳照进我心底；**  
-**我要带你去寻找，散落的星星。**  
-
-<div align="right">——回春丹《艾蜜莉》</div>
+<LyricCard
+  title="艾蜜莉"
+  artist="回春丹"
+  lang="zh"
+  netease-url="https://music.163.com/#/song?id=1429237296"
+>
+  <LyricLine original="艾蜜莉啊艾蜜莉，夕阳照进我心底；" />
+  <LyricLine original="我要带你去寻找，散落的星星。" />
+</LyricCard>
 
 ![alt text](<CCD Lecture 3-4 Transistors.attachments/1779784088824.jpg>)
 

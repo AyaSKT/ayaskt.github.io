@@ -1,13 +1,23 @@
+---
+lastUpdated: 2026-05-31T14:55:30+08:00
+---
 # Lecture 7 Mixers 混频器
 
-**孤独の中，泣いても，**  
-**孤独的内心，即使哭泣，**  
-
-**蝶の羽根で，おやすみなさい。**  
-**也要在蝴蝶的翅膀上，说着晚安。**  
-
-
-<div align="right">——Aiobahn/長瀬有花 《宙でおやすみ (在天空晚安)》</div>
+<LyricCard
+  title="宙でおやすみ"
+  artist="Aiobahn / 長瀬有花"
+  lang="ja"
+  netease-url="https://music.163.com/#/song?id=2027310408"
+>
+  <LyricLine
+    original="孤独(こどく)の中(なか)，泣(な)いても，"
+    translation="孤独的内心，即使哭泣，"
+  />
+  <LyricLine
+    original="蝶(ちょう)の羽根(はね)で，おやすみなさい。"
+    translation="也要在蝴蝶的翅膀上，说着晚安。"
+  />
+</LyricCard>
 
 ![alt text](<CCD Lecture 7 Mixers.attachments/1780057844904.PNG>)
 

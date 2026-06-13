@@ -1,12 +1,25 @@
+---
+lastUpdated: 2026-05-25T21:50:22+08:00
+---
+
 # 6 Static Magnetic Fields
 
-**It all returns to nothing，**  
-**一切都回不去了，**
-
-**It all comes tumbling down, tumbling down, tumbling down.**  
-**一切都分崩离析，分崩离析。**  
-
-<div align="right">——ARIANNE《Komm, süsser Tod》</div>
+<LyricCard
+  title="Komm, süsser Tod"
+  artist="ARIANNE"
+  lang="de"
+  qq-url="https://y.qq.com/n/ryqq/songDetail/003iThvD25EblY"
+  netease-url="https://music.163.com/#/song?id=2740110229"
+>
+  <LyricLine
+    original="It all returns to nothing，"
+    translation="一切都回不去了，"
+  />
+  <LyricLine
+    original="It all comes tumbling down, tumbling down, tumbling down."
+    translation="一切都分崩离析，分崩离析。"
+  />
+</LyricCard>
 
 ![alt text](<EMFT Chapter 6.attachments/1778749796338.jpg>)
 

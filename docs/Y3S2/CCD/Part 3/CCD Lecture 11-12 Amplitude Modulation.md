@@ -1,13 +1,23 @@
+---
+lastUpdated: 2026-06-12T01:40:38+08:00
+---
 # Lecture 11-12 Amplitude Modulation 幅度调制
 
-**これは これは 誰のため？**  
-**这一切 这一切 到底是为谁？**
-
-**なにが なにが 君のため？**  
-**该如何 才算是 真正为了你？**
-
-
-<div align="right">——LonePi/初音ミク 《幸福刑》</div>
+<LyricCard
+  title="幸福刑"
+  artist="LonePi / 初音ミク"
+  lang="ja"
+  netease-url="https://music.163.com/#/song?id=3357994187"
+>
+  <LyricLine
+    original="これは これは 誰(だれ)のため？"
+    translation="这一切 这一切 到底是为谁？"
+  />
+  <LyricLine
+    original="なにが なにが 君(きみ)のため？"
+    translation="该如何 才算是 真正为了你？"
+  />
+</LyricCard>
 
 ![alt text](<CCD Lecture 11-12 Amplitude Modulation.attachments/1780674328208.JPG>)
 

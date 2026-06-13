@@ -1,13 +1,25 @@
+---
+lastUpdated: 2026-06-02T16:06:16+08:00
+---
+
 # 7 Time-Varying Fields and Maxwell’s Equations
 
-**季節の変わり目の服は 何着りゃいいんだろ，**  
-**季节交替之时 该换上什么衣服呢，** 
-
-
-**春と秋 どこいっちゃったんだよ。**  
-**春天与秋天 究竟去了哪里呢。**  
-
-<div align="right">——結束バンド《ギターと孤独と蒼い惑星》</div>
+<LyricCard
+  title="ギターと孤独と蒼い惑星"
+  artist="結束バンド"
+  lang="ja"
+  qq-url="https://y.qq.com/n/ryqq/songDetail/001UnSHi3ELswe"
+  netease-url="https://music.163.com/#/song?id=1991012773"
+>
+  <LyricLine
+    original="季節(きせつ)の変(か)わり目(め)の服(ふく)は 何(なに)着(き)りゃいいんだろ，"
+    translation="季节交替之时 该换上什么衣服呢，"
+  />
+  <LyricLine
+    original="春(はる)と秋(あき) どこいっちゃったんだよ。"
+    translation="春天与秋天 究竟去了哪里呢。"
+  />
+</LyricCard>
 
 ![alt text](<EMFT Chapter 7.attachments/1778750317994.PNG>)
 

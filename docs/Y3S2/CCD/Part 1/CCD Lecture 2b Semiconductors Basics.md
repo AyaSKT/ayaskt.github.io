@@ -1,12 +1,23 @@
+---
+lastUpdated: 2026-06-12T01:40:38+08:00
+---
 # Lecture 2b Semiconductors and PN Junction 半导体与 PN 结
 
-**今日は歩いてみようよ，上を向いて歩いた；**  
-**今天我们一起出去走一走吧，抬起头来缓缓迈步；**  
-
-**花が夜空に咲いてる，夏の匂いがしてた。**  
-**烟花绽放在夜空之中，散发着阵阵夏日气息。**  
-
-<div align="right">——ヨルシカ《逃亡 (Escape)》</div>
+<LyricCard
+  title="逃亡"
+  artist="ヨルシカ"
+  lang="ja"
+  netease-url="https://music.163.com/#/song?id=1466519476"
+>
+  <LyricLine
+    original="今日(きょう)は歩(ある)いてみようよ，上(うえ)を向(む)いて歩(ある)いた；"
+    translation="今天我们一起出去走一走吧，抬起头来缓缓迈步；"
+  />
+  <LyricLine
+    original="花(はな)が夜空(よぞら)に咲(さ)いてる，夏(なつ)の匂(にお)いがしてた。"
+    translation="烟花绽放在夜空之中，散发着阵阵夏日气息。"
+  />
+</LyricCard>
 
 ![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/1779784870101.JPG>)
 

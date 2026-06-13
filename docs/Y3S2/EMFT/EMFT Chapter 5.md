@@ -1,10 +1,21 @@
+---
+lastUpdated: 2026-05-11T10:05:08+08:00
+---
+
 # 5 Steady Electric Currents
 
-**老师，我想谈谈人生。**  
-**在这之后怎样才能感到轻松呢？**  
-**会被说那种事情谁也不知道之类的吗？**  
-
-<div align="right">——ヨルシカ《ヒッチコック》</div>
+<LyricCard
+  title="ヒッチコック"
+  artist="ヨルシカ"
+  lang="zh"
+  title-style="ja-kagi"
+  qq-url="https://y.qq.com/n/ryqq/songDetail/002khQke3D5YTV"
+  netease-url="https://music.163.com/#/song?id=557581315"
+>
+  <LyricLine original="老师，我想谈谈人生。" />
+  <LyricLine original="在这之后怎样才能感到轻松呢？" />
+  <LyricLine original="会被说那种事情谁也不知道之类的吗？" />
+</LyricCard>
 
 ![alt text](<EMFT Chapter 5.attachments/1774778411631.jpg>)
 

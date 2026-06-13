@@ -1,12 +1,23 @@
+---
+lastUpdated: 2026-06-12T01:40:38+08:00
+---
 # Lecture 14 Frequency Modulation (FM) & Phase Modulation (PM) 调频与调相
 
-**星のない夜，**  
-**不见星辰的夜幕，**
-
-**どこにも無いふつう それが素敵なので。**  
-**无处可寻的平凡 才更显美好。**
-
-<div align="right">——花譜 《ありふれてたい》</div>
+<LyricCard
+  title="ありふれてたい"
+  artist="花譜"
+  lang="ja"
+  netease-url="https://music.163.com/#/song?id=2753833710"
+>
+  <LyricLine
+    original="星(ほし)のない夜(よる)，"
+    translation="不见星辰的夜幕，"
+  />
+  <LyricLine
+    original="どこにも無(な)いふつう それが素敵(すてき)なので。"
+    translation="无处可寻的平凡 才更显美好。"
+  />
+</LyricCard>
 
 ![alt text](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/1780839332491.png>)
 

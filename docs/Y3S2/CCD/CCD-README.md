@@ -10,8 +10,6 @@ pageClass: course-index-page
 
 
 
-
-
 <CourseIndex
   course="CCD"
   basePath="Y3S2/CCD"

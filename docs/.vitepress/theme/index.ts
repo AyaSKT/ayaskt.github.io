@@ -18,6 +18,8 @@ import PageTransition from './components/PageTransition.vue'
 import ScrollReveal from './components/ScrollReveal.vue'
 import DocMeta from './components/DocMeta.vue'
 import CourseIndex from './components/CourseIndex.vue'
+import LyricCard from './components/LyricCard.vue'
+import LyricLine from './components/LyricLine.vue'
 import { setupLinkWarmup } from './link-warmup'
 
 export default {
@@ -39,6 +41,8 @@ export default {
     app.component('ScrollReveal', ScrollReveal)
     app.component('DocMeta', DocMeta)
     app.component('CourseIndex', CourseIndex)
+    app.component('LyricCard', LyricCard)
+    app.component('LyricLine', LyricLine)
   },
 
   extends: DefaultTheme,

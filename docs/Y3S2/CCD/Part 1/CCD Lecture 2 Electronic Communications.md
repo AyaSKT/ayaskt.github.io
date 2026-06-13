@@ -1,12 +1,23 @@
+---
+lastUpdated: 2026-05-26T16:20:25+08:00
+---
 # Lecture 2 Electronic Communications 电子通信基础
 
-**「しゃあないな」って 目を伏せて，**  
-**闭上眼低头说着“真厉害”，**  
-
-**大人振って しまう様な。**  
-**像大人一样。**  
-
-<div align="right">——Afterglow《燦々》</div>
+<LyricCard
+  title="燦々"
+  artist="Afterglow"
+  lang="ja"
+  netease-url="https://music.163.com/#/song?id=2079882237"
+>
+  <LyricLine
+    original="「しゃあないな」って 目(め)を伏(ふ)せて，"
+    translation="闭上眼低头说着“真厉害”，"
+  />
+  <LyricLine
+    original="大人(おとな)振(ぶ)って しまう様(よう)な。"
+    translation="像大人一样。"
+  />
+</LyricCard>
 
 ![alt text](<CCD Lecture 2 Electronic Communications.attachments/1778848682009.jpg>)
 

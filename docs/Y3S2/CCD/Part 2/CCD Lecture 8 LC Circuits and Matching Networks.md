@@ -1,12 +1,23 @@
+---
+lastUpdated: 2026-06-12T01:40:38+08:00
+---
 # Lecture 8 LC Circuits and Matching Networks LC 电路与匹配网络
 
-**If I leave here tomorrow**  
-**如果明天我将离开**
-
-**Would you still remember me?**  
-**你还会记得我吗？**
-
-<div align="right">——Lynyrd Skynrd《Free Bird》</div>
+<LyricCard
+  title="Free Bird"
+  artist="Lynyrd Skynyrd"
+  lang="en"
+  netease-url="https://music.163.com/#/song?id=21052194"
+>
+  <LyricLine
+    original="If I leave here tomorrow"
+    translation="如果明天我将离开"
+  />
+  <LyricLine
+    original="Would you still remember me?"
+    translation="你还会记得我吗？"
+  />
+</LyricCard>
 
 ![alt text](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/1780209189821.JPG>)
 

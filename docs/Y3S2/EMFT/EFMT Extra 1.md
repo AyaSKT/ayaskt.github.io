@@ -1,9 +1,21 @@
+---
+lastUpdated: 2026-06-03T16:35:12+08:00
+---
+
 # Ex 1 公式复习 Formula Review
 
-**答えが出るまでとか = 未来永劫。**  
-**等有了答案再说 = 永远不会有答案。**
-
-<div align="right">——MyGO!!!!!《影色舞》</div>
+<LyricCard
+  title="影色舞"
+  artist="MyGO!!!!!"
+  lang="ja"
+  qq-url="https://y.qq.com/n/ryqq/songDetail/001BnKRK1oo2g1"
+  netease-url="https://music.163.com/#/song?id=2003330146"
+>
+  <LyricLine
+    original="答(こた)えが出(で)るまでとか = 未来永劫(みらいえいごう)。"
+    translation="等有了答案再说 = 永远不会有答案。"
+  />
+</LyricCard>
 
 ![alt text](<EFMT Extra 1.attachments/1780475410244.jpg>)
 

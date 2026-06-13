@@ -1,12 +1,23 @@
+---
+lastUpdated: 2026-05-31T14:55:30+08:00
+---
 # Lecture 10 Revision 复习
 
-**Even if the sky is gray your're sunny**  
-**天空阴沉也无妨，你会带来晴天**
-
-**Alays finding time to play it's funny**  
-**总在为玩耍寻找时间，这多有趣**
-
-<div align="right">——塞壬唱片-MSR《Before Summer》</div>
+<LyricCard
+  title="Before Summer"
+  artist="塞壬唱片-MSR"
+  lang="en"
+  netease-url="https://music.163.com/#/song?id=2051789190"
+>
+  <LyricLine
+    original="Even if the sky is gray your're sunny"
+    translation="天空阴沉也无妨，你会带来晴天"
+  />
+  <LyricLine
+    original="Alays finding time to play it's funny"
+    translation="总在为玩耍寻找时间，这多有趣"
+  />
+</LyricCard>
 
 ![alt text](<CCD Lecture 9 Oscillators.attachments/1780209422588.JPG>)
 
