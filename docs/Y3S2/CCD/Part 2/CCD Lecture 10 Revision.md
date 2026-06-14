@@ -14,7 +14,7 @@ lastUpdated: 2026-05-31T14:55:30+08:00
     translation="天空阴沉也无妨，你会带来晴天"
   />
   <LyricLine
-    original="Alays finding time to play it's funny"
+    original="Always finding time to play it's funny"
     translation="总在为玩耍寻找时间，这多有趣"
   />
 </LyricCard>

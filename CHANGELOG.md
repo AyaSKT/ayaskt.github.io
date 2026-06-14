@@ -12,6 +12,25 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.6 beta 2 - 2026-06-14
+
+### 新增
+
+- 暂无。
+
+### 调整
+
+- 为 EPMF Block 1、Block 3、Block 4 思维导图页面添加 LyricCard 歌词卡片装饰。
+
+### 修复
+
+- 修复正文页路由切换时 View Transition 快照过早、图片未取得自然尺寸导致页面先以错误矮高度进入过渡、随后被撑开的问题：在 `PageTransition.vue` 新增过渡前稳定步骤，正文页 `nextTick` 后等待前几个图片完成布局（最长 1400ms），再强制读取 `.VPDoc .main` 布局后拍新快照。
+- 修复 CCD Lecture 10 Revision 歌词 typo：「Alays」→「Always」。
+
+### 删减
+
+- 暂无。
+
 ## V6.6 beta - 2026-06-14
 
 ### 新增

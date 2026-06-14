@@ -20,6 +20,9 @@ let outlineJumpMotion: ReturnType<typeof createOutlineJumpMotion> | undefined
 let detachOutlineJumpMotion: (() => void) | undefined
 let detachSidebarMotion: (() => void) | undefined
 
+const ARTICLE_IMAGE_LAYOUT_TIMEOUT = 1400
+const ARTICLE_IMAGE_WAIT_LIMIT = 6
+
 function sidebarKeyFor(to: string) {
   const sidebar = theme.value.sidebar
   if (!sidebar || Array.isArray(sidebar)) return ''
@@ -192,6 +195,64 @@ function resetSidebarMotion() {
   })
 }
 
+function imageHasLayoutSize(image: HTMLImageElement) {
+  return image.complete || (image.naturalWidth > 0 && image.naturalHeight > 0)
+}
+
+function waitForImageLayoutSize(image: HTMLImageElement) {
+  if (imageHasLayoutSize(image)) return Promise.resolve()
+
+  return new Promise<void>((resolve) => {
+    let pollTimer: ReturnType<typeof setTimeout> | undefined
+    let timer: ReturnType<typeof setTimeout> | undefined
+    let settled = false
+
+    const cleanup = () => {
+      clearTimeout(pollTimer)
+      clearTimeout(timer)
+      image.removeEventListener('load', finish)
+      image.removeEventListener('error', finish)
+    }
+
+    const finish = () => {
+      if (settled) return
+      settled = true
+      cleanup()
+      resolve()
+    }
+
+    const check = () => {
+      if (imageHasLayoutSize(image)) {
+        finish()
+        return
+      }
+
+      pollTimer = setTimeout(check, 50)
+    }
+
+    timer = setTimeout(finish, ARTICLE_IMAGE_LAYOUT_TIMEOUT)
+    image.addEventListener('load', finish, { once: true })
+    image.addEventListener('error', finish, { once: true })
+    check()
+  })
+}
+
+async function waitForArticleMediaLayout() {
+  const main = document.querySelector<HTMLElement>('.VPDoc .main')
+  if (!main) return
+
+  const pendingImages = Array
+    .from(main.querySelectorAll<HTMLImageElement>('img'))
+    .filter((image) => !imageHasLayoutSize(image))
+    .slice(0, ARTICLE_IMAGE_WAIT_LIMIT)
+
+  if (pendingImages.length) {
+    await Promise.allSettled(pendingImages.map((image) => waitForImageLayoutSize(image)))
+  }
+
+  main.getBoundingClientRect()
+}
+
 onMounted(() => {
   const originalGo = router.go.bind(router)
   outlineJumpMotion = createOutlineJumpMotion()
@@ -241,6 +302,9 @@ onMounted(() => {
         document.documentElement.classList.toggle('vt-doc-to-contentless', fromArticleContent && !toArticleContent)
 
         await nextTick()
+        if (toArticleContent) {
+          await waitForArticleMediaLayout()
+        }
         resetSidebarObserver()
 
         // 非同一 sidebar：DOM 更新后立刻定位指示器（无动画），确保出现在快照中
