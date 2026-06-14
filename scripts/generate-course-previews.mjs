@@ -1,14 +1,42 @@
 #!/usr/bin/env node
 import fs from 'node:fs'
 import path from 'node:path'
-import {
-  normalizeDocsPath,
-  resolveNotePath,
-} from '../docs/.vitepress/shared/course-index-paths.mjs'
 
 const root = process.cwd()
 const docsRoot = path.join(root, 'docs')
 const outputPath = path.join(root, 'docs/.vitepress/theme/generated/course-previews.json')
+
+function normalizeDocsPath(value) {
+  const segments = []
+
+  for (const segment of value.replace(/\\/g, '/').split('/')) {
+    if (!segment || segment === '.') continue
+    if (segment === '..') {
+      segments.pop()
+      continue
+    }
+
+    segments.push(segment)
+  }
+
+  return segments.join('/')
+}
+
+function decodeSafe(value) {
+  try {
+    return decodeURIComponent(value)
+  } catch {
+    return value
+  }
+}
+
+function stripAngleBrackets(value) {
+  return value.trim().replace(/^<|>$/g, '')
+}
+
+function isSpecialPath(value) {
+  return /^(?:[a-z][a-z0-9+.-]*:|\/\/|#)/i.test(value)
+}
 
 function walkMarkdown(dir, files = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -24,6 +52,19 @@ function walkMarkdown(dir, files = []) {
 
 function findCourseIndexFiles() {
   return walkMarkdown(docsRoot).filter((file) => fs.readFileSync(file, 'utf8').includes('<CourseIndex'))
+}
+
+function resolveNotePath(basePath, link) {
+  const clean = decodeSafe(stripAngleBrackets(link))
+  if (!clean || isSpecialPath(clean)) return ''
+
+  const pathOnly = clean.split(/[?#]/)[0] ?? ''
+  if (!pathOnly) return ''
+
+  const markdownPath = pathOnly.replace(/\.html$/i, '.md')
+  return markdownPath.startsWith('/')
+    ? normalizeDocsPath(markdownPath.replace(/^\/+/, ''))
+    : normalizeDocsPath(`${basePath}/${markdownPath}`)
 }
 
 function isTocHeading(value) {
@@ -130,7 +171,7 @@ const missing = []
 for (const readme of findCourseIndexFiles()) {
   const markdown = fs.readFileSync(readme, 'utf8')
   const fallbackBasePath = path.relative(docsRoot, path.dirname(readme)).replace(/\\/g, '/')
-  const basePath = normalizeDocsPath(markdown.match(/basePath=["']([^"']+)["']/)?.[1] ?? fallbackBasePath)
+  const basePath = markdown.match(/basePath=["']([^"']+)["']/)?.[1] ?? fallbackBasePath
   const linkPattern = /link:\s*(['"`])([^'"`]+)\1/g
 
   for (const match of markdown.matchAll(linkPattern)) {

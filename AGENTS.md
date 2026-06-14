@@ -18,15 +18,6 @@ This is a **VitePress blog** for university engineering course notes (Chinese). 
 
 **Theme chain**: `index.ts` → `Layout.vue` → `MyLayout.vue` → wraps `DefaultTheme.Layout` with custom components via slots (`#layout-top`, `#doc-after`, `#home-hero-image`).
 
-**Config architecture** (`docs/.vitepress/config/`):
-- `config.mts` is the VitePress composition entry plus a thin compatibility re-export layer for legacy helper imports. Keep it small: site metadata, build flags, imports from config modules, and explicit helper re-exports only.
-- `config/env.mts`, `paths.mts`, `page-data.mts`, and `vite.mts` hold environment flags, shared filesystem roots, page-data transforms, and Vite watcher options.
-- `config/theme.mts` assembles theme config; `config/navigation.mts` owns `nav` and `sidebar`; `config/search.mts` owns local-search HTML rendering.
-- `config/markdown/index.mts` orchestrates Markdown plugins. Keep the registration order: MathJax → custom containers → image dimensions → MindMap fence → DocMeta → component asset imports.
-- Markdown submodules live under `config/markdown/`: `mathjax.mts`, `containers.mts`, `image-dimensions.mts`, `mindmap.mts`, `doc-meta.mts`, and `component-assets.mts`.
-- `config/markdown.mts` is a compatibility barrel for tests or scripts that import old helpers. Keep re-exporting `transformSongCardCoverAttrs`, `transformLyricCardAlbumCoverAttrs`, `renderMindMapFence`, `formatDocMeta`, and `getReadableWordCount`.
-- Course index path resolution is shared through `docs/.vitepress/shared/course-index-paths.mjs`; use it from both Vue components and Node scripts instead of copying normalize/resolve helpers.
-
 **CSS architecture** (`docs/.vitepress/theme/style/`):
 - `var.css` — brand colors (`#98CBEA → #C2C7F8 → #F1DCE4`), VitePress CSS variable overrides, iOS animation easing curves and durations
 - `rainbow.css` — `@property`-based gradient animation for hero title. Uses registered `<color>` custom properties so the browser interpolates directly (no 101-frame color-mix hack)
@@ -38,16 +29,14 @@ This is a **VitePress blog** for university engineering course notes (Chinese). 
 
 ## Custom Markdown Infrastructure
 
-**Math rendering** (in `config/markdown/mathjax.mts`): MathJax 4 via `@mdit/plugin-mathjax`. Server-side SVG output. `$...$` and `$$...$$` delimiters. A custom `tex.packages` list excludes `bboldx` to avoid font variant errors. A `transformer` wraps output in `<span v-pre>` to prevent Vue hydration double-rendering.
+**Math rendering** (in `config.mts`): MathJax 4 via `@mdit/plugin-mathjax`. Server-side SVG output. `$...$` and `$$...$$` delimiters. A custom `tex.packages` list excludes `bboldx` to avoid font variant errors. A `transformer` wraps output in `<span v-pre>` to prevent Vue hydration double-rendering.
 
-**Custom containers** (in `config/markdown/containers.mts`, self-contained `registerContainer` function — no external markdown-it-container dependency):
+**Custom containers** (in `config.mts`, self-contained `registerContainer` function — no external markdown-it-container dependency):
 - `::: example [title]` / `::: stem` / `::: solution` — example/problem/solution blocks
 - `::: definition [title]` — definition blocks
 
-**Markdown component assets** (in `config/markdown/component-assets.mts`): relative `SongCard cover` and `LyricCard album-cover` attributes in markdown HTML are rewritten into Vite asset imports. Absolute public paths stay as authored and component code must run them through `withBase()` when rendering.
-
 **Custom components** registered globally in `index.ts`:
-- `Mycomponent` (Linkcard), `Confetti` (canvas-confetti), `MouseClick` (DOM ripple), `update`, `BackToTop`, `PageTransition`, `ScrollReveal`, `DocMeta`, `CourseIndex`, `LyricCard`, `LyricLine`, `SongCard`, `MindMap`
+- `Mycomponent` (Linkcard), `Confetti` (canvas-confetti), `MouseClick` (DOM ripple), `update`, `BackToTop`, `PageTransition`, `ScrollReveal`, `DocMeta`, `CourseIndex`, `LyricCard`, `LyricLine`
 
 Components usable in markdown must be registered in `enhanceApp` and placed in `MyLayout.vue` slots (or used inline in `.md` files).
 
@@ -108,15 +97,11 @@ Keep lyric excerpts short in committed docs. Do not paste long copyrighted lyric
 
 ## Navigation Active State
 
-Course nav entries in `docs/.vitepress/config/navigation.mts` must highlight for the course README **and every note under the same directory, including nested subdirectories**. When adding or changing course nav links, set `activeMatch` to the course directory prefix, for example `^/Y3S2/CCD/`. Dropdown parents such as `第三学年` also need a parent-level `activeMatch` that aggregates all child course directories; otherwise README pages may highlight correctly while lecture pages do not.
+Course nav entries in `docs/.vitepress/config.mts` must highlight for the course README **and every note under the same directory, including nested subdirectories**. When adding or changing course nav links, set `activeMatch` to the course directory prefix, for example `^/Y3S2/CCD/`. Dropdown parents such as `第三学年` also need a parent-level `activeMatch` that aggregates all child course directories; otherwise README pages may highlight correctly while lecture pages do not.
 
 ## Page Transition System (V3.3)
 
 `PageTransition.vue` intercepts internal link clicks on `capture` phase, calls `document.startViewTransition()`, navigates via `useRouter().go()`, and the browser crossfades between old/new snapshots. Zero dependencies. Duration: `--dur-page: 0.8s` (mobile: `0.55s`).
-
-Router lifecycle hooks should be wrapped through `theme/router-hooks.ts` (`wrapRouterHook` / `combineHookRestorers`) so `TopProgress`, link warmup, and future route effects chain and restore consistently. `PageTransition.vue` remains the owner of the `router.go` view-transition interception.
-
-`link-warmup.ts` intentionally uses same-origin route `prefetch` and does not import VitePress private internals such as `vitepress/dist/client/app/utils.js`.
 
 `ScrollReveal.vue` uses `IntersectionObserver` to add `reveal-visible` class to `[data-reveal]` elements on enter with staggered delay.
 

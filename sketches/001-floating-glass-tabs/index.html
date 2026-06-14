@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Floating Glass Tabs Preview</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { color-scheme: light; }
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Segoe UI", sans-serif;
+      color: #18202b;
+      background:
+        linear-gradient(180deg, rgba(249, 252, 255, 0.92), rgba(246, 248, 253, 0.72)),
+        linear-gradient(140deg, #dff1fb 0%, #eceeff 46%, #fff1f6 100%);
+      overflow-x: hidden;
+    }
+    body.dark {
+      color: #edf5ff;
+      background:
+        linear-gradient(180deg, rgba(12, 17, 25, 0.88), rgba(16, 22, 33, 0.82)),
+        linear-gradient(140deg, #132f42 0%, #252745 48%, #3a2834 100%);
+    }
+    a, button { font: inherit; }
+    button { border: 0; cursor: pointer; }
+    .page {
+      min-height: 100dvh;
+      padding: 0 32px 56px;
+    }
+    .hero-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(115deg, rgba(255,255,255,0.72) 0 18%, transparent 42%),
+        linear-gradient(180deg, transparent, rgba(255,255,255,0.56));
+    }
+    body.dark .hero-bg {
+      background:
+        linear-gradient(115deg, rgba(255,255,255,0.08) 0 18%, transparent 42%),
+        linear-gradient(180deg, transparent, rgba(0,0,0,0.22));
+    }
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      width: min(1180px, 100%);
+      height: 72px;
+      margin: 0 auto;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 218px;
+      color: inherit;
+      text-decoration: none;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background:
+        linear-gradient(140deg, #98cbea, #c2c7f8 54%, #f1dce4);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.72), 0 8px 22px rgba(96, 128, 154, 0.16);
+    }
+    .nav-controls {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      min-width: 0;
+    }
+    .nav-right {
+      --glass-blur: 18px;
+      position: relative;
+      isolation: isolate;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.54);
+      border-radius: 999px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.68), rgba(255,255,255,0.28)),
+        rgba(255,255,255,0.22);
+      box-shadow:
+        0 18px 60px rgba(79, 109, 136, 0.18),
+        inset 0 1px 0 rgba(255,255,255,0.78),
+        inset 0 -18px 34px rgba(152,203,234,0.10);
+      backdrop-filter: blur(var(--glass-blur)) saturate(1.28);
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.28);
+      transition:
+        border-color 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease,
+        backdrop-filter 0.18s ease,
+        -webkit-backdrop-filter 0.18s ease;
+    }
+    .nav-right::before {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      background:
+        linear-gradient(115deg, rgba(255,255,255,0.34), rgba(255,255,255,0.06) 34%, transparent 58%),
+        linear-gradient(180deg, rgba(255,255,255,0.22), transparent);
+      opacity: 0.72;
+      content: "";
+      transition: opacity 0.18s ease;
+    }
+    .nav-right.is-live {
+      --glass-blur: 26px;
+      will-change: backdrop-filter;
+      box-shadow:
+        0 20px 68px rgba(79, 109, 136, 0.24),
+        inset 0 1px 0 rgba(255,255,255,0.88),
+        inset 0 -18px 34px rgba(152,203,234,0.14);
+    }
+    .nav-right.is-live::before { opacity: 0.96; }
+    .nav-right.is-idle { will-change: auto; }
+    body.dark .nav-right {
+      border-color: rgba(255,255,255,0.16);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06)),
+        rgba(18,24,34,0.48);
+      box-shadow:
+        0 20px 70px rgba(0,0,0,0.38),
+        inset 0 1px 0 rgba(255,255,255,0.16),
+        inset 0 -18px 34px rgba(0,0,0,0.16);
+    }
+    body.dark .nav-right::before {
+      background:
+        linear-gradient(115deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04) 34%, transparent 58%),
+        linear-gradient(180deg, rgba(255,255,255,0.08), transparent);
+    }
+    body.dark .nav-right.is-live {
+      box-shadow:
+        0 22px 76px rgba(0,0,0,0.46),
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        inset 0 -18px 34px rgba(0,0,0,0.18);
+    }
+    .search {
+      --glass-blur: 18px;
+      position: relative;
+      isolation: isolate;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+      height: 44px;
+      padding: 0 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.54);
+      border-radius: 999px;
+      color: rgba(42,56,72,0.72);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.64), rgba(255,255,255,0.28)),
+        rgba(255,255,255,0.20);
+      box-shadow:
+        0 14px 44px rgba(79, 109, 136, 0.14),
+        inset 0 1px 0 rgba(255,255,255,0.76),
+        inset 0 -12px 24px rgba(152,203,234,0.08);
+      backdrop-filter: blur(var(--glass-blur)) saturate(1.24);
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.24);
+      transition:
+        border-color 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease,
+        backdrop-filter 0.18s ease,
+        -webkit-backdrop-filter 0.18s ease,
+        transform 0.18s ease;
+    }
+    .search::before {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      background:
+        linear-gradient(115deg, rgba(255,255,255,0.32), rgba(255,255,255,0.06) 42%, transparent 64%),
+        linear-gradient(180deg, rgba(255,255,255,0.20), transparent);
+      opacity: 0.66;
+      content: "";
+      transition: opacity 0.18s ease;
+    }
+    .search.is-live {
+      --glass-blur: 26px;
+      will-change: backdrop-filter;
+      box-shadow:
+        0 16px 54px rgba(79, 109, 136, 0.20),
+        inset 0 1px 0 rgba(255,255,255,0.84),
+        inset 0 -12px 24px rgba(152,203,234,0.12);
+    }
+    .search.is-live::before { opacity: 0.94; }
+    .search.is-idle { will-change: auto; }
+    .search > * {
+      position: relative;
+      z-index: 1;
+    }
+    body.dark .search {
+      color: rgba(226,237,250,0.76);
+      border-color: rgba(255,255,255,0.16);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05)),
+        rgba(18,24,34,0.48);
+      box-shadow:
+        0 16px 54px rgba(0,0,0,0.34),
+        inset 0 1px 0 rgba(255,255,255,0.14),
+        inset 0 -12px 24px rgba(0,0,0,0.14);
+    }
+    body.dark .search::before {
+      background:
+        linear-gradient(115deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04) 42%, transparent 64%),
+        linear-gradient(180deg, rgba(255,255,255,0.07), transparent);
+    }
+    body.dark .search.is-live {
+      box-shadow:
+        0 18px 60px rgba(0,0,0,0.44),
+        inset 0 1px 0 rgba(255,255,255,0.17),
+        inset 0 -12px 24px rgba(0,0,0,0.17);
+    }
+    .search:hover,
+    .search:focus-visible {
+      transform: translateY(-1px);
+      outline: none;
+    }
+    .search:focus-visible {
+      box-shadow:
+        0 0 0 3px rgba(152,203,234,0.22),
+        0 16px 54px rgba(79, 109, 136, 0.18),
+        inset 0 1px 0 rgba(255,255,255,0.82);
+    }
+    .search-mark {
+      width: 15px;
+      height: 15px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      position: relative;
+      opacity: 0.86;
+    }
+    .search-mark::after {
+      position: absolute;
+      right: -5px;
+      bottom: -4px;
+      width: 6px;
+      height: 2px;
+      border-radius: 2px;
+      background: currentColor;
+      transform: rotate(45deg);
+      content: "";
+    }
+    .tabs {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .tab {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      height: 36px;
+      padding: 0 12px;
+      color: rgba(32,43,57,0.72);
+      text-decoration: none;
+      white-space: nowrap;
+      background: transparent;
+      transition: color 0.18s ease, transform 0.18s ease;
+    }
+    .tab::before {
+      position: absolute;
+      right: 13px;
+      bottom: 4px;
+      left: 13px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #98cbea, #c2c7f8 55%, #f1dce4);
+      opacity: 0;
+      transform: scaleX(0.48);
+      content: "";
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+    body.dark .tab { color: rgba(232,240,250,0.76); }
+    .tab:hover,
+    .tab.open {
+      color: #21465d;
+      transform: translateY(-1px);
+    }
+    body.dark .tab:hover,
+    body.dark .tab.open {
+      color: #f3f8ff;
+    }
+    .tab.active {
+      color: #17384d;
+    }
+    .tab.active::before,
+    .tab.open::before {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+    body.dark .tab.active {
+      color: #f7fbff;
+    }
+    .tab.has-menu::after {
+      width: 5px;
+      height: 5px;
+      margin-left: 8px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: translateY(-1px) rotate(45deg);
+      opacity: 0.7;
+      content: "";
+    }
+    .tool-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      color: rgba(32,43,57,0.70);
+      background: transparent;
+      text-decoration: none;
+      transition: transform 0.18s ease, color 0.18s ease;
+    }
+    body.dark .tool-button {
+      color: rgba(232,240,250,0.76);
+    }
+    .tool-button:hover,
+    .tool-button:focus-visible {
+      color: #17384d;
+      transform: translateY(-1px);
+      outline: none;
+    }
+    body.dark .tool-button:hover,
+    body.dark .tool-button:focus-visible {
+      color: #f7fbff;
+    }
+    .dropdown {
+      position: absolute;
+      top: 62px;
+      right: 132px;
+      display: none;
+      width: 272px;
+      padding: 10px;
+      border: 1px solid rgba(255,255,255,0.50);
+      border-radius: 22px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.80), rgba(255,255,255,0.42)),
+        rgba(255,255,255,0.24);
+      box-shadow: 0 24px 70px rgba(79,109,136,0.22), inset 0 1px 0 rgba(255,255,255,0.82);
+      backdrop-filter: blur(24px) saturate(1.32);
+      -webkit-backdrop-filter: blur(24px) saturate(1.32);
+    }
+    body.dark .dropdown {
+      border-color: rgba(255,255,255,0.16);
+      background:
+        linear-gradient(145deg, rgba(34,43,58,0.76), rgba(18,24,34,0.58)),
+        rgba(15,20,29,0.50);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.14);
+    }
+    .dropdown.show { display: block; }
+    .menu-link {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 14px;
+      color: inherit;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .menu-link:hover {
+      background: rgba(152,203,234,0.18);
+    }
+    body.dark .menu-link:hover {
+      background: rgba(152,203,234,0.14);
+    }
+    .content {
+      position: relative;
+      width: min(940px, 100%);
+      margin: 96px auto 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+      gap: 36px;
+      align-items: start;
+    }
+    .panel {
+      border: 1px solid rgba(255,255,255,0.50);
+      border-radius: 28px;
+      padding: 28px;
+      background: rgba(255,255,255,0.46);
+      box-shadow: 0 24px 80px rgba(84,113,140,0.14), inset 0 1px 0 rgba(255,255,255,0.76);
+      backdrop-filter: blur(18px) saturate(1.18);
+      -webkit-backdrop-filter: blur(18px) saturate(1.18);
+    }
+    body.dark .panel {
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(20,27,38,0.48);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+    p {
+      max-width: 62ch;
+      margin: 0;
+      color: rgba(35,48,64,0.70);
+      line-height: 1.8;
+    }
+    body.dark p { color: rgba(226,237,250,0.72); }
+    .course-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .course {
+      padding: 13px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.42);
+      color: rgba(35,48,64,0.78);
+    }
+    body.dark .course {
+      background: rgba(255,255,255,0.07);
+      color: rgba(226,237,250,0.82);
+    }
+    .note-stream {
+      position: relative;
+      width: min(940px, 100%);
+      margin: 46px auto 0;
+      display: grid;
+      gap: 18px;
+      padding-bottom: 120px;
+    }
+    .note-card {
+      min-height: 210px;
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,0.46);
+      border-radius: 28px;
+      box-shadow: 0 18px 56px rgba(84,113,140,0.12), inset 0 1px 0 rgba(255,255,255,0.70);
+    }
+    .note-card:nth-child(3n + 1) {
+      background:
+        linear-gradient(135deg, rgba(152,203,234,0.34), rgba(255,255,255,0.54)),
+        rgba(255,255,255,0.30);
+    }
+    .note-card:nth-child(3n + 2) {
+      background:
+        linear-gradient(135deg, rgba(194,199,248,0.32), rgba(255,255,255,0.52)),
+        rgba(255,255,255,0.30);
+    }
+    .note-card:nth-child(3n) {
+      background:
+        linear-gradient(135deg, rgba(241,220,228,0.38), rgba(255,255,255,0.52)),
+        rgba(255,255,255,0.30);
+    }
+    body.dark .note-card {
+      border-color: rgba(255,255,255,0.13);
+      box-shadow: 0 20px 64px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.10);
+    }
+    body.dark .note-card:nth-child(3n + 1) {
+      background:
+        linear-gradient(135deg, rgba(152,203,234,0.18), rgba(18,24,34,0.54)),
+        rgba(18,24,34,0.40);
+    }
+    body.dark .note-card:nth-child(3n + 2) {
+      background:
+        linear-gradient(135deg, rgba(194,199,248,0.18), rgba(18,24,34,0.54)),
+        rgba(18,24,34,0.40);
+    }
+    body.dark .note-card:nth-child(3n) {
+      background:
+        linear-gradient(135deg, rgba(241,220,228,0.16), rgba(18,24,34,0.54)),
+        rgba(18,24,34,0.40);
+    }
+    .note-card h2 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+    @media (max-width: 900px) {
+      .page { padding: 0 18px 48px; }
+      .site-nav { height: auto; padding-top: 14px; align-items: flex-start; }
+      .brand span:last-child { display: none; }
+      .nav-controls {
+        max-width: calc(100vw - 82px);
+      }
+      .nav-right {
+        min-width: 0;
+        max-width: calc(100vw - 140px);
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .nav-right::-webkit-scrollbar { display: none; }
+      .search .text,
+      .search .shortcut,
+      .extra-text { display: none; }
+      .content {
+        margin-top: 60px;
+        grid-template-columns: 1fr;
+      }
+      .note-stream { margin-top: 24px; }
+      .note-card {
+        min-height: 240px;
+        padding: 22px;
+        border-radius: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-bg"></div>
+  <main class="page">
+    <nav class="site-nav" aria-label="Preview navigation">
+      <a class="brand" href="#">
+        <span class="brand-logo" aria-hidden="true"></span>
+        <span>Ayaskt Workspace</span>
+      </a>
+      <div class="nav-controls">
+        <button class="search" type="button">
+          <span class="search-mark" aria-hidden="true"></span>
+          <span class="text">Search</span>
+          <span class="shortcut">⌘K</span>
+        </button>
+        <div class="nav-right">
+          <div class="tabs" role="tablist" aria-label="Main navigation">
+            <a class="tab active" href="#" role="tab" aria-selected="true">主页</a>
+            <button class="tab has-menu" type="button" data-menu="year3">第三学年</button>
+            <button class="tab has-menu" type="button" data-menu="year2">第二学年</button>
+            <button class="tab has-menu" type="button" data-menu="year1">第一学年</button>
+          </div>
+          <button class="tool-button" type="button" id="themeToggle" aria-label="Toggle theme">月</button>
+          <a class="tool-button" href="#" aria-label="GitHub">GH</a>
+          <a class="tool-button" href="#" aria-label="UESTC">U</a>
+        </div>
+      </div>
+      <div class="dropdown" id="year3">
+        <a class="menu-link" href="#">通信原理与系统 CPS</a>
+        <a class="menu-link" href="#">人工智能与机器学习 AIML</a>
+        <a class="menu-link" href="#">数字信号处理 DSP</a>
+        <a class="menu-link" href="#">电磁场与波 EMFT</a>
+        <a class="menu-link" href="#">通信电路设计 CCD</a>
+        <a class="menu-link" href="#">工程项目管理与财务 EPM&F</a>
+      </div>
+      <div class="dropdown" id="year2">
+        <a class="menu-link" href="#">嵌入式处理器 EP</a>
+        <a class="menu-link" href="#">电路分析与设计 CAD</a>
+      </div>
+      <div class="dropdown" id="year1">
+        <a class="menu-link" href="#">微电子系统 MS</a>
+      </div>
+    </nav>
+    <section class="content">
+      <div class="panel">
+        <h1>SwiftUI floating glass tab bar</h1>
+        <p>这个方向把搜索和主导航拆成两个同级控件：搜索是独立胶囊，导航右侧只有一个外层毛玻璃胶囊，内部 tab 用文字和细光条表达状态，不再胶囊套胶囊。</p>
+      </div>
+      <aside class="panel">
+        <p>当前课程</p>
+        <div class="course-list">
+          <div class="course">DSP Chapter 7</div>
+          <div class="course">EMFT Chapter 8</div>
+          <div class="course">AIML Machine Learning</div>
+        </div>
+      </aside>
+    </section>
+    <section class="note-stream" aria-label="Scrollable notes">
+      <article class="note-card">
+        <h2>离散时间信号</h2>
+        <p>滚动这组笔记卡片时，导航背后的色块会连续变化。导航进入 live glass 后提高 backdrop 采样质量，停止后回到 idle glass 并释放长期的合成提示。</p>
+      </article>
+      <article class="note-card">
+        <h2>频域表示</h2>
+        <p>这里模拟真实笔记页面里公式块、例题块、图片区域穿过导航栏背后的情况。静止时视觉保持当前毛玻璃观感，不额外触发应用层重渲染。</p>
+      </article>
+      <article class="note-card">
+        <h2>系统响应</h2>
+        <p>运行时只使用 passive scroll / wheel / touchmove 监听，并用 requestAnimationFrame 合并状态切换。它不会读取滚动中的布局尺寸。</p>
+      </article>
+      <article class="note-card">
+        <h2>滤波器设计</h2>
+        <p>滚动停止约 180ms 后，导航从实时模式回落到静止模式。这个窗口足够覆盖惯性滚动，又不会让高成本效果一直挂着。</p>
+      </article>
+      <article class="note-card">
+        <h2>工程经济学</h2>
+        <p>如果页面内容没有变化，导航保持当前渲染效果；如果内容在导航后方移动，导航切到实时玻璃层，让背景变化更自然。</p>
+      </article>
+    </section>
+  </main>
+  <script>
+    const buttons = document.querySelectorAll('[data-menu]')
+    const menus = document.querySelectorAll('.dropdown')
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const id = button.dataset.menu
+        const menu = document.getElementById(id)
+        const willOpen = !menu.classList.contains('show')
+        menus.forEach((item) => item.classList.remove('show'))
+        buttons.forEach((item) => item.classList.remove('open'))
+        if (willOpen) {
+          menu.classList.add('show')
+          button.classList.add('open')
+        }
+      })
+    })
+    document.getElementById('themeToggle').addEventListener('click', (event) => {
+      document.body.classList.toggle('dark')
+      event.currentTarget.textContent = document.body.classList.contains('dark') ? '日' : '月'
+    })
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.site-nav')) {
+        menus.forEach((item) => item.classList.remove('show'))
+        buttons.forEach((item) => item.classList.remove('open'))
+      }
+    })
+    const glassElements = document.querySelectorAll('.search, .nav-right')
+    let glassLive
+    let glassFrame = 0
+    let glassIdleTimer = 0
+    function setGlassLive(next) {
+      if (glassLive === next) return
+      glassLive = next
+      glassElements.forEach((glass) => {
+        glass.classList.toggle('is-live', next)
+        glass.classList.toggle('is-idle', !next)
+      })
+    }
+    function markPageChanging() {
+      if (!glassFrame) {
+        glassFrame = requestAnimationFrame(() => {
+          glassFrame = 0
+          setGlassLive(true)
+        })
+      }
+      window.clearTimeout(glassIdleTimer)
+      glassIdleTimer = window.setTimeout(() => setGlassLive(false), 180)
+    }
+    setGlassLive(false)
+    window.addEventListener('scroll', markPageChanging, { passive: true })
+    window.addEventListener('wheel', markPageChanging, { passive: true })
+    window.addEventListener('touchmove', markPageChanging, { passive: true })
+    window.addEventListener('resize', markPageChanging)
+  </script>
+</body>
+</html>

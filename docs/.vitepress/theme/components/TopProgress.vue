@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vitepress'
-import { combineHookRestorers, wrapRouterHook } from '../router-hooks'
 
 const router = useRouter()
 
@@ -185,45 +184,48 @@ async function finishAfterPageImages(session = progressSession) {
 }
 
 onMounted(() => {
-  const restorers = [
-    wrapRouterHook(router, 'onBeforeRouteChange', (previousBeforeRouteChange) => async (to) => {
-      startProgress()
+  const previousBeforeRouteChange = router.onBeforeRouteChange
+  const previousBeforePageLoad = router.onBeforePageLoad
+  const previousAfterPageLoad = router.onAfterPageLoad
+  const previousAfterRouteChange = router.onAfterRouteChange
 
-      try {
-        const result = await previousBeforeRouteChange?.(to)
-        if (result === false) finishProgress()
-        return result
-      } catch (error) {
-        finishProgress()
-        throw error
-      }
-    }),
+  router.onBeforeRouteChange = async (to) => {
+    startProgress()
 
-    wrapRouterHook(router, 'onBeforePageLoad', (previousBeforePageLoad) => async (to) => {
-      if (!visible.value) startProgress()
-      setProgress(Math.max(progress.value, 36))
+    try {
+      const result = await previousBeforeRouteChange?.(to)
+      if (result === false) finishProgress()
+      return result
+    } catch (error) {
+      finishProgress()
+      throw error
+    }
+  }
 
-      try {
-        const result = await previousBeforePageLoad?.(to)
-        if (result === false) finishProgress()
-        return result
-      } catch (error) {
-        finishProgress()
-        throw error
-      }
-    }),
+  router.onBeforePageLoad = async (to) => {
+    if (!visible.value) startProgress()
+    setProgress(Math.max(progress.value, 36))
 
-    wrapRouterHook(router, 'onAfterPageLoad', (previousAfterPageLoad) => async (to) => {
-      setProgress(Math.max(progress.value, IMAGE_PROGRESS_START))
-      await previousAfterPageLoad?.(to)
-    }),
+    try {
+      const result = await previousBeforePageLoad?.(to)
+      if (result === false) finishProgress()
+      return result
+    } catch (error) {
+      finishProgress()
+      throw error
+    }
+  }
 
-    wrapRouterHook(router, 'onAfterRouteChange', (previousAfterRouteChange) => (to) => {
-      void Promise
-        .resolve(previousAfterRouteChange?.(to))
-        .then(() => finishAfterPageImages())
-    }),
-  ]
+  router.onAfterPageLoad = async (to) => {
+    setProgress(Math.max(progress.value, IMAGE_PROGRESS_START))
+    await previousAfterPageLoad?.(to)
+  }
+
+  router.onAfterRouteChange = (to) => {
+    void Promise
+      .resolve(previousAfterRouteChange?.(to))
+      .then(() => finishAfterPageImages())
+  }
 
   if (document.readyState !== 'complete') {
     startProgress()
@@ -235,7 +237,12 @@ onMounted(() => {
     window.addEventListener('load', initialLoadHandler, { once: true })
   }
 
-  restoreHooks = combineHookRestorers(restorers)
+  restoreHooks = () => {
+    router.onBeforeRouteChange = previousBeforeRouteChange
+    router.onBeforePageLoad = previousBeforePageLoad
+    router.onAfterPageLoad = previousAfterPageLoad
+    router.onAfterRouteChange = previousAfterRouteChange
+  }
 })
 
 onUnmounted(() => {

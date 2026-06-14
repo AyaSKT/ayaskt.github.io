@@ -10,8 +10,7 @@ const indexPath = path.join(themeRoot, 'index.ts')
 const lyricCardPath = path.join(themeRoot, 'components/LyricCard.vue')
 const songCardPath = path.join(themeRoot, 'components/SongCard.vue')
 const mindMapPath = path.join(themeRoot, 'components/MindMap.vue')
-const componentAssetsConfigPath = path.join(root, 'docs/.vitepress/config/markdown/component-assets.mts')
-const navigationConfigPath = path.join(root, 'docs/.vitepress/config/navigation.mts')
+const configPath = path.join(root, 'docs/.vitepress/config.mts')
 const labReadmePath = path.join(root, 'docs/others/lab/README.md')
 const lyricCardDocPath = path.join(root, 'docs/others/lab/lyric-container.md')
 const songCardDocPath = path.join(root, 'docs/others/lab/song-card.md')
@@ -91,7 +90,7 @@ test('renders mindmap fences as a MindMap markdown component', async () => {
 })
 
 test('component cover asset imports are only injected for markdown HTML tokens', () => {
-  const configSource = fs.readFileSync(componentAssetsConfigPath, 'utf8')
+  const configSource = fs.readFileSync(configPath, 'utf8')
 
   assert.match(configSource, /token\.type\s*===\s*['"]html_block['"]/)
   assert.match(configSource, /token\.type\s*===\s*['"]html_inline['"]/)
@@ -118,8 +117,6 @@ test('SongCard exposes album cover and CJK-aware metadata hooks', () => {
   const source = fs.readFileSync(songCardPath, 'utf8')
 
   assert.match(source, /cover:\s*string/)
-  assert.match(source, /import \{ withBase \} from ['"]vitepress['"]/)
-  assert.match(source, /value\.startsWith\('\/'\)[\s\S]*withBase\(value\)/)
   assert.match(source, /album\?:\s*string/)
   assert.match(source, /artist\?:\s*string/)
   assert.match(source, /song\?:\s*string/)
@@ -282,7 +279,7 @@ test('documents SongCard in the lab and sidebar', () => {
 
   const docSource = fs.readFileSync(songCardDocPath, 'utf8')
   const readmeSource = fs.readFileSync(labReadmePath, 'utf8')
-  const configSource = fs.readFileSync(navigationConfigPath, 'utf8')
+  const configSource = fs.readFileSync(configPath, 'utf8')
 
   assert.match(docSource, /# SongCard/)
   assert.match(docSource, /<SongCard/)
@@ -296,7 +293,7 @@ test('documents MindMap in the lab and sidebar', () => {
 
   const docSource = fs.readFileSync(mindMapDocPath, 'utf8')
   const readmeSource = fs.readFileSync(labReadmePath, 'utf8')
-  const configSource = fs.readFileSync(navigationConfigPath, 'utf8')
+  const configSource = fs.readFileSync(configPath, 'utf8')
   const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'))
   const devDeps = packageJson.devDependencies ?? {}
 

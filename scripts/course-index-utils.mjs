@@ -1,30 +1,80 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import {
-  decodeSafe,
-  isSpecialPath,
-  normalizeDocsPath,
-  resolveCourseAssetPath,
-  resolveNoteImagePath,
-  resolveNotePath,
-  stripAngleBrackets,
-} from '../docs/.vitepress/shared/course-index-paths.mjs'
 
-export {
-  decodeSafe,
-  isSpecialPath,
-  normalizeDocsPath,
-  resolveCourseAssetPath,
-  resolveNoteImagePath,
-  resolveNotePath,
-  stripAngleBrackets,
-} from '../docs/.vitepress/shared/course-index-paths.mjs'
+export function normalizeDocsPath(value) {
+  const segments = []
+
+  for (const segment of value.replace(/\\/g, '/').split('/')) {
+    if (!segment || segment === '.') continue
+    if (segment === '..') {
+      segments.pop()
+      continue
+    }
+
+    segments.push(segment)
+  }
+
+  return segments.join('/')
+}
+
+export function decodeSafe(value) {
+  try {
+    return decodeURIComponent(value)
+  } catch {
+    return value
+  }
+}
+
+export function stripAngleBrackets(value) {
+  return value.trim().replace(/^<|>$/g, '')
+}
+
+export function isSpecialPath(value) {
+  return /^(?:[a-z][a-z0-9+.-]*:|\/\/|#)/i.test(value)
+}
 
 export function resolveCourseIndexBasePath(markdown, docsRoot, readmePath) {
   const configuredBasePath = markdown.match(/basePath=["']([^"']+)["']/)?.[1]
   if (configuredBasePath) return normalizeDocsPath(configuredBasePath)
 
   return normalizeDocsPath(path.relative(docsRoot, path.dirname(readmePath)))
+}
+
+export function resolveNotePath(basePath, link) {
+  const clean = decodeSafe(stripAngleBrackets(link))
+  if (!clean || isSpecialPath(clean)) return ''
+
+  const pathOnly = clean.split(/[?#]/)[0] ?? ''
+  if (!pathOnly) return ''
+
+  const markdownPath = pathOnly.replace(/\.html$/i, '.md')
+  return markdownPath.startsWith('/')
+    ? normalizeDocsPath(markdownPath.replace(/^\/+/, ''))
+    : normalizeDocsPath(`${basePath}/${markdownPath}`)
+}
+
+export function resolveCourseAssetPath(basePath, assetPath) {
+  const clean = decodeSafe(stripAngleBrackets(assetPath))
+  if (!clean || isSpecialPath(clean)) return ''
+
+  const pathOnly = clean.split(/[?#]/)[0] ?? ''
+  if (!pathOnly) return ''
+
+  return pathOnly.startsWith('/')
+    ? normalizeDocsPath(pathOnly.replace(/^\/+/, ''))
+    : normalizeDocsPath(`${basePath}/${pathOnly}`)
+}
+
+export function resolveNoteImagePath(notePath, imagePath) {
+  const clean = decodeSafe(stripAngleBrackets(imagePath))
+  if (!clean || isSpecialPath(clean)) return ''
+
+  const pathOnly = clean.split(/[?#]/)[0] ?? ''
+  if (!pathOnly) return ''
+
+  return pathOnly.startsWith('/')
+    ? normalizeDocsPath(pathOnly.replace(/^\/+/, ''))
+    : normalizeDocsPath(`${path.posix.dirname(notePath)}/${pathOnly}`)
 }
 
 export function findFirstMarkdownImage(markdown) {
