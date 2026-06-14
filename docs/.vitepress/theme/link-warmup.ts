@@ -1,4 +1,4 @@
-import { pathToFile } from 'vitepress/dist/client/app/utils.js'
+import { wrapRouterHook } from './router-hooks'
 
 type RouterLike = {
   onAfterRouteChange?: (to: string) => unknown
@@ -33,12 +33,13 @@ function isHtmlNavigation(anchor: HTMLAnchorElement) {
   return !extension || extension === '.html'
 }
 
-function addModulePreload(href: string) {
+function addRoutePrefetch(href: string) {
   if (warmed.has(href)) return
   warmed.add(href)
 
   const link = document.createElement('link')
-  link.rel = 'modulepreload'
+  link.rel = 'prefetch'
+  link.as = 'document'
   link.href = href
   document.head.appendChild(link)
 }
@@ -46,8 +47,9 @@ function addModulePreload(href: string) {
 function warmAnchor(anchor: HTMLAnchorElement) {
   if (!canWarmLinks() || !isHtmlNavigation(anchor)) return
 
-  const chunk = pathToFile(new URL(anchor.href).pathname)
-  if (chunk) addModulePreload(chunk)
+  const url = new URL(anchor.href)
+  url.hash = ''
+  addRoutePrefetch(url.href)
 }
 
 function normalizedPath(value: string) {
@@ -130,12 +132,11 @@ export function setupLinkWarmup(router: RouterLike) {
   document.addEventListener('focusin', onFocusIn)
   document.addEventListener('touchstart', onTouchStart, { passive: true })
 
-  const previousAfterRouteChange = router.onAfterRouteChange
-  router.onAfterRouteChange = (to) => {
+  wrapRouterHook(router, 'onAfterRouteChange', (previousAfterRouteChange) => (to) => {
     const result = previousAfterRouteChange?.(to)
     void Promise.resolve(result).then(scheduleNearbyWarmup)
     return result
-  }
+  })
 
   scheduleNearbyWarmup()
 }

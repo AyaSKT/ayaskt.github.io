@@ -12,6 +12,35 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.6 - 2026-06-14
+
+### 新增
+
+- 新增 `docs/.vitepress/config/` 配置模块架构，将 VitePress 配置拆分为 Markdown 管线、搜索渲染、导航数据、主题装配、页面数据、Vite watcher 与路径常量等独立模块。
+- 新增 `docs/.vitepress/config/markdown/` 子模块，分别承载 MathJax、custom containers、图片尺寸注入、MindMap fence、DocMeta 注入和 Markdown 组件资源导入逻辑。
+- 新增 `docs/.vitepress/shared/course-index-paths.mjs`，让 `CourseIndex` 组件、课程封面生成脚本与课程预览生成脚本共用同一套路由 / 资源路径解析规则。
+- 新增 `theme/router-hooks.ts`，统一封装 VitePress router lifecycle hook 的包装与恢复方式。
+- 在 `AGENTS.md` 记录新的配置模块边界、Markdown 插件注册顺序、组件资源路径约定、CourseIndex 共享路径工具和 router hook 维护方式。
+
+### 调整
+
+- 将 `docs/.vitepress/config.mts` 收敛为轻量 VitePress 入口，仅保留站点基础配置、模块组合和旧 helper 的兼容 re-export。
+- 将 `nav` / `sidebar` 从主配置中移入 `config/navigation.mts`，将 local search HTML 渲染移入 `config/search.mts`，降低后续导航和搜索修改的影响范围。
+- 将 `link-warmup.ts` 从 VitePress 私有 `dist` API 预加载 chunk 的实现，调整为同源 route prefetch，避免主题优化逻辑绑定内部文件名算法。
+- `TopProgress` 与 link warmup 改用统一 router hook 包装工具，减少多个主题增强功能分别 monkey patch router hook 的维护风险。
+- 更新主题组件、PDF 和 CourseIndex 相关测试，使测试断言指向新的职责模块，而不是继续把 `config.mts` 当作所有逻辑的源码入口。
+
+### 修复
+
+- 修复 `SongCard` 渲染 `/...` public asset 路径时未经过 `withBase()` 的问题，避免站点以后部署到子路径时封面资源失效。
+- 修复 CourseIndex 路径解析先 decode 再截断 query / hash 的边界问题，保留文件名中编码后的 `%23` / `%3F` 字符。
+- 保留 `transformSongCardCoverAttrs`、`transformLyricCardAlbumCoverAttrs`、`renderMindMapFence`、`formatDocMeta` 与 `getReadableWordCount` 的旧入口 re-export，避免既有测试和脚本 import 被拆分破坏。
+
+### 删减
+
+- 移除构建与探索过程中遗留的 `*_tmp.html`、`tmp/ccd_*`、`screenshots/nav-tabs/`、`sketches/` 和 `docs/superpowers/` 开发草稿 / 截图 / 临时提取文件。
+- 更新 `.gitignore`，忽略 `tmp/`、`screenshots/`、`sketches/` 和 `**/*_tmp.html`，避免同类非部署产物再次进入版本库。
+
 ## V6.6 beta 3 - 2026-06-14
 
 ### 新增

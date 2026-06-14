@@ -4,7 +4,43 @@ import os from 'node:os'
 import path from 'node:path'
 import test from 'node:test'
 
-import { collectCourseCovers } from './course-index-utils.mjs'
+import {
+  collectCourseCovers,
+  resolveCourseAssetPath,
+  resolveNoteImagePath,
+  resolveNotePath,
+} from './course-index-utils.mjs'
+
+test('normalizes CourseIndex note and asset paths through the shared resolver', () => {
+  assert.equal(
+    resolveNotePath('Y3S2/CCD', 'Part%204/Lecture%2016.html#pll'),
+    'Y3S2/CCD/Part 4/Lecture 16.md',
+  )
+  assert.equal(
+    resolveNotePath('Y3S2/CCD', '/Y3S2/DSP/DSP Chapter 2.md'),
+    'Y3S2/DSP/DSP Chapter 2.md',
+  )
+  assert.equal(
+    resolveCourseAssetPath('Y3S2/CCD', '<Part 4/Lecture 16.attachments/new cover image.PNG>'),
+    'Y3S2/CCD/Part 4/Lecture 16.attachments/new cover image.PNG',
+  )
+  assert.equal(
+    resolveNoteImagePath('Y3S2/CCD/Part 4/Lecture 16.md', 'Lecture 16.attachments/cover.PNG?raw=1'),
+    'Y3S2/CCD/Part 4/Lecture 16.attachments/cover.PNG',
+  )
+  assert.equal(
+    resolveNotePath('Y3S2/CCD', 'Part%204/Lec%231%3Fintro.html?tab=notes#section'),
+    'Y3S2/CCD/Part 4/Lec#1?intro.md',
+  )
+  assert.equal(
+    resolveCourseAssetPath('Y3S2/CCD', 'covers/Lec%231%3Fintro.PNG?raw=1'),
+    'Y3S2/CCD/covers/Lec#1?intro.PNG',
+  )
+  assert.equal(
+    resolveNoteImagePath('Y3S2/CCD/Part 4/Lec#1?intro.md', 'Lec%231%3Fintro.attachments/cover.PNG#hero'),
+    'Y3S2/CCD/Part 4/Lec#1?intro.attachments/cover.PNG',
+  )
+})
 
 test('uses the first note image as fallback when a CourseIndex item has no cover', (t) => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'course-index-covers-'))

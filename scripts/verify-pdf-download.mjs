@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs'
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8')
 
 test('markdown injects the pdf prop from frontmatter', () => {
-  const config = read('docs/.vitepress/config.mts')
+  const config = read('docs/.vitepress/config/markdown/doc-meta.mts')
 
   assert.match(
     config,

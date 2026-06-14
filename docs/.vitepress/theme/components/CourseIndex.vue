@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { withBase } from 'vitepress'
+import {
+  isSpecialPath,
+  normalizeDocsPath,
+  replaceMarkdownExtension,
+  resolveCourseAssetPath,
+  resolveNotePath as resolveCourseNotePath,
+  stripAngleBrackets,
+} from '../../shared/course-index-paths.mjs'
 import courseCoverFallbacks from '../generated/course-covers.json'
 import coursePreviews from '../generated/course-previews.json'
 
@@ -48,70 +56,17 @@ const courseThumbnailUrlByPath = new Map(
 const coursePreviewByPath = coursePreviews as Record<string, string>
 const courseCoverFallbackByPath = courseCoverFallbacks as Record<string, string>
 
-function stripAngleBrackets(value: string) {
-  return value.trim().replace(/^<|>$/g, '')
-}
-
-function isSpecialLink(value: string) {
-  return /^(?:[a-z][a-z0-9+.-]*:|\/\/|#)/i.test(value)
-}
-
-function replaceMarkdownExtension(value: string) {
-  return value.replace(/\.md(?=([?#]|$))/i, '.html')
-}
-
-function safeDecodePath(value: string) {
-  try {
-    return decodeURIComponent(value)
-  } catch {
-    return value
-  }
-}
-
-function normalizeDocsPath(value: string) {
-  const segments: string[] = []
-
-  for (const segment of value.replace(/\\/g, '/').split('/')) {
-    if (!segment || segment === '.') continue
-    if (segment === '..') {
-      segments.pop()
-      continue
-    }
-
-    segments.push(segment)
-  }
-
-  return segments.join('/')
-}
-
-function joinDocsPath(basePath: string, cover: string) {
-  if (cover.startsWith('/')) return normalizeDocsPath(cover.replace(/^\/+/, ''))
-
-  return normalizeDocsPath(`${basePath}/${cover}`)
-}
-
 function thumbnailPathFor(imagePath: string) {
   return imagePath.replace(/\.[^.]+$/, '.thumb.webp')
 }
 
 function resolveNotePath(link: string) {
-  const clean = stripAngleBrackets(link)
-  if (isSpecialLink(clean)) return ''
-
-  const pathOnly = safeDecodePath(clean.split(/[?#]/)[0] ?? '')
-  if (!pathOnly) return ''
-
-  const markdownPath = pathOnly.replace(/\.html$/i, '.md')
-  if (markdownPath.startsWith('/')) {
-    return normalizeDocsPath(markdownPath.replace(/^\/+/, ''))
-  }
-
-  return normalizeDocsPath(`${props.basePath}/${markdownPath}`)
+  return resolveCourseNotePath(props.basePath, link)
 }
 
 function resolveLink(link: string) {
   const clean = stripAngleBrackets(link)
-  if (isSpecialLink(clean)) return clean
+  if (isSpecialPath(clean)) return clean
 
   const normalized = replaceMarkdownExtension(clean)
   return normalized.startsWith('/') ? withBase(normalized) : normalized
@@ -132,7 +87,7 @@ function resolveCover(cover: string | undefined, notePath: string) {
   const clean = stripAngleBrackets(cover)
   if (/^(?:[a-z][a-z0-9+.-]*:|\/\/|data:)/i.test(clean)) return clean
 
-  const imagePath = joinDocsPath(props.basePath, clean)
+  const imagePath = resolveCourseAssetPath(props.basePath, clean)
   return resolveThumbnailUrl(imagePath) || resolveFallbackCover(notePath)
 }
 
