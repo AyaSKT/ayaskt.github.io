@@ -106,7 +106,9 @@ test('registers SongCard as a markdown component', () => {
 test('registers MindMap as a markdown component', () => {
   const indexSource = fs.readFileSync(indexPath, 'utf8')
 
-  assert.match(indexSource, /app\.component\(['"]MindMap['"]\s*,\s*defineAsyncComponent\(\(\)\s*=>\s*import\(['"]\.\/components\/MindMap\.vue['"]\)\)\)/)
+  assert.match(indexSource, /const MindMapLoader = defineAsyncComponent\(\{\s*loader:\s*\(\)\s*=>\s*import\(['"]\.\/components\/MindMap\.vue['"]\),/s)
+  assert.match(indexSource, /loadingComponent:\s*\{[^}]*mind-map-placeholder/s)
+  assert.match(indexSource, /app\.component\(['"]MindMap['"]\s*,\s*MindMapLoader\)/)
 })
 
 test('SongCard exposes album cover and CJK-aware metadata hooks', () => {
@@ -141,6 +143,7 @@ test('MindMap exposes a compact interactive SVG surface', () => {
   assert.match(source, /const hasTitle = computed\(\(\) => displayTitle\.value\.length > 0\)/)
   assert.match(source, /class="mind-map-surface"/)
   assert.match(source, /class="mind-map-svg"/)
+  assert.match(source, /:style="surfaceStyle"/)
   assert.match(source, /aria-label/)
   assert.match(source, /isExpanded\s*=\s*ref\(false\)/)
   assert.match(source, /isExportMenuOpen\s*=\s*ref\(false\)/)
@@ -194,11 +197,15 @@ test('MindMap exposes a compact interactive SVG surface', () => {
   assert.match(source, /--mind-map-safe-pad-x:/)
   assert.match(source, /--mind-map-safe-pad-y:/)
   assert.match(source, /fitRatio:\s*0\.9/)
+  assert.match(source, /function alignInvisibleRootHeadings/)
+  assert.match(source, /headingY\s*=\s*0/)
+  assert.match(source, /patchRelayout\(markmap\)/)
   assert.match(source, /padding:\s*var\(--mind-map-safe-pad-y\)\s+var\(--mind-map-safe-pad-x\)/)
+  assert.match(source, /min-height:\s*calc\(var\(--mind-map-height\)\s*\+\s*46px\)/)
   assert.match(source, /\.mind-map :deep\(\.markmap-node \.markmap-foreign\)\s*{[^}]*overflow:\s*visible;/s)
-  assert.match(source, /\.mind-map :deep\(\.katex \.katex-mathml\)\s*{[^}]*clip-path:\s*inset\(50%\);/s)
+  assert.match(source, /\.mind-map :deep\(\.katex \.katex-mathml\)\s*{[^}]*display:\s*none;/s)
   assert.match(source, /\.markmap-foreign\{overflow:visible;color:\$\{getExportTextColor\(\)\}\}/)
-  assert.match(source, /\.katex \.katex-mathml\{border:0;clip-path:inset\(50%\);height:1px;overflow:hidden;padding:0;position:absolute;width:1px\}/)
+  assert.match(source, /\.katex \.katex-mathml\{display:none\}/)
   assert.match(source, /\.mind-map-control-pill\s*{[^}]*border-radius:\s*999px;[^}]*backdrop-filter:\s*var\(--mind-map-pill-glass\)/s)
   assert.match(source, /\.mind-map-control\.is-square\s*{[^}]*width:\s*var\(--mind-map-square-size\);[^}]*min-width:\s*var\(--mind-map-square-size\);[^}]*height:\s*var\(--mind-map-square-size\);/s)
   assert.match(source, /\.mind-map-control-symbol\s*{[^}]*height:\s*var\(--mind-map-square-symbol-size\);[^}]*line-height:\s*1;/s)
@@ -258,6 +265,7 @@ test('SongCard keeps the cover one third wide with a low-reflection floating car
   const source = fs.readFileSync(songCardPath, 'utf8')
 
   assert.match(source, /grid-template-columns:\s*minmax\(0,\s*1fr\)\s+minmax\(0,\s*2fr\)/)
+  assert.match(source, /min-height:\s*156px/)
   assert.match(source, /aspect-ratio:\s*1/)
   assert.match(source, /border-radius:\s*8px/)
   assert.match(source, /--song-card-highlight:/)

@@ -20,7 +20,8 @@ let outlineJumpMotion: ReturnType<typeof createOutlineJumpMotion> | undefined
 let detachOutlineJumpMotion: (() => void) | undefined
 let detachSidebarMotion: (() => void) | undefined
 
-const ARTICLE_IMAGE_LAYOUT_TIMEOUT = 1400
+const ARTICLE_IMAGE_LAYOUT_TIMEOUT = 180
+const ARTICLE_IMAGE_LAYOUT_POLL_INTERVAL = 32
 const ARTICLE_IMAGE_WAIT_LIMIT = 6
 
 function sidebarKeyFor(to: string) {
@@ -196,7 +197,14 @@ function resetSidebarMotion() {
 }
 
 function imageHasLayoutSize(image: HTMLImageElement) {
-  return image.complete || (image.naturalWidth > 0 && image.naturalHeight > 0)
+  if (image.complete || (image.naturalWidth > 0 && image.naturalHeight > 0)) return true
+
+  const widthAttr = Number(image.getAttribute('width'))
+  const heightAttr = Number(image.getAttribute('height'))
+  if (widthAttr > 0 && heightAttr > 0) return true
+
+  const rect = image.getBoundingClientRect()
+  return rect.width > 0 && rect.height > 0
 }
 
 function waitForImageLayoutSize(image: HTMLImageElement) {
@@ -227,7 +235,7 @@ function waitForImageLayoutSize(image: HTMLImageElement) {
         return
       }
 
-      pollTimer = setTimeout(check, 50)
+      pollTimer = setTimeout(check, ARTICLE_IMAGE_LAYOUT_POLL_INTERVAL)
     }
 
     timer = setTimeout(finish, ARTICLE_IMAGE_LAYOUT_TIMEOUT)

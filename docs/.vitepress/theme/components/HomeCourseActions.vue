@@ -23,7 +23,7 @@ interface CourseGroup {
 }
 
 const { frontmatter } = useData()
-const HERO_STACKED_MEDIA = '(max-width: 960px)'
+const HERO_STACKED_MEDIA = '(max-width: 959px)'
 const actionsRoot = ref<HTMLElement | null>(null)
 
 const groups = computed<CourseGroup[]>(() => {
@@ -366,7 +366,7 @@ watch(
 }
 
 /* Mobile: disable circle-wrap, full width rows */
-@media (max-width: 960px) {
+@media (max-width: 959px) {
   :global(.VPHome .VPHero .main),
   :global(.VPHome .VPHero .text),
   :global(.VPHome .VPHero .tagline) {

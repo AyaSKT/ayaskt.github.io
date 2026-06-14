@@ -12,6 +12,52 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.6 beta 3 - 2026-06-14
+
+### 新增
+
+- 为 EPMF Block 1-4 补齐“思维导图”章节入口：课程 README 中新增对应 CourseIndex 卡片，侧边栏中同步新增各 Block 下的“思维导图”导航项。
+- 新增 EPMF Block 1-4 的 `Mindmap.md` 页面文件，并在页面 frontmatter 中关闭右侧目录显示。
+- 新增 Markdown 图片构建期尺寸注入：本地 `jpg` / `jpeg` / `png` / `gif` / `svg` / `webp` 图片会在 VitePress 构建时解析实际宽高，并写入最终 HTML 的 `width` / `height` 属性，提前为正文图片预留布局空间。
+- 图片尺寸解析支持相对路径、`docs/public` 绝对路径、URL 编码路径、JPEG EXIF 方向修正、SVG `viewBox` 回退，以及基于文件 `mtime` / `size` 的构建期缓存。
+- 新增 `MindMap` 异步组件加载占位块，组件 chunk 尚未加载完成时也会先保留稳定的正文高度。
+- 为 EPMF Block 1 思维导图填充 Lecture 1-4 的项目管理、范围、进度、成本、资源、沟通与风险管理复习提纲。
+- 新增 EPMF README 思维导图统一封面与缩略图附件，用于四个 Block 的 CourseIndex 卡片。
+- 新增 EPMF Block 4 思维导图《铁花飞》专辑封面附件，用于页面开头的 `LyricCard` 展示。
+- 新增金曲《String Theocracy》页面与封面附件，并加入金曲 README 与侧边栏导航。
+
+### 调整
+
+- 将 EPMF 思维导图文件统一改为英文文件名 `Mindmap.md`，并同步更新 README 与 sidebar 链接，避免中文文件名路径残留。
+- 将 EPMF Block 4 思维导图开头的歌词卡片改为《铁花飞》，补入开头两句英中歌词、Mili/塞壬唱片-MSR 艺人信息与专辑封面。
+- 为 EPMF Block 1、Block 3、Block 4 思维导图开头的 `LyricCard` 补充网易云音乐歌曲链接。
+- EPMF README 中“思维导图”卡片副标题统一为 `Mindmap`，并切换到统一的 `epmf-mindmap-cover` 封面资源。
+- 刷新课程预览缓存，使 EPMF 思维导图页面使用新的 `Mindmap.md` 路径。
+- 微调首页课程入口与 Hero 图片的移动端断点和间距，避免 960px 附近布局状态不一致。
+- 调整 `MindMap` 多一级标题场景的根节点连线：当导图由自动生成的空根节点承载多个一级标题时，隐藏空根节点及其连向一级标题的上级连线。
+- 调整 `MindMap` 多一级标题场景的布局：自动空根节点下的一级标题会按同一水平线横向排列，各自子树保持独立展开。
+- 将正文页 View Transition 的图片等待策略从运行时长等待改为“构建期尺寸预留 + 短时布局确认”，部署后网络较慢时不再因为图片下载延迟而长时间卡在页面切换前。
+- `PageTransition.vue` 现在会把已有 `width` / `height` 属性、图片自然尺寸和实际布局盒子都视为有效布局尺寸，减少短页面切换时的误判等待。
+- 为正文自定义容器、`example` / `stem` / `solution` / `options` 容器、`Linkcard`、`SongCard`、`LyricCard`、`CourseIndex`、`MindMap` 补充稳定的 `width`、`min-width`、`box-sizing` 与 `min-height` 约束。
+- 为 `CourseIndex` 卡片补充固定 cover 行与移动端行高约束，避免课程索引卡片在图片或 fallback cover 尚未完成布局时抖动。
+- 为 `LyricCard` 专辑封面、底部信息区与移动端封面布局补充明确宽高和最小高度，避免封面 rail 影响正文首帧高度。
+- 为 `SongCard` 保留封面约 1/3 宽度的 1:2 栅格比例，同时补充卡片与封面框的稳定高度约束。
+- 同步更新主题组件测试，覆盖 `MindMap` 加载占位、当前 KaTeX 隐藏策略与 `SongCard` 稳定高度约束。
+
+### 修复
+
+- 修复 `MindMap` 在移动端渲染 KaTeX 公式时可能错位、重复或尺寸不稳定的问题：等待字体加载完成后重新 layout / fit，并让组件内 KaTeX 仅使用 HTML 渲染层参与布局。
+- 同步修复 `MindMap` 导出 SVG / PNG / PDF 时的公式样式，避免导出内容与页面显示不一致。
+- 修复正文内容较少、无法填满整页时，页面切换动画首帧可能被 Chrome 以错误高度快照捕获，导致正文在竖直方向被压缩的问题。
+- 修复金曲首页 README、DSP 后几章等短页面在切入时因图片或容器尚未预留高度而出现压缩、跳高或长等待的问题。
+- 修复自定义容器或正文卡片内容很短、为空、异步加载或图片尚未完成加载时，可能把正文主区域高度拉低并影响 View Transition 快照的问题。
+- 修复 `MindMap` 异步加载期间正文区域短暂塌陷的问题，并让外层容器继承 `--mind-map-height` 参与首帧布局。
+- 修复 `Linkcard` 图片 HTML 尺寸属性与实际 CSS 尺寸不一致的问题。
+
+### 删减
+
+- 移除 EPMF 思维导图旧中文文件名路径，统一使用 `Mindmap.md`。
+
 ## V6.6 beta 2 - 2026-06-14
 
 ### 新增

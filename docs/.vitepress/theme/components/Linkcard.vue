@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<Props>(), {
         <a :href="props.url" target="_blank">
             <p class="description">{{ props.title }}<br><span>{{ props.description }}</span></p>
             <div class="logo">
-                <img alt="logo" width="70px" height="70px" :src="props.logo" />
+                <img alt="logo" width="80" height="80" :src="props.logo" />
             </div>
         </a>
     </div>
@@ -29,6 +29,10 @@ const props = withDefaults(defineProps<Props>(), {
 <style>
 /* 卡片背景 */
 .linkcard {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    min-height: 98px;
     background-color: var(--vp-c-bg-soft);
     border-radius: 8px;
     padding: 8px 16px 8px 8px;
@@ -45,6 +49,7 @@ const props = withDefaults(defineProps<Props>(), {
 .linkcard a {
     display: flex;
     align-items: center;
+    min-height: 80px;
     min-width: 0;
 }
 
@@ -73,7 +78,9 @@ const props = withDefaults(defineProps<Props>(), {
 }
 
 .linkcard .logo {
-    flex: 0 0 auto;
+    flex: 0 0 80px;
+    width: 80px;
+    height: 80px;
 }
 
 /* 链接下划线去除 */
@@ -83,11 +90,13 @@ const props = withDefaults(defineProps<Props>(), {
 
 @media (max-width: 480px) {
     .linkcard {
+        min-height: 78px;
         padding: 8px 10px 8px 8px;
     }
 
     .linkcard a {
         gap: 10px;
+        min-height: 60px;
     }
 
     .linkcard .description {
@@ -101,6 +110,12 @@ const props = withDefaults(defineProps<Props>(), {
     }
 
     .linkcard .logo img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .linkcard .logo {
+        flex-basis: 60px;
         width: 60px;
         height: 60px;
     }

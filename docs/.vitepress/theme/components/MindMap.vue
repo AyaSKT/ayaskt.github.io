@@ -8,6 +8,45 @@ import 'katex/dist/katex.min.css'
 
 type ExportFormat = 'svg' | 'png' | 'pdf'
 
+interface MarkmapLayoutRect {
+  x: number
+  y: number
+  width: number
+  height: number
+}
+
+interface MarkmapLayoutNode {
+  content?: string
+  children?: MarkmapLayoutNode[]
+  payload?: {
+    fold?: number
+  }
+  state: {
+    rect: MarkmapLayoutRect
+  }
+}
+
+interface MarkmapLayoutBounds {
+  minX: number
+  minY: number
+  maxX: number
+  maxY: number
+}
+
+type PatchedMarkmap = Markmap & {
+  state: Markmap['state'] & {
+    data?: MarkmapLayoutNode
+    rect: {
+      x1: number
+      y1: number
+      x2: number
+      y2: number
+    }
+  }
+  _relayout: () => void
+  __mindMapRelayoutPatched?: boolean
+}
+
 declare global {
   interface Window {
     katex?: typeof katex
@@ -43,6 +82,7 @@ let markmap: Markmap | undefined
 let resizeObserver: ResizeObserver | undefined
 let fitTimer: number | undefined
 let expandedCloseTimer: number | undefined
+let renderVersion = 0
 
 const displayTitle = computed(() => props.title.trim())
 const hasTitle = computed(() => displayTitle.value.length > 0)
@@ -92,23 +132,175 @@ function getOptions() {
   return deriveOptions(jsonOptions)
 }
 
+function hasInvisibleRoot(root: { content?: string; children?: unknown[] }) {
+  return !String(root.content || '').trim() && !!root.children?.length
+}
+
+function createEmptyBounds(): MarkmapLayoutBounds {
+  return {
+    minX: Number.POSITIVE_INFINITY,
+    minY: Number.POSITIVE_INFINITY,
+    maxX: Number.NEGATIVE_INFINITY,
+    maxY: Number.NEGATIVE_INFINITY,
+  }
+}
+
+function includeRect(bounds: MarkmapLayoutBounds, rect: MarkmapLayoutRect) {
+  bounds.minX = Math.min(bounds.minX, rect.x)
+  bounds.minY = Math.min(bounds.minY, rect.y)
+  bounds.maxX = Math.max(bounds.maxX, rect.x + rect.width)
+  bounds.maxY = Math.max(bounds.maxY, rect.y + rect.height)
+}
+
+function includeBounds(bounds: MarkmapLayoutBounds, next: MarkmapLayoutBounds) {
+  bounds.minX = Math.min(bounds.minX, next.minX)
+  bounds.minY = Math.min(bounds.minY, next.minY)
+  bounds.maxX = Math.max(bounds.maxX, next.maxX)
+  bounds.maxY = Math.max(bounds.maxY, next.maxY)
+}
+
+function hasBounds(bounds: MarkmapLayoutBounds) {
+  return Number.isFinite(bounds.minX)
+    && Number.isFinite(bounds.minY)
+    && Number.isFinite(bounds.maxX)
+    && Number.isFinite(bounds.maxY)
+}
+
+function walkVisibleTree(node: MarkmapLayoutNode, visitor: (node: MarkmapLayoutNode) => void) {
+  visitor(node)
+  if (node.payload?.fold) return
+  node.children?.forEach((child) => walkVisibleTree(child, visitor))
+}
+
+function getVisibleTreeBounds(node: MarkmapLayoutNode) {
+  const bounds = createEmptyBounds()
+
+  walkVisibleTree(node, (current) => {
+    includeRect(bounds, current.state.rect)
+  })
+
+  return bounds
+}
+
+function translateVisibleTree(node: MarkmapLayoutNode, dx: number, dy: number) {
+  walkVisibleTree(node, (current) => {
+    current.state.rect.x += dx
+    current.state.rect.y += dy
+  })
+}
+
+function alignInvisibleRootHeadings(markmapInstance: PatchedMarkmap) {
+  const root = markmapInstance.state.data
+  if (!root || !hasInvisibleRoot(root) || !root.children || root.children.length < 2) return
+
+  const rowGap = Math.max(72, markmapInstance.options.spacingHorizontal || 0)
+  const headingY = 0
+  const nextBounds = createEmptyBounds()
+  let nextMinX = 0
+
+  for (const child of root.children) {
+    const bounds = getVisibleTreeBounds(child)
+    if (!hasBounds(bounds)) continue
+
+    const dx = nextMinX - bounds.minX
+    const dy = headingY - child.state.rect.y
+    translateVisibleTree(child, dx, dy)
+
+    const movedBounds = {
+      minX: bounds.minX + dx,
+      minY: bounds.minY + dy,
+      maxX: bounds.maxX + dx,
+      maxY: bounds.maxY + dy,
+    }
+
+    includeBounds(nextBounds, movedBounds)
+    nextMinX = movedBounds.maxX + rowGap
+  }
+
+  if (!hasBounds(nextBounds)) return
+
+  root.state.rect = {
+    x: nextBounds.minX,
+    y: headingY,
+    width: 0,
+    height: 0,
+  }
+  markmapInstance.state.rect = {
+    x1: nextBounds.minX,
+    y1: nextBounds.minY,
+    x2: nextBounds.maxX,
+    y2: nextBounds.maxY,
+  }
+}
+
+function patchRelayout(markmapInstance: Markmap) {
+  const patched = markmapInstance as PatchedMarkmap
+  if (patched.__mindMapRelayoutPatched) return
+
+  const relayout = patched._relayout.bind(patched)
+
+  patched._relayout = () => {
+    relayout()
+    alignInvisibleRootHeadings(patched)
+  }
+  patched.__mindMapRelayoutPatched = true
+}
+
+function waitForAnimationFrame() {
+  return new Promise<void>((resolve) => {
+    window.requestAnimationFrame(() => resolve())
+  })
+}
+
+async function waitForMindMapFonts() {
+  const fontSet = document.fonts
+  if (!fontSet) return
+
+  try {
+    await fontSet.ready
+  } catch {
+    // Font loading failures should not block the map itself from rendering.
+  }
+}
+
+async function settleFormulaLayout(version: number) {
+  if (typeof window === 'undefined') return
+
+  await waitForMindMapFonts()
+  await nextTick()
+  await waitForAnimationFrame()
+
+  if (version !== renderVersion || !markmap) return
+
+  await markmap.renderData()
+  await nextTick()
+  await waitForAnimationFrame()
+
+  if (version !== renderVersion || !markmap) return
+
+  await fitMap()
+}
+
 async function renderMap() {
   if (!svgRef.value || !props.source.trim()) return
 
   try {
+    const version = ++renderVersion
     error.value = ''
     const { root } = transformer.transform(props.source)
     const options = getOptions()
+    svgRef.value.classList.toggle('has-invisible-root', hasInvisibleRoot(root))
 
     if (!markmap) {
-      markmap = Markmap.create(svgRef.value, options, root)
-    } else {
-      markmap.setOptions(options)
-      await markmap.setData(root)
+      markmap = Markmap.create(svgRef.value, options)
+      patchRelayout(markmap)
     }
 
+    markmap.setOptions(options)
+    await markmap.setData(root)
     await nextTick()
     await fitMap()
+    void settleFormulaLayout(version)
   } catch (err) {
     error.value = err instanceof Error ? err.message : '思维导图渲染失败'
   }
@@ -222,9 +414,10 @@ function getExportTextColor() {
 
 function getKatexExportStyle() {
   return [
-    '.katex{white-space:nowrap}',
-    '.katex .katex-mathml{border:0;clip-path:inset(50%);height:1px;overflow:hidden;padding:0;position:absolute;width:1px}',
-    '.katex .katex-html{display:inline-block}',
+    '.katex{display:inline-block;line-height:1.2;text-rendering:auto;white-space:nowrap}',
+    '.katex .katex-mathml{display:none}',
+    '.katex .katex-html{display:inline-block;white-space:nowrap}',
+    '.katex-display{margin:0;text-align:left}',
   ].join('')
 }
 
@@ -255,6 +448,7 @@ function getSvgMarkup() {
     ".markmap-node{font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif}",
     `.markmap-foreign{overflow:visible;color:${getExportTextColor()}}`,
     '.markmap-link{opacity:.82}',
+    '.has-invisible-root .markmap-node[data-depth="1"],.has-invisible-root .markmap-link[data-depth="2"]{display:none}',
     getKatexExportStyle(),
   ].join('')
 
@@ -534,6 +728,7 @@ onBeforeUnmount(() => {
       'is-modal-active': isModalActive,
       'is-modal-closing': isClosingExpanded,
     }"
+    :style="surfaceStyle"
     :aria-label="ariaLabel"
   >
     <div
@@ -700,14 +895,18 @@ onBeforeUnmount(() => {
   --mind-map-safe-pad-y: 18px;
   --mind-map-square-size: 28px;
   --mind-map-square-symbol-size: 14px;
+  box-sizing: border-box;
   width: 100%;
   min-width: 0;
+  min-height: calc(var(--mind-map-height) + 46px);
   margin: 1.5rem 0 1.75rem;
 }
 
 .mind-map-panel {
+  box-sizing: border-box;
   width: 100%;
   min-width: 0;
+  min-height: inherit;
 }
 
 .mind-map-backdrop {
@@ -1049,6 +1248,7 @@ onBeforeUnmount(() => {
   flex-direction: column;
   width: auto;
   min-width: 0;
+  min-height: 0;
   border: 1px solid var(--mind-map-border);
   border-radius: 10px;
   padding: 12px;
@@ -1074,6 +1274,8 @@ onBeforeUnmount(() => {
   position: relative;
   z-index: 2;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
   height: var(--mind-map-height);
   min-height: 300px;
   box-sizing: border-box;
@@ -1088,6 +1290,8 @@ onBeforeUnmount(() => {
 .mind-map-svg {
   display: block;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
   height: 100%;
   cursor: grab;
   overflow: visible;
@@ -1132,18 +1336,30 @@ onBeforeUnmount(() => {
   opacity: 0.78;
 }
 
+.mind-map :deep(.mind-map-svg.has-invisible-root .markmap-node[data-depth="1"]),
+.mind-map :deep(.mind-map-svg.has-invisible-root .markmap-link[data-depth="2"]) {
+  display: none;
+}
+
 .mind-map :deep(.katex) {
+  display: inline-block;
+  line-height: 1.2;
+  text-rendering: auto;
   white-space: nowrap;
 }
 
 .mind-map :deep(.katex .katex-mathml) {
-  border: 0;
-  clip-path: inset(50%);
-  height: 1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+  display: none;
+}
+
+.mind-map :deep(.katex .katex-html) {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.mind-map :deep(.katex-display) {
+  margin: 0;
+  text-align: left;
 }
 
 :global(.dark .mind-map) {
@@ -1169,6 +1385,7 @@ onBeforeUnmount(() => {
 
 @media (max-width: 640px) {
   .mind-map {
+    min-height: calc(var(--mind-map-height) + 92px);
     margin: 1.25rem 0 1.5rem;
   }
 

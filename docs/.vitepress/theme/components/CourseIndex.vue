@@ -248,6 +248,9 @@ const resolvedGroups = computed(() =>
   --course-index-card-hover-depth-shadow: 0 18px 42px rgb(92 102 114 / 16%);
   container-type: inline-size;
   display: grid;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
   gap: 34px;
   margin: 30px 0 36px;
 }
@@ -269,6 +272,8 @@ const resolvedGroups = computed(() =>
 }
 
 .course-index-group {
+  box-sizing: border-box;
+  width: 100%;
   min-width: 0;
 }
 
@@ -302,6 +307,9 @@ const resolvedGroups = computed(() =>
 
 .course-index-grid {
   display: grid;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
   gap: var(--course-index-gap);
   overflow: visible;
@@ -326,6 +334,9 @@ const resolvedGroups = computed(() =>
 .course-index-card {
   position: relative;
   display: grid;
+  box-sizing: border-box;
+  grid-template-rows: var(--course-index-cover-h) minmax(96px, auto);
+  width: 100%;
   min-width: 0;
   min-height: 194px;
   border: 1px solid var(--course-index-card-border);
@@ -374,6 +385,9 @@ const resolvedGroups = computed(() =>
 .course-index-cover {
   position: relative;
   display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
   overflow: hidden;
   background:
     radial-gradient(circle at 18% 22%, rgb(255 255 255 / 70%) 0 9%, transparent 10%),
@@ -427,6 +441,8 @@ const resolvedGroups = computed(() =>
 
 .course-index-card-body {
   display: grid;
+  box-sizing: border-box;
+  width: 100%;
   gap: 5px;
   min-width: 0;
   padding: 12px 13px 14px;
@@ -462,6 +478,8 @@ const resolvedGroups = computed(() =>
   top: calc(100% + 10px);
   z-index: 20;
   display: block;
+  box-sizing: border-box;
+  min-width: 0;
   border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 45%, var(--vp-c-divider));
   border-radius: 10px;
   overflow: hidden;
@@ -477,6 +495,9 @@ const resolvedGroups = computed(() =>
 
 .course-index-preview-body {
   display: grid;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
   gap: 7px;
   padding: 14px 15px 15px;
 }
@@ -518,6 +539,7 @@ const resolvedGroups = computed(() =>
 
   .course-index-card {
     grid-template-columns: 92px minmax(0, 1fr);
+    grid-template-rows: minmax(84px, auto);
     min-height: 84px;
     overflow: hidden;
   }

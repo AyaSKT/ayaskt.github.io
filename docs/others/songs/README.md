@@ -11,3 +11,4 @@ aside: false
 - [自己肯定感爆上げ↑↑しゅきしゅきソング](./shuki)
 - [ヒッチコック —— ヨルシカ](./hitchcock)
 - [夢が僕らの太陽さ —— 虹ヶ咲](./yume-taiyou)
+- [String Theocracy —— Mili](./string-theocracy)

@@ -216,11 +216,52 @@
   display: none;
 }
 
+.vp-doc .custom-block,
+.vp-doc .example-stem,
+.vp-doc .example-solution,
+.vp-doc .example-options,
+.mind-map-placeholder {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+}
+
+.vp-doc .custom-block {
+  min-height: 4.5rem;
+  overflow-wrap: anywhere;
+}
+
+.vp-doc .example-stem,
+.vp-doc .example-solution,
+.vp-doc .example-options {
+  min-height: 3.5rem;
+  overflow-wrap: anywhere;
+}
+
+.mind-map-placeholder {
+  min-height: 468px;
+  margin: 1.5rem 0 1.75rem;
+  border: 1px solid color-mix(in srgb, var(--vp-c-divider) 76%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--vp-c-bg) 95%, var(--vp-c-bg-soft));
+}
+
+@media (max-width: 640px) {
+  .mind-map-placeholder {
+    min-height: 408px;
+    margin: 1.25rem 0 1.5rem;
+  }
+}
+
 /* ================================================================
    Example Container（例题容器）::: example / ::: stem / ::: solution
    配色基于主题渐变 #98CBEA → #C2C7F8 → #F1DCE4
    ================================================================ */
 .custom-block.example {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 7rem;
   border: 1px solid rgba(194, 199, 248, 0.45);
   border-radius: 8px;
   padding: 20px 24px 16px;
@@ -246,6 +287,9 @@
 
 .example-stem,
 .example-solution {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
   margin: 0;
   padding: 14px 16px;
   font-family: 'SimSun', 'Songti SC', 'STSong', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -391,12 +435,18 @@
 
 .example-options {
   display: grid;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
   gap: 6px;
   margin: 10px 0;
 }
 
 .example-option {
   display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
   padding: 7px 10px;
   border: 1px solid rgba(60, 60, 67, 0.1);
   border-radius: 6px;
@@ -680,6 +730,12 @@
   .VPHome .VPHero .image-container {
     width: min(42vw, 300px) !important;
     height: min(42vw, 300px) !important;
+  }
+}
+
+@media (max-width: 959px) {
+  .VPHome .VPHero.has-image .image {
+    margin-bottom: clamp(16px, 4vw, 28px);
   }
 }
 

@@ -42,7 +42,7 @@
   "Y3S2/EPMF/Block 1/Lecture 2.md": "Lec. 2 - Ses. 1 项目范围管理 Project Scope Management / 2-1-1 概览 Overview / 项目范围管理包括确保项目成功完成所需的全部工作，且仅包含所需工作的各个过程。 / Project Scope Management includes the processes required to ensure that the project includes all the work required, and only the work required, to complete the projec...",
   "Y3S2/EPMF/Block 1/Lecture 3.md": "Lec. 3 - Ses. 1 项目成本管理 Project Cost Management / 3-1-1 概览 Overview / 项目成本管理包括为使项目在批准的预算内完成而进行的规划、估算、预算、融资、筹资、管理和控制成本的各个过程。 / Project Cost Management includes the processes involved in planning, estimating, budgeting, financing, funding, managing, and controlling costs so that ...",
   "Y3S2/EPMF/Block 1/Lecture 4.md": "Lec. 4 - Ses. 1 项目沟通管理 Project Communications Management / 4-1-1 概览 Overview / 项目沟通管理 Project Communications Management / 项目沟通管理包括为确保项目信息及时且恰当地规划、收集、生成、发布、存储、检索、管理、控制、监督和最终处置所需的各个过程。 / Project Communications Management includes the processes necessary to ensure that the inform...",
-  "Y3S2/EPMF/Block 1/Mindmap.md": "Lecture 1 / '''mindmap / Lecture 1 / L / '''",
+  "Y3S2/EPMF/Block 1/Mindmap.md": "Lecture 1 / Lecture 2 / Lecture 3 / Lecture 4",
   "Y3S2/EPMF/Block 2/Block 2 Examples.md": "Lecture 5 Introduction to DFM & Design for Sustainability / Q1 / 以下哪一项不是可持续设计原则？ / Which item below is not an actionable sustainable design principle? / 答案 Answer: D",
   "Y3S2/EPMF/Block 2/Lecture 5.md": "Lec. 5 - Ses. 1 面向制造的设计 Introduction to DFM / 5-1-1 DFM 的定义 Definition of DFM / 面向制造的设计 Design For Manufacturing (DFM) / 面向制造的设计（DFM）是以更低的成本、更便于制造为目标，对高质量产品的零部件进行设计的过程。它通过降低复杂性、优化性能和重新定义产品来实现。 / Design For Manufacturing (DFM) is the process of designing components of high-qual...",
   "Y3S2/EPMF/Block 2/Lecture 6.md": "Lec. 6 - Ses. 1 质量控制 Quality Control / 6-1-1 质量控制定义 QC Definition / 质量控制 Quality Control / 质量控制是一套旨在确保制成品或服务符合既定质量标准或满足客户要求的程序。质量控制的目标是在产品开发完成后、发布前识别任何缺陷。 / Quality Control is a procedure or set of procedures intended to ensure that a manufactured product or performed service ...",
@@ -56,9 +56,9 @@
   "Y3S2/EPMF/Block 3/Lecture 13 Part 2.md": "Lec. 13 - Ses. 3 资本性支出 CapEx 与运营性支出 OpEx / 13-3-1 被遗漏的资本成本 Missing Capital Cost / 回看 Florida drive / fly 案例，汽车保险和汽车购买成本对该次旅行决策通常不构成相关成本 relevant cost，因为不管开不开车，这些成本都已经存在或不会改变。 / 但它们仍然是真实成本。 / 成本 Cost: 是否影响开车 / 飞行 fly / drive",
   "Y3S2/EPMF/Block 3/Lecture 13-2 Extended Version.md": "Lec. 13-2 Extended - Ses. 1 三大报表 Revisit of Financial Statements / 13-2E-1 资产负债表 Balance Sheet / 资产负债表 Balance Sheet / 在某一具体日期展示公司资产 assets、负债 liabilities 和股东权益 shareholder's equity 的报表。 / 基本恒等式：",
   "Y3S2/EPMF/Block 3/Lecture 9.md": "Lec. 9 - Ses. 1 工程经济学概览 Engineering Economics Overview / 9-1-1 工程师为什么要懂经济 Why Engineers Care / 工程经济学 Engineering Economics / 一组用于比较经济方案的准数学方法。它把工程选择中的成本、收益、时间和风险写成可比较的形式。 / A collection of quasi-mathematical techniques that simplifies economic comparisons and supports rational...",
-  "Y3S2/EPMF/Block 3/Mindmap.md": "暂无正文预览",
+  "Y3S2/EPMF/Block 3/Mindmap.md": "Lecture 9",
   "Y3S2/EPMF/Block 4/Lecture 14.md": "Lec. 14 - Ses. 1 公司是什么 What is a Company / 14-1-1 工程师为什么要懂公司结构 Why Engineers Need Company Structures / 工程师以后可能会做三件和公司结构有关的事： / 在公司中工作，需要知道权力、责任和决策链在哪里。 / 成为创业者 entrepreneur，需要知道如何注册、融资、分配股权。",
   "Y3S2/EPMF/Block 4/Lecture 15.md": "Lec. 15 - Ses. 1 公司成长 Company Growth / 15-1-1 公司成长与结构 Growth and Structure / 公司刚开始时，通常靠创始人 founder 或创业者 entrepreneur 直接管理。人少、产品少、流程少，大家靠沟通和临场解决问题。 / 规模变大后，组织会遇到几个变化： / 人数增加，直接监督变难。",
   "Y3S2/EPMF/Block 4/Lecture 16.md": "Lec. 16 - Ses. 1 公司战略 Company Strategy / 16-1-1 战略是什么 What is Strategy / 很多人会把战略 strategy 和计划 plan 混在一起。战略 Strategy 比计划 plan 更高一层，它决定公司在哪个方向竞争、用什么资源竞争、为了谁创造价值。 / 战略 Strategy / 战略是组织的长期方向和范围。它通过资源配置，在有挑战的环境中获得优势，满足市场需求并实现利益相关者期望 stakeholder expectations。",
-  "Y3S2/EPMF/Block 4/Mindmap.md": "暂无正文预览"
+  "Y3S2/EPMF/Block 4/Mindmap.md": "Block 4 Mindmap / <LyricCard / title=\"铁花飞\" / artist=\"Mili/塞壬唱片-MSR\" / lang=\"en\""
 }

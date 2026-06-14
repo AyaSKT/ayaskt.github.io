@@ -6,20 +6,21 @@ outline: false
 # Block 4 Mindmap
 
 <LyricCard
-  title="A Turtle's Heart"
-  artist="Mili"
+  title="铁花飞"
+  artist="Mili/塞壬唱片-MSR"
   lang="en"
-  album-cover=""
+  title-style="cn-book"
+  netease-url="https://music.163.com/#/song?id=3342981041"
+  album-cover="Mindmap.attachments/tie-hua-fei-cover.jpg"
+  album-cover-alt="铁花飞 专辑封面"
 >
 <LyricLine
-  original="Life goes around and round"
-  translation="生命的年轮转了一圈又一圈"
+  original="Let our memories unite,"
+  translation="让你我的回忆连结，"
 />
 <LyricLine
-  original="I've stumbled and stopped moving on"
-  translation="我却依然蹒跚徘徊，停滞不前"
+  original="Then maybe we'll see a new sight,"
+  translation="或许就能窥得焕然一新的景象。"
 />
 </LyricCard>
-
-
 

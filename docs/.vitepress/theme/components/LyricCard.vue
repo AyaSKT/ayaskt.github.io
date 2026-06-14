@@ -248,8 +248,10 @@ function releaseActionFocus(event: MouseEvent) {
   --lyric-card-top-rail-space: 72px;
   position: relative;
   display: grid;
+  box-sizing: border-box;
   width: 100%;
   min-width: 0;
+  min-height: 132px;
   gap: 14px;
   margin: 1.5rem 0 1.75rem;
   padding: 0;
@@ -257,6 +259,7 @@ function releaseActionFocus(event: MouseEvent) {
 
 .lyric-card.has-album-cover {
   --lyric-card-top-rail-space: calc(var(--lyric-card-album-cover-size) + 12px);
+  min-height: calc(var(--lyric-card-album-cover-size) + 92px);
 }
 
 .lyric-card.has-album-cover.has-furigana-control {
@@ -300,7 +303,9 @@ function releaseActionFocus(event: MouseEvent) {
 
 .lyric-card-album-cover-frame {
   flex: 0 0 var(--lyric-card-album-cover-size);
+  box-sizing: border-box;
   width: var(--lyric-card-album-cover-size);
+  height: var(--lyric-card-album-cover-size);
   aspect-ratio: 1;
   border-radius: 8px;
   overflow: hidden;
@@ -429,8 +434,10 @@ function releaseActionFocus(event: MouseEvent) {
 
 .lyric-card-footer {
   display: grid;
+  box-sizing: border-box;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
   align-items: end;
+  width: 100%;
   gap: 10px;
   min-width: 0;
 }
@@ -489,6 +496,8 @@ function releaseActionFocus(event: MouseEvent) {
 
 .lyric-card-body {
   display: grid;
+  box-sizing: border-box;
+  width: 100%;
   min-width: 0;
 }
 
@@ -509,7 +518,12 @@ function releaseActionFocus(event: MouseEvent) {
     --lyric-card-album-cover-size: 112px;
     --lyric-card-album-cover-body-min-height: 0px;
     gap: 12px;
+    min-height: 116px;
     margin: 1.25rem 0 1.5rem;
+  }
+
+  .lyric-card.has-album-cover {
+    min-height: calc(var(--lyric-card-album-cover-size) + 124px);
   }
 
   .lyric-card-top-rail {

@@ -23,6 +23,13 @@ import LyricLine from './components/LyricLine.vue'
 import SongCard from './components/SongCard.vue'
 import { setupLinkWarmup } from './link-warmup'
 
+const MindMapLoader = defineAsyncComponent({
+  loader: () => import('./components/MindMap.vue'),
+  loadingComponent: {
+    template: '<div class="mind-map-placeholder" aria-hidden="true"></div>',
+  },
+})
+
 export default {
   
 
@@ -45,7 +52,7 @@ export default {
     app.component('LyricCard', LyricCard)
     app.component('LyricLine', LyricLine)
     app.component('SongCard', SongCard)
-    app.component('MindMap', defineAsyncComponent(() => import('./components/MindMap.vue')))
+    app.component('MindMap', MindMapLoader)
   },
 
   extends: DefaultTheme,

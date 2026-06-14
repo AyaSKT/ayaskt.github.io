@@ -58,7 +58,7 @@ pageClass: course-index-page
           title: '思维导图',
           subtitle: 'Mindmap',
           link: 'Block 1/Mindmap.md',
-          cover: 'EPMF-README.attachments/1781422533672.PNG'
+          cover: 'EPMF-README.attachments/epmf-mindmap-cover.PNG'
         }
       ]
     },
@@ -105,7 +105,7 @@ pageClass: course-index-page
           title: '思维导图',
           subtitle: 'Mindmap',
           link: 'Block 2/Mindmap.md',
-          cover: 'EPMF-README.attachments/1781422533672.PNG'
+          cover: 'EPMF-README.attachments/epmf-mindmap-cover.PNG'
         }
       ]
     },
@@ -159,7 +159,7 @@ pageClass: course-index-page
           title: '思维导图',
           subtitle: 'Mindmap',
           link: 'Block 3/Mindmap.md',
-          cover: 'EPMF-README.attachments/1781422533672.PNG'
+          cover: 'EPMF-README.attachments/epmf-mindmap-cover.PNG'
         }
       ]
     },
@@ -189,7 +189,7 @@ pageClass: course-index-page
           title: '思维导图',
           subtitle: 'Mindmap',
           link: 'Block 4/Mindmap.md',
-          cover: 'EPMF-README.attachments/1781422533672.PNG'
+          cover: 'EPMF-README.attachments/epmf-mindmap-cover.PNG'
         }
       ]
     }

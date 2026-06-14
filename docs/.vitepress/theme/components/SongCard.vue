@@ -191,11 +191,13 @@ const isAlbumItalic = computed(() => resolvedAlbumStyle.value === 'italic')
   --song-card-hover-feather-shadow: 0 0 18px 5px rgb(152 203 234 / 10%);
   --song-card-hover-depth-shadow: 0 18px 42px rgb(92 102 114 / 14%);
   display: grid;
+  box-sizing: border-box;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   align-items: center;
   gap: 16px;
   width: 100%;
   min-width: 0;
+  min-height: 156px;
   margin: 1.5rem 0 1.75rem;
   border: 1px solid var(--song-card-border);
   border-radius: 8px;
@@ -257,8 +259,11 @@ const isAlbumItalic = computed(() => resolvedAlbumStyle.value === 'italic')
 
 .song-card-cover-frame {
   display: block;
+  box-sizing: border-box;
+  width: 100%;
   aspect-ratio: 1;
   min-width: 0;
+  min-height: 0;
   overflow: hidden;
   border-radius: 8px;
   background: var(--vp-c-bg-alt);
@@ -275,6 +280,8 @@ const isAlbumItalic = computed(() => resolvedAlbumStyle.value === 'italic')
 .song-card-content {
   display: grid;
   align-content: center;
+  box-sizing: border-box;
+  width: 100%;
   gap: 6px;
   min-width: 0;
 }
@@ -341,6 +348,7 @@ const isAlbumItalic = computed(() => resolvedAlbumStyle.value === 'italic')
   .song-card {
     grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
     gap: 12px;
+    min-height: 124px;
     margin: 1.25rem 0 1.5rem;
     padding: 12px;
   }
