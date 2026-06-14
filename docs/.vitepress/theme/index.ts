@@ -45,6 +45,7 @@ export default {
     app.component('LyricCard', LyricCard)
     app.component('LyricLine', LyricLine)
     app.component('SongCard', SongCard)
+    app.component('MindMap', defineAsyncComponent(() => import('./components/MindMap.vue')))
   },
 
   extends: DefaultTheme,

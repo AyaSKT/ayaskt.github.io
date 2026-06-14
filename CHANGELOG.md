@@ -12,6 +12,45 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.6 beta - 2026-06-14
+
+### 新增
+
+- 新增 `MindMap` 全局组件，基于 `markmap-lib` / `markmap-view` 将 Markdown 层级渲染为可拖拽、缩放、折叠和适配视图的交互式思维导图。
+- 新增 `mindmap` 代码块渲染器，支持用 ```` ```mindmap 可选标题 ```` 在笔记中直接生成思维导图。
+- `MindMap` 新增展开弹层与导出菜单，支持保存 SVG、PNG，并通过浏览器打印页面导出 PDF；导出内容会带上主题背景、文本颜色和 KaTeX 公式样式。
+- `LyricCard` 新增 `album-cover`、`album-cover-alt`、`album-cover-position` 参数，可在歌词块右上角展示专辑封面，并支持 public 路径、相对路径和外链。
+- 新增 Markdown 组件资源自动导入管线，为 `SongCard` 的 `cover` 与 `LyricCard` 的 `album-cover` 自动处理相对资源路径。
+- 新增 `/others/lab/mindmap` 实验室文档与导航入口，并补充歌词容器中专辑封面的示例和参数说明。
+- 新增 EPMF Block 1-4 的思维导图页面与课程索引 / 侧边栏入口；其中 Block 2 已填充 DFM、DFS、QC、COQ、稳健设计、DOE、Six-Sigma 等复习导图内容。
+- 新增 `katex`、`markmap-lib`、`markmap-view` 开发依赖，并扩展 `test:theme-components` 覆盖 MindMap、组件资源路径转换和 LyricCard 专辑封面。
+
+### 调整
+
+- 调整 `LyricCard` 顶部控制区布局：注音按钮与专辑封面共用右上角 rail，正文会自动为封面预留空间，移动端改为封面在上、歌词在下。
+- 调整 `LyricCard` 底部布局，使音乐平台图标固定在左下角，标题与作者继续保持右下角对齐。
+- 调整 `MindMap` 卡片视觉：使用更干净的卡片背景、轻微悬浮阴影，移除外层蓝色边框，并让暗色模式改用更中性的深色表面。
+- 调整 `MindMap` 顶部工具区为仿导航栏的胶囊按钮，展开按钮与视图 / 导出工具分为独立胶囊，导出 SVG / PNG / PDF 合并到一个带动画下拉菜单的导出按钮中。
+- 调整 `MindMap` 默认展开层级为全部展开，并在标题留空时仍让控制按钮胶囊保持最右侧对齐。
+- 更新歌词容器实验室示例，替换为更贴近真实用法的日文、英文与俄文歌词片段，并加入专辑封面演示。
+- 刷新 EPMF 课程预览缓存，使新增思维导图页面出现在课程索引预览数据中。
+- 调整 EMFT Chapter 6 页首歌词块的语言与标题标点样式。
+
+### 修复
+
+- 修复 `MindMap` 右侧分支文字边缘被 SVG 裁切的问题。
+- 修复 `MindMap` 导出菜单层级低于导图卡片、打开后被遮挡的问题。
+- 修复 `MindMap` 放大 / 缩小按钮视觉高度不一致的问题。
+- 修复 `MindMap` 中 KaTeX 公式同时显示 MathML 与 HTML、看起来被渲染两次的问题，并同步处理 SVG / PNG / PDF 导出时的公式样式。
+- 修复 Markdown 中组件相对图片路径不能稳定进入 Vite 资源管线的问题，避免移动文档或构建后封面路径失效。
+- 修复正文 View Transition 在页面高度变化时可能被 Chrome 插值压扁的问题，将正文过渡目标调整到 `.VPDoc .main` 并禁用 `doc-content` group 动画。
+- 修复 `LyricCard` 同时显示注音按钮和封面时右上角元素挤占正文的问题。
+- 修复 `LyricCard` 带专辑封面且页面无右侧目录时，底部歌曲名与作者可能未贴齐歌词块最右边的问题。
+
+### 删减
+
+- 暂无。
+
 ## V6.5.1 - 2026-06-13
 
 ### 新增

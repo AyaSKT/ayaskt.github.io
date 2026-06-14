@@ -9,6 +9,8 @@ pageClass: course-index-page
 
 **小楼一夜听春雨，深巷明朝卖杏花。**
 
+
+
 <CourseIndex
   course="EPMF"
   basePath="Y3S2/EPMF"
@@ -50,6 +52,13 @@ pageClass: course-index-page
           subtitle: 'Examples',
           link: 'Block 1/Block 1 Examples.md',
           cover: 'EPMF-README.attachments/1781246592182.JPG'
+        },
+        {
+          code: '思维导图',
+          title: '思维导图',
+          subtitle: 'Mindmap',
+          link: 'Block 1/Mindmap.md',
+          cover: 'EPMF-README.attachments/1781422533672.PNG'
         }
       ]
     },
@@ -90,6 +99,13 @@ pageClass: course-index-page
           subtitle: 'Examples',
           link: 'Block 2/Block 2 Examples.md',
           cover: 'EPMF-README.attachments/1781246592182.JPG'
+        },
+        {
+          code: '思维导图',
+          title: '思维导图',
+          subtitle: 'Mindmap',
+          link: 'Block 2/Mindmap.md',
+          cover: 'EPMF-README.attachments/1781422533672.PNG'
         }
       ]
     },
@@ -137,6 +153,13 @@ pageClass: course-index-page
           title: '拓展版本',
           subtitle: 'Extended Version',
           link: 'Block 3/Lecture 13-2 Extended Version.md'
+        },
+        {
+          code: '思维导图',
+          title: '思维导图',
+          subtitle: 'Mindmap',
+          link: 'Block 3/Mindmap.md',
+          cover: 'EPMF-README.attachments/1781422533672.PNG'
         }
       ]
     },
@@ -160,6 +183,13 @@ pageClass: course-index-page
           title: '公司战略与工程职业',
           subtitle: 'Company Strategy \u0026 Engineering Careers',
           link: 'Block 4/Lecture 16.md'
+        },
+        {
+          code: '思维导图',
+          title: '思维导图',
+          subtitle: 'Mindmap',
+          link: 'Block 4/Mindmap.md',
+          cover: 'EPMF-README.attachments/1781422533672.PNG'
         }
       ]
     }

@@ -129,6 +129,184 @@ function formatDocMeta(md: any, src: string, frontmatter: Record<string, any> = 
   return `<DocMeta :words="${words}" :minutes="${minutes}" author="${md.utils.escapeHtml(author)}" :pdf="${pdf}"></DocMeta>\n`
 }
 
+type ResolveComponentAsset = (specifier: string) => string
+
+interface ComponentAssetRule {
+  componentName: string
+  attrNames: string[]
+  variablePrefix: string
+}
+
+const componentAssetRules: ComponentAssetRule[] = [
+  { componentName: 'SongCard', attrNames: ['cover'], variablePrefix: '__songCardCover' },
+  { componentName: 'LyricCard', attrNames: ['album-cover'], variablePrefix: '__lyricCardAlbumCover' },
+]
+
+function safeDecodeUri(value: string) {
+  try {
+    return decodeURIComponent(value)
+  } catch {
+    return value
+  }
+}
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+function escapeSingleQuotedAttribute(value: string) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+}
+
+function isRelativeComponentAsset(value: string) {
+  const src = value.trim()
+  if (!src) return false
+  if (src.startsWith('/') || src.startsWith('#') || src.startsWith('//')) return false
+  return !/^[a-z][a-z\d+.-]*:/i.test(src)
+}
+
+function normalizeComponentAssetSpecifier(value: string) {
+  const src = safeDecodeUri(value.trim())
+  return src.startsWith('./') || src.startsWith('../') ? src : `./${src}`
+}
+
+function toStaticAssetExpression(specifier: string) {
+  return JSON.stringify(specifier)
+}
+
+function transformComponentAssetAttrs(
+  src: string,
+  componentName: string,
+  attrNames: string[],
+  resolveRelativeAsset: ResolveComponentAsset = toStaticAssetExpression,
+) {
+  const tagPattern = new RegExp(`<${escapeRegExp(componentName)}\\b(?:[^<>"']|"[^"]*"|'[^']*')*>`, 'g')
+
+  return src.replace(tagPattern, (tag) => {
+    return attrNames.reduce((currentTag, attrName) => {
+      const escapedAttr = escapeRegExp(attrName)
+      const boundAttrPattern = new RegExp(`(?:^|\\s)(?::${escapedAttr}|v-bind:${escapedAttr})\\s*=`)
+      if (boundAttrPattern.test(currentTag)) return currentTag
+
+      const attrPattern = new RegExp(`(\\s)${escapedAttr}\\s*=\\s*("([^"]*)"|'([^']*)')`)
+
+      return currentTag.replace(attrPattern, (match, leadingSpace, _quoted, doubleQuoted, singleQuoted) => {
+        const rawValue = (doubleQuoted ?? singleQuoted ?? '').trim()
+        if (!isRelativeComponentAsset(rawValue)) return match
+
+        const expression = resolveRelativeAsset(normalizeComponentAssetSpecifier(rawValue))
+        return `${leadingSpace}:${attrName}='${escapeSingleQuotedAttribute(expression)}'`
+      })
+    }, tag)
+  })
+}
+
+export function transformSongCardCoverAttrs(
+  src: string,
+  resolveRelativeAsset?: ResolveComponentAsset,
+) {
+  return transformComponentAssetAttrs(src, 'SongCard', ['cover'], resolveRelativeAsset)
+}
+
+export function transformLyricCardAlbumCoverAttrs(
+  src: string,
+  resolveRelativeAsset?: ResolveComponentAsset,
+) {
+  return transformComponentAssetAttrs(src, 'LyricCard', ['album-cover'], resolveRelativeAsset)
+}
+
+export function renderMindMapFence(src: string, info = '') {
+  const title = info.replace(/^mindmap\b\s*/, '').trim()
+  const titleAttr = title ? ` title="${escapeHtml(title)}"` : ''
+  const sourceAttr = escapeSingleQuotedAttribute(JSON.stringify(src))
+
+  return `<MindMap${titleAttr} :source='${sourceAttr}'></MindMap>\n`
+}
+
+function transformMarkdownComponentAssetAttrs(
+  src: string,
+  resolveRuleAsset: (rule: ComponentAssetRule, specifier: string) => string = (_rule, specifier) => {
+    return toStaticAssetExpression(specifier)
+  },
+) {
+  return componentAssetRules.reduce((currentSrc, rule) => {
+    return transformComponentAssetAttrs(
+      currentSrc,
+      rule.componentName,
+      rule.attrNames,
+      (specifier) => resolveRuleAsset(rule, specifier),
+    )
+  }, src)
+}
+
+function registerComponentAssetImports(md: any) {
+  const render = md.renderer.render.bind(md.renderer)
+
+  md.renderer.render = (tokens: any[], options: any, env: any) => {
+    const imports = new Map<string, string>()
+
+    const resolveRuleAsset = (rule: ComponentAssetRule, specifier: string) => {
+      const key = `${rule.componentName}:${specifier}`
+      const existing = imports.get(key)
+      if (existing) return existing
+
+      const variable = `${rule.variablePrefix}${imports.size}`
+      imports.set(key, variable)
+      return variable
+    }
+
+    const transformToken = (token: any) => {
+      if (
+        typeof token.content === 'string'
+        && (token.type === 'html_block' || token.type === 'html_inline')
+      ) {
+        const shouldTransform = componentAssetRules.some((rule) => {
+          return token.content.includes(`<${rule.componentName}`)
+        })
+
+        if (shouldTransform) {
+          token.content = transformMarkdownComponentAssetAttrs(token.content, resolveRuleAsset)
+        }
+      }
+
+      token.children?.forEach(transformToken)
+    }
+
+    tokens.forEach(transformToken)
+    const html = render(tokens, options, env)
+    injectComponentAssetImports(env, imports)
+
+    return html
+  }
+}
+
+function injectComponentAssetImports(env: any, imports: Map<string, string>) {
+  if (!env.sfcBlocks || imports.size === 0) return
+
+  const importCode = [...imports]
+    .map(([key, variable]) => {
+      const specifier = key.slice(key.indexOf(':') + 1)
+      return `import ${variable} from ${JSON.stringify(specifier)}`
+    })
+    .join('\n')
+  const scriptSetup = env.sfcBlocks.scriptSetup
+
+  if (scriptSetup) {
+    scriptSetup.content = scriptSetup.content.replace(
+      /(<script\b[^>]*>)/i,
+      `$1\n${importCode}`,
+    )
+    return
+  }
+
+  env.sfcBlocks.scripts.push({
+    content: `<script setup>\n${importCode}\n</script>`,
+  })
+}
+
 function registerDocMeta(md: any) {
   md.core.ruler.after('inline', 'doc_meta', (state: any) => {
     const h1CloseIndex = state.tokens.findIndex(
@@ -140,6 +318,20 @@ function registerDocMeta(md: any) {
     token.content = formatDocMeta(md, state.src, state.env?.frontmatter)
     state.tokens.splice(h1CloseIndex + 1, 0, token)
   })
+}
+
+function registerMindMapFence(md: any) {
+  const defaultFence = md.renderer.rules.fence?.bind(md.renderer.rules)
+
+  md.renderer.rules.fence = (tokens: any[], idx: number, options: any, env: any, self: any) => {
+    const info = (tokens[idx].info || '').trim()
+    if (/^mindmap(?:\s|$)/.test(info)) {
+      return renderMindMapFence(tokens[idx].content, info)
+    }
+
+    if (defaultFence) return defaultFence(tokens, idx, options, env, self)
+    return self.renderToken(tokens, idx, options)
+  }
 }
 
 // 插件默认 TeX 包列表去掉 bboldx，避免 "Invalid variant: -bboldx"（newcm 字体无此变体）
@@ -373,7 +565,9 @@ export default defineConfig({
         },
       })
 
+      registerMindMapFence(md)
       registerDocMeta(md)
+      registerComponentAssetImports(md)
     }
   },
   themeConfig: {
@@ -451,6 +645,7 @@ export default defineConfig({
             { text: '实验室首页', link: '/others/lab/README.md' },
             { text: '歌词容器', link: '/others/lab/lyric-container' },
             { text: 'SongCard', link: '/others/lab/song-card' },
+            { text: 'MindMap', link: '/others/lab/mindmap' },
           ],
         },
       ],
@@ -518,6 +713,7 @@ export default defineConfig({
                 { text: 'Lecture 3', link: '/Y3S2/EPMF/Block 1/Lecture 3' },
                 { text: 'Lecture 4', link: '/Y3S2/EPMF/Block 1/Lecture 4' },
                 { text: 'Block 1 例题 Examples', link: '/Y3S2/EPMF/Block 1/Block 1 Examples' },
+                { text: '思维导图', link: '/Y3S2/EPMF/Block 1/Mindmap' },
               ],
             },
             {
@@ -529,6 +725,7 @@ export default defineConfig({
                 { text: 'Lecture 7', link: '/Y3S2/EPMF/Block 2/Lecture 7' },
                 { text: 'Lecture 8', link: '/Y3S2/EPMF/Block 2/Lecture 8' },
                 { text: 'Block 2 例题 Examples', link: '/Y3S2/EPMF/Block 2/Block 2 Examples' },
+                { text: '思维导图', link: '/Y3S2/EPMF/Block 2/Mindmap' },
               ],
             },
             {
@@ -542,6 +739,7 @@ export default defineConfig({
                 { text: 'Lecture 13 I', link: '/Y3S2/EPMF/Block 3/Lecture 13 Part 1' },
                 { text: 'Lecture 13 II', link: '/Y3S2/EPMF/Block 3/Lecture 13 Part 2' },
                 { text: 'Lecture 13 II Ex.', link: '/Y3S2/EPMF/Block 3/Lecture 13-2 Extended Version' },
+                { text: '思维导图', link: '/Y3S2/EPMF/Block 3/Mindmap' },
               ],
             },
             {
@@ -551,6 +749,7 @@ export default defineConfig({
                 { text: 'Lecture 14', link: '/Y3S2/EPMF/Block 4/Lecture 14' },
                 { text: 'Lecture 15', link: '/Y3S2/EPMF/Block 4/Lecture 15' },
                 { text: 'Lecture 16', link: '/Y3S2/EPMF/Block 4/Lecture 16' },
+                { text: '思维导图', link: '/Y3S2/EPMF/Block 4/Mindmap' },
               ],
             },
           ],

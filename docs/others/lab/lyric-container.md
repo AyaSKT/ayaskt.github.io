@@ -5,56 +5,52 @@
 ## LyricCard
 
 <LyricCard
-  title="再下一场太阳雨吧"
+  title="夢が僕らの太陽さ"
   artist="虹ヶ咲学園スクールアイドル同好会"
   lang="ja"
-  qq-url="https://y.qq.com/"
-  netease-url="https://music.163.com/"
+  qq-url="https://y.qq.com/n/ryqq/search?w=夢が僕らの太陽さ"
+  netease-url="https://yq3.music.163.com/m/program?id=2500986660"
+  album-cover="../songs/yume-taiyou.attachments/cover.JPG"
+  album-cover-alt="夢が僕らの太陽さ 专辑封面"
 >
   <LyricLine
-    original="雨上(あめあ)がりの空(そら)に、小(ちい)さな光(ひかり)を置(お)いた"
-    translation="雨后的天空里，我放下一点小小的光"
+    original="どんな時(とき)も夢(ゆめ)が僕(ぼく)らの太陽(たいよう)さ"
+    translation="无论何时 梦想是我们的太阳"
   />
   <LyricLine
-    original="君(きみ)と見(み)たい景色(けしき)だけ、まだ胸(むね)の奥(おく)で鳴(な)っている"
-    translation="只想与你看见的风景，还在心底轻轻作响"
+    original="風(かぜ)が雨(あめ)が激(はげ)しくても"
+    translation="任凭狂风作乱暴雨作势"
   />
   <LyricLine
-    original="愛しい｜時間(じかん)ほど、そっと名前(なまえ)を呼(よ)びたくなる"
-    translation="越是珍贵的时间，越想轻轻呼唤它的名字"
+    original="思(おも)いだすんだ僕(ぼく)らを照(て)らす光(ひかり)があるよ"
+    translation="也始终牢记 有一道光一直在照耀着我们"
   />
 </LyricCard>
 
 <LyricCard
-  title="Paper Moon Signal"
-  artist="Aya Sketch"
+  title="I Really Want to Stay at Your House"
+  artist="Rosa Walton & Hallie Coggins"
   lang="en"
   title-style="italic"
-  qq-url="https://y.qq.com/"
+  qq-url="https://y.qq.com/n/ryqq/search?w=I%20Really%20Want%20to%20Stay%20at%20Your%20House%20Rosa%20Walton"
+  netease-url="https://music.163.com/#/search/m/?s=I%20Really%20Want%20to%20Stay%20at%20Your%20House"
 >
   <LyricLine
-    original="A paper moon keeps watch above the station lights"
-    translation="纸月亮守在车站灯光之上"
-  />
-  <LyricLine
-    original="I fold the night, and save the quieter side"
-    translation="我折起夜晚，留下更安静的一面"
+    original="Because I miss you all the time"
+    translation="因为我却时刻思念着你"
   />
 </LyricCard>
 
 <LyricCard
-  title="Дорога к дождю"
-  artist="Sever Notebook"
+  title="Мёртвый вечер"
+  artist="мой друг магнитофон"
   lang="ru"
-  netease-url="https://music.163.com/"
+  qq-url="https://y.qq.com/n/ryqq/search?w=Мёртвый%20вечер%20мой%20друг%20магнитофон"
+  netease-url="https://music.163.com/#/search/m/?s=Мёртвый%20вечер%20мой%20друг%20магнитофон"
 >
   <LyricLine
-    original="Свет у окна медленно тает"
-    translation="窗边的光慢慢融化"
-  />
-  <LyricLine
-    original="Город хранит дорогу к дождю"
-    translation="城市保存着通向雨的路"
+    original="Мёртвый вечер"
+    translation="死去的夜晚"
   />
 </LyricCard>
 
@@ -64,24 +60,45 @@
 
 ```html
 <LyricCard
-  title="再下一场太阳雨吧"
+  title="夢が僕らの太陽さ"
   artist="虹ヶ咲学園スクールアイドル同好会"
   lang="ja"
-  qq-url="https://y.qq.com/"
-  netease-url="https://music.163.com/"
+  qq-url="https://y.qq.com/n/ryqq/search?w=夢が僕らの太陽さ"
+  netease-url="https://yq3.music.163.com/m/program?id=2500986660"
+  album-cover="../songs/yume-taiyou.attachments/cover.JPG"
+  album-cover-alt="夢が僕らの太陽さ 专辑封面"
 >
   <LyricLine
-    original="雨上(あめあ)がりの空(そら)"
-    translation="雨后的天空"
+    original="どんな時(とき)も夢(ゆめ)が僕(ぼく)らの太陽(たいよう)さ"
+    translation="无论何时 梦想是我们的太阳"
   />
   <LyricLine
-    original="愛しい｜時間(じかん)"
-    translation="珍贵的时间"
+    original="風(かぜ)が雨(あめ)が激(はげ)しくても"
+    translation="任凭狂风作乱暴雨作势"
+  />
+  <LyricLine
+    original="思(おも)いだすんだ僕(ぼく)らを照(て)らす光(ひかり)があるよ"
+    translation="也始终牢记 有一道光一直在照耀着我们"
   />
 </LyricCard>
 ```
 
 `qq-url` 和 `netease-url` 会在歌词块左下角生成裸露的 SVG 图标。它们默认隐藏，鼠标进入歌词块或键盘聚焦歌词块内部时显示；歌词块本体不会跳转。
+
+`album-cover` 会在歌词块右上角显示专辑图片，样式是较大的圆角矩形。它可以使用 public 路径、相对路径或外链；相对路径会自动转换成当前 Markdown 附近的 Vite 资源 URL。日语歌词块同时出现注音按钮时，注音按钮会自动排到封面左侧。歌词或翻译行数较少时，正文区会自动延展到专辑封面需要的最低高度，避免歌曲名贴近封面。
+
+```html
+<LyricCard
+  title="夢が僕らの太陽さ"
+  artist="虹ヶ咲学園スクールアイドル同好会"
+  lang="ja"
+  album-cover="../songs/yume-taiyou.attachments/cover.JPG"
+  album-cover-alt="夢が僕らの太陽さ 专辑封面"
+  album-cover-position="center top"
+>
+  <LyricLine original="どんな時(とき)も夢(ゆめ)が僕(ぼく)らの太陽(たいよう)さ" />
+</LyricCard>
+```
 
 日文注音短写：
 
@@ -120,6 +137,9 @@
 | `netease-url` | `string` | `''` | 网易云音乐链接。设置后左下角显示裸 SVG 图标。 |
 | `qq` | `string` | `''` | `qq-url` 的短别名。 |
 | `netease` | `string` | `''` | `netease-url` 的短别名。 |
+| `album-cover` | `string` | `''` | 专辑图片。设置后显示在歌词块右上角，使用圆角矩形裁切。支持 public 路径、相对路径和外链。 |
+| `album-cover-alt` | `string` | 自动 | 专辑图片替代文本。未设置时根据标题和作者生成。 |
+| `album-cover-position` | `string` | `'center'` | 专辑图片裁切位置，对应 CSS `object-position`。 |
 | `default-furigana` | `boolean` | `false` | 初始显示日文注音，但用户仍可点击按钮关闭。 |
 | `force-furigana` | `boolean` | `false` | 强制显示日文注音，按钮显示为固定状态。 |
 | `furigana` | `string` | `'auto'` | 注音控制模式。可选 `auto`、`open`、`show`、`hide`、`none`；其中 `show` 等同强制显示，`none` 隐藏注音按钮。 |

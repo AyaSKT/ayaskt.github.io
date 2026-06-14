@@ -26,6 +26,9 @@ const props = withDefaults(defineProps<{
   qq?: string
   neteaseUrl?: string
   netease?: string
+  albumCover?: string
+  albumCoverAlt?: string
+  albumCoverPosition?: string
   defaultFurigana?: boolean
   forceFurigana?: boolean
   furigana?: 'auto' | 'open' | 'show' | 'hide' | 'none'
@@ -37,6 +40,9 @@ const props = withDefaults(defineProps<{
   qq: '',
   neteaseUrl: '',
   netease: '',
+  albumCover: '',
+  albumCoverAlt: '',
+  albumCoverPosition: 'center',
   defaultFurigana: false,
   forceFurigana: false,
   furigana: 'auto',
@@ -112,6 +118,22 @@ const musicLinks = computed(() => [
   },
 ].filter((link) => Boolean(link.url)))
 
+function resolveAsset(src: string) {
+  const value = src.trim()
+  if (!value) return ''
+  if (value.startsWith('/')) return withBase(value)
+  return value
+}
+
+const resolvedAlbumCover = computed(() => resolveAsset(props.albumCover))
+const hasAlbumCover = computed(() => Boolean(resolvedAlbumCover.value))
+const albumCoverAlt = computed(() => {
+  if (props.albumCoverAlt) return props.albumCoverAlt
+
+  const label = [props.title, props.artist].filter(Boolean).join(' - ')
+  return label ? `${label} 专辑封面` : '专辑封面'
+})
+
 const isFuriganaForced = computed(() => props.forceFurigana || props.furigana === 'show')
 const hasFuriganaControl = computed(() => {
   if (props.furigana === 'none') return false
@@ -122,6 +144,7 @@ const hasFuriganaControl = computed(() => {
   return normalizedLang.value.startsWith('ja')
 })
 const isFuriganaVisible = computed(() => isFuriganaForced.value || userFuriganaVisible.value)
+const hasTopRail = computed(() => hasFuriganaControl.value || hasAlbumCover.value)
 
 function toggleFurigana() {
   if (isFuriganaForced.value) return
@@ -137,21 +160,43 @@ function releaseActionFocus(event: MouseEvent) {
 <template>
   <section
     class="lyric-card"
-    :class="{ 'is-furigana-visible': isFuriganaVisible, 'is-furigana-forced': isFuriganaForced }"
+    :class="{
+      'is-furigana-visible': isFuriganaVisible,
+      'is-furigana-forced': isFuriganaForced,
+      'has-album-cover': hasAlbumCover,
+      'has-furigana-control': hasFuriganaControl,
+      'has-top-rail': hasTopRail,
+    }"
     :lang="props.lang === 'auto' ? undefined : props.lang"
   >
-    <div v-if="hasFuriganaControl" class="lyric-card-top-actions">
-      <button
-        class="lyric-card-action lyric-card-furigana-toggle"
-        :class="{ 'is-active': isFuriganaVisible }"
-        type="button"
-        :aria-pressed="isFuriganaVisible"
-        :disabled="isFuriganaForced"
-        :title="isFuriganaForced ? 'ふりがなを固定表示' : 'ふりがなを表示/非表示'"
-        @click="toggleFurigana"
+    <div v-if="hasTopRail" class="lyric-card-top-rail">
+      <div v-if="hasFuriganaControl" class="lyric-card-top-actions">
+        <button
+          class="lyric-card-action lyric-card-furigana-toggle"
+          :class="{ 'is-active': isFuriganaVisible }"
+          type="button"
+          :aria-pressed="isFuriganaVisible"
+          :disabled="isFuriganaForced"
+          :title="isFuriganaForced ? 'ふりがなを固定表示' : 'ふりがなを表示/非表示'"
+          @click="toggleFurigana"
+        >
+          ふりがな
+        </button>
+      </div>
+
+      <div
+        v-if="hasAlbumCover"
+        class="lyric-card-album-cover-frame"
       >
-        ふりがな
-      </button>
+        <img
+          class="lyric-card-album-cover"
+          :src="resolvedAlbumCover"
+          :alt="albumCoverAlt"
+          loading="lazy"
+          decoding="async"
+          :style="{ objectPosition: props.albumCoverPosition }"
+        >
+      </div>
     </div>
 
     <div class="lyric-card-body">
@@ -198,6 +243,9 @@ function releaseActionFocus(event: MouseEvent) {
   --lyric-card-serif-jp: 'Noto Serif CJK JP', 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
   --lyric-card-serif: var(--lyric-card-serif-sc);
   --lyric-line-original-serif: var(--lyric-card-serif);
+  --lyric-card-album-cover-size: 136px;
+  --lyric-card-album-cover-body-min-height: calc(var(--lyric-card-album-cover-size) + 64px);
+  --lyric-card-top-rail-space: 72px;
   position: relative;
   display: grid;
   width: 100%;
@@ -205,6 +253,19 @@ function releaseActionFocus(event: MouseEvent) {
   gap: 14px;
   margin: 1.5rem 0 1.75rem;
   padding: 0;
+}
+
+.lyric-card.has-album-cover {
+  --lyric-card-top-rail-space: calc(var(--lyric-card-album-cover-size) + 12px);
+}
+
+.lyric-card.has-album-cover.has-furigana-control {
+  --lyric-card-top-rail-space: calc(var(--lyric-card-album-cover-size) + 82px);
+}
+
+.lyric-card.has-album-cover .lyric-card-body {
+  align-content: start;
+  min-height: var(--lyric-card-album-cover-body-min-height);
 }
 
 .lyric-card:lang(ja) {
@@ -217,16 +278,43 @@ function releaseActionFocus(event: MouseEvent) {
   --lyric-line-original-serif: var(--lyric-card-serif-sc);
 }
 
-.lyric-card-top-actions {
+.lyric-card-top-rail {
   position: absolute;
   top: 0;
   right: 0;
   z-index: 2;
   display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 8px;
+  max-width: min(68%, 360px);
+}
+
+.lyric-card-top-actions {
+  display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 6px;
-  max-width: min(58%, 280px);
+  min-width: 0;
+}
+
+.lyric-card-album-cover-frame {
+  flex: 0 0 var(--lyric-card-album-cover-size);
+  width: var(--lyric-card-album-cover-size);
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--vp-c-bg-soft);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 64%, transparent),
+    0 6px 18px rgb(92 102 114 / 12%);
+}
+
+.lyric-card-album-cover {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .lyric-card-action {
@@ -350,6 +438,8 @@ function releaseActionFocus(event: MouseEvent) {
 .lyric-card-music-links {
   display: flex;
   flex-wrap: wrap;
+  grid-column: 1;
+  grid-row: 1;
   align-items: center;
   align-self: end;
   justify-self: start;
@@ -359,6 +449,8 @@ function releaseActionFocus(event: MouseEvent) {
 
 .lyric-card-header {
   display: grid;
+  grid-column: 2;
+  grid-row: 1;
   gap: 5px;
   justify-items: end;
   min-width: 0;
@@ -400,8 +492,8 @@ function releaseActionFocus(event: MouseEvent) {
   min-width: 0;
 }
 
-.lyric-card:has(.lyric-card-top-actions) .lyric-card-body {
-  padding-right: 72px;
+.lyric-card.has-top-rail .lyric-card-body {
+  padding-right: var(--lyric-card-top-rail-space);
 }
 
 .lyric-card:not(.is-furigana-visible) :deep(rt) {
@@ -414,12 +506,14 @@ function releaseActionFocus(event: MouseEvent) {
 
 @media (max-width: 640px) {
   .lyric-card {
+    --lyric-card-album-cover-size: 112px;
+    --lyric-card-album-cover-body-min-height: 0px;
     gap: 12px;
     margin: 1.25rem 0 1.5rem;
   }
 
-  .lyric-card-top-actions {
-    max-width: calc(100% - 24px);
+  .lyric-card-top-rail {
+    max-width: 100%;
   }
 
   .lyric-card-footer {
@@ -431,9 +525,14 @@ function releaseActionFocus(event: MouseEvent) {
     font-size: 1.12rem;
   }
 
-  .lyric-card:has(.lyric-card-top-actions) .lyric-card-body {
+  .lyric-card.has-top-rail .lyric-card-body {
     padding-top: 28px;
     padding-right: 0;
+  }
+
+  .lyric-card.has-album-cover .lyric-card-body {
+    min-height: 0;
+    padding-top: calc(var(--lyric-card-album-cover-size) + 12px);
   }
 
   .lyric-card-furigana-toggle {

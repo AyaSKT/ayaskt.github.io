@@ -7,7 +7,8 @@ lastUpdated: 2026-05-25T21:50:22+08:00
 <LyricCard
   title="Komm, süsser Tod"
   artist="ARIANNE"
-  lang="de"
+  lang="ja"
+  title-style="ja-kagi"
   qq-url="https://y.qq.com/n/ryqq/songDetail/003iThvD25EblY"
   netease-url="https://music.163.com/#/song?id=2740110229"
 >
@@ -47,6 +48,7 @@ lastUpdated: 2026-05-25T21:50:22+08:00
   - [6-6-1 磁感应强度的边界条件](#6-6-1-磁感应强度的边界条件)
   - [6-6-2 磁场强度的边界条件](#6-6-2-磁场强度的边界条件)
   - [6-6-3 磁矢位的边界条件](#6-6-3-磁矢位的边界条件)
+- [\\frac{1}{\\mu\_1}\\nabla\\times\\vec A\_1](#frac1mu_1nablatimesvec-a_1)
 - [6-7 电感与电感器 Inductances and Inductors](#6-7-电感与电感器-inductances-and-inductors)
   - [6-7-1 磁通与磁链 Magnetic Flux and Flux Linkage](#6-7-1-磁通与磁链-magnetic-flux-and-flux-linkage)
   - [6-7-2 自感 Self-Inductance](#6-7-2-自感-self-inductance)

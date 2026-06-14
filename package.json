@@ -18,6 +18,9 @@
     "@mdit/plugin-mathjax": "^0.26.1",
     "@types/node": "^25.5.0",
     "canvas-confetti": "^1.9.4",
+    "katex": "^0.16.47",
+    "markmap-lib": "^0.18.12",
+    "markmap-view": "^0.18.12",
     "vitepress": "^2.0.0-alpha.16",
     "vue": "^3.5.30"
   },

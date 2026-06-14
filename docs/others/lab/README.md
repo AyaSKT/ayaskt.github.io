@@ -10,3 +10,4 @@ aside: false
 
 - [歌词容器用法](./lyric-container)
 - [SongCard 用法](./song-card)
+- [MindMap 思维导图](./mindmap)

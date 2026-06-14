@@ -86,14 +86,16 @@ html.vt-hide-sidebar::view-transition-new(sidebar) {
 }
 
 /* ---- Doc content：正文横向进出，避免 root 位移带动 nav ---- */
-html.vt-from-doc-content .VPDoc > .container > .content,
-html.vt-to-doc-content .VPDoc > .container > .content {
+html.vt-from-doc-content .VPDoc .main,
+html.vt-to-doc-content .VPDoc .main {
   view-transition-name: doc-content;
 }
 
 html.vt-doc-content-transition::view-transition-group(doc-content) {
   z-index: 1;
   overflow: visible;
+  /* Keep Chrome from interpolating old/new article boxes; height changes squash text vertically. */
+  animation: none;
 }
 
 html.vt-doc-content-transition::view-transition-old(doc-content),
