@@ -17,6 +17,9 @@ docs/.vitepress/cache/
 # Superpowers 视觉脑暴临时文件
 .superpowers/
 
+# 本地临时文件
+tmp/
+
 # 开发文档 / 工具，不部署到 GitHub Pages
 docs/superpowers/
 docs/public/animation-tuner.html
