@@ -1116,6 +1116,7 @@ export default defineConfig({
                 { text: 'Ch 5: 离散傅里叶变换 DFT', link: '/Y3S2/DSP/DSP Chapter 5' },
                 { text: 'Ch 6: Z 变换', link: '/Y3S2/DSP/DSP Chapter 6' },
                 { text: 'Ch 7: 变换域中的离散 LTI 系统', link: '/Y3S2/DSP/DSP Chapter 7' },
+                { text: 'Ch 11: 快速傅里叶变换 FFT', link: '/Y3S2/DSP/DSP Chapter 11' },
               ],
             },
             {
@@ -1125,13 +1126,6 @@ export default defineConfig({
                 { text: 'Ch 8: 数字滤波器架构', link: '/Y3S2/DSP/DSP Chapter 8' },
                 { text: 'Ch 9: IIR 数字滤波器设计', link: '/Y3S2/DSP/DSP Chapter 9' },
                 { text: 'Ch 10: FIR 数字滤波器设计', link: '/Y3S2/DSP/DSP Chapter 10' },
-              ],
-            },
-            {
-              text: 'Block 4: DSP 算法实现',
-              collapsed: false,
-              items: [
-                { text: 'Ch 11: DSP 算法实现 FFT', link: '/Y3S2/DSP/DSP Chapter 11' },
               ],
             },
           ],

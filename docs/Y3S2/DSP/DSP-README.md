@@ -69,6 +69,13 @@ pageClass: course-index-page
           subtitle: 'LTI Discrete-Time Systems in the Transform Domain',
           link: 'DSP Chapter 7.md',
           cover: 'DSP Chapter 7.attachments/1773645635605.JPG'
+        },
+        {
+          code: 'Ch 11',
+          title: '快速傅里叶变换',
+          subtitle: 'Fast Fourier Transform and DFT Computation',
+          link: 'DSP Chapter 11.md',
+          cover: 'DSP Chapter 11.attachments/fft-8point-dit-dif-comparison.jpg'
         }
       ]
     },
@@ -95,17 +102,6 @@ pageClass: course-index-page
           subtitle: 'FIR Digital Filter Design',
           link: 'DSP Chapter 10.md',
           cover: 'DSP Chapter 10.attachments/1773653226401.JPG'
-        }
-      ]
-    },
-    {
-      title: 'Part IV DSP 算法实现',
-      items: [
-        {
-          code: 'Ch 11',
-          title: 'DSP 算法实现',
-          subtitle: 'DSP Algorithm Implementation (FFT)',
-          link: 'DSP Chapter 11.md'
         }
       ]
     }
