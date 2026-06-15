@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-01-12T18:30:30+08:00"
+---
+
 # Lecture 11 : Inductors
 
 > 所以这种大物里已经讲过的内容为什么还得放在CAD里再讲一遍，

@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-05-12T18:01:15+08:00"
+---
+
 # Lecture 9 : Inter Integrated Circuit (I2C)
 
 > 是的，没错，I2C 在 Microelectronic System 里也讲过了

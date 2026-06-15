@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-06-13T16:07:07+08:00"
+---
+
 # Lecture 7 Fix : Working Principle of ADC (模数转换器工作原理)
 
 > Embedded Processor 是一门神奇的科目。他可以让你在每一节课都去上了的同时还能在 Moodle 上找到全新并且没有讲过的 PPT。

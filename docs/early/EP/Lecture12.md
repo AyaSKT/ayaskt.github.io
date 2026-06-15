@@ -1,4 +1,9 @@
-# Lecture 12 ; Energy Efficient Embedded System (节能嵌入式系统)
+---
+author: "Cateds"
+lastUpdated: "2025-05-26T17:43:27+08:00"
+---
+
+# Lecture 12 : Energy Efficient Embedded System (节能嵌入式系统)
 
 ## 节能的嵌入式系统
 

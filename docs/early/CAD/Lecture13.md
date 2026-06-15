@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-01-12T18:30:30+08:00"
+---
+
 # Lecture 13 : RL Circuit
 
 > 看到了老师手写的教案非常感动

@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-01-12T18:30:30+08:00"
+---
+
 # Lecture 14 : RLC Circuits
 
 > 这节课甚至有两份手写教案，一个叫`RLC Circuit`一个叫`Step Response of RLC Circuit`

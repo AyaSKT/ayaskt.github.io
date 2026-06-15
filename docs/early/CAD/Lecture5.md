@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-01-12T18:30:30+08:00"
+---
+
 # Lecture 5 : Nodal Analysis & Supernode
 
 ## Nodal Analysis（节点分析法）

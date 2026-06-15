@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-01-12T18:30:30+08:00"
+---
+
 # Lecture 12 : RC Circuit
 
 > 这课上的真是同时折磨所有人

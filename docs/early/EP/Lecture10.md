@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-05-12T18:01:15+08:00"
+---
+
 # Lecture 10 : Serial Peripheral Interface (SPI)
 
 > 仍然是 Microelectronic System 里讲过的

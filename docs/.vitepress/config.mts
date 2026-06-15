@@ -807,6 +807,9 @@ export default defineConfig({
     if (pageData.filePath.startsWith('Y3S2/EPMF/') && !pageData.filePath.endsWith('-README.md')) {
       pageData.frontmatter.outline = [2, 3]
     }
+    if (pageData.filePath.startsWith('early/EP/') || pageData.filePath.startsWith('early/CAD/')) {
+      pageData.frontmatter.outline ??= 'deep'
+    }
   },
 
   vite: {
@@ -938,9 +941,11 @@ export default defineConfig({
         ]
       },
 
-      { text: '早期资料', items: [
+      { text: '早期资料', activeMatch: '^/early/(EP|CAD)/', items: [
         { text: '嵌入式处理器 EP (DT5EDU)', link: 'https://mp.weixin.qq.com/s/Xqwg9KBZHkuYoXQAH-DfGw' },
+        { text: '嵌入式处理器 EP (Cateds)', link: '/early/EP/', activeMatch: '^/early/EP/' },
         { text: '电路分析与设计 CAD (DT5EDU)', link: 'https://mp.weixin.qq.com/s/-_oFpk5asMRE_D6sqlMCsw' },
+        { text: '电路分析与设计 CAD (Cateds)', link: '/early/CAD/', activeMatch: '^/early/CAD/' },
         { text: '微电子系统 MS (DT5EDU)', link: 'https://mp.weixin.qq.com/s/-9nZpf5RWmMm46bBMuBrLg' },
 
        ]
@@ -966,6 +971,100 @@ export default defineConfig({
 
 
     sidebar: {
+      '/early/EP/': [
+        {
+          text: '嵌入式处理器 EP',
+          collapsed: false,
+          items: [
+            { text: '课程索引', link: '/early/EP/' },
+            { text: 'Lec.1 介绍', link: '/early/EP/Lecture1' },
+            { text: 'Lec.2 ARM 处理器与接口', link: '/early/EP/Lecture2' },
+            { text: 'Lec.3 汇编语言与机器语言', link: '/early/EP/Lecture3' },
+            { text: 'Lec.4 嵌入式系统开发周期', link: '/early/EP/Lecture4' },
+            { text: 'Lec.5 测试与调试 I', link: '/early/EP/Lecture5' },
+            { text: 'Lec.6 测试与调试 II', link: '/early/EP/Lecture6' },
+            { text: 'Lec.7 模数转换器与中断', link: '/early/EP/Lecture7' },
+            { text: 'Lec.7 Fix 工作原理', link: '/early/EP/Lecture7_Fix' },
+            { text: 'Lec.8 数模转换器', link: '/early/EP/Lecture8' },
+            { text: 'Lec.9 I2C', link: '/early/EP/Lecture9' },
+            { text: 'Lec.10 SPI', link: '/early/EP/Lecture10' },
+            { text: 'Lec.11 模块化编程', link: '/early/EP/Lecture11' },
+            { text: 'Lec.12 低功耗嵌入式系统', link: '/early/EP/Lecture12' },
+            {
+              text: 'MS Review Notes',
+              collapsed: false,
+              items: [
+                { text: 'Lec.9 串行通信与 UART', link: '/early/EP/MS_Review_Notes/B4P3' },
+                { text: 'Lec.10 SPI', link: '/early/EP/MS_Review_Notes/B4P1' },
+                { text: 'Lec.11 I2C', link: '/early/EP/MS_Review_Notes/B4P2' },
+                { text: 'Lec.12 中断、计时器与任务', link: '/early/EP/MS_Review_Notes/B4P4' },
+              ],
+            },
+          ],
+        },
+      ],
+
+      '/early/CAD/': [
+        {
+          text: '电路分析与设计 CAD',
+          collapsed: false,
+          items: [
+            { text: '课程索引', link: '/early/CAD/' },
+            {
+              text: 'Week 4',
+              collapsed: false,
+              items: [
+                { text: 'Lec.2 电源与基本信号', link: '/early/CAD/Lecture2' },
+              ],
+            },
+            {
+              text: 'Week 8',
+              collapsed: false,
+              items: [
+                { text: 'Lec.5 节点分析法与超节点', link: '/early/CAD/Lecture5' },
+                { text: 'Lec.6 网孔分析法与超网孔', link: '/early/CAD/Lecture6' },
+              ],
+            },
+            {
+              text: 'Week 10',
+              collapsed: false,
+              items: [
+                { text: 'Lec.7 叠加原理与电源变换', link: '/early/CAD/Lecture7' },
+                { text: 'Lec.8 戴维南定理', link: '/early/CAD/Lecture8' },
+                { text: 'Lec.9 诺顿定理与最大功率传输', link: '/early/CAD/Lecture9' },
+              ],
+            },
+            {
+              text: 'Week 12',
+              collapsed: false,
+              items: [
+                { text: 'Lec.10 电容器', link: '/early/CAD/Lecture10' },
+                { text: 'Lec.11 电感器', link: '/early/CAD/Lecture11' },
+                { text: 'Lec.12 RC 电路', link: '/early/CAD/Lecture12' },
+              ],
+            },
+            {
+              text: 'Week 14',
+              collapsed: false,
+              items: [
+                { text: 'Lec.13 RL 电路', link: '/early/CAD/Lecture13' },
+                { text: 'Lec.14 RLC 电路', link: '/early/CAD/Lecture14' },
+                { text: 'Lec.15 交流电路', link: '/early/CAD/Lecture15' },
+              ],
+            },
+            {
+              text: 'Week 16',
+              collapsed: false,
+              items: [
+                { text: 'Lec.16 一阶滤波器', link: '/early/CAD/Lecture16' },
+                { text: 'Lec.17 二阶滤波器', link: '/early/CAD/Lecture17' },
+                { text: 'Lec.18 运算放大器', link: '/early/CAD/Lecture18' },
+              ],
+            },
+          ],
+        },
+      ],
+
       '/others/songs/': [
         {
           text: '金曲',

@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-01-12T18:30:30+08:00"
+---
+
 # Lecture 18 : Operational Amplifiers (运算放大器)
 
 ## Ideal Op-Amp (理想运算放大器)

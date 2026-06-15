@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-06-08T14:19:04+08:00"
+---
+
 # Lecture 6 : Testing & Debugging - II
 
 > Lecture @ 2025-3-31

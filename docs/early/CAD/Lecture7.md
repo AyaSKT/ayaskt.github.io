@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2024-12-16T16:04:33+08:00"
+---
+
 # Lecture 7 : Superposition & Source Transformation
 
 ## Superposition Principle（叠加原理）

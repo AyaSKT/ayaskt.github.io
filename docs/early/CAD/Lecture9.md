@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2024-11-05T17:49:11+08:00"
+---
+
 # Lecture 9 : Norton's Theorem & Maximum Power Transfer Theorem
 
 ## Norton's Theorem（诺顿定理）

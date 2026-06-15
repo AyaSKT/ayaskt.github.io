@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-06-14T15:45:15+08:00"
+---
+
 # Lecture 2 : ARM Processors & Intro to Interfacing (ARM 处理器 & 接口)
 
 > Lecture @ 2025-3-3

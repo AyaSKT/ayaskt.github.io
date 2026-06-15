@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-01-12T18:30:30+08:00"
+---
+
 # Lecture 2 : Source（电源） & Element Signals（基本信号）
 
 ## Source（电源）

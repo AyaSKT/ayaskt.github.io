@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2024-12-16T16:04:33+08:00"
+---
+
 # Lecture 8 : Thevenin's Theorem
 
 ## Thevenin's Theorem（戴维南定理）

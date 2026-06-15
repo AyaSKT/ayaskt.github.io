@@ -1,4 +1,9 @@
-# Lecture 4 : Embedded System & Project Developent Cycle (嵌入式系统与项目开发周期)
+---
+author: "Cateds"
+lastUpdated: "2025-06-14T23:52:51+08:00"
+---
+
+# Lecture 4 : Embedded System & Project Development Cycle (嵌入式系统与项目开发周期)
 
 > Lecture @ 2025-3-17
 

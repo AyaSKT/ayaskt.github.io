@@ -67,10 +67,10 @@ homeCourseGroups:
     variant: alt
     rows:
       - items:
-          - text: 嵌入式处理器 EP (DT5EDU)
-            link: https://mp.weixin.qq.com/s/Xqwg9KBZHkuYoXQAH-DfGw
-          - text: 电路分析与设计 CAD (DT5EDU)
-            link: https://mp.weixin.qq.com/s/-_oFpk5asMRE_D6sqlMCsw
+          - text: 嵌入式处理器 EP (Cateds)
+            link: /early/EP/
+          - text: 电路分析与设计 CAD (Cateds)
+            link: /early/CAD/
       - items:
           - text: 微电子系统 MS (DT5EDU)
             link: https://mp.weixin.qq.com/s/-9nZpf5RWmMm46bBMuBrLg

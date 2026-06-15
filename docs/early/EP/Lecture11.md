@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-05-26T17:43:27+08:00"
+---
+
 # Lecture 11 : Modular Programming (模块化编程)
 
 ## 概述

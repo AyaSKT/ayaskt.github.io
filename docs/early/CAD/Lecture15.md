@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-01-14T01:43:37+08:00"
+---
+
 # Lecture 15 : AC Circuits（交流电路）
 
 ## Sinusoidal Signals（正弦信号）

@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-06-14T20:51:04+08:00"
+---
+
 # Lecture 3 : Assembly and Machine Language
 
 > Lecture @ 2025-3-10

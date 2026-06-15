@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-06-14T20:51:04+08:00"
+---
+
 # Lecture 7 : ADC & Interrupts
 
 ## ADC (Analog to Digital Converter, 模数转换器)

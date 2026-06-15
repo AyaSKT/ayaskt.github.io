@@ -1,3 +1,8 @@
+---
+author: "Cateds"
+lastUpdated: "2025-05-09T18:57:49+08:00"
+---
+
 # Lecture 8 : DAC
 
 ## DAC (Digital to Analog Converter, 数模转换器)
