@@ -12,6 +12,26 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.6.2 - 2026-06-15
+
+### 新增
+
+- 新增 EPMF 样卷标注解答 PDF：`output/pdf/Sample Exam Questions - EPMF Annotated Solutions.pdf`。
+- 在 EPMF Block 2 Lecture 8 的 Cp / Cpk 小节补充样本数据与规格参数来源说明，明确样本均值、标准差、Target、Tolerance、USL 与 LSL 在公式中的角色。
+
+### 调整
+
+- 暂无
+
+### 修复
+
+- 修正 EPMF Block 2 Lecture 6 控制图例题中的均值、估计标准差与控制限取值，保留更精确中间结果后再四舍五入。
+- 修正 EPMF Block 2 Lecture 7 Taguchi 损失函数例题中的样本方差与平均损失计算结果。
+
+### 删减
+
+- 暂无
+
 ## V6.6 - 2026-06-15
 
 ### 新增
