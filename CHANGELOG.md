@@ -12,28 +12,39 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
-## V6.6 beta 3 - 2026-06-14
+## V6.6 - 2026-06-15
 
 ### 新增
 
-- 为 EPMF Block 1-4 补齐“思维导图”章节入口：课程 README 中新增对应 CourseIndex 卡片，侧边栏中同步新增各 Block 下的“思维导图”导航项。
-- 新增 EPMF Block 1-4 的 `Mindmap.md` 页面文件，并在页面 frontmatter 中关闭右侧目录显示。
+- 新增 `MindMap` 全局组件，基于 `markmap-lib` / `markmap-view` 将 Markdown 层级渲染为可拖拽、缩放、折叠和适配视图的交互式思维导图。
+- 新增 `mindmap` 代码块渲染器，支持用 ```` ```mindmap 可选标题 ```` 在笔记中直接生成思维导图。
+- `MindMap` 新增展开弹层与导出菜单，支持保存 SVG、PNG，并通过浏览器打印页面导出 PDF；导出内容会带上主题背景、文本颜色和 KaTeX 公式样式。
+- 新增 `/others/lab/mindmap` 实验室文档与导航入口，并扩展 `test:theme-components` 覆盖 MindMap、组件资源路径转换和 LyricCard 专辑封面。
+- 新增 `katex`、`markmap-lib`、`markmap-view` 开发依赖。
+- 新增 EPMF Block 1-4 的 `Mindmap.md` 页面、课程索引卡片与侧边栏入口；Block 1 填充项目管理、范围、进度、成本、资源、沟通与风险管理复习提纲，Block 2 填充 DFM、DFS、QC、COQ、稳健设计、DOE、Six-Sigma 等复习导图内容。
+- 新增 EPMF README 思维导图统一封面与缩略图附件，用于四个 Block 的 CourseIndex 卡片。
+- 新增 `LyricCard` 的 `album-cover`、`album-cover-alt`、`album-cover-position` 参数，可在歌词块右上角展示专辑封面，并支持 public 路径、相对路径和外链。
+- 新增 Markdown 组件资源自动导入管线，为 `SongCard` 的 `cover` 与 `LyricCard` 的 `album-cover` 自动处理相对资源路径。
 - 新增 Markdown 图片构建期尺寸注入：本地 `jpg` / `jpeg` / `png` / `gif` / `svg` / `webp` 图片会在 VitePress 构建时解析实际宽高，并写入最终 HTML 的 `width` / `height` 属性，提前为正文图片预留布局空间。
 - 图片尺寸解析支持相对路径、`docs/public` 绝对路径、URL 编码路径、JPEG EXIF 方向修正、SVG `viewBox` 回退，以及基于文件 `mtime` / `size` 的构建期缓存。
 - 新增 `MindMap` 异步组件加载占位块，组件 chunk 尚未加载完成时也会先保留稳定的正文高度。
-- 为 EPMF Block 1 思维导图填充 Lecture 1-4 的项目管理、范围、进度、成本、资源、沟通与风险管理复习提纲。
-- 新增 EPMF README 思维导图统一封面与缩略图附件，用于四个 Block 的 CourseIndex 卡片。
 - 新增 EPMF Block 4 思维导图《铁花飞》专辑封面附件，用于页面开头的 `LyricCard` 展示。
 - 新增金曲《String Theocracy》页面与封面附件，并加入金曲 README 与侧边栏导航。
+- 新增早期资料 EP 笔记站内展示页，迁入 `DT5EDU/EP_Lecture_Notes` 的完整历史内容与 Git 记录，并固定页面作者为 `Cateds`。
+- 新增早期资料 CAD 笔记站内展示页，迁入 `Cateds/CAD_Lecture_Notes` 的完整历史内容与 Git 记录，并固定页面作者为 `Cateds`。
+- 为 EP / CAD 早期资料新增独立 sidebar，覆盖课程索引、讲义页面与 EP 的 MS Review Notes 子目录。
 
 ### 调整
 
-- 将 EPMF 思维导图文件统一改为英文文件名 `Mindmap.md`，并同步更新 README 与 sidebar 链接，避免中文文件名路径残留。
+- 将首页早期资料里的 EP / CAD 笔记链接改为站内 Cateds 版本，导航栏“早期资料”下载菜单保留原 DT5EDU 外链，并新增 Cateds 站内跳转。
+- 将 EP / CAD 导入页面的 `lastUpdated` 写死到原始资料日期，避免后续站点维护 commit 改变旧笔记展示日期。
+- 将 EPMF 思维导图文件统一改为英文文件名 `Mindmap.md`，并同步更新 README、sidebar 与课程预览缓存，避免中文文件名路径残留。
 - 将 EPMF Block 4 思维导图开头的歌词卡片改为《铁花飞》，补入开头两句英中歌词、Mili/塞壬唱片-MSR 艺人信息与专辑封面。
 - 为 EPMF Block 1、Block 3、Block 4 思维导图开头的 `LyricCard` 补充网易云音乐歌曲链接。
 - EPMF README 中“思维导图”卡片副标题统一为 `Mindmap`，并切换到统一的 `epmf-mindmap-cover` 封面资源。
-- 刷新课程预览缓存，使 EPMF 思维导图页面使用新的 `Mindmap.md` 路径。
-- 微调首页课程入口与 Hero 图片的移动端断点和间距，避免 960px 附近布局状态不一致。
+- 调整 `LyricCard` 顶部控制区布局：注音按钮与专辑封面共用右上角 rail，正文会自动为封面预留空间，移动端改为封面在上、歌词在下。
+- 调整 `LyricCard` 底部布局，使音乐平台图标固定在左下角，标题与作者继续保持右下角对齐。
+- 调整 `MindMap` 卡片视觉、顶部工具区、默认展开层级与无标题对齐逻辑，导出 SVG / PNG / PDF 合并到一个带动画下拉菜单的导出按钮中。
 - 调整 `MindMap` 多一级标题场景的根节点连线：当导图由自动生成的空根节点承载多个一级标题时，隐藏空根节点及其连向一级标题的上级连线。
 - 调整 `MindMap` 多一级标题场景的布局：自动空根节点下的一级标题会按同一水平线横向排列，各自子树保持独立展开。
 - 将正文页 View Transition 的图片等待策略从运行时长等待改为“构建期尺寸预留 + 短时布局确认”，部署后网络较慢时不再因为图片下载延迟而长时间卡在页面切换前。
@@ -43,70 +54,25 @@
 - 为 `LyricCard` 专辑封面、底部信息区与移动端封面布局补充明确宽高和最小高度，避免封面 rail 影响正文首帧高度。
 - 为 `SongCard` 保留封面约 1/3 宽度的 1:2 栅格比例，同时补充卡片与封面框的稳定高度约束。
 - 同步更新主题组件测试，覆盖 `MindMap` 加载占位、当前 KaTeX 隐藏策略与 `SongCard` 稳定高度约束。
+- 刷新歌词容器实验室示例，替换为更贴近真实用法的日文、英文与俄文歌词片段，并加入专辑封面演示。
+- 调整 EMFT Chapter 6 页首歌词块的语言与标题标点样式。
+- 微调首页课程入口与 Hero 图片的移动端断点和间距，避免 960px 附近布局状态不一致。
 
 ### 修复
 
+- 修复 EP 导入笔记中的若干早期格式问题，包括 HTML 下划线标题、starter comment 拼写与部分年份 typo。
 - 修复 `MindMap` 在移动端渲染 KaTeX 公式时可能错位、重复或尺寸不稳定的问题：等待字体加载完成后重新 layout / fit，并让组件内 KaTeX 仅使用 HTML 渲染层参与布局。
 - 同步修复 `MindMap` 导出 SVG / PNG / PDF 时的公式样式，避免导出内容与页面显示不一致。
+- 修复 `MindMap` 右侧分支文字边缘被 SVG 裁切的问题。
+- 修复 `MindMap` 导出菜单层级低于导图卡片、打开后被遮挡的问题。
+- 修复 `MindMap` 放大 / 缩小按钮视觉高度不一致的问题。
 - 修复正文内容较少、无法填满整页时，页面切换动画首帧可能被 Chrome 以错误高度快照捕获，导致正文在竖直方向被压缩的问题。
 - 修复金曲首页 README、DSP 后几章等短页面在切入时因图片或容器尚未预留高度而出现压缩、跳高或长等待的问题。
 - 修复自定义容器或正文卡片内容很短、为空、异步加载或图片尚未完成加载时，可能把正文主区域高度拉低并影响 View Transition 快照的问题。
 - 修复 `MindMap` 异步加载期间正文区域短暂塌陷的问题，并让外层容器继承 `--mind-map-height` 参与首帧布局。
 - 修复 `Linkcard` 图片 HTML 尺寸属性与实际 CSS 尺寸不一致的问题。
-
-### 删减
-
-- 移除 EPMF 思维导图旧中文文件名路径，统一使用 `Mindmap.md`。
-
-## V6.6 beta 2 - 2026-06-14
-
-### 新增
-
-- 暂无。
-
-### 调整
-
-- 为 EPMF Block 1、Block 3、Block 4 思维导图页面添加 LyricCard 歌词卡片装饰。
-
-### 修复
-
 - 修复正文页路由切换时 View Transition 快照过早、图片未取得自然尺寸导致页面先以错误矮高度进入过渡、随后被撑开的问题：在 `PageTransition.vue` 新增过渡前稳定步骤，正文页 `nextTick` 后等待前几个图片完成布局（最长 1400ms），再强制读取 `.VPDoc .main` 布局后拍新快照。
 - 修复 CCD Lecture 10 Revision 歌词 typo：「Alays」→「Always」。
-
-### 删减
-
-- 暂无。
-
-## V6.6 beta - 2026-06-14
-
-### 新增
-
-- 新增 `MindMap` 全局组件，基于 `markmap-lib` / `markmap-view` 将 Markdown 层级渲染为可拖拽、缩放、折叠和适配视图的交互式思维导图。
-- 新增 `mindmap` 代码块渲染器，支持用 ```` ```mindmap 可选标题 ```` 在笔记中直接生成思维导图。
-- `MindMap` 新增展开弹层与导出菜单，支持保存 SVG、PNG，并通过浏览器打印页面导出 PDF；导出内容会带上主题背景、文本颜色和 KaTeX 公式样式。
-- `LyricCard` 新增 `album-cover`、`album-cover-alt`、`album-cover-position` 参数，可在歌词块右上角展示专辑封面，并支持 public 路径、相对路径和外链。
-- 新增 Markdown 组件资源自动导入管线，为 `SongCard` 的 `cover` 与 `LyricCard` 的 `album-cover` 自动处理相对资源路径。
-- 新增 `/others/lab/mindmap` 实验室文档与导航入口，并补充歌词容器中专辑封面的示例和参数说明。
-- 新增 EPMF Block 1-4 的思维导图页面与课程索引 / 侧边栏入口；其中 Block 2 已填充 DFM、DFS、QC、COQ、稳健设计、DOE、Six-Sigma 等复习导图内容。
-- 新增 `katex`、`markmap-lib`、`markmap-view` 开发依赖，并扩展 `test:theme-components` 覆盖 MindMap、组件资源路径转换和 LyricCard 专辑封面。
-
-### 调整
-
-- 调整 `LyricCard` 顶部控制区布局：注音按钮与专辑封面共用右上角 rail，正文会自动为封面预留空间，移动端改为封面在上、歌词在下。
-- 调整 `LyricCard` 底部布局，使音乐平台图标固定在左下角，标题与作者继续保持右下角对齐。
-- 调整 `MindMap` 卡片视觉：使用更干净的卡片背景、轻微悬浮阴影，移除外层蓝色边框，并让暗色模式改用更中性的深色表面。
-- 调整 `MindMap` 顶部工具区为仿导航栏的胶囊按钮，展开按钮与视图 / 导出工具分为独立胶囊，导出 SVG / PNG / PDF 合并到一个带动画下拉菜单的导出按钮中。
-- 调整 `MindMap` 默认展开层级为全部展开，并在标题留空时仍让控制按钮胶囊保持最右侧对齐。
-- 更新歌词容器实验室示例，替换为更贴近真实用法的日文、英文与俄文歌词片段，并加入专辑封面演示。
-- 刷新 EPMF 课程预览缓存，使新增思维导图页面出现在课程索引预览数据中。
-- 调整 EMFT Chapter 6 页首歌词块的语言与标题标点样式。
-
-### 修复
-
-- 修复 `MindMap` 右侧分支文字边缘被 SVG 裁切的问题。
-- 修复 `MindMap` 导出菜单层级低于导图卡片、打开后被遮挡的问题。
-- 修复 `MindMap` 放大 / 缩小按钮视觉高度不一致的问题。
-- 修复 `MindMap` 中 KaTeX 公式同时显示 MathML 与 HTML、看起来被渲染两次的问题，并同步处理 SVG / PNG / PDF 导出时的公式样式。
 - 修复 Markdown 中组件相对图片路径不能稳定进入 Vite 资源管线的问题，避免移动文档或构建后封面路径失效。
 - 修复正文 View Transition 在页面高度变化时可能被 Chrome 插值压扁的问题，将正文过渡目标调整到 `.VPDoc .main` 并禁用 `doc-content` group 动画。
 - 修复 `LyricCard` 同时显示注音按钮和封面时右上角元素挤占正文的问题。
@@ -114,7 +80,8 @@
 
 ### 删减
 
-- 暂无。
+- 移除 EPMF 思维导图旧中文文件名路径，统一使用 `Mindmap.md`。
+- 合并并移除 changelog 中独立的 V6.6 beta / beta 2 / beta 3 条目，以正式 `V6.6` 作为本轮发布记录。
 
 ## V6.5.1 - 2026-06-13
 
