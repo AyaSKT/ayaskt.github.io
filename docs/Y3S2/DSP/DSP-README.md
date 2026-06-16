@@ -3,7 +3,7 @@ aside: false
 pageClass: course-index-page
 ---
 
-# DSP 数字信号处理笔记 Introduction & Outline
+# 数字信号处理<br>Digital Signal Processing<br><span class="h2-in-h1">UESTC4005 / UESTCHN4005</span>
 
 **要保持希望在每天清晨太阳升起。**
 
@@ -110,7 +110,6 @@ pageClass: course-index-page
 ![alt text](DSP-README.attachments/1773557775504.PNG)
 
 
-## Digital Signal Processing (UESTC4005 / UESTCHN4005)
 
 **本笔记基于2026年春季格拉斯哥学院数字信号处理课程文件及教材**
 

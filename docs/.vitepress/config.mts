@@ -962,7 +962,7 @@ export default defineConfig({
 
 
     footer: {
-      message: 'Released under the MIT License.\nBuilt with VitePress.',
+      message: '除特别注明外，本站原创内容采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a> 协议授权；引用的歌词、课程材料、图片等第三方内容版权归原权利人所有。<br>Built with VitePress.',
       copyright: 'Copyright © 2025-present Ayaskt'
     },
 
