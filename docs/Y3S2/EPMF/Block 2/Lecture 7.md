@@ -33,6 +33,8 @@
 
 ### 7-1-1 稳健设计导论 Introduction to Robust Design
 
+![alt text](<Lecture 7.attachments/1781594167906.png>)
+
 R&D 需要在品质、成本和速度之间取得平衡。
 
 :::definition 稳健设计 Robust Design
@@ -40,6 +42,9 @@ R&D 需要在品质、成本和速度之间取得平衡。
 
 **An engineering methodology for improving R&D productivity, producing high-quality products quickly and at lower cost using statistical experimental design methods. Developed by Genichi Taguchi in the 1950s-1960s.**
 :::
+
+
+![alt text](<Lecture 7.attachments/1781594043590.png>)
 
 稳健设计的核心思路：**减少变异对品质的影响，同时不必消除变异的来源**——因为消除变异来源往往太困难、太昂贵。
 
