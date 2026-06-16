@@ -334,6 +334,27 @@
     pointer-events: none;
   }
 
+  .VPNavBar .VPFlyout > .menu[data-aya-nav-menu-state="closed"] {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0, -6px, 0) scale(0.98);
+    pointer-events: none;
+    transition: none !important;
+  }
+
+  .VPNavBar .VPFlyout:not(:hover) > .button[aria-expanded="false"] + .menu[data-aya-nav-menu-state="closing"] {
+    opacity: 0;
+    visibility: visible;
+    transform: translate3d(0, -6px, 0) scale(0.98);
+    pointer-events: none;
+    transition:
+      visibility 0s linear var(--dur-menu-out),
+      opacity var(--dur-menu-out) var(--ease-ios-press),
+      transform var(--dur-menu-out) var(--ease-ios-press) !important;
+  }
+
+  .VPNavBar .VPFlyout:not(:hover) > .button[aria-expanded="false"] + .menu[data-aya-nav-menu-state="open"],
+  .VPNavBar .VPFlyout > .menu[data-aya-nav-menu-state="open"],
   .VPNavBar .VPFlyout:hover > .button + .menu,
   .VPNavBar .VPFlyout > .button[aria-expanded="true"] + .menu {
     opacity: 1;

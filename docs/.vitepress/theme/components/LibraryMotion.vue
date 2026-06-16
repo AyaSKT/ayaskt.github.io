@@ -5,6 +5,8 @@ import { useRoute } from 'vitepress'
 const route = useRoute()
 
 const NAV_MENU_XYZ = 'fade small-2 up-1 stagger-1 stagger-rev-0.35 ease-out'
+const NAV_MENU_CLOSE_DELAY_FALLBACK = 100
+const NAV_MENU_OUT_DURATION_FALLBACK = 220
 const NAV_MENU_ITEM_SELECTOR = [
   '.VPMenu .items > *',
   '.VPMenu > .group',
@@ -20,6 +22,35 @@ let navFlyoutCleanups: Array<() => void> = []
 
 function motionEnabled() {
   return window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+}
+
+function parseDurationToMs(value: string, fallback: number) {
+  const duration = value.trim()
+  if (!duration) return fallback
+
+  const amount = Number.parseFloat(duration)
+  if (!Number.isFinite(amount)) return fallback
+
+  if (duration.endsWith('ms')) return amount
+  if (duration.endsWith('s')) return amount * 1000
+
+  return fallback
+}
+
+function getNavMenuCloseDelay(flyout: HTMLElement) {
+  const delay = window
+    .getComputedStyle(flyout)
+    .getPropertyValue('--dur-menu-close-delay')
+
+  return parseDurationToMs(delay, NAV_MENU_CLOSE_DELAY_FALLBACK)
+}
+
+function getNavMenuOutDuration(flyout: HTMLElement) {
+  const duration = window
+    .getComputedStyle(flyout)
+    .getPropertyValue('--dur-menu-out')
+
+  return parseDurationToMs(duration, NAV_MENU_OUT_DURATION_FALLBACK)
 }
 
 function resetManagedMotion() {
@@ -106,6 +137,19 @@ function setNavMenuState(menu: HTMLElement, open: boolean, animate = true) {
   menu.classList.add(nextClass)
 }
 
+function setNavMenuClosing(menu: HTMLElement) {
+  menu.dataset.ayaNavMenuState = 'closing'
+
+  if (!motionEnabled()) {
+    menu.classList.remove('xyz-in', 'xyz-out')
+    return
+  }
+
+  menu.classList.remove('xyz-in', 'xyz-out')
+  menu.offsetHeight
+  menu.classList.add('xyz-out')
+}
+
 function enhanceNavFlyout(flyout: HTMLElement) {
   if (flyout.dataset.ayaNavMotion === 'ready') return
 
@@ -122,13 +166,50 @@ function enhanceNavFlyout(flyout: HTMLElement) {
   setNavMenuState(menu, isOpen, isOpen)
 
   let syncFrame = 0
+  let closeTimer: number | undefined
+  let closeAnimationTimer: number | undefined
+  const clearCloseTimer = () => {
+    if (!closeTimer) return
+
+    window.clearTimeout(closeTimer)
+    closeTimer = undefined
+  }
+  const clearCloseAnimationTimer = () => {
+    if (!closeAnimationTimer) return
+
+    window.clearTimeout(closeAnimationTimer)
+    closeAnimationTimer = undefined
+  }
   const syncState = () => {
     syncFrame = 0
     const nextOpen = isNavFlyoutOpen(flyout, button)
-    if (nextOpen === isOpen) return
 
-    isOpen = nextOpen
-    setNavMenuState(menu, isOpen)
+    if (nextOpen) {
+      clearCloseTimer()
+      clearCloseAnimationTimer()
+      if (isOpen) return
+
+      isOpen = true
+      setNavMenuState(menu, true)
+      return
+    }
+
+    if (!isOpen || closeTimer) return
+
+    closeTimer = window.setTimeout(() => {
+      closeTimer = undefined
+      if (isNavFlyoutOpen(flyout, button)) return
+
+      isOpen = false
+      setNavMenuClosing(menu)
+
+      closeAnimationTimer = window.setTimeout(() => {
+        closeAnimationTimer = undefined
+        if (isNavFlyoutOpen(flyout, button)) return
+
+        setNavMenuState(menu, false, false)
+      }, getNavMenuOutDuration(flyout))
+    }, getNavMenuCloseDelay(flyout))
   }
   const scheduleSync = () => {
     if (syncFrame) window.cancelAnimationFrame(syncFrame)
@@ -152,6 +233,8 @@ function enhanceNavFlyout(flyout: HTMLElement) {
   navFlyoutCleanups.push(() => {
     buttonObserver.disconnect()
     menuObserver.disconnect()
+    clearCloseTimer()
+    clearCloseAnimationTimer()
     if (syncFrame) window.cancelAnimationFrame(syncFrame)
 
     flyout.removeEventListener('mouseenter', scheduleSync)

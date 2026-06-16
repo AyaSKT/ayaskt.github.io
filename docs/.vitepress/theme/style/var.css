@@ -104,6 +104,7 @@
   --dur-panel: 0.62s;
   --dur-overlay: 0.34s;
   --dur-menu: 0.32s;
+  --dur-menu-close-delay: 0.1s;
   --dur-menu-out: 0.22s;
   --dur-list-item: 0.52s;
   --dur-tap: var(--duration-quick-2, 0.12s);
