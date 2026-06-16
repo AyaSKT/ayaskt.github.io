@@ -315,6 +315,8 @@ VOC 闭环流程（8步循环）：
 | 黑带 (Black Belts) | 全职领导 DMAIC 专案 |
 | 绿带 (Green Belts) | 本职工作中执行专案 |
 
+![alt text](<Lecture 8.attachments/1781593940339.png>)
+
 > [!TIP] 角色层级
 > 从上到下：Executive Leadership → Champions → Master Black Belts → Black Belts → Green Belts。黑带通常需完成至少两个完整专案才能获得认证。
 
