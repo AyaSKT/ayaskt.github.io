@@ -75,7 +75,6 @@ pageClass: course-index-page
           title: '快速傅里叶变换',
           subtitle: 'Fast Fourier Transform and DFT Computation',
           link: 'DSP Chapter 11.md',
-          cover: 'DSP Chapter 11.attachments/fft-8point-dit-dif-comparison.jpg'
         }
       ]
     },
@@ -101,7 +100,6 @@ pageClass: course-index-page
           title: 'FIR 数字滤波器设计',
           subtitle: 'FIR Digital Filter Design',
           link: 'DSP Chapter 10.md',
-          cover: 'DSP Chapter 10.attachments/1773653226401.JPG'
         }
       ]
     }
