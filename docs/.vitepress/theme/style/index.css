@@ -9,6 +9,7 @@
 @import './rainbow.css';
 @import './nav-tabs.css';
 @import './sidebar-window.css';
+@import './reading-mode.css';
 
 /* 正文字体 */
 .vp-doc {

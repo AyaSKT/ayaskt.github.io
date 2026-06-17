@@ -12,6 +12,7 @@ import PageTransition from './PageTransition.vue'
 import LibraryMotion from './LibraryMotion.vue'
 import MathCopy from './MathCopy.vue'
 import TopProgress from './TopProgress.vue'
+import ReadingModeControl from './ReadingModeControl.vue'
 
 const { frontmatter, isDark } = useData()
 const route = useRoute()
@@ -182,6 +183,10 @@ onMounted(() => {
       <TopProgress />
       <MouseClick />
       <MathCopy />
+    </template>
+
+    <template #nav-bar-content-after>
+      <ReadingModeControl />
     </template>
 
     <!-- 文档内容之后的评论组件 -->
