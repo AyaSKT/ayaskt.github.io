@@ -22,6 +22,12 @@ const visibleRegions = reactive<Record<Region, boolean>>({
   aside: false,
 })
 
+const armedRegions = reactive<Record<Region, boolean>>({
+  nav: true,
+  sidebar: true,
+  aside: true,
+})
+
 const toast = reactive({
   visible: false,
   text: '',
@@ -119,6 +125,29 @@ function clearVisibleRegions() {
   })
 }
 
+function prepareActiveSession() {
+  clearVisibleRegions()
+  armedRegions.nav = false
+  armedRegions.sidebar = true
+  armedRegions.aside = true
+}
+
+function resetRegionArming() {
+  ;(Object.keys(armedRegions) as Region[]).forEach((region) => {
+    armedRegions[region] = true
+  })
+}
+
+function enterHotZone(region: Region) {
+  if (!armedRegions[region]) return
+  showRegion(region)
+}
+
+function leaveHotZone(region: Region) {
+  armedRegions[region] = true
+  hideRegionSoon(region)
+}
+
 function showToast(event: MouseEvent, text: string) {
   const fallbackRect = buttonRef.value?.getBoundingClientRect()
   const x = Number.isFinite(event.clientX)
@@ -168,7 +197,12 @@ function onToggle(event: MouseEvent) {
   }
 
   active.value = !active.value
-  if (!active.value) clearVisibleRegions()
+  if (active.value) {
+    prepareActiveSession()
+  } else {
+    clearVisibleRegions()
+    resetRegionArming()
+  }
 }
 
 function detachSurfaces() {
@@ -208,7 +242,12 @@ function onMediaQueryChange() {
 
 watch([canUseReadingMode, () => route.path], ([canUse]) => {
   if (!canUse) active.value = false
-  clearVisibleRegions()
+  if (active.value && canUse) {
+    prepareActiveSession()
+  } else {
+    clearVisibleRegions()
+    resetRegionArming()
+  }
   void nextTick(syncSurfaceListeners)
 })
 
@@ -288,18 +327,18 @@ onUnmounted(() => {
       >
         <div
           class="reading-mode-hover-zone reading-mode-top-zone"
-          @pointerenter="showRegion('nav')"
-          @pointerleave="hideRegionSoon('nav')"
+          @pointerenter="enterHotZone('nav')"
+          @pointerleave="leaveHotZone('nav')"
         />
         <div
           class="reading-mode-hover-zone reading-mode-sidebar-zone"
-          @pointerenter="showRegion('sidebar')"
-          @pointerleave="hideRegionSoon('sidebar')"
+          @pointerenter="enterHotZone('sidebar')"
+          @pointerleave="leaveHotZone('sidebar')"
         />
         <div
           class="reading-mode-hover-zone reading-mode-aside-zone"
-          @pointerenter="showRegion('aside')"
-          @pointerleave="hideRegionSoon('aside')"
+          @pointerenter="enterHotZone('aside')"
+          @pointerleave="leaveHotZone('aside')"
         />
       </div>
     </Teleport>
