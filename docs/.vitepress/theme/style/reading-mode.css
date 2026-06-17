@@ -203,6 +203,7 @@ html.reading-mode-active.reading-mode-nav-visible .VPNavBar {
 }
 
 html.reading-mode-active .VPSidebar {
+  animation: none !important;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -266,6 +267,12 @@ html.reading-mode-active.reading-mode-aside-visible .VPDoc .aside {
   right: 0;
   bottom: 0;
   width: min(30vw, 340px);
+}
+
+html.reading-mode-nav-visible .reading-mode-top-zone,
+html.reading-mode-sidebar-visible .reading-mode-sidebar-zone,
+html.reading-mode-aside-visible .reading-mode-aside-zone {
+  pointer-events: none;
 }
 
 @media (min-width: 768px) {
