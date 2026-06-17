@@ -151,6 +151,17 @@ pageClass: course-index-page
           cover: 'Part 4/CCD Lecture 19-20 ADC and Converter Errors.attachments/1781248130127.jpg'
         }
       ]
+    },
+    {
+      title: '复习 Review',
+      items: [
+        {
+          code: 'Review 1',
+          title: 'Rev 1 概念与模型',
+          subtitle: 'Concepts and Models',
+          link: 'Review/Review 1.md'
+        }
+      ]
     }
   ]"
 />

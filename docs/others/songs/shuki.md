@@ -6,6 +6,9 @@
   song="自己肯定感爆上げ↑↑しゅきしゅきソング"
   artist="初星学園/ヒゲドライバー/藤田ことね"
   lang="ja"
+  song-id="2728105197"
+  lyric-preview="ピンポンパンポーン"
+  translation-preview="叮咚当咚"
 >
 </SongCard>
 
@@ -318,7 +321,5 @@
     translation="当咚叮咚——。"
   />
 </LyricCard>
-
-
 
 

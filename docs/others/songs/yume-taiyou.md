@@ -6,6 +6,9 @@
   song="夢が僕らの太陽さ"
   artist="虹ヶ咲学園スクールアイドル同好会"
   lang="ja"
+  song-id="1942066993"
+  lyric-preview="見つけた、君を！"
+  translation-preview="找到你了！"
 >
 </SongCard>
 

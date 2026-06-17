@@ -6,6 +6,9 @@
   song="ヒッチコック"
   artist="ヨルシカ (n-buna × suis)"
   lang="ja"
+  song-id="557581315"
+  lyric-preview="雨の匂いに"
+  translation-preview="雨的味道"
 >
 </SongCard>
 

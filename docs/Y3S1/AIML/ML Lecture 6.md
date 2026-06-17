@@ -85,7 +85,7 @@ lastUpdated: 2025-12-12T15:45:20+08:00
 
 > 在神经网络中引入激活函数（Activation Function）来增加非线性，其核心意义可以总结为一句话：**赋予神经网络处理复杂问题的能力（即提高模型的表达能力）。**
 
-> 如果没有激活函数，无论神经网络有多少层，它本质上都只是一个线性回归模型。
+> 如果没有非线性激活函数，且各层只做仿射变换，无论神经网络有多少层，它整体上都等价于一个单层线性/仿射模型。
 
 
 > 如果不用激活函数：
@@ -99,7 +99,7 @@ lastUpdated: 2025-12-12T15:45:20+08:00
     
  >   这说明，**没有非线性激活函数，多层网络在数学上等价于单层网络**。你费劲搭建的“深度”网络会塌缩成一个简单的线性模型，无法学习复杂的特征。
 >- 引入激活函数后：
-    每一层的输出经过非线性变换（如 ReLU, Sigmoid），打破了线性的叠加。使得神经网络能够通过层层叠加，逼近任意复杂的函数。
+    每一层的输出经过非线性变换（如 ReLU, Sigmoid），打破了线性的叠加。使得足够宽或足够深的神经网络能够逼近范围很广的非线性函数。
 
 
 
@@ -218,7 +218,7 @@ lastUpdated: 2025-12-12T15:45:20+08:00
 最简单情形下的更新公式：
 
 $$
-\Delta w = - \eta \frac{\partial E(w)}{\partial w}
+w^{\text{new}} = w^{\text{old}} - \eta \frac{\partial E(w)}{\partial w}
 $$
 
 即：
@@ -259,11 +259,11 @@ $$
 
 权重更新（梯度下降）：
 $$
-\Delta w_5 = \eta \frac{\partial E}{\partial w_5}
-           = 1 \times 0.0276 = 0.0276
+\eta \frac{\partial E}{\partial w_5}
+  = 1 \times 0.0276 = 0.0276
 $$
 $$
-w_5^{\text{new}} = w_5^{\text{old}} - \Delta w_5
+w_5^{\text{new}} = w_5^{\text{old}} - \eta \frac{\partial E}{\partial w_5}
                  = 0.3 - 0.0276
                  \approx 0.2724
 $$
@@ -337,16 +337,15 @@ $$
 
 代入数值（课件给出的数值）：
 $$
-\Delta w_1
-  = \eta \frac{\partial E}{\partial w_1}
-  = 1 \times 0.19 \times 0.2139 \times 0.2724
+\eta \frac{\partial E}{\partial w_1}
+  = 1 \times 0.19 \times 0.2139 \times 0.3
     \times 0.68 \times (1 - 0.68) \times 0.35
-  \approx 8.43 \times 10^{-4}
+  \approx 9.29 \times 10^{-4}
 $$
 $$
 w_1^{\text{new}}
-  = w_1^{\text{old}} - \Delta w_1
-  = 0.1 - 8.43 \times 10^{-4}
+  = w_1^{\text{old}} - \eta \frac{\partial E}{\partial w_1}
+  = 0.1 - 9.29 \times 10^{-4}
   \approx 0.0991
 $$
 
@@ -418,8 +417,8 @@ $$
   - 和 $1$ 次 **反向传播 Backward propagation**
 
 - 一个 **轮次 Epoch** 的含义：  
-  - 对所有训练样本各做一次  
-  - 即：**样本数 number of training samples** $\times$ （前向 + 反向传播）
+  - 完整遍历训练集一次  
+  - 在 SGD 中通常近似为：**样本数 number of training samples** $\times$ （前向 + 反向传播）；在 batch/mini-batch 训练中则按批次更新。
 
 - **批量训练 Batch training**：  
   - 基于**平均损失 averaged loss** 来更新模型参数  
@@ -498,7 +497,7 @@ MBGD 结合了 BGD 和 SGD 的优点，因此：
      - 交叉熵损失 **Cross-entropy loss** 等。
 
 4. **计算损失函数的梯度 Compute gradients of the loss function**  
-   - 然后**利用梯度最小化损失 Minimize gradients and loss**，这一步就是 **反向传播 Back propagation**。  
+   - **反向传播 Back propagation** 负责高效计算梯度；随后由优化器利用这些梯度更新参数、最小化损失。  
    - 可选的优化方法很多，例如：  
      - **随机梯度下降 Stochastic Gradient Descent, SGD**  
      - **Adadelta**  
@@ -697,7 +696,7 @@ $R(f)$：仍然表示对模型复杂度的惩罚，使模型能推广到新样�
 
   - 将参数向量 $\beta$ **均匀地向原点拉回 Draws $\beta$ back toward origin evenly**  
   - 不会像 L1 那样把参数变为严格的 $0$，但会整体减小参数大小  
-  - 通常能得到**较少过拟合 least overfit** 的模型
+  - 通常能得到**较少过拟合 less overfit** 的模型
 
 
 ## 训练集–验证集–测试集划分 Training-validation-test splitting
@@ -743,8 +742,8 @@ $R(f)$：仍然表示对模型复杂度的惩罚，使模型能推广到新样�
 
 **早停 Early stopping**：
 
-- 在验证集损失达到最小值时停止更新模型参数。  
-- 即：**The model parameter update stops at the minimum validation loss**。  
+- 当验证集损失在若干轮内不再改善时停止更新模型参数，并通常恢复到验证集表现最好的那一轮。  
+- 即：**Stop when validation loss no longer improves, and keep the best validation checkpoint**。  
 
 常见的训练集 : 验证集 : 测试集划分比例示例：
 

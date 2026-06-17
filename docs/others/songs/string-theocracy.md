@@ -6,6 +6,9 @@
   song="String Theocracy (神权政治之绳)"
   artist="Mili"
   lang="en"
+  song-id="1887467085"
+  lyric-preview="Open the curtains"
+  translation-preview="幕启"
 >
 </SongCard>
 
@@ -81,4 +84,3 @@
   <LyricLine original="And if you love me" translation="如果你还爱我" />
   <LyricLine original="Can you love your everything too, for me?" translation="你可以为了我，去爱你自己的所有吗？" />
 </LyricCard>
-

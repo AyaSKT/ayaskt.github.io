@@ -930,9 +930,9 @@ export default defineConfig({
 
       {
         text: '第三学年',
-        activeMatch: '^/(Y3S1/(CPS|AIML)|Y3S2/(DSP|EMFT|CCD|EPMF))/',
+        activeMatch: '^/(Y3S1/(CPS_N|AIML)|Y3S2/(DSP|EMFT|CCD|EPMF))/',
         items: [
-          { text: '通信原理与系统 CPS', link: '/Y3S1/CPS/CPS-README.md', activeMatch: '^/Y3S1/CPS/' },
+          { text: '通信原理与系统（新） CPS', link: '/Y3S1/CPS_N/CPS-README.md', activeMatch: '^/Y3S1/CPS_N/' },
           { text: '人工智能与机器学习 AIML', link: '/Y3S1/AIML/AIML-README.md', activeMatch: '^/Y3S1/AIML/' },
           { text: '数字信号处理 DSP', link: '/Y3S2/DSP/DSP-README.md', activeMatch: '^/Y3S2/DSP/' },
           { text: '电磁场与波 EMFT', link: '/Y3S2/EMFT/EMFT-README.md', activeMatch: '^/Y3S2/EMFT/' },
@@ -1071,7 +1071,10 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '金曲首页', link: '/others/songs/README.md' },
+            { text: 'ギターと孤独と蒼い惑星', link: '/others/songs/guitar-loneliness-blue-planet.md' },
+            { text: 'ノンブレス・オブリージュ (Cover)', link: '/others/songs/non-breath-oblige.md' },
             { text: '自己肯定感爆上げ↑↑しゅきしゅきソング', link: '/others/songs/shuki.md' },
+            { text: '逃亡', link: '/others/songs/toubou.md' },
             { text: 'ヒッチコック', link: '/others/songs/hitchcock.md' },
             { text: '夢が僕らの太陽さ', link: '/others/songs/yume-taiyou.md' },
             { text: 'String Theocracy', link: '/others/songs/string-theocracy.md' },
@@ -1280,28 +1283,64 @@ export default defineConfig({
                 { text: 'Lec 19-20 模数转换与转换误差', link: '/Y3S2/CCD/Part 4/CCD Lecture 19-20 ADC and Converter Errors' },
               ],
             },
+            {
+              text: '复习 Review',
+              collapsed: false,
+              items: [
+                { text: 'Rev 1 概念与模型', link: '/Y3S2/CCD/Review/Review 1' },
+              ],
+            },
           ],
         },
       ],
 
-      // 通信原理与系统 CPS：当路径在 /Y3S1/CPS/ 下时显示
-      '/Y3S1/CPS/': [
+      // 通信原理与系统（新） CPS：当路径在 /Y3S1/CPS_N/ 下时显示
+      '/Y3S1/CPS_N/': [
         {
-          text: '通信原理与系统 CPS 课程总览',
+          text: '通信原理与系统（新） CPS 课程总览',
           collapsed: false,
           items: [
-            { text: 'Introduction', link: '/Y3S1/CPS/CPS-README' },
-            { text: 'Lec 6 抑制载波双边带调幅 DSB-SC', link: '/Y3S1/CPS/CPS Lecture 6 Amplitude Modulation DSB-SC' },
-            { text: 'Lec 7 常规调幅 DSB-WC', link: '/Y3S1/CPS/CPS Lecture 7 Amplitude Modulation DSB-WC' },
-            { text: 'Lec 8 单边带调幅 SSB', link: '/Y3S1/CPS/CPS Lecture 8 Amplitude Modulation SSB' },
-            { text: 'Lec 9 残留边带调幅 VSB', link: '/Y3S1/CPS/CPS Lecture 9 Amplitude Modulation VSB' },
-            { text: 'Lec 11 角度调制 FM 与 PM', link: '/Y3S1/CPS/CPS Lecture 11 FM and PM' },
-            { text: 'Lec 12 FM 带宽分析', link: '/Y3S1/CPS/CPS Lecture 12 FM Bandwidth Analysis' },
-            { text: 'Lec 13 FM 解调', link: '/Y3S1/CPS/CPS Lecture 13 FM Demodulation' },
-            { text: 'Lec 14 FM 生成', link: '/Y3S1/CPS/CPS Lecture 14 FM Generation' },
-            { text: 'Lec 16 & 17 模数转换', link: '/Y3S1/CPS/CPS Lecture 16 & 17 Analog to Digital Conversion' },
-            { text: 'Lec 18 AWGN 信道中的数字调制', link: '/Y3S1/CPS/CPS Lecture 18 Digital Modulation in AWGN Channel' },
-            { text: 'Lec 19 数字调制中的噪声', link: '/Y3S1/CPS/CPS Lecture 19 Noise in Digital Modulation' }
+            { text: 'Introduction', link: '/Y3S1/CPS_N/CPS-README' },
+            {
+              text: 'Part 1 信号，系统与傅里叶',
+              collapsed: false,
+              items: [
+                { text: 'Lec 1 课程简介', link: '/Y3S1/CPS_N/Part 1/CPS Lecture 1 Introduction' },
+                { text: 'Lec 2 信号与系统回顾', link: '/Y3S1/CPS_N/Part 1/CPS Lecture 2 Review of Signals and Systems' },
+                { text: 'Lec 3 LTI 系统与傅里叶变换', link: '/Y3S1/CPS_N/Part 1/CPS Lecture 3 LTI Systems and Fourier Transform' },
+                { text: 'Lec 4 基带与通带信号', link: '/Y3S1/CPS_N/Part 1/CPS Lecture 4 Baseband and Passband Signals' },
+              ],
+            },
+            {
+              text: 'Part 2 模拟幅度调制',
+              collapsed: false,
+              items: [
+                { text: 'Lec 6 DSB-SC 调幅', link: '/Y3S1/CPS_N/Part 2/CPS Lecture 6 DSB-SC Amplitude Modulation' },
+                { text: 'Lec 7 常规调幅', link: '/Y3S1/CPS_N/Part 2/CPS Lecture 7 Conventional AM' },
+                { text: 'Lec 8 单边带调制', link: '/Y3S1/CPS_N/Part 2/CPS Lecture 8 Single Sideband Modulation' },
+                { text: 'Lec 9 残留边带调制', link: '/Y3S1/CPS_N/Part 2/CPS Lecture 9 Vestigial Sideband Modulation' },
+              ],
+            },
+            {
+              text: 'Part 3 模拟频率调制',
+              collapsed: false,
+              items: [
+                { text: 'Lec 11 FM 与 PM', link: '/Y3S1/CPS_N/Part 3/CPS Lecture 11 FM and PM' },
+                { text: 'Lec 12 FM 带宽分析', link: '/Y3S1/CPS_N/Part 3/CPS Lecture 12 FM Bandwidth Analysis' },
+                { text: 'Lec 13 FM 解调', link: '/Y3S1/CPS_N/Part 3/CPS Lecture 13 FM Demodulation' },
+                { text: 'Lec 14 FM 生成', link: '/Y3S1/CPS_N/Part 3/CPS Lecture 14 FM Generation' },
+                { text: 'Lec 15 练习题', link: '/Y3S1/CPS_N/Part 3/CPS Lecture 15 Practice Problems' },
+              ],
+            },
+            {
+              text: 'Part 4 数字调制',
+              collapsed: false,
+              items: [
+                { text: 'Lec 16-17 模数转换', link: '/Y3S1/CPS_N/Part 4/CPS Lecture 16-17 Analogue to Digital Conversion' },
+                { text: 'Lec 18 数字调制', link: '/Y3S1/CPS_N/Part 4/CPS Lecture 18 Digital Modulation' },
+                { text: 'Lec 19 数字调制中的噪声', link: '/Y3S1/CPS_N/Part 4/CPS Lecture 19 Noise in Digital Modulation' },
+              ],
+            },
           ]
         }
       ],

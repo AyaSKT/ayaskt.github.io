@@ -117,6 +117,5 @@ $$
 
 ### 单峰与多峰优化问题 Unimodal and multimodal optimization problems
 
-- **单峰 / 凸问题 Unimodal / Convex problem**：目标函数的“地形 landscape”只有一个最优值（没有多个局部极小）。  
+- **单峰问题 Unimodal problem**：目标函数的“地形 landscape”只有一个主要峰/谷。凸最小化问题也不会有非全局的局部极小值，但“单峰”和“凸”不是完全等价的概念。  
 - **多峰问题 Multimodal problem**：目标函数存在多个局部极小值 **Local minima**。
-

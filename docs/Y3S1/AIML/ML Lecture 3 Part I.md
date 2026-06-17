@@ -20,7 +20,7 @@ lastUpdated: 2025-12-05T16:29:48+08:00
     例如：KNN 中的 kkk 等。
 
 ### 损失函数 Loss Function
-**损失函数**是用来评估模型实际输出与预测输出之间差异的函数。
+**损失函数**是用来评估真实值（标签）与模型预测值之间差异的函数。
 由损失函数计算得到的数值称为“损失”（loss）。
 
 损失函数有多种形式：
@@ -50,12 +50,12 @@ $$
 
 其中 $y^i$ 为实际值，$\hat{y}^i$ 为模型预测值。
 
-- MSE 总是**凸 Convex 且可导 Differentiable** → 便于优化。
+- MSE 对预测值是**凸 Convex 且可导 Differentiable**的；在线性回归中，它对模型参数也是凸函数，因此便于优化。
 - MSE **对离群点** **outliers 不鲁棒 robust**。
 
 离群点：与其他数据点明显不同的数据点。
 ![](Assets/Pasted%20image%2020251205103519.png)
-- 如果第 $k$ 个样本是离群点，那么 $(y^i-\hat{y}^i)$​ 的差值会很大。
+- 如果第 $i$ 个样本是离群点，那么 $(y^i-\hat{y}^i)$​ 的差值会很大。
 - 由于在 MSE 中该差值 $(y^i-\hat{y}^i)$ 被**平方**，**整体损失会被这些离群点主导**。
 
 ### 回归中的损失函数：Mean Absolute Error (MAE)
@@ -69,14 +69,14 @@ $$
 
 MSE 会放大（平方级）大误差的影响。为了最小化总损失，模型会被迫“用力”去迁就这个离群点，导致模型参数发生剧烈偏移，从而牺牲了对正常点的预测准确度。而 MAE 只是线性地看待这个错误，不会因为它是离群点就给予过度关注。
 
-从统计学角度来说，MSE 等于估计数据的均值，MAE 等于估计数据的中位数。中位数受到个别离群点的干扰明显小于均值。
+从统计学角度来说，最小化平方误差会得到条件均值估计，最小化绝对误差会得到条件中位数估计。中位数受到个别离群点的干扰明显小于均值。
 
 ### 分类中的损失函数
 #### 二元交叉熵 Binary Cross Entropy
 二元交叉熵通常使用在分类数为2的情况。
 
 $$
-l = - \frac{1}{N} \sum^N_{i=1} y^i \log \hat{y}^i + (1-y^i) \log (1-\hat{y}^i)
+l = - \frac{1}{N} \sum^N_{i=1} \left[y^i \log \hat{y}^i + (1-y^i) \log (1-\hat{y}^i)\right]
 $$
 
 其中 $N$ 为样本数量。
@@ -90,8 +90,8 @@ $$
 
 其中 $K$ 为类别数量。
 
-- 交叉熵是**可导的**（更易于优化）。
-- 然而，它可能具有多个**局部极小值 Local Minima**。
+- 交叉熵对预测概率是**可导的**（在概率不为 0 或 1 的区域内），因此更易于配合梯度法优化。
+- 交叉熵本身关于预测概率是凸的；在神经网络等非线性模型中，整体目标函数对模型参数通常是非凸的，可能具有多个**局部极小值 Local Minima**。
 
 ### 线性回归模型的训练
 在线性回归中，损失函数通常用 MSE 来定义：
@@ -101,22 +101,22 @@ l(a,b)=\frac{1}{N}\sum_{i=1}^{N}(y_i-\hat y_i)^2
 $$
 
 - $y^j$ 为真实值；
-- $\hat{y}^j = \bf{ax^j} + b$ 为预测值。
+- $\hat{y}^j = \mathbf a^T\mathbf x^j + b$ 为预测值。
 代入可得：
 
 $$
-l(\pmb a,b)=\frac{1}{N}\sum_{i=1}^{N}(y_i- \pmb{ax}^j - b)^2
+l(\mathbf a,b)=\frac{1}{N}\sum_{j=1}^{N}(y^j- \mathbf a^T\mathbf x^j - b)^2
 $$
 
 #### 最小化损失
 我们的目标是最小化损失，也就是求解下面这个无约束优化问题：
 
 $$
-\min_{a,b} l(a,b) = \min_{a,b} \frac{1}{N} \sum_{j=1}^{N} (y^j - a x^j - b)^2
+\min_{\mathbf a,b} l(\mathbf a,b) = \min_{\mathbf a,b} \frac{1}{N} \sum_{j=1}^{N} (y^j - \mathbf a^T\mathbf x^j - b)^2
 $$
 
-其中 $a, b$ 为需要被优化的决策变量。
-- $l(a,b)$ 连**续可导且凸**。
+其中 $\mathbf a, b$ 为需要被优化的决策变量。
+- $l(\mathbf a,b)$ 连**续可导且凸**。
 - **梯度下降 Gradient Descent Algorithm** 适合用于最小化这个损失。
 
 ### 最小化损失函数：梯度下降 The Gradient Descent Method
@@ -124,21 +124,21 @@ $$
 **梯度下降迭代 Gradient Descent Iteration：**
 
 $$
-\pmb{x}^{k+1} = \pmb{x}^k - \alpha^k \pmb \nabla \pmb l (\pmb x^k)
+\mathbf{x}^{k+1} = \mathbf{x}^k - \alpha^k \nabla l(\mathbf x^k)
 $$
 
 其中 $\nabla$ 为nabla算子，$\alpha^k \gt 0$ 则是学习的步长，在 ML 中也称为 **学习率 Learning Rate**。
-$\pmb{ \nabla l (x^k)}$ 是函数 $l$ 在点 $\pmb{x}^k$ 的梯度，即：
+$\nabla l(\mathbf x^k)$ 是函数 $l$ 在点 $\mathbf{x}^k$ 的梯度，即：
 
 $$
-\pmb{\nabla l(x^k)} = [\frac{\partial l}{\partial x^k_1},\frac{\partial l}{\partial x^k_2}, \dots, \frac{\partial l}{\partial x^k_n},]^T
+\nabla l(\mathbf x^k) = \left[\frac{\partial l}{\partial x_1},\frac{\partial l}{\partial x_2}, \dots, \frac{\partial l}{\partial x_n}\right]^T_{\mathbf x=\mathbf x^k}
 $$
 
-其中 $k$ 是当前迭代的数量，$n$ 则是向量 $\pmb{x}$ 的维度。
+其中 $k$ 是当前迭代的数量，$n$ 则是向量 $\mathbf{x}$ 的维度。
 
 梯度下降算法步骤：
-1. 将 $\pmb x^0$ 设置为任意初始点；
-2. 按照式 $\pmb{x}^{k+1} = \pmb{x}^k - \alpha^k \pmb \nabla \pmb l (\pmb x^k)$ 进行迭代，直到满足 $|l(\pmb x^{k+1}) - l(\pmb x^k)| \le \epsilon$。
+1. 将 $\mathbf x^0$ 设置为任意初始点；
+2. 按照式 $\mathbf{x}^{k+1} = \mathbf{x}^k - \alpha^k \nabla l(\mathbf x^k)$ 进行迭代，直到满足 $|l(\mathbf x^{k+1}) - l(\mathbf x^k)| \le \epsilon$。
 
 例如：使用梯度下降算法最小化：$l(x_1, x_2) = x_1^2 + x^2_2$ 
 ![](Assets/Pasted%20image%2020251205134900.png)
@@ -147,17 +147,17 @@ $$
 对于一个线性回归，其损失函数可写为：
 
 $$
-l(\pmb a,b)=\frac{1}{N}\sum_{i=1}^{N}(y_i- \pmb{a \cdot x}^j - b)^2
+l(\mathbf a,b)=\frac{1}{N}\sum_{j=1}^{N}(y^j- \mathbf a^T\mathbf x^j - b)^2
 $$
 
 计算梯度：
 
 $$
-\frac{\partial l}{\partial a_i} = \frac{2}{N} \sum^N_{j=1} (\underbrace{\pmb{a \cdot x}^j}_{第j样本的个特征向量\pmb x^j的和权重向量点积} +b -y^j)\underbrace{x^j_i}_{第i个特征，常量}
+\frac{\partial l}{\partial a_i} = \frac{2}{N} \sum^N_{j=1} (\mathbf a^T\mathbf x^j + b - y^j)x^j_i
 $$
 
 $$
-\frac{\partial l}{\partial b} = \frac{2}{N} \sum^N_{j=1} (\pmb{a \cdot x}^j +b -y^j)
+\frac{\partial l}{\partial b} = \frac{2}{N} \sum^N_{j=1} (\mathbf a^T\mathbf x^j + b - y^j)
 $$
 
 
@@ -264,23 +264,23 @@ MBGD 是 BGD 和 SGD 的一个结合，故
 $K$ 折交叉验证用于评价模型性能，并客观比较不同的模型或超参数设置。
 数据集被划分为 $K$ 份，每次用其中 1 份作测试集，其余 $K−1$ 份作训练集，循环 $K$ 次，得到 $K$ 个评价分数，然后求**平均**等。
 ![](Assets/Pasted%20image%2020251205143909.png)
-#### 通过 $K$ 折交叉验证来估计偏差和方差
+#### 通过 $K$ 折交叉验证估计平均误差和评估波动
 在完成 $K$ 折交叉验证后，我们得到 $k$ 个预测误差估计值，即 $e_1, e_2, \dots e_k$；
-**偏差可以通过求这些误差的均值估计：**
+**平均泛化误差可以通过这些误差的均值估计：**
 
 $$
 \bar{e} = \frac{1}{k} \sum^k_{i=1} e_i
 $$
 
 。
-**方差可以通过求这些误差的标准差估计：**
+**评估结果的波动可以通过这些误差的标准差估计：**
 
 $$
 \sigma = \sqrt{\frac{1}{k} \sum^k_{i=1} (e_i - \bar e)^2}
 $$
 
 。
-基于误差的均值和方差，我们就可以对模型做出较客观的判断，也可以在此基础上调节超参数、比较不同的机器学习模型。
+基于误差的均值和波动，我们就可以对模型做出较客观的判断，也可以在此基础上调节超参数、比较不同的机器学习模型。这里的标准差反映交叉验证分数的稳定性，不等同于偏差-方差分解中的 Variance。
 
 ### 偏差-方差权衡 Bias-Variance Trade-off
 偏差与方差之间存在此消彼长的关系：

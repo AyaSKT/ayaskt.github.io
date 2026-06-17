@@ -76,7 +76,7 @@ lastUpdated: 2025-12-13T10:23:04+08:00
 
 6. **终止条件 Termination conditions**  
    若满足终止条件（例如达到最大代数、目标函数不再改善等），  
-   则**保存最优解 Save the optimal solution**；  
+   则**保存当前找到的最好解 Save the best solution found so far**；  
    否则返回步骤 2 继续迭代。
 
 
@@ -355,7 +355,7 @@ $$
 
 变异的作用：
 
-- 保证不断**产生新个体 Generate new individuals**（几乎必然）。  
+- 以一定概率**产生新个体 Generate new individuals**。  
 - 帮助算法跳出局部最优，缓解早熟收敛问题。  
 - 与交叉一起，共同维持种群的多样性并探索搜索空间。
 
@@ -384,7 +384,7 @@ $$
 #### 选择 Selection
 
 - 降低种群多样性 **Decrease the population diversity**  
-- 提高适应度 **Increase the fitness**  
+- 在期望意义上提高种群平均适应度 **Increase the expected average fitness**  
 - 引导进入有前景的区域 **Focus on entering promising areas**
 
 
