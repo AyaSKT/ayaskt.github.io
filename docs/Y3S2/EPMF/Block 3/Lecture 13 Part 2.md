@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-06-13T16:56:33+08:00
+---
+
 # Lec. 13 Part 2 Engineering Economics (Capex, Opex, and Total Cost of Ownership)
 
 **Fly perfect wings,**  

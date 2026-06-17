@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-06-16T15:10:17+08:00
+---
+
 # Lec. 15 Company Structure
 
 **有共存才有未来可说。**

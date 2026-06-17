@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-06-16T15:12:29+08:00
+---
+
 # Lec. 8 Six-Sigma & Process Capability
 
 **穿越流云罅隙，阳光闪烁夺目。**

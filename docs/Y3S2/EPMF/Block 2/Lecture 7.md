@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-06-16T15:16:25+08:00
+---
+
 # Lec. 7 Robust Manufacturing Design
 
 **若时光能永远静止于此，只希望我可以一直待在这里。**

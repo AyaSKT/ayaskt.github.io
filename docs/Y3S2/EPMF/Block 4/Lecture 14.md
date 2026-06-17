@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-06-13T16:56:33+08:00
+---
+
 # Lec. 14 What is a Company
 
 **千年之后还剩下什么？**

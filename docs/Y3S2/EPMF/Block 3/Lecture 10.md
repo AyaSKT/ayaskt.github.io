@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-06-13T16:56:33+08:00
+---
+
 # Lec. 10 Engineering Economics (Make or Buy)
 
 **In dreams I'm with you.**  

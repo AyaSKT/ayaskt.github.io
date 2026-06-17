@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-05-27T16:47:21+08:00
+---
+
 # Block 2 例题
 
 - [Lecture 5 Introduction to DFM \& Design for Sustainability](#lecture-5-introduction-to-dfm--design-for-sustainability)

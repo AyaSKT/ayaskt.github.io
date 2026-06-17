@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-06-13T16:56:33+08:00
+---
+
 # Lec. 12 Engineering Economics (Outsourcing)
 
 **何もしないで生きていたい，青空だけが見たいのは我儘ですか。**  

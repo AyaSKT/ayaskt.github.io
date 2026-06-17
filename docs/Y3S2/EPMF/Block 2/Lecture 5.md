@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-05-27T16:18:51+08:00
+---
+
 # Lec. 5 Introduction to DFM, Design for Sustainability
 
 **落花风里，春意渐行渐远。**

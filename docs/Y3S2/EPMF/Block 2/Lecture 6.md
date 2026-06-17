@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-06-15T21:18:53+08:00
+---
+
 # Lec. 6 Quality Control, Cost of Quality
 
 **请先不要让一切沦为过去。**

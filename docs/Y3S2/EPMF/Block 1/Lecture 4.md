@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-06-12T15:16:20+08:00
+---
+
 # Lec. 4 Project Communications Management, Project Risk Management
 
 **让阳光的旋律去跟随燕子的踪迹，丈量每一寸土地。**

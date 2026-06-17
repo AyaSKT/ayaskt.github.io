@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-06-12T15:16:20+08:00
+---
+
 # Lec. 3 Project Cost Management, Project Resource Management
 
 **未来某天你将会去向哪，未来的我将会写出诗句吗？**

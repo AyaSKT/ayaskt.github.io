@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-05-27T16:47:21+08:00
+---
+
 # Lec. 1 Introduction, The Role of the Project Manager
 
 **有朝一日，是否会有人纪念他们?**

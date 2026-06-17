@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-06-13T16:56:33+08:00
+---
+
 # Lec. 9 Introduction to Engineering Economics
 
 **怒ってる？…怒ってない。**  
