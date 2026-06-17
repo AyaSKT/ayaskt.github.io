@@ -183,14 +183,15 @@ html:has(.VPDoc) .VPSidebar,
 }
 
 html.reading-mode-active .VPNavBar {
-  opacity: 0;
-  visibility: hidden;
+  /* Keep the nav paintable so backdrop-filter pills render during the reveal. */
+  opacity: 0.001;
+  visibility: visible;
   pointer-events: none;
-  transform: translateY(calc(-1 * var(--aya-reading-mode-shift)));
+  will-change: opacity, transform;
+  transform: translate3d(0, calc(-1 * var(--aya-reading-mode-shift)), 0);
   transition:
     opacity var(--aya-reading-mode-fade-duration) var(--ease-ios-fade),
-    transform var(--aya-reading-mode-fade-duration) var(--ease-ios-fade),
-    visibility 0s linear var(--aya-reading-mode-fade-duration);
+    transform var(--aya-reading-mode-fade-duration) var(--ease-ios-fade);
 }
 
 html.reading-mode-active.reading-mode-nav-visible .VPNavBar {
@@ -200,6 +201,16 @@ html.reading-mode-active.reading-mode-nav-visible .VPNavBar {
   pointer-events: auto;
   transform: translateY(0);
   transition-delay: 0s;
+}
+
+html.reading-mode-active .VPNavBar .VPNavBarMenu,
+html.reading-mode-active .VPNavBar .DocSearch-Button,
+html.reading-mode-active .VPNavBar .VPNavBarSearchButton,
+html.reading-mode-active .VPNavBar .VPNavBarAppearance,
+html.reading-mode-active .VPNavBar .VPNavBarSocialLinks,
+html.reading-mode-active .VPNavBar .VPNavBarExtra > .button,
+html.reading-mode-active .VPNavBar .reading-mode-control {
+  will-change: backdrop-filter, opacity;
 }
 
 html.reading-mode-active .VPSidebar {

@@ -68,10 +68,12 @@ test('reading mode CSS hides portrait control and matches navbar glass styling',
   assert.match(css, /@keyframes readingModeShake/)
 })
 
-test('reading mode CSS fades full surfaces and keeps navbar shadow bound to navbar', () => {
+test('reading mode CSS fades full surfaces and keeps navbar glass live', () => {
   const css = read('docs/.vitepress/theme/style/reading-mode.css')
 
-  assert.match(css, /html\.reading-mode-active \.VPNavBar\s*{[\s\S]*opacity:\s*0;/)
+  assert.match(css, /html\.reading-mode-active \.VPNavBar\s*{[\s\S]*opacity:\s*0\.001;/, 'navbar should stay paintable at near-zero opacity')
+  assert.match(css, /html\.reading-mode-active \.VPNavBar\s*{[\s\S]*visibility:\s*visible;/, 'navbar should not use visibility:hidden because it delays backdrop-filter rendering')
+  assert.match(css, /html\.reading-mode-active \.VPNavBar \.VPNavBarAppearance,[\s\S]*will-change:\s*backdrop-filter, opacity;/, 'glass nav pills should be kept in the compositor')
   assert.match(css, /html\.reading-mode-active\.reading-mode-nav-visible \.VPNavBar\s*{[\s\S]*opacity:\s*1;/)
   assert.match(css, /html\.reading-mode-active \.VPSidebar\s*{[\s\S]*opacity:\s*0;/)
   assert.match(css, /html\.reading-mode-active \.VPSidebar\s*{[\s\S]*animation:\s*none !important;/, 'sidebar entrance animation should not override reading-mode opacity')
