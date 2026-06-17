@@ -50,3 +50,33 @@ test('ReadingModeControl applies the agreed root classes and feedback messages',
   assert.match(source, /aria-label/)
   assert.match(source, /fill="currentColor"/, 'book icon should inherit nav color')
 })
+
+test('reading mode CSS hides portrait control and matches navbar glass styling', () => {
+  const css = read('docs/.vitepress/theme/style/reading-mode.css')
+
+  assert.match(css, /\.VPNavBar \.reading-mode-control/)
+  assert.match(css, /--aya-nav-tab-bg/)
+  assert.match(css, /--aya-nav-tab-border/)
+  assert.match(css, /--aya-nav-tab-glass/)
+  assert.match(css, /@media \(orientation: portrait\)[\s\S]*\.reading-mode-control/)
+  assert.match(css, /\.reading-mode-control\.is-active/)
+  assert.match(css, /var\(--vp-c-text-1\)/, 'active state should invert against text color')
+  assert.match(css, /var\(--vp-c-bg\)/, 'active state should invert against page background')
+  assert.match(css, /@keyframes readingModeShake/)
+})
+
+test('reading mode CSS fades full surfaces and keeps navbar shadow bound to navbar', () => {
+  const css = read('docs/.vitepress/theme/style/reading-mode.css')
+
+  assert.match(css, /html\.reading-mode-active \.VPNavBar\s*{[\s\S]*opacity:\s*0;/)
+  assert.match(css, /html\.reading-mode-active\.reading-mode-nav-visible \.VPNavBar\s*{[\s\S]*opacity:\s*1;/)
+  assert.match(css, /html\.reading-mode-active \.VPSidebar\s*{[\s\S]*opacity:\s*0;/)
+  assert.match(css, /html\.reading-mode-active\.reading-mode-sidebar-visible \.VPSidebar\s*{[\s\S]*opacity:\s*1;/)
+  assert.match(css, /html\.reading-mode-active \.VPDoc \.aside\s*{[\s\S]*opacity:\s*0;/)
+  assert.match(css, /html\.reading-mode-active\.reading-mode-aside-visible \.VPDoc \.aside\s*{[\s\S]*opacity:\s*1;/)
+  assert.doesNotMatch(css, /reading-mode-active[\s\S]{0,180}\.VPNavBar::before[\s\S]{0,120}opacity:\s*1/, 'navbar shadow should not be separately kept visible')
+  assert.match(css, /\.reading-mode-top-zone/)
+  assert.match(css, /\.reading-mode-sidebar-zone/)
+  assert.match(css, /\.reading-mode-aside-zone/)
+  assert.match(css, /prefers-reduced-motion: reduce/)
+})

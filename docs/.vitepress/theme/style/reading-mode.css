@@ -1,3 +1,354 @@
-.reading-mode-control {
-  display: none;
+:root {
+  --aya-reading-mode-fade-duration: 0.24s;
+  --aya-reading-mode-shift: 8px;
+  --aya-reading-mode-toast-bg: rgb(28 34 42 / 86%);
+  --aya-reading-mode-toast-text: #fff;
+}
+
+.VPNavBar .VPNavBarAppearance {
+  order: 20;
+}
+
+.VPNavBar .reading-mode-control {
+  order: 21;
+}
+
+.VPNavBar .VPNavBarSocialLinks {
+  order: 22;
+}
+
+.VPNavBar .VPNavBarExtra {
+  order: 23;
+}
+
+.VPNavBar .VPNavBarHamburger {
+  order: 30;
+}
+
+.VPNavBar .reading-mode-control {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  color: var(--aya-nav-tab-text);
+  transition:
+    color 0.22s var(--ease-ios-fade),
+    background-color 0.22s var(--ease-ios-fade),
+    border-color 0.22s var(--ease-ios-fade),
+    box-shadow 0.22s var(--ease-ios-fade),
+    transform 0.22s var(--ease-ios-fade);
+}
+
+.VPNavBar .reading-mode-control::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: 0;
+  border-radius: inherit;
+  background: var(--aya-nav-tab-highlight);
+  pointer-events: none;
+}
+
+.VPNavBar .reading-mode-control > * {
+  position: relative;
+  z-index: 1;
+}
+
+.reading-mode-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.reading-mode-button:hover {
+  color: var(--vp-c-text-1);
+  background: var(--aya-nav-tab-hover);
+  backdrop-filter: var(--aya-nav-pill-glass);
+  -webkit-backdrop-filter: var(--aya-nav-pill-glass);
+}
+
+.reading-mode-button:focus-visible {
+  outline: 2px solid rgb(255 255 255 / 78%);
+  outline-offset: 2px;
+}
+
+.reading-mode-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  color: currentColor;
+}
+
+.reading-mode-icon path {
+  fill: currentColor;
+}
+
+.VPNavBar .reading-mode-control.is-active {
+  color: var(--vp-c-bg);
+  border-color: color-mix(in srgb, var(--vp-c-text-1) 72%, transparent);
+  background: var(--vp-c-text-1) !important;
+  background-color: var(--vp-c-text-1) !important;
+  box-shadow:
+    var(--aya-nav-tab-feather-shadow),
+    0 14px 32px rgb(0 0 0 / 16%);
+}
+
+.VPNavBar .reading-mode-control.is-active::after {
+  background: linear-gradient(135deg, rgb(255 255 255 / 16%), rgb(255 255 255 / 0%));
+}
+
+.dark .VPNavBar .reading-mode-control.is-active {
+  color: var(--vp-c-bg);
+  background: var(--vp-c-text-1) !important;
+  background-color: var(--vp-c-text-1) !important;
+  box-shadow:
+    var(--aya-nav-tab-feather-shadow),
+    0 14px 32px rgb(0 0 0 / 34%);
+}
+
+.reading-mode-control.is-shaking {
+  animation: readingModeShake 0.42s var(--ease-ios-press) both;
+}
+
+@keyframes readingModeShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-3px);
+  }
+
+  40% {
+    transform: translateX(3px);
+  }
+
+  60% {
+    transform: translateX(-2px);
+  }
+
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+.reading-mode-toast {
+  position: fixed;
+  z-index: 1000000;
+  max-width: min(280px, calc(100vw - 32px));
+  padding: 8px 12px;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 12px;
+  color: var(--aya-reading-mode-toast-text);
+  background: var(--aya-reading-mode-toast-bg);
+  box-shadow: 0 12px 30px rgb(0 0 0 / 18%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  font-size: 13px;
+  line-height: 1.45;
+  pointer-events: none;
+  transform: translateY(0);
+  animation: readingModeToastIn 0.2s var(--ease-ios-fade) both;
+}
+
+@keyframes readingModeToastIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.VPNavBar,
+html:has(.VPDoc) .VPSidebar,
+.VPDoc .aside {
+  transition:
+    opacity var(--aya-reading-mode-fade-duration) var(--ease-ios-fade),
+    transform var(--aya-reading-mode-fade-duration) var(--ease-ios-fade),
+    visibility 0s linear 0s;
+}
+
+html.reading-mode-active .VPNavBar {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(calc(-1 * var(--aya-reading-mode-shift)));
+  transition:
+    opacity var(--aya-reading-mode-fade-duration) var(--ease-ios-fade),
+    transform var(--aya-reading-mode-fade-duration) var(--ease-ios-fade),
+    visibility 0s linear var(--aya-reading-mode-fade-duration);
+}
+
+html.reading-mode-active.reading-mode-nav-visible .VPNavBar {
+  z-index: 60;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+html.reading-mode-active .VPSidebar {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(calc(-1 * var(--aya-reading-mode-shift)));
+  transition:
+    opacity var(--aya-reading-mode-fade-duration) var(--ease-ios-fade),
+    transform var(--aya-reading-mode-fade-duration) var(--ease-ios-fade),
+    visibility 0s linear var(--aya-reading-mode-fade-duration);
+}
+
+html.reading-mode-active.reading-mode-sidebar-visible .VPSidebar {
+  z-index: 50;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(0);
+  transition-delay: 0s;
+}
+
+html.reading-mode-active .VPDoc .aside {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(var(--aya-reading-mode-shift));
+  transition:
+    opacity var(--aya-reading-mode-fade-duration) var(--ease-ios-fade),
+    transform var(--aya-reading-mode-fade-duration) var(--ease-ios-fade),
+    visibility 0s linear var(--aya-reading-mode-fade-duration);
+}
+
+html.reading-mode-active.reading-mode-aside-visible .VPDoc .aside {
+  z-index: 45;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(0);
+  transition-delay: 0s;
+}
+
+.reading-mode-hover-zone {
+  position: fixed;
+  z-index: 40;
+  background: transparent;
+  pointer-events: auto;
+}
+
+.reading-mode-top-zone {
+  inset: 0 0 auto 0;
+  height: calc(var(--vp-nav-height) + 18px);
+}
+
+.reading-mode-sidebar-zone {
+  top: var(--vp-nav-height);
+  bottom: 0;
+  left: 0;
+  width: calc(var(--vp-sidebar-width, 272px) + 36px);
+}
+
+.reading-mode-aside-zone {
+  top: var(--vp-nav-height);
+  right: 0;
+  bottom: 0;
+  width: min(30vw, 340px);
+}
+
+@media (min-width: 768px) {
+  .VPNavBar .reading-mode-control {
+    height: 38px;
+    padding: 0 4px;
+    border: 1px solid var(--aya-nav-tab-border);
+    border-radius: 999px;
+    background: var(--aya-nav-tab-bg) !important;
+    background-color: var(--aya-nav-tab-bg) !important;
+    background-clip: padding-box;
+    box-shadow:
+      var(--aya-nav-tab-feather-shadow),
+      var(--aya-nav-tab-shadow);
+    backdrop-filter: var(--aya-nav-tab-glass) !important;
+    -webkit-backdrop-filter: var(--aya-nav-tab-glass) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .VPNavBar .reading-mode-control {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    border: 1px solid var(--aya-nav-tab-border);
+    border-radius: 999px;
+    background: var(--aya-nav-tab-bg) !important;
+    background-color: var(--aya-nav-tab-bg) !important;
+    background-clip: padding-box;
+    box-shadow:
+      var(--aya-nav-tab-feather-shadow),
+      0 10px 24px rgb(0 0 0 / 7%);
+    backdrop-filter: var(--aya-nav-tab-glass) !important;
+    -webkit-backdrop-filter: var(--aya-nav-tab-glass) !important;
+  }
+
+  .reading-mode-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .reading-mode-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (orientation: portrait) {
+  .reading-mode-control {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .VPNavBar .reading-mode-control,
+  .reading-mode-toast {
+    background: var(--vp-c-bg-elv) !important;
+    background-color: var(--vp-c-bg-elv) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .VPNavBar .reading-mode-control::after {
+    content: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reading-mode-control.is-shaking,
+  .reading-mode-toast {
+    animation: none !important;
+  }
+
+  .VPNavBar,
+  html:has(.VPDoc) .VPSidebar,
+  .VPDoc .aside,
+  html.reading-mode-active .VPNavBar,
+  html.reading-mode-active .VPSidebar,
+  html.reading-mode-active .VPDoc .aside {
+    transition:
+      opacity 0.08s linear,
+      visibility 0s linear 0s !important;
+    transform: none !important;
+  }
 }
