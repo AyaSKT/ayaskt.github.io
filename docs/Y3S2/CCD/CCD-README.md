@@ -3,11 +3,17 @@ aside: false
 pageClass: course-index-page
 ---
 
-# CCD 通信电路设计笔记 Introduction & Outline
+# 通信电路设计<br>Communication Circuit Design<br><span class="h2-in-h1">UESTC 3029 / UESTCHN3004</span>
 
-**再下一场太阳雨吧。**
+---
 
 
+> [!TIP]
+> 如果你看到这里，那就说明你已经活过了紧张刺激的工财。
+>
+> 那么，接下来是什么呢...？
+>
+> 祝你好运。
 
 
 <CourseIndex
@@ -151,19 +157,12 @@ pageClass: course-index-page
 
 ![alt text](CCD-README.attachments/1779785178403.JPG)
 
-## Communication Circuit Design (UESTC 3029 / UESTCHN3004)
 
-**本笔记基于 2026 年春季格拉斯哥学院通信电路设计课程文件及教材整理。**
+**本笔记基于 2026 年春季格拉斯哥学院通信电路设计课件及教材整理。**
 
 > [!TIP]
 > 人生的意义是什么呢？
 
 
-> [!CAUTION]
-> 本笔记的内容受限于本人的水平和老旧的课程资料，可能会存在某些知识错误或者讲解不完全。
->
-> 如果你发现类似的错误或者有改进建议，请直接在评论区评论或者联系我修改，非常感谢！
->
-> **顺带一提，请关注虹咲学园谢谢喵**
 
 如果对你有帮助，就请留下一些评论或者表情吧，我会非常感谢的（真的非常非常感谢！）
