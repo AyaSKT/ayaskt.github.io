@@ -47,7 +47,8 @@
   inset: 1px;
   z-index: 0;
   border-radius: inherit;
-  background: var(--aya-nav-tab-highlight);
+  background: none;
+  opacity: 0;
   pointer-events: none;
 }
 
@@ -73,8 +74,8 @@
 .reading-mode-button:hover {
   color: var(--vp-c-text-1);
   background: var(--aya-nav-tab-hover);
-  backdrop-filter: var(--aya-nav-pill-glass);
-  -webkit-backdrop-filter: var(--aya-nav-pill-glass);
+  backdrop-filter: var(--aya-nav-pill-frosted-blur);
+  -webkit-backdrop-filter: var(--aya-nav-pill-frosted-blur);
 }
 
 .reading-mode-button:focus-visible {
@@ -104,7 +105,8 @@
 }
 
 .VPNavBar .reading-mode-control.is-active::after {
-  background: linear-gradient(135deg, rgb(255 255 255 / 16%), rgb(255 255 255 / 0%));
+  background: none;
+  opacity: 0;
 }
 
 .dark .VPNavBar .reading-mode-control.is-active {
@@ -298,8 +300,8 @@ html.reading-mode-aside-visible .reading-mode-aside-zone {
     box-shadow:
       var(--aya-nav-tab-feather-shadow),
       var(--aya-nav-tab-shadow);
-    backdrop-filter: var(--aya-nav-tab-glass) !important;
-    -webkit-backdrop-filter: var(--aya-nav-tab-glass) !important;
+    backdrop-filter: var(--aya-nav-tab-frosted-blur) !important;
+    -webkit-backdrop-filter: var(--aya-nav-tab-frosted-blur) !important;
   }
 }
 
@@ -317,8 +319,8 @@ html.reading-mode-aside-visible .reading-mode-aside-zone {
     box-shadow:
       var(--aya-nav-tab-feather-shadow),
       0 10px 24px rgb(0 0 0 / 7%);
-    backdrop-filter: var(--aya-nav-tab-glass) !important;
-    -webkit-backdrop-filter: var(--aya-nav-tab-glass) !important;
+    backdrop-filter: var(--aya-nav-tab-frosted-blur) !important;
+    -webkit-backdrop-filter: var(--aya-nav-tab-frosted-blur) !important;
   }
 
   .reading-mode-button {

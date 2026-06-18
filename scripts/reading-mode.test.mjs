@@ -54,13 +54,14 @@ test('ReadingModeControl applies the agreed root classes and feedback messages',
   assert.match(source, /fill="currentColor"/, 'book icon should inherit nav color')
 })
 
-test('reading mode CSS hides portrait control and matches navbar glass styling', () => {
+test('reading mode CSS hides portrait control and matches navbar frosted styling', () => {
   const css = read('docs/.vitepress/theme/style/reading-mode.css')
 
   assert.match(css, /\.VPNavBar \.reading-mode-control/)
   assert.match(css, /--aya-nav-tab-bg/)
   assert.match(css, /--aya-nav-tab-border/)
-  assert.match(css, /--aya-nav-tab-glass/)
+  assert.match(css, /--aya-nav-tab-frosted-blur/)
+  assert.match(css, /--aya-nav-pill-frosted-blur/)
   assert.match(css, /@media \(orientation: portrait\)[\s\S]*\.reading-mode-control/)
   assert.match(css, /\.reading-mode-control\.is-active/)
   assert.match(css, /var\(--vp-c-text-1\)/, 'active state should invert against text color')
@@ -68,12 +69,12 @@ test('reading mode CSS hides portrait control and matches navbar glass styling',
   assert.match(css, /@keyframes readingModeShake/)
 })
 
-test('reading mode CSS fades full surfaces and keeps navbar glass live', () => {
+test('reading mode CSS fades full surfaces and keeps navbar frosted blur live', () => {
   const css = read('docs/.vitepress/theme/style/reading-mode.css')
 
   assert.match(css, /html\.reading-mode-active \.VPNavBar\s*{[\s\S]*opacity:\s*0\.001;/, 'navbar should stay paintable at near-zero opacity')
   assert.match(css, /html\.reading-mode-active \.VPNavBar\s*{[\s\S]*visibility:\s*visible;/, 'navbar should not use visibility:hidden because it delays backdrop-filter rendering')
-  assert.match(css, /html\.reading-mode-active \.VPNavBar \.VPNavBarAppearance,[\s\S]*will-change:\s*backdrop-filter, opacity;/, 'glass nav pills should be kept in the compositor')
+  assert.match(css, /html\.reading-mode-active \.VPNavBar \.VPNavBarAppearance,[\s\S]*will-change:\s*backdrop-filter, opacity;/, 'frosted nav pills should be kept in the compositor')
   assert.match(css, /html\.reading-mode-active\.reading-mode-nav-visible \.VPNavBar\s*{[\s\S]*opacity:\s*1;/)
   assert.match(css, /html\.reading-mode-active \.VPSidebar\s*{[\s\S]*opacity:\s*0;/)
   assert.match(css, /html\.reading-mode-active \.VPSidebar\s*{[\s\S]*animation:\s*none !important;/, 'sidebar entrance animation should not override reading-mode opacity')
