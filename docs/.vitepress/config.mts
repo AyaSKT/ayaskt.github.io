@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { execFileSync, spawnSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -140,6 +141,7 @@ interface ComponentAssetRule {
 const componentAssetRules: ComponentAssetRule[] = [
   { componentName: 'SongCard', attrNames: ['cover'], variablePrefix: '__songCardCover' },
   { componentName: 'LyricCard', attrNames: ['album-cover'], variablePrefix: '__lyricCardAlbumCover' },
+  { componentName: 'LyricCover', attrNames: ['image', 'src', 'cover'], variablePrefix: '__lyricCoverImage' },
 ]
 
 function safeDecodeUri(value: string) {
@@ -218,6 +220,50 @@ export function transformLyricCardAlbumCoverAttrs(
   return transformComponentAssetAttrs(src, 'LyricCard', ['album-cover'], resolveRelativeAsset)
 }
 
+export function transformLyricCoverImageAttrs(
+  src: string,
+  resolveRelativeAsset?: ResolveComponentAsset,
+) {
+  return transformComponentAssetAttrs(src, 'LyricCover', ['image', 'src', 'cover'], resolveRelativeAsset)
+}
+
+function getStaticAttribute(tag: string, attrNames: string[]) {
+  for (const attrName of attrNames) {
+    const attrPattern = new RegExp(`\\s${escapeRegExp(attrName)}\\s*=\\s*("([^"]*)"|'([^']*)')`)
+    const match = tag.match(attrPattern)
+    const value = match?.[2] ?? match?.[3]
+    if (value) return value
+  }
+
+  return ''
+}
+
+function hasStaticAttribute(tag: string, attrNames: string[]) {
+  return attrNames.some((attrName) => {
+    const attrPattern = new RegExp(`\\s${escapeRegExp(attrName)}\\s*=\\s*("([^"]*)"|'([^']*)')`)
+    return attrPattern.test(tag)
+  })
+}
+
+export function transformLyricCoverTextToneAttrs(
+  src: string,
+  resolveTextTone: (imagePath: string) => 'light' | 'dark' | '' = () => '',
+) {
+  const tagPattern = /<LyricCover\b(?:[^<>"']|"[^"]*"|'[^']*')*>/g
+
+  return src.replace(tagPattern, (tag) => {
+    if (hasStaticAttribute(tag, ['text-tone', 'textTone'])) return tag
+
+    const imagePath = getStaticAttribute(tag, ['image', 'src', 'cover'])
+    if (!imagePath) return tag
+
+    const textTone = resolveTextTone(imagePath)
+    if (textTone !== 'light' && textTone !== 'dark') return tag
+
+    return tag.replace(/\s*\/?>$/, (ending) => ` text-tone="${textTone}"${ending}`)
+  })
+}
+
 export function renderMindMapFence(src: string, info = '') {
   const title = info.replace(/^mindmap\b\s*/, '').trim()
   const titleAttr = title ? ` title="${escapeHtml(title)}"` : ''
@@ -231,7 +277,10 @@ function transformMarkdownComponentAssetAttrs(
   resolveRuleAsset: (rule: ComponentAssetRule, specifier: string) => string = (_rule, specifier) => {
     return toStaticAssetExpression(specifier)
   },
+  resolveLyricCoverTextTone: (imagePath: string) => 'light' | 'dark' | '' = () => '',
 ) {
+  const sourceWithLyricCoverTone = transformLyricCoverTextToneAttrs(src, resolveLyricCoverTextTone)
+
   return componentAssetRules.reduce((currentSrc, rule) => {
     return transformComponentAssetAttrs(
       currentSrc,
@@ -239,7 +288,7 @@ function transformMarkdownComponentAssetAttrs(
       rule.attrNames,
       (specifier) => resolveRuleAsset(rule, specifier),
     )
-  }, src)
+  }, sourceWithLyricCoverTone)
 }
 
 function registerComponentAssetImports(md: any) {
@@ -268,7 +317,11 @@ function registerComponentAssetImports(md: any) {
         })
 
         if (shouldTransform) {
-          token.content = transformMarkdownComponentAssetAttrs(token.content, resolveRuleAsset)
+          token.content = transformMarkdownComponentAssetAttrs(
+            token.content,
+            resolveRuleAsset,
+            (imagePath) => inferLyricCoverTextTone(imagePath, env),
+          )
         }
       }
 
@@ -445,6 +498,76 @@ function resolveMarkdownImageFile(src: string, env: any) {
   const markdownFilePath = markdownFilePathFromEnv(env)
   const baseDir = markdownFilePath ? path.dirname(markdownFilePath) : docsRoot
   return getExistingImageFile([path.resolve(baseDir, cleanSrc)])
+}
+
+interface CachedImageTone {
+  mtimeMs: number
+  size: number
+  textTone: 'light' | 'dark' | ''
+}
+
+const imageToneCache = new Map<string, CachedImageTone>()
+let hasMagickForTone: boolean | undefined
+
+function canMeasureImageTone() {
+  if (hasMagickForTone === undefined) {
+    hasMagickForTone = spawnSync('magick', ['-version'], { stdio: 'ignore' }).status === 0
+  }
+
+  return hasMagickForTone
+}
+
+function measureImageTextTone(filePath: string) {
+  const stat = fs.statSync(filePath, { throwIfNoEntry: false })
+  if (!stat?.isFile()) return ''
+
+  const cached = imageToneCache.get(filePath)
+  if (cached && cached.mtimeMs === stat.mtimeMs && cached.size === stat.size) {
+    return cached.textTone
+  }
+
+  let textTone: 'light' | 'dark' | '' = ''
+
+  if (canMeasureImageTone()) {
+    try {
+      const output = execFileSync('magick', [
+        filePath,
+        '-auto-orient',
+        '-resize',
+        '1x1!',
+        '-colorspace',
+        'sRGB',
+        '-format',
+        '%[fx:0.2126*r+0.7152*g+0.0722*b]',
+        'info:',
+      ], {
+        encoding: 'utf8',
+        timeout: 5000,
+        stdio: ['ignore', 'pipe', 'ignore'],
+      })
+      const luminance = Number.parseFloat(output.trim())
+      if (Number.isFinite(luminance)) {
+        textTone = luminance > 0.58 ? 'dark' : 'light'
+      }
+    } catch {
+      textTone = ''
+    }
+  }
+
+  imageToneCache.set(filePath, {
+    mtimeMs: stat.mtimeMs,
+    size: stat.size,
+    textTone,
+  })
+
+  return textTone
+}
+
+function inferLyricCoverTextTone(src: string, env: any) {
+  const filePath = resolveMarkdownImageFile(src, env)
+  if (!filePath) return ''
+
+  return measureImageTextTone(filePath)
 }
 
 function readUInt16(buffer: Buffer, offset: number, littleEndian: boolean) {
@@ -1089,6 +1212,7 @@ export default defineConfig({
           items: [
             { text: '实验室首页', link: '/others/lab/README.md' },
             { text: '歌词容器', link: '/others/lab/lyric-container' },
+            { text: 'LyricCover', link: '/others/lab/lyric-cover' },
             { text: 'SongCard', link: '/others/lab/song-card' },
             { text: 'MindMap', link: '/others/lab/mindmap' },
           ],

@@ -3,7 +3,8 @@ lastUpdated: 2026-06-12T15:16:20+08:00
 ---
 # Lecture 16 Phase-Locked Loop PLL 锁相环
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 16 Phase-Locked Loop PLL.attachments/1781247638338.PNG"
   title="花の塔"
   artist="さユり"
   lang="ja"
@@ -17,9 +18,7 @@ lastUpdated: 2026-06-12T15:16:20+08:00
     original="連(つ)れて行(い)って見(み)たことない星(ほし)まで。"
     translation="直至抵达我们从未去过的星球。"
   />
-</LyricCard>
-
-![alt text](<CCD Lecture 16 Phase-Locked Loop PLL.attachments/1781247638338.PNG>)
+</LyricCover>
 
 ## 章节目录
 
@@ -181,7 +180,7 @@ Lock range 是已经锁住以后还能跟踪的频率范围；capture range 是�
 
 ### 16-3-1 模拟相位检测器 Analog Phase Detector
 
-![相位检测器](<CCD Lecture 16 Phase-Locked Loop PLL.attachments/pll_phase_detector.jpg>)
+![相位检测器](<CCD Lecture 16 Phase-Locked Loop PLL.attachments/pll_phase_detector_wide.jpg>)
 
 模拟相位检测器常用乘法器实现。设两个输入为
 
@@ -239,7 +238,7 @@ $$
 
 ### 16-4-1 环路滤波器 Loop Filter
 
-![环路滤波器](<CCD Lecture 16 Phase-Locked Loop PLL.attachments/pll_loop_filter.jpg>)
+![环路滤波器](<CCD Lecture 16 Phase-Locked Loop PLL.attachments/pll_loop_filter_wide.jpg>)
 
 相位检测器输出通常包含两部分：
 
@@ -258,7 +257,7 @@ $$
 
 ### 16-4-2 压控振荡器 Voltage-Controlled Oscillator
 
-![VCO](<CCD Lecture 16 Phase-Locked Loop PLL.attachments/pll_vco.jpg>)
+![VCO](<CCD Lecture 16 Phase-Locked Loop PLL.attachments/pll_vco_wide.jpg>)
 
 VCO 的输出频率由控制电压决定。线性近似下：
 

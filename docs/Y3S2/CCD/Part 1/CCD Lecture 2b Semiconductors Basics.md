@@ -3,7 +3,8 @@ lastUpdated: 2026-06-12T01:40:38+08:00
 ---
 # Lecture 2b Semiconductors and PN Junction 半导体与 PN 结
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 2b Semiconductors Basics.attachments/1779784870101.JPG"
   title="逃亡"
   artist="ヨルシカ"
   lang="ja"
@@ -17,9 +18,7 @@ lastUpdated: 2026-06-12T01:40:38+08:00
     original="花(はな)が夜空(よぞら)に咲(さ)いてる，夏(なつ)の匂(にお)いがしてた。"
     translation="烟花绽放在夜空之中，散发着阵阵夏日气息。"
   />
-</LyricCard>
-
-![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/1779784870101.JPG>)
+</LyricCover>
 
 ## 章节目录
 
@@ -45,7 +44,7 @@ $$
 N_e = 2n^2
 $$
 
-![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/bohr-atom.jpg>)
+![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/bohr-atom_wide.jpg>)
 
 最外层称为价壳层 Valence shell，其中的电子称为价电子 Valence electrons。价电子束缚较弱，获得足够能量后可以脱离原子并参与导电。
 
@@ -65,14 +64,14 @@ $$
 
 硅 Silicon 有 4 个价电子，相邻硅原子通过共价键共享电子。
 
-![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/silicon.jpg>)
+![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/silicon_wide.jpg>)
 
 纯硅中大多数价电子被束缚在共价键中，因此室温下导电能力有限。
 
 ## 2b-3 本征半导体 Intrinsic Semiconductor
 
 :::: definition 本征半导体 Intrinsic Semiconductor
-本征半导体是未故意掺杂的纯半导体。其导电载流子来自热激发产生的电子-空穴对。
+本征半导体是未掺杂的纯半导体。其导电载流子来自热激发产生的电子-空穴对。
 ::::
 
 当价电子获得足够能量后，会从价带跃迁到导带，留下一个空穴。
@@ -92,16 +91,16 @@ $$
 
 ## 2b-4 掺杂半导体 Doped Semiconductor
 
-掺杂可以显著改变半导体导电性。硅是四价元素，掺入五价或三价杂质会分别形成 n 型或 p 型材料。
+掺杂可以显著增强半导体导电性，一般是百万倍数量级的增强。
+
+硅是四价元素，掺入五价或三价杂质会分别形成 n 型或 p 型材料。
 
 | 类型 | 掺杂元素 | 多数载流子 | 少数载流子 | 说明 |
 | --- | --- | --- | --- | --- |
 | n-type | 五价杂质，如 Sb、P、As | 电子 | 空穴 | 多出一个弱束缚电子 |
 | p-type | 三价杂质，如 B、Al、Ga | 空穴 | 电子 | 共价键中缺少一个电子 |
 
-![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/n-type.jpg>)
-
-![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/p-type.jpg>)
+![n 型与 p 型半导体](<CCD Lecture 2b Semiconductors Basics.attachments/n-p-type_wide.jpg>)
 
 :::: tip
 n 型材料整体仍为电中性。n 型只表示电子是多数载流子，不表示材料带负电。
@@ -109,21 +108,34 @@ n 型材料整体仍为电中性。n 型只表示电子是多数载流子，不�
 
 ## 2b-5 PN 结 PN Junction
 
+在实际的使用中，通常将 p 型半导体和 n 型半导体紧贴放置。此时，由于P型半导体中含有数量更多的空穴（正电），其负电荷，即电子会被向另一部分推移，N型同理。在分界面上形成了一块特殊的区域，即
+
+
+
 :::: definition PN 结 PN Junction
-p 型半导体与 n 型半导体接触形成 PN 结。结附近会因载流子扩散与复合形成耗尽层，并建立内建电势。
+p 型半导体与 n 型半导体接触形成 PN 结。结附近会因载流子扩散与复合形成**耗尽层**（也叫势垒，阻挡层等），并建立内建电势。
+
+![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/pn-junction_wide.jpg>)
+
 ::::
 
-![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/pn-junction.jpg>)
+PN结分界面上的电荷间形成了从N指向P的内部电场，阻止了进一步的多子扩散。
 
-形成过程如下：
+
+
+
+
+PN结的形成过程如下：
 
 1. n 区电子向 p 区扩散，并与 p 区空穴复合；
 2. p 区空穴也可等效向 n 区扩散；
 3. 结附近留下固定离子，形成耗尽层 Depletion region；
-4. 固定离子产生电场，阻止进一步扩散；
+4. 固定离子产生电场（或内建电势），阻止多子进一步扩散；
 5. 扩散与漂移达到平衡。
 
-内建电势也称势垒电势 Barrier potential。对硅 PN 结，室温下常近似为
+::: definition
+
+内建电势也称势垒电势 Barrier potential，是PN结内部形成的电势差。对硅 PN 结，室温下常近似为
 
 $$
 V_\gamma \approx 0.7\,\mathrm{V}
@@ -135,7 +147,13 @@ $$
 V_\gamma \approx 0.3\,\mathrm{V}
 $$
 
+:::
+
+
+
 ## 2b-6 二极管 Diode
+
+将上文所提到的PN结两端贴上导体引出引脚，可得到**二极管 Diode**。
 
 :::: definition 二极管 Diode
 二极管是具有单个 PN 结和两个引脚的半导体器件。理想情况下，它只允许电流沿一个方向通过。
@@ -156,15 +174,17 @@ $$
 
 ### 2b-7-1 正向偏置 Forward Bias
 
-正向偏置时，电源正端接 p 区，负端接 n 区。外加电压降低势垒，耗尽层变窄。
+通常在二极管施加的正向电压被称为正向偏置，简称正偏。
+
+正向偏置时，电源正端接 p 区，负端接 n 区。外加电压与内部电场方向相反，因此削弱PN结，降低势垒，耗尽层变窄。
 
 ![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/forward-bias.jpg>)
 
-若外加电压超过势垒电势，电流显著增加。实际电路中通常需要串联电阻限制电流。
+若外加电压超过势垒电势，电流显著增加，斜率甚至接近直线。因此，实际电路中通常需要串联电阻限制电流。
 
 ### 2b-7-2 反向偏置 Reverse Bias
 
-反向偏置时，电源正端接 n 区，负端接 p 区。外加电压增大势垒，耗尽层变宽。
+反向偏置时，电源正端接 n 区，负端接 p 区。外加电压与内部电场方向相同，增强PN结，增大势垒，耗尽层变宽。
 
 ![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/reverse-bias.jpg>)
 
@@ -172,7 +192,7 @@ $$
 
 ### 2b-7-3 V-I 特性曲线
 
-![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/vi-curve.jpg>)
+![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/vi-curve_wide.jpg>)
 
 | 区域 | 条件 | 特点 |
 | --- | --- | --- |
@@ -194,19 +214,18 @@ $$
 
 > [!NOTE]
 > 完整模型中，$r_d$ 为二极管的**动态电阻 Dynamic Resistance**（也称体电阻 Bulk Resistance），其值由 Q 点处 V-I 特性曲线的斜率决定：
->
-> $$
+>$$
 > r_d = \frac{\Delta V_D}{\Delta I_D} \approx \frac{26\,\mathrm{mV}}{I_D}
 > $$
 >
-> 其中 $I_D$ 为 Q 点电流。此 $r_d$ 与后续放大器小信号分析中的 $r_e'$ 估算直接相关。
+>其中 $I_D$ 为 Q 点电流。此 $r_d$ 与后续放大器小信号分析中的 $r_e'$ 估算直接相关。
 
 :::: tip
-CCD 手算中若未特别说明，硅二极管通常按 practical model 取 $V_D=0.7\,\mathrm{V}$。
+计算中若未特别说明，正偏二极管两端电压通常直接取 $V_D=0.7\,\mathrm{V}$。
 ::::
 
 :::: stem
-使用实用二极管模型，求图中电路电流。已知 $V_{\mathrm{BIAS}}=12\,\mathrm{V}$，$R=3.3\,\mathrm{k}\Omega$，硅二极管正向导通。
+求图中电路电流。已知 $V_{\mathrm{BIAS}}=12\,\mathrm{V}$，$R=3.3\,\mathrm{k}\Omega$，硅二极管正向导通。
 
 ![alt text](<CCD Lecture 2b Semiconductors Basics.attachments/diode-example.jpg>)
 ::::
@@ -253,4 +272,4 @@ $$
 | PN 结 | 扩散形成耗尽层和势垒电势 | 硅约 $0.7\,\mathrm{V}$ |
 | 正向偏置 | 耗尽层变窄，允许电流 | p 接正，n 接负 |
 | 反向偏置 | 耗尽层变宽，阻止电流 | p 接负，n 接正 |
-| Practical model | $V_D\approx0.7\,\mathrm{V}$ for Si | 常用于手算 |
+| Practical model | $V_D\approx0.7\,\mathrm{V}$ for Si |  |

@@ -9,5 +9,6 @@ aside: false
 ## 文档
 
 - [歌词容器用法](./lyric-container)
+- [LyricCover 用法](./lyric-cover)
 - [SongCard 用法](./song-card)
 - [MindMap 思维导图](./mindmap)

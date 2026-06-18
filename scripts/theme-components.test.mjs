@@ -8,11 +8,13 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const themeRoot = path.join(root, 'docs/.vitepress/theme')
 const indexPath = path.join(themeRoot, 'index.ts')
 const lyricCardPath = path.join(themeRoot, 'components/LyricCard.vue')
+const lyricCoverPath = path.join(themeRoot, 'components/LyricCover.vue')
 const songCardPath = path.join(themeRoot, 'components/SongCard.vue')
 const mindMapPath = path.join(themeRoot, 'components/MindMap.vue')
 const configPath = path.join(root, 'docs/.vitepress/config.mts')
 const labReadmePath = path.join(root, 'docs/others/lab/README.md')
 const lyricCardDocPath = path.join(root, 'docs/others/lab/lyric-container.md')
+const lyricCoverDocPath = path.join(root, 'docs/others/lab/lyric-cover.md')
 const songCardDocPath = path.join(root, 'docs/others/lab/song-card.md')
 const mindMapDocPath = path.join(root, 'docs/others/lab/mindmap.md')
 
@@ -67,6 +69,47 @@ test('rewrites relative LyricCard album covers into Vite asset URLs', async () =
   assert.match(result, /album-cover="https:\/\/example\.com\/cover\.jpg"/)
 })
 
+test('rewrites relative LyricCover images into Vite asset URLs', async () => {
+  const { transformLyricCoverImageAttrs } = await import('../docs/.vitepress/config.mts')
+  const imports = new Map()
+  const source = [
+    '<LyricCover',
+    '  image="hitchcock.attachments/cover.JPG"',
+    '  title="ヒッチコック"',
+    '>',
+    '</LyricCover>',
+    '<LyricCover src="/1.jpg" title="Public" />',
+    '<LyricCover cover="https://example.com/cover.jpg" title="Remote" />',
+  ].join('\n')
+
+  const result = transformLyricCoverImageAttrs(source, (cover) => {
+    const variable = `__lyricCoverImage${imports.size}`
+    imports.set(cover, variable)
+    return variable
+  })
+
+  assert.match(result, /:image='__lyricCoverImage0'/)
+  assert.doesNotMatch(result, /image="hitchcock\.attachments\/cover\.JPG"/)
+  assert.deepEqual([...imports], [['./hitchcock.attachments/cover.JPG', '__lyricCoverImage0']])
+  assert.match(result, /src="\/1\.jpg"/)
+  assert.match(result, /cover="https:\/\/example\.com\/cover\.jpg"/)
+})
+
+test('injects LyricCover text tone at markdown compile time when available', async () => {
+  const { transformLyricCoverTextToneAttrs } = await import('../docs/.vitepress/config.mts')
+  const source = [
+    '<LyricCover image="dark-cover.jpg" title="Night" />',
+    '<LyricCover image="bright-cover.jpg" title="Day" text-tone="dark" />',
+  ].join('\n')
+
+  const result = transformLyricCoverTextToneAttrs(source, (imagePath) => {
+    return imagePath === 'dark-cover.jpg' ? 'light' : 'dark'
+  })
+
+  assert.match(result, /<LyricCover image="dark-cover\.jpg" title="Night" text-tone="light" \/>/)
+  assert.match(result, /<LyricCover image="bright-cover\.jpg" title="Day" text-tone="dark" \/>/)
+})
+
 test('renders mindmap fences as a MindMap markdown component', async () => {
   const { renderMindMapFence } = await import('../docs/.vitepress/config.mts')
   const source = [
@@ -101,6 +144,13 @@ test('registers SongCard as a markdown component', () => {
 
   assert.match(indexSource, /import SongCard from ['"]\.\/components\/SongCard\.vue['"]/)
   assert.match(indexSource, /app\.component\(['"]SongCard['"]\s*,\s*SongCard\)/)
+})
+
+test('registers LyricCover as a markdown component', () => {
+  const indexSource = fs.readFileSync(indexPath, 'utf8')
+
+  assert.match(indexSource, /import LyricCover from ['"]\.\/components\/LyricCover\.vue['"]/)
+  assert.match(indexSource, /app\.component\(['"]LyricCover['"]\s*,\s*LyricCover\)/)
 })
 
 test('registers MindMap as a markdown component', () => {
@@ -300,6 +350,33 @@ test('LyricCard styles the album cover as the rightmost rounded rectangle', () =
   assert.match(source, /--lyric-card-album-cover-size:\s*112px/)
 })
 
+test('LyricCover reuses LyricCard with a CSS-only frosted cover reveal', () => {
+  assert.equal(fs.existsSync(lyricCoverPath), true)
+
+  const source = fs.readFileSync(lyricCoverPath, 'utf8')
+
+  assert.match(source, /import LyricCard from ['"]\.\/LyricCard\.vue['"]/)
+  assert.match(source, /image\?:\s*string/)
+  assert.match(source, /src\?:\s*string/)
+  assert.match(source, /cover\?:\s*string/)
+  assert.match(source, /textTone\?:\s*TextTone/)
+  assert.match(source, /<LyricCard/)
+  assert.match(source, /<slot \/>/)
+  assert.match(source, /class="lyric-cover-frame"/)
+  assert.match(source, /class="lyric-cover-backdrop"/)
+  assert.match(source, /class="lyric-cover-glass"/)
+  assert.match(source, /class="lyric-cover-content"/)
+  assert.match(source, /backdrop-filter:\s*blur\(18px\)\s*saturate\(1\.12\)/)
+  assert.match(source, /filter:\s*blur\(22px\)\s*saturate\(1\.08\)/)
+  assert.match(source, /\.lyric-cover-frame:hover\s+\.lyric-cover-content,/)
+  assert.match(source, /opacity\s+0\.28s\s+ease/)
+  assert.match(source, /object-fit:\s*contain/)
+  assert.match(source, /--lyric-cover-text-1:\s*rgb\(255 255 255 \/ 94%\)/)
+  assert.match(source, /--lyric-cover-text-1:\s*rgb\(33 36 46 \/ 96%\)/)
+  assert.match(source, /:global\(\.dark \.lyric-cover\)\s*{[^}]*--lyric-cover-glass-border:\s*transparent;/s)
+  assert.match(source, /@media \(prefers-reduced-motion:\s*reduce\)/)
+})
+
 test('SongCard keeps the cover one third wide with a flat frosted floating card style', () => {
   const source = fs.readFileSync(songCardPath, 'utf8')
 
@@ -375,6 +452,24 @@ test('documents SongCard in the lab and sidebar', () => {
   assert.match(docSource, /旧句向上淡出，新句从下方向上淡入/)
   assert.match(readmeSource, /\[SongCard.*\]\(\.\/song-card\)/)
   assert.match(configSource, /text:\s*['"]SongCard['"],\s*link:\s*['"]\/others\/lab\/song-card['"]/)
+})
+
+test('documents LyricCover in the lab and sidebar', () => {
+  assert.equal(fs.existsSync(lyricCoverDocPath), true)
+  assert.equal(fs.existsSync(path.join(root, 'docs/others/lab/lyric-cover.attachments/demo-cover.jpg')), true)
+
+  const docSource = fs.readFileSync(lyricCoverDocPath, 'utf8')
+  const readmeSource = fs.readFileSync(labReadmePath, 'utf8')
+  const configSource = fs.readFileSync(configPath, 'utf8')
+
+  assert.match(docSource, /# LyricCover/)
+  assert.match(docSource, /<LyricCover/)
+  assert.match(docSource, /image="lyric-cover\.attachments\/demo-cover\.jpg"/)
+  assert.match(docSource, /text-tone="light".*text-tone="dark"/s)
+  assert.match(docSource, /CourseIndex/)
+  assert.match(docSource, /第一个 `LyricCover`/)
+  assert.match(readmeSource, /\[LyricCover.*\]\(\.\/lyric-cover\)/)
+  assert.match(configSource, /text:\s*['"]LyricCover['"],\s*link:\s*['"]\/others\/lab\/lyric-cover['"]/)
 })
 
 test('documents MindMap in the lab and sidebar', () => {

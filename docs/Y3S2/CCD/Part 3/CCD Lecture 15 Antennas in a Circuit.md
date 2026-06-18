@@ -3,7 +3,8 @@ lastUpdated: 2026-06-07T21:49:56+08:00
 ---
 # Lecture 15 Antennas in a Circuit 天线
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 15 Antennas in a Circuit.attachments/1780840132059.JPG"
   title="bloom"
   artist="三木谷奈々"
   lang="en"
@@ -17,9 +18,7 @@ lastUpdated: 2026-06-07T21:49:56+08:00
     original="This wasn't magic as I knew it."
     translation="这不是我所知的魔法。"
   />
-</LyricCard>
-
-![alt text](<CCD Lecture 15 Antennas in a Circuit.attachments/1780840132059.JPG>)
+</LyricCover>
 
 ## 章节目录
 
@@ -124,7 +123,7 @@ $$
 **辐射方向图 Radiation Pattern** 描述天线辐射强度随空间方向 $(\theta,\phi)$ 的变化。它可以画成二维截面，也可以画成三维曲面。
 ::::
 
-![天线方向图](<CCD Lecture 15 Antennas in a Circuit.attachments/antenna_pattern.jpg>)
+![天线方向图](<CCD Lecture 15 Antennas in a Circuit.attachments/antenna_pattern_wide.jpg>)
 
 方向图中的常见部分：
 
@@ -138,7 +137,7 @@ $$
 
 理想 isotropic radiator 在所有方向均匀辐射，三维方向图是球面。真实天线一般都有方向性。
 
-![三维方向图](<CCD Lecture 15 Antennas in a Circuit.attachments/antenna_pattern_3d.jpg>)
+![三维方向图](<CCD Lecture 15 Antennas in a Circuit.attachments/antenna_pattern_3d_wide.jpg>)
 
 ---
 
@@ -257,7 +256,7 @@ $$
 
 自由空间传播中，功率会分布到越来越大的波前面积上，因此功率密度随距离平方下降。
 
-![通信链路](<CCD Lecture 15 Antennas in a Circuit.attachments/antenna_link.jpg>)
+![通信链路](<CCD Lecture 15 Antennas in a Circuit.attachments/antenna_link_wide.jpg>)
 
 若发射天线增益为 $G_t$，距离 $R$ 处功率密度可写为
 

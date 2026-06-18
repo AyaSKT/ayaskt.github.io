@@ -3,7 +3,8 @@ lastUpdated: 2026-06-12T15:16:20+08:00
 ---
 # Lecture 19-20 ADC and Converter Errors 模数转换与转换器误差
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 19-20 ADC and Converter Errors.attachments/1781248130127.jpg"
   title="白線"
   artist="初星学園 / 葛城リーリヤ / ナユタン星人"
   lang="ja"
@@ -17,9 +18,7 @@ lastUpdated: 2026-06-12T15:16:20+08:00
     original="今日(きょう)に未来色(みらいいろ)の軌道(きどう)描(えが)いて 地平(ちへい)の先(さき)まで。"
     translation="描绘一条通往 地平线彼端彩色轨迹。"
   />
-</LyricCard>
-
-![alt text](<CCD Lecture 19-20 ADC and Converter Errors.attachments/1781248130127.jpg>)
+</LyricCover>
 
 ## 章节目录
 
@@ -242,7 +241,7 @@ $$
 
 ### 19-3-3 量化误差 Quantization Error
 
-![量化误差](<CCD Lecture 19-20 ADC and Converter Errors.attachments/adc_quantization_error.jpg>)
+![量化误差](<CCD Lecture 19-20 ADC and Converter Errors.attachments/adc_quantization_error_wide.jpg>)
 
 量化误差是实际模拟样本值与量化电平之间的差。
 
@@ -330,7 +329,7 @@ Dual-slope ADC 也叫 integrating ADC。它把输入电压积分一段固定时�
 
 ### 19-4-3 Flash ADC 闪速 ADC
 
-![Flash ADC](<CCD Lecture 19-20 ADC and Converter Errors.attachments/adc_flash.jpg>)
+![Flash ADC](<CCD Lecture 19-20 ADC and Converter Errors.attachments/adc_flash_wide.jpg>)
 
 Flash ADC 是最快的 ADC。它用一组比较器同时比较输入电压和多个参考阈值。
 

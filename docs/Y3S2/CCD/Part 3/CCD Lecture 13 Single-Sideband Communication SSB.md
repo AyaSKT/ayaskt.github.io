@@ -3,7 +3,8 @@ lastUpdated: 2026-06-12T01:40:38+08:00
 ---
 # Lecture 13 Single-Sideband Communication (SSB) 单边带通信
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 13 Single-Sideband Communication SSB.attachments/1780727188147.JPG"
   title="D/N/A"
   artist="Azari"
   lang="ja"
@@ -17,10 +18,7 @@ lastUpdated: 2026-06-12T01:40:38+08:00
     original="この心(こころ)は私(わたし)の中(なか)，紅(あか)く，紅(あか)く。"
     translation="这颗心脏在我心中，变得泛红，泛红。"
   />
-</LyricCard>
-
-![alt text](<CCD Lecture 13 Single-Sideband Communication SSB.attachments/1780727188147.JPG>)
-
+</LyricCover>
 
 ## 章节目录
 
@@ -57,7 +55,7 @@ $$
 - 上边带 USB 和下边带 LSB 携带相同消息；
 - 100% 调制时，每个边带的幅度最大只有载波幅度的一半。
 
-![AM 频谱](<CCD Lecture 13 Single-Sideband Communication SSB.attachments/ssb_am_spectrum.jpg>)
+![AM 频谱](<CCD Lecture 13 Single-Sideband Communication SSB.attachments/ssb_am_spectrum_wide.jpg>)
 
 因此常规 AM 的功率和带宽都有明显冗余。
 
@@ -81,7 +79,7 @@ $$
 f_{\mathrm{LSB}}=f_c-f_m
 $$
 
-![边带选择](<CCD Lecture 13 Single-Sideband Communication SSB.attachments/ssb_sideband_choice.jpg>)
+![边带选择](<CCD Lecture 13 Single-Sideband Communication SSB.attachments/ssb_sideband_choice_wide.jpg>)
 
 SSB 仍能恢复消息，因为一个边带已经包含完整消息信息。
 
@@ -175,7 +173,7 @@ $$
 **二极管环形调制器** 用四个匹配二极管构成开关网络。大幅度载波控制二极管导通组合，使消息信号按载波半周期交替反相，从而产生 DSB-SC。
 ::::
 
-![二极管环形调制器](<CCD Lecture 13 Single-Sideband Communication SSB.attachments/ssb_ring_modulator.jpg>)
+![二极管环形调制器](<CCD Lecture 13 Single-Sideband Communication SSB.attachments/ssb_ring_modulator_wide.jpg>)
 
 正半周时，一组对角二极管导通，消息以原极性传到输出。负半周时，另一组对角二极管导通，消息反相传到输出。
 

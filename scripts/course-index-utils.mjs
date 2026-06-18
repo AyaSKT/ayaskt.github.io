@@ -99,6 +99,46 @@ export function findFirstMarkdownImage(markdown) {
   return ''
 }
 
+function withoutFencedBlocks(markdown) {
+  const lines = []
+  let inFence = false
+
+  for (const line of markdown.split(/\r?\n/)) {
+    if (/^\s*(?:```|~~~)/.test(line)) {
+      inFence = !inFence
+      continue
+    }
+
+    if (!inFence) lines.push(line)
+  }
+
+  return lines.join('\n')
+}
+
+function extractStaticHtmlAttribute(tag, names) {
+  for (const name of names) {
+    const pattern = new RegExp(`\\s${name}\\s*=\\s*("([^"]*)"|'([^']*)')`)
+    const match = tag.match(pattern)
+    const value = match?.[2] ?? match?.[3]
+    if (value) return value
+  }
+
+  return ''
+}
+
+export function findFirstLyricCoverImage(markdown) {
+  const tagPattern = /<LyricCover\b(?:[^<>"']|"[^"]*"|'[^']*')*>/g
+  const source = withoutFencedBlocks(markdown)
+
+  for (const match of source.matchAll(tagPattern)) {
+    const imagePath = extractStaticHtmlAttribute(match[0], ['image', 'src', 'cover'])
+    const clean = decodeSafe(stripAngleBrackets(imagePath))
+    if (clean && !isSpecialPath(clean)) return clean
+  }
+
+  return ''
+}
+
 function extractStringProperty(block, name) {
   const pattern = new RegExp(`${name}:\\s*(['"\`])([^'"\`]*)\\1`)
   return block.match(pattern)?.[2] ?? ''
@@ -126,7 +166,18 @@ export function resolveFirstNoteImage(docsRoot, notePath) {
   const sourcePath = path.join(docsRoot, notePath)
   if (!fs.existsSync(sourcePath)) return ''
 
-  const firstImage = findFirstMarkdownImage(fs.readFileSync(sourcePath, 'utf8'))
+  const markdown = fs.readFileSync(sourcePath, 'utf8')
+  const firstImage = findFirstMarkdownImage(markdown)
+  if (!firstImage) return ''
+
+  return resolveNoteImagePath(notePath, firstImage)
+}
+
+export function resolveFirstLyricCoverImage(docsRoot, notePath) {
+  const sourcePath = path.join(docsRoot, notePath)
+  if (!fs.existsSync(sourcePath)) return ''
+
+  const firstImage = findFirstLyricCoverImage(fs.readFileSync(sourcePath, 'utf8'))
   if (!firstImage) return ''
 
   return resolveNoteImagePath(notePath, firstImage)
@@ -142,8 +193,14 @@ export function collectCourseCovers({ docsRoot, readmePath, markdown }) {
     if (!notePath) continue
 
     let coverDocsPath = ''
+    const lyricCoverImage = resolveFirstLyricCoverImage(docsRoot, notePath)
 
-    if (item.cover) {
+    if (lyricCoverImage && fs.existsSync(path.join(docsRoot, lyricCoverImage))) {
+      coverDocsPath = lyricCoverImage
+      fallbackCovers[notePath] = lyricCoverImage
+    }
+
+    if (!coverDocsPath && item.cover) {
       const configuredCover = resolveCourseAssetPath(basePath, item.cover)
       if (configuredCover && fs.existsSync(path.join(docsRoot, configuredCover))) {
         coverDocsPath = configuredCover

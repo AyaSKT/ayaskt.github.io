@@ -3,7 +3,8 @@ lastUpdated: 2026-06-12T01:40:38+08:00
 ---
 # Lecture 14 Frequency Modulation (FM) & Phase Modulation (PM) 调频与调相
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/1780839332491.png"
   title="ありふれてたい"
   artist="花譜"
   lang="ja"
@@ -17,9 +18,7 @@ lastUpdated: 2026-06-12T01:40:38+08:00
     original="どこにも無(な)いふつう それが素敵(すてき)なので。"
     translation="无处可寻的平凡 才更显美好。"
   />
-</LyricCard>
-
-![alt text](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/1780839332491.png>)
+</LyricCover>
 
 ## 章节目录
 
@@ -200,7 +199,7 @@ $$
 **变容二极管 Varactor Diode** 是反向偏置下作为电压控制电容使用的 PN 结二极管。反向电压改变耗尽层宽度，从而改变结电容。
 ::::
 
-![变容二极管](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_varactor_diode.jpg>)
+![变容二极管](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_varactor_diode_wide.jpg>)
 
 在变容二极管 FM 调制器中，消息电压改变反向偏置：
 
@@ -214,7 +213,7 @@ $$
 f_c(t)=\frac{1}{2\pi\sqrt{LC_T(t)}}
 $$
 
-![变容二极管 FM 调制器](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_varactor_modulator.jpg>)
+![变容二极管 FM 调制器](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_varactor_modulator_wide.jpg>)
 
 LC 振荡器简单，但稳定性不如晶体振荡器。温度、电源、元件容差和老化都会造成频率漂移。
 
@@ -289,7 +288,7 @@ $$
 
 FM 的消息在频率变化中，外部噪声很多表现为幅度扰动。因此 FM 接收机可在解调前使用 limiter 去掉幅度尖峰。
 
-![FM 噪声抑制](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_noise_suppression.jpg>)
+![FM 噪声抑制](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_noise_suppression_wide.jpg>)
 
 AM 中，幅度变化就是消息，噪声幅度会直接进入输出。FM 中，限幅器能削弱幅度噪声。
 

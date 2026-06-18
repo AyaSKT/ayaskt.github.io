@@ -3,7 +3,8 @@ lastUpdated: 2026-05-31T14:55:30+08:00
 ---
 # Lecture 7 Mixers 混频器
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 7 Mixers.attachments/1780057844904.PNG"
   title="宙でおやすみ"
   artist="Aiobahn / 長瀬有花"
   lang="ja"
@@ -17,9 +18,7 @@ lastUpdated: 2026-05-31T14:55:30+08:00
     original="蝶(ちょう)の羽根(はね)で，おやすみなさい。"
     translation="也要在蝴蝶的翅膀上，说着晚安。"
   />
-</LyricCard>
-
-![alt text](<CCD Lecture 7 Mixers.attachments/1780057844904.PNG>)
+</LyricCover>
 
 ## 章节目录
 

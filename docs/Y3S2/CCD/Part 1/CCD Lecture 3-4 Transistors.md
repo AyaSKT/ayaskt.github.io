@@ -3,7 +3,8 @@ lastUpdated: 2026-06-12T01:40:38+08:00
 ---
 # Lecture 3-4 Transistors 晶体管
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 3-4 Transistors.attachments/1779784088824.jpg"
   title="艾蜜莉"
   artist="回春丹"
   lang="zh"
@@ -11,9 +12,10 @@ lastUpdated: 2026-06-12T01:40:38+08:00
 >
   <LyricLine original="艾蜜莉啊艾蜜莉，夕阳照进我心底；" />
   <LyricLine original="我要带你去寻找，散落的星星。" />
-</LyricCard>
+</LyricCover>
 
-![alt text](<CCD Lecture 3-4 Transistors.attachments/1779784088824.jpg>)
+> [!TIP]
+> 通信一周学完了电工一学期的内容，唉。
 
 ## 章节目录
 
@@ -33,7 +35,7 @@ lastUpdated: 2026-06-12T01:40:38+08:00
 ## 3-1 BJT 结构 Bipolar Junction Transistor Structure
 
 :::: definition BJT
-BJT，即双极结型晶体管，由 emitter、base、collector 三个区域组成。它同时依靠电子和空穴两种载流子工作。
+BJT，双极结型晶体管，由 emitter、base、collector 三个区域组成。它同时依靠电子和空穴两种载流子工作。
 ::::
 
 ![alt text](<CCD Lecture 3-4 Transistors.attachments/bjt-structure.jpg>)
@@ -45,7 +47,7 @@ BJT 有两种基本类型：
 | npn | n-p-n | 从 collector 流向 emitter | 电子为主要参与者 |
 | pnp | p-n-p | 从 emitter 流向 collector | 极性与 npn 相反 |
 
-![alt text](<CCD Lecture 3-4 Transistors.attachments/bjt-types.jpg>)
+![alt text](<CCD Lecture 3-4 Transistors.attachments/bjt-types_wide.jpg>)
 
 三个区域的掺杂通常不同：
 
@@ -62,7 +64,7 @@ BJT 正常放大工作时处于 active region。此时：
 | Base-emitter junction | 正向偏置 |
 | Base-collector junction | 反向偏置 |
 
-![alt text](<CCD Lecture 3-4 Transistors.attachments/bjt-bias.jpg>)
+![alt text](<CCD Lecture 3-4 Transistors.attachments/bjt-bias_wide.jpg>)
 
 对 npn 管，正常有
 
@@ -114,7 +116,7 @@ $$
 \beta_{\mathrm{DC}} = \frac{\alpha_{\mathrm{DC}}}{1-\alpha_{\mathrm{DC}}}
 $$
 
-![alt text](<CCD Lecture 3-4 Transistors.attachments/bjt-characteristics.jpg>)
+![alt text](<CCD Lecture 3-4 Transistors.attachments/bjt-characteristics_wide.jpg>)
 
 :::: stem
 若在 BJT 输出特性曲线上读得 $I_B=30\,\mu\mathrm{A}$ 时 $I_C=5.0\,\mathrm{mA}$，求 $\beta_{\mathrm{DC}}$。
@@ -152,7 +154,7 @@ $$
 V_{CE(\mathrm{sat})} \approx 0.2\,\mathrm{V}
 $$
 
-![alt text](<CCD Lecture 3-4 Transistors.attachments/dc-load-line.jpg>)
+![alt text](<CCD Lecture 3-4 Transistors.attachments/dc-load-line_wide.jpg>)
 
 直流负载线由外部电路决定。对简单 collector 电阻电路，
 
@@ -199,7 +201,7 @@ $$
 :::: stem
 图中晶体管 $\beta_{\mathrm{DC}}=150$。已知 $V_{BB}=5\,\mathrm{V}$，$R_B=10\,\mathrm{k}\Omega$，$V_{CC}=10\,\mathrm{V}$，$R_C=100\,\Omega$，取 $V_{BE}=0.7\,\mathrm{V}$。求 $I_B$、$I_C$、$I_E$、$V_{CE}$ 与 $V_{CB}$。
 
-![alt text](<CCD Lecture 3-4 Transistors.attachments/bjt-bias-example.jpg>)
+![alt text](<CCD Lecture 3-4 Transistors.attachments/bjt-bias-example_wide.jpg>)
 ::::
 
 :::: solution
@@ -260,7 +262,7 @@ BJT 也可作为开关：
 :::: stem
 LED 需要约 $30\,\mathrm{mA}$ 电流。已知 $V_{CC}=9\,\mathrm{V}$，$V_{LED}=1.6\,\mathrm{V}$，$V_{CE(\mathrm{sat})}=0.3\,\mathrm{V}$，$R_C=220\,\Omega$，$R_B=3.3\,\mathrm{k}\Omega$，$\beta_{\mathrm{DC}}=50$。若为保证饱和取两倍最小基极电流，求输入方波高电平 $V_{in}$。
 
-![alt text](<CCD Lecture 3-4 Transistors.attachments/bjt-switch-example.jpg>)
+![alt text](<CCD Lecture 3-4 Transistors.attachments/bjt-switch-example_wide.jpg>)
 ::::
 
 :::: solution
@@ -311,7 +313,7 @@ $$
 JFET，即结型场效应晶体管，通过 gate-source PN 结的反向偏置改变沟道宽度，从而控制 drain current。
 ::::
 
-![alt text](<CCD Lecture 3-4 Transistors.attachments/jfet-structure.jpg>)
+![alt text](<CCD Lecture 3-4 Transistors.attachments/jfet-structure_wide.jpg>)
 
 JFET 有三个端点：
 
@@ -329,7 +331,7 @@ $$
 
 当 $V_{GS}$ 更负时，耗尽层变宽，沟道变窄，$I_D$ 减小。
 
-![alt text](<CCD Lecture 3-4 Transistors.attachments/jfet-operation.jpg>)
+![alt text](<CCD Lecture 3-4 Transistors.attachments/jfet-operation_wide.jpg>)
 
 ## 4-2 JFET 特性曲线 JFET Characteristics
 
@@ -389,7 +391,7 @@ $$
 JFET 转移特性表示 $I_D$ 随 $V_{GS}$ 的变化关系，通常在恒流区内使用。
 ::::
 
-![alt text](<CCD Lecture 3-4 Transistors.attachments/jfet-transfer.jpg>)
+![alt text](<CCD Lecture 3-4 Transistors.attachments/jfet-transfer_wide.jpg>)
 
 Shockley 方程为
 
@@ -481,9 +483,7 @@ MOSFET 可分为 depletion MOSFET 与 enhancement MOSFET。
 | D-MOSFET | 有 | depletion 或 enhancement |
 | E-MOSFET | 无 | 只能 enhancement |
 
-![alt text](<CCD Lecture 3-4 Transistors.attachments/d-mosfet.jpg>)
-
-![alt text](<CCD Lecture 3-4 Transistors.attachments/e-mosfet.jpg>)
+![D-MOSFET 与 E-MOSFET](<CCD Lecture 3-4 Transistors.attachments/mosfet-types_wide.jpg>)
 
 对 n-channel E-MOSFET，只有当
 
@@ -497,7 +497,7 @@ $$
 I_D = K\left(V_{GS}-V_{GS(\mathrm{th})}\right)^2
 $$
 
-![alt text](<CCD Lecture 3-4 Transistors.attachments/emosfet-transfer.jpg>)
+![alt text](<CCD Lecture 3-4 Transistors.attachments/emosfet-transfer_wide.jpg>)
 
 对 n-channel D-MOSFET，可近似使用与 JFET 类似的形式：
 
@@ -505,7 +505,7 @@ $$
 I_D \cong I_{DSS}\left(1-\frac{V_{GS}}{V_{GS(\mathrm{off})}}\right)^2
 $$
 
-![alt text](<CCD Lecture 3-4 Transistors.attachments/dmosfet-transfer.jpg>)
+![alt text](<CCD Lecture 3-4 Transistors.attachments/dmosfet-transfer_wide.jpg>)
 
 MOSFET 使用时需要注意静电防护：
 

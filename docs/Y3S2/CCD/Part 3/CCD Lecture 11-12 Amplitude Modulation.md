@@ -3,7 +3,8 @@ lastUpdated: 2026-06-12T01:40:38+08:00
 ---
 # Lecture 11-12 Amplitude Modulation 幅度调制
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 11-12 Amplitude Modulation.attachments/1780674328208.JPG"
   title="幸福刑"
   artist="LonePi / 初音ミク"
   lang="ja"
@@ -17,9 +18,7 @@ lastUpdated: 2026-06-12T01:40:38+08:00
     original="なにが なにが 君(きみ)のため？"
     translation="该如何 才算是 真正为了你？"
   />
-</LyricCard>
-
-![alt text](<CCD Lecture 11-12 Amplitude Modulation.attachments/1780674328208.JPG>)
+</LyricCover>
 
 > [!TIP]
 >
@@ -305,7 +304,7 @@ AM 需要非线性器件或乘法器。
 
 带通调谐电路只保留 $f_c-f_m$、$f_c$、$f_c+f_m$，其余分量被滤除。
 
-![晶体管 AM 调制器](<CCD Lecture 11-12 Amplitude Modulation.attachments/am_transistor_modulator.jpg>)
+![晶体管 AM 调制器](<CCD Lecture 11-12 Amplitude Modulation.attachments/am_transistor_modulator_wide.jpg>)
 
 ---
 
@@ -332,7 +331,7 @@ Class C 放大器效率高，但不适合直接放大已经生成的 AM 信号�
 **集电极调制 Collector Modulation** 是高电平 AM 的一种实现。载波送入 Class C RF 放大器，消息信号串入集电极电源，使输出载波幅度随消息变化。
 ::::
 
-![集电极调制器](<CCD Lecture 11-12 Amplitude Modulation.attachments/am_collector_modulator.jpg>)
+![集电极调制器](<CCD Lecture 11-12 Amplitude Modulation.attachments/am_collector_modulator_wide.jpg>)
 
 工作关系：
 

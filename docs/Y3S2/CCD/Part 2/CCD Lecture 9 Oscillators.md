@@ -3,7 +3,8 @@ lastUpdated: 2026-06-12T01:40:38+08:00
 ---
 # Lecture 9 Oscillators 振荡器
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 9 Oscillators.attachments/1780209759050.jpg"
   title="新长征路上的摇滚"
   artist="崔健"
   lang="zh"
@@ -13,9 +14,7 @@ lastUpdated: 2026-06-12T01:40:38+08:00
   <LyricLine original="求求风 求求雨 快离我远去" />
   <LyricLine original="山也多 水也多 分不清东西" />
   <LyricLine original="人也多 嘴也多 讲不清道理" />
-</LyricCard>
-
-![alt text](<CCD Lecture 9 Oscillators.attachments/1780209759050.jpg>)
+</LyricCover>
 
 ## 章节目录
 

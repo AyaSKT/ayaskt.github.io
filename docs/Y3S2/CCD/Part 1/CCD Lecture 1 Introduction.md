@@ -3,7 +3,8 @@ lastUpdated: 2026-05-26T16:58:59+08:00
 ---
 # Lecture 1 Introduction 电子通信导论
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 1 Introduction.attachments/1779783811122.PNG"
   title="LIFE"
   artist="Neuro-Sama"
   lang="en"
@@ -13,11 +14,7 @@ lastUpdated: 2026-05-26T16:58:59+08:00
     original="What am I to do when you're gone?"
     translation="当你离去，我该如何自处？"
   />
-</LyricCard>
-
-![alt text](<CCD Lecture 1 Introduction.attachments/1779783811122.PNG>)
-
-
+</LyricCover>
 
 ## 章节目录
 

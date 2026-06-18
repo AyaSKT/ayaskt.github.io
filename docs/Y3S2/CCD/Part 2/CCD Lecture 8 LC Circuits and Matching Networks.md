@@ -3,7 +3,8 @@ lastUpdated: 2026-06-12T01:40:38+08:00
 ---
 # Lecture 8 LC Circuits and Matching Networks LC 电路与匹配网络
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 8 LC Circuits and Matching Networks.attachments/1780209189821.JPG"
   title="Free Bird"
   artist="Lynyrd Skynyrd"
   lang="en"
@@ -17,9 +18,7 @@ lastUpdated: 2026-06-12T01:40:38+08:00
     original="Would you still remember me?"
     translation="你还会记得我吗？"
   />
-</LyricCard>
-
-![alt text](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/1780209189821.JPG>)
+</LyricCover>
 
 ## 章节目录
 

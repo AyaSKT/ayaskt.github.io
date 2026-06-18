@@ -3,7 +3,8 @@ lastUpdated: 2026-06-12T15:16:20+08:00
 ---
 # Lecture 18 Digital to Analog Conversion 数模转换
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 18 Digital to Analog Conversion.attachments/1781248048842.jpg"
   title="夢が僕らの太陽さ"
   artist="虹ヶ咲学園スクールアイドル同好会"
   lang="ja"
@@ -17,9 +18,7 @@ lastUpdated: 2026-06-12T15:16:20+08:00
     original="泣(な)いちゃった後(あと)は笑顔(えがお)で，明日(あした)を語(かた)ればいいよ。"
     translation="拭去泪水后笑着聊起明天，心情就好起来了。"
   />
-</LyricCard>
-
-![alt text](<CCD Lecture 18 Digital to Analog Conversion.attachments/1781248048842.jpg>)
+</LyricCover>
 
 ## 章节目录
 
@@ -177,7 +176,7 @@ $$
 
 ### 18-2-3 阶梯波形 Staircase Waveform
 
-![DAC 阶梯输出](<CCD Lecture 18 Digital to Analog Conversion.attachments/dac_staircase.jpg>)
+![DAC 阶梯输出](<CCD Lecture 18 Digital to Analog Conversion.attachments/dac_staircase_wide.jpg>)
 
 DAC 输出不会在每个 digital code 之间连续变化，只能落在有限个电平上。因此输出-输入曲线呈阶梯状。
 
@@ -253,7 +252,7 @@ $$
 
 ### 18-4-1 工作原理 Operating Principle
 
-![加权电阻 DAC](<CCD Lecture 18 Digital to Analog Conversion.attachments/dac_weighted_resistor.jpg>)
+![加权电阻 DAC](<CCD Lecture 18 Digital to Analog Conversion.attachments/dac_weighted_resistor_wide.jpg>)
 
 **加权电阻 DAC Weighted Resistor DAC** 对不同 bit 使用不同阻值。阻值按二进制权重排列，使 MSB 贡献最大电流，LSB 贡献最小电流。
 

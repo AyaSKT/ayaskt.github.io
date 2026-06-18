@@ -3,7 +3,8 @@ lastUpdated: 2026-05-26T16:20:25+08:00
 ---
 # Lecture 2 Electronic Communications 电子通信基础
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 2 Electronic Communications.attachments/1778848682009.jpg"
   title="燦々"
   artist="Afterglow"
   lang="ja"
@@ -17,9 +18,7 @@ lastUpdated: 2026-05-26T16:20:25+08:00
     original="大人(おとな)振(ぶ)って しまう様(よう)な。"
     translation="像大人一样。"
   />
-</LyricCard>
-
-![alt text](<CCD Lecture 2 Electronic Communications.attachments/1778848682009.jpg>)
+</LyricCover>
 
 ## 章节目录
 
@@ -43,7 +42,7 @@ lastUpdated: 2026-05-26T16:20:25+08:00
 | Full duplex | 全双工 | 双方可同时发送和接收 | 电话通话 |
 | Half duplex | 半双工 | 双方都能通信，但同一时刻只有一方发送 | 对讲机、部分无线电系统 |
 
-![alt text](<CCD Lecture 2 Electronic Communications.attachments/duplex.jpg>)
+![alt text](<CCD Lecture 2 Electronic Communications.attachments/duplex_wide.jpg>)
 
 需要注意，duplex 只说明通信方向，不直接说明信号是模拟还是数字。
 

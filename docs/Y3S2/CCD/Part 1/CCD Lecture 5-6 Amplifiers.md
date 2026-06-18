@@ -3,7 +3,8 @@ lastUpdated: 2026-05-30T15:33:21+08:00
 ---
 # Lecture 5-6 Amplifiers 放大器
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 5-6 Amplifiers.attachments/1780057676448.JPG"
   title="Море"
   artist="SadSvit"
   lang="uk"
@@ -17,9 +18,7 @@ lastUpdated: 2026-05-30T15:33:21+08:00
     original="Лиш дай йому свої думи."
     translation="把你的想法告诉它。"
   />
-</LyricCard>
-
-![alt text](<CCD Lecture 5-6 Amplifiers.attachments/1780057676448.JPG>)
+</LyricCover>
 
 ## 章节目录
 
@@ -293,7 +292,7 @@ $$
 C\ge \frac{1}{2\pi f_{\min}X_C}
 $$
 
-![发射极旁路电容的作用](<CCD Lecture 5-6 Amplifiers.attachments/amp_41_emitter_bypass_effect.jpg>)
+![发射极旁路电容的作用](<CCD Lecture 5-6 Amplifiers.attachments/amp_41_emitter_bypass_effect_wide.jpg>)
 
 若没有旁路电容，发射极电阻会进入交流增益公式：
 

@@ -3,7 +3,8 @@ lastUpdated: 2026-05-31T14:55:30+08:00
 ---
 # Lecture 10 Revision 复习
 
-<LyricCard
+<LyricCover
+  image="CCD Lecture 9 Oscillators.attachments/1780209422588.JPG"
   title="Before Summer"
   artist="塞壬唱片-MSR"
   lang="en"
@@ -17,9 +18,7 @@ lastUpdated: 2026-05-31T14:55:30+08:00
     original="Always finding time to play it's funny"
     translation="总在为玩耍寻找时间，这多有趣"
   />
-</LyricCard>
-
-![alt text](<CCD Lecture 9 Oscillators.attachments/1780209422588.JPG>)
+</LyricCover>
 
 ## 章节目录
 

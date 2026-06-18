@@ -148,7 +148,7 @@ const resolvedGroups = computed(() =>
 
       return {
         ...item,
-        coverUrl: resolveCover(item.cover, notePath) || resolveFallbackCover(notePath),
+        coverUrl: resolveFallbackCover(notePath) || resolveCover(item.cover, notePath),
         notePath,
         previewText: coursePreviewByPath[notePath] ?? '',
       }
