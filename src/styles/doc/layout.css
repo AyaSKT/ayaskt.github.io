@@ -1,0 +1,120 @@
+:root {
+  --aya-doc-content-width: 760px;
+  --aya-doc-content-width-with-aside: 760px;
+  --aya-doc-aside-width: 256px;
+  --aya-doc-content-gutter: 32px;
+  --aya-doc-top-gap: 128px;
+}
+
+.VPContent {
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.VPContent.has-sidebar {
+  margin: 0;
+}
+
+.VPDoc {
+  width: 100%;
+  padding: 96px 24px 96px;
+}
+
+.VPDoc > .container {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  padding: 0;
+  gap: 0;
+}
+
+.VPDoc > .container > .content {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  margin: 0 auto;
+}
+
+.VPDoc > .container > .content > .content-container {
+  width: 100%;
+  max-width: var(--aya-doc-content-width);
+  margin: 0 auto;
+}
+
+.VPDoc .main {
+  min-width: 0;
+}
+
+.VPDoc .main > .vp-doc {
+  width: 100%;
+}
+
+.VPDoc .aside {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .VPDoc {
+    padding: var(--aya-doc-top-gap) 32px 128px;
+  }
+}
+
+@media (min-width: 960px) {
+  .VPContent.has-sidebar {
+    padding-left: 0;
+  }
+
+  .VPDoc.has-sidebar {
+    padding-left: var(--vp-sidebar-width);
+  }
+}
+
+@media (min-width: 1280px) {
+  .VPDoc {
+    padding-bottom: 0;
+  }
+
+  .VPDoc > .container {
+    display: flex;
+    justify-content: center;
+    max-width: none;
+    padding: 0;
+    gap: 0;
+  }
+
+  .VPDoc > .container > .content {
+    order: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: calc(var(--aya-doc-content-width) + var(--aya-doc-content-gutter) * 2);
+    margin: 0;
+    padding: 0 var(--aya-doc-content-gutter) 128px;
+  }
+
+  .VPDoc.has-aside > .container > .content > .content-container {
+    max-width: var(--aya-doc-content-width-with-aside);
+  }
+
+  .VPDoc .aside {
+    position: relative;
+    display: block;
+    order: 2;
+    flex: 0 0 var(--aya-doc-aside-width);
+    max-width: var(--aya-doc-aside-width);
+    padding-left: 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .VPDoc.has-sidebar {
+    padding-right: calc((100% - var(--vp-layout-max-width)) / 2 + 32px);
+    padding-left: calc((100% - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
+  }
+}
+
+@media (max-width: 959px) {
+  .VPDoc {
+    padding-top: 88px;
+  }
+}

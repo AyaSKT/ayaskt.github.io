@@ -1,0 +1,94 @@
+.VPDocAsideOutline {
+  display: none;
+  font-family: 'Noto Serif SC', 'SimSun', 'Songti SC', 'STSong', serif;
+}
+
+.VPDocAsideOutline.has-outline {
+  display: block;
+}
+
+.VPDoc .aside-container {
+  position: fixed;
+  top: 0;
+  width: 224px;
+  height: 100vh;
+  padding-top: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 48px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.VPDoc .aside-content {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--vp-nav-height) - var(--vp-layout-top-height, 0px) - 48px);
+  padding-bottom: 32px;
+}
+
+.VPDoc .aside-container::-webkit-scrollbar {
+  display: none;
+}
+
+.VPDocAsideOutline > .content {
+  position: relative;
+  border-left: 1px solid var(--vp-c-divider);
+  padding-left: 16px;
+  font-family: 'Noto Serif SC', 'SimSun', 'Songti SC', 'STSong', serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.VPDocAsideOutline .outline-marker {
+  position: absolute;
+  top: 32px;
+  left: -1px;
+  z-index: 0;
+  width: 2px;
+  height: 18px;
+  border-radius: 2px;
+  opacity: 0;
+  background-color: var(--vp-c-brand-1);
+  transition:
+    top 0.25s cubic-bezier(0, 1, 0.5, 1),
+    height 0.25s cubic-bezier(0, 1, 0.5, 1),
+    background-color 0.5s,
+    opacity 0.25s;
+}
+
+.VPDocAsideOutline .outline-title {
+  color: var(--vp-c-text-1);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.VPDocAsideOutline ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.VPDocAsideOutline li {
+  margin: 0;
+}
+
+.VPDocAsideOutline a {
+  display: block;
+  padding: 4px 0;
+  color: var(--vp-c-text-2);
+  font-size: 14px;
+  line-height: 1.45;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 0.2s var(--ease-ios-fade);
+}
+
+.VPDocAsideOutline .outline-depth-3 a {
+  padding-left: 14px;
+  color: var(--vp-c-text-3);
+}
+
+.VPDocAsideOutline a:hover,
+.VPDocAsideOutline a[data-outline-current] {
+  color: var(--vp-c-text-1);
+}

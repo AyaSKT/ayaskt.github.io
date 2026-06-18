@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from 'astro:transitions'
 import { siteConfig } from '../config/site'
 import '../styles/site.css'
 
@@ -41,6 +42,7 @@ const {
     <meta name="description" content={description} />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
     <title>{title}</title>
+    <ClientRouter />
   </head>
   <body>
     <slot />
@@ -48,6 +50,7 @@ const {
       (() => {
         if (window.__ayaAppearanceSetup) return
         window.__ayaAppearanceSetup = true
+        window.__ayaHasSpaNavigated = false
 
         const STORAGE_KEY = 'vitepress-theme-appearance'
         const root = document.documentElement
@@ -170,6 +173,9 @@ const {
 
         media.addEventListener?.('change', syncAutoPreference)
         media.addListener?.(syncAutoPreference)
+        document.addEventListener('astro:before-preparation', () => {
+          window.__ayaHasSpaNavigated = true
+        })
         window.addEventListener('pageshow', () => applyPreference(readPreference()))
         document.addEventListener('astro:page-load', () => applyPreference(readPreference()))
         applyPreference(readPreference())

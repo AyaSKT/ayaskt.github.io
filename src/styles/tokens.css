@@ -1,10 +1,65 @@
 :root {
   color-scheme: light;
 
+  --aya-gradient-start: #98CBEA;
+  --aya-gradient-middle: #C2C7F8;
+  --aya-gradient-end: #F1DCE4;
+  --aya-gradient-angle: 140deg;
+
+  --vp-c-brand-1: var(--aya-gradient-start);
+  --vp-c-brand-2: var(--aya-gradient-middle);
+  --vp-c-brand-3: var(--aya-gradient-end);
+  --vp-c-border: var(--vp-c-divider);
   --vp-c-bg-elv: #ffffff;
   --vp-c-bg-mute: #f1f1f3;
   --vp-c-default-soft: rgb(142 150 170 / 14%);
   --vp-c-brand-soft: rgb(152 203 234 / 18%);
+  --vp-c-green-1: #18794e;
+  --vp-c-green-soft: rgb(16 185 129 / 14%);
+  --vp-c-red-1: #b8272c;
+  --vp-c-red-soft: rgb(239 68 68 / 14%);
+  --vp-c-purple-1: #8e5cd9;
+  --vp-c-purple-soft: rgb(139 92 246 / 14%);
+
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(
+    var(--aya-gradient-angle),
+    var(--aya-gradient-start) 0%,
+    var(--aya-gradient-middle) 52%,
+    var(--aya-gradient-end) 100%
+  );
+  --vp-home-hero-image-background-image: linear-gradient(
+    var(--aya-gradient-angle),
+    var(--aya-gradient-start) 0%,
+    var(--aya-gradient-middle) 52%,
+    var(--aya-gradient-end) 100%
+  );
+  --vp-home-hero-image-filter: blur(40px);
+
+  --ease-ios-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-ios-slide: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-ios-fade: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-ios-press: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --dur-page: 0.76s;
+  --dur-page-exit: 0.48s;
+  --dur-doc-enter: 0.94s;
+  --dur-sidebar-enter: 0.72s;
+  --dur-sidebar-exit: 0.46s;
+  --dur-panel: 0.62s;
+  --dur-overlay: 0.34s;
+  --dur-menu: 0.32s;
+  --dur-menu-out: 0.22s;
+  --dur-list-item: 0.52s;
+  --dur-reveal: 0.64s;
+  --animate-duration: var(--dur-page);
+  --animate-delay: 0.08s;
+  --xyz-duration-default: var(--dur-reveal);
+  --xyz-stagger-default: 0.04s;
+  --xyz-ease-default: var(--ease-ios-fade);
+
+  --aya-card-surface-bg: var(--vp-c-bg);
+  --aya-card-outline-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 62%, transparent);
+  --aya-card-hover-outline-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 28%, transparent);
 
   --aya-astro-nav-surface-border: rgb(255 255 255 / 58%);
   --aya-astro-nav-surface-bg: rgb(255 255 255 / 32%);
@@ -42,6 +97,14 @@
   --vp-c-gutter: #000000;
   --vp-c-default-soft: rgb(101 117 133 / 16%);
   --vp-c-brand-soft: rgb(152 203 234 / 16%);
+  --vp-c-green-1: #3dd68c;
+  --vp-c-green-soft: rgb(16 185 129 / 16%);
+  --vp-c-red-1: #f66f81;
+  --vp-c-red-soft: rgb(239 68 68 / 16%);
+  --vp-c-purple-1: #c8abfa;
+  --vp-c-purple-soft: rgb(139 92 246 / 16%);
+  --aya-card-outline-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 42%, transparent);
+  --aya-card-hover-outline-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 22%, transparent);
 
   --aya-astro-nav-surface-border: rgb(255 255 255 / 18%);
   --aya-astro-nav-surface-bg: rgb(12 18 28 / 48%);

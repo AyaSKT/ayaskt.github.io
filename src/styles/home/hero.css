@@ -68,6 +68,86 @@
   transition: opacity 0.16s var(--ease-ios-fade, ease);
 }
 
+.hero-image-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-preload {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-tooltip {
+  position: absolute;
+  z-index: 10;
+  border-radius: 999px;
+  padding: 5px 14px;
+  background: rgb(0 0 0 / 72%);
+  color: #fff;
+  font-size: 13px;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 12px));
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+@keyframes fadeInRightCentered {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateX(36px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(0);
+  }
+}
+
+@keyframes fadeInRightCenteredX {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateX(36px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-course-actions:not(.xyz-in) .home-course-group-title,
+  .home-course-actions:not(.xyz-in) .home-course-button {
+    opacity: 0;
+  }
+
+  .VPHero .image-bg {
+    animation: fadeInRightCentered 0.9s var(--ease-ios-fade) 0.18s both;
+  }
+
+  .VPHero .image-src {
+    animation: fadeInRightCentered 0.9s var(--ease-ios-fade) 0.24s both;
+  }
+
+  .hero-hitokoto.desktop-hitokoto {
+    animation: fadeInRightCenteredX 0.82s var(--ease-ios-fade) 0.34s both;
+  }
+
+  .hero-hitokoto.mobile-hitokoto,
+  .VPHero .text {
+    animation: fadeInLeft 0.9s var(--ease-ios-fade) 0.34s both;
+  }
+
+  .VPHero .tagline {
+    animation: fadeInLeft 0.9s var(--ease-ios-fade) 0.24s both;
+  }
+}
+
 .VPHero .tagline {
   max-width: 392px;
   margin: 0 auto;

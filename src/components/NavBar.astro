@@ -13,6 +13,7 @@ const { currentPath } = Astro.props
 const current = normalizeComparablePath(currentPath)
 const hasSidebar = docsSpaces.some((space) => current.startsWith(normalizeComparablePath(space.base)))
 const uestcIcon = uestcIconRaw.replace(/^<\?xml[^>]*>\s*/i, '')
+const sidebarPrefixes = docsSpaces.map((space) => normalizeComparablePath(space.base)).join('|')
 
 function hrefFor(item: NavItem) {
   if (!item.link) return undefined
@@ -29,8 +30,8 @@ function matchesActive(item: NavItem): boolean {
 }
 ---
 
-<header class="VPNav">
-  <div class:list={['VPNavBar', { home: current === '/', top: true, 'has-sidebar': hasSidebar }]}>
+<header class="VPNav" transition:name="site-nav" transition:persist>
+  <div class:list={['VPNavBar', { home: current === '/', top: true, 'has-sidebar': hasSidebar }]} data-sidebar-prefixes={sidebarPrefixes}>
     <div class="wrapper">
       <div class="container">
         <div class="title">
@@ -61,7 +62,7 @@ function matchesActive(item: NavItem): boolean {
 
                 if (item.items?.length) {
                   return (
-                    <div class:list={['VPNavBarMenuGroup', 'VPFlyout', { active }]}>
+                    <div class:list={['VPNavBarMenuGroup', 'VPFlyout', { active }]} data-nav-active-match={item.activeMatch} data-nav-href={href}>
                       <button class="button" type="button" aria-haspopup="true" aria-expanded="false">
                         <span class="text">{item.text}</span>
                         <svg class="text-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
@@ -74,7 +75,7 @@ function matchesActive(item: NavItem): boolean {
                             const childHref = hrefFor(child)
                             const childActive = matchesActive(child)
                             return childHref ? (
-                              <a class:list={['VPMenuLink', { active: childActive }]} href={childHref}>
+                              <a class:list={['VPMenuLink', { active: childActive }]} href={childHref} data-nav-active-match={child.activeMatch} data-nav-href={childHref}>
                                 <span class="text">{child.text}</span>
                               </a>
                             ) : (
@@ -88,7 +89,7 @@ function matchesActive(item: NavItem): boolean {
                 }
 
                 return href ? (
-                  <a class:list={['VPNavBarMenuLink', { active }]} href={href}>
+                  <a class:list={['VPNavBarMenuLink', { active }]} href={href} data-nav-active-match={item.activeMatch} data-nav-href={href}>
                     <span class="text">{item.text}</span>
                   </a>
                 ) : (
@@ -144,13 +145,59 @@ function matchesActive(item: NavItem): boolean {
   </div>
   <script is:inline>
     (() => {
-      const nav = document.querySelector('.VPNavBar')
-      if (!nav) return
+      if (window.__ayaNavRuntimeSetup) {
+        window.__ayaSyncNavRuntime?.()
+        return
+      }
+      window.__ayaNavRuntimeSetup = true
 
-      const update = () => nav.classList.toggle('top', window.scrollY === 0)
+      const normalize = (value) => {
+        try {
+          const url = new URL(value, window.location.href)
+          const path = url.pathname.replace(/\/index\.html$/i, '/').replace(/\.html$/i, '')
+          return path.length > 1 ? path.replace(/\/$/, '') : path
+        } catch {
+          return value
+        }
+      }
+
+      const updateActiveState = (nav) => {
+        const current = normalize(window.location.href)
+        const prefixes = (nav.dataset.sidebarPrefixes || '').split('|').filter(Boolean)
+        nav.classList.toggle('home', current === '/')
+        nav.classList.toggle('has-sidebar', prefixes.some((prefix) => current.startsWith(prefix.replace(/\/$/, ''))))
+
+        const candidates = nav.querySelectorAll('.VPNavBarMenuLink, .VPMenuLink, .VPNavBarMenuGroup')
+        for (const item of candidates) {
+          const activeMatch = item.getAttribute('data-nav-active-match')
+          const href = item.getAttribute('data-nav-href')
+          const isActive = Boolean(activeMatch && new RegExp(activeMatch).test(current))
+            || Boolean(href && normalize(href) === current)
+          item.classList.toggle('active', isActive)
+        }
+
+        nav.querySelectorAll('.VPNavBarMenuGroup').forEach((group) => {
+          const groupMatch = group.getAttribute('data-nav-active-match')
+          const groupHref = group.getAttribute('data-nav-href')
+          const selfActive = Boolean(groupMatch && new RegExp(groupMatch).test(current))
+            || Boolean(groupHref && normalize(groupHref) === current)
+          group.classList.toggle('active', selfActive || Boolean(group.querySelector('.VPMenuLink.active')))
+        })
+      }
+
+      const update = () => {
+        const nav = document.querySelector('.VPNavBar')
+        if (!nav) return
+        nav.classList.toggle('top', window.scrollY === 0)
+        updateActiveState(nav)
+      }
+
+      window.__ayaSyncNavRuntime = update
+
       update()
       window.addEventListener('scroll', update, { passive: true })
       window.addEventListener('pageshow', update)
+      document.addEventListener('astro:after-swap', update)
       document.addEventListener('astro:page-load', update)
     })()
   </script>

@@ -14,45 +14,69 @@ interface Props {
 }
 
 const { doc, html, headings } = Astro.props
-const pageClass = [doc.frontmatter.pageClass, doc.frontmatter.layout === 'home' ? 'home' : ''].filter(Boolean).join(' ')
+const pageClass = ['doc', doc.frontmatter.pageClass, doc.frontmatter.layout === 'home' ? 'home' : ''].filter(Boolean).join(' ')
 const showAside = doc.frontmatter.aside !== false && headings.some((heading) => heading.depth >= 2 && heading.depth <= 3)
 const docsSpace = docsSpaces.find((space) => doc.urlPath.startsWith(space.base))
+const sidebarTransitionName = docsSpace
+  ? `sidebar-${docsSpace.base.replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').toLowerCase()}`
+  : 'sidebar-none'
 ---
 
 <BaseLayout title={`${doc.title} | Ayaskt Workspace`} pageClass={pageClass}>
   <NavBar currentPath={doc.urlPath} />
-  <div class="VPDoc">
-    <div class="container">
-      <aside class="VPSidebar">
+  <div id="VPContent" class:list={['VPContent', { 'has-sidebar': Boolean(docsSpace) }]}> 
+    <div class:list={['VPDoc', { 'has-sidebar': Boolean(docsSpace), 'has-aside': showAside }]}> 
+      <aside class="VPSidebar" transition:name={sidebarTransitionName} transition:persist>
         <nav class="nav" aria-label={docsSpace?.title ?? 'Sidebar navigation'}>
           <div class="sidebar-active-indicator" aria-hidden="true"></div>
           {docsSpace && <SidebarTree items={docsSpace.sidebar} currentPath={doc.urlPath} />}
         </nav>
       </aside>
-      <main class="main">
+
+      <div class="container">
         <div class="content">
           <div class="content-container">
-            <MarkdownContent client:load html={html} path={doc.urlPath} frontmatter={doc.frontmatter} page={{ relativePath: doc.docsPath }} />
+            <main class="main" transition:name="doc-content">
+              <MarkdownContent client:load html={html} path={doc.urlPath} frontmatter={doc.frontmatter} page={{ relativePath: doc.docsPath }} />
+            </main>
           </div>
         </div>
-      </main>
-      {showAside && (
-        <aside class="aside">
-          <nav class="VPDocAsideOutline">
-            <ul>
-              {headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3).map((heading) => (
-                <li class={`outline-depth-${heading.depth}`}>
-                  <a href={`#${heading.slug}`}>{heading.text}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </aside>
-      )}
+
+        {showAside && (
+          <aside class="aside" transition:name="doc-outline">
+            <div class="aside-curtain"></div>
+            <div class="aside-container">
+              <div class="aside-content">
+                <nav class="VPDocAsideOutline has-outline" aria-labelledby="doc-outline-aria-label">
+                  <div class="content">
+                    <div class="outline-marker" aria-hidden="true"></div>
+                    <div class="outline-title" id="doc-outline-aria-label" role="heading" aria-level="2">On this page</div>
+                    <ul class="root">
+                      {headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3).map((heading) => (
+                        <li class={`outline-depth-${heading.depth}`}>
+                          <a href={`#${heading.slug}`}>{heading.text}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </aside>
+        )}
+      </div>
     </div>
   </div>
   <script is:inline>
     (() => {
+      if (window.__ayaDocRuntimeSetup) {
+        window.__ayaSyncDocRuntime?.()
+        return
+      }
+      window.__ayaDocRuntimeSetup = true
+
+      const root = document.documentElement
+
       const normalize = (value) => {
         try {
           const url = new URL(value, window.location.href)
@@ -61,6 +85,11 @@ const docsSpace = docsSpaces.find((space) => doc.urlPath.startsWith(space.base))
         } catch {
           return value
         }
+      }
+
+      const syncDocNavState = () => {
+        root.classList.add('doc-nav-ready')
+        root.classList.remove('doc-nav-animate')
       }
 
       const updateSidebarIndicator = () => {
@@ -87,20 +116,65 @@ const docsSpace = docsSpaces.find((space) => doc.urlPath.startsWith(space.base))
         const links = nav.querySelectorAll('.link[href]')
         for (const link of links) {
           const isCurrent = normalize(link.href) === currentPath
-          link.toggleAttribute('data-sidebar-current', isCurrent)
-          link.toggleAttribute('aria-current', isCurrent)
+          if (isCurrent) {
+            link.setAttribute('data-sidebar-current', 'true')
+            link.setAttribute('aria-current', 'page')
+          } else {
+            link.removeAttribute('data-sidebar-current')
+            link.removeAttribute('aria-current')
+          }
         }
         updateSidebarIndicator()
       }
 
+      const updateOutlineMarker = () => {
+        const outline = document.querySelector('.VPDocAsideOutline')
+        const marker = outline?.querySelector('.outline-marker')
+        const links = outline ? Array.from(outline.querySelectorAll('a[href^="#"]')) : []
+        if (!outline || !marker || links.length === 0) return
+
+        const headings = links
+          .map((link) => {
+            const target = document.getElementById(link.getAttribute('href').slice(1))
+            return target ? { link, target } : undefined
+          })
+          .filter(Boolean)
+
+        const active = [...headings].reverse().find(({ target }) => target.getBoundingClientRect().top <= 112) ?? headings[0]
+        if (!active) return
+
+        links.forEach((link) => link.toggleAttribute('data-outline-current', link === active.link))
+
+        const content = outline.querySelector('.content')
+        const contentRect = content.getBoundingClientRect()
+        const linkRect = active.link.getBoundingClientRect()
+        marker.style.opacity = '1'
+        marker.style.top = `${linkRect.top - contentRect.top}px`
+        marker.style.height = `${linkRect.height}px`
+      }
+
+      const syncDocRuntime = () => {
+        if (!document.querySelector('.VPDoc')) {
+          root.classList.remove('doc-nav-ready', 'doc-nav-animate')
+          return
+        }
+
+        syncDocNavState()
+        syncCurrentLink()
+        requestAnimationFrame(updateOutlineMarker)
+      }
+
+      window.__ayaSyncDocRuntime = syncDocRuntime
+
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', syncCurrentLink, { once: true })
+        document.addEventListener('DOMContentLoaded', syncDocRuntime, { once: true })
       } else {
-        requestAnimationFrame(syncCurrentLink)
+        requestAnimationFrame(syncDocRuntime)
       }
       window.addEventListener('resize', updateSidebarIndicator, { passive: true })
-      window.addEventListener('pageshow', syncCurrentLink)
-      document.addEventListener('astro:page-load', syncCurrentLink)
+      window.addEventListener('scroll', updateOutlineMarker, { passive: true })
+      window.addEventListener('pageshow', syncDocRuntime)
+      document.addEventListener('astro:page-load', syncDocRuntime)
     })()
   </script>
 </BaseLayout>

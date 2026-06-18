@@ -228,17 +228,43 @@ function isImageIcon(icon: string) {
       </section>
     )}
   </main>
-  <script is:inline define:vars={{ heroPool }}>
+  <script is:inline data-astro-rerun define:vars={{ heroPool }}>
     (() => {
-      const image = document.querySelector('.VPHome .hero-image-src')
-      if (image && Array.isArray(heroPool) && heroPool.length) {
-        image.setAttribute('src', heroPool[Date.now() % heroPool.length])
+      window.__ayaHomeHeroPool = Array.isArray(heroPool) ? heroPool : []
+
+      if (window.__ayaHomeRuntimeSetup) {
+        window.__ayaSyncHomeRuntime?.()
+        return
       }
 
-      const wrap = document.querySelector('.hero-image-wrap')
-      const imageTarget = document.querySelector('.hero-image-wrap > .image-src')
-      const tooltip = document.querySelector('.hero-tooltip')
-      if (wrap && imageTarget && tooltip) {
+      window.__ayaHomeRuntimeSetup = true
+      let navMotionTimer
+
+      const shouldAnimateHomeNav = () => !window.__ayaHasSpaNavigated && !window.__ayaHomeNavAnimated
+
+      const getHeroPool = () => {
+        if (Array.isArray(window.__ayaHomeHeroPool) && window.__ayaHomeHeroPool.length) {
+          return window.__ayaHomeHeroPool
+        }
+
+        return Array.from(document.querySelectorAll('.VPHome .hero-preload'))
+          .map((image) => image.getAttribute('src'))
+          .filter(Boolean)
+      }
+
+      const syncHeroImage = () => {
+        const image = document.querySelector('.VPHome .hero-image-src')
+        const pool = getHeroPool()
+        if (image && pool.length) image.setAttribute('src', pool[Date.now() % pool.length])
+      }
+
+      const syncHeroTooltip = () => {
+        const wrap = document.querySelector('.hero-image-wrap')
+        const imageTarget = document.querySelector('.hero-image-wrap > .image-src')
+        const tooltip = document.querySelector('.hero-tooltip')
+        if (!wrap || !imageTarget || !tooltip || imageTarget.dataset.ayaTooltipBound === 'true') return
+
+        imageTarget.dataset.ayaTooltipBound = 'true'
         imageTarget.addEventListener('mousemove', (event) => {
           const rect = wrap.getBoundingClientRect()
           tooltip.style.opacity = '1'
@@ -252,10 +278,23 @@ function isImageIcon(icon: string) {
 
       const runHomeMotion = () => {
         const root = document.documentElement
-        root.classList.add('home-nav-ready', 'home-nav-animate')
-        window.setTimeout(() => {
+        if (!document.querySelector('.VPHome')) {
+          root.classList.remove('home-nav-ready', 'home-nav-animate')
+          return
+        }
+
+        syncHeroImage()
+        syncHeroTooltip()
+
+        root.classList.add('home-nav-ready')
+        window.clearTimeout(navMotionTimer)
+        if (shouldAnimateHomeNav()) {
+          window.__ayaHomeNavAnimated = true
+          root.classList.add('home-nav-animate')
+          navMotionTimer = window.setTimeout(() => root.classList.remove('home-nav-animate'), 700)
+        } else {
           root.classList.remove('home-nav-animate')
-        }, 700)
+        }
 
         const courseActions = document.querySelector('.home-course-actions')
         if (!courseActions) return
@@ -272,7 +311,12 @@ function isImageIcon(icon: string) {
         courseActions.classList.add('xyz-in')
       }
 
-      requestAnimationFrame(() => requestAnimationFrame(runHomeMotion))
+      const syncHomeRuntime = () => requestAnimationFrame(() => requestAnimationFrame(runHomeMotion))
+      window.__ayaSyncHomeRuntime = syncHomeRuntime
+
+      window.addEventListener('pageshow', syncHomeRuntime)
+      document.addEventListener('astro:page-load', syncHomeRuntime)
+      syncHomeRuntime()
     })()
   </script>
 </BaseLayout>

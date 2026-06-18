@@ -1,0 +1,91 @@
+:root {
+  --aya-c-definition-1: #d4851f;
+  --aya-c-definition-soft: rgb(237 155 64 / 12%);
+  --aya-c-warning-1: #b0780c;
+  --aya-c-warning-soft: rgb(200 150 20 / 12%);
+}
+
+.dark {
+  --aya-c-definition-1: #f5b860;
+  --aya-c-definition-soft: rgb(240 168 72 / 14%);
+  --aya-c-warning-1: #fcc850;
+  --aya-c-warning-soft: rgb(252 200 80 / 14%);
+}
+
+.vp-doc .custom-block:not(.example) {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 4.5rem;
+  border: none;
+  border-right: 2px solid var(--vp-c-divider);
+  border-left: 4px solid var(--vp-c-border);
+  border-radius: 0;
+  margin: 1.5em 0;
+  padding: 1.25em 1.5em 1em;
+  overflow-wrap: anywhere;
+  background: var(--vp-c-default-soft);
+  color: var(--vp-c-text-1);
+  font-size: inherit;
+  line-height: 1.8;
+}
+
+.vp-doc .custom-block:not(.example) .custom-block-title {
+  margin: 0 0 0.5em;
+  color: var(--vp-c-text-2);
+  font-size: 0.92em;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.vp-doc .custom-block:not(.example) p {
+  margin: 0.4em 0;
+}
+
+.vp-doc .custom-block.info,
+.vp-doc .custom-block.details {
+  border-right-color: var(--vp-c-brand-1);
+  border-left-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+}
+
+.vp-doc .custom-block.note {
+  border-right-color: var(--vp-c-text-2);
+  border-left-color: var(--vp-c-text-2);
+}
+
+.vp-doc .custom-block.tip {
+  border-right-color: var(--vp-c-green-1);
+  border-left-color: var(--vp-c-green-1);
+  background: var(--vp-c-green-soft);
+}
+
+.vp-doc .custom-block.warning {
+  border-right-color: var(--aya-c-warning-1);
+  border-left-color: var(--aya-c-warning-1);
+  background: var(--aya-c-warning-soft);
+}
+
+.vp-doc .custom-block.danger,
+.vp-doc .custom-block.caution {
+  border-right-color: var(--vp-c-red-1);
+  border-left-color: var(--vp-c-red-1);
+  background: var(--vp-c-red-soft);
+}
+
+.vp-doc .custom-block.important {
+  border-right-color: var(--vp-c-purple-1);
+  border-left-color: var(--vp-c-purple-1);
+  background: var(--vp-c-purple-soft);
+}
+
+.vp-doc .custom-block.definition {
+  border-right-color: var(--aya-c-definition-1);
+  border-left-color: var(--aya-c-definition-1);
+  background: var(--aya-c-definition-soft);
+}
+
+.vp-doc .custom-block a {
+  color: inherit;
+}

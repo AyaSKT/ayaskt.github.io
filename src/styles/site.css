@@ -1,8 +1,6 @@
 @import './vitepress-base.css';
 @import 'animate.css';
 @import '@animxyz/core/dist/animxyz.css';
-@import '../../docs/.vitepress/theme/style/index.css';
-@import '../../docs/.vitepress/theme/custom.css';
 @import 'katex/dist/katex.min.css';
 @import './tokens.css';
 @import './base.css';
@@ -11,3 +9,9 @@
 @import './shell/nav-motion.css';
 @import './shell/nav.css';
 @import './home/hero.css';
+@import './doc/layout.css';
+@import './doc/typography.css';
+@import './doc/sidebar.css';
+@import './doc/outline.css';
+@import './doc/custom-blocks.css';
+@import './doc/transitions.css';

@@ -30,6 +30,10 @@
   padding: 0 32px;
 }
 
+.VPNav .VPNavBar.home .container {
+  max-width: var(--vp-layout-max-width);
+}
+
 .VPNav .VPNavBar.has-sidebar .container {
   max-width: 100%;
 }

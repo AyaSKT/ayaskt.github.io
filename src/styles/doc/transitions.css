@@ -1,0 +1,104 @@
+@media (prefers-reduced-motion: no-preference) {
+  html.doc:not(.doc-nav-ready) .VPNav .VPNavBar:not(.home) .VPNavBarTitle .title,
+  html.doc:not(.doc-nav-ready) .VPNav .VPNavBar:not(.home) .DocSearch-Button,
+  html.doc:not(.doc-nav-ready) .VPNav .VPNavBar:not(.home) .VPNavBarMenu,
+  html.doc:not(.doc-nav-ready) .VPNav .VPNavBar:not(.home) .VPNavBarAppearance,
+  html.doc:not(.doc-nav-ready) .VPNav .VPNavBar:not(.home) .reading-mode-control,
+  html.doc:not(.doc-nav-ready) .VPNav .VPNavBar:not(.home) .VPNavBarSocialLinks {
+    transform: translateY(-12px);
+  }
+
+  html.doc-nav-animate .VPNav .VPNavBar:not(.home) .VPNavBarTitle .title,
+  html.doc-nav-animate .VPNav .VPNavBar:not(.home) .DocSearch-Button,
+  html.doc-nav-animate .VPNav .VPNavBar:not(.home) .VPNavBarMenu,
+  html.doc-nav-animate .VPNav .VPNavBar:not(.home) .VPNavBarAppearance,
+  html.doc-nav-animate .VPNav .VPNavBar:not(.home) .reading-mode-control,
+  html.doc-nav-animate .VPNav .VPNavBar:not(.home) .VPNavBarSocialLinks {
+    animation: ayaNavSurfaceDropIn 0.58s var(--ease-ios-fade) both;
+  }
+
+  html.doc:not(.doc-nav-ready) .VPNav .VPNavBar:not(.home) .VPNavBarTitle .title > *,
+  html.doc:not(.doc-nav-ready) .VPNav .VPNavBar:not(.home) .DocSearch-Button > *,
+  html.doc:not(.doc-nav-ready) .VPNav .VPNavBar:not(.home) .VPNavBarMenuLink > .text,
+  html.doc:not(.doc-nav-ready) .VPNav .VPNavBar:not(.home) .VPNavBarMenuGroup > .button > .text,
+  html.doc:not(.doc-nav-ready) .VPNav .VPNavBar:not(.home) .VPNavBarMenuGroup > .button > .text-icon,
+  html.doc:not(.doc-nav-ready) .VPNav .VPNavBar:not(.home) .VPNavBarAppearance .button > *,
+  html.doc:not(.doc-nav-ready) .VPNav .VPNavBar:not(.home) .reading-mode-button > *,
+  html.doc:not(.doc-nav-ready) .VPNav .VPNavBar:not(.home) .VPSocialLink > * {
+    opacity: 0;
+  }
+
+  html.doc-nav-animate .VPNav .VPNavBar:not(.home) .VPNavBarTitle .title > *,
+  html.doc-nav-animate .VPNav .VPNavBar:not(.home) .DocSearch-Button > *,
+  html.doc-nav-animate .VPNav .VPNavBar:not(.home) .VPNavBarMenuLink > .text,
+  html.doc-nav-animate .VPNav .VPNavBar:not(.home) .VPNavBarMenuGroup > .button > .text,
+  html.doc-nav-animate .VPNav .VPNavBar:not(.home) .VPNavBarMenuGroup > .button > .text-icon,
+  html.doc-nav-animate .VPNav .VPNavBar:not(.home) .VPNavBarAppearance .button > *,
+  html.doc-nav-animate .VPNav .VPNavBar:not(.home) .reading-mode-button > *,
+  html.doc-nav-animate .VPNav .VPNavBar:not(.home) .VPSocialLink > * {
+    animation: ayaNavContentFadeIn 0.46s var(--ease-ios-fade) 0.08s both;
+  }
+}
+
+::view-transition-group(doc-content),
+::view-transition-group(doc-outline) {
+  overflow: visible;
+}
+
+::view-transition-old(doc-content),
+::view-transition-new(doc-content),
+::view-transition-old(doc-outline),
+::view-transition-new(doc-outline) {
+  object-fit: none;
+  object-position: top left;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(doc-content) {
+  animation: ayaDocFadeOutLeft 0.28s var(--ease-ios-fade) both;
+}
+
+::view-transition-new(doc-content) {
+  animation: ayaDocFadeInRight 0.54s var(--ease-ios-fade) both;
+}
+
+::view-transition-old(doc-outline) {
+  animation: fadeOut 0.22s var(--ease-ios-fade) both;
+}
+
+::view-transition-new(doc-outline) {
+  animation: fadeIn 0.36s var(--ease-ios-fade) both;
+}
+
+@keyframes ayaDocFadeOutLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+}
+
+@keyframes ayaDocFadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(doc-content),
+  ::view-transition-new(doc-content),
+  ::view-transition-old(doc-outline),
+  ::view-transition-new(doc-outline) {
+    animation: none;
+  }
+}
