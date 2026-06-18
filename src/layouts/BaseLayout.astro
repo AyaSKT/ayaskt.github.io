@@ -18,6 +18,24 @@ const {
 <!doctype html>
 <html lang={siteConfig.lang} class={pageClass}>
   <head>
+    <script is:inline>
+      (() => {
+        const STORAGE_KEY = 'vitepress-theme-appearance'
+        const root = document.documentElement
+        const readPreference = () => {
+          try {
+            return localStorage.getItem(STORAGE_KEY) || 'auto'
+          } catch {
+            return 'auto'
+          }
+        }
+        const prefersDark = () => window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false
+        const preference = readPreference()
+        const isDark = preference === 'dark' || (preference !== 'light' && prefersDark())
+        root.classList.toggle('dark', isDark)
+        root.style.colorScheme = isDark ? 'dark' : 'light'
+      })()
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
@@ -26,5 +44,136 @@ const {
   </head>
   <body>
     <slot />
+    <script is:inline>
+      (() => {
+        if (window.__ayaAppearanceSetup) return
+        window.__ayaAppearanceSetup = true
+
+        const STORAGE_KEY = 'vitepress-theme-appearance'
+        const root = document.documentElement
+        const media = window.matchMedia('(prefers-color-scheme: dark)')
+
+        const readPreference = () => {
+          try {
+            return localStorage.getItem(STORAGE_KEY) || 'auto'
+          } catch {
+            return 'auto'
+          }
+        }
+
+        const writePreference = (preference) => {
+          try {
+            localStorage.setItem(STORAGE_KEY, preference)
+          } catch {
+            // Ignore storage failures in private or restricted contexts.
+          }
+        }
+
+        const resolveDark = (preference) => preference === 'dark' || (preference !== 'light' && media.matches)
+
+        const updateButtons = (isDark) => {
+          document.querySelectorAll('.VPSwitchAppearance').forEach((button) => {
+            button.setAttribute('aria-pressed', String(isDark))
+            button.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode')
+            button.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode')
+          })
+        }
+
+        const applyPreference = (preference, { persist = false } = {}) => {
+          if (persist) writePreference(preference)
+          const isDark = resolveDark(preference)
+          root.classList.toggle('dark', isDark)
+          root.style.colorScheme = isDark ? 'dark' : 'light'
+          updateButtons(isDark)
+          return isDark
+        }
+
+        const canTransition = () => (
+          'startViewTransition' in document &&
+          window.matchMedia('(prefers-reduced-motion: no-preference)').matches
+        )
+
+        const appearanceCenter = (event) => {
+          if (Number.isFinite(event.clientX) && Number.isFinite(event.clientY)) {
+            return { x: event.clientX, y: event.clientY }
+          }
+
+          const switchEl = event.target?.closest?.('.VPSwitchAppearance')
+            ?? document.querySelector('.VPNavBarAppearance .VPSwitchAppearance')
+
+          if (switchEl instanceof HTMLElement) {
+            const rect = switchEl.getBoundingClientRect()
+            return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
+          }
+
+          return { x: window.innerWidth / 2, y: window.innerHeight / 2 }
+        }
+
+        const setPreference = async (preference, event) => {
+          const nextDark = resolveDark(preference)
+
+          if (!canTransition()) {
+            applyPreference(preference, { persist: true })
+            return
+          }
+
+          const { x, y } = appearanceCenter(event)
+          const radius = Math.hypot(
+            Math.max(x, innerWidth - x),
+            Math.max(y, innerHeight - y),
+          )
+          const clipPath = [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${radius}px at ${x}px ${y}px)`,
+          ]
+
+          root.classList.add('vt-appearance')
+
+          try {
+            const transition = document.startViewTransition(() => {
+              applyPreference(preference, { persist: true })
+            })
+
+            await transition.ready
+
+            const animation = root.animate(
+              { clipPath: nextDark ? clipPath.slice().reverse() : clipPath },
+              {
+                duration: 300,
+                easing: 'ease-in',
+                fill: 'forwards',
+                pseudoElement: `::view-transition-${nextDark ? 'old' : 'new'}(root)`,
+              },
+            )
+
+            await Promise.allSettled([transition.finished, animation.finished])
+          } catch {
+            applyPreference(preference, { persist: true })
+          } finally {
+            root.classList.remove('vt-appearance')
+          }
+        }
+
+        document.addEventListener('click', (event) => {
+          if (!(event.target instanceof Element)) return
+
+          const button = event.target.closest('.VPSwitchAppearance')
+          if (!button) return
+
+          event.preventDefault()
+          setPreference(root.classList.contains('dark') ? 'light' : 'dark', event)
+        })
+
+        const syncAutoPreference = () => {
+          if (readPreference() === 'auto') applyPreference('auto')
+        }
+
+        media.addEventListener?.('change', syncAutoPreference)
+        media.addListener?.(syncAutoPreference)
+        window.addEventListener('pageshow', () => applyPreference(readPreference()))
+        document.addEventListener('astro:page-load', () => applyPreference(readPreference()))
+        applyPreference(readPreference())
+      })()
+    </script>
   </body>
 </html>

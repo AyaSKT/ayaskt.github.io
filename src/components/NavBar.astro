@@ -99,10 +99,13 @@ function matchesActive(item: NavItem): boolean {
               })}
             </nav>
             <div class="VPNavBarAppearance appearance">
-              <button class="button VPSwitchAppearance" type="button" aria-label="Toggle dark mode">
-                <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <button class="button VPSwitchAppearance" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+                <svg class="nav-icon appearance-icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8" />
                   <path d="M12 2.5v3M12 18.5v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2.5 12h3M18.5 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" />
+                </svg>
+                <svg class="nav-icon appearance-icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M20.2 14.45A7.65 7.65 0 0 1 9.55 3.8 8.65 8.65 0 1 0 20.2 14.45Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" />
                 </svg>
               </button>
             </div>

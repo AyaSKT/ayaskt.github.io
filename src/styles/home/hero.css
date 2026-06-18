@@ -1,0 +1,231 @@
+/* Match VitePress' home hero structure, then let the legacy theme decorate it. */
+.VPHome {
+  min-height: 100vh;
+  padding-top: var(--vp-nav-height);
+  overflow: hidden;
+}
+
+.VPHero {
+  margin-top: calc((var(--vp-nav-height) + var(--vp-layout-top-height, 0px)) * -1);
+  padding: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 48px) 24px 48px;
+}
+
+.VPHero .container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1152px;
+  margin: 0 auto;
+  gap: 0;
+}
+
+.VPHero .main {
+  position: relative;
+  z-index: 10;
+  order: 2;
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: auto;
+  max-width: none;
+  text-align: center;
+}
+
+.VPHero.has-image .main {
+  max-width: none;
+}
+
+.VPHero .heading {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.VPHero .name,
+.VPHero .text {
+  width: fit-content;
+  max-width: 392px;
+  margin: 0 auto;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: -0.4px;
+  white-space: pre-wrap;
+}
+
+.VPHero .name {
+  color: var(--vp-home-hero-name-color);
+  background: var(--vp-home-hero-name-background);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: var(--vp-home-hero-name-color);
+}
+
+.hero-name-wrapper {
+  display: inline-block;
+}
+
+.VPHome .hero-tooltip {
+  opacity: 0;
+  transition: opacity 0.16s var(--ease-ios-fade, ease);
+}
+
+.VPHero .tagline {
+  max-width: 392px;
+  margin: 0 auto;
+  padding-top: 8px;
+  color: var(--vp-c-text-2);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 28px;
+  white-space: pre-wrap;
+}
+
+.VPHero .image {
+  order: 1;
+  width: auto;
+  height: auto;
+  margin: -76px -24px -48px;
+}
+
+.VPHero .image-container {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  margin: 0 auto;
+}
+
+.VPHero .image-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 192px;
+  height: 192px;
+  border-radius: 50%;
+  background-image: var(--vp-home-hero-image-background-image);
+  filter: var(--vp-home-hero-image-filter);
+  transform: translate(-50%, -50%);
+}
+
+.VPHero .image-src {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 192px;
+  max-height: 192px;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+}
+
+.VPHero a.image-src > img,
+.VPHero img.image-src {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 640px) {
+  .VPHero {
+    padding: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 80px) 48px 64px;
+  }
+
+  .VPHero .name,
+  .VPHero .text {
+    max-width: 576px;
+    font-size: 48px;
+    line-height: 56px;
+  }
+
+  .VPHero .tagline {
+    max-width: 576px;
+    padding-top: 12px;
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  .VPHero .image {
+    margin: -108px -24px -48px;
+  }
+
+  .VPHero .image-container {
+    width: 392px;
+    height: 392px;
+  }
+
+  .VPHero .image-bg,
+  .VPHero .image-src {
+    max-width: 256px;
+    max-height: 256px;
+  }
+
+  .VPHero .image-bg {
+    width: 256px;
+    height: 256px;
+  }
+}
+
+@media (min-width: 960px) {
+  .VPHero {
+    padding: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 80px) 64px 64px;
+  }
+
+  .VPHero .container {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .VPHero .main {
+    order: 1;
+    width: calc((100% / 3) * 2);
+    text-align: left;
+  }
+
+  .VPHero.has-image .main {
+    max-width: 592px;
+  }
+
+  .VPHero .name,
+  .VPHero .text,
+  .VPHero .tagline {
+    margin: 0;
+  }
+
+  .VPHero .name,
+  .VPHero .text {
+    font-size: 56px;
+    line-height: 64px;
+  }
+
+  .VPHero .tagline {
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  .VPHero .image {
+    flex-grow: 1;
+    order: 2;
+    min-height: 100%;
+    margin: 0;
+  }
+
+  .VPHero .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    transform: translate(-32px, -32px);
+  }
+
+  .VPHero .image-bg,
+  .VPHero .image-src {
+    max-width: 320px;
+    max-height: 320px;
+  }
+
+  .VPHero .image-bg {
+    width: 320px;
+    height: 320px;
+  }
+}

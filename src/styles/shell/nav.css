@@ -1,0 +1,233 @@
+/* Put dropdown glass on the outer floating layer. A transformed/isolation-wrapped
+   child backdrop-filter degrades to tint-only in Chromium/WebKit. */
+@media (min-width: 768px) {
+  .VPNav .VPNavBar .VPFlyout > .menu {
+    overflow: hidden !important;
+    padding-top: 0 !important;
+    border: 1px solid var(--aya-astro-menu-border) !important;
+    border-radius: 24px !important;
+    background: var(--aya-astro-menu-bg) !important;
+    background-color: var(--aya-astro-menu-bg-color) !important;
+    box-shadow: var(--aya-astro-menu-shadow) !important;
+    backdrop-filter: saturate(185%) blur(34px) !important;
+    -webkit-backdrop-filter: saturate(185%) blur(34px) !important;
+    isolation: auto !important;
+    transform: none !important;
+    will-change: opacity !important;
+  }
+
+  .VPNav .VPNavBar .VPFlyout:not(:hover) > .button[aria-expanded="false"] + .menu,
+  .VPNav .VPNavBar .VPFlyout > .menu[data-aya-nav-menu-state="closed"],
+  .VPNav .VPNavBar .VPFlyout:not(:hover) > .button[aria-expanded="false"] + .menu[data-aya-nav-menu-state="closing"] {
+    transform: none !important;
+  }
+
+  .VPNav .VPNavBar .VPFlyout:not(:hover) > .button[aria-expanded="false"] + .menu[data-aya-nav-menu-state="open"],
+  .VPNav .VPNavBar .VPFlyout > .menu[data-aya-nav-menu-state="open"],
+  .VPNav .VPNavBar .VPFlyout:hover > .button + .menu,
+  .VPNav .VPNavBar .VPFlyout > .button[aria-expanded="true"] + .menu {
+    transform: none !important;
+  }
+
+  .VPNav .VPNavBar .VPFlyout > .menu::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    background: var(--aya-astro-menu-glint);
+    pointer-events: none;
+  }
+
+  .VPNav .VPNavBar .VPFlyout > .menu > .VPMenu {
+    position: relative;
+    z-index: 1;
+    overflow: visible !important;
+    min-width: 224px;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 16px 18px !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    isolation: auto !important;
+  }
+
+  .VPNav .VPNavBar .VPFlyout > .menu > .VPMenu::before {
+    content: none !important;
+  }
+}
+
+.VPNavBarTitle .title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.VPNavBarTitle .nav-site-logo {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.VPNav .VPNavBar .nav-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  color: currentColor;
+}
+
+.VPNav .VPNavBar .appearance-icon-moon {
+  display: none;
+}
+
+.dark .VPNav .VPNavBar .appearance-icon-sun {
+  display: none;
+}
+
+.dark .VPNav .VPNavBar .appearance-icon-moon {
+  display: block;
+}
+
+.VPNav .VPNavBar .social-image {
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.VPNav .VPNavBar .social-image > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.VPNav .VPNavBar .VPSocialLink {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 !important;
+  font-size: 0;
+}
+
+.VPNav .VPNavBar .VPNavBarAppearance {
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  margin-left: 0 !important;
+  border-radius: 999px !important;
+  padding: 0 !important;
+}
+
+.VPNav .VPNavBar .reading-mode-control {
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  margin-left: 0 !important;
+  border-radius: 999px !important;
+  padding: 0 !important;
+}
+
+.VPNav .VPNavBar .VPNavBarAppearance .button,
+.VPNav .VPNavBar .reading-mode-button {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  padding: 0 !important;
+}
+
+.VPNav .VPNavBar .VPNavBarAppearance .button,
+.VPNav .VPNavBar .reading-mode-button,
+.VPNav .VPNavBar .VPSocialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Stable frosted surfaces for the Astro shell. */
+.VPNav .VPNavBar .VPNavBarMenu,
+.VPNav .VPNavBar .DocSearch-Button,
+.VPNav .VPNavBar .VPNavBarSearchButton,
+.VPNav .VPNavBar .VPNavBarExtra > .button,
+.VPNav .VPNavBar .VPNavBarAppearance,
+.VPNav .VPNavBar .reading-mode-control,
+.VPNav .VPNavBar .VPNavBarSocialLinks {
+  border: 1px solid var(--aya-astro-nav-surface-border) !important;
+  background: var(--aya-astro-nav-surface-bg) !important;
+  background-color: var(--aya-astro-nav-surface-bg) !important;
+  box-shadow: var(--aya-astro-nav-surface-shadow) !important;
+  backdrop-filter: saturate(180%) blur(24px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(24px) !important;
+}
+
+.VPNav .VPNavBar .VPNavBarMenuLink.active,
+.VPNav .VPNavBar .VPNavBarMenuGroup.active > .button {
+  background: var(--aya-astro-nav-active-bg) !important;
+  background-color: var(--aya-astro-nav-active-bg) !important;
+  box-shadow: var(--aya-astro-nav-active-shadow) !important;
+  backdrop-filter: saturate(180%) blur(12px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(12px) !important;
+}
+
+@media (min-width: 768px) {
+  .VPNav .VPNavBar .VPNavBarMenu {
+    background: transparent !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .VPNav .VPNavBar .content-body {
+    gap: 14px;
+  }
+
+  .VPNav .VPNavBar .VPNavBarSearch,
+  .VPNav .VPNavBar .VPNavBarMenu,
+  .VPNav .VPNavBar .VPNavBarAppearance,
+  .VPNav .VPNavBar .reading-mode-control,
+  .VPNav .VPNavBar .VPNavBarSocialLinks {
+    margin-left: 0 !important;
+  }
+
+  .VPNav .VPNavBar .VPNavBarSocialLinks {
+    height: 38px;
+    padding: 0 4px;
+    border-radius: 999px !important;
+    gap: 0;
+  }
+
+  .VPNav .VPNavBar .VPNavBarMenuGroup > .button {
+    gap: 6px;
+  }
+
+  .VPNav .VPNavBar .VPNavBarMenuGroup > .button .text-icon {
+    display: block;
+    flex: 0 0 14px;
+    width: 14px;
+    height: 14px;
+    margin: 0;
+  }
+
+  .VPNav .VPNavBar .VPNavBarMenu::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-radius: inherit;
+    background: var(--aya-astro-nav-surface-bg);
+    background-color: var(--aya-astro-nav-surface-bg);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    pointer-events: none;
+  }
+
+  .VPNav .VPNavBar .VPNavBarMenu > * {
+    position: relative;
+    z-index: 1;
+  }
+}

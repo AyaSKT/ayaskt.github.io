@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+}
+
+a {
+  color: inherit;
+}
+
+.markdown-component-block {
+  display: contents;
+}
