@@ -12,6 +12,34 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.7 - 2026-06-18
+
+### 新增
+
+- 新增 flat frosted surface token 层 `surface.css`，统一管理平面毛玻璃的背景、边框、模糊与阴影变量，并在主题样式入口中先于各 material consumer 引入。
+- 新增 `test:frosted-surface` 回归测试，覆盖旧 `liquid` / `glass` / `highlight` 反射 token、方向性白色高光渐变，以及 MindMap / CourseIndex / SongCard 等组件表面契约。
+- 新增 frosted surface 重构设计规格与实施计划文档，记录从液态玻璃/反射层迁移到平面毛玻璃的边界与验收标准。
+- 新增 Catppuccin 主题迁移设计规格文档，记录后续主题语义色迁移方向。
+
+### 调整
+
+- 将搜索框、Feature 卡片、导航栏阴影带、导航标签、下拉菜单、移动端导航按钮与文档侧栏窗口的表面样式，从旧液态玻璃/反射命名迁移到 flat frosted / gaussian blur token。
+- 将纯净阅读模式导航按钮同步到新的 frosted nav token，并更新阅读模式测试，使隐藏导航栏时仍保持实时可绘制的模糊表面。
+- 将 MindMap 顶部控制条与导出菜单的本地 `glass` / `highlight` token 改为 frosted blur token，并关闭控制条、菜单伪元素上的反射背景层。
+- 将 CourseIndex 与 SongCard 卡片背景从“高光渐变 + 底色”调整为单层平面底色，hover 态继续使用原有品牌色混合背景。
+- 清理 transition 与 surface 注释中的玻璃/反射表述，改为中性的模糊表面描述。
+
+### 修复
+
+- 修复导航 frosted token 改名后，纯净阅读模式仍引用旧 nav glass 变量导致部分 `backdrop-filter` 声明失效的风险。
+- 修复主题组件测试仍期待旧 MindMap `glass` token 与 SongCard `highlight` token 的问题，改为断言 frosted 命名与 flat background。
+- 保持导航、侧栏、MindMap、CourseIndex、SongCard 等组件原有阴影栈不变，避免清理反射层时误删卡片深度阴影。
+
+### 删减
+
+- 移除生产 UI 代码中的旧 `liquid` / `glass` / `highlight` 反射 material token 与方向性白色高光渐变层。
+- 移除 CourseIndex / SongCard 的卡片 `highlight` overlay 变量，以及 MindMap 的本地 `glass` / `highlight` 表面变量。
+
 ## V6.6.6 - 2026-06-17
 
 ### 新增
