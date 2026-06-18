@@ -12,8 +12,8 @@
   --aya-sidebar-active-bg: rgb(152 203 234 / 20%);
   --aya-sidebar-active-text: #3a7a9b;
   --aya-sidebar-window-shadow: 0 18px 42px rgb(92 102 114 / 18%);
-  --aya-sidebar-glass: blur(22px);
-  --aya-sidebar-item-glass: blur(12px);
+  --aya-sidebar-frosted-blur: blur(22px);
+  --aya-sidebar-item-frosted-blur: blur(12px);
   --aya-sidebar-layout-offset: max(0px, calc((100vw - var(--vp-layout-max-width)) / 2));
 }
 
@@ -55,8 +55,8 @@
     background: var(--aya-sidebar-bg);
     background-clip: padding-box;
     box-shadow: var(--aya-sidebar-window-shadow);
-    backdrop-filter: var(--aya-sidebar-glass);
-    -webkit-backdrop-filter: var(--aya-sidebar-glass);
+    backdrop-filter: var(--aya-sidebar-frosted-blur);
+    -webkit-backdrop-filter: var(--aya-sidebar-frosted-blur);
     transform: translateZ(0);
     backface-visibility: hidden;
     isolation: isolate;
@@ -132,8 +132,8 @@
 
   html:has(.VPDoc) .VPSidebar .VPSidebarItem.level-0 > .item:hover {
     background: var(--aya-sidebar-hover);
-    backdrop-filter: var(--aya-sidebar-item-glass);
-    -webkit-backdrop-filter: var(--aya-sidebar-item-glass);
+    backdrop-filter: var(--aya-sidebar-item-frosted-blur);
+    -webkit-backdrop-filter: var(--aya-sidebar-item-frosted-blur);
   }
 
   html:has(.VPDoc) .VPSidebar .VPSidebarItem .items {
@@ -185,8 +185,8 @@
   html:has(.VPDoc) .VPSidebar .VPSidebarItem .link:hover {
     color: var(--aya-sidebar-text-strong);
     background: var(--aya-sidebar-hover);
-    backdrop-filter: var(--aya-sidebar-item-glass);
-    -webkit-backdrop-filter: var(--aya-sidebar-item-glass);
+    backdrop-filter: var(--aya-sidebar-item-frosted-blur);
+    -webkit-backdrop-filter: var(--aya-sidebar-item-frosted-blur);
   }
 
   html:has(.VPDoc) .VPSidebar .VPSidebarItem.is-active > .item > .link,
@@ -270,8 +270,8 @@
     background: var(--aya-sidebar-bg) !important;
     background-clip: padding-box;
     box-shadow: var(--aya-sidebar-window-shadow);
-    backdrop-filter: var(--aya-sidebar-glass);
-    -webkit-backdrop-filter: var(--aya-sidebar-glass);
+    backdrop-filter: var(--aya-sidebar-frosted-blur);
+    -webkit-backdrop-filter: var(--aya-sidebar-frosted-blur);
     overflow: hidden auto;
     overscroll-behavior: contain;
     isolation: isolate;
