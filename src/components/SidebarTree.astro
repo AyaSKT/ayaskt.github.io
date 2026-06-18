@@ -7,9 +7,10 @@ interface Props {
   items: SidebarItem[]
   currentPath: string
   level?: number
+  groupKey?: string
 }
 
-const { items, currentPath, level = 0 } = Astro.props
+const { items, currentPath, level = 0, groupKey = 'root' } = Astro.props
 const current = normalizeComparablePath(currentPath)
 
 function itemHref(item: SidebarItem) {
@@ -24,18 +25,40 @@ function itemIsCurrent(item: SidebarItem) {
 function itemContainsCurrent(item: SidebarItem): boolean {
   return itemIsCurrent(item) || item.items?.some(itemContainsCurrent) === true
 }
+
+function keyPart(value: string, index: number) {
+  return `${index}-${value.toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]+/gi, '-').replace(/^-|-$/g, '')}`
+}
 ---
 
-{items.map((item) => {
+{items.map((item, index) => {
   const href = itemHref(item)
   const isCurrent = itemIsCurrent(item)
   const isActive = itemContainsCurrent(item)
   const hasChildren = item.items && item.items.length > 0
+  const sidebarGroupId = `${groupKey}/${keyPart(href ?? item.text, index)}`
+  const isCollapsed = Boolean(hasChildren && item.collapsed && !isActive)
 
   return (
-    <div class:list={['VPSidebarItem', `level-${level}`, { collapsed: item.collapsed, 'is-active': isActive }]}>
+    <div
+      class:list={['VPSidebarItem', `level-${level}`, { collapsed: isCollapsed, 'is-active': isActive, 'has-children': hasChildren }]}
+      data-sidebar-group-id={hasChildren ? sidebarGroupId : undefined}
+      data-sidebar-collapsed={hasChildren && isCollapsed ? 'true' : undefined}
+    >
       <div class="item">
-        {href ? (
+        {hasChildren ? (
+          <button
+            class="sidebar-group-toggle"
+            type="button"
+            aria-expanded={isCollapsed ? 'false' : 'true'}
+            aria-controls={`sidebar-items-${sidebarGroupId}`}
+          >
+            <span class="text">{item.text}</span>
+            <svg class="caret" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path d="M4.2 6.2 8 10l3.8-3.8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" />
+            </svg>
+          </button>
+        ) : href ? (
           <a class="link" href={href} data-sidebar-current={isCurrent ? 'true' : undefined} aria-current={isCurrent ? 'page' : undefined}>
             <span class="text">{item.text}</span>
           </a>
@@ -44,8 +67,13 @@ function itemContainsCurrent(item: SidebarItem): boolean {
         )}
       </div>
       {hasChildren && (
-        <div class="items">
-          <SidebarTree items={item.items ?? []} currentPath={currentPath} level={level + 1} />
+        <div class="items" id={`sidebar-items-${sidebarGroupId}`} data-sidebar-motion>
+          {href && (
+            <a class="link sidebar-group-link" href={href} data-sidebar-current={isCurrent ? 'true' : undefined} aria-current={isCurrent ? 'page' : undefined}>
+              <span class="text">{item.text}</span>
+            </a>
+          )}
+          <SidebarTree items={item.items ?? []} currentPath={currentPath} level={level + 1} groupKey={sidebarGroupId} />
         </div>
       )}
     </div>

@@ -30,31 +30,6 @@
   padding: 0 32px;
 }
 
-.VPNav .VPNavBar.home .container {
-  max-width: var(--vp-layout-max-width);
-}
-
-.VPNav .VPNavBar.has-sidebar .container {
-  max-width: 100%;
-}
-
-.VPNav .VPNavBar.has-sidebar > .wrapper > .container > .title {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  width: var(--vp-sidebar-width);
-  height: var(--vp-nav-height);
-  padding: 0 32px;
-}
-
-.VPNav .VPNavBar.has-sidebar .content {
-  position: relative;
-  z-index: 1;
-  padding-right: 32px;
-  padding-left: var(--vp-sidebar-width);
-}
-
 .VPNav .VPNavBar .title,
 .VPNav .VPNavBar .content,
 .VPNav .VPNavBar .wrapper,
@@ -90,29 +65,9 @@
   height: 1px;
 }
 
-.VPNav .VPNavBar.has-sidebar .divider {
-  padding-left: var(--vp-sidebar-width);
-}
-
 .VPNav .VPNavBar .divider-line {
   width: 100%;
   height: 1px;
-}
-
-@media (min-width: 1440px) {
-  .VPNav .VPNavBar.has-sidebar > .wrapper > .container > .title {
-    width: calc((100% - (var(--vp-layout-max-width) - 64px)) / 2 + var(--vp-sidebar-width) - 32px);
-    padding-left: max(32px, calc((100% - (var(--vp-layout-max-width) - 64px)) / 2));
-  }
-
-  .VPNav .VPNavBar.has-sidebar .content {
-    padding-right: calc((100% - var(--vp-layout-max-width)) / 2 + 32px);
-    padding-left: calc((100% - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
-  }
-
-  .VPNav .VPNavBar.has-sidebar .divider {
-    padding-left: calc((100% - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
-  }
 }
 
 @media (max-width: 767px) {

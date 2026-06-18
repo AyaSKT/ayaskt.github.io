@@ -297,18 +297,29 @@ function isImageIcon(icon: string) {
         }
 
         const courseActions = document.querySelector('.home-course-actions')
-        if (!courseActions) return
+        if (courseActions) {
+          courseActions.setAttribute('xyz', 'fade left-1 duration-6 stagger-0 stagger-rev-0.5 ease-out')
+          const items = Array.from(courseActions.querySelectorAll('.home-course-group-title, .home-course-button')).slice(0, 18)
+          items.forEach((item, index) => {
+            item.classList.add('xyz-nested', 'aya-xyz-nested')
+            item.style.setProperty('--xyz-index', String(index))
+            item.style.setProperty('--xyz-index-rev', String(items.length - index - 1))
+          })
 
-        courseActions.setAttribute('xyz', 'fade left-1 duration-6 stagger-0 stagger-rev-0.5 ease-out')
-        const items = Array.from(courseActions.querySelectorAll('.home-course-group-title, .home-course-button')).slice(0, 18)
-        items.forEach((item, index) => {
-          item.classList.add('xyz-nested', 'aya-xyz-nested')
-          item.style.setProperty('--xyz-index', String(index))
-          item.style.setProperty('--xyz-index-rev', String(items.length - index - 1))
+          courseActions.offsetHeight
+          courseActions.classList.add('xyz-in')
+        }
+
+        const featureCards = Array.from(document.querySelectorAll('.VPFeatures .item'))
+        featureCards.forEach((item, index) => {
+          item.style.setProperty('--aya-feature-index', String(index))
         })
 
-        courseActions.offsetHeight
-        courseActions.classList.add('xyz-in')
+        const features = document.querySelector('.VPFeatures')
+        if (features) {
+          features.offsetHeight
+          features.classList.add('features-in')
+        }
       }
 
       const syncHomeRuntime = () => requestAnimationFrame(() => requestAnimationFrame(runHomeMotion))

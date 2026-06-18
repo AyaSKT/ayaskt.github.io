@@ -21,6 +21,24 @@ const {
   <head>
     <script is:inline>
       (() => {
+        try {
+          if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+
+          const root = document.documentElement
+          const navEntry = performance.getEntriesByType?.('navigation')?.[0]
+          const navType = navEntry?.type
+          const key = `aya-scroll:${location.pathname}${location.search}`
+          const saved = JSON.parse(sessionStorage.getItem(key) || 'null')
+
+          if ((navType === 'reload' || navType === 'back_forward') && !location.hash && saved?.y > 1) {
+            window.__ayaPendingScrollRestore = { x: saved.x || 0, y: saved.y || 0 }
+            root.dataset.ayaScrollRestore = 'pending'
+            root.style.visibility = 'hidden'
+          }
+        } catch {
+          // Keep first paint visible if scroll state cannot be read.
+        }
+
         const STORAGE_KEY = 'vitepress-theme-appearance'
         const root = document.documentElement
         const readPreference = () => {
@@ -48,9 +66,89 @@ const {
     <slot />
     <script is:inline>
       (() => {
+        if (!window.__ayaShellLifecycleSetup) {
+          window.__ayaShellLifecycleSetup = true
+          window.__ayaHasSpaNavigated = false
+
+          const scrollKey = () => `aya-scroll:${location.pathname}${location.search}`
+          const saveScroll = () => {
+            try {
+              sessionStorage.setItem(scrollKey(), JSON.stringify({
+                x: window.scrollX,
+                y: window.scrollY,
+                t: Date.now(),
+              }))
+            } catch {
+              // Ignore storage failures in private or restricted contexts.
+            }
+          }
+
+          let saveScrollFrame = 0
+          const scheduleSaveScroll = () => {
+            if (saveScrollFrame) return
+            saveScrollFrame = requestAnimationFrame(() => {
+              saveScrollFrame = 0
+              saveScroll()
+            })
+          }
+
+          const revealAfterScrollRestore = () => {
+            const root = document.documentElement
+            delete root.dataset.ayaScrollRestore
+            root.style.visibility = ''
+            window.__ayaPendingScrollRestore = undefined
+          }
+
+          const restoreInitialScroll = () => {
+            const pending = window.__ayaPendingScrollRestore
+            if (!pending) return
+
+            let attempts = 0
+            const apply = () => {
+              window.scrollTo(pending.x, pending.y)
+              attempts += 1
+
+              if (attempts < 4) {
+                requestAnimationFrame(apply)
+                return
+              }
+
+              setTimeout(() => {
+                window.scrollTo(pending.x, pending.y)
+                revealAfterScrollRestore()
+                saveScroll()
+              }, 0)
+            }
+
+            requestAnimationFrame(apply)
+          }
+
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', restoreInitialScroll, { once: true })
+          } else {
+            restoreInitialScroll()
+          }
+
+          setTimeout(() => {
+            if (document.documentElement.dataset.ayaScrollRestore === 'pending') {
+              const pending = window.__ayaPendingScrollRestore
+              if (pending) window.scrollTo(pending.x, pending.y)
+              revealAfterScrollRestore()
+            }
+          }, 900)
+
+          window.addEventListener('scroll', scheduleSaveScroll, { passive: true })
+          window.addEventListener('pagehide', saveScroll)
+          window.addEventListener('beforeunload', saveScroll)
+          document.addEventListener('astro:before-preparation', () => {
+            window.__ayaHasSpaNavigated = true
+            saveScroll()
+          })
+          document.addEventListener('astro:page-load', saveScroll)
+        }
+
         if (window.__ayaAppearanceSetup) return
         window.__ayaAppearanceSetup = true
-        window.__ayaHasSpaNavigated = false
 
         const STORAGE_KEY = 'vitepress-theme-appearance'
         const root = document.documentElement
@@ -173,9 +271,14 @@ const {
 
         media.addEventListener?.('change', syncAutoPreference)
         media.addListener?.(syncAutoPreference)
-        document.addEventListener('astro:before-preparation', () => {
-          window.__ayaHasSpaNavigated = true
+        document.addEventListener('astro:before-swap', (event) => {
+          const isDark = resolveDark(readPreference())
+          const nextRoot = event.newDocument?.documentElement
+          if (!nextRoot) return
+          nextRoot.classList.toggle('dark', isDark)
+          nextRoot.style.colorScheme = isDark ? 'dark' : 'light'
         })
+        document.addEventListener('astro:after-swap', () => applyPreference(readPreference()))
         window.addEventListener('pageshow', () => applyPreference(readPreference()))
         document.addEventListener('astro:page-load', () => applyPreference(readPreference()))
         applyPreference(readPreference())

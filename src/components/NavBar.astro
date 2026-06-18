@@ -1,6 +1,5 @@
 ---
 import { navItems } from '../config/docs-spaces'
-import { docsSpaces } from '../config/docs-spaces'
 import type { NavItem } from '../config/types'
 import { isExternalHref, normalizeComparablePath, normalizeSiteHref } from '../lib/routing/vitepressPaths'
 import uestcIconRaw from '../../docs/Index-assets/logos/UESTC.svg?raw'
@@ -11,9 +10,7 @@ interface Props {
 
 const { currentPath } = Astro.props
 const current = normalizeComparablePath(currentPath)
-const hasSidebar = docsSpaces.some((space) => current.startsWith(normalizeComparablePath(space.base)))
 const uestcIcon = uestcIconRaw.replace(/^<\?xml[^>]*>\s*/i, '')
-const sidebarPrefixes = docsSpaces.map((space) => normalizeComparablePath(space.base)).join('|')
 
 function hrefFor(item: NavItem) {
   if (!item.link) return undefined
@@ -30,12 +27,12 @@ function matchesActive(item: NavItem): boolean {
 }
 ---
 
-<header class="VPNav" transition:name="site-nav" transition:persist>
-  <div class:list={['VPNavBar', { home: current === '/', top: true, 'has-sidebar': hasSidebar }]} data-sidebar-prefixes={sidebarPrefixes}>
+<header class="VPNav" transition:name="site-nav" transition:persist transition:animate="none">
+  <div class:list={['VPNavBar', { home: current === '/', top: true }]}>
     <div class="wrapper">
       <div class="container">
         <div class="title">
-          <div class:list={['VPNavBarTitle', { 'has-sidebar': hasSidebar }]}> 
+          <div class="VPNavBarTitle">
             <a class="title" href="/">
               <img class="nav-site-logo" src="/IMG_4825_transparent.png" alt="" />
               <span>Ayaskt Workspace</span>
@@ -56,6 +53,7 @@ function matchesActive(item: NavItem): boolean {
               </button>
             </div>
             <nav class="VPNavBarMenu menu" aria-label="Main navigation">
+              <span class="nav-active-indicator" aria-hidden="true"></span>
               {navItems.map((item) => {
                 const href = hrefFor(item)
                 const active = matchesActive(item)
@@ -154,18 +152,109 @@ function matchesActive(item: NavItem): boolean {
       const normalize = (value) => {
         try {
           const url = new URL(value, window.location.href)
-          const path = url.pathname.replace(/\/index\.html$/i, '/').replace(/\.html$/i, '')
+          const path = url.pathname.replace(/\/index\.html$/i, '/').replace(/\.html$/i, '').replace(/\/index$/i, '/')
           return path.length > 1 ? path.replace(/\/$/, '') : path
         } catch {
           return value
         }
       }
 
-      const updateActiveState = (nav) => {
-        const current = normalize(window.location.href)
-        const prefixes = (nav.dataset.sidebarPrefixes || '').split('|').filter(Boolean)
-        nav.classList.toggle('home', current === '/')
-        nav.classList.toggle('has-sidebar', prefixes.some((prefix) => current.startsWith(prefix.replace(/\/$/, ''))))
+      const navIndicatorAnimations = new WeakMap()
+      const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
+
+      const updateNavIndicator = (nav, { animate = true, force = false } = {}) => {
+        const menu = nav.querySelector('.VPNavBarMenu')
+        const indicator = menu?.querySelector('.nav-active-indicator')
+        if (!menu || !indicator) return
+
+        const activeItem = Array.from(menu.children).find((item) => (
+          item !== indicator && item.classList.contains('active')
+        ))
+        const activeTarget = activeItem?.matches('.VPNavBarMenuGroup')
+          ? activeItem.querySelector(':scope > .button')
+          : activeItem
+
+        if (!activeTarget) {
+          navIndicatorAnimations.get(indicator)?.cancel()
+          navIndicatorAnimations.delete(indicator)
+          delete indicator.dataset.navIndicatorTarget
+          indicator.style.opacity = '0'
+          menu.removeAttribute('data-nav-indicator-ready')
+          return
+        }
+
+        const targetKey = activeItem.getAttribute('data-nav-href')
+          || activeItem.getAttribute('data-nav-active-match')
+          || activeItem.textContent?.trim()
+
+        if (!force && indicator.dataset.navIndicatorTarget === targetKey && menu.hasAttribute('data-nav-indicator-ready')) {
+          return
+        }
+
+        const menuRect = menu.getBoundingClientRect()
+        const targetRect = activeTarget.getBoundingClientRect()
+        const menuStyle = getComputedStyle(menu)
+        const borderTop = parseFloat(menuStyle.borderTopWidth) || 0
+        const borderLeft = parseFloat(menuStyle.borderLeftWidth) || 0
+        const targetLeft = targetRect.left - menuRect.left - borderLeft
+        const targetTop = (menuRect.height - targetRect.height) / 2 - borderTop
+        const targetViewportTop = menuRect.top + borderTop + targetTop
+        if (targetRect.width === 0 || targetRect.height === 0) {
+          navIndicatorAnimations.get(indicator)?.cancel()
+          navIndicatorAnimations.delete(indicator)
+          delete indicator.dataset.navIndicatorTarget
+          indicator.style.opacity = '0'
+          menu.removeAttribute('data-nav-indicator-ready')
+          return
+        }
+
+        const previousRect = indicator.getBoundingClientRect()
+        const hadReady = menu.hasAttribute('data-nav-indicator-ready')
+          && previousRect.width > 0
+          && previousRect.height > 0
+          && getComputedStyle(indicator).display !== 'none'
+
+        navIndicatorAnimations.get(indicator)?.cancel()
+        navIndicatorAnimations.delete(indicator)
+
+        indicator.style.opacity = '1'
+        indicator.style.left = `${targetLeft}px`
+        indicator.style.top = `${targetTop}px`
+        indicator.style.width = `${targetRect.width}px`
+        indicator.style.height = `${targetRect.height}px`
+        indicator.dataset.navIndicatorTarget = targetKey
+        menu.setAttribute('data-nav-indicator-ready', 'true')
+
+        if (!animate || !hadReady || prefersReducedMotion()) return
+
+        const dx = previousRect.left - targetRect.left
+        const dy = previousRect.top - targetViewportTop
+        const sx = previousRect.width / targetRect.width
+        const sy = previousRect.height / targetRect.height
+        const animation = indicator.animate(
+          [
+            { transform: `translate(${dx}px, ${dy}px) scale(${Number.isFinite(sx) ? sx : 1}, ${Number.isFinite(sy) ? sy : 1})` },
+            { transform: 'translate(0, 0) scale(1, 1)' },
+          ],
+          {
+            duration: 680,
+            easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
+            fill: 'both',
+          },
+        )
+        navIndicatorAnimations.set(indicator, animation)
+        animation.finished.then(() => {
+          if (navIndicatorAnimations.get(indicator) === animation) {
+            navIndicatorAnimations.delete(indicator)
+          }
+        }).catch(() => {})
+      }
+
+      const updateActiveState = (nav, target = window.location.href, { geometry = true } = {}) => {
+        const current = normalize(target)
+        if (geometry) {
+          nav.classList.toggle('home', current === '/')
+        }
 
         const candidates = nav.querySelectorAll('.VPNavBarMenuLink, .VPMenuLink, .VPNavBarMenuGroup')
         for (const item of candidates) {
@@ -183,22 +272,54 @@ function matchesActive(item: NavItem): boolean {
             || Boolean(groupHref && normalize(groupHref) === current)
           group.classList.toggle('active', selfActive || Boolean(group.querySelector('.VPMenuLink.active')))
         })
+
+        updateNavIndicator(nav)
+        requestAnimationFrame(() => updateNavIndicator(nav))
       }
 
-      const update = () => {
+      const update = (target = window.location.href) => {
         const nav = document.querySelector('.VPNavBar')
         if (!nav) return
         nav.classList.toggle('top', window.scrollY === 0)
-        updateActiveState(nav)
+        updateActiveState(nav, target)
+      }
+
+      const preSyncForNavigation = (event) => {
+        if (!(event.target instanceof Element)) return
+
+        const anchor = event.target.closest('a[href]')
+        if (!anchor) return
+
+        const href = anchor.getAttribute('href')
+        if (!href || href.startsWith('#')) return
+
+        let url
+        try {
+          url = new URL(anchor.href, window.location.href)
+        } catch {
+          return
+        }
+
+        if (url.origin !== window.location.origin) return
+        if (url.pathname === window.location.pathname && url.search === window.location.search) return
+
+        const nav = document.querySelector('.VPNavBar')
+        if (!nav) return
+        updateActiveState(nav, url.href, { geometry: false })
       }
 
       window.__ayaSyncNavRuntime = update
 
       update()
-      window.addEventListener('scroll', update, { passive: true })
-      window.addEventListener('pageshow', update)
-      document.addEventListener('astro:after-swap', update)
-      document.addEventListener('astro:page-load', update)
+      document.addEventListener('click', preSyncForNavigation, { capture: true })
+      window.addEventListener('resize', () => {
+        const nav = document.querySelector('.VPNavBar')
+        if (nav) updateNavIndicator(nav, { animate: false, force: true })
+      }, { passive: true })
+      window.addEventListener('scroll', () => update(), { passive: true })
+      window.addEventListener('pageshow', () => update())
+      document.addEventListener('astro:after-swap', () => update())
+      document.addEventListener('astro:page-load', () => update())
     })()
   </script>
 </header>

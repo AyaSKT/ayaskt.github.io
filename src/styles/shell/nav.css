@@ -74,6 +74,27 @@
     overflow: visible !important;
   }
 
+  .VPNav .VPNavBar .nav-active-indicator {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    transform-origin: left top;
+    border-radius: 999px;
+    background: var(--aya-astro-nav-active-bg);
+    background-color: var(--aya-astro-nav-active-bg);
+    box-shadow: var(--aya-astro-nav-active-shadow);
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    transition: opacity 0.22s var(--ease-ios-fade);
+    will-change: transform, left, top, width, height;
+  }
+
+  .VPNav .VPNavBar .VPNavBarMenu:not([data-nav-indicator-ready]) .nav-active-indicator {
+    transition: none;
+  }
+
   .VPNav .VPNavBar .VPNavBarMenuLink,
   .VPNav .VPNavBar .VPNavBarMenuGroup > .button {
     position: relative;
@@ -93,7 +114,6 @@
     text-decoration: none;
     cursor: pointer;
     transition:
-      color 0.2s var(--ease-ios-fade),
       background-color 0.2s var(--ease-ios-fade),
       box-shadow 0.2s var(--ease-ios-fade),
       transform 0.16s var(--ease-ios-press);
@@ -113,13 +133,6 @@
   .VPNav .VPNavBar .VPSocialLink:hover {
     color: var(--vp-c-text-1);
     background: var(--aya-nav-tab-hover, rgb(255 255 255 / 18%));
-  }
-
-  .VPNav .VPNavBar .VPNavBarMenuGroup > .button .text {
-    color: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: 28px;
   }
 
   .VPNav .VPNavBar .VPNavBarMenuGroup > .button .text-icon {
@@ -168,16 +181,6 @@
   .VPNav .VPNavBar .VPFlyout:hover > .button + .menu,
   .VPNav .VPNavBar .VPFlyout > .button[aria-expanded="true"] + .menu {
     transform: none !important;
-  }
-
-  .VPNav .VPNavBar .VPFlyout > .menu::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    border-radius: inherit;
-    background: var(--aya-astro-menu-glint);
-    pointer-events: none;
   }
 
   .VPNav .VPNavBar .VPFlyout > .menu > .VPMenu {
@@ -347,11 +350,12 @@
 
 .VPNav .VPNavBar .VPNavBarMenuLink.active,
 .VPNav .VPNavBar .VPNavBarMenuGroup.active > .button {
-  background: var(--aya-astro-nav-active-bg) !important;
-  background-color: var(--aya-astro-nav-active-bg) !important;
-  box-shadow: var(--aya-astro-nav-active-shadow) !important;
-  backdrop-filter: saturate(180%) blur(12px) !important;
-  -webkit-backdrop-filter: saturate(180%) blur(12px) !important;
+  color: var(--aya-nav-tab-text, var(--vp-c-text-2));
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 @media (min-width: 768px) {
@@ -406,8 +410,49 @@
     pointer-events: none;
   }
 
-  .VPNav .VPNavBar .VPNavBarMenu > * {
+  .VPNav .VPNavBar .VPNavBarMenu > :not(.nav-active-indicator) {
     position: relative;
-    z-index: 1;
+    z-index: 2;
+  }
+}
+
+@media (max-width: 767px) {
+  .VPNav .VPNavBar .nav-active-indicator {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .VPNav .VPNavBar .content-body {
+    gap: 8px;
+  }
+
+  .VPNav .VPNavBar .DocSearch-Button {
+    gap: 6px;
+    padding: 0 10px;
+  }
+
+  .VPNav .VPNavBar .VPNavBarMenuLink,
+  .VPNav .VPNavBar .VPNavBarMenuGroup > .button {
+    min-width: 48px;
+    padding: 0 9px;
+    font-size: 12.5px;
+  }
+
+  .VPNav .VPNavBar .VPNavBarMenuGroup > .button {
+    gap: 4px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1120px) {
+  .VPNav .VPNavBar .DocSearch-Button-Placeholder,
+  .VPNav .VPNavBar .DocSearch-Button-Keys {
+    display: none;
+  }
+
+  .VPNav .VPNavBar .DocSearch-Button {
+    width: 38px;
+    justify-content: center;
+    padding: 0;
   }
 }

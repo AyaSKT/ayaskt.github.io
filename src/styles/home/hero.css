@@ -120,6 +120,18 @@
   }
 }
 
+@keyframes ayaHomeFeatureFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .home-course-actions:not(.xyz-in) .home-course-group-title,
   .home-course-actions:not(.xyz-in) .home-course-button {
@@ -145,6 +157,22 @@
 
   .VPHero .tagline {
     animation: fadeInLeft 0.9s var(--ease-ios-fade) 0.24s both;
+  }
+
+  .VPFeatures:not(.features-in) .item {
+    opacity: 0;
+  }
+
+  .VPFeatures.features-in .item {
+    animation: ayaHomeFeatureFadeIn 0.68s var(--ease-ios-fade) both;
+    animation-delay: calc(0.12s + var(--aya-feature-index, 0) * 0.08s);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .VPFeatures .item {
+    opacity: 1;
+    transform: none;
   }
 }
 

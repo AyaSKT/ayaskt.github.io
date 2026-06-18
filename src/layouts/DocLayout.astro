@@ -26,7 +26,7 @@ const sidebarTransitionName = docsSpace
   <NavBar currentPath={doc.urlPath} />
   <div id="VPContent" class:list={['VPContent', { 'has-sidebar': Boolean(docsSpace) }]}> 
     <div class:list={['VPDoc', { 'has-sidebar': Boolean(docsSpace), 'has-aside': showAside }]}> 
-      <aside class="VPSidebar" transition:name={sidebarTransitionName} transition:persist>
+      <aside class="VPSidebar" transition:name={sidebarTransitionName} transition:persist transition:animate="none">
         <nav class="nav" aria-label={docsSpace?.title ?? 'Sidebar navigation'}>
           <div class="sidebar-active-indicator" aria-hidden="true"></div>
           {docsSpace && <SidebarTree items={docsSpace.sidebar} currentPath={doc.urlPath} />}
@@ -43,7 +43,7 @@ const sidebarTransitionName = docsSpace
         </div>
 
         {showAside && (
-          <aside class="aside" transition:name="doc-outline">
+          <aside class="aside">
             <div class="aside-curtain"></div>
             <div class="aside-container">
               <div class="aside-content">
@@ -101,11 +101,169 @@ const sidebarTransitionName = docsSpace
 
         const navRect = nav.getBoundingClientRect()
         const linkRect = activeLink.getBoundingClientRect()
+        if (linkRect.width === 0 || linkRect.height === 0) {
+          indicator.style.opacity = '0'
+          return
+        }
+
         indicator.style.opacity = '1'
         indicator.style.left = `${linkRect.left - navRect.left}px`
         indicator.style.top = `${linkRect.top - navRect.top}px`
         indicator.style.width = `${linkRect.width}px`
         indicator.style.height = `${linkRect.height}px`
+      }
+
+      const sidebarStorageKey = (id) => `aya-sidebar-collapsed:${id}`
+      const sidebarTransitionHandlers = new WeakMap()
+      const sidebarTransitionTimers = new WeakMap()
+
+      const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
+
+      const resetSidebarItemsAnimation = (items) => {
+        if (!items) return
+        items.classList.remove('is-collapsing', 'is-expanding')
+        items.style.height = ''
+        items.style.opacity = ''
+        items.style.transform = ''
+      }
+
+      const finishSidebarItemsAnimation = (items, collapsed) => {
+        const handler = sidebarTransitionHandlers.get(items)
+        if (handler) items.removeEventListener('transitionend', handler)
+        sidebarTransitionHandlers.delete(items)
+
+        const timer = sidebarTransitionTimers.get(items)
+        if (timer) window.clearTimeout(timer)
+        sidebarTransitionTimers.delete(items)
+
+        resetSidebarItemsAnimation(items)
+        items.toggleAttribute('hidden', collapsed)
+        requestAnimationFrame(updateSidebarIndicator)
+      }
+
+      const scheduleSidebarItemsFinish = (items, collapsed) => {
+        const handler = (event) => {
+          if (event.target === items && event.propertyName === 'height') {
+            finishSidebarItemsAnimation(items, collapsed)
+          }
+        }
+        sidebarTransitionHandlers.set(items, handler)
+        items.addEventListener('transitionend', handler)
+        sidebarTransitionTimers.set(items, window.setTimeout(() => {
+          finishSidebarItemsAnimation(items, collapsed)
+        }, 420))
+      }
+
+      const animateSidebarItems = (items, collapsed) => {
+        if (!items || prefersReducedMotion()) {
+          items?.toggleAttribute('hidden', collapsed)
+          return
+        }
+
+        finishSidebarItemsAnimation(items, items.hidden)
+        items.hidden = false
+
+        if (collapsed) {
+          const startHeight = items.scrollHeight
+          items.style.height = `${startHeight}px`
+          items.style.opacity = '1'
+          items.style.transform = 'translateY(0)'
+          items.classList.add('is-collapsing')
+          items.offsetHeight
+          scheduleSidebarItemsFinish(items, true)
+          requestAnimationFrame(() => {
+            items.style.height = '0px'
+            items.style.opacity = '0'
+            items.style.transform = 'translateY(-4px)'
+          })
+          return
+        }
+
+        items.style.height = '0px'
+        items.style.opacity = '0'
+        items.style.transform = 'translateY(-4px)'
+        items.classList.add('is-expanding')
+        items.offsetHeight
+        const endHeight = items.scrollHeight
+        scheduleSidebarItemsFinish(items, false)
+        requestAnimationFrame(() => {
+          items.style.height = `${endHeight}px`
+          items.style.opacity = '1'
+          items.style.transform = 'translateY(0)'
+        })
+      }
+
+      const setSidebarGroupCollapsed = (group, collapsed, { persist = true, animate = false } = {}) => {
+        const button = group.querySelector(':scope > .item > .sidebar-group-toggle')
+        const items = group.querySelector(':scope > .items')
+        group.classList.toggle('collapsed', collapsed)
+        if (collapsed) {
+          group.setAttribute('data-sidebar-collapsed', 'true')
+        } else {
+          group.removeAttribute('data-sidebar-collapsed')
+        }
+        button?.setAttribute('aria-expanded', String(!collapsed))
+
+        if (animate) {
+          animateSidebarItems(items, collapsed)
+        } else if (items) {
+          finishSidebarItemsAnimation(items, collapsed)
+        }
+
+        if (persist) {
+          try {
+            localStorage.setItem(sidebarStorageKey(group.dataset.sidebarGroupId), String(collapsed))
+          } catch {
+            // Ignore storage failures in private or restricted contexts.
+          }
+        }
+      }
+
+      const restoreSidebarCollapseState = () => {
+        document.querySelectorAll('.VPSidebarItem[data-sidebar-group-id]').forEach((group) => {
+          const activeInside = Boolean(group.querySelector('.link[data-sidebar-current="true"]'))
+          let collapsed = group.getAttribute('data-sidebar-collapsed') === 'true'
+
+          try {
+            const saved = localStorage.getItem(sidebarStorageKey(group.dataset.sidebarGroupId))
+            if (saved !== null) collapsed = saved === 'true'
+          } catch {
+            // Ignore storage failures in private or restricted contexts.
+          }
+
+          setSidebarGroupCollapsed(group, activeInside ? false : collapsed, { persist: false })
+        })
+      }
+
+      const expandActiveSidebarParents = () => {
+        const activeLink = document.querySelector('.VPSidebar .link[data-sidebar-current="true"]')
+        if (!activeLink) return
+
+        let group = activeLink.closest('.VPSidebarItem[data-sidebar-group-id]')
+        while (group) {
+          setSidebarGroupCollapsed(group, false)
+          group = group.parentElement?.closest?.('.VPSidebarItem[data-sidebar-group-id]')
+        }
+      }
+
+      const setupSidebarCollapse = () => {
+        const nav = document.querySelector('.VPSidebar .nav')
+        if (!nav || nav.dataset.sidebarCollapseBound === 'true') return
+        nav.dataset.sidebarCollapseBound = 'true'
+
+        nav.addEventListener('click', (event) => {
+          const button = event.target instanceof Element
+            ? event.target.closest('.sidebar-group-toggle')
+            : undefined
+          if (!button) return
+
+          const group = button.closest('.VPSidebarItem[data-sidebar-group-id]')
+          if (!group) return
+
+          const nextCollapsed = group.getAttribute('data-sidebar-collapsed') !== 'true'
+          setSidebarGroupCollapsed(group, nextCollapsed, { animate: true })
+          requestAnimationFrame(updateSidebarIndicator)
+        })
       }
 
       const syncCurrentLink = () => {
@@ -124,6 +282,7 @@ const sidebarTransitionName = docsSpace
             link.removeAttribute('aria-current')
           }
         }
+        expandActiveSidebarParents()
         updateSidebarIndicator()
       }
 
@@ -160,6 +319,8 @@ const sidebarTransitionName = docsSpace
         }
 
         syncDocNavState()
+        setupSidebarCollapse()
+        restoreSidebarCollapseState()
         syncCurrentLink()
         requestAnimationFrame(updateOutlineMarker)
       }

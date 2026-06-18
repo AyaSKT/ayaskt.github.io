@@ -2,11 +2,11 @@
   --aya-doc-font-size: 18px;
   --aya-doc-line-height: 1.78;
   --aya-doc-heading-color: var(--vp-c-text-1);
-  --aya-doc-h1-size: 46px;
+  --aya-doc-h1-size: clamp(36px, 4vw, 46px);
   --aya-doc-h1-line-height: 1.12;
-  --aya-doc-h2-size: 34px;
-  --aya-doc-h3-size: 26px;
-  --aya-doc-h4-size: 21px;
+  --aya-doc-h2-size: clamp(28px, 3vw, 34px);
+  --aya-doc-h3-size: clamp(23px, 2.4vw, 26px);
+  --aya-doc-h4-size: clamp(20px, 2vw, 21px);
 }
 
 .vp-doc {
@@ -178,6 +178,21 @@
   padding: 0;
   background: transparent;
   color: inherit;
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  :root {
+    --aya-doc-h1-size: 38px;
+    --aya-doc-h2-size: 30px;
+    --aya-doc-h3-size: 24px;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1439px) {
+  :root {
+    --aya-doc-h1-size: 42px;
+    --aya-doc-h2-size: 32px;
+  }
 }
 
 @media (max-width: 767px) {

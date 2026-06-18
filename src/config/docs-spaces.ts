@@ -1,7 +1,7 @@
 import type { DocsSpace, NavItem } from './types'
 
 export const navItems = [
-  { text: '主页', link: '/index' },
+  { text: '主页', link: '/' },
   { text: '第四学年', items: [] },
   {
     text: '第三学年',

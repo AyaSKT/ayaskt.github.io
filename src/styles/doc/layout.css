@@ -1,6 +1,6 @@
 :root {
   --aya-doc-content-width: 760px;
-  --aya-doc-content-width-with-aside: 760px;
+  --aya-doc-content-width-with-aside: 688px;
   --aya-doc-aside-width: 256px;
   --aya-doc-content-gutter: 32px;
   --aya-doc-top-gap: 128px;
@@ -92,6 +92,10 @@
     padding: 0 var(--aya-doc-content-gutter) 128px;
   }
 
+  .VPDoc.has-aside > .container > .content {
+    max-width: calc(var(--aya-doc-content-width-with-aside) + var(--aya-doc-content-gutter) * 2);
+  }
+
   .VPDoc.has-aside > .container > .content > .content-container {
     max-width: var(--aya-doc-content-width-with-aside);
   }
@@ -107,14 +111,39 @@
 }
 
 @media (min-width: 1440px) {
+  :root {
+    --aya-doc-content-width-with-aside: 760px;
+  }
+
   .VPDoc.has-sidebar {
     padding-right: calc((100% - var(--vp-layout-max-width)) / 2 + 32px);
     padding-left: calc((100% - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
   }
 }
 
+@media (min-width: 960px) and (max-width: 1279px) {
+  .VPDoc.has-sidebar > .container > .content > .content-container {
+    max-width: min(var(--aya-doc-content-width), calc(100vw - var(--vp-sidebar-width) - 72px));
+  }
+}
+
 @media (max-width: 959px) {
   .VPDoc {
-    padding-top: 88px;
+    padding: 88px 24px 96px;
+  }
+
+  .VPDoc.has-sidebar {
+    padding-left: 24px;
+  }
+
+  .VPDoc > .container > .content > .content-container {
+    max-width: min(var(--aya-doc-content-width), 100%);
+  }
+}
+
+@media (max-width: 767px) {
+  .VPDoc,
+  .VPDoc.has-sidebar {
+    padding: 80px 20px 80px;
   }
 }

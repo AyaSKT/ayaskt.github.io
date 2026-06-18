@@ -69,17 +69,14 @@
   --aya-astro-nav-active-bg: rgb(255 255 255 / 68%);
   --aya-astro-nav-active-shadow:
     0 0 12px 3px rgb(0 0 0 / 3%),
-    0 8px 18px rgb(56 72 88 / 8%);
+    0 0 18px 2px rgb(56 72 88 / 6%);
 
   --aya-astro-menu-border: rgb(255 255 255 / 54%);
-  --aya-astro-menu-bg: linear-gradient(135deg, rgb(255 255 255 / 42%), rgb(255 255 255 / 24%));
+  --aya-astro-menu-bg: rgb(255 255 255 / 30%);
   --aya-astro-menu-bg-color: rgb(255 255 255 / 30%);
   --aya-astro-menu-shadow:
     0 0 28px 8px rgb(0 0 0 / 5%),
     0 24px 64px rgb(48 62 78 / 16%);
-  --aya-astro-menu-glint:
-    radial-gradient(circle at 22% 0%, rgb(255 255 255 / 42%), transparent 42%),
-    linear-gradient(to bottom, rgb(255 255 255 / 18%), rgb(255 255 255 / 4%));
 }
 
 .dark {
@@ -114,15 +111,12 @@
   --aya-astro-nav-active-bg: rgb(255 255 255 / 10%);
   --aya-astro-nav-active-shadow:
     0 0 12px 3px rgb(0 0 0 / 14%),
-    0 8px 18px rgb(0 0 0 / 22%);
+    0 0 18px 2px rgb(0 0 0 / 18%);
 
   --aya-astro-menu-border: rgb(255 255 255 / 18%);
-  --aya-astro-menu-bg: linear-gradient(135deg, rgb(22 30 42 / 56%), rgb(8 13 21 / 38%));
+  --aya-astro-menu-bg: rgb(12 18 28 / 46%);
   --aya-astro-menu-bg-color: rgb(12 18 28 / 46%);
   --aya-astro-menu-shadow:
     0 0 28px 8px rgb(0 0 0 / 22%),
     0 24px 64px rgb(0 0 0 / 36%);
-  --aya-astro-menu-glint:
-    radial-gradient(circle at 22% 0%, rgb(255 255 255 / 13%), transparent 44%),
-    linear-gradient(to bottom, rgb(255 255 255 / 8%), rgb(255 255 255 / 2%));
 }
