@@ -1,0 +1,87 @@
+/* Flat frosted surface tokens: blur, tint, border, and shadow without directional reflection. */
+:root {
+  --aya-surface-bg: rgb(255 255 255 / 26%);
+  --aya-surface-bg-strong: rgb(255 255 255 / 64%);
+  --aya-surface-bg-soft: rgb(255 255 255 / 34%);
+  --aya-surface-bg-hover: rgb(255 255 255 / 18%);
+  --aya-surface-bg-active: rgb(152 203 234 / 20%);
+  --aya-surface-border: rgb(255 255 255 / 54%);
+  --aya-surface-border-soft: rgb(152 203 234 / 30%);
+  --aya-surface-text: rgb(56 69 83 / 70%);
+  --aya-surface-text-strong: rgb(42 53 65 / 88%);
+  --aya-surface-selected: #405769;
+  --aya-surface-inverse-bg: rgb(28 34 42 / 86%);
+  --aya-surface-inverse-text: #fff;
+
+  --aya-frosted-blur-lg: blur(24px);
+  --aya-frosted-blur-md: blur(14px);
+  --aya-frosted-blur-sm: blur(10px);
+  --aya-frosted-blur-panel: blur(30px);
+  --aya-frosted-blur-backdrop: blur(4px);
+
+  --aya-shadow-nav: 0 12px 28px rgb(0 0 0 / 7%);
+  --aya-shadow-nav-feather: 0 0 14px 4px rgb(0 0 0 / 4%);
+  --aya-shadow-pill-feather: 0 0 12px 3px rgb(0 0 0 / 3.5%);
+  --aya-shadow-menu: 0 22px 54px rgb(0 0 0 / 9%);
+  --aya-shadow-menu-feather: 0 0 26px 8px rgb(0 0 0 / 7%);
+  --aya-shadow-card-feather: 0 0 14px 4px rgb(0 0 0 / 3.5%);
+  --aya-shadow-card-depth: 0 14px 34px rgb(92 102 114 / 15%);
+  --aya-shadow-sidebar-window: 0 18px 42px rgb(92 102 114 / 18%);
+  --aya-shadow-search-panel: 0 34px 90px rgb(54 87 113 / 18%);
+  --aya-shadow-search-control: 0 14px 34px rgb(54 87 113 / 13%);
+  --aya-shadow-search-result: 0 8px 18px rgb(54 87 113 / 7%);
+
+  --aya-search-backdrop-bg: rgb(247 250 253 / 10%);
+  --aya-search-text-soft: rgb(61 72 85 / 72%);
+  --aya-search-mark-bg: rgb(152 203 234 / 68%);
+  --aya-search-mark-text: #1d4258;
+
+  --aya-nav-shadow-band-height: calc(var(--vp-nav-height, 64px) + 14px);
+  --aya-nav-shadow-band-bg: linear-gradient(
+    to bottom,
+    rgb(74 83 96 / 14%) 0%,
+    rgb(74 83 96 / 9%) 38%,
+    rgb(74 83 96 / 4%) 68%,
+    rgb(74 83 96 / 0%) 100%
+  );
+}
+
+.dark {
+  --aya-surface-bg: rgb(9 13 20 / 48%);
+  --aya-surface-bg-strong: rgb(18 24 34 / 62%);
+  --aya-surface-bg-soft: rgb(255 255 255 / 8%);
+  --aya-surface-bg-hover: rgb(255 255 255 / 7%);
+  --aya-surface-bg-active: rgb(152 203 234 / 14%);
+  --aya-surface-border: rgb(255 255 255 / 18%);
+  --aya-surface-border-soft: rgb(152 203 234 / 24%);
+  --aya-surface-text: rgb(223 232 244 / 68%);
+  --aya-surface-text-strong: rgb(247 250 255 / 88%);
+  --aya-surface-selected: #f8fbff;
+  --aya-surface-inverse-bg: rgb(17 24 35 / 92%);
+  --aya-surface-inverse-text: #fff;
+
+  --aya-shadow-nav: 0 14px 32px rgb(0 0 0 / 30%);
+  --aya-shadow-nav-feather: 0 0 16px 4px rgb(0 0 0 / 16%);
+  --aya-shadow-pill-feather: 0 0 12px 3px rgb(0 0 0 / 12%);
+  --aya-shadow-menu: 0 22px 54px rgb(0 0 0 / 34%);
+  --aya-shadow-menu-feather: 0 0 26px 8px rgb(0 0 0 / 22%);
+  --aya-shadow-card-feather: 0 0 16px 5px rgb(0 0 0 / 16%);
+  --aya-shadow-card-depth: 0 14px 36px rgb(0 0 0 / 36%);
+  --aya-shadow-sidebar-window: 0 18px 44px rgb(0 0 0 / 42%);
+  --aya-shadow-search-panel: 0 34px 90px rgb(0 0 0 / 42%);
+  --aya-shadow-search-control: 0 14px 34px rgb(0 0 0 / 24%);
+  --aya-shadow-search-result: 0 8px 18px rgb(0 0 0 / 18%);
+
+  --aya-search-backdrop-bg: rgb(5 9 14 / 22%);
+  --aya-search-text-soft: rgb(220 230 242 / 72%);
+  --aya-search-mark-bg: rgb(152 203 234 / 54%);
+  --aya-search-mark-text: #eef8ff;
+
+  --aya-nav-shadow-band-bg: linear-gradient(
+    to bottom,
+    rgb(152 160 172 / 12%) 0%,
+    rgb(152 160 172 / 7%) 38%,
+    rgb(152 160 172 / 3%) 68%,
+    rgb(152 160 172 / 0%) 100%
+  );
+}
