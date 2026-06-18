@@ -871,16 +871,13 @@ onBeforeUnmount(() => {
   --mind-map-pill-text: var(--aya-nav-tab-text, rgb(56 69 83 / 70%));
   --mind-map-pill-selected: var(--aya-nav-tab-selected, #405769);
   --mind-map-pill-hover: var(--aya-nav-tab-hover, rgb(255 255 255 / 18%));
-  --mind-map-pill-highlight: var(--aya-nav-tab-highlight, linear-gradient(135deg, rgb(255 255 255 / 26%), rgb(255 255 255 / 6%)));
-  --mind-map-pill-inner-highlight: var(--aya-nav-pill-highlight, linear-gradient(135deg, rgb(255 255 255 / 24%), rgb(255 255 255 / 7%)));
-  --mind-map-pill-glass: var(--aya-nav-tab-glass, blur(24px));
-  --mind-map-pill-soft-glass: var(--aya-nav-pill-glass, blur(12px));
+  --mind-map-pill-frosted-blur: var(--aya-nav-tab-frosted-blur, blur(24px));
+  --mind-map-pill-soft-frosted-blur: var(--aya-nav-pill-frosted-blur, blur(12px));
   --mind-map-pill-shadow: var(--aya-nav-tab-shadow, 0 12px 28px rgb(0 0 0 / 7%));
   --mind-map-pill-feather-shadow: var(--aya-nav-tab-feather-shadow, 0 0 14px 4px rgb(0 0 0 / 4%));
   --mind-map-pill-active-shadow: var(--aya-nav-pill-feather-shadow, 0 0 12px 3px rgb(0 0 0 / 3.5%));
   --mind-map-menu-bg: var(--aya-nav-menu-bg, rgb(255 255 255 / 46%));
-  --mind-map-menu-highlight: var(--aya-nav-menu-highlight, linear-gradient(135deg, rgb(255 255 255 / 30%), rgb(255 255 255 / 8%)));
-  --mind-map-menu-glass: var(--aya-nav-menu-glass, blur(30px));
+  --mind-map-menu-frosted-blur: var(--aya-nav-menu-frosted-blur, blur(30px));
   --mind-map-menu-shadow: var(--aya-nav-menu-shadow, 0 22px 54px rgb(0 0 0 / 9%));
   --mind-map-menu-feather-shadow: var(--aya-nav-menu-feather-shadow, 0 0 26px 8px rgb(0 0 0 / 7%));
   --mind-map-backdrop-bg: rgb(247 249 252 / 52%);
@@ -963,8 +960,8 @@ onBeforeUnmount(() => {
   box-shadow:
     var(--mind-map-pill-feather-shadow),
     var(--mind-map-pill-shadow);
-  backdrop-filter: var(--mind-map-pill-glass);
-  -webkit-backdrop-filter: var(--mind-map-pill-glass);
+  backdrop-filter: var(--mind-map-pill-frosted-blur);
+  -webkit-backdrop-filter: var(--mind-map-pill-frosted-blur);
 }
 
 .mind-map-control-pill::before {
@@ -973,7 +970,7 @@ onBeforeUnmount(() => {
   inset: 1px;
   z-index: 0;
   border-radius: inherit;
-  background: var(--mind-map-pill-highlight);
+  background: transparent;
   pointer-events: none;
 }
 
@@ -1069,15 +1066,15 @@ onBeforeUnmount(() => {
 .mind-map-control:focus-visible {
   color: var(--vp-c-text-1);
   background: var(--mind-map-pill-hover);
-  backdrop-filter: var(--mind-map-pill-soft-glass);
-  -webkit-backdrop-filter: var(--mind-map-pill-soft-glass);
+  backdrop-filter: var(--mind-map-pill-soft-frosted-blur);
+  -webkit-backdrop-filter: var(--mind-map-pill-soft-frosted-blur);
 }
 
 .mind-map-control:hover::before,
 .mind-map-control:focus-visible::before,
 .mind-map-control.is-active::before,
 .mind-map-export-trigger[aria-expanded="true"]::before {
-  background: var(--mind-map-pill-inner-highlight);
+  background: transparent;
   opacity: 1;
 }
 
@@ -1094,8 +1091,8 @@ onBeforeUnmount(() => {
   box-shadow:
     var(--mind-map-pill-active-shadow),
     0 7px 16px rgb(0 0 0 / 5%);
-  backdrop-filter: var(--mind-map-pill-soft-glass);
-  -webkit-backdrop-filter: var(--mind-map-pill-soft-glass);
+  backdrop-filter: var(--mind-map-pill-soft-frosted-blur);
+  -webkit-backdrop-filter: var(--mind-map-pill-soft-frosted-blur);
 }
 
 .mind-map-control:active {
@@ -1146,8 +1143,8 @@ onBeforeUnmount(() => {
   box-shadow:
     var(--mind-map-menu-feather-shadow),
     var(--mind-map-menu-shadow);
-  backdrop-filter: var(--mind-map-menu-glass);
-  -webkit-backdrop-filter: var(--mind-map-menu-glass);
+  backdrop-filter: var(--mind-map-menu-frosted-blur);
+  -webkit-backdrop-filter: var(--mind-map-menu-frosted-blur);
   transform-origin: top right;
 }
 
@@ -1157,7 +1154,7 @@ onBeforeUnmount(() => {
   inset: 1px;
   z-index: 0;
   border-radius: inherit;
-  background: var(--mind-map-menu-highlight);
+  background: transparent;
   pointer-events: none;
 }
 
