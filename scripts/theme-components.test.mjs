@@ -241,7 +241,11 @@ test('MindMap exposes a compact interactive SVG surface', () => {
   assert.match(source, /\.mind-map :deep\(\.katex \.katex-mathml\)\s*{[^}]*display:\s*none;/s)
   assert.match(source, /\.markmap-foreign\{overflow:visible;color:\$\{getExportTextColor\(\)\}\}/)
   assert.match(source, /\.katex \.katex-mathml\{display:none\}/)
-  assert.match(source, /\.mind-map-control-pill\s*{[^}]*border-radius:\s*999px;[^}]*backdrop-filter:\s*var\(--mind-map-pill-glass\)/s)
+  assert.match(source, /--mind-map-pill-frosted-blur:\s*var\(--aya-nav-tab-frosted-blur/)
+  assert.match(source, /--mind-map-pill-soft-frosted-blur:\s*var\(--aya-nav-pill-frosted-blur/)
+  assert.match(source, /--mind-map-menu-frosted-blur:\s*var\(--aya-nav-menu-frosted-blur/)
+  assert.doesNotMatch(source, /--mind-map-[\w-]*(?:glass|highlight)/)
+  assert.match(source, /\.mind-map-control-pill\s*{[^}]*border-radius:\s*999px;[^}]*backdrop-filter:\s*var\(--mind-map-pill-frosted-blur\)/s)
   assert.match(source, /\.mind-map-control\.is-square\s*{[^}]*width:\s*var\(--mind-map-square-size\);[^}]*min-width:\s*var\(--mind-map-square-size\);[^}]*height:\s*var\(--mind-map-square-size\);/s)
   assert.match(source, /\.mind-map-control-symbol\s*{[^}]*height:\s*var\(--mind-map-square-symbol-size\);[^}]*line-height:\s*1;/s)
   assert.match(source, /\.mind-map-header\s*{[^}]*position:\s*relative;[^}]*z-index:\s*auto;/s)
@@ -296,14 +300,16 @@ test('LyricCard styles the album cover as the rightmost rounded rectangle', () =
   assert.match(source, /--lyric-card-album-cover-size:\s*112px/)
 })
 
-test('SongCard keeps the cover one third wide with a low-reflection floating card style', () => {
+test('SongCard keeps the cover one third wide with a flat frosted floating card style', () => {
   const source = fs.readFileSync(songCardPath, 'utf8')
 
   assert.match(source, /grid-template-columns:\s*minmax\(0,\s*1fr\)\s+minmax\(0,\s*2fr\)/)
   assert.match(source, /min-height:\s*156px/)
   assert.match(source, /aspect-ratio:\s*1/)
   assert.match(source, /border-radius:\s*8px/)
-  assert.match(source, /--song-card-highlight:/)
+  assert.doesNotMatch(source, /--song-card-[\w-]*highlight/)
+  assert.match(source, /\.song-card\s*{[^}]*background:\s*var\(--song-card-bg\);/s)
+  assert.match(source, /\.song-card:hover\s*{[^}]*background:\s*color-mix\(in srgb,\s*var\(--vp-c-brand-1\)\s*7%,\s*var\(--song-card-bg\)\);/s)
   assert.match(source, /--song-card-depth-shadow:/)
   assert.match(source, /\.song-card:hover/)
   assert.match(source, /transform:\s*translate3d\(0,\s*-2px,\s*0\)/)
