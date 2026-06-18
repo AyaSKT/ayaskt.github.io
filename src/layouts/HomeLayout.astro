@@ -1,0 +1,278 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import NavBar from '../components/NavBar.astro'
+import HeroHitokoto from '../../docs/.vitepress/theme/components/HeroHitokoto.vue'
+import { siteConfig } from '../config/site'
+import type { LoadedDoc } from '../lib/content/docs'
+import { isExternalHref, normalizeSiteHref } from '../lib/routing/vitepressPaths'
+
+interface Props {
+  doc: LoadedDoc
+}
+
+interface HomeCourseItem {
+  text?: string
+  link?: string
+  variant?: 'brand' | 'alt'
+}
+
+interface HomeCourseRow {
+  items?: HomeCourseItem[]
+}
+
+interface HomeCourseGroup {
+  id?: string
+  label?: string
+  title?: string
+  tone?: string
+  variant?: 'brand' | 'alt'
+  rows?: HomeCourseRow[]
+  items?: HomeCourseItem[]
+}
+
+interface HomeFeature {
+  icon?: string | { dark?: string; light?: string }
+  title?: string
+  details?: string
+  link?: string
+  linkText?: string
+}
+
+const { doc } = Astro.props
+const hero = asRecord(doc.frontmatter.hero)
+const heroName = stringValue(hero?.name) || siteConfig.title
+const heroText = stringValue(hero?.text)
+const heroTagline = stringValue(hero?.tagline)
+const heroImage = asRecord(hero?.image)
+const heroImageSrc = resolveImageSource(hero?.image)
+const heroImageLink = stringValue(heroImage?.link)
+const heroImageStyle = styleToString(heroImage?.style)
+const heroImageWidth = numberOrString(heroImage?.width)
+const heroImageHeight = numberOrString(heroImage?.height)
+const courseGroups = normalizeCourseGroups(doc.frontmatter.homeCourseGroups)
+const features = Array.isArray(doc.frontmatter.features)
+  ? (doc.frontmatter.features as HomeFeature[])
+  : []
+const heroPool = ['/IMG_4338.jpeg', '/IMG_4520.png', '/IMG_4521.png', '/IMG_4522.png']
+
+function asRecord(value: unknown): Record<string, unknown> | undefined {
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? value as Record<string, unknown>
+    : undefined
+}
+
+function stringValue(value: unknown) {
+  return typeof value === 'string' ? value : undefined
+}
+
+function numberOrString(value: unknown) {
+  return typeof value === 'number' || typeof value === 'string' ? value : undefined
+}
+
+function resolveImageSource(value: unknown) {
+  if (typeof value === 'string') return value
+  const image = asRecord(value)
+  return stringValue(image?.src) || stringValue(image?.light) || stringValue(image?.dark) || ''
+}
+
+function resolveHref(href: string | undefined) {
+  if (!href) return undefined
+  return isExternalHref(href) ? href : normalizeSiteHref(href)
+}
+
+function styleToString(value: unknown) {
+  if (typeof value === 'string') return value
+  const style = asRecord(value)
+  if (!style) return undefined
+
+  return Object.entries(style)
+    .filter(([, styleValue]) => styleValue !== undefined && styleValue !== null)
+    .map(([key, styleValue]) => {
+      const property = key.replace(/[A-Z]/g, (char) => `-${char.toLowerCase()}`)
+      return `${property}: ${String(styleValue).replace(/;\s*$/, '')}`
+    })
+    .join('; ')
+}
+
+function normalizeCourseGroups(value: unknown): HomeCourseGroup[] {
+  if (!Array.isArray(value)) return []
+  return value.map((group) => {
+    const record = asRecord(group) as HomeCourseGroup | undefined
+    if (!record) return { rows: [] }
+    return {
+      ...record,
+      rows: record.rows ?? (record.items ? [{ items: record.items }] : []),
+    }
+  })
+}
+
+function featureIconSource(icon: HomeFeature['icon']) {
+  if (typeof icon === 'string') return icon
+  return icon?.light || icon?.dark || ''
+}
+
+function isImageIcon(icon: string) {
+  return /(?:\.png|\.jpe?g|\.webp|\.gif|\.svg)$/i.test(icon)
+}
+---
+
+<BaseLayout title={siteConfig.title} description={siteConfig.description} pageClass="home">
+  <NavBar currentPath="/" />
+  <main class="VPHome">
+    <section class:list={['VPHero', { 'has-image': Boolean(heroImageSrc) }]}> 
+      <div class="container">
+        <div class="main">
+          <h1 class="heading">
+            <span class="hero-name-wrapper animate__animated animate__fadeInLeft" style="animation-delay: 0.48s; animation-duration: 0.9s;">
+              <span class="name clip hero-name-ready">{heroName}</span>
+            </span>
+            {heroText && <span class="text">{heroText}</span>}
+          </h1>
+          {heroTagline && <p class="tagline">{heroTagline}</p>}
+
+          {courseGroups.length > 0 && (
+            <section class="home-course-actions aya-xyz-root">
+              {courseGroups.map((group) => (
+                <div class="home-course-group" style={`--year-color: ${group.tone || 'var(--vp-c-brand-1)'}`}>
+                  <div class="home-course-group-title aya-xyz-nested">
+                    <span class="year-dot"></span>
+                    {group.label && <span class="year-code">{group.label}</span>}
+                    {group.title && <span class="year-name">{group.title}</span>}
+                  </div>
+                  <div class="home-course-lines">
+                    {(group.rows ?? []).map((row) => (
+                      <div class="home-course-row">
+                        {(row.items ?? []).map((item) => {
+                          const href = resolveHref(item.link)
+                          const variant = item.variant ?? group.variant ?? 'alt'
+                          return href ? (
+                            <a class:list={['home-course-button', 'aya-xyz-nested', variant]} href={href}>{item.text}</a>
+                          ) : (
+                            <button class:list={['home-course-button', 'aya-xyz-nested', variant]} type="button">{item.text}</button>
+                          )
+                        })}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </section>
+          )}
+          <HeroHitokoto client:load class="mobile-hitokoto" />
+        </div>
+
+        {heroImageSrc && (
+          <div class="image">
+            <div class="image-container">
+              <div class="image-bg"></div>
+              <div class="hero-image-wrap">
+                {heroImageLink ? (
+                  <a class="image-src" href={heroImageLink} target="_blank" rel="noopener noreferrer">
+                    <img
+                      class="hero-image-src"
+                      src={heroImageSrc}
+                      width={heroImageWidth}
+                      height={heroImageHeight}
+                      style={heroImageStyle}
+                      alt=""
+                    />
+                  </a>
+                ) : (
+                  <img
+                    class="image-src hero-image-src"
+                    src={heroImageSrc}
+                    width={heroImageWidth}
+                    height={heroImageHeight}
+                    style={heroImageStyle}
+                    alt=""
+                  />
+                )}
+                {heroImageLink && <span class="hero-tooltip">点我有惊喜 (≧▽≦)</span>}
+                {heroPool.map((src) => <img src={src} class="hero-preload" aria-hidden="true" alt="" />)}
+                <HeroHitokoto client:load class="desktop-hitokoto" />
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+
+    {features.length > 0 && (
+      <section class="VPFeatures">
+        <div class="container">
+          <div class="items">
+            {features.map((feature) => {
+              const icon = featureIconSource(feature.icon)
+              const href = resolveHref(feature.link)
+              return (
+                <div class="item">
+                  <article class="VPFeature">
+                    {icon && (
+                      <div class="icon">
+                        {isImageIcon(icon) ? <img src={icon} alt="" /> : <span>{icon}</span>}
+                      </div>
+                    )}
+                    {feature.title && <h2 class="title">{feature.title}</h2>}
+                    {feature.details && <p class="details">{feature.details}</p>}
+                    {href && (
+                      <a class="link" href={href} target={isExternalHref(href) ? '_blank' : undefined} rel={isExternalHref(href) ? 'noreferrer noopener' : undefined}>
+                        {feature.linkText || 'Learn more'}
+                      </a>
+                    )}
+                  </article>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+    )}
+  </main>
+  <script is:inline define:vars={{ heroPool }}>
+    (() => {
+      const image = document.querySelector('.VPHome .hero-image-src')
+      if (image && Array.isArray(heroPool) && heroPool.length) {
+        image.setAttribute('src', heroPool[Date.now() % heroPool.length])
+      }
+
+      const wrap = document.querySelector('.hero-image-wrap')
+      const imageTarget = document.querySelector('.hero-image-wrap > .image-src')
+      const tooltip = document.querySelector('.hero-tooltip')
+      if (wrap && imageTarget && tooltip) {
+        imageTarget.addEventListener('mousemove', (event) => {
+          const rect = wrap.getBoundingClientRect()
+          tooltip.style.opacity = '1'
+          tooltip.style.left = `${event.clientX - rect.left}px`
+          tooltip.style.top = `${event.clientY - rect.top}px`
+        })
+        imageTarget.addEventListener('mouseleave', () => {
+          tooltip.style.opacity = '0'
+        })
+      }
+
+      const runHomeMotion = () => {
+        const root = document.documentElement
+        root.classList.add('home-nav-ready', 'home-nav-animate')
+        window.setTimeout(() => {
+          root.classList.remove('home-nav-animate')
+        }, 700)
+
+        const courseActions = document.querySelector('.home-course-actions')
+        if (!courseActions) return
+
+        courseActions.setAttribute('xyz', 'fade left-1 duration-6 stagger-0 stagger-rev-0.5 ease-out')
+        const items = Array.from(courseActions.querySelectorAll('.home-course-group-title, .home-course-button')).slice(0, 18)
+        items.forEach((item, index) => {
+          item.classList.add('xyz-nested', 'aya-xyz-nested')
+          item.style.setProperty('--xyz-index', String(index))
+          item.style.setProperty('--xyz-index-rev', String(items.length - index - 1))
+        })
+
+        courseActions.offsetHeight
+        courseActions.classList.add('xyz-in')
+      }
+
+      requestAnimationFrame(() => requestAnimationFrame(runHomeMotion))
+    })()
+  </script>
+</BaseLayout>

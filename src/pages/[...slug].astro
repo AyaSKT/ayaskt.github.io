@@ -1,0 +1,24 @@
+---
+import DocLayout from '../layouts/DocLayout.astro'
+import { loadAllDocs } from '../lib/content/docs'
+import { renderMarkdown } from '../lib/markdown/render'
+import { routePathAliases } from '../lib/routing/vitepressPaths'
+
+export function getStaticPaths() {
+  return loadAllDocs()
+    .filter((doc) => doc.urlPath !== '/')
+    .flatMap((doc) => routePathAliases(doc.urlPath).map((slug: string) => ({
+      params: { slug },
+      props: { docsPath: doc.docsPath },
+    })))
+}
+
+const docs = loadAllDocs()
+const doc = docs.find((item) => item.docsPath === Astro.props.docsPath)
+
+if (!doc) throw new Error(`Document not found for ${Astro.props.docsPath}`)
+
+const rendered = await renderMarkdown(doc.content, doc.docsPath)
+---
+
+<DocLayout doc={doc} html={rendered.html} headings={rendered.headings} />

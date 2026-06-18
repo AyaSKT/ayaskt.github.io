@@ -1,0 +1,9 @@
+---
+import HomeLayout from '../layouts/HomeLayout.astro'
+import { findDocByUrlPath } from '../lib/content/docs'
+
+const doc = findDocByUrlPath('/')
+if (!doc) throw new Error('Homepage document not found')
+---
+
+<HomeLayout doc={doc} />

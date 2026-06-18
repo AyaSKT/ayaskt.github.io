@@ -1,0 +1,53 @@
+---
+import SidebarTree from './SidebarTree.astro'
+import type { SidebarItem } from '../config/types'
+import { normalizeComparablePath, normalizeSiteHref } from '../lib/routing/vitepressPaths'
+
+interface Props {
+  items: SidebarItem[]
+  currentPath: string
+  level?: number
+}
+
+const { items, currentPath, level = 0 } = Astro.props
+const current = normalizeComparablePath(currentPath)
+
+function itemHref(item: SidebarItem) {
+  return item.link ? normalizeSiteHref(item.link) : undefined
+}
+
+function itemIsCurrent(item: SidebarItem) {
+  const href = itemHref(item)
+  return href ? normalizeComparablePath(href) === current : false
+}
+
+function itemContainsCurrent(item: SidebarItem): boolean {
+  return itemIsCurrent(item) || item.items?.some(itemContainsCurrent) === true
+}
+---
+
+{items.map((item) => {
+  const href = itemHref(item)
+  const isCurrent = itemIsCurrent(item)
+  const isActive = itemContainsCurrent(item)
+  const hasChildren = item.items && item.items.length > 0
+
+  return (
+    <div class:list={['VPSidebarItem', `level-${level}`, { collapsed: item.collapsed, 'is-active': isActive }]}>
+      <div class="item">
+        {href ? (
+          <a class="link" href={href} data-sidebar-current={isCurrent ? 'true' : undefined} aria-current={isCurrent ? 'page' : undefined}>
+            <span class="text">{item.text}</span>
+          </a>
+        ) : (
+          <span class="text">{item.text}</span>
+        )}
+      </div>
+      {hasChildren && (
+        <div class="items">
+          <SidebarTree items={item.items ?? []} currentPath={currentPath} level={level + 1} />
+        </div>
+      )}
+    </div>
+  )
+})}

@@ -4,6 +4,12 @@ node_modules/
 # VitePress 构建产物（由 GitHub Actions 自动生成，无需提交）
 docs/.vitepress/dist/
 
+# Astro 构建产物（由 GitHub Actions 自动生成，无需提交）
+dist/
+
+# Astro 类型/内容缓存
+.astro/
+
 # VitePress 构建缓存
 docs/.vitepress/cache/
 
@@ -24,6 +30,7 @@ tmp/
 docs/superpowers/
 docs/public/animation-tuner.html
 docs/public/archive-gallery.html
+docs/public/_docs/
 
 # 本地配置文件
 .markdownlint.json

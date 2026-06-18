@@ -1,0 +1,30 @@
+---
+import { siteConfig } from '../config/site'
+import '../styles/site.css'
+
+interface Props {
+  title?: string
+  description?: string
+  pageClass?: string
+}
+
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+  pageClass = '',
+} = Astro.props
+---
+
+<!doctype html>
+<html lang={siteConfig.lang} class={pageClass}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

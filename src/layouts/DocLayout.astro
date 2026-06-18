@@ -1,0 +1,106 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import MarkdownContent from '../components/MarkdownContent.vue'
+import NavBar from '../components/NavBar.astro'
+import SidebarTree from '../components/SidebarTree.astro'
+import { docsSpaces } from '../config/docs-spaces'
+import type { LoadedDoc } from '../lib/content/docs'
+import type { Heading } from '../lib/markdown/render'
+
+interface Props {
+  doc: LoadedDoc
+  html: string
+  headings: Heading[]
+}
+
+const { doc, html, headings } = Astro.props
+const pageClass = [doc.frontmatter.pageClass, doc.frontmatter.layout === 'home' ? 'home' : ''].filter(Boolean).join(' ')
+const showAside = doc.frontmatter.aside !== false && headings.some((heading) => heading.depth >= 2 && heading.depth <= 3)
+const docsSpace = docsSpaces.find((space) => doc.urlPath.startsWith(space.base))
+---
+
+<BaseLayout title={`${doc.title} | Ayaskt Workspace`} pageClass={pageClass}>
+  <NavBar currentPath={doc.urlPath} />
+  <div class="VPDoc">
+    <div class="container">
+      <aside class="VPSidebar">
+        <nav class="nav" aria-label={docsSpace?.title ?? 'Sidebar navigation'}>
+          <div class="sidebar-active-indicator" aria-hidden="true"></div>
+          {docsSpace && <SidebarTree items={docsSpace.sidebar} currentPath={doc.urlPath} />}
+        </nav>
+      </aside>
+      <main class="main">
+        <div class="content">
+          <div class="content-container">
+            <MarkdownContent client:load html={html} path={doc.urlPath} frontmatter={doc.frontmatter} page={{ relativePath: doc.docsPath }} />
+          </div>
+        </div>
+      </main>
+      {showAside && (
+        <aside class="aside">
+          <nav class="VPDocAsideOutline">
+            <ul>
+              {headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3).map((heading) => (
+                <li class={`outline-depth-${heading.depth}`}>
+                  <a href={`#${heading.slug}`}>{heading.text}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      )}
+    </div>
+  </div>
+  <script is:inline>
+    (() => {
+      const normalize = (value) => {
+        try {
+          const url = new URL(value, window.location.href)
+          const path = url.pathname.replace(/\/index\.html$/i, '/').replace(/\.html$/i, '')
+          return path.length > 1 ? path.replace(/\/$/, '') : path
+        } catch {
+          return value
+        }
+      }
+
+      const updateSidebarIndicator = () => {
+        const nav = document.querySelector('.VPSidebar .nav')
+        const indicator = nav?.querySelector('.sidebar-active-indicator')
+        const activeLink = nav?.querySelector('.link[data-sidebar-current="true"]')
+
+        if (!nav || !indicator || !activeLink) return
+
+        const navRect = nav.getBoundingClientRect()
+        const linkRect = activeLink.getBoundingClientRect()
+        indicator.style.opacity = '1'
+        indicator.style.left = `${linkRect.left - navRect.left}px`
+        indicator.style.top = `${linkRect.top - navRect.top}px`
+        indicator.style.width = `${linkRect.width}px`
+        indicator.style.height = `${linkRect.height}px`
+      }
+
+      const syncCurrentLink = () => {
+        const nav = document.querySelector('.VPSidebar .nav')
+        if (!nav) return
+
+        const currentPath = normalize(window.location.href)
+        const links = nav.querySelectorAll('.link[href]')
+        for (const link of links) {
+          const isCurrent = normalize(link.href) === currentPath
+          link.toggleAttribute('data-sidebar-current', isCurrent)
+          link.toggleAttribute('aria-current', isCurrent)
+        }
+        updateSidebarIndicator()
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', syncCurrentLink, { once: true })
+      } else {
+        requestAnimationFrame(syncCurrentLink)
+      }
+      window.addEventListener('resize', updateSidebarIndicator, { passive: true })
+      window.addEventListener('pageshow', syncCurrentLink)
+      document.addEventListener('astro:page-load', syncCurrentLink)
+    })()
+  </script>
+</BaseLayout>

@@ -1,0 +1,150 @@
+---
+import { navItems } from '../config/docs-spaces'
+import { docsSpaces } from '../config/docs-spaces'
+import type { NavItem } from '../config/types'
+import { isExternalHref, normalizeComparablePath, normalizeSiteHref } from '../lib/routing/vitepressPaths'
+import uestcIconRaw from '../../docs/Index-assets/logos/UESTC.svg?raw'
+
+interface Props {
+  currentPath: string
+}
+
+const { currentPath } = Astro.props
+const current = normalizeComparablePath(currentPath)
+const hasSidebar = docsSpaces.some((space) => current.startsWith(normalizeComparablePath(space.base)))
+const uestcIcon = uestcIconRaw.replace(/^<\?xml[^>]*>\s*/i, '')
+
+function hrefFor(item: NavItem) {
+  if (!item.link) return undefined
+  return isExternalHref(item.link) ? item.link : normalizeSiteHref(item.link)
+}
+
+function matchesActive(item: NavItem): boolean {
+  if (item.activeMatch && new RegExp(item.activeMatch).test(current)) return true
+
+  const href = hrefFor(item)
+  if (href && !isExternalHref(href) && normalizeComparablePath(href) === current) return true
+
+  return item.items?.some(matchesActive) === true
+}
+---
+
+<header class="VPNav">
+  <div class:list={['VPNavBar', { home: current === '/', top: true, 'has-sidebar': hasSidebar }]}>
+    <div class="wrapper">
+      <div class="container">
+        <div class="title">
+          <div class:list={['VPNavBarTitle', { 'has-sidebar': hasSidebar }]}> 
+            <a class="title" href="/">
+              <img class="nav-site-logo" src="/IMG_4825_transparent.png" alt="" />
+              <span>Ayaskt Workspace</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="content">
+          <div class="content-body">
+            <div class="VPNavBarSearch search">
+              <button class="DocSearch-Button" type="button" aria-label="Search">
+                <svg class="DocSearch-Search-Icon" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+                  <path d="M14.386 14.386 19 19" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                  <circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                </svg>
+                <span class="DocSearch-Button-Placeholder">Search</span>
+                <span class="DocSearch-Button-Keys" aria-hidden="true">⌘ K</span>
+              </button>
+            </div>
+            <nav class="VPNavBarMenu menu" aria-label="Main navigation">
+              {navItems.map((item) => {
+                const href = hrefFor(item)
+                const active = matchesActive(item)
+
+                if (item.items?.length) {
+                  return (
+                    <div class:list={['VPNavBarMenuGroup', 'VPFlyout', { active }]}>
+                      <button class="button" type="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="text">{item.text}</span>
+                        <svg class="text-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                          <path d="M4.2 6.2 8 10l3.8-3.8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" />
+                        </svg>
+                      </button>
+                      <div class="menu">
+                        <div class="VPMenu">
+                          {item.items.map((child) => {
+                            const childHref = hrefFor(child)
+                            const childActive = matchesActive(child)
+                            return childHref ? (
+                              <a class:list={['VPMenuLink', { active: childActive }]} href={childHref}>
+                                <span class="text">{child.text}</span>
+                              </a>
+                            ) : (
+                              <span class="VPMenuLink disabled">{child.text}</span>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                }
+
+                return href ? (
+                  <a class:list={['VPNavBarMenuLink', { active }]} href={href}>{item.text}</a>
+                ) : (
+                  <span class="VPNavBarMenuLink disabled">{item.text}</span>
+                )
+              })}
+            </nav>
+            <div class="VPNavBarAppearance appearance">
+              <button class="button VPSwitchAppearance" type="button" aria-label="Toggle dark mode">
+                <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8" />
+                  <path d="M12 2.5v3M12 18.5v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2.5 12h3M18.5 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" />
+                </svg>
+              </button>
+            </div>
+            <div class="reading-mode-control">
+              <button class="reading-mode-button" type="button" aria-label="进入纯净阅读模式" aria-pressed="false">
+                <svg class="reading-mode-icon" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                  <path d="M859.136 51.712h-253.952c-38.4 0-72.704 19.456-93.184 48.64-20.48-29.184-54.784-48.64-93.184-48.64H164.864C102.4 51.712 51.2 102.912 51.2 165.376v627.2c0 62.976 51.2 113.664 113.664 113.664h211.456c32.256 41.472 81.92 65.536 135.168 65.536 52.736 0 102.4-24.576 135.168-65.536h211.456c62.976 0 113.664-51.2 113.664-113.664V165.376c1.024-62.464-50.176-113.664-112.64-113.664zM931.84 792.576c0 39.936-32.768 72.704-72.704 72.704h-222.208c-6.656 0-13.312 3.584-16.896 8.704-24.576 35.328-64.512 56.832-107.52 56.832s-83.456-20.992-107.52-56.832c-3.584-5.632-10.24-8.704-16.896-8.704H165.888c-39.936 0-72.704-32.768-72.704-72.704V165.376c0-39.936 32.768-72.704 72.704-72.704H419.84c39.936 0 72.704 32.768 72.704 72.704V629.76c0 11.264 9.216 20.48 20.48 20.48s20.48-9.216 20.48-20.48V165.376c0-39.936 32.768-72.704 72.704-72.704H860.16c39.936 0 72.704 32.768 72.704 72.704v627.2z" fill="currentColor" />
+                  <path d="M367.104 241.152H215.04c-11.264 0-20.48 9.216-20.48 20.48s9.216 20.48 20.48 20.48h151.552c11.264 0 20.48-9.216 20.48-20.48s-8.704-20.48-19.968-20.48zM367.104 457.216H215.04c-11.264 0-20.48 9.216-20.48 20.48s9.216 20.48 20.48 20.48h151.552c11.264 0 20.48-9.216 20.48-20.48s-8.704-20.48-19.968-20.48zM367.104 672.768H215.04c-11.264 0-20.48 9.216-20.48 20.48s9.216 20.48 20.48 20.48h151.552c11.264 0 20.48-9.216 20.48-20.48 0.512-11.264-8.704-20.48-19.968-20.48zM807.936 241.152h-151.552c-11.264 0-20.48 9.216-20.48 20.48s9.216 20.48 20.48 20.48h151.552c11.264 0 20.48-9.216 20.48-20.48s-9.216-20.48-20.48-20.48zM807.936 457.216h-151.552c-11.264 0-20.48 9.216-20.48 20.48s9.216 20.48 20.48 20.48h151.552c11.264 0 20.48-9.216 20.48-20.48s-9.216-20.48-20.48-20.48zM807.936 672.768h-151.552c-11.264 0-20.48 9.216-20.48 20.48s9.216 20.48 20.48 20.48h151.552c11.264 0 20.48-9.216 20.48-20.48s-9.216-20.48-20.48-20.48z" fill="currentColor" />
+                </svg>
+              </button>
+            </div>
+            <div class="VPNavBarSocialLinks social-links">
+              <a class="VPSocialLink" href="https://github.com/ayaskt" target="_blank" rel="noreferrer noopener" aria-label="GitHub">
+                <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path fill="currentColor" d="M12 .5A11.5 11.5 0 0 0 8.36 22.9c.58.1.8-.25.8-.56v-2.13c-3.25.7-3.94-1.38-3.94-1.38-.53-1.35-1.3-1.7-1.3-1.7-1.06-.73.08-.72.08-.72 1.17.08 1.8 1.2 1.8 1.2 1.04 1.79 2.73 1.27 3.4.97.1-.76.4-1.27.73-1.56-2.6-.3-5.33-1.3-5.33-5.76 0-1.27.45-2.31 1.2-3.13-.12-.3-.52-1.49.12-3.08 0 0 .98-.31 3.2 1.2a11.05 11.05 0 0 1 5.84 0c2.22-1.51 3.2-1.2 3.2-1.2.64 1.6.24 2.79.12 3.08.75.82 1.2 1.86 1.2 3.13 0 4.47-2.74 5.46-5.35 5.75.42.36.8 1.08.8 2.18v3.24c0 .31.2.67.8.56A11.5 11.5 0 0 0 12 .5Z" />
+                </svg>
+              </a>
+              <a class="VPSocialLink" href="https://www.uestc.edu.cn/" target="_blank" rel="noreferrer noopener" aria-label="UESTC">
+                <span class="nav-icon social-image" set:html={uestcIcon}></span>
+              </a>
+            </div>
+            <button class="VPNavBarHamburger hamburger" type="button" aria-label="Open navigation" aria-expanded="false">
+              <span class="container" aria-hidden="true">
+                <span class="top"></span>
+                <span class="middle"></span>
+                <span class="bottom"></span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="divider">
+      <div class="divider-line"></div>
+    </div>
+  </div>
+  <script is:inline>
+    (() => {
+      const nav = document.querySelector('.VPNavBar')
+      if (!nav) return
+
+      const update = () => nav.classList.toggle('top', window.scrollY === 0)
+      update()
+      window.addEventListener('scroll', update, { passive: true })
+      window.addEventListener('pageshow', update)
+      document.addEventListener('astro:page-load', update)
+    })()
+  </script>
+</header>
