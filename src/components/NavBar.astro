@@ -88,9 +88,13 @@ function matchesActive(item: NavItem): boolean {
                 }
 
                 return href ? (
-                  <a class:list={['VPNavBarMenuLink', { active }]} href={href}>{item.text}</a>
+                  <a class:list={['VPNavBarMenuLink', { active }]} href={href}>
+                    <span class="text">{item.text}</span>
+                  </a>
                 ) : (
-                  <span class="VPNavBarMenuLink disabled">{item.text}</span>
+                  <span class="VPNavBarMenuLink disabled">
+                    <span class="text">{item.text}</span>
+                  </span>
                 )
               })}
             </nav>

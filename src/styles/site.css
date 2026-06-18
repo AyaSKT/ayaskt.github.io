@@ -209,6 +209,76 @@ a {
   transition: opacity 0.16s var(--ease-ios-fade, ease);
 }
 
+@keyframes ayaNavSurfaceDropIn {
+  from {
+    transform: translateY(-12px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes ayaNavContentFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.home-nav-ready) .VPNav .VPNavBar.home {
+    opacity: 1 !important;
+  }
+
+  html.home-nav-animate .VPNav .VPNavBar.home {
+    animation: none !important;
+  }
+
+  html:not(.home-nav-ready) .VPNav .VPNavBar.home .VPNavBarTitle .title,
+  html:not(.home-nav-ready) .VPNav .VPNavBar.home .DocSearch-Button,
+  html:not(.home-nav-ready) .VPNav .VPNavBar.home .VPNavBarMenu,
+  html:not(.home-nav-ready) .VPNav .VPNavBar.home .VPNavBarAppearance,
+  html:not(.home-nav-ready) .VPNav .VPNavBar.home .reading-mode-control,
+  html:not(.home-nav-ready) .VPNav .VPNavBar.home .VPNavBarSocialLinks {
+    transform: translateY(-12px);
+  }
+
+  html.home-nav-animate .VPNav .VPNavBar.home .VPNavBarTitle .title,
+  html.home-nav-animate .VPNav .VPNavBar.home .DocSearch-Button,
+  html.home-nav-animate .VPNav .VPNavBar.home .VPNavBarMenu,
+  html.home-nav-animate .VPNav .VPNavBar.home .VPNavBarAppearance,
+  html.home-nav-animate .VPNav .VPNavBar.home .reading-mode-control,
+  html.home-nav-animate .VPNav .VPNavBar.home .VPNavBarSocialLinks {
+    animation: ayaNavSurfaceDropIn 0.58s var(--ease-ios-fade) both;
+  }
+
+  html:not(.home-nav-ready) .VPNav .VPNavBar.home .VPNavBarTitle .title > *,
+  html:not(.home-nav-ready) .VPNav .VPNavBar.home .DocSearch-Button > *,
+  html:not(.home-nav-ready) .VPNav .VPNavBar.home .VPNavBarMenuLink > .text,
+  html:not(.home-nav-ready) .VPNav .VPNavBar.home .VPNavBarMenuGroup > .button > .text,
+  html:not(.home-nav-ready) .VPNav .VPNavBar.home .VPNavBarMenuGroup > .button > .text-icon,
+  html:not(.home-nav-ready) .VPNav .VPNavBar.home .VPNavBarAppearance .button > *,
+  html:not(.home-nav-ready) .VPNav .VPNavBar.home .reading-mode-button > *,
+  html:not(.home-nav-ready) .VPNav .VPNavBar.home .VPSocialLink > * {
+    opacity: 0;
+  }
+
+  html.home-nav-animate .VPNav .VPNavBar.home .VPNavBarTitle .title > *,
+  html.home-nav-animate .VPNav .VPNavBar.home .DocSearch-Button > *,
+  html.home-nav-animate .VPNav .VPNavBar.home .VPNavBarMenuLink > .text,
+  html.home-nav-animate .VPNav .VPNavBar.home .VPNavBarMenuGroup > .button > .text,
+  html.home-nav-animate .VPNav .VPNavBar.home .VPNavBarMenuGroup > .button > .text-icon,
+  html.home-nav-animate .VPNav .VPNavBar.home .VPNavBarAppearance .button > *,
+  html.home-nav-animate .VPNav .VPNavBar.home .reading-mode-button > *,
+  html.home-nav-animate .VPNav .VPNavBar.home .VPSocialLink > * {
+    animation: ayaNavContentFadeIn 0.46s var(--ease-ios-fade) 0.08s both;
+  }
+}
+
 .VPHero .tagline {
   max-width: 392px;
   margin: 0 auto;
