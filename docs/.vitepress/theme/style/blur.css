@@ -1,31 +1,8 @@
-/* .vitepress\theme\style\blur.css */
+/* Search, feature card, local nav, and navbar-shadow surfaces. */
 :root {
-    --aya-liquid-search-backdrop: rgb(247 250 253 / 10%);
-    --aya-liquid-search-bg: rgb(255 255 255 / 48%);
-    --aya-liquid-search-bg-strong: rgb(255 255 255 / 64%);
-    --aya-liquid-search-line: rgb(255 255 255 / 42%);
-    --aya-liquid-search-line-soft: rgb(152 203 234 / 30%);
-    --aya-liquid-search-shadow: rgb(54 87 113 / 18%);
-    --aya-liquid-search-text-soft: rgb(61 72 85 / 72%);
-    --aya-liquid-search-result: rgb(255 255 255 / 34%);
-    --aya-liquid-search-result-hover: rgb(255 255 255 / 52%);
-    --aya-liquid-search-highlight: rgb(152 203 234 / 68%);
-    --aya-liquid-search-highlight-text: #1d4258;
-    --aya-liquid-search-backdrop-blur: blur(4px);
-    --aya-liquid-search-panel-blur: blur(26px);
-    --aya-liquid-search-control-blur: blur(14px);
-    --aya-card-feather: 0 0 14px 4px rgb(0 0 0 / 3.5%);
-    --aya-card-shadow: 0 14px 34px rgb(92 102 114 / 15%);
-    --aya-card-border: rgb(255 255 255 / 44%);
-
-    --aya-nav-shadow-band-height: calc(var(--vp-nav-height, 64px) + 14px);
-    --aya-nav-shadow-band-bg: linear-gradient(
-        to bottom,
-        rgb(74 83 96 / 14%) 0%,
-        rgb(74 83 96 / 9%) 38%,
-        rgb(74 83 96 / 4%) 68%,
-        rgb(74 83 96 / 0%) 100%
-    );
+    --aya-card-feather: var(--aya-shadow-card-feather);
+    --aya-card-shadow: var(--aya-shadow-card-depth);
+    --aya-card-border: var(--aya-surface-border);
 
     /* 移除导航栏滚动后出现的底部分隔线 */
     .VPNavBar,
@@ -88,32 +65,6 @@
         background-color: rgba(255, 255, 255, 0);
         backdrop-filter: blur(10px);
     }
-
-}
-
-.dark {
-    --aya-liquid-search-backdrop: rgb(5 9 14 / 22%);
-    --aya-liquid-search-bg: rgb(14 19 27 / 62%);
-    --aya-liquid-search-bg-strong: rgb(23 30 41 / 72%);
-    --aya-liquid-search-line: rgb(255 255 255 / 18%);
-    --aya-liquid-search-line-soft: rgb(152 203 234 / 24%);
-    --aya-liquid-search-shadow: rgb(0 0 0 / 42%);
-    --aya-liquid-search-text-soft: rgb(220 230 242 / 72%);
-    --aya-liquid-search-result: rgb(255 255 255 / 8%);
-    --aya-liquid-search-result-hover: rgb(255 255 255 / 12%);
-    --aya-liquid-search-highlight: rgb(152 203 234 / 54%);
-    --aya-liquid-search-highlight-text: #eef8ff;
-    --aya-card-feather: 0 0 16px 5px rgb(0 0 0 / 16%);
-    --aya-card-shadow: 0 14px 36px rgb(0 0 0 / 36%);
-    --aya-card-border: rgb(255 255 255 / 12%);
-
-    --aya-nav-shadow-band-bg: linear-gradient(
-        to bottom,
-        rgb(152 160 172 / 12%) 0%,
-        rgb(152 160 172 / 7%) 38%,
-        rgb(152 160 172 / 3%) 68%,
-        rgb(152 160 172 / 0%) 100%
-    );
 }
 
 /* Navbar shadow band: top-level selectors for Chromium consistency. */
@@ -159,20 +110,16 @@
     --vp-local-search-result-bg: transparent;
     --vp-local-search-result-border: transparent;
     --vp-local-search-result-selected-bg: transparent;
-    --vp-local-search-result-selected-border: rgb(152 203 234 / 78%);
-    --vp-local-search-highlight-bg: var(--aya-liquid-search-highlight);
-    --vp-local-search-highlight-text: var(--aya-liquid-search-highlight-text);
+    --vp-local-search-result-selected-border: color-mix(in srgb, var(--vp-c-brand-1) 78%, transparent);
+    --vp-local-search-highlight-bg: var(--aya-search-mark-bg);
+    --vp-local-search-highlight-text: var(--aya-search-mark-text);
     z-index: 1000;
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .backdrop {
-    background: var(--aya-liquid-search-backdrop);
-    backdrop-filter: var(--aya-liquid-search-backdrop-blur);
-    -webkit-backdrop-filter: var(--aya-liquid-search-backdrop-blur);
-}
-
-.dark .VPLocalSearchBox[aria-expanded="true"] .backdrop {
-    background: var(--aya-liquid-search-backdrop);
+    background: var(--aya-search-backdrop-bg);
+    backdrop-filter: var(--aya-frosted-blur-backdrop);
+    -webkit-backdrop-filter: var(--aya-frosted-blur-backdrop);
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .shell {
@@ -182,17 +129,12 @@
     width: min(100vw - 48px, 860px);
     padding: 14px;
     gap: 14px;
-    border: 1px solid var(--aya-liquid-search-line);
+    border: 1px solid var(--aya-surface-border);
     border-radius: 28px;
-    background: var(--aya-liquid-search-bg);
-    box-shadow: 0 34px 90px var(--aya-liquid-search-shadow);
-    backdrop-filter: var(--aya-liquid-search-panel-blur);
-    -webkit-backdrop-filter: var(--aya-liquid-search-panel-blur);
-}
-
-.dark .VPLocalSearchBox[aria-expanded="true"] .shell {
-    background: var(--aya-liquid-search-bg);
-    box-shadow: 0 34px 90px var(--aya-liquid-search-shadow);
+    background: var(--aya-surface-bg-strong);
+    box-shadow: var(--aya-shadow-search-panel);
+    backdrop-filter: var(--aya-frosted-blur-panel);
+    -webkit-backdrop-filter: var(--aya-frosted-blur-panel);
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .shell > * {
@@ -203,21 +145,16 @@
 .VPLocalSearchBox[aria-expanded="true"] .search-bar {
     min-height: 52px;
     padding: 0 12px;
-    border: 1px solid var(--aya-liquid-search-line);
+    border: 1px solid var(--aya-surface-border);
     border-radius: 18px;
-    background: var(--aya-liquid-search-result);
-    box-shadow: 0 14px 34px rgb(54 87 113 / 13%);
-    backdrop-filter: var(--aya-liquid-search-control-blur);
-    -webkit-backdrop-filter: var(--aya-liquid-search-control-blur);
+    background: var(--aya-surface-bg-soft);
+    box-shadow: var(--aya-shadow-search-control);
+    backdrop-filter: var(--aya-frosted-blur-md);
+    -webkit-backdrop-filter: var(--aya-frosted-blur-md);
     transition:
         border-color 0.22s var(--ease-ios-fade),
         box-shadow 0.22s var(--ease-ios-fade),
         background 0.22s var(--ease-ios-fade);
-}
-
-.dark .VPLocalSearchBox[aria-expanded="true"] .search-bar {
-    background: var(--aya-liquid-search-result);
-    box-shadow: 0 14px 34px rgb(0 0 0 / 24%);
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .search-bar:focus-within {
@@ -232,13 +169,14 @@
     caret-color: var(--vp-c-brand-1);
 }
 
-.VPLocalSearchBox[aria-expanded="true"] .search-input::placeholder {
-    color: var(--aya-liquid-search-text-soft);
+.VPLocalSearchBox[aria-expanded="true"] .search-input::placeholder,
+.VPLocalSearchBox[aria-expanded="true"] .search-keyboard-shortcuts,
+.VPLocalSearchBox[aria-expanded="true"] .no-results {
+    color: var(--aya-search-text-soft);
 }
 
-.VPLocalSearchBox[aria-expanded="true"] .local-search-icon,
-.VPLocalSearchBox[aria-expanded="true"] .search-keyboard-shortcuts {
-    color: var(--aya-liquid-search-text-soft);
+.VPLocalSearchBox[aria-expanded="true"] .local-search-icon {
+    color: var(--aya-search-text-soft);
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .search-actions button {
@@ -264,12 +202,12 @@
 .VPLocalSearchBox[aria-expanded="true"] .result {
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--aya-liquid-search-line-soft);
+    border: 1px solid var(--aya-surface-border-soft);
     border-radius: 18px;
-    background: var(--aya-liquid-search-result);
-    box-shadow: 0 8px 18px rgb(54 87 113 / 7%);
-    backdrop-filter: var(--aya-liquid-search-control-blur);
-    -webkit-backdrop-filter: var(--aya-liquid-search-control-blur);
+    background: var(--aya-surface-bg-soft);
+    box-shadow: var(--aya-shadow-search-result);
+    backdrop-filter: var(--aya-frosted-blur-md);
+    -webkit-backdrop-filter: var(--aya-frosted-blur-md);
     transition:
         border-color 0.2s var(--ease-ios-fade),
         background 0.2s var(--ease-ios-fade),
@@ -277,16 +215,11 @@
         transform 0.2s var(--ease-ios-press);
 }
 
-.dark .VPLocalSearchBox[aria-expanded="true"] .result {
-    background: var(--aya-liquid-search-result);
-    box-shadow: 0 8px 18px rgb(0 0 0 / 18%);
-}
-
 .VPLocalSearchBox[aria-expanded="true"] .result:hover,
 .VPLocalSearchBox[aria-expanded="true"] .result.selected {
     transform: translateY(-1px);
     border-color: rgb(152 203 234 / 70%);
-    background: var(--aya-liquid-search-result-hover);
+    background: var(--aya-surface-bg-hover);
     box-shadow: 0 12px 26px rgb(54 87 113 / 12%);
 }
 
@@ -334,8 +267,8 @@
 .VPLocalSearchBox[aria-expanded="true"] .excerpt mark {
     border-radius: 5px;
     padding: 0 3px;
-    background: var(--aya-liquid-search-highlight);
-    color: var(--aya-liquid-search-highlight-text);
+    background: var(--aya-search-mark-bg);
+    color: var(--aya-search-mark-text);
     box-shadow: none;
 }
 
@@ -344,17 +277,16 @@
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .search-keyboard-shortcuts kbd {
-    border: 1px solid var(--aya-liquid-search-line-soft);
+    border: 1px solid var(--aya-surface-border-soft);
     border-radius: 8px;
-    background: var(--aya-liquid-search-result);
+    background: var(--aya-surface-bg-soft);
     box-shadow: 0 3px 10px rgb(54 87 113 / 8%);
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .no-results {
-    border: 1px solid var(--aya-liquid-search-line-soft);
+    border: 1px solid var(--aya-surface-border-soft);
     border-radius: 16px;
-    background: var(--aya-liquid-search-result);
-    color: var(--aya-liquid-search-text-soft);
+    background: var(--aya-surface-bg-soft);
 }
 
 @media (max-width: 767px) {
@@ -365,8 +297,8 @@
         border-width: 0;
         padding: 12px;
         max-height: none;
-        backdrop-filter: var(--aya-liquid-search-panel-blur);
-        -webkit-backdrop-filter: var(--aya-liquid-search-panel-blur);
+        backdrop-filter: var(--aya-frosted-blur-panel);
+        -webkit-backdrop-filter: var(--aya-frosted-blur-panel);
     }
 
     .VPLocalSearchBox[aria-expanded="true"] .search-bar {
