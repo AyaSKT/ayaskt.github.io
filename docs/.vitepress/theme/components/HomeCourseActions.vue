@@ -347,22 +347,27 @@ watch(
 /* Alt variant — subtle gray/white */
 .home-course-button.alt {
   color: var(--vp-c-text-1);
-  background-color: var(--vp-c-bg-soft);
-  border-color: color-mix(in srgb, var(--vp-c-divider) 70%, transparent);
+  background-color: var(--vp-c-bg);
+  border-color: transparent;
+  box-shadow:
+    var(--aya-card-outline-shadow, 0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 62%, transparent)),
+    var(--aya-card-feather, 0 0 14px 4px rgb(0 0 0 / 3.5%));
 }
 
 .home-course-button.alt:hover,
 .home-course-button.alt:focus-visible {
-  background-color: color-mix(in srgb, var(--vp-c-bg-soft) 80%, var(--vp-c-brand-1));
-  border-color: color-mix(in srgb, var(--vp-c-divider) 50%, var(--vp-c-brand-1));
+  background-color: var(--vp-c-bg);
+  border-color: transparent;
   color: var(--vp-c-text-1);
   transform: translateY(-1px);
-  box-shadow: 0 3px 10px color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent);
+  box-shadow:
+    var(--aya-card-hover-outline-shadow, 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 28%, transparent)),
+    0 3px 10px color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent);
 }
 
 .home-course-button.alt:active {
   transform: translateY(0);
-  box-shadow: none;
+  box-shadow: var(--aya-card-outline-shadow, 0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 62%, transparent));
 }
 
 /* Mobile: disable circle-wrap, full width rows */

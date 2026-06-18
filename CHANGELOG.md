@@ -26,7 +26,11 @@
 - 将搜索框、Feature 卡片、导航栏阴影带、导航标签、下拉菜单、移动端导航按钮与文档侧栏窗口的表面样式，从旧液态玻璃/反射命名迁移到 flat frosted / gaussian blur token。
 - 将纯净阅读模式导航按钮同步到新的 frosted nav token，并更新阅读模式测试，使隐藏导航栏时仍保持实时可绘制的模糊表面。
 - 将 MindMap 顶部控制条与导出菜单的本地 `glass` / `highlight` token 改为 frosted blur token，并关闭控制条、菜单伪元素上的反射背景层。
-- 将 CourseIndex 与 SongCard 卡片背景从“高光渐变 + 底色”调整为单层平面底色，hover 态继续使用原有品牌色混合背景。
+- 将 Feature、首页课程入口、CourseIndex、SongCard 与 LyricCard 等卡片表面统一为同背景底色与阴影外轮廓，实体边框改为透明，弱化旧高光/底色卡面。
+- 调整桌面端文档侧栏当前位置指示器，使蓝色选中面改为更方的圆角矩形，并在左侧轻微内收以贴合侧栏层级。
+- 调整课程 README 卡片：下半区复用封面图作为毛玻璃模糊背景，增加连续圆角、外轮廓阴影，并加粗 Lecture 编号；浅色模式编号改为 `#8839EF`。
+- 调整 SongCard 悬浮态，使其不再上浮或切换高亮阴影，保持与普通状态一致。
+- 调整 LyricCard 主体为无框无影的透明正文块，仅保留专辑封面框的背景与阴影处理。
 - 清理 transition 与 surface 注释中的玻璃/反射表述，改为中性的模糊表面描述。
 
 ### 修复
@@ -34,6 +38,7 @@
 - 修复导航 frosted token 改名后，纯净阅读模式仍引用旧 nav glass 变量导致部分 `backdrop-filter` 声明失效的风险。
 - 修复主题组件测试仍期待旧 MindMap `glass` token 与 SongCard `highlight` token 的问题，改为断言 frosted 命名与 flat background。
 - 保持导航、侧栏、MindMap、CourseIndex、SongCard 等组件原有阴影栈不变，避免清理反射层时误删卡片深度阴影。
+- 修复课程 README 卡片下半区毛玻璃背景被遮罩过度削弱、底部圆角在分区裁剪时变成直角的问题。
 
 ### 删减
 

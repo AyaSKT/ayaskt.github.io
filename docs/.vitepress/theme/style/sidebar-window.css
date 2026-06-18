@@ -2,6 +2,8 @@
 :root {
   --aya-sidebar-radius: 28px;
   --aya-sidebar-item-radius: 14px;
+  --aya-sidebar-active-radius: 10px;
+  --aya-sidebar-active-left-inset: 4px;
   --aya-sidebar-bg: rgb(255 255 255 / 50%);
   --aya-sidebar-bg-strong: rgb(255 255 255 / 78%);
   --aya-sidebar-border: rgb(255 255 255 / 42%);
@@ -87,10 +89,8 @@
     position: absolute;
     z-index: 0;
     pointer-events: none;
-    border-radius: var(--aya-sidebar-item-radius);
+    border-radius: var(--aya-sidebar-active-radius);
     corner-shape: squircle;
-    background: var(--aya-sidebar-active-bg);
-    box-shadow: 0 0 0 1px rgb(152 203 234 / 32%), 0 8px 18px rgb(54 87 113 / 6%);
     transition:
       left 0.38s var(--ease-ios-slide),
       top 0.38s var(--ease-ios-slide),
@@ -98,7 +98,17 @@
       height 0.38s var(--ease-ios-slide);
   }
 
-  .dark .sidebar-active-indicator {
+  .sidebar-active-indicator::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 0 var(--aya-sidebar-active-left-inset);
+    border-radius: var(--aya-sidebar-active-radius);
+    corner-shape: squircle;
+    background: var(--aya-sidebar-active-bg);
+    box-shadow: 0 0 0 1px rgb(152 203 234 / 32%), 0 8px 18px rgb(54 87 113 / 6%);
+  }
+
+  .dark .sidebar-active-indicator::before {
     box-shadow: 0 0 0 1px rgb(152 203 234 / 22%), 0 8px 18px rgb(0 0 0 / 18%);
   }
 

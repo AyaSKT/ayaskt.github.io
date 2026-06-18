@@ -255,6 +255,8 @@ function releaseActionFocus(event: MouseEvent) {
   gap: 14px;
   margin: 1.5rem 0 1.75rem;
   padding: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .lyric-card.has-album-cover {
@@ -309,10 +311,10 @@ function releaseActionFocus(event: MouseEvent) {
   aspect-ratio: 1;
   border-radius: 8px;
   overflow: hidden;
-  background: var(--vp-c-bg-soft);
+  background: var(--vp-c-bg);
   box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 64%, transparent),
-    0 6px 18px rgb(92 102 114 / 12%);
+    var(--aya-card-outline-shadow, 0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 64%, transparent)),
+    var(--aya-card-shadow, 0 6px 18px rgb(92 102 114 / 12%));
 }
 
 .lyric-card-album-cover {

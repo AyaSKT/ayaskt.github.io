@@ -1,8 +1,10 @@
 /* Search, feature card, local nav, and navbar-shadow surfaces. */
 :root {
+    --aya-card-bg: var(--aya-card-surface-bg, var(--vp-c-bg));
+    --aya-card-outline: var(--aya-card-outline-shadow);
     --aya-card-feather: var(--aya-shadow-card-feather);
     --aya-card-shadow: var(--aya-shadow-card-depth);
-    --aya-card-border: var(--aya-surface-border);
+    --aya-card-border: transparent;
 
     /* 移除导航栏滚动后出现的底部分隔线 */
     .VPNavBar,
@@ -40,8 +42,9 @@
     /* Feature透明 */
     .VPFeature {
         border: 1px solid var(--aya-card-border);
-        box-shadow: var(--aya-card-feather), var(--aya-card-shadow);
-        background-color: transparent;
+        box-shadow: var(--aya-card-outline), var(--aya-card-feather), var(--aya-card-shadow);
+        background: var(--aya-card-bg);
+        background-color: var(--aya-card-bg);
     }
 
     /* 文档页侧边栏顶部透明 */

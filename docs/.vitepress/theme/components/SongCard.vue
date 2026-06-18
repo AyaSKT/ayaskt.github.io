@@ -880,16 +880,14 @@ onBeforeUnmount(() => {
   --song-card-sans-jp: 'Noto Sans CJK JP', 'Noto Sans JP', 'Hiragino Sans', sans-serif;
   --song-card-serif: var(--song-card-serif-sc);
   --song-card-sans: var(--song-card-sans-sc);
-  --song-card-bg: color-mix(in srgb, var(--vp-c-bg-soft) 86%, rgb(255 255 255 / 34%));
-  --song-card-border: color-mix(in srgb, var(--aya-card-border, rgb(255 255 255 / 44%)) 68%, var(--vp-c-divider));
-  --song-card-hover-border: color-mix(in srgb, var(--vp-c-brand-1) 44%, var(--vp-c-divider));
-  --song-card-outline-shadow: 0 0 0 1px rgb(255 255 255 / 28%);
+  --song-card-bg: var(--aya-card-bg, var(--vp-c-bg));
+  --song-card-border: transparent;
+  --song-card-hover-border: transparent;
+  --song-card-outline-shadow: var(--aya-card-outline-shadow, 0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 62%, transparent));
   --song-card-feather-shadow: var(--aya-card-feather, 0 0 14px 4px rgb(0 0 0 / 3.5%));
-  --song-card-depth-shadow: 0 14px 34px rgb(92 102 114 / 10%);
-  --song-card-inner-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 36%),
-    inset 0 -1px 0 rgb(255 255 255 / 8%);
-  --song-card-hover-outline-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 18%, rgb(255 255 255 / 70%));
+  --song-card-depth-shadow: var(--aya-card-shadow, 0 14px 34px rgb(92 102 114 / 10%));
+  --song-card-inner-shadow: none;
+  --song-card-hover-outline-shadow: var(--aya-card-hover-outline-shadow, 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 28%, transparent));
   --song-card-hover-feather-shadow: 0 0 18px 5px rgb(152 203 234 / 10%);
   --song-card-hover-depth-shadow: 0 18px 42px rgb(92 102 114 / 14%);
   --song-card-player-accent: color-mix(in srgb, var(--vp-c-brand-1) 82%, #6f8ff7);
@@ -935,16 +933,14 @@ onBeforeUnmount(() => {
 }
 
 :global(.dark .song-card) {
-  --song-card-bg: rgb(10 14 21 / 74%);
-  --song-card-border: rgb(17 24 35 / 88%);
-  --song-card-hover-border: color-mix(in srgb, var(--vp-c-brand-1) 18%, rgb(17 24 35 / 90%));
-  --song-card-outline-shadow: 0 0 0 1px rgb(0 0 0 / 18%);
+  --song-card-bg: var(--aya-card-bg, var(--vp-c-bg));
+  --song-card-border: transparent;
+  --song-card-hover-border: transparent;
+  --song-card-outline-shadow: var(--aya-card-outline-shadow, 0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 42%, transparent));
   --song-card-feather-shadow: var(--aya-card-feather, 0 0 16px 5px rgb(0 0 0 / 16%));
-  --song-card-depth-shadow: 0 14px 34px rgb(0 0 0 / 30%);
-  --song-card-inner-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 2%),
-    inset 0 -1px 0 rgb(0 0 0 / 12%);
-  --song-card-hover-outline-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 18%, rgb(0 0 0 / 26%));
+  --song-card-depth-shadow: var(--aya-card-shadow, 0 14px 34px rgb(0 0 0 / 30%));
+  --song-card-inner-shadow: none;
+  --song-card-hover-outline-shadow: var(--aya-card-hover-outline-shadow, 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 22%, transparent));
   --song-card-hover-feather-shadow: 0 0 18px 5px rgb(152 203 234 / 8%);
   --song-card-hover-depth-shadow: 0 18px 42px rgb(0 0 0 / 40%);
   --song-card-player-track: rgb(255 255 255 / 12%);
@@ -955,14 +951,14 @@ onBeforeUnmount(() => {
 }
 
 .song-card:hover {
-  border-color: var(--song-card-hover-border);
-  background: color-mix(in srgb, var(--vp-c-brand-1) 7%, var(--song-card-bg));
+  border-color: var(--song-card-border);
+  background: var(--song-card-bg);
   box-shadow:
-    var(--song-card-hover-outline-shadow),
-    var(--song-card-hover-feather-shadow),
-    var(--song-card-hover-depth-shadow),
+    var(--song-card-outline-shadow),
+    var(--song-card-feather-shadow),
+    var(--song-card-depth-shadow),
     var(--song-card-inner-shadow);
-  transform: translate3d(0, -2px, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 .song-card-cover-frame {
@@ -976,8 +972,8 @@ onBeforeUnmount(() => {
   min-height: 0;
   overflow: hidden;
   border-radius: 8px;
-  background: var(--vp-c-bg-alt);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 72%, transparent);
+  background: var(--vp-c-bg);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 72%, transparent);
 }
 
 .song-card-cover-frame.is-loading::after {

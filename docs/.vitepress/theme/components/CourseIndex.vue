@@ -191,6 +191,14 @@ const resolvedGroups = computed(() =>
           </span>
 
           <span class="course-index-card-body">
+            <img
+              v-if="item.coverUrl"
+              class="course-index-card-body-bg"
+              :src="item.coverUrl"
+              alt=""
+              loading="lazy"
+              aria-hidden="true"
+            >
             <span class="course-index-card-code">{{ item.code }}</span>
             <span class="course-index-card-title">{{ item.title }}</span>
             <span v-if="item.subtitle" class="course-index-card-subtitle">
@@ -233,18 +241,28 @@ const resolvedGroups = computed(() =>
   --course-index-cover-h: 98px;
   --course-index-radius: 8px;
   --course-index-gap: 14px;
-  --course-index-card-bg: color-mix(in srgb, var(--vp-c-bg-soft) 86%, rgb(255 255 255 / 34%));
-  --course-index-card-border: color-mix(in srgb, var(--aya-card-border, rgb(255 255 255 / 44%)) 68%, var(--vp-c-divider));
-  --course-index-card-hover-border: color-mix(in srgb, var(--vp-c-brand-1) 58%, var(--vp-c-divider));
-  --course-index-card-outline-shadow: 0 0 0 1px rgb(255 255 255 / 32%);
-  --course-index-card-feather-shadow: var(--aya-nav-pill-feather-shadow, 0 0 12px 3px rgb(0 0 0 / 3.5%));
-  --course-index-card-depth-shadow: 0 14px 34px rgb(92 102 114 / 10%);
-  --course-index-card-inner-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 42%),
-    inset 0 -1px 0 rgb(255 255 255 / 9%);
-  --course-index-card-hover-outline-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 22%, rgb(255 255 255 / 72%));
-  --course-index-card-hover-feather-shadow: 0 0 18px 5px rgb(152 203 234 / 11%);
-  --course-index-card-hover-depth-shadow: 0 18px 42px rgb(92 102 114 / 16%);
+  --course-index-card-bg: var(--aya-card-bg, var(--vp-c-bg));
+  --course-index-card-border: transparent;
+  --course-index-card-hover-border: transparent;
+  --course-index-card-outline-shadow:
+    var(--aya-card-outline-shadow, 0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 62%, transparent)),
+    0 0 0 3px rgb(0 0 0 / 3%),
+    0 0 24px 6px rgb(0 0 0 / 7%),
+    0 0 46px 12px rgb(0 0 0 / 5%);
+  --course-index-card-feather-shadow: 0 0 18px 5px rgb(0 0 0 / 5.5%);
+  --course-index-card-depth-shadow: 0 16px 38px rgb(0 0 0 / 13%);
+  --course-index-card-inner-shadow: none;
+  --course-index-card-hover-outline-shadow:
+    var(--aya-card-hover-outline-shadow, 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 28%, transparent)),
+    0 0 0 4px color-mix(in srgb, var(--vp-c-brand-1) 15%, transparent),
+    0 0 28px 8px color-mix(in srgb, var(--vp-c-brand-1) 20%, transparent),
+    0 0 58px 14px color-mix(in srgb, #8839EF 12%, transparent);
+  --course-index-card-hover-feather-shadow: 0 0 22px 7px color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent);
+  --course-index-card-hover-depth-shadow: 0 18px 42px color-mix(in srgb, var(--vp-c-brand-1) 14%, transparent);
+  --course-index-preview-shadow:
+    0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 58%, transparent),
+    0 24px 70px rgb(34 42 60 / 18%);
+  --course-index-card-code-color: #8839EF;
   container-type: inline-size;
   display: grid;
   box-sizing: border-box;
@@ -255,18 +273,28 @@ const resolvedGroups = computed(() =>
 }
 
 :global(.dark .course-index) {
-  --course-index-card-bg: rgb(10 14 21 / 74%);
-  --course-index-card-border: rgb(17 24 35 / 88%);
-  --course-index-card-hover-border: color-mix(in srgb, var(--vp-c-brand-1) 18%, rgb(17 24 35 / 90%));
-  --course-index-card-outline-shadow: 0 0 0 1px rgb(0 0 0 / 18%);
-  --course-index-card-feather-shadow: var(--aya-nav-pill-feather-shadow, 0 0 12px 3px rgb(0 0 0 / 12%));
-  --course-index-card-depth-shadow: 0 14px 34px rgb(0 0 0 / 30%);
-  --course-index-card-inner-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 4%),
-    inset 0 -1px 0 rgb(0 0 0 / 12%);
-  --course-index-card-hover-outline-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 18%, rgb(0 0 0 / 26%));
-  --course-index-card-hover-feather-shadow: 0 0 18px 5px rgb(152 203 234 / 8%);
-  --course-index-card-hover-depth-shadow: 0 18px 42px rgb(0 0 0 / 40%);
+  --course-index-card-bg: var(--aya-card-bg, var(--vp-c-bg));
+  --course-index-card-border: transparent;
+  --course-index-card-hover-border: transparent;
+  --course-index-card-outline-shadow:
+    var(--aya-card-outline-shadow, 0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 42%, transparent)),
+    0 0 0 3px rgb(0 0 0 / 18%),
+    0 0 26px 7px rgb(0 0 0 / 25%),
+    0 0 52px 14px rgb(0 0 0 / 18%);
+  --course-index-card-feather-shadow: 0 0 18px 6px rgb(0 0 0 / 22%);
+  --course-index-card-depth-shadow: 0 16px 38px rgb(0 0 0 / 42%);
+  --course-index-card-inner-shadow: none;
+  --course-index-card-hover-outline-shadow:
+    var(--aya-card-hover-outline-shadow, 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 22%, transparent)),
+    0 0 0 4px color-mix(in srgb, var(--vp-c-brand-1) 14%, transparent),
+    0 0 30px 8px color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent),
+    0 0 62px 16px color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent);
+  --course-index-card-hover-feather-shadow: 0 0 24px 8px color-mix(in srgb, var(--vp-c-brand-1) 16%, transparent);
+  --course-index-card-hover-depth-shadow: 0 18px 42px color-mix(in srgb, var(--vp-c-brand-1) 18%, rgb(0 0 0 / 34%));
+  --course-index-preview-shadow:
+    0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 42%, transparent),
+    0 24px 70px rgb(0 0 0 / 36%);
+  --course-index-card-code-color: var(--vp-c-brand-1);
 }
 
 .course-index-group {
@@ -339,6 +367,7 @@ const resolvedGroups = computed(() =>
   min-height: 194px;
   border: 1px solid var(--course-index-card-border);
   border-radius: var(--course-index-radius);
+  corner-shape: squircle;
   overflow: visible;
   background: var(--course-index-card-bg);
   background-clip: padding-box;
@@ -349,8 +378,8 @@ const resolvedGroups = computed(() =>
     var(--course-index-card-feather-shadow),
     var(--course-index-card-depth-shadow),
     var(--course-index-card-inner-shadow);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   transition:
     transform 0.22s var(--ease-ios-fade, ease),
     border-color 0.22s ease,
@@ -362,7 +391,7 @@ const resolvedGroups = computed(() =>
 .course-index-card:focus-visible {
   z-index: 2;
   border-color: var(--course-index-card-hover-border);
-  background: color-mix(in srgb, var(--vp-c-brand-1) 10%, var(--course-index-card-bg));
+  background: var(--course-index-card-bg);
   box-shadow:
     var(--course-index-card-hover-outline-shadow),
     var(--course-index-card-hover-feather-shadow),
@@ -396,6 +425,7 @@ const resolvedGroups = computed(() =>
 .course-index-cover {
   height: var(--course-index-cover-h);
   border-radius: var(--course-index-radius) var(--course-index-radius) 0 0;
+  corner-shape: squircle;
 }
 
 .course-index-cover::after {
@@ -434,24 +464,67 @@ const resolvedGroups = computed(() =>
 }
 
 .course-index-card-body {
+  position: relative;
   display: grid;
   box-sizing: border-box;
   width: 100%;
   gap: 5px;
   min-width: 0;
+  overflow: hidden;
+  border-radius: 0 0 var(--course-index-radius) var(--course-index-radius);
+  corner-shape: squircle;
   padding: 12px 13px 14px;
+  background: var(--course-index-card-bg);
+  isolation: isolate;
+}
+
+.course-index-card-body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 42%), rgb(255 255 255 / 68%)),
+    color-mix(in srgb, var(--vp-c-bg) 26%, transparent);
+}
+
+:global(.dark .course-index-card-body::after) {
+  background:
+    linear-gradient(180deg, rgb(9 13 20 / 44%), rgb(9 13 20 / 68%)),
+    color-mix(in srgb, var(--vp-c-bg) 30%, transparent);
+}
+
+.course-index-card-body-bg {
+  position: absolute;
+  inset: -18px;
+  z-index: 0;
+  display: block;
+  width: calc(100% + 36px);
+  max-width: none;
+  height: calc(100% + 36px);
+  margin: 0;
+  object-fit: cover;
+  filter: blur(22px) saturate(1.24);
+  opacity: 0.96;
+  transform: scale(1.12);
+  pointer-events: none;
 }
 
 .course-index-card-code,
 .course-index-preview-code {
-  color: var(--vp-c-brand-1);
+  position: relative;
+  z-index: 2;
+  color: var(--course-index-card-code-color);
   font-size: 0.78rem;
-  font-weight: 750;
+  font-weight: 850;
   line-height: 1.2;
 }
 
 .course-index-card-title,
 .course-index-preview-title {
+  position: relative;
+  z-index: 2;
   color: var(--vp-c-text-1);
   font-size: 0.96rem;
   font-weight: 650;
@@ -460,6 +533,8 @@ const resolvedGroups = computed(() =>
 
 .course-index-card-subtitle,
 .course-index-preview-subtitle {
+  position: relative;
+  z-index: 2;
   color: var(--vp-c-text-2);
   font-size: 0.82rem;
   line-height: 1.45;
@@ -474,11 +549,12 @@ const resolvedGroups = computed(() =>
   display: block;
   box-sizing: border-box;
   min-width: 0;
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 45%, var(--vp-c-divider));
+  border: 1px solid transparent;
   border-radius: 10px;
+  corner-shape: squircle;
   overflow: hidden;
-  background: color-mix(in srgb, var(--vp-c-bg) 94%, transparent);
-  box-shadow: 0 24px 70px rgb(34 42 60 / 20%);
+  background: var(--course-index-card-bg);
+  box-shadow: var(--course-index-preview-shadow);
   opacity: 0;
   pointer-events: none;
   transform: translateY(8px) scale(0.98);
@@ -542,10 +618,13 @@ const resolvedGroups = computed(() =>
     height: 100%;
     min-height: 84px;
     border-radius: var(--course-index-radius) 0 0 var(--course-index-radius);
+    corner-shape: squircle;
   }
 
   .course-index-card-body {
     align-content: center;
+    border-radius: 0 var(--course-index-radius) var(--course-index-radius) 0;
+    corner-shape: squircle;
     padding: 10px 12px;
   }
 

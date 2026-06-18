@@ -12,6 +12,9 @@
   --aya-surface-selected: #405769;
   --aya-surface-inverse-bg: rgb(28 34 42 / 86%);
   --aya-surface-inverse-text: #fff;
+  --aya-card-surface-bg: var(--vp-c-bg);
+  --aya-card-outline-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 62%, transparent);
+  --aya-card-hover-outline-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 28%, transparent);
 
   --aya-frosted-blur-lg: blur(24px);
   --aya-frosted-blur-md: blur(14px);
@@ -59,6 +62,8 @@
   --aya-surface-selected: #f8fbff;
   --aya-surface-inverse-bg: rgb(17 24 35 / 92%);
   --aya-surface-inverse-text: #fff;
+  --aya-card-outline-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 42%, transparent);
+  --aya-card-hover-outline-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 22%, transparent);
 
   --aya-shadow-nav: 0 14px 32px rgb(0 0 0 / 30%);
   --aya-shadow-nav-feather: 0 0 16px 4px rgb(0 0 0 / 16%);
