@@ -7,7 +7,7 @@
    只有 doc 页面才把 sidebar 提取出来独立动画
    homepage 没有 VPDoc，这些元素不参与 view-transition，直接出现
    侧边栏在所有页面存在（homepage 为隐藏/空），用 :has(.VPDoc) 限定
-   Nav / Local nav 留在 root 快照中，避免 Chrome 对玻璃态导航生成
+   Nav / Local nav 留在 root 快照中，避免 Chrome 对模糊导航表面生成
    独立命名快照时出现异常缩放或重叠
 ----------------------------------- */
 
@@ -16,7 +16,7 @@ html:has(.VPDoc) .VPSidebar {
 }
 
 /* 有 sidebar -> 无 sidebar 时，先关闭真实元素的 backdrop-filter。
-   否则 Chrome 会把玻璃模糊烘进 root 旧快照，sidebar 淡出后留下高矩形残影。 */
+   否则 Chrome 会把背景模糊烘进 root 旧快照，sidebar 淡出后留下高矩形残影。 */
 html.vt-hide-sidebar:has(.VPDoc) .VPSidebar {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;

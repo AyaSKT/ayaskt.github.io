@@ -1,4 +1,4 @@
-/* Flat frosted surface tokens: blur, tint, border, and shadow without directional reflection. */
+/* Flat frosted surface tokens: blur, tint, border, and shadow without directional light layers. */
 :root {
   --aya-surface-bg: rgb(255 255 255 / 26%);
   --aya-surface-bg-strong: rgb(255 255 255 / 64%);
