@@ -236,7 +236,6 @@ const resolvedGroups = computed(() =>
   --course-index-card-bg: color-mix(in srgb, var(--vp-c-bg-soft) 86%, rgb(255 255 255 / 34%));
   --course-index-card-border: color-mix(in srgb, var(--aya-card-border, rgb(255 255 255 / 44%)) 68%, var(--vp-c-divider));
   --course-index-card-hover-border: color-mix(in srgb, var(--vp-c-brand-1) 58%, var(--vp-c-divider));
-  --course-index-card-highlight: linear-gradient(135deg, rgb(255 255 255 / 20%), rgb(255 255 255 / 4%));
   --course-index-card-outline-shadow: 0 0 0 1px rgb(255 255 255 / 32%);
   --course-index-card-feather-shadow: var(--aya-nav-pill-feather-shadow, 0 0 12px 3px rgb(0 0 0 / 3.5%));
   --course-index-card-depth-shadow: 0 14px 34px rgb(92 102 114 / 10%);
@@ -259,7 +258,6 @@ const resolvedGroups = computed(() =>
   --course-index-card-bg: rgb(10 14 21 / 74%);
   --course-index-card-border: rgb(17 24 35 / 88%);
   --course-index-card-hover-border: color-mix(in srgb, var(--vp-c-brand-1) 18%, rgb(17 24 35 / 90%));
-  --course-index-card-highlight: linear-gradient(135deg, rgb(255 255 255 / 4%), rgb(255 255 255 / 0%));
   --course-index-card-outline-shadow: 0 0 0 1px rgb(0 0 0 / 18%);
   --course-index-card-feather-shadow: var(--aya-nav-pill-feather-shadow, 0 0 12px 3px rgb(0 0 0 / 12%));
   --course-index-card-depth-shadow: 0 14px 34px rgb(0 0 0 / 30%);
@@ -342,9 +340,7 @@ const resolvedGroups = computed(() =>
   border: 1px solid var(--course-index-card-border);
   border-radius: var(--course-index-radius);
   overflow: visible;
-  background:
-    var(--course-index-card-highlight),
-    var(--course-index-card-bg);
+  background: var(--course-index-card-bg);
   background-clip: padding-box;
   color: var(--vp-c-text-1);
   text-decoration: none;
@@ -366,9 +362,7 @@ const resolvedGroups = computed(() =>
 .course-index-card:focus-visible {
   z-index: 2;
   border-color: var(--course-index-card-hover-border);
-  background:
-    var(--course-index-card-highlight),
-    color-mix(in srgb, var(--vp-c-brand-1) 10%, var(--course-index-card-bg));
+  background: color-mix(in srgb, var(--vp-c-brand-1) 10%, var(--course-index-card-bg));
   box-shadow:
     var(--course-index-card-hover-outline-shadow),
     var(--course-index-card-hover-feather-shadow),

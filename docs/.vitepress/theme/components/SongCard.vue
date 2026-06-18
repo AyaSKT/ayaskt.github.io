@@ -883,7 +883,6 @@ onBeforeUnmount(() => {
   --song-card-bg: color-mix(in srgb, var(--vp-c-bg-soft) 86%, rgb(255 255 255 / 34%));
   --song-card-border: color-mix(in srgb, var(--aya-card-border, rgb(255 255 255 / 44%)) 68%, var(--vp-c-divider));
   --song-card-hover-border: color-mix(in srgb, var(--vp-c-brand-1) 44%, var(--vp-c-divider));
-  --song-card-highlight: linear-gradient(135deg, rgb(255 255 255 / 18%), rgb(255 255 255 / 3%));
   --song-card-outline-shadow: 0 0 0 1px rgb(255 255 255 / 28%);
   --song-card-feather-shadow: var(--aya-card-feather, 0 0 14px 4px rgb(0 0 0 / 3.5%));
   --song-card-depth-shadow: 0 14px 34px rgb(92 102 114 / 10%);
@@ -911,9 +910,7 @@ onBeforeUnmount(() => {
   border: 1px solid var(--song-card-border);
   border-radius: 8px;
   padding: 14px;
-  background:
-    var(--song-card-highlight),
-    var(--song-card-bg);
+  background: var(--song-card-bg);
   box-shadow:
     var(--song-card-outline-shadow),
     var(--song-card-feather-shadow),
@@ -941,7 +938,6 @@ onBeforeUnmount(() => {
   --song-card-bg: rgb(10 14 21 / 74%);
   --song-card-border: rgb(17 24 35 / 88%);
   --song-card-hover-border: color-mix(in srgb, var(--vp-c-brand-1) 18%, rgb(17 24 35 / 90%));
-  --song-card-highlight: none;
   --song-card-outline-shadow: 0 0 0 1px rgb(0 0 0 / 18%);
   --song-card-feather-shadow: var(--aya-card-feather, 0 0 16px 5px rgb(0 0 0 / 16%));
   --song-card-depth-shadow: 0 14px 34px rgb(0 0 0 / 30%);
@@ -960,9 +956,7 @@ onBeforeUnmount(() => {
 
 .song-card:hover {
   border-color: var(--song-card-hover-border);
-  background:
-    var(--song-card-highlight),
-    color-mix(in srgb, var(--vp-c-brand-1) 7%, var(--song-card-bg));
+  background: color-mix(in srgb, var(--vp-c-brand-1) 7%, var(--song-card-bg));
   box-shadow:
     var(--song-card-hover-outline-shadow),
     var(--song-card-hover-feather-shadow),
