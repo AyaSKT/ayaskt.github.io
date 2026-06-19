@@ -13,12 +13,15 @@
     "test:doc-meta-date": "node --test scripts/doc-meta-date.test.mjs",
     "test:reading-mode": "node --test scripts/reading-mode.test.mjs",
     "test:frosted-surface": "node --test scripts/frosted-surface.test.mjs",
+    "test:local-editor": "node --test scripts/local-editor.test.mjs",
     "test:pdf": "node --test scripts/verify-pdf-download.mjs",
     "postinstall": "node scripts/patch-mathjax.mjs"
   },
   "devDependencies": {
     "@mdit/plugin-mathjax": "^0.26.1",
     "@types/node": "^25.5.0",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "canvas-confetti": "^1.9.4",
     "katex": "^0.16.47",
     "markmap-lib": "^0.18.12",

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 // 1. 再次导入必要的组件
 import DefaultTheme from 'vitepress/theme'
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, defineAsyncComponent, nextTick, onMounted, ref, watch } from 'vue'
 import { useData, useRoute } from 'vitepress'
 import MouseClick from './MouseClick.vue'
 import GiscusComment from './GiscusComment.vue' // 评论模块
@@ -13,6 +13,10 @@ import LibraryMotion from './LibraryMotion.vue'
 import MathCopy from './MathCopy.vue'
 import TopProgress from './TopProgress.vue'
 import ReadingModeControl from './ReadingModeControl.vue'
+
+const LocalEditorHost = import.meta.env.DEV
+  ? defineAsyncComponent(() => import('./LocalEditorHost.vue'))
+  : null
 
 const { frontmatter, isDark } = useData()
 const route = useRoute()
@@ -193,6 +197,7 @@ onMounted(() => {
     <template #doc-after>
       <GiscusComment />
       <BackToTop />
+      <LocalEditorHost v-if="LocalEditorHost" />
     </template>
 
     <template #home-hero-info-after>

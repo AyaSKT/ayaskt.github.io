@@ -402,11 +402,380 @@ const TEX_MACROS = {
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const docsRoot = path.resolve(__dirname, '..')
 const publicRoot = path.resolve(docsRoot, 'public')
+const localEditorApiPrefix = '/__local-editor__'
+const localEditorMaxBodyBytes = 16 * 1024 * 1024
 const isDevCommand = process.argv.includes('dev') || process.argv.includes('serve')
 const uestcIcon = fs.readFileSync(
   path.resolve(__dirname, '../Index-assets/logos/UESTC.svg'),
   'utf-8'
 )
+
+interface LocalEditorPathResult {
+  ok: boolean
+  filePath?: string
+  relativePath?: string
+  error?: string
+}
+
+interface LocalEditorAttachmentPathResult extends LocalEditorPathResult {
+  attachmentDir?: string
+  markdownPath?: string
+  fileName?: string
+}
+
+const localEditorImageExtensionsByType = new Map([
+  ['image/png', '.png'],
+  ['image/jpeg', '.jpg'],
+  ['image/gif', '.gif'],
+  ['image/webp', '.webp'],
+])
+
+const localEditorSupportedImageExtensions = new Set([
+  '.png',
+  '.jpg',
+  '.jpeg',
+  '.gif',
+  '.webp',
+])
+
+export function resolveLocalEditorMarkdownPath(requestedPath: unknown): LocalEditorPathResult {
+  if (typeof requestedPath !== 'string' || !requestedPath.trim()) {
+    return { ok: false, error: '缺少文章路径' }
+  }
+
+  const cleanPath = requestedPath
+    .replace(/\\/g, '/')
+    .replace(/^\/+/, '')
+    .split(/[?#]/, 1)[0]
+
+  if (!cleanPath || cleanPath.includes('\0')) {
+    return { ok: false, error: '文章路径无效' }
+  }
+
+  if (!cleanPath.endsWith('.md')) {
+    return { ok: false, error: '只能编辑 Markdown 文章' }
+  }
+
+  if (cleanPath.startsWith('.vitepress/') || cleanPath.startsWith('public/')) {
+    return { ok: false, error: '这个路径不允许本地编辑' }
+  }
+
+  const filePath = path.resolve(docsRoot, cleanPath)
+  const relativePath = path.relative(docsRoot, filePath)
+
+  if (relativePath === '' || relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
+    return { ok: false, error: '文章路径超出 docs 目录' }
+  }
+
+  return {
+    ok: true,
+    filePath,
+    relativePath: relativePath.split(path.sep).join('/'),
+  }
+}
+
+function localEditorTimestamp(date = new Date()) {
+  const pad = (value: number) => String(value).padStart(2, '0')
+  return [
+    date.getFullYear(),
+    pad(date.getMonth() + 1),
+    pad(date.getDate()),
+    '-',
+    pad(date.getHours()),
+    pad(date.getMinutes()),
+    pad(date.getSeconds()),
+  ].join('')
+}
+
+function sanitizeLocalEditorAssetName(value: string) {
+  return value
+    .normalize('NFKD')
+    .replace(/[^\w.-]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^[.-]+|[.-]+$/g, '')
+    .toLowerCase()
+}
+
+function localEditorImageExtension(mimeType: unknown, fileName: unknown) {
+  const type = typeof mimeType === 'string' ? mimeType.toLowerCase().split(';', 1)[0] : ''
+  const fromType = localEditorImageExtensionsByType.get(type)
+  if (fromType) return fromType
+
+  if (typeof fileName === 'string') {
+    const extension = path.extname(fileName).toLowerCase()
+    if (localEditorSupportedImageExtensions.has(extension)) return extension
+  }
+
+  return ''
+}
+
+export function resolveLocalEditorAttachmentPath(
+  requestedPath: unknown,
+  requestedName: unknown,
+  mimeType: unknown,
+  date = new Date(),
+): LocalEditorAttachmentPathResult {
+  const resolved = resolveLocalEditorMarkdownPath(requestedPath)
+  if (!resolved.ok || !resolved.filePath || !resolved.relativePath) return resolved
+
+  const extension = localEditorImageExtension(mimeType, requestedName)
+  if (!extension) {
+    return { ok: false, error: '只支持 png / jpg / gif / webp 图片' }
+  }
+
+  const articleBaseName = path.basename(resolved.filePath, '.md')
+  const attachmentDirName = `${articleBaseName}.attachments`
+  const attachmentDir = path.join(path.dirname(resolved.filePath), attachmentDirName)
+  const rawBaseName = typeof requestedName === 'string'
+    ? path.basename(requestedName, path.extname(requestedName))
+    : ''
+  const sanitizedBaseName = sanitizeLocalEditorAssetName(rawBaseName)
+  const fileBaseName = sanitizedBaseName && sanitizedBaseName !== 'image'
+    ? sanitizedBaseName
+    : `clipboard-${localEditorTimestamp(date)}`
+  const fileName = `${fileBaseName}${extension}`
+  const filePath = path.join(attachmentDir, fileName)
+  const markdownPath = `${attachmentDirName}/${fileName}`
+  const relativePath = path.relative(docsRoot, filePath)
+
+  if (relativePath === '' || relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
+    return { ok: false, error: '附件路径超出 docs 目录' }
+  }
+
+  return {
+    ok: true,
+    filePath,
+    relativePath: relativePath.split(path.sep).join('/'),
+    attachmentDir,
+    markdownPath,
+    fileName,
+  }
+}
+
+function sendLocalEditorJson(res: any, statusCode: number, payload: Record<string, unknown>) {
+  res.statusCode = statusCode
+  res.setHeader('Content-Type', 'application/json; charset=utf-8')
+  res.setHeader('Cache-Control', 'no-store')
+  res.end(JSON.stringify(payload))
+}
+
+function readLocalEditorBody(req: any) {
+  return new Promise<string>((resolve, reject) => {
+    let size = 0
+    let body = ''
+
+    req.setEncoding('utf8')
+    req.on('data', (chunk: string) => {
+      size += Buffer.byteLength(chunk)
+      if (size > localEditorMaxBodyBytes) {
+        reject(new Error('请求内容过大'))
+        req.destroy()
+        return
+      }
+
+      body += chunk
+    })
+    req.on('end', () => resolve(body))
+    req.on('error', reject)
+  })
+}
+
+function extractLocalEditorTitle(content: string, relativePath: string) {
+  const heading = content.match(/^#\s+(.+?)\s*#*\s*$/m)?.[1]?.trim()
+  if (heading) return heading
+
+  return path.basename(relativePath, '.md')
+}
+
+function invalidateLocalEditorMarkdownModule(server: any, filePath: string) {
+  const modules = server.moduleGraph.getModulesByFile(filePath)
+  if (!modules) return
+
+  for (const moduleNode of modules) {
+    server.moduleGraph.invalidateModule(moduleNode)
+  }
+}
+
+function parseLocalEditorBase64(value: unknown) {
+  if (typeof value !== 'string') return undefined
+
+  const raw = value.includes(',') ? value.slice(value.indexOf(',') + 1) : value
+  if (!raw || !/^[A-Za-z0-9+/=\s]+$/.test(raw)) return undefined
+
+  const buffer = Buffer.from(raw.replace(/\s+/g, ''), 'base64')
+  return buffer.length ? buffer : undefined
+}
+
+async function uniqueLocalEditorAssetPath(filePath: string) {
+  const dir = path.dirname(filePath)
+  const extension = path.extname(filePath)
+  const baseName = path.basename(filePath, extension)
+
+  for (let index = 0; index < 1000; index++) {
+    const candidate = index === 0
+      ? filePath
+      : path.join(dir, `${baseName}-${index + 1}${extension}`)
+
+    const stat = await fs.promises.stat(candidate).catch(() => undefined)
+    if (!stat) return candidate
+  }
+
+  throw new Error('无法生成唯一图片文件名')
+}
+
+export function createLocalMarkdownEditorPlugin() {
+  return {
+    name: 'gp-blogs-local-markdown-editor',
+    apply: 'serve',
+    configureServer(server: any) {
+      server.middlewares.use(async (req: any, res: any, next: any) => {
+        const url = new URL(req.url ?? '/', 'http://local-editor.local')
+        if (!url.pathname.startsWith(`${localEditorApiPrefix}/`)) {
+          next()
+          return
+        }
+
+        const isArticleRoute = url.pathname === `${localEditorApiPrefix}/article`
+        const isAssetRoute = url.pathname === `${localEditorApiPrefix}/asset`
+        if (!isArticleRoute && !isAssetRoute) {
+          sendLocalEditorJson(res, 404, { error: '未知的本地编辑器接口' })
+          return
+        }
+
+        if (req.method === 'OPTIONS') {
+          res.statusCode = 204
+          res.setHeader('Allow', isArticleRoute ? 'GET, PUT, OPTIONS' : 'POST, OPTIONS')
+          res.end()
+          return
+        }
+
+        try {
+          if (isArticleRoute && req.method === 'GET') {
+            const resolved = resolveLocalEditorMarkdownPath(url.searchParams.get('path'))
+            if (!resolved.ok || !resolved.filePath || !resolved.relativePath) {
+              sendLocalEditorJson(res, 400, { error: resolved.error })
+              return
+            }
+
+            const stat = await fs.promises.stat(resolved.filePath).catch(() => undefined)
+            if (!stat?.isFile()) {
+              sendLocalEditorJson(res, 404, { error: '文章文件不存在' })
+              return
+            }
+
+            const content = await fs.promises.readFile(resolved.filePath, 'utf8')
+            sendLocalEditorJson(res, 200, {
+              path: resolved.relativePath,
+              content,
+              mtimeMs: stat.mtimeMs,
+              title: extractLocalEditorTitle(content, resolved.relativePath),
+            })
+            return
+          }
+
+          if (isArticleRoute && req.method === 'PUT') {
+            const payload = JSON.parse(await readLocalEditorBody(req))
+            const resolved = resolveLocalEditorMarkdownPath(payload?.path)
+            if (!resolved.ok || !resolved.filePath || !resolved.relativePath) {
+              sendLocalEditorJson(res, 400, { error: resolved.error })
+              return
+            }
+
+            if (typeof payload?.content !== 'string') {
+              sendLocalEditorJson(res, 400, { error: '文章内容必须是字符串' })
+              return
+            }
+
+            const currentStat = await fs.promises.stat(resolved.filePath).catch(() => undefined)
+            if (!currentStat?.isFile()) {
+              sendLocalEditorJson(res, 404, { error: '文章文件不存在' })
+              return
+            }
+
+            if (
+              typeof payload.mtimeMs === 'number' &&
+              Math.abs(currentStat.mtimeMs - payload.mtimeMs) > 1
+            ) {
+              sendLocalEditorJson(res, 409, { error: '文件已被其他操作修改，请重新载入后再保存' })
+              return
+            }
+
+            await fs.promises.writeFile(resolved.filePath, payload.content, 'utf8')
+            invalidateLocalEditorMarkdownModule(server, resolved.filePath)
+
+            const nextStat = await fs.promises.stat(resolved.filePath)
+            sendLocalEditorJson(res, 200, {
+              path: resolved.relativePath,
+              mtimeMs: nextStat.mtimeMs,
+              title: extractLocalEditorTitle(payload.content, resolved.relativePath),
+            })
+            return
+          }
+
+          if (isAssetRoute && req.method === 'POST') {
+            const payload = JSON.parse(await readLocalEditorBody(req))
+            const imageBuffer = parseLocalEditorBase64(payload?.data)
+            if (!imageBuffer) {
+              sendLocalEditorJson(res, 400, { error: '图片内容无效' })
+              return
+            }
+
+            const article = resolveLocalEditorMarkdownPath(payload?.path)
+            if (!article.ok || !article.filePath) {
+              sendLocalEditorJson(res, 400, { error: article.error })
+              return
+            }
+
+            const articleStat = await fs.promises.stat(article.filePath).catch(() => undefined)
+            if (!articleStat?.isFile()) {
+              sendLocalEditorJson(res, 404, { error: '文章文件不存在' })
+              return
+            }
+
+            const resolved = resolveLocalEditorAttachmentPath(
+              payload?.path,
+              payload?.name,
+              payload?.type,
+            )
+            if (
+              !resolved.ok ||
+              !resolved.filePath ||
+              !resolved.relativePath ||
+              !resolved.attachmentDir ||
+              !resolved.markdownPath
+            ) {
+              sendLocalEditorJson(res, 400, { error: resolved.error })
+              return
+            }
+
+            await fs.promises.mkdir(resolved.attachmentDir, { recursive: true })
+            const filePath = await uniqueLocalEditorAssetPath(resolved.filePath)
+            await fs.promises.writeFile(filePath, imageBuffer, { flag: 'wx' })
+
+            const relativePath = path.relative(docsRoot, filePath).split(path.sep).join('/')
+            const markdownPath = `${path.basename(resolved.attachmentDir)}/${path.basename(filePath)}`
+            sendLocalEditorJson(res, 200, {
+              path: relativePath,
+              markdownPath,
+              fileName: path.basename(filePath),
+            })
+            return
+          }
+
+          sendLocalEditorJson(res, 405, {
+            error: isArticleRoute
+              ? '本地编辑器仅支持 GET 和 PUT'
+              : '本地编辑器附件接口仅支持 POST',
+          })
+        } catch (error) {
+          sendLocalEditorJson(res, 500, {
+            error: error instanceof Error ? error.message : '本地编辑器接口异常',
+          })
+        }
+      })
+    },
+  }
+}
 
 interface ImageDimensions {
   width: number
@@ -925,9 +1294,15 @@ export default defineConfig({
   ],
   buildConcurrency: 4,
 
-  // EPMF 笔记页面：右侧目录显式限定为 h2 ~ h3
+  // EPMF / CCD 笔记页面：右侧目录显式限定为 h2 ~ h3
   transformPageData(pageData) {
-    if (pageData.filePath.startsWith('Y3S2/EPMF/') && !pageData.filePath.endsWith('-README.md')) {
+    if (
+      (
+        pageData.filePath.startsWith('Y3S2/EPMF/')
+        || pageData.filePath.startsWith('Y3S2/CCD/')
+      )
+      && !pageData.filePath.endsWith('-README.md')
+    ) {
       pageData.frontmatter.outline = [2, 3]
     }
     if (pageData.filePath.startsWith('early/EP/') || pageData.filePath.startsWith('early/CAD/')) {
@@ -936,6 +1311,9 @@ export default defineConfig({
   },
 
   vite: {
+    plugins: [
+      createLocalMarkdownEditorPlugin(),
+    ],
     server: {
       watch: {
         awaitWriteFinish: {

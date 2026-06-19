@@ -383,7 +383,7 @@ $$
 
 FM 的消息在频率变化中，外部噪声很多表现为幅度扰动。因此 FM 接收机可在解调前使用 limiter 去掉幅度尖峰。
 
-![FM 噪声抑制](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_noise_suppression_wide.jpg>)
+
 
 AM 中，幅度变化就是消息，噪声幅度会直接进入输出。FM 中，限幅器能削弱幅度噪声。
 

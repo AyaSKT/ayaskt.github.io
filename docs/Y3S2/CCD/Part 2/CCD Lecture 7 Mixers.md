@@ -3,6 +3,7 @@ lastUpdated: 2026-05-31T14:55:30+08:00
 ---
 # Lecture 7 Mixers 混频器
 
+
 <LyricCover
   image="CCD Lecture 7 Mixers.attachments/1780057844904.PNG"
   title="宙でおやすみ"
@@ -19,6 +20,8 @@ lastUpdated: 2026-05-31T14:55:30+08:00
     translation="也要在蝴蝶的翅膀上，说着晚安。"
   />
 </LyricCover>
+
+
 
 ## 章节目录
 
@@ -93,7 +96,7 @@ $$
 
 实际混频器输出常同时包含两个分量，因此后级需要接滤波器，仅保留所需频率分量。
 
-![混频器后接滤波器](<CCD Lecture 7 Mixers.attachments/mix_05_mixer_filter_superhet.jpg>)
+![混频器后接滤波器](<CCD%20Lecture%207%20Mixers.attachments/mix_05_mixer_filter_superhet.jpg>)
 
 :::: tip
 频域分析更适合理解混频：时域波形叠加不能直接反映频率成分，频谱可明确显示和频与差频的位置。
@@ -124,7 +127,7 @@ $$
 
 理论上，可以用两路相乘、90° 相移和加减法构造一个只输出单边频移的理想频移电路。
 
-![理想频移电路](<CCD Lecture 7 Mixers.attachments/mix_07_ideal_frequency_shifter.jpg>)
+![理想频移电路](<CCD%20Lecture%207%20Mixers.attachments/mix_07_ideal_frequency_shifter.jpg>)
 
 这种结构的关键问题在于 90° 移相器。固定频率下做 90° 相移还算容易，但如果要在宽频带上保持精确 90°，实现会非常麻烦。
 
@@ -176,11 +179,11 @@ $$
 2\omega_1,\quad 2\omega_2,\quad |\omega_1-\omega_2|,\quad \omega_1+\omega_2
 $$
 
-![二极管混频器](<CCD Lecture 7 Mixers.attachments/mix_09_diode_mixer.jpg>)
+![二极管混频器](<CCD%20Lecture%207%20Mixers.attachments/mix_09_diode_mixer.jpg>)
 
 二极管混频器的问题是它还会产生 $2\omega_1$、$2\omega_2$ 等不想要的分量。如果输入不够小，高阶泰勒项还会继续产生更多杂散分量。
 
-![二极管混频器与 LC 滤波](<CCD Lecture 7 Mixers.attachments/mix_10_diode_mixer_filter.jpg>)
+![二极管混频器与 LC 滤波](<CCD%20Lecture%207%20Mixers.attachments/mix_10_diode_mixer_filter.jpg>)
 
 
 ---
@@ -201,7 +204,7 @@ $$
 
 平方项仍然产生 $\omega_1\pm\omega_2$。
 
-![BJT 混频器](<CCD Lecture 7 Mixers.attachments/mix_11_bjt_mixer_wide.jpg>)
+![BJT 混频器](<CCD%20Lecture%207%20Mixers.attachments/mix_11_bjt_mixer_wide.jpg>)
 
 BJT 是有源混频器，可以提供转换增益，在混频的同时可能带来放大，对后级需要一定功率电平的场景较为适用。
 
@@ -250,7 +253,7 @@ JFET 混频器的优势在于没有指数展开中的无限高阶项，因此杂
 
 双栅 MOSFET 可以理解为两个匹配得很好的 MOSFET 叠在一起，两个栅极分别接两个输入频率。
 
-![双栅 MOSFET 混频器](<CCD Lecture 7 Mixers.attachments/mix_13_dual_gate_mosfet.jpg>)
+![双栅 MOSFET 混频器](<CCD%20Lecture%207%20Mixers.attachments/mix_13_dual_gate_mosfet.jpg>)
 
 输出可近似写成
 
@@ -293,7 +296,7 @@ $$
 
 。
 
-![Image frequency](<CCD Lecture 7 Mixers.attachments/mix_14_image_frequency.jpg>)
+![Image frequency](<CCD%20Lecture%207%20Mixers.attachments/mix_14_image_frequency.jpg>)
 
 如果目标射频频率在本振频率下方，则镜像频率在本振频率上方；反过来也一样。
 
@@ -313,7 +316,7 @@ $$
 
 LC 并联谐振电路可以做带通滤波器。其选择性由品质因数 $Q$ 决定。
 
-![镜像抑制滤波器](<CCD Lecture 7 Mixers.attachments/mix_15_image_rejection_filter.jpg>)
+![镜像抑制滤波器](<CCD%20Lecture%207%20Mixers.attachments/mix_15_image_rejection_filter.jpg>)
 
 在谐振频率 $\omega_0$ 附近定义
 
@@ -377,7 +380,7 @@ $$
 | $P_{1\mathrm{dB}}$ | 转换增益压缩 $1\,\mathrm{dB}$ 时的输入功率 | 判断大信号能力 |
 | IP3 | 三阶互调外推交点 | 判断线性度，越高越好 |
 
-![Mini-Circuits 混频器例子](<CCD Lecture 7 Mixers.attachments/mix_19_minicircuits_example_wide.jpg>)
+![Mini-Circuits 混频器例子](<CCD%20Lecture%207%20Mixers.attachments/mix_19_minicircuits_example_wide.jpg>)
 
 回波损耗与反射电压比的关系为
 
@@ -407,7 +410,7 @@ $$
 
 理想无反射时 $|\Gamma|=0$，所以 $VSWR=1$。实际设计中希望 VSWR 尽量接近 1。
 
-![混频器指标曲线](<CCD Lecture 7 Mixers.attachments/mix_24_mixer_metric_plots.jpg>)
+![混频器指标曲线](<CCD%20Lecture%207%20Mixers.attachments/mix_24_mixer_metric_plots.jpg>)
 
 :::: tip
 本振电平偏低会使开关不充分，偏高也可能让损耗、隔离度或杂散变差。因此 LO power 要按数据手册给定范围选。
