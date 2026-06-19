@@ -65,13 +65,15 @@ $$
 
 这个能量交换称为**飞轮效应 Flywheel Effect**。理想 LC 槽路的谐振频率为
 
+![alt text](<CCD Lecture 9 Oscillators.attachments/1781862289732.png>)
+
 $$
 f_r=\frac{1}{2\pi\sqrt{LC}}
 $$
 
 实际槽路有电阻损耗，振荡会衰减。要得到稳定输出，必须用放大器补偿损耗，并用反馈网络控制相位与幅度。
 
-![振荡器的放大与反馈环路](<CCD Lecture 9 Oscillators.attachments/osc_06_oscillator_loop.jpg>)
+![alt text](<CCD Lecture 9 Oscillators.attachments/1781862264329.png>)
 
 
 ---
@@ -181,24 +183,44 @@ $$
 
 课程中给出的反馈网络都可以看成并联 LC 槽路的不同抽头形式。
 
-![抽头电感反馈网络](<CCD Lecture 9 Oscillators.attachments/osc_16_tapped_l_center_clean.jpg>)
+![alt text](<CCD Lecture 9 Oscillators.attachments/1781862560463.png>)
 
 常见形式如下：
 
-| 反馈网络 | 谐振角频率 | 反馈特点 |
+| 反馈网络 | 谐振角频率 | 反馈系数 $\beta$ |
 | --- | --- | --- |
-| 中心接地抽头电感 | $\displaystyle \omega_0=\frac{1}{\sqrt{(L_1+L_2)C}}$ | 用 $L_1,L_2$ 分压形成反馈 |
-| 中心接地抽头电容 | $\displaystyle \omega_0=\sqrt{\frac{C_1+C_2}{C_1C_2L}}$ | 用 $C_1,C_2$ 分压形成反馈 |
-| 底部接地抽头电感 | $\displaystyle \omega_0=\frac{1}{\sqrt{(L_1+L_2)C}}$ | 反馈系数与电感抽头位置有关 |
-| 底部接地抽头电容 | $\displaystyle \omega_0=\sqrt{\frac{C_1+C_2}{C_1C_2L}}$ | 反馈系数与电容抽头位置有关 |
+| 中心接地抽头电感 | $\displaystyle \omega_0=\frac{1}{\sqrt{(L_1+L_2)C}}$ | $\displaystyle \beta=-\frac{L_1}{L_2}$ |
+| 中心接地抽头电容 | $\displaystyle \omega_0=\sqrt{\frac{C_1+C_2}{C_1C_2L}}$ | $\displaystyle \beta\approx-\frac{C_1}{C_2}$ |
+| 底部接地抽头电感 | $\displaystyle \omega_0=\frac{1}{\sqrt{(L_1+L_2)C}}$ | $\displaystyle \beta=\frac{L_1}{L_1+L_2}$ |
+| 底部接地抽头电容 | $\displaystyle \omega_0=\sqrt{\frac{C_1+C_2}{C_1C_2L}}$ | $\displaystyle \beta=\frac{C_2}{C_1+C_2}$ |
 
 高 $Q$ 近似下，这些网络都以槽路谐振频率作为振荡频率。
+
+中心接地抽头电感网络中，放大器看到的等效负载还会受到抽头比例影响，可写成
+
+$$
+R_{\mathrm{eff}}
+=
+R_L\left(\frac{L_2}{L_1}\right)^2
+\parallel
+\frac{Q\omega L_2^2}{L_1+L_2}
+$$
+
+反馈网络被放大器输入端加载后，等效 $Q$ 会下降。更精确的谐振频率为
+
+$$
+f_r=
+\frac{1}{2\pi\sqrt{LC_T}}
+\sqrt{\frac{Q^2}{Q^2+1}}
+$$
+
+当 $Q>10$ 时，根号修正项接近 $1$，才可直接用 $1/(2\pi\sqrt{LC_T})$。
 
 ## 9-4 Hartley 与 Colpitts 振荡器 Hartley and Colpitts Oscillators
 
 Hartley 振荡器使用抽头电感反馈网络。放大器通常由 BJT 提供，反馈网络由 $L_1$、$L_2$ 和 $C$ 组成。
 
-![Hartley 与 Colpitts 振荡器结构对比](<CCD Lecture 9 Oscillators.attachments/osc_hartley_colpitts_wide.jpg>)
+![alt text](<CCD Lecture 9 Oscillators.attachments/1781862626563.png>)
 
 其谐振频率近似为
 
@@ -206,7 +228,11 @@ $$
 f_r=\frac{1}{2\pi\sqrt{(L_1+L_2)C}}
 $$
 
+
+
 Colpitts 振荡器把电感和电容的位置互换，使用抽头电容反馈网络。
+
+![alt text](<CCD Lecture 9 Oscillators.attachments/1781862658506.png>)
 
 两个串联电容的等效电容为
 
@@ -221,6 +247,8 @@ f_r=\frac{1}{2\pi\sqrt{LC_T}}
 $$
 
 射频扼流圈 RFC 对直流近似短路，用来给晶体管供电；对射频近似开路，避免射频信号被电源旁路掉。耦合电容负责隔直通交，避免直流偏置进入槽路或输出端。
+
+![alt text](<CCD Lecture 9 Oscillators.attachments/1781862836264.png>)
 
 起振时 Colpitts 振荡器需要满足
 
@@ -283,6 +311,8 @@ $$
 | TCXO | 加温度补偿 |
 | DTCXO | 用数字控制改善补偿 |
 | OCXO | 恒温槽控制，稳定度更高，但功耗和成本更高 |
+
+晶体常见频率从几 $\mathrm{kHz}$ 到几十 $\mathrm{MHz}$。若需要约 $50$ 到 $100\,\mathrm{MHz}$ 以上的输出，常利用高阶谐振或泛音 overtone，再配合倍频或 PLL。
 
 
 ---
@@ -375,11 +405,11 @@ $$
 
 其中 $\phi_n(t)$ 使零交叉点发生随机偏移，这种时间上的偏移称为抖动。
 
-![相位噪声与频谱扩展](<CCD Lecture 9 Oscillators.attachments/osc_35_phase_noise_jitter_clean.jpg>)
+![alt text](<CCD Lecture 9 Oscillators.attachments/1781862907294.png>)
 
 在时域中，可以用眼图观察抖动。把波形按半个周期切成许多段并叠加，若抖动小，交叉点集中，眼图打开；若抖动大，交叉点扩散，眼图闭合。
 
-![眼图中的抖动](<CCD Lecture 9 Oscillators.attachments/osc_36_eye_diagram_clean.jpg>)
+![alt text](<CCD Lecture 9 Oscillators.attachments/1781862875113.png>)
 
 在频域中，相位噪声表现为载波附近的频谱扩展。常在距离载波 $\Delta f$ 的偏移处，用 $1\,\mathrm{Hz}$ 带宽内的噪声功率相对载波功率表示：
 

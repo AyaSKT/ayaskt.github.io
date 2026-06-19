@@ -115,6 +115,14 @@ $$
 
 单位通常是 $\mathrm{Hz}$ 或 samples per second。
 
+常见采样模型有三种：
+
+| 类型 | 说明 |
+| --- | --- |
+| Ideal impulse sampling | 用理想冲激表示每个采样时刻 |
+| Natural sampling | 采样窗口内仍跟随原波形 |
+| Flattop / sample-and-hold | 采样后保持一个平顶电压，给 ADC 转换时间 |
+
 较高采样率能保留更多时间细节，但也会增加数据量、功耗和处理压力。较低采样率适合慢变化信号。
 
 ---
@@ -135,6 +143,26 @@ $$
 
 $$
 T_s\le \frac{1}{2f_{\max}}
+$$
+
+这个最大采样间隔也叫 Nyquist interval。
+
+若 low-pass 信号最高频率为 $100\,\mathrm{kHz}$，最低采样率为
+
+$$
+f_s=2f_{\max}=200\,\mathrm{kHz}
+$$
+
+采样后若每个样本用 $N$ bit 编码，数据率为
+
+$$
+R_b=f_sN
+$$
+
+例如语音带宽到 $4\,\mathrm{kHz}$，取最低采样率 $8\,\mathrm{kHz}$，每样本 $8$ bit：
+
+$$
+R_b=8000\times8=64\,\mathrm{kbps}
 $$
 
 实际系统通常使用略高于 Nyquist rate 的采样频率，并在 ADC 前加 anti-aliasing filter。
@@ -221,20 +249,28 @@ $$
 19.53\,\mathrm{mV}
 $$
 
+同样范围下，16-bit ADC 的分辨率为
+
+$$
+\Delta
+=\frac{5-0}{2^{16}}
+=\frac{5}{65536}
+\approx76\,\mu\mathrm{V}
+$$
+
 输入 $3\,\mathrm{V}$ 对应的十进制 code 近似为
 
 $$
 D\approx
-\frac{3}{5}\times 256
+\frac{(2^8-1)3}{5}
 =
-153.6
-\approx154
+153
 $$
 
 转成 8-bit binary：
 
 $$
-154_{10}=10011010_2
+153_{10}=10011001_2
 $$
 
 ---
@@ -262,6 +298,30 @@ $$
 $$
 
 提高 bit depth 会减小 LSB，因此量化误差也会变小。
+
+量化噪声对应的动态范围可近似写为
+
+$$
+DNR=20\log_{10}{(2^N)}
+$$
+
+例如
+
+$$
+N=12:\quad DNR\approx72\,\mathrm{dB}
+$$
+
+$$
+N=16:\quad DNR\approx96\,\mathrm{dB}
+$$
+
+若按同一公式，$24$ bit 应为
+
+$$
+20\log_{10}{(2^{24})}\approx144\,\mathrm{dB}
+$$
+
+课件图中 $24$ bit 标成 $114\,\mathrm{dB}$，与同页公式不一致，复习时按公式核算。
 
 | 位数 $N$ | 电平数 $2^N$ | 结果 |
 | ---: | ---: | --- |
@@ -298,6 +358,21 @@ SAR ADC 速度中等，成本低，分辨率常见在 8 到 16 bit。
 
 > [!NOTE]
 > SAR ADC 一次完整的 $N$-bit 转换需要 $N$ 个时钟周期（每 bit 一次比较）。转换时间为 $t_{\mathrm{conv}} = N \cdot T_{\mathrm{clk}}$，其中 $T_{\mathrm{clk}}$ 为时钟周期。
+
+例：4-bit SAR，$V_{\mathrm{ref}}=1\,\mathrm{V}$，输入 $V_{\mathrm{in}}=0.425\,\mathrm{V}$。逐位比较：
+
+| Step | Trial code | $V_{\mathrm{DAC}}$ | 结果 |
+| ---: | --- | ---: | --- |
+| 1 | 1000 | $0.5\,\mathrm{V}$ | 太高，MSB 清零 |
+| 2 | 0100 | $0.25\,\mathrm{V}$ | 保留 |
+| 3 | 0110 | $0.375\,\mathrm{V}$ | 保留 |
+| 4 | 0111 | $0.4375\,\mathrm{V}$ | 太高，LSB 清零 |
+
+最终输出为
+
+$$
+0110_2
+$$
 
 ---
 
@@ -348,6 +423,31 @@ $$
 $$
 
 个比较器。
+
+阈值间隔为
+
+$$
+\Delta V=\frac{V_{\mathrm{ref}}}{2^N}
+$$
+
+对 3-bit ADC：
+
+$$
+V_i=i\frac{V_{\mathrm{ref}}}{8},
+\qquad i=1,2,\ldots,7
+$$
+
+比较器输出先形成 thermometer code，再由编码器转成 binary code。若 $V_{\mathrm{ref}}=8\,\mathrm{V}$、$V_{\mathrm{in}}=5.5\,\mathrm{V}$，低于 $5\,\mathrm{V}$ 的比较器输出为 1，高于 $6\,\mathrm{V}$ 的比较器输出为 0，可写成
+
+$$
+0011111
+$$
+
+最高有效比较器为 $V_{c5}$，输出 code 为
+
+$$
+101_2
+$$
 
 Flash ADC 的优点是速度极高，可达到 giga samples per second。缺点是比较器数量随位数指数增长，因此成本和功耗很高，分辨率通常不高。
 

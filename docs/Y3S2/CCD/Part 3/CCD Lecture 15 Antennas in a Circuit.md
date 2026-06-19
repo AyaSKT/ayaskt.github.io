@@ -89,6 +89,8 @@ lastUpdated: 2026-06-07T21:49:56+08:00
 | Radiative near-field / Fresnel | 开始辐射，方向图随距离变化 | 波前还未近似球面 |
 | Radiating far-field / Fraunhofer | $E$ 与 $H$ 同相，方向图基本不随距离变 | 传播功率为主 |
 
+Reactive near-field 中电抗储能占主导，波阻抗可能很高，电场和磁场比例不像远场那样固定。Radiative near-field 中 $E$ 与 $H$ 已经主要同相，但波前还不是近似球面，方向图仍会随距离改变。
+
 远场中波阻抗近似为实数，功率主要向外传播。方向图、增益和链路预算通常都按远场条件定义。
 
 ---
@@ -115,6 +117,42 @@ $$
 
 这里 $D$ 是天线最大物理尺寸。频率越高，波长越短，同样尺寸天线的远场距离越大。
 
+例：$D=1.2\,\mathrm{m}$、$f=4.2\,\mathrm{GHz}$。先求波长：
+
+$$
+\lambda=\frac{3\times10^8}{4.2\times10^9}
+=0.0714\,\mathrm{m}
+$$
+
+远场边界为
+
+$$
+R_0=\frac{2D^2}{\lambda}
+=\frac{2(1.2)^2}{0.0714}
+\approx40.3\,\mathrm{m}
+$$
+
+也可以反求频率。由
+
+$$
+R_0=\frac{2D^2}{\lambda},\qquad \lambda=\frac{c}{f}
+$$
+
+得
+
+$$
+f=\frac{cR_0}{2D^2}
+$$
+
+若 $D=0.5\,\mathrm{m}$、$R_0=4\,\mathrm{m}$，按公式计算：
+
+$$
+f=\frac{(3\times10^8)(4)}{2(0.5)^2}
+=2.4\,\mathrm{GHz}
+$$
+
+课件手写结果标为 $1.2\,\mathrm{GHz}$，与同页公式代入不一致，复习时按公式核算。
+
 ## 15-3 辐射方向图 Radiation Pattern
 
 ### 15-3-1 主瓣与副瓣 Lobes
@@ -130,8 +168,8 @@ $$
 | 名称 | 含义 |
 | --- | --- |
 | Major lobe / Main lobe | 最大辐射方向附近的主波束 |
-| Minor lobe | 非主瓣的其他辐射瓣 |
-| Side lobe | 偏离主方向的副瓣，通常希望降低 |
+| Minor lobe | 非主瓣的其他辐射瓣，通常是不希望的方向 |
+| Side lobe | 偏离主方向的副瓣，常指较大的 minor lobe，通常希望降低 |
 | Back lobe | 与主瓣相反方向的辐射瓣 |
 | Null | 辐射很弱或为零的方向 |
 
@@ -225,6 +263,14 @@ $$
 $$
 G=\eta D
 $$
+
+实际 gain 受三件事共同影响：
+
+- mismatch / reflection：端口不匹配会把功率反射回去；
+- ohmic loss / efficiency：导体、介质和馈线损耗会把功率变成热；
+- directivity：天线把功率集中到某些方向。
+
+增益常用 $\mathrm{dBi}$ 表示，意思是相对 isotropic radiator 的 dB 值。写成单个 $D$ 或 $G$ 时，通常默认取最大辐射方向；完整表达仍是 $D(\theta,\phi)$ 或 $G(\theta,\phi)$。
 
 天线增益不是放大器增益。天线不能凭空增加输入功率，只能把功率集中到某些方向。
 

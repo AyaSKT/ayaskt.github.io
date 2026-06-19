@@ -152,6 +152,14 @@ V_{\mathrm{LSB}}
 \frac{V_{\mathrm{ref}}}{2^n}
 $$
 
+对应的最大输出码为 $2^n-1$，所以 full-scale output 为
+
+$$
+V_{\mathrm{FS}}
+=
+\frac{(2^n-1)V_{\mathrm{ref}}}{2^n}
+$$
+
 也有资料把从 $0$ 到 full-scale 的 $2^n-1$ 个间隔作为步距：
 
 $$
@@ -171,6 +179,16 @@ V_{\mathrm{LSB}}
 =
 0.625\,\mathrm{V}
 $$
+
+若用 $V_{\mathrm{LSB}}=V_{\mathrm{ref}}/2^n$，最高 code $111_2=7$ 的输出为
+
+$$
+V_{\mathrm{FS}}=7\times0.625\,\mathrm{V}
+=4.375\,\mathrm{V}
+=\frac{35}{8}\,\mathrm{V}
+$$
+
+所以阶梯输出的最高一级不到 $5\,\mathrm{V}$。
 
 ---
 
@@ -348,6 +366,31 @@ V_{\mathrm{ref}}
 $$
 
 若使用反相运放，输出前面加负号。
+
+对 4-bit R-2R ladder，可用叠加法记住每一位贡献：
+
+$$
+D_3:\frac{V}{2},\qquad
+D_2:\frac{V}{4},\qquad
+D_1:\frac{V}{8},\qquad
+D_0:\frac{V}{16}
+$$
+
+于是
+
+$$
+V_{\mathrm{out}}
+=D_3\frac{V}{2}
++D_2\frac{V}{4}
++D_1\frac{V}{8}
++D_0\frac{V}{16}
+$$
+
+若把 $D=8D_3+4D_2+2D_1+D_0$，则
+
+$$
+V_{\mathrm{out}}=\frac{D}{16}V
+$$
 
 ---
 

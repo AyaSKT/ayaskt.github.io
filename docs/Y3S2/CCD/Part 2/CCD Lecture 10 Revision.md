@@ -43,6 +43,26 @@ lastUpdated: 2026-05-31T14:55:30+08:00
 
 放大器题目通常先判断是直流分析还是交流分析。
 
+基本 gain 和 dB 公式先放在最前面：
+
+$$
+A_v=\frac{V_{\mathrm{out}}}{V_{\mathrm{in}}},
+\qquad
+A_p=\frac{P_{\mathrm{out}}}{P_{\mathrm{in}}}
+$$
+
+$$
+A_{v,\mathrm{dB}}=20\log_{10}{\left(\frac{V_{\mathrm{out}}}{V_{\mathrm{in}}}\right)}
+$$
+
+$$
+A_{i,\mathrm{dB}}=20\log_{10}{\left(\frac{I_{\mathrm{out}}}{I_{\mathrm{in}}}\right)}
+$$
+
+$$
+A_{p,\mathrm{dB}}=10\log_{10}{\left(\frac{P_{\mathrm{out}}}{P_{\mathrm{in}}}\right)}
+$$
+
 | 分析类型 | 处理方式 |
 | --- | --- |
 | 直流分析 | 耦合/旁路电容开路，信号源与负载被隔离 |
@@ -118,6 +138,55 @@ $$
 R_{in}\approx r_e'
 $$
 
+若考虑信号源内阻和偏置网络，完整 AC 题常用这几步：
+
+$$
+R_{in(tot)}=R_1\parallel R_2\parallel R_{in(base)}
+$$
+
+$$
+V_b=V_s\frac{R_{in(tot)}}{R_s+R_{in(tot)}}
+$$
+
+$$
+R_{in(base)}=\beta_{ac}r_e'
+$$
+
+$$
+A_v'=
+\left(\frac{V_c}{V_b}\right)
+\left(\frac{V_b}{V_s}\right)
+=\frac{V_c}{V_s}
+$$
+
+$$
+A_i=\frac{I_c}{I_s},
+\qquad
+A_p=A_v'A_i
+$$
+
+JFET 复习重点是 transfer curve 和自偏置：
+
+$$
+I_D=I_{DSS}\left(1-\frac{V_{GS}}{V_{GS(\mathrm{off})}}\right)^2
+$$
+
+$$
+g_m=\frac{\Delta I_D}{\Delta V_{GS}}
+$$
+
+$$
+g_m=g_{m0}\left(1-\frac{V_{GS}}{V_{GS(\mathrm{off})}}\right),
+\qquad
+g_{m0}=\frac{2I_{DSS}}{|V_{GS(\mathrm{off})}|}
+$$
+
+自偏置时
+
+$$
+V_G=0,\qquad V_S=I_DR_S,\qquad V_{GS}=-V_S
+$$
+
 ## 10-2 混频器 Mixers
 
 混频器用非线性乘法产生新频率。两个单音相乘：
@@ -158,6 +227,26 @@ $$
 $$
 
 镜像抑制依赖前端选择性，常用高 $Q$ 带通滤波器。
+
+调谐滤波器的镜像抑制常用
+
+$$
+\delta=\frac{f}{f_0}-\frac{f_0}{f}
+$$
+
+$$
+A_r=\frac{1}{\sqrt{1+(\delta Q)^2}}
+$$
+
+例如 $f_0=500\,\mathrm{kHz}$、镜像 $f=1430\,\mathrm{kHz}$、$Q=50$：
+
+$$
+\delta Q\approx126,\qquad A_r\approx\frac{1}{126}
+$$
+
+$$
+20\log_{10}{A_r}\approx-42\,\mathrm{dB}
+$$
 
 ## 10-3 LC 电路与匹配网络 LC Circuits and Matching Networks
 
@@ -288,6 +377,18 @@ $$
 |A|\ge29
 $$
 
+这个 $29$ 来自三节 RC 网络在振荡频率处的反馈：
+
+$$
+\omega_0=\frac{1}{\sqrt6RC}
+$$
+
+$$
+\beta=\frac{v_3}{v_0}=-\frac{1}{29}
+$$
+
+因此放大器必须提供至少 $29$ 倍反相增益。
+
 Hartley 振荡器：
 
 $$
@@ -308,6 +409,32 @@ $$
 
 $$
 \omega_0=\frac{1}{\sqrt{L(C+C_D(V_D))}}
+$$
+
+Clapp/VCO 例题中，若 $L=100\,\mu\mathrm{H}$、$C_1=C_2=300\,\mathrm{pF}$、$C_0=20\,\mathrm{pF}$，并且
+
+$$
+C_D=\frac{C_0}{\sqrt{1+|V_D|/0.5}}
+$$
+
+则零偏置时总等效电容约为
+
+$$
+C\approx17.65\,\mathrm{pF}
+$$
+
+$$
+f_0\approx3.789\,\mathrm{MHz}
+$$
+
+当 $V_D=-7\,\mathrm{V}$ 时，
+
+$$
+C_D\approx4.998\,\mathrm{pF}
+$$
+
+$$
+f_0\approx7.126\,\mathrm{MHz}
 $$
 
 相位噪声可写进输出模型：

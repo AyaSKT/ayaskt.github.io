@@ -147,6 +147,7 @@ BJT 输出特性曲线可分为三个主要区域。
 | Cutoff 截止区 | $I_B\approx0$ | $I_C\approx0$，晶体管近似开路 |
 | Active 放大区 | BE 正偏，BC 反偏 | $I_C\approx\beta_{\mathrm{DC}}I_B$ |
 | Saturation 饱和区 | BE、BC 都正偏 | $V_{CE}$ 很小，$I_C$ 由外电路限制 |
+| Breakdown 击穿区 | $V_{CE}$ 过高 | 电流急剧增大，不作为正常工作区 |
 
 饱和时常用近似：
 
@@ -194,6 +195,24 @@ $$
 $$
 V_{CE(\mathrm{cutoff})}=V_{CC}=15\,\mathrm{V}
 $$
+
+若再给定 $V_{BB}=3.0\,\mathrm{V}$、$R_B=220\,\mathrm{k}\Omega$、$\beta_{\mathrm{DC}}=200$，则
+
+$$
+I_B=\frac{V_{BB}-V_{BE}}{R_B}
+=\frac{3.0\,\mathrm{V}-0.7\,\mathrm{V}}{220\,\mathrm{k}\Omega}
+=10.45\,\mu\mathrm{A}
+$$
+
+按 active region 估算：
+
+$$
+I_C=\beta_{\mathrm{DC}}I_B
+=200\times10.45\,\mu\mathrm{A}
+=2.09\,\mathrm{mA}
+$$
+
+由于 $2.09\,\mathrm{mA}<I_{C(\mathrm{sat})}=4.48\,\mathrm{mA}$，晶体管没有饱和，工作点仍在 active region。
 ::::
 
 ---
@@ -251,6 +270,13 @@ $$
 ## 3-5 BJT 作为放大器与开关 Amplifier and Switch
 
 BJT 可把直流电源能量转换为交流信号能量，因此可作为放大器。小信号分析中，输入交流信号叠加在直流偏置上，输出常出现相位反转。
+
+未饱和 BJT 的直流模型可以看成两部分：
+
+- 输入端 base-emitter 结近似为正向导通二极管；
+- 输出端 collector-emitter 之间由受控电流源表示，电流约为 $\beta_{\mathrm{DC}}I_B$。
+
+所以先算 $I_B$，再判断 $\beta_{\mathrm{DC}}I_B$ 是否超过外电路允许的 $I_{C(\mathrm{sat})}$，是 BJT 开关题最稳的做法。
 
 BJT 也可作为开关：
 
@@ -401,6 +427,30 @@ $$
 
 其中 $V_{GS(\mathrm{off})}$ 为使 $I_D$ 近似降为 0 的 gate-source 电压。
 
+若已知 $I_D$ 占 $I_{DSS}$ 的比例，也可以反求 $V_{GS}$。例如
+
+$$
+I_D=0.5I_{DSS}
+$$
+
+代入 Shockley 方程：
+
+$$
+0.5=\left(1-\frac{V_{GS}}{V_{GS(\mathrm{off})}}\right)^2
+$$
+
+于是
+
+$$
+V_{GS}\approx0.3V_{GS(\mathrm{off})}
+$$
+
+若 $V_{GS(\mathrm{off})}=-3.5\,\mathrm{V}$，则
+
+$$
+V_{GS}\approx-1.05\,\mathrm{V}
+$$
+
 跨导定义为
 
 $$
@@ -422,6 +472,14 @@ $$
 :::: tip
 JFET 的 $g_m$ 不是常数。工作点改变时，转移曲线斜率也随之改变。
 ::::
+
+JFET gate-source 结反向偏置，因此输入电阻很高。可用漏电流估算：
+
+$$
+R_{IN}=\left|\frac{V_{GS}}{I_{GSS}}\right|
+$$
+
+温度升高时 $I_{GSS}$ 会增加，输入电阻会明显下降。课件例题给出的数量级是：$25^\circ\mathrm{C}$ 时约 $20\,\mathrm{G}\Omega$，$100^\circ\mathrm{C}$ 时约 $100\,\mathrm{M}\Omega$。
 
 ## 4-4 JFET 偏置 JFET Biasing
 
@@ -455,6 +513,13 @@ $$
 R_S = \left|\frac{V_{GS}}{I_D}\right|
 $$
 
+例如目标工作点为 $I_D=2.6\,\mathrm{mA}$、$V_{GS}=-0.975\,\mathrm{V}$，则
+
+$$
+R_S=\left|\frac{-0.975\,\mathrm{V}}{2.6\,\mathrm{mA}}\right|
+\approx375\,\Omega
+$$
+
 > [!NOTE]
 > **分压偏置 Voltage-Divider Bias** 的 gate 电压由 $R_1$、$R_2$ 分压设定，不依赖于 $I_D$：
 >
@@ -469,6 +534,14 @@ $$
 > $$
 >
 > 与 Shockley 方程 $I_D=I_{DSS}(1-V_{GS}/V_{GS(\mathrm{off})})^2$ 联立可解出 Q 点。分压偏置比自偏置的 $I_D$ 对器件参数变化更不敏感，因为 $V_G$ 被分压器固定。
+
+在图解法中，分压偏置线与 transfer curve 的交点就是 Q 点。课件例题的读数约为
+
+$$
+I_D\approx3.3\,\mathrm{mA},\qquad V_{GS}\approx-0.7\,\mathrm{V}
+$$
+
+JFET 还可以工作在 ohmic region，作为电压控制电阻使用。此时 $V_{GS}$ 改变沟道宽度，等效 $R_{DS}$ 随之改变，可用于可变衰减器或模拟开关。
 
 ## 4-5 MOSFET
 
@@ -518,6 +591,23 @@ MOSFET 使用时需要注意静电防护：
 :::: tip
 接地腕带中串联高阻是为了限流。若人体误触电源，高阻可降低危险电流。
 ::::
+
+实际选型还要看几个限制参数：
+
+| 参数 | 含义 |
+| --- | --- |
+| $V_{(BR)DSS}$ / $BV_{DSS}$ | drain-source 击穿电压 |
+| $R_{DS(on)}$ | 导通电阻，越小导通损耗越低 |
+| Continuous $I_D$ | 允许连续漏极电流 |
+| $P_D$ | 最大耗散功率 |
+
+E-MOSFET 常用 voltage-divider bias 或 drain-feedback bias 建立 $V_{GS}>V_{GS(th)}$ 的工作点。D-MOSFET 可以零偏置工作，此时
+
+$$
+V_{GS}=0,\qquad I_D=I_{DSS}
+$$
+
+IGBT 可以看成 MOSFET 输入特性与 BJT 输出能力的结合，常用于高压、中频功率开关，例如 motor control。
 
 ## Summary
 

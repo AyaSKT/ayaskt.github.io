@@ -129,6 +129,30 @@ $$
 
 SSB 还有 selective fading 优势。AM 中载波、USB、LSB 可能在电离层传播中受到不同衰落，SSB 只传一个边带，边带间不均衡衰落的问题小很多。
 
+课程里把 SSB 相对 AM 的综合优势估为约 $10$ 到 $12\,\mathrm{dB}$。100% AM 中，
+
+$$
+P_{\mathrm{AM}}=P_c+P_{\mathrm{USB}}+P_{\mathrm{LSB}}
+$$
+
+且
+
+$$
+P_{\mathrm{USB}}=P_{\mathrm{LSB}}
+$$
+
+同等有效信息下，SSB 把功率集中到一个边带，并且接收带宽更窄。可用
+
+$$
+10\log_{10}
+\left[
+\left(\frac{P_{\mathrm{SSB}}}{P_{\mathrm{AM}}}\right)
+\left(\frac{BW_{\mathrm{AM}}}{BW_{\mathrm{SSB}}}\right)^2
+\right]
+$$
+
+估算优势。语音 $300\,\mathrm{Hz}$ 到 $3\,\mathrm{kHz}$ 时，$BW_{\mathrm{AM}}=6\,\mathrm{kHz}$、$BW_{\mathrm{SSB}}=2.7\,\mathrm{kHz}$，课件例题得到约 $11.7\,\mathrm{dB}$。
+
 ## 13-3 SSB 产生方法 SSB Generation
 
 ### 13-3-1 平衡调制器 Balanced Modulator
@@ -208,7 +232,16 @@ $$
 载波频率越高、边带间隔越小，所需 $Q$ 越高。直接在最终 RF 频率做 SSB 滤波通常很难。
 
 > [!NOTE]
-> 以语音信号为例，最低消息频率约 $300\,\mathrm{Hz}$，USB 与 LSB 之间仅隔 $600\,\mathrm{Hz}$。若载波为 $10\,\mathrm{MHz}$，所需 $Q$ 远超常规 LC 滤波器可达到的水平（通常 $Q<200$）。因此实际 SSB 发射机先在固定低中频（如 $455\,\mathrm{kHz}$ 或 $1.65\,\mathrm{MHz}$）生成干净 SSB，再经混频器搬移到目标频率。
+> 以最低消息频率 $100\,\mathrm{Hz}$ 为例，USB 与 LSB 之间最近只隔 $200\,\mathrm{Hz}$。若在很高 RF 频率直接滤波，所需 $Q$ 远超常规 LC 滤波器可达到的水平（通常 $Q<200$）。因此实际 SSB 发射机先在固定低中频（如 $455\,\mathrm{kHz}$ 或 $1.65\,\mathrm{MHz}$）生成干净 SSB，再经混频器搬移到目标频率。
+
+若所需边带抑制为 $80\,\mathrm{dB}$、$\Delta f=200\,\mathrm{Hz}$，在 $f_c=100\,\mathrm{kHz}$ 的中频处：
+
+$$
+Q=\frac{100\,\mathrm{kHz}\left(10^{80/20}\right)^{1/2}}{4(200\,\mathrm{Hz})}
+=12500
+$$
+
+这仍然很高，但已经比直接在 MHz 级载波频率滤波实际得多。
 
 ## 13-4 SSB 发射机与接收机 SSB Transmitters and Receivers
 
@@ -227,6 +260,15 @@ $$
 5. Linear power amplifier 放大发射。
 
 SSB 信号本身有幅度变化，因此最终 RF 功率放大器必须线性。Class C 这类强非线性末级会产生互调和边带失真。
+
+如果最终发射频率附近两个边带相隔较远，功放输出端的简单滤波就容易很多。例如载波 $3\,\mathrm{MHz}$，不需要的边带在 $2.9\,\mathrm{MHz}$，目标边带在 $3.1\,\mathrm{MHz}$，粗略选择性为
+
+$$
+Q=\frac{3\,\mathrm{MHz}}{3.1\,\mathrm{MHz}-2.9\,\mathrm{MHz}}
+=15
+$$
+
+这个 $Q$ 对普通调谐回路就比较现实。
 
 ---
 
@@ -261,6 +303,28 @@ $$
 $$
 
 BFO 频率偏差会直接造成音调偏移，所以 SSB 接收对频率稳定性要求更高。
+
+课件例题给出了一条完整频率链。若抑制载波为 $2\,\mathrm{MHz}$，USB 中有 $1\,\mathrm{kHz}$ 和 $3\,\mathrm{kHz}$ 音频，则 RF 分量为
+
+$$
+2001\,\mathrm{kHz},\qquad 2003\,\mathrm{kHz}
+$$
+
+若用 $2455\,\mathrm{kHz}$ 本振混到 $455\,\mathrm{kHz}$ 附近，则 IF 分量为
+
+$$
+454\,\mathrm{kHz},\qquad 452\,\mathrm{kHz}
+$$
+
+接收端 BFO 取 $455\,\mathrm{kHz}$，product detector 输出差频：
+
+$$
+455-454=1\,\mathrm{kHz}
+$$
+
+$$
+455-452=3\,\mathrm{kHz}
+$$
 
 ## 13-5 例题 Exercises
 

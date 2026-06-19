@@ -74,6 +74,10 @@ $$
 | 自由空间 Free space | 无线电、红外、可见光通信 | 依靠电磁波传播 |
 | 其他媒介 | 水、地面 | 声呐或低频通信中会出现 |
 
+信道不只会让信号变小，也会改变信号形状。距离增加时，接收功率通常按平方关系下降；实际媒介还具有频率选择性，常表现为低通效应，高频分量被削弱后，数字脉冲边沿会变钝。
+
+另外，信号在电缆、水或其他媒介中的传播速度低于真空光速。传输线越长，这个延迟越不能忽略。
+
 ### 1-2-3 接收机 Receiver
 
 接收机负责从信道中取出信号，并恢复原始信息。接收机中也会用到放大器、振荡器、混频器、滤波器和解调器。
@@ -135,6 +139,20 @@ $$
 A_T = A_1 A_2 A_3 \cdots A_n
 $$
 
+例如三级衰减分别为 $0.2$、$0.9$、$0.06$，则
+
+$$
+A_T=0.2\times0.9\times0.06=0.0108
+$$
+
+若输入为 $3\,\mathrm{V}$，输出为
+
+$$
+V_{\mathrm{out}}=A_TV_{\mathrm{in}}
+=0.0108\times3\,\mathrm{V}
+=32.4\,\mathrm{mV}
+$$
+
 需要注意，同一个字母 $A$ 有时表示 gain，有时表示 attenuation。判断时看比值是否大于 1。
 
 ## 1-5 分贝 Decibel
@@ -167,6 +185,36 @@ $$
 | --- | --- | --- |
 | dBm | $1\,\mathrm{mW}$ | $P_{\mathrm{dBm}} = 10\log_{10}\dfrac{P}{1\,\mathrm{mW}}$ |
 | dBW | $1\,\mathrm{W}$ | $P_{\mathrm{dBW}} = 10\log_{10}\dfrac{P}{1\,\mathrm{W}}$ |
+
+由 dBm 反推功率：
+
+$$
+P=1\,\mathrm{mW}\times10^{P_{\mathrm{dBm}}/10}
+$$
+
+例如 $+8\,\mathrm{dBm}$ 对应
+
+$$
+P=1\,\mathrm{mW}\times10^{8/10}
+\approx6.31\,\mathrm{mW}
+$$
+
+若负载为 $600\,\Omega$，则
+
+$$
+V_{\mathrm{rms}}
+=\sqrt{PR}
+=\sqrt{6.31\,\mathrm{mW}\times600\,\Omega}
+\approx1.95\,\mathrm{V}
+$$
+
+$+10\,\mathrm{dBm}$ 对应 $10\,\mathrm{mW}=0.01\,\mathrm{W}$，因此
+
+$$
+P_{\mathrm{dBW}}
+=10\log_{10}{(0.01)}
+=-20\,\mathrm{dBW}
+$$
 
 ## 1-6 信噪比 Signal-to-Noise Ratio
 

@@ -87,6 +87,20 @@ $$
 \theta_{\mathrm{PM}}(t)=\omega_c t+k_p m(t)
 $$
 
+对单音消息，PM 波形可写成
+
+$$
+e_{\mathrm{PM}}(t)
+=A_c\sin{(\omega_c t+m_p\sin{(\omega_m t)})}
+$$
+
+或用 cosine 写作同样形式。PM 调制指数为最大相位偏移：
+
+$$
+m_p=\Delta\theta_{\max}
+\qquad \mathrm{(rad)}
+$$
+
 所以：
 
 - FM 中，消息积分后进入相位；
@@ -181,7 +195,60 @@ $$
 \mathrm{BW}_{\mathrm{FM}}\approx 2f_m(m_f+1)
 $$
 
+Carson 定则约包含 FM 信号总功率的 $98\%$。其中 $\Delta f$ 是载波单侧的最大频偏，而带宽要覆盖载波两侧：
+
+$$
+\mathrm{BW}_{\mathrm{FM}}
+\approx
+2\left(\frac{\Delta f_{\max}}{f_{m,\max}}+1\right)f_{m,\max}
+$$
+
 窄带 FM 满足 $m_f\ll1$，主要只有一阶边频。宽带 FM 的边频数量多，带宽也明显增大。
+
+另一个常用指标是**频偏比 Deviation Ratio**：
+
+$$
+DR=\frac{\Delta f_{\max}}{f_{m,\max}}
+$$
+
+$DR\ge1$ 常称为 wideband FM，$DR<1$ 常称为 narrowband FM。商业 FM 若最大频偏为 $75\,\mathrm{kHz}$，消息频率范围 $30\,\mathrm{Hz}$ 到 $15\,\mathrm{kHz}$，则 $m_f$ 从
+
+$$
+\frac{75\,\mathrm{kHz}}{30\,\mathrm{Hz}}=2500
+$$
+
+到
+
+$$
+\frac{75\,\mathrm{kHz}}{15\,\mathrm{kHz}}=5
+$$
+
+变化。
+
+由 Bessel 表还可以估算各频率分量功率。若 $m_f=0.25$，表中约有
+
+$$
+J_0\approx0.98,\qquad J_1\approx0.12
+$$
+
+对 $10\,\mathrm{kW}$ FM 发射机，载波功率近似为
+
+$$
+(0.98)^2(10\,\mathrm{kW})=9.604\,\mathrm{kW}
+$$
+
+每个一阶边频功率为
+
+$$
+(0.12)^2(10\,\mathrm{kW})=144\,\mathrm{W}
+$$
+
+总显著功率约为
+
+$$
+9.604\,\mathrm{kW}+144\,\mathrm{W}+144\,\mathrm{W}
+=9.892\,\mathrm{kW}
+$$
 
 ## 14-4 调频与调相电路 FM and PM Circuits
 
@@ -246,6 +313,12 @@ $$
 X_C=\frac{1}{2\pi fC}
 $$
 
+若输出取在低通 RC 的电容端，输出相位滞后，常写为
+
+$$
+\theta=-\tan^{-1}{\left(\frac{R}{X_C}\right)}
+$$
+
 ![相移电路](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_phase_shifter.jpg>)
 
 若把相移网络中的电容换成变容二极管，消息信号改变电容，相移也随消息变化，于是得到 PM。
@@ -258,6 +331,28 @@ $$
 
 $$
 \Delta f_{\mathrm{out}}=N\Delta f_{\mathrm{in}}
+$$
+
+倍频链例题中，若总倍频数为 $N=24$，目标输出频率为 $168.96\,\mathrm{MHz}$，则晶体振荡器频率应为
+
+$$
+f_{\mathrm{osc}}=\frac{168.96\,\mathrm{MHz}}{24}
+=7.04\,\mathrm{MHz}
+$$
+
+若最终需要 $\Delta f=5\,\mathrm{kHz}$，相位调制器起始频偏为
+
+$$
+\Delta f_{\mathrm{PM}}
+=\frac{5\,\mathrm{kHz}}{24}
+=208.33\,\mathrm{Hz}
+$$
+
+反过来，若起始频偏为 $200\,\mathrm{Hz}$，经过 $24$ 倍频后：
+
+$$
+\Delta f_{\mathrm{out}}=24\times200\,\mathrm{Hz}
+=4.8\,\mathrm{kHz}
 $$
 
 > [!NOTE]
@@ -293,6 +388,58 @@ FM 的消息在频率变化中，外部噪声很多表现为幅度扰动。因�
 AM 中，幅度变化就是消息，噪声幅度会直接进入输出。FM 中，限幅器能削弱幅度噪声。
 
 需要注意，FM 不是完全免疫噪声。靠近目标信号的噪声会改变合成信号相位，而相位扰动会对应到瞬时频率误差。
+
+发射功率常用 Peak Envelope Power, PEP 表示：
+
+$$
+PEP=\frac{V_{\mathrm{RMS}}^2}{R}
+=
+\frac{(V/\sqrt2)^2}{R}
+=
+\frac{V^2}{2R}
+$$
+
+例如
+
+$$
+e(t)=2000\sin{(2\pi\times10^8t+2\sin{\pi\times10^4t})}
+$$
+
+接 $50\,\Omega$ 天线。由式子直接读出
+
+$$
+f_c=100\,\mathrm{MHz},\qquad m_f=2
+$$
+
+且
+
+$$
+\omega_m=\pi\times10^4=2\pi f_m
+$$
+
+所以
+
+$$
+f_m=5\,\mathrm{kHz}
+$$
+
+频偏为
+
+$$
+\Delta f=m_ff_m=2\times5\,\mathrm{kHz}=10\,\mathrm{kHz}
+$$
+
+Carson 定则给
+
+$$
+BW=2(\Delta f+f_m)=2(10+5)\,\mathrm{kHz}=30\,\mathrm{kHz}
+$$
+
+功率为
+
+$$
+P=\frac{2000^2}{2(50)}=40\,\mathrm{kW}
+$$
 
 ## Summary
 

@@ -4,7 +4,7 @@
   "Y3S2/CCD/Part 1/CCD Lecture 2b Semiconductors Basics.md": "2b-1 原子结构 Atomic Structure / Bohr 模型中，电子只能位于特定能级的壳层上。第 n 层最多容纳的电子数为 / 最外层称为价壳层 Valence shell，其中的电子称为价电子 Valence electrons。价电子束缚较弱，获得足够能量后可以脱离原子并参与导电。 / 价电子 Valence Electron / 价电子是处于最外层能级的电子。材料的化学键合和电学性质主要由价电子决定。",
   "Y3S2/CCD/Part 1/CCD Lecture 3-4 Transistors.md": "3-1 BJT 结构 Bipolar Junction Transistor Structure / BJT / BJT，双极结型晶体管，由 emitter、base、collector 三个区域组成。它同时依靠电子和空穴两种载流子工作。 / BJT 有两种基本类型： / 类型: 结构",
   "Y3S2/CCD/Part 1/CCD Lecture 5-6 Amplifiers.md": "5-1 放大器直流分析 DC Analysis / 放大器分析通常分两步：先求直流偏置，再求交流小信号响应。直流偏置决定晶体管是否工作在放大区，也决定小信号模型里的参数。 / 对 BJT 共射放大器，直流分析时： / 耦合电容和旁路电容视为开路； / 信号源和负载电阻被隔离；",
-  "Y3S2/CCD/Part 2/CCD Lecture 10 Revision.md": "10-1 放大器 Amplifiers / 放大器题目通常先判断是直流分析还是交流分析。 / 分析类型: 处理方式 / 直流分析: 耦合/旁路电容开路，信号源与负载被隔离 / 交流分析: 耦合/旁路电容短路，直流电源为交流地",
+  "Y3S2/CCD/Part 2/CCD Lecture 10 Revision.md": "10-1 放大器 Amplifiers / 放大器题目通常先判断是直流分析还是交流分析。 / 基本 gain 和 dB 公式先放在最前面： / 分析类型: 处理方式 / 直流分析: 耦合/旁路电容开路，信号源与负载被隔离",
   "Y3S2/CCD/Part 2/CCD Lecture 7 Mixers.md": "7-1 混频原理 Mixing Principle / 7-1-1 基本乘法关系 Basic Multiplication Relation / 混频器 Mixer / 混频器是一个三端口电路，用非线性器件把两个交流信号相乘，从而在输出端产生新的频率分量。 / 混频按乘法处理。若两个输入为",
   "Y3S2/CCD/Part 2/CCD Lecture 8 LC Circuits and Matching Networks.md": "8-1 LC 元件与谐振 LC Components and Resonance / 8-1-1 实际电容与电感 Practical Capacitors and Inductors / 理想电容只储存电场能量，理想电感只储存磁场能量。但在 RF 频率下，实际元件一定有损耗。 / 元件: 理想功能 / 电容 Capacitor: 存储电场能量",
   "Y3S2/CCD/Part 2/CCD Lecture 9 Oscillators.md": "9-1 LC 振荡与 Barkhausen 条件 LC Oscillation and Barkhausen Criterion / 振荡器 Oscillator / 振荡器把直流电源转换为周期性交流输出。通信电路中的本地振荡器、载波源和时钟源都属于这类电路。 / 理想正弦振荡器希望输出 / 其中频率和幅度都稳定。",

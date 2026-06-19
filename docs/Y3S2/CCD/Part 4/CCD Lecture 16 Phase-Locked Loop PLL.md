@@ -121,6 +121,8 @@ $$
 
 VCO 的自由振荡频率记作 $f_0$。没有输入信号或未锁定时，VCO 频率接近 $f_0$。
 
+PLL 还常用于 frequency synthesis。用稳定参考频率控制 VCO，再配合分频器，可以产生准确、可调的输出频率。其他应用还包括 carrier recovery、reference clean-up、FM/PM demodulation 和频率跟踪。
+
 ---
 
 ### 16-2-2 三个核心模块 Three Core Blocks
@@ -175,6 +177,24 @@ $$
 :::: tip
 Lock range 是已经锁住以后还能跟踪的频率范围；capture range 是从未锁定状态开始能抓住输入的范围。后者通常更窄。
 ::::
+
+更精确地写：
+
+$$
+f_{\min}\le f_{\mathrm{in}}\le f_{\max}
+\qquad \text{lock range}
+$$
+
+一旦 PLL 已锁定，只要输入频率仍在这个范围内，VCO 可以继续跟踪。若超出该范围，环路会失锁。
+
+捕获范围通常围绕自由振荡频率 $f_0$：
+
+$$
+f_0-f_c\le f_{\mathrm{in}}\le f_0+f_c
+\qquad \text{capture range}
+$$
+
+未锁定时，输入必须足够接近 $f_0$，环路才有机会重新捕获。
 
 ## 16-3 相位检测器 Phase Detector
 
@@ -234,6 +254,28 @@ $$
 
 数字检测器输出仍然要经过环路滤波器，得到 VCO 控制电压。
 
+以 XOR phase detector 为例，输出占空比与相位差近似成比例：
+
+$$
+D_{\phi}=\frac{\phi_e}{\pi}
+$$
+
+若逻辑高电平为 $V_{DD}$，平均输出为
+
+$$
+V_{\phi}=D_{\phi}V_{DD}
+=\frac{V_{DD}}{\pi}\phi_e
+$$
+
+因此
+
+$$
+K_D=\frac{V_{DD}}{\pi}
+\qquad \mathrm{(V/rad)}
+$$
+
+这个线性关系主要适用于 $0\le\phi_e\le\pi$ 的范围。
+
 ## 16-4 环路滤波器与 VCO Loop Filter and VCO
 
 ### 16-4-1 环路滤波器 Loop Filter
@@ -252,6 +294,26 @@ v_o(t)=\text{VCO control voltage}
 $$
 
 滤波器还会影响捕获速度、稳定性和输出纹波。带宽太窄，锁定慢；带宽太宽，噪声和纹波更容易进入 VCO。
+
+一阶 RC 低通环路滤波器可写为
+
+$$
+F(s)=\frac{1}{1+sRC}
+$$
+
+也可写成
+
+$$
+F(s)=\frac{1}{1+s/\omega_p}
+$$
+
+其中
+
+$$
+\omega_p=\frac{1}{RC},\qquad f_p=\frac{\omega_p}{2\pi}
+$$
+
+若 $f_p\ll2f_{\mathrm{in}}$，相位检测器输出中的高频项被明显衰减，滤波后主要剩下 DC 或低频误差信号。
 
 ---
 
@@ -357,6 +419,36 @@ $$
 
 这是一个一阶低通形式。输入相位的低频变化被跟踪，高频变化会被环路衰减。
 
+若 $F(s)$ 为一阶 RC 低通，且
+
+$$
+F(s)=\frac{\omega_p}{s+\omega_p}
+$$
+
+开环相位传递为
+
+$$
+G(s)=\frac{K_VF(s)}{s}
+$$
+
+闭环传递函数变为二阶形式：
+
+$$
+H(s)=
+\frac{K_V\omega_p}{s^2+s\omega_p+K_V\omega_p}
+$$
+
+与标准二阶系统比较可得
+
+$$
+\omega_n=\sqrt{K_V\omega_p}
+=\sqrt{K_DK_O\omega_p}
+$$
+
+$$
+\zeta=\frac{\omega_p}{2\omega_n}
+$$
+
 ---
 
 ### 16-5-2 4046 VCO 设计 4046 VCO Design
@@ -433,6 +525,36 @@ $$
 
 $$
 H(s)=\frac{10^3}{s+10^3}
+$$
+
+**例 4：XOR 检测器与二阶参数**
+
+若 XOR phase detector 的 $K_D=1.6\,\mathrm{V/rad}$，VCO 增益 $K_O=1000\,\mathrm{rad/(s\cdot V)}$，则
+
+$$
+K_V=K_DK_O=1600\,\mathrm{s^{-1}}
+$$
+
+若环路滤波器极点为
+
+$$
+\omega_p=2525\,\mathrm{rad/s}
+$$
+
+则
+
+$$
+F(s)=\frac{2525}{s+2525}
+$$
+
+二阶自然频率和阻尼比为
+
+$$
+\omega_n=\sqrt{1600\times2525}\approx2010\,\mathrm{rad/s}
+$$
+
+$$
+\zeta=\frac{2525}{2(2010)}\approx0.63
 $$
 
 ## Summary

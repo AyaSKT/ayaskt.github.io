@@ -20,15 +20,6 @@ lastUpdated: 2026-06-12T01:40:38+08:00
   />
 </LyricCover>
 
-> [!TIP]
->
-> 嘿，小朋友们大家好，是我，CPS。
->
-> 想不想进我的妙妙屋？
->
-> 噢，差点忘了，要进入妙妙屋，必须要念奇妙的咒语；
->
-> Misika Mosika CPS
 
 ## 章节目录
 
@@ -131,6 +122,14 @@ $$
 m=\frac{E_{\max}-E_{\min}}{E_{\max}+E_{\min}}
 $$
 
+也可用百分比调制度表示：
+
+$$
+\%m=
+\frac{E_{\max}-E_{\min}}{E_{\max}+E_{\min}}
+\times100\%
+$$
+
 调制百分比为
 
 $$
@@ -138,6 +137,8 @@ M=m\times 100\%
 $$
 
 ![AM 包络](<CCD Lecture 11-12 Amplitude Modulation.attachments/am_envelope.jpg>)
+
+100% 调制时，包络最低点刚好到零，载波瞬时幅度在 $0$ 到 $2E_c$ 之间变化。
 
 > [!TIP]
 > 包络法求 $m$ 时必须用峰值包络的 $E_{\max}$ 和 $E_{\min}$，不是用载波周期内相邻高频峰值。
@@ -157,6 +158,8 @@ $$
 ![过调制](<CCD Lecture 11-12 Amplitude Modulation.attachments/am_overmodulation.jpg>)
 
 工程上 AM 发送机通常不追求超过 100% 调制。调制度太小会浪费载波功率，调制度太大又会失真。
+
+过调制不只是时域包络失真。因为波形被折叠或削顶，会产生额外频率分量，使边带向外扩展。这个现象常称为 **sideband splatter**，可能干扰邻近信道。
 
 ## 11-3 AM 频谱与带宽 AM Spectrum and Bandwidth
 
@@ -265,6 +268,14 @@ $$
 
 这个公式适合发射机调试时估计调制度。
 
+同样的关系也可写成电压形式：
+
+$$
+E_T=E_c\sqrt{1+\frac{m^2}{2}}
+$$
+
+前提仍然是负载阻抗不变。
+
 ## 11-5 AM 产生电路 AM Generation Circuits
 
 ### 11-5-1 非线性器件与滤波 Nonlinear Device and Filtering
@@ -322,6 +333,8 @@ Class C 放大器效率高，但不适合直接放大已经生成的 AM 信号�
 > **低电平调制 Low-Level Modulation**：调制后的信号已包含完整 AM 波形，后续所有 RF 放大器必须工作在线性模式（如 Class A 或 Class AB）以保持包络形状不畸变。调制电路功率小、实现灵活，但末级线性放大器效率低，不适合大功率发射。
 >
 > **高电平调制 High-Level Modulation**：前级可用高效率非线性放大器（如 Class C）放大纯载波，末级再用消息信号控制输出载波幅度。整体效率高，适合大功率 AM 广播发射机，但调制器需要提供与 RF 输出功率相当的音频功率。
+
+低功率集成 AM 调制也可用 OTA，例如 LM13700。carrier 作为输入信号，message 控制 OTA 的跨导，也就是控制放大器增益，输出就得到幅度随 message 变化的 AM 波形。
 
 ---
 

@@ -12,6 +12,31 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.7.2 - 2026-06-19
+
+### 新增
+
+- 补全 CCD 全课程多篇笔记中课件遗漏的图片公式、速算公式与例题结论，覆盖 Introduction、Semiconductors、Transistors、Amplifiers、Mixers、LC Matching、Oscillators、AM / SSB / FM / PM、Antenna、PLL、DAC 与 ADC。
+- 为 CCD Part 1 补充半导体能带模型、PN 结能带解释、BJT 饱和判断、JFET 输入电阻与偏置、MOSFET 限制参数，以及放大器旁路电容、共集/共基放大器核心公式。
+- 为 CCD Part 2 补充混频器镜像抑制例题、三阶互调产物、LC 截止频率与 Q 例题、最大功率传输推导、L 型匹配验证、振荡器反馈网络表和 Revision 总复习公式。
+- 为 CCD Part 3 补充 AM 过调制 sideband splatter、SSB 10-12 dB 优势推导与接收频率链路、PM 指数、Carson Rule 限定、Deviation Ratio、Bessel 功率分配、PEP 与天线远场边界例题。
+- 为 CCD Part 4 补充 PLL lock/capture range、XOR phase detector、RC loop filter、二阶闭环参数、DAC full-scale / R-2R ladder 推导、ADC sampling / SAR / Flash / DNR 公式和例题。
+
+### 调整
+
+- 调整 CCD Lecture 9 Oscillators 的部分插图引用，并补充对应截图附件，使振荡器反馈网络、Hartley / Colpitts 与相位噪声内容更贴合课件图示。
+- 刷新课程预览缓存，使 CCD Revision 卡片摘要反映新增的 gain / dB 复习公式。
+
+### 修复
+
+- 修正 CCD ADC 笔记中 8-bit、0-5 V、3 V 输入的编码例题，按课件公式改为 `153 = 10011001_2`。
+- 标注天线远场反求频率与 ADC 24-bit DNR 两处课件图示中的疑似数值不一致，复习时按同页公式核算。
+- 修复 FM 笔记中低通 RC 相移、倍频链和发射功率相关公式缺失导致的复习断点。
+
+### 删减
+
+- 暂无
+
 ## V6.7.1 - 2026-06-18
 
 ### 新增

@@ -187,6 +187,45 @@ $$
 
 $Q$ 越大，频响曲线越窄，选择性越强。
 
+常用速算：
+
+$$
+BW=f_2-f_1,\qquad f_r\approx\sqrt{f_1f_2},\qquad Q=\frac{f_r}{BW}
+$$
+
+若 $f_r=49\,\mathrm{MHz}$、$BW=10\,\mathrm{kHz}$，则
+
+$$
+f_1=48.995\,\mathrm{MHz},\qquad f_2=49.005\,\mathrm{MHz}
+$$
+
+若 $f_1=7.93\,\mathrm{MHz}$、$f_2=8.07\,\mathrm{MHz}$，则
+
+$$
+BW=140\,\mathrm{kHz}
+$$
+
+$$
+f_r\approx\sqrt{7.93\times8.07}\,\mathrm{MHz}
+\approx8\,\mathrm{MHz}
+$$
+
+$$
+Q=\frac{8\,\mathrm{MHz}}{140\,\mathrm{kHz}}
+\approx57.14
+$$
+
+若 $Q=200$、$f_r=16\,\mathrm{MHz}$，则
+
+$$
+BW=\frac{16\,\mathrm{MHz}}{200}
+=80\,\mathrm{kHz}
+$$
+
+$$
+f_1=15.96\,\mathrm{MHz},\qquad f_2=16.04\,\mathrm{MHz}
+$$
+
 ![谐振响应与 Q 对带宽的影响](<CCD Lecture 8 LC Circuits and Matching Networks.attachments/lc_q_bandwidth_wide.jpg>)
 
 :::: tip
@@ -323,6 +362,16 @@ $$
 
 最大平均功率传输条件是**复共轭匹配 Complex Conjugate Matching**：
 
+负载平均功率可写成
+
+$$
+P_L=
+\frac{1}{2}
+\frac{|V_0|^2R_L}{(R_0+R_L)^2+(X_0+X_L)^2}
+$$
+
+要让 $P_L$ 最大，分母应尽量小。先令电抗项抵消：
+
 $$
 Z_L=Z_0^*
 $$
@@ -373,6 +422,10 @@ $$
 失配损耗表示由于阻抗失配损失掉的功率：
 
 $$
+ML=\frac{1}{1-|\Gamma|^2}
+$$
+
+$$
 ML=-10\log_{10}(1-|\Gamma|^2)
 $$
 
@@ -413,6 +466,34 @@ X_P=\frac{R_+}{Q}
 $$
 
 。
+
+验证时可分别算
+
+$$
+Q_S=\frac{X_S}{R_-},\qquad Q_P=\frac{R_+}{X_P}
+$$
+
+匹配成功时，串联侧等效阻抗与并联侧等效阻抗互为共轭：
+
+$$
+Z_S=Z_P^*
+$$
+
+例如课件例题验证得到
+
+$$
+|Z_0|=\sqrt{5^2+15^2}=15.811\,\Omega
+$$
+
+另一侧并联等效的模为
+
+$$
+|Z_L|=
+\frac{1}{\sqrt{(1/50)^2+(1/16.667)^2}}
+=15.811\,\Omega
+$$
+
+两边模相同且电抗符号相反，即满足共轭匹配。
 
 再根据元件类型换算：
 

@@ -105,6 +105,38 @@ $$
 
 求出静态电流。
 
+若分压网络足够 stiff，也可以先用近似法：
+
+$$
+V_B\approx V_{CC}\frac{R_2}{R_1+R_2}
+$$
+
+再取
+
+$$
+V_E\approx V_B-0.7\,\mathrm{V}
+$$
+
+$$
+I_E\approx I_C\approx\frac{V_E}{R_E}
+$$
+
+课件例题中由近似法得到
+
+$$
+V_B=3.59\,\mathrm{V},\qquad V_E=2.89\,\mathrm{V}
+$$
+
+$$
+I_E\approx I_C=5.16\,\mathrm{mA}
+$$
+
+若 $V_C=4.84\,\mathrm{V}$，则
+
+$$
+V_{CE}=V_C-V_E=1.95\,\mathrm{V}
+$$
+
 
 ---
 
@@ -246,6 +278,14 @@ $$
 V_b=V_s\frac{R_{in(tot)}}{R_s+R_{in(tot)}}
 $$
 
+输入衰减也可写成
+
+$$
+\frac{V_s}{V_b}
+=
+\frac{R_s+R_{in(tot)}}{R_{in(tot)}}
+$$
+
 ![基极信号分压](<CCD Lecture 5-6 Amplifiers.attachments/amp_32_base_signal_divider.jpg>)
 
 
@@ -273,6 +313,15 @@ $$
 A_{v(overall)}=\frac{V_c}{V_s}=A_v\frac{V_b}{V_s}
 $$
 
+也就是
+
+$$
+A_v'=
+\left(\frac{V_c}{V_b}\right)
+\left(\frac{V_b}{V_s}\right)
+=\frac{V_c}{V_s}
+$$
+
 ![基极到集电极电压增益](<CCD Lecture 5-6 Amplifiers.attachments/amp_38_voltage_gain.jpg>)
 
 
@@ -292,6 +341,23 @@ $$
 C\ge \frac{1}{2\pi f_{\min}X_C}
 $$
 
+例如 $R_E=560\,\Omega$，最低频率 $f_{\min}=200\,\mathrm{Hz}$。先取
+
+$$
+X_{C2}=\frac{R_E}{10}=56\,\Omega
+$$
+
+则
+
+$$
+C_2=\frac{1}{2\pi fX_C}
+=
+\frac{1}{2\pi(200)(56)}
+\approx14.2\,\mu\mathrm{F}
+$$
+
+实际选值通常取更大一些，使最低频率处旁路更充分。
+
 ![发射极旁路电容的作用](<CCD Lecture 5-6 Amplifiers.attachments/amp_41_emitter_bypass_effect_wide.jpg>)
 
 若没有旁路电容，发射极电阻会进入交流增益公式：
@@ -301,6 +367,28 @@ A_v\approx-\frac{R_C}{r_e'+R_E}
 $$
 
 这会降低增益，但也让增益更稳定，因为它不再只依赖 $r_e'$。
+
+同一电路在有无旁路电容时差异会很大。课件例题给出的数量级为
+
+$$
+A_v=\frac{R_C}{r_e'+R_E}=1.76
+\qquad \text{without } C_2
+$$
+
+若 $C_2$ 使发射极交流接地，则
+
+$$
+A_v=\frac{R_C}{r_e'}=152
+\qquad \text{with } C_2
+$$
+
+当 $R_E\gg r_e'$ 时，无旁路共射增益可近似为
+
+$$
+A_v\approx-\frac{R_C}{R_E}
+$$
+
+此时增益主要由外部电阻比决定，对 $r_e'$ 的温度变化不敏感。
 
 若输出接负载 $R_L$，交流下集电极等效电阻变为
 
@@ -346,6 +434,30 @@ $$
 
 因为输出取在发射极，所以发射极电阻不能被旁路掉。
 
+其电压增益为
+
+$$
+A_v=\frac{R_e}{r_e'+R_e}\approx1
+$$
+
+其中 $R_e$ 是发射极交流等效负载。输出电阻常用近似：
+
+$$
+R_{out}\approx\frac{R_s}{\beta_{ac}}\parallel R_E
+$$
+
+电流增益仍可很高：
+
+$$
+A_i=\frac{I_e}{I_{in}}
+$$
+
+因为 $A_v\approx1$，所以功率增益近似等于电流增益：
+
+$$
+A_p\approx A_i
+$$
+
 ![共集输入电阻](<CCD Lecture 5-6 Amplifiers.attachments/amp_67_cc_input_resistance.jpg>)
 
 ## 6-2 共基放大器 Common-Base Amplifier
@@ -370,10 +482,38 @@ $$
 A_v=\frac{R_C}{r_e'}
 $$
 
+若接入负载，集电极交流电阻改为
+
+$$
+R_c=R_C\parallel R_L
+$$
+
+于是
+
+$$
+A_v\approx\frac{R_c}{r_e'}
+$$
+
 输入电阻近似为
 
 $$
 R_{in(emitter)}\approx r_e'
+$$
+
+共基放大器没有相位反转，电流增益约为 $1$，所以
+
+$$
+A_i\approx1,\qquad A_p\approx A_v
+$$
+
+课件例题给出过一组典型结果：
+
+$$
+r_{in}\approx r_e'=24.5\,\Omega,\qquad R_c=1.8\,\mathrm{k}\Omega
+$$
+
+$$
+A_v=\frac{1.8\,\mathrm{k}\Omega}{24.5\,\Omega}=73.5
 $$
 
 ![共基电压增益](<CCD Lecture 5-6 Amplifiers.attachments/amp_76_cb_voltage_gain.jpg>)
