@@ -55,7 +55,7 @@ $$
 - 上边带 USB 和下边带 LSB 携带相同消息；
 - 100% 调制时，每个边带的幅度最大只有载波幅度的一半。
 
-![AM 频谱](<CCD Lecture 13 Single-Sideband Communication SSB.attachments/ssb_am_spectrum_wide.jpg>)
+![AM 频谱](<CCD%20Lecture%2013%20Single-Sideband%20Communication%20SSB.attachments/ssb_am_spectrum_wide.jpg>)
 
 因此常规 AM 的功率和带宽都有明显冗余。
 
@@ -79,7 +79,7 @@ $$
 f_{\mathrm{LSB}}=f_c-f_m
 $$
 
-![边带选择](<CCD Lecture 13 Single-Sideband Communication SSB.attachments/ssb_sideband_choice_wide.jpg>)
+![边带选择](<CCD%20Lecture%2013%20Single-Sideband%20Communication%20SSB.attachments/ssb_sideband_choice_wide.jpg>)
 
 SSB 仍能恢复消息，因为一个边带已经包含完整消息信息。
 
@@ -197,7 +197,8 @@ $$
 **二极管环形调制器** 用四个匹配二极管构成开关网络。大幅度载波控制二极管导通组合，使消息信号按载波半周期交替反相，从而产生 DSB-SC。
 ::::
 
-![二极管环形调制器](<CCD Lecture 13 Single-Sideband Communication SSB.attachments/ssb_ring_modulator_wide.jpg>)
+![图片](CCD%20Lecture%2013%20Single-Sideband%20Communication%20SSB.attachments/clipboard-20260621-120214.png)
+
 
 正半周时，一组对角二极管导通，消息以原极性传到输出。负半周时，另一组对角二极管导通，消息反相传到输出。
 
@@ -209,7 +210,7 @@ $$
 
 DSB-SC 仍有两个边带，SSB 还需要滤波。
 
-![SSB 滤波](<CCD Lecture 13 Single-Sideband Communication SSB.attachments/ssb_filter.jpg>)
+![SSB 滤波](<CCD%20Lecture%2013%20Single-Sideband%20Communication%20SSB.attachments/ssb_filter.jpg>)
 
 滤波器需要：
 
@@ -249,7 +250,7 @@ $$
 
 实际 SSB 发射机常先在固定中频处生成干净 SSB，再混频到最终发射频率。
 
-![滤波法 SSB 发射机](<CCD Lecture 13 Single-Sideband Communication SSB.attachments/ssb_transmitter_filter_method.jpg>)
+![滤波法 SSB 发射机](<CCD%20Lecture%2013%20Single-Sideband%20Communication%20SSB.attachments/ssb_transmitter_filter_method.jpg>)
 
 基本链路：
 
@@ -276,7 +277,7 @@ $$
 
 普通 AM 二极管包络检波不能直接解调 SSB，因为 SSB 中没有原载波。
 
-![SSB 接收机](<CCD Lecture 13 Single-Sideband Communication SSB.attachments/ssb_receiver.jpg>)
+![SSB 接收机](<CCD%20Lecture%2013%20Single-Sideband%20Communication%20SSB.attachments/ssb_receiver.jpg>)
 
 SSB 接收机常见流程：
 

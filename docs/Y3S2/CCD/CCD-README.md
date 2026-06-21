@@ -127,7 +127,7 @@ pageClass: course-index-page
       ]
     },
     {
-      title: 'Part 4 - PLL, DAC, ADC and Converter Errors',
+      title: 'Part 4 - PLL, RF Receivers, DAC, ADC and Converter Errors',
       items: [
         {
           code: 'Lecture 16',
@@ -135,6 +135,13 @@ pageClass: course-index-page
           subtitle: 'Phase-Locked Loop (PLL)',
           link: 'Part 4/CCD Lecture 16 Phase-Locked Loop PLL.md',
           cover: 'Part 4/CCD Lecture 16 Phase-Locked Loop PLL.attachments/1781247638338.PNG'
+        },
+        {
+          code: 'Lecture 17',
+          title: '射频接收机',
+          subtitle: 'RF Receivers',
+          link: 'Part 4/CCD Lecture 17 RF Receivers.md',
+          cover: 'Part 4/CCD Lecture 17 RF Receivers.attachments/rf_superhet_receiver.jpg'
         },
         {
           code: 'Lecture 18',
@@ -160,6 +167,19 @@ pageClass: course-index-page
           title: 'Rev 1 概念与模型',
           subtitle: 'Concepts and Models',
           link: 'Review/Review 1.md'
+        },
+        {
+          code: 'Review 2',
+          title: 'Rev 2 电路图与框图总整理',
+          subtitle: 'Circuit and Block Diagram Index',
+          link: 'Review/Review 2.md',
+          cover: 'Part 1/CCD Lecture 1 Introduction.attachments/communication-system.jpg'
+        },
+        {
+          code: 'Review 3',
+          title: 'Rev 3 公式总整理',
+          subtitle: 'Formula Index',
+          link: 'Review/Review 3.md'
         }
       ]
     }

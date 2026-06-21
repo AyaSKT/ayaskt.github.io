@@ -1777,10 +1777,11 @@ export default defineConfig({
               ],
             },
             {
-              text: 'Part 4 — PLL 与数模转换',
+              text: 'Part 4 — PLL、RF 接收机与数模转换',
               collapsed: false,
               items: [
                 { text: 'Lec 16 锁相环', link: '/Y3S2/CCD/Part 4/CCD Lecture 16 Phase-Locked Loop PLL' },
+                { text: 'Lec 17 射频接收机', link: '/Y3S2/CCD/Part 4/CCD Lecture 17 RF Receivers' },
                 { text: 'Lec 18 数模转换', link: '/Y3S2/CCD/Part 4/CCD Lecture 18 Digital to Analog Conversion' },
                 { text: 'Lec 19-20 模数转换与转换误差', link: '/Y3S2/CCD/Part 4/CCD Lecture 19-20 ADC and Converter Errors' },
               ],
@@ -1790,6 +1791,8 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: 'Rev 1 概念与模型', link: '/Y3S2/CCD/Review/Review 1' },
+                { text: 'Rev 2 电路图与框图总整理', link: '/Y3S2/CCD/Review/Review 2' },
+                { text: 'Rev 3 公式总整理', link: '/Y3S2/CCD/Review/Review 3' },
               ],
             },
           ],

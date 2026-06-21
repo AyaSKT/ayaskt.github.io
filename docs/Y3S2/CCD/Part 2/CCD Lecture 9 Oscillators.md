@@ -54,7 +54,7 @@ $$
 
 并联 LC 槽路中，能量在电容电场和电感磁场之间来回交换。
 
-![LC 槽路振荡过程](<CCD Lecture 9 Oscillators.attachments/osc_04_lc_oscillator_waveform.jpg>)
+![LC 槽路振荡过程](<CCD%20Lecture%209%20Oscillators.attachments/osc_04_lc_oscillator_waveform.jpg>)
 
 若电容一开始被充电，闭合回路后：
 
@@ -63,9 +63,11 @@ $$
 3. 电感电流继续流动，把电容充成相反极性；
 4. 过程反向重复，形成振荡。
 
+![alt text](<CCD%20Lecture%209%20Oscillators.attachments/1781862289732.png>)
+
 这个能量交换称为**飞轮效应 Flywheel Effect**。理想 LC 槽路的谐振频率为
 
-![alt text](<CCD Lecture 9 Oscillators.attachments/1781862289732.png>)
+
 
 $$
 f_r=\frac{1}{2\pi\sqrt{LC}}
@@ -73,12 +75,14 @@ $$
 
 实际槽路有电阻损耗，振荡会衰减。要得到稳定输出，必须用放大器补偿损耗，并用反馈网络控制相位与幅度。
 
-![alt text](<CCD Lecture 9 Oscillators.attachments/1781862264329.png>)
 
 
 ---
 
 ### 9-1-2 Barkhausen 振荡条件 Barkhausen Criterion
+
+
+![alt text](<CCD%20Lecture%209%20Oscillators.attachments/1781862264329.png>)
 
 把振荡器看成放大器 $A$ 与反馈网络 $\beta$ 组成的闭环系统。开环时：
 
@@ -134,7 +138,7 @@ $$
 
 相移振荡器用一个反相放大器提供 $180^\circ$ 相移，再用多级 RC 网络提供额外 $180^\circ$ 相移，使总相移达到 $360^\circ$。
 
-![相移振荡器](<CCD Lecture 9 Oscillators.attachments/osc_09_phase_shift_circuit.jpg>)
+![相移振荡器](<CCD%20Lecture%209%20Oscillators.attachments/osc_09_phase_shift_circuit.jpg>)
 
 对三节相同的 RC 网络，理想放大器输入阻抗无限大时，振荡频率为
 
@@ -154,7 +158,7 @@ $$
 
 射频振荡器设计常先看开环参数，再把反馈网络接回形成闭环。
 
-![开环设计视角](<CCD Lecture 9 Oscillators.attachments/osc_14_open_loop_design.jpg>)
+![开环设计视角](<CCD%20Lecture%209%20Oscillators.attachments/osc_14_open_loop_design.jpg>)
 
 开环设计通常分三步：
 
@@ -183,7 +187,7 @@ $$
 
 课程中给出的反馈网络都可以看成并联 LC 槽路的不同抽头形式。
 
-![alt text](<CCD Lecture 9 Oscillators.attachments/1781862560463.png>)
+![alt text](<CCD%20Lecture%209%20Oscillators.attachments/1781862560463.png>)
 
 常见形式如下：
 
@@ -220,7 +224,7 @@ $$
 
 Hartley 振荡器使用抽头电感反馈网络。放大器通常由 BJT 提供，反馈网络由 $L_1$、$L_2$ 和 $C$ 组成。
 
-![alt text](<CCD Lecture 9 Oscillators.attachments/1781862626563.png>)
+![alt text](<CCD%20Lecture%209%20Oscillators.attachments/1781862626563.png>)
 
 其谐振频率近似为
 
@@ -232,7 +236,7 @@ $$
 
 Colpitts 振荡器把电感和电容的位置互换，使用抽头电容反馈网络。
 
-![alt text](<CCD Lecture 9 Oscillators.attachments/1781862658506.png>)
+![alt text](<CCD%20Lecture%209%20Oscillators.attachments/1781862658506.png>)
 
 两个串联电容的等效电容为
 
@@ -248,7 +252,7 @@ $$
 
 射频扼流圈 RFC 对直流近似短路，用来给晶体管供电；对射频近似开路，避免射频信号被电源旁路掉。耦合电容负责隔直通交，避免直流偏置进入槽路或输出端。
 
-![alt text](<CCD Lecture 9 Oscillators.attachments/1781862836264.png>)
+![alt text](<CCD%20Lecture%209%20Oscillators.attachments/1781862836264.png>)
 
 起振时 Colpitts 振荡器需要满足
 
@@ -280,7 +284,7 @@ $$
 
 ## 9-5 晶体振荡器与压控振荡器 Crystal and Voltage-Controlled Oscillators
 
-![晶体、可变电容与变容二极管 VCO](<CCD Lecture 9 Oscillators.attachments/osc_crystal_vco_wide.jpg>)
+![晶体、可变电容与变容二极管 VCO](<CCD%20Lecture%209%20Oscillators.attachments/osc_crystal_vco_wide.jpg>)
 
 
 
@@ -358,7 +362,7 @@ $$
 
 Clapp 振荡器可以看成带额外串联电容的 Colpitts 结构。加入变容二极管后，反馈网络总电容由 $C_1$、$C_2$ 和 $C_D$ 的串联组合决定。
 
-![Clapp 压控振荡器](<CCD Lecture 9 Oscillators.attachments/osc_32_clapp_vco.jpg>)
+![Clapp 压控振荡器](<CCD%20Lecture%209%20Oscillators.attachments/osc_32_clapp_vco.jpg>)
 
 先把 $C_1$、$C_2$ 串联合并：
 
@@ -405,11 +409,11 @@ $$
 
 其中 $\phi_n(t)$ 使零交叉点发生随机偏移，这种时间上的偏移称为抖动。
 
-![alt text](<CCD Lecture 9 Oscillators.attachments/1781862907294.png>)
+![alt text](<CCD%20Lecture%209%20Oscillators.attachments/1781862907294.png>)
 
 在时域中，可以用眼图观察抖动。把波形按半个周期切成许多段并叠加，若抖动小，交叉点集中，眼图打开；若抖动大，交叉点扩散，眼图闭合。
 
-![alt text](<CCD Lecture 9 Oscillators.attachments/1781862875113.png>)
+![alt text](<CCD%20Lecture%209%20Oscillators.attachments/1781862875113.png>)
 
 在频域中，相位噪声表现为载波附近的频谱扩展。常在距离载波 $\Delta f$ 的偏移处，用 $1\,\mathrm{Hz}$ 带宽内的噪声功率相对载波功率表示：
 
@@ -456,7 +460,7 @@ $$
 :::: stem L9-E2
 Colpitts 振荡器中，$L=50\,\mathrm{mH}$，$C_1=0.1\,\mu\mathrm{F}$，$C_2=0.01\,\mu\mathrm{F}$。假设反馈网络负载很小且 $Q>10$，求振荡频率。若加载后 $Q=8$，频率变为多少？若 $Q=4$ 呢？
 
-![Colpitts 振荡器例题电路](<CCD Lecture 9 Oscillators.attachments/osc_colpitts_problem_wide.jpg>)
+![Colpitts 振荡器例题电路](<CCD%20Lecture%209%20Oscillators.attachments/osc_colpitts_problem_wide.jpg>)
 ::::
 
 :::: solution

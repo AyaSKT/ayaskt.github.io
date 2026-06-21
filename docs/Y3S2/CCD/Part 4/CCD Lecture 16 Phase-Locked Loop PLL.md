@@ -1,5 +1,5 @@
 ---
-lastUpdated: 2026-06-12T15:16:20+08:00
+lastUpdated: 2026-06-21T22:30:51+08:00
 ---
 # Lecture 16 Phase-Locked Loop PLL 锁相环
 
@@ -570,3 +570,39 @@ v_{\phi}=K_D\phi_e,
 \qquad
 H(s)=\frac{K_DK_OF(s)}{s+K_DK_OF(s)}
 $$
+
+参数可以按三层记：**信号电压 signal voltage**、**频率 frequency**、**增益 gain**。不要把电压符号和频率符号放在同一类里比较。
+
+| 参数 Parameter | 所在位置 | 含义 | 常用关系 / 单位 | 容易混淆点 |
+| --- | --- | --- | --- | --- |
+| $v_i(t)$ 或 $V_i$ | PLL 输入端 | 输入信号电压，通常来自 FM 信号或参考信号 | $\mathrm{V}$ | 这是送入相位检测器的外部信号 |
+| $v_{\mathrm{vco}}(t)$ 或 $V_o$ | VCO / PLL 输出端 | VCO 产生的输出波形，也可作为反馈信号送回相位检测器 | $\mathrm{V}$ | 课件若写 $V_o$，通常指输出波形电压；看箭头是否从 VCO 输出端出来 |
+| $v_{\phi}$ | 相位检测器输出 | 输入信号与 VCO 输出比较后的误差电压 | $v_{\phi}=K_D\phi_e$，$\mathrm{V}$ | 还没有经过环路滤波器，通常含有高频项 |
+| $v_o(t)$ | 环路滤波器输出 | VCO 控制电压，直接调节 VCO 频率 | $v_o\approx K_D\phi_e$，$\mathrm{V}$ | 本页小写 $v_o$ 指 control voltage；它和图中大写 $V_o$ 可能不是同一个量 |
+| $\phi_{\mathrm{in}}$ | 输入相位 | 输入信号的瞬时相位 | $\mathrm{rad}$ | 相位随时间变化，频率是相位的变化率 |
+| $\phi_{\mathrm{out}}$ | VCO 输出相位 | VCO 输出信号的瞬时相位 | $\mathrm{rad}$ | 锁定后与输入相位差为常数 |
+| $\phi_e$ | 相位检测器输入差值 | 输入与 VCO 输出之间的相位误差 | $\phi_e=\phi_{\mathrm{in}}-\phi_{\mathrm{out}}$，$\mathrm{rad}$ | PLL 真正调节的是这个误差 |
+| $f_{\mathrm{in}}$ | 输入信号 | 输入信号频率 | $\mathrm{Hz}$ | 锁定后 VCO 频率等于它 |
+| $f_0$ | VCO 自由运行状态 | 没有控制电压修正时的 VCO 自由振荡频率 | $\mathrm{Hz}$ | 它是频率，不是电压；自由运行时 $f_{\mathrm{osc}}\approx f_0$ |
+| $\omega_0$ | VCO 自由运行状态 | $f_0$ 对应的角频率 | $\omega_0=2\pi f_0$，$\mathrm{rad/s}$ | 与 $f_0$ 是同一件事的角频率写法 |
+| $f_{\mathrm{osc}}$ | VCO 输出 | VCO 实际输出频率 | $f_{\mathrm{osc}}=f_0+K_{\mathrm{VCO}}v_o$，$\mathrm{Hz}$ | 锁定后 $f_{\mathrm{osc}}=f_{\mathrm{in}}$ |
+| $\omega_{\mathrm{osc}}$ | VCO 输出 | VCO 实际输出角频率 | $\omega_{\mathrm{osc}}=\omega_0+K_Ov_o$，$\mathrm{rad/s}$ | 与 $f_{\mathrm{osc}}$ 相差 $2\pi$ |
+| $K_D$ | 相位检测器 | 相位误差转成电压的比例 | $K_D=v_{\phi}/\phi_e$，$\mathrm{V/rad}$ | 输入是相位误差，输出是误差电压 |
+| $K_{\mathrm{VCO}}$ | VCO | 控制电压转成频率变化的比例 | $K_{\mathrm{VCO}}=\Delta f_{\mathrm{osc}}/\Delta v_o$，$\mathrm{Hz/V}$ | 用普通频率 $f$ 时用它 |
+| $K_O$ | VCO | 控制电压转成角频率变化的比例 | $K_O=\Delta\omega_{\mathrm{osc}}/\Delta v_o$，$\mathrm{rad/(s\cdot V)}$ | 用角频率 $\omega$ 时用它，$K_O=2\pi K_{\mathrm{VCO}}$ |
+| $K_V$ | 整个 PLL loop | 环路增益 | $K_V=K_DK_O$，$\mathrm{s^{-1}}$ | 决定维持同样频率偏移所需的相位误差大小 |
+| $F(s)$ | 环路滤波器 | 滤掉相位检测器输出中的高频项，保留控制 VCO 的低频项 | $F(s)=1/(1+sRC)$ | 影响捕获速度、纹波和稳定性 |
+| $\omega_p,f_p$ | 环路滤波器 | 一阶滤波器的极点频率 | $\omega_p=1/RC,\ f_p=\omega_p/(2\pi)$ | 带宽太小锁定慢，太大则纹波和噪声更容易进入 VCO |
+| $f_{\min},f_{\max}$ | VCO 或 PLL 可调范围 | VCO 能覆盖的最低、最高频率 | $\mathrm{Hz}$ | 4046 设计题常先求这两个量 |
+| $f_c$ | 捕获范围 | 未锁定时可捕获输入的半宽度 | $f_0-f_c\le f_{\mathrm{in}}\le f_0+f_c$ | capture range 通常比 lock range 窄 |
+| $\omega_n,\zeta$ | 二阶 PLL 模型 | 自然频率与阻尼比 | $\omega_n=\sqrt{K_DK_O\omega_p}$，$\zeta=\omega_p/(2\omega_n)$ | 只在含一阶环路滤波器的二阶模型中使用 |
+| $V_{DD}$ | 数字 PLL / 4046 | 逻辑或芯片供电电压 | XOR 中 $K_D=V_{DD}/\pi$ | 也会出现在 4046 VCO 灵敏度计算中 |
+| $R_1,R_2,C_1$ | 4046 VCO 外接元件 | 决定 VCO 频率范围的电阻和电容 | $f_{\min}\approx1/[R_2(C_1+32\,\mathrm{pF})]$ | $R_1$ 主要影响 $f_{\max}-f_{\min}$，$R_2$ 主要影响 $f_{\min}$ |
+
+判断顺序：
+
+1. 先看量的单位。$\mathrm{V}$ 是电压，$\mathrm{Hz}$ 是频率，$\mathrm{rad/s}$ 是角频率；
+2. 再看箭头位置。输入端的 $V_i$ 是输入波形，VCO 输出端的 $V_o$ 是输出波形，环路滤波器到 VCO 的 $v_o$ 是控制电压；
+3. 最后看是否锁定。自由运行时 $f_{\mathrm{osc}}\approx f_0$；锁定后 $f_{\mathrm{osc}}=f_{\mathrm{in}}$。
+
+因此，$V_i$ / $v_i(t)$ 是送进 PLL 的输入电压，$V_o$ 常表示 VCO 或 PLL 的输出电压波形，$v_o(t)$ 在本页表示控制 VCO 的滤波器输出电压；$f_0$ 是 VCO 自己的自由振荡频率，单位是 $\mathrm{Hz}$，和这些电压不是同一类参数。

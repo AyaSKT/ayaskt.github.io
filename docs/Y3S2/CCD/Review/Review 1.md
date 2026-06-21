@@ -12,7 +12,7 @@
   - [1-2-2 LC、匹配与振荡 LC, Matching and Oscillators](#1-2-2-lc匹配与振荡-lc-matching-and-oscillators)
   - [1-2-3 混频与镜像频率 Mixers and Image Frequency](#1-2-3-混频与镜像频率-mixers-and-image-frequency)
   - [1-2-4 调制 Modulation](#1-2-4-调制-modulation)
-  - [1-2-5 PLL、DAC 与 ADC](#1-2-5-plldac-与-adc)
+  - [1-2-5 PLL、DAC/ADC 与接收机](#1-2-5-plldacadc-与接收机)
 - [1-3 难点来源 Difficulty Sources](#1-3-难点来源-difficulty-sources)
   - [1-3-1 难点一：先识别模型](#1-3-1-难点一先识别模型)
   - [1-3-2 难点二：单位和 dB](#1-3-2-难点二单位和-db)
@@ -160,7 +160,7 @@ $$
 
 ---
 
-### 1-2-5 PLL、DAC 与 ADC
+### 1-2-5 PLL、DAC/ADC 与接收机
 
 PLL 在 2022、2023、2024、2025 都出现过，近两年更偏参数影响分析。
 
@@ -179,6 +179,15 @@ DAC/ADC 是 Q4 的高频轮换点。2024 考 R-2R DAC，2025 考加权电阻 DAC
 | R-2R DAC | 用相同阻值比例实现二进制权重，工程上更容易制造 |
 | ADC resolution | 由参考电压范围和 bit 数求 LSB |
 
+Lecture 17 把 Q4 的 receiver 部分补完整。接收机题通常从 superheterodyne block diagram 进入，再落到 image frequency、receiver linearity、noise figure 和 sensitivity。
+
+| 模块 | 常见要求 |
+| --- | --- |
+| Superheterodyne receiver | 说明 RF、LO、mixer、IF、detector、AGC 的作用 |
+| Image frequency | 由 $f_{\mathrm{IF}}=\lvert f_{\mathrm{RF}}-f_{\mathrm{LO}}\rvert$ 求 image，解释为什么 IF filter 不能再消掉 image |
+| Linearity | 由 $y(t)=a_0+a_1x+a_2x^2+a_3x^3$ 解释 harmonics、IM3、1 dB compression 和 IIP3 |
+| Noise / sensitivity | 用 $P_n=-174+10\log_{10}B+NF$ 和 Friis 公式判断 LNA 为什么要放在最前面 |
+
 ## 1-3 难点来源 Difficulty Sources
 
 ### 1-3-1 难点一：先识别模型
@@ -191,6 +200,8 @@ CCD 的题目经常把图、文字和公式混在一起。多数题不是公式�
 | AC equivalent / current gain / input resistance | 小信号放大器 |
 | source and load mismatch | 匹配网络 |
 | IF / LO / image | 超外差接收机 |
+| IM3 / IIP3 / 1 dB compression | 接收机非线性 |
+| noise figure / Friis / sensitivity | 接收机噪声链路 |
 | sideband separation / suppression | SSB filter $Q$ |
 | varactor diode | 变容二极管振荡或 FM |
 | $K_D$、$K_O$、VCO | PLL |
@@ -297,7 +308,7 @@ CCD 的题目经常把图、文字和公式混在一起。多数题不是公式�
 | PLL | operating stages、$K_D$、$K_O$、$K_V$、control voltage |
 | DAC | weighted-resistor、R-2R、output voltage、resolution |
 | ADC | resolution、precision improvement |
-| Receiver | heterodyne block diagram、noise figure、LNA 作用 |
+| Receiver | heterodyne block diagram、image frequency、linearity、noise figure、LNA 作用 |
 | Antenna | beamwidth、efficiency、Friis link budget |
 
 ## Summary
@@ -306,7 +317,7 @@ CCD 的题目经常把图、文字和公式混在一起。多数题不是公式�
 | --- | --- |
 | Q1 和 Q2 每年稳定出现 | 放大器、器件、LC、匹配网络是基本盘 |
 | Q3 每年考调制 | AM、SSB、FM/PM 不能只背公式，要会画频谱和框图 |
-| Q4 近年偏 PLL 与 DAC | PLL 参数影响分析和 DAC 图型识别要重点练 |
+| Q4 近年偏 PLL、DAC 与接收机指标 | PLL 参数影响、DAC 图型识别、receiver noise/linearity 要重点练 |
 | 2024、2025 解释题增多 | 答案需要写出模型选择、设计理由和工程影响 |
 | 图题贯穿全卷 | 复习时必须练电路图识别，不只看文字公式 |
 
@@ -315,4 +326,4 @@ CCD 的题目经常把图、文字和公式混在一起。多数题不是公式�
 1. 先刷 Q1：dB、BJT/JFET、放大器；
 2. 再刷 Q2：LC、matching、oscillator、image；
 3. 再刷 Q3：AM、SSB、FM/PM；
-4. 最后刷 Q4：PLL、DAC/ADC、receiver、antenna。
+4. 最后刷 Q4：PLL、receiver、DAC/ADC、antenna。
