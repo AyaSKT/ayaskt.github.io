@@ -12,6 +12,33 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.7.3 - 2026-06-21
+
+### 新增
+
+- 新增 CCD Lecture 17 `RF Receivers` 完整笔记，覆盖 TRF 接收机、超外差接收机、IF / LO 频率关系、镜像频率、选择性、灵敏度、动态范围、非线性、IIP3、噪声系数、等效噪声温度与 Friis 级联噪声公式。
+- 为 CCD Lecture 17 新增射频接收机配套图片素材与缩略图，包含 TRF / superhet 框图、1 dB 压缩点、双音互调频谱、IIP3 测量图、镜像频率图、噪声底与动态范围图、两级噪声因子与前端灵敏度例题图。
+- 新增 CCD `Rev 2 电路图与框图总整理`，按 Block 汇总通信链路、器件、电路图、调制/解调框图、PLL、DAC、ADC 与 RF receiver 等复习识图入口，并补齐多张源 PDF 截图附件。
+- 新增 CCD `Rev 3 公式总整理`，按课程主线整理基础量与 dB、器件、放大器、混频器、LC 匹配、振荡器、AM / SSB、FM / PM、天线、PLL、RF receiver、DAC、ADC 与转换误差公式。
+- 在 CCD Review 1 中补充 Lecture 17 对 Q4 的复习入口，将 receiver 题型扩展到 superheterodyne block diagram、image frequency、linearity、noise figure、sensitivity 与 LNA 作用。
+
+### 调整
+
+- 调整 CCD Part 4 README 与 sidebar，把 Part 4 名称扩展为 `PLL, RF Receivers, DAC, ADC and Converter Errors`，并加入 Lecture 17、Review 2、Review 3 的课程入口。
+- 刷新 CCD CourseIndex 与主题生成缓存，使 Review 2 / Review 3 和 Lecture 17 能在课程首页与侧栏中正常展示封面、摘要与入口。
+- 调整 CCD Lecture 9 Oscillators 的多处图片路径与图示位置，使 LC 飞轮效应、Barkhausen 条件、反馈网络、Hartley / Colpitts、Clapp VCO 与相位噪声插图更稳定地渲染。
+- 调整 CCD Lecture 13 SSB 中部分插图路径，并替换二极管环形调制器图，使 SSB 频谱、滤波、发射机与接收机图示引用保持一致。
+- 扩展 CCD Lecture 16 PLL 的参数对照表，补充 $V_i$、$V_o$、$v_o(t)$、$f_0$、$K_D$、$K_O$、$K_V$、环路滤波器与 4046 VCO 参数的单位和易混点。
+
+### 修复
+
+- 修正 CCD Review 2 在 CourseIndex 中硬编码旧通信系统封面的问题，改为与自动封面生成结果保持一致。
+- 在 CCD Lecture 17 的前端灵敏度例题中标注课件题干带宽与最终数值之间的疑似不一致，复习时按公式和题干带宽核算。
+
+### 删减
+
+- 暂无
+
 ## V6.7.2 - 2026-06-19
 
 ### 新增

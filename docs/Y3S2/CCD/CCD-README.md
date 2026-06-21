@@ -173,7 +173,6 @@ pageClass: course-index-page
           title: 'Rev 2 电路图与框图总整理',
           subtitle: 'Circuit and Block Diagram Index',
           link: 'Review/Review 2.md',
-          cover: 'Part 1/CCD Lecture 1 Introduction.attachments/communication-system.jpg'
         },
         {
           code: 'Review 3',
