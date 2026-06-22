@@ -7,8 +7,7 @@ lastUpdated: 2026-06-21T22:47:31+08:00
   image="CCD Lecture 17 RF Receivers.attachments/1782053769829.jpg"
   title="堕天"
   artist="Creepy Nuts"
-  lang="ja"
-  default-furigana
+  lang="ja"V
   qq-url="https://y.qq.com/n/ryqq/songDetail/002MVjb31ZNK5m"
   netease-url="https://music.163.com/#/song?id=1958186823"
 >
