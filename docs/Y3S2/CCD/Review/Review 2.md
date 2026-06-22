@@ -5,7 +5,6 @@
   title="Dye the sky."
   artist="シャイニーカラーズ"
   lang="ja"
-  furigana="open"
   qq-url="https://y.qq.com/n/ryqq/songDetail/001uQOMI1gx65x"
   netease-url="https://music.163.com/#/song?id=2741168530"
 >
