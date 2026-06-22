@@ -1,6 +1,23 @@
 # Rev 2 电路图与框图总整理
 
-![alt text](<Review%202.attachments/1782054353527.JPG>)
+<LyricCover
+  image="Review 2.attachments/1782054353527.JPG"
+  title="Dye the sky."
+  artist="シャイニーカラーズ"
+  lang="ja"
+  furigana="open"
+  qq-url="https://y.qq.com/n/ryqq/songDetail/001uQOMI1gx65x"
+  netease-url="https://music.163.com/#/song?id=2741168530"
+>
+  <LyricLine
+    original="未来(みらい)なんて実(じつ)はどこにもない，"
+    translation="未来其实哪里都不在，"
+  />
+  <LyricLine
+    original="描(えが)きだせ、自分(じぶん)の手(て)で。"
+    translation="而是用自己的双手，画出来的。"
+  />
+</LyricCover>
 
 本页把 CCD 课件里的电路图、系统框图、等效模型、题图按 block 直接展示出来。已经在讲义里裁好的图优先使用高清裁图；讲义未单独裁出的图，用源 PDF 页面截图补齐。
 

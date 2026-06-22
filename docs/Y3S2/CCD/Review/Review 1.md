@@ -1,6 +1,22 @@
 # Rev 1 考试分析与复习重点
 
-![alt text](<Review 1.attachments/1781871673814.JPG>)
+<LyricCover
+  image="Review 1.attachments/1781871673814.JPG"
+  title="Dye the sky."
+  artist="シャイニーカラーズ"
+  lang="ja"
+  qq-url="https://y.qq.com/n/ryqq/songDetail/001uQOMI1gx65x"
+  netease-url="https://music.163.com/#/song?id=2741168530"
+>
+  <LyricLine
+    original="さぁ、誰(だれ)よりも鮮烈(せんれつ)に，"
+    translation="来吧 描绘出超越一切的浓烈，"
+  />
+  <LyricLine
+    original="キャンバスを裂(さ)くように，叩(たた)きつけろ。"
+    translation="如撕裂画布般，甩下这一笔。"
+  />
+</LyricCover>
 
 ## 章节目录
 

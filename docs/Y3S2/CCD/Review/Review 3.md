@@ -1,6 +1,23 @@
 # Rev 3 公式总整理 Formula Index
 
-![alt text](<Review 3.attachments/1782054367069.jpg>)
+<LyricCover
+  image="Review 3.attachments/1782054367069.jpg"
+  title="Dye the sky."
+  artist="シャイニーカラーズ"
+  lang="ja"
+  furigana="open"
+  qq-url="https://y.qq.com/n/ryqq/songDetail/001uQOMI1gx65x"
+  netease-url="https://music.163.com/#/song?id=2741168530"
+>
+  <LyricLine
+    original="現在(げんざい)だけが存在(そんざい)の証明(しょうめい)，"
+    translation="只有存于当下的证明，"
+  />
+  <LyricLine
+    original="刻(きざ)み込(こ)め昨日(きのう)より強(つよ)く。"
+    translation="铭刻地比昨日更加深刻。"
+  />
+</LyricCover>
 
 本页按 CCD 主讲义顺序整理公式。重复出现的公式只保留一次；例题中的纯数值代入不逐条重写，除非它代表一种常用计算模板。
 
