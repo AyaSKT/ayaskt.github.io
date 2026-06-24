@@ -1,6 +1,7 @@
 ---
 aside: false
 pageClass: course-index-page
+lastUpdated: 2026-06-24T10:46:31+08:00
 ---
 
 # 通信电路设计<br>Communication Circuit Design<br><span class="h2-in-h1">UESTC 3029 / UESTCHN3004</span>

@@ -621,3 +621,16 @@ $$
 | 正交检波 | $\Delta f\rightarrow\Delta\theta\rightarrow v_o(t)$ | 在 $f_c$ 处调为约 $90^\circ$ |
 | FM 抗噪 | limiter 去除幅度扰动 | 相位噪声仍会进入瞬时频率 |
 | PEP | $P=V^2/(2R)$ | $V$ 为峰值电压 |
+
+FM 产生与解调的步骤可以按下表复习：
+
+| 原理 | 步骤 | 关键变化 |
+| --- | --- | --- |
+| 直接 FM Direct FM | 1. 消息电压加到 VCO 或 LC 振荡器；2. 控制电压改变谐振条件；3. 瞬时频率随消息升降；4. 输出 FM 信号 | $m(t)\rightarrow f_i(t)$ |
+| 变容二极管 FM Varactor FM | 1. 直流反偏确定中心电容；2. 消息电压叠加到反偏上；3. 结电容随电压变化；4. $C_T$ 改变 LC 谐振频率 | 电压控制电容，再由电容控制频率 |
+| VCXO / 晶体拉频 FM | 1. 晶体振荡器给出稳定中心频率；2. 小电容或变容二极管轻微拉动晶体；3. 得到小频偏 FM；4. 后级常接倍频器 | 稳定性好，但直接频偏较小 |
+| 间接 FM Indirect FM | 1. 晶体振荡器产生稳定载波；2. 消息先积分；3. 相位调制器产生窄带 FM；4. 倍频链放大载波频率和频偏；5. 必要时混频搬回目标频段 | 先积分再 PM，等效得到 FM |
+| 倍频链 Frequency Multipliers | 1. 窄带 FM 进入倍频器；2. 载波频率乘以 $N$；3. 频偏也乘以 $N$；4. 最终得到目标频偏 | $f_{\mathrm{out}}=Nf_{\mathrm{in}}$，$\Delta f_{\mathrm{out}}=N\Delta f_{\mathrm{in}}$ |
+| 斜率检波 Slope Detector | 1. FM 进入偏离谐振点的调谐电路；2. 频率变化变成幅度变化；3. 二极管包络检波；4. 低通后得到消息 | $\Delta f\rightarrow\Delta V\rightarrow m(t)$ |
+| 脉冲平均检波 Pulse-Averaging Detector | 1. 限幅或过零检测把 FM 整形成方波；2. 每个边沿触发等宽脉冲；3. 瞬时频率改变脉冲密度；4. 低通取平均电压 | $f_i(t)\rightarrow$ pulse density $\rightarrow V_{\mathrm{avg}}(t)$ |
+| 正交检波 Quadrature Detector | 1. FM 分成参考路和移相路；2. 调谐网络在 $f_c$ 附近把频偏变成相位差；3. phase detector 输出电压；4. 低通恢复消息 | $\Delta f\rightarrow\Delta\theta\rightarrow v_o(t)$ |

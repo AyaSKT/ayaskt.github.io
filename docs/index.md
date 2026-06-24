@@ -31,14 +31,19 @@ homeCourseGroups:
     variant: brand
     rows:
       - items:
-          - text: 敬请期待
+          - text: 移动通信 MC
+            link: /Y4S1/MC/MC-README.md
+          - text: 高阶数字通信 ADC
+            link: /Y4S1/ADC/ADC-README.md
+          - text: 信息安全 IS
+            link: /Y4S1/IS/IS-README.md
             variant: alt
 
   - id: y3
     label: Y3
     title: '第三学年 2025 Sep - 2026 Jul'
     tone: "#5fa8cf"
-    variant: brand
+    variant: alt
     rows:
       - items:
           - text: 电磁场与波 EMFT

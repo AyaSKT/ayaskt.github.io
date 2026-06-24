@@ -1427,7 +1427,15 @@ export default defineConfig({
     nav: [
       { text: '主页', link: '/index' },
 
-      { text: '第四学年', items: [] },
+      {
+        text: '第四学年',
+        activeMatch: '^/Y4S1/(MC|ADC|IS)/',
+        items: [
+          { text: '移动通信 MC', link: '/Y4S1/MC/MC-README.md', activeMatch: '^/Y4S1/MC/' },
+          { text: '高阶数字通信 ADC', link: '/Y4S1/ADC/ADC-README.md', activeMatch: '^/Y4S1/ADC/' },
+          { text: '信息安全 IS', link: '/Y4S1/IS/IS-README.md', activeMatch: '^/Y4S1/IS/' },
+        ]
+      },
 
       {
         text: '第三学年',
@@ -1472,6 +1480,39 @@ export default defineConfig({
 
 
     sidebar: {
+      // 高阶数字通信 ADC：当路径在 /Y4S1/ADC/ 下时显示
+      '/Y4S1/ADC/': [
+        {
+          text: '高阶数字通信 ADC 课程总览',
+          collapsed: false,
+          items: [
+            { text: 'Introduction', link: '/Y4S1/ADC/ADC-README.md' },
+          ],
+        },
+      ],
+
+      // 信息安全 IS：当路径在 /Y4S1/IS/ 下时显示
+      '/Y4S1/IS/': [
+        {
+          text: '信息安全 IS 课程总览',
+          collapsed: false,
+          items: [
+            { text: 'Introduction', link: '/Y4S1/IS/IS-README.md' },
+          ],
+        },
+      ],
+
+      // 移动通信 MC：当路径在 /Y4S1/MC/ 下时显示
+      '/Y4S1/MC/': [
+        {
+          text: '移动通信 MC 课程总览',
+          collapsed: false,
+          items: [
+            { text: 'Introduction', link: '/Y4S1/MC/MC-README.md' },
+          ],
+        },
+      ],
+
       '/early/EP/': [
         {
           text: '嵌入式处理器 EP',

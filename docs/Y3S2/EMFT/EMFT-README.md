@@ -3,7 +3,9 @@ aside: false
 pageClass: course-index-page
 ---
 
-# EMFT 电磁场课程笔记 Introduction & Outline
+# 电磁场与微波技术<br>Electromagnetic Field and Microwave Technology<br><span class="h2-in-h1">UESTC4002 / UESTCHN4007</span>
+
+---
 
 **小荷才露尖尖角，早有蜻蜓立上头。**
 
@@ -111,7 +113,7 @@ pageClass: course-index-page
 
 
 
-## Electromagnetic Field and Microwave Technology (UESTC4002)
+
 
 **本笔记基于 2026 年春季格拉斯哥学院电磁场与波课程文件及教材整理。**
 

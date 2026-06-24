@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-06-22T12:19:36+08:00
+---
+
 # Rev 3 公式总整理 Formula Index
 
 <LyricCover
