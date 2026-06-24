@@ -73,6 +73,10 @@
 
 ![B1-09 multiplexing](<../Part%201/CCD%20Lecture%202%20Electronic%20Communications.attachments/multiplexing.jpg>)
 
+
+![图片](Review%202.attachments/clipboard-20260623-163737.png)
+
+
 **B1-10 spectrum**
 
 ![B1-10 spectrum](<../Part%201/CCD%20Lecture%202%20Electronic%20Communications.attachments/spectrum.jpg>)
@@ -523,6 +527,10 @@ FM/PM 图题先看是 direct FM、indirect FM 还是 demodulator。补漏截图�
 **B3-10 变容二极管 FM 调制器**
 
 ![B3-10 变容二极管 FM 调制器](<../Part%203/CCD%20Lecture%2014%20Frequency%20Modulation%20and%20Phase%20Modulation.attachments/fm_varactor_modulator_wide.jpg>)
+
+
+![图片](Review%202.attachments/clipboard-20260623-163659.png)
+
 
 **B3-11 相移电路**
 

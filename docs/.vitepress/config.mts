@@ -1793,6 +1793,7 @@ export default defineConfig({
                 { text: 'Rev 1 概念与模型', link: '/Y3S2/CCD/Review/Review 1' },
                 { text: 'Rev 2 电路图与框图总整理', link: '/Y3S2/CCD/Review/Review 2' },
                 { text: 'Rev 3 公式总整理', link: '/Y3S2/CCD/Review/Review 3' },
+                { text: 'Rev 4 概念总整理', link: '/Y3S2/CCD/Review/Review 4' },
               ],
             },
           ],

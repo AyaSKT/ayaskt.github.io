@@ -1,5 +1,5 @@
 ---
-lastUpdated: 2026-06-12T01:40:38+08:00
+lastUpdated: 2026-06-24T10:34:10+08:00
 ---
 # Lecture 14 Frequency Modulation (FM) & Phase Modulation (PM) 调频与调相
 
@@ -37,7 +37,9 @@ lastUpdated: 2026-06-12T01:40:38+08:00
   - [14-4-2 间接 FM Indirect FM](#14-4-2-间接-fm-indirect-fm)
 - [14-5 FM 解调与抗噪 FM Demodulation and Noise](#14-5-fm-解调与抗噪-fm-demodulation-and-noise)
   - [14-5-1 斜率检波器 Slope Detector](#14-5-1-斜率检波器-slope-detector)
-  - [14-5-2 限幅与噪声抑制 Limiting and Noise Suppression](#14-5-2-限幅与噪声抑制-limiting-and-noise-suppression)
+  - [14-5-2 脉冲平均检波器 Pulse-Averaging Discriminator](#14-5-2-脉冲平均检波器-pulse-averaging-discriminator)
+  - [14-5-3 正交检波器 Quadrature Detector](#14-5-3-正交检波器-quadrature-detector)
+  - [14-5-4 限幅与噪声抑制 Limiting and Noise Suppression](#14-5-4-限幅与噪声抑制-limiting-and-noise-suppression)
 - [Summary](#summary)
 
 ## 14-1 角度调制 Angle Modulation
@@ -53,9 +55,9 @@ $$
 
 AM 改变 $E_c$；FM 和 PM 保持幅度近似恒定，改变 $\theta(t)$。
 
-:::: definition 角度调制 Angle Modulation
+::: definition 角度调制 Angle Modulation
 **角度调制 Angle Modulation** 通过消息信号改变载波瞬时相位或瞬时频率。FM 和 PM 都属于角度调制。
-::::
+:::
 
 | 调制方式 | 消息控制量 | 载波幅度 |
 | --- | --- | --- |
@@ -132,13 +134,13 @@ $$
 
 ### 14-2-2 调频指数 Modulation Index
 
-:::: definition 频偏 Frequency Deviation
+::: definition 频偏 Frequency Deviation
 **频偏 Frequency Deviation** 是 FM 瞬时频率相对中心频率的最大偏移量。
 
 $$
 \Delta f=k_fE_i
 $$
-::::
+:::
 
 ![FM 频偏](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_deviation.jpg>)
 
@@ -149,6 +151,39 @@ $$
 $$
 
 其中 $f_m$ 是消息频率。消息幅度决定 $\Delta f$，消息频率决定频率摆动的快慢。
+
+#### 1. 由输入电压求频偏
+
+若 $25\,\mathrm{mV}$、$400\,\mathrm{Hz}$ 的正弦信号加到 capacitor microphone FM generator，且频偏常数为
+
+$$
+k_f=\frac{750\,\mathrm{Hz}}{10\,\mathrm{mV}}
+$$
+
+则最大频偏为
+
+$$
+\Delta f
+=25\,\mathrm{mV}\times\frac{750\,\mathrm{Hz}}{10\,\mathrm{mV}}
+=1875\,\mathrm{Hz}
+=1.875\,\mathrm{kHz}
+$$
+
+频率随消息以 $400\,\mathrm{Hz}$ 的速率上下摆动，因此输出频率的偏移为 $\pm1.875\,\mathrm{kHz}$，摆动速率为 $400\,\mathrm{Hz}$。
+
+#### 2. 由频率摆动反推消息
+
+若中心频率为 $100\,\mathrm{MHz}$，输出在 $100.001\,\mathrm{MHz}$ 与 $99.999\,\mathrm{MHz}$ 之间以每秒 $100$ 次摆动，则
+
+$$
+f_m=100\,\mathrm{Hz},
+\qquad
+\Delta f=1\,\mathrm{kHz}
+$$
+
+仅由这些信息无法得到消息电压幅度。因为消息幅度和频偏之间还差一个系统自己的比例常数 $k_f$。
+
+若摆动范围变为 $100.002\,\mathrm{MHz}$ 到 $99.998\,\mathrm{MHz}$，频偏加倍。若 $k_f$ 不变，消息幅度也加倍。
 
 > [!TIP]
 > FM 中载波幅度理想恒定。示波器上看到的疏密变化对应瞬时频率，不是包络变化。
@@ -181,13 +216,13 @@ $$
 
 ### 14-3-2 Carson 定则 Carson Rule
 
-:::: definition Carson 定则 Carson Rule
+::: definition Carson 定则 Carson Rule
 **Carson Rule** 用于估算 FM 信号的传输带宽。
 
 $$
 \mathrm{BW}_{\mathrm{FM}}\approx 2(\Delta f+f_{m,\max})
 $$
-::::
+:::
 
 用调频指数写：
 
@@ -262,9 +297,11 @@ $$
 
 改变 $L$ 或 $C$ 都能改变频率，实际电路中更常改变电容。
 
-:::: definition 变容二极管 Varactor Diode
+::: definition 变容二极管 Varactor Diode
 **变容二极管 Varactor Diode** 是反向偏置下作为电压控制电容使用的 PN 结二极管。反向电压改变耗尽层宽度，从而改变结电容。
-::::
+:::
+
+它也叫 **voltage-variable capacitor**、**variable-capacitance diode** 或 **varicap diode**。记忆重点是反向偏置越变，结电容随之变，振荡频率也随之变。
 
 ![变容二极管](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_varactor_diode_wide.jpg>)
 
@@ -282,7 +319,35 @@ $$
 
 ![变容二极管 FM 调制器](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_varactor_modulator_wide.jpg>)
 
+图中的 $-V_{CC}$ 对高频交流近似为 AC short，所以变容二极管等效接在谐振槽路上。耦合电容 $C_c$ 隔离直流偏置，同时对高频载波近似短路。
+
 LC 振荡器简单，但稳定性不如晶体振荡器。温度、电源、元件容差和老化都会造成频率漂移。
+
+若变容二极管在中心线性区为 $40\,\mathrm{pF}$，并联固定电容 $20\,\mathrm{pF}$，目标谐振频率为 $5.5\,\mathrm{MHz}$，则
+
+$$
+C_T=40\,\mathrm{pF}+20\,\mathrm{pF}=60\,\mathrm{pF}
+$$
+
+由
+
+$$
+f_c=\frac{1}{2\pi\sqrt{LC_T}}
+$$
+
+反解电感：
+
+$$
+L=\frac{1}{(2\pi f_c)^2C_T}
+$$
+
+代入得
+
+$$
+L=\frac{1}{(2\pi\times5.5\times10^6)^2(60\times10^{-12})}
+\approx 1.40\times10^{-5}\,\mathrm{H}
+=14.0\,\mu\mathrm{H}
+$$
 
 > [!NOTE]
 > FM 产生方法分为**直接 FM** 和**间接 FM** 两类。直接 FM 用消息电压改变振荡器谐振频率，电路简单但频率稳定度受限于 LC 振荡器。间接 FM 先由晶体振荡器产生稳定载波，再经相位调制和倍频链得到所需频偏。
@@ -313,6 +378,12 @@ $$
 X_C=\frac{1}{2\pi fC}
 $$
 
+当 $X_C=R$ 时，
+
+$$
+\phi=\tan^{-1}{(1)}=45^\circ
+$$
+
 若输出取在低通 RC 的电容端，输出相位滞后，常写为
 
 $$
@@ -322,6 +393,12 @@ $$
 ![相移电路](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_phase_shifter.jpg>)
 
 若把相移网络中的电容换成变容二极管，消息信号改变电容，相移也随消息变化，于是得到 PM。
+
+晶体振荡器也可以做小频偏 FM。方法是在晶体串联或并联一个小电容，并用变容二极管拉动该电容。
+
+晶体频率只能被轻微拉动，通常只有几百赫兹级别。需要较大最终频偏时，后面接 frequency multipliers。
+
+**电压控制振荡器 Voltage-Controlled Oscillator, VCO** 将输入电压转换成输出频率，常用于 FM generation、frequency synthesis、PLL、RF transmitters and receivers。电压控制晶体振荡器称为 **VCXO Voltage-Controlled Crystal Oscillator**。
 
 频率倍频器会同时放大载波频率和频偏：
 
@@ -360,34 +437,117 @@ $$
 
 ## 14-5 FM 解调与抗噪 FM Demodulation and Noise
 
+FM 解调的目标是从瞬时频率
+
+$$
+f_i(t)=f_c+k_fm(t)
+$$
+
+中取回 $m(t)$。实际电路通常先把频率变化转换成电压、脉冲密度或相位差，再用低通滤波得到消息。
+
+FM demodulator 也常叫 **FM detector**、**frequency discriminator** 或 **frequency detector**。这些名字都指向同一件事：把频率变化恢复成电压变化。
+
 ### 14-5-1 斜率检波器 Slope Detector
 
-:::: definition 斜率检波器 Slope Detector
+::: definition 斜率检波器 Slope Detector
 **斜率检波器 Slope Detector** 用调谐电路的幅频斜率先把 FM 转成幅度变化，再用二极管包络检波恢复消息。
-::::
+:::
 
 ![斜率检波器](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_slope_detector.jpg>)
 
-当瞬时频率沿调谐曲线移动时，输出幅度随频率变化。这个幅度变化再进入 AM detector。
+FM 信号先加到变压器 $T_1$。次级绕组 $L_2$ 与电容 $C_1$ 构成谐振电路，其谐振频率 $f_r$ 通常放在载波频率 $f_c$ 的一侧。
+
+当输入频率变化时，$C_1$ 两端电压也随调谐曲线变化。于是频率变化先变成幅度变化：
+
+$$
+\Delta f \longrightarrow \Delta V_{C_1}
+$$
+
+这个带有包络变化的信号再送入二极管 AM detector。二极管与 $R_1,C_2$ 取出包络，输出对应原来的调制信号。
 
 斜率检波器结构简单，但线性范围有限，对调谐点和幅度噪声比较敏感。
 
 > [!NOTE]
-> 调谐电路（LC 槽路）的谐振频率 $f_r$ 偏置于载波频率 $f_c$ 的一侧。当 FM 瞬时频率升高时，工作点沿调谐曲线斜坡向上移动，槽路输出电压幅度增大；瞬时频率降低时，输出幅度减小。频率变化到幅度变化的转换过程为 $\text{FM}\rightarrow\text{AM}\rightarrow\text{audio}$。
+> 调谐电路的工作点要落在幅频响应近似线性的斜坡上。当 FM 瞬时频率升高时，工作点沿调谐曲线移动，槽路输出电压幅度随之改变；瞬时频率降低时，输出幅度反向变化。频率变化到幅度变化的转换过程为 $\text{FM}\rightarrow\text{AM}\rightarrow\text{audio}$。
 >
 > 线性范围由调谐曲线斜率线性段决定。频偏超出线性段时，输出幅度与频率不再成正比，解调失真增大。此外，斜率检波器对输入幅度噪声无抑制能力，因此实际 FM 接收机常在斜率检波器前加限幅器。
 
 ---
 
-### 14-5-2 限幅与噪声抑制 Limiting and Noise Suppression
+### 14-5-2 脉冲平均检波器 Pulse-Averaging Discriminator
+
+::: definition 脉冲平均检波器 Pulse-Averaging Discriminator
+**脉冲平均检波器 Pulse-Averaging Discriminator** 先把 FM 的频率变化变成脉冲密度变化，再由低通滤波器取平均电压。
+:::
+
+![脉冲平均检波器](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_pulse_averaging_discriminator.jpg>)
+
+电路前级是 zero-crossing detector、clipper 或 limiter。它把 FM 输入整形成矩形波，过零点位置仍保留瞬时频率信息。
+
+One-shot multivibrator 在选定边沿（通常是 rising edge）产生窄脉冲。每个脉冲的高度相同、宽度相同，只有脉冲间隔会随瞬时频率改变。
+
+因此信号变成 pulse train：
+
+- FM 频率较高时，脉冲更密；
+- FM 频率较低时，脉冲更疏。
+
+对幅度为 $V_p$、宽度为 $\tau$ 的脉冲列，低通后的平均值近似为
+
+$$
+V_{\mathrm{avg}}(t)\approx V_p\tau f_i(t)
+$$
+
+代入 $f_i(t)=f_c+k_fm(t)$：
+
+$$
+V_{\mathrm{avg}}(t)\approx V_p\tau f_c+V_p\tau k_fm(t)
+$$
+
+其中第一项是直流分量，后续耦合或滤波可去掉；剩余变化量与 $m(t)$ 成正比。
+
+---
+
+### 14-5-3 正交检波器 Quadrature Detector
+
+::: definition 正交检波器 Quadrature Detector
+**正交检波器 Quadrature Detector** 先用移相网络把 FM 频偏转成相位差变化，再由 phase detector 与低通滤波器恢复消息。
+:::
+
+![正交检波器](<CCD Lecture 14 Frequency Modulation and Phase Modulation.attachments/fm_quadrature_detector.jpg>)
+
+正交检波器有两路输入给 phase detector：
+
+- A 路：原 FM 信号，作为 $0^\circ$ reference；
+- B 路：经 $C_1$ 与并联调谐电路移相后的信号。
+
+并联 $LC$ 电路调到中心载波频率 $f_c$。在谐振点，调谐电路近似为较大的纯电阻；小电容 $C_1$ 的 reactance 很高，与调谐电路配合后，使 B 路在未调制载波频率处相对 A 路约为 $90^\circ$。
+
+当 FM 瞬时频率偏离 $f_c$ 时，调谐电路相位响应改变：
+
+$$
+f_i<f_c \Rightarrow \theta>\!90^\circ,
+\qquad
+f_i=f_c \Rightarrow \theta=90^\circ,
+\qquad
+f_i>f_c \Rightarrow \theta<\!90^\circ
+$$
+
+在工作频带内，$\theta$ 与 $f_i$ 近似成线性关系。Phase detector 把两路信号的相位差变成电压，低通滤波后得到与频偏成比例的解调输出。
+
+> [!TIP]
+> 复习图题时先找三件事：$90^\circ$ 移相网络、phase detector、低通滤波器。若题目问为什么能解调，答案链路是 $\Delta f\rightarrow\Delta\theta\rightarrow v_o(t)$。
+
+---
+
+### 14-5-4 限幅与噪声抑制 Limiting and Noise Suppression
 
 FM 的消息在频率变化中，外部噪声很多表现为幅度扰动。因此 FM 接收机可在解调前使用 limiter 去掉幅度尖峰。
 
-
-
 AM 中，幅度变化就是消息，噪声幅度会直接进入输出。FM 中，限幅器能削弱幅度噪声。
 
-需要注意，FM 不是完全免疫噪声。靠近目标信号的噪声会改变合成信号相位，而相位扰动会对应到瞬时频率误差。
+FM 仍会受噪声影响。靠近目标信号的噪声会改变合成信号相位，而相位扰动会对应到瞬时频率误差。
+
+接收机调谐电路能滤掉远离目标载波的噪声。靠近目标 FM 信号的噪声仍可能通过前端，叠加后改变合成信号相位，所以限幅后仍可能产生失真。
 
 发射功率常用 Peak Envelope Power, PEP 表示：
 
@@ -453,5 +613,11 @@ $$
 | FM 边频 | $f_c\pm nf_m$ | 幅度由 $J_n(m_f)$ 决定 |
 | Carson 定则 | $\mathrm{BW}\approx2(\Delta f+f_{m,\max})$ | 常用带宽估算 |
 | 变容 FM | $f_c=1/(2\pi\sqrt{LC_T})$ | 消息改变电容 |
+| LC 设计 | $L=1/[(2\pi f_c)^2C_T]$ | 由目标频率反推电感 |
+| VCO / VCXO | $f_{\mathrm{out}}=f_c+k_fe_i(t)$ | VCXO 频率稳定但可拉动范围小 |
 | 倍频器 | $\Delta f_{\mathrm{out}}=N\Delta f_{\mathrm{in}}$ | 频率和频偏同倍数增加 |
 | 斜率检波 | FM → AM → envelope detection | 简单但线性一般 |
+| 脉冲平均检波 | $V_{\mathrm{avg}}\approx V_p\tau f_i(t)$ | 频率变化变成脉冲密度变化 |
+| 正交检波 | $\Delta f\rightarrow\Delta\theta\rightarrow v_o(t)$ | 在 $f_c$ 处调为约 $90^\circ$ |
+| FM 抗噪 | limiter 去除幅度扰动 | 相位噪声仍会进入瞬时频率 |
+| PEP | $P=V^2/(2R)$ | $V$ 为峰值电压 |

@@ -12,6 +12,30 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.7.5 - 2026-06-24
+
+### 新增
+
+- 新增 CCD `Rev 4 概念总整理`，按通信系统、半导体与二极管、晶体管与放大器、RF building blocks、调制/解调、天线、PLL、RF receivers、DAC / ADC 与转换误差整理全课程概念索引。
+- 在 CCD README 课程索引与侧栏中加入 `Rev 4 概念总整理` 入口，并刷新课程预览缓存，使 Review 4 能在课程首页正常展示摘要。
+- 为 CCD Lecture 14 `Frequency Modulation (FM) & Phase Modulation (PM)` 补充 pulse-averaging discriminator 与 quadrature detector 两张电路图及对应解调过程说明。
+- 为 CCD Lecture 14 补充 FM 频偏计算、频率摆动反推消息、变容二极管 LC 设计、RC phase shifter、晶体振荡器小频偏 FM、VCO / VCXO 与 FM detector 别名等复习例题和概念。
+
+### 调整
+
+- 扩展 CCD Lecture 14 的 FM 解调与抗噪章节，把 slope detector、pulse-averaging discriminator、quadrature detector、limiting 与 noise suppression 分成更清晰的复习链路。
+- 在 CCD Lecture 5-6 `Amplifiers` 末尾追加 CE / CC / CB 三种 BJT 放大器组态对比表，集中比较电压增益、电流增益、输入/输出电阻、相位关系与典型用途。
+- 为 CCD Review 2 追加通信系统与 FM 调制器相关补漏截图，使电路图与框图总整理覆盖更多源讲义图示。
+
+### 修复
+
+- 修正 CCD Lecture 14 中多个 `definition` 容器的 Markdown 写法，避免自定义容器层级不一致影响渲染。
+- 补齐 FM/PM Summary 中解调器、VCO / VCXO、LC 设计、FM 抗噪与 PEP 等条目，减少复习时从正文回翻公式的断点。
+
+### 删减
+
+- 暂无
+
 ## V6.7.4 - 2026-06-22
 
 ### 新增

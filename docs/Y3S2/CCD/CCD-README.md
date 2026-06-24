@@ -179,6 +179,12 @@ pageClass: course-index-page
           title: 'Rev 3 公式总整理',
           subtitle: 'Formula Index',
           link: 'Review/Review 3.md'
+        },
+        {
+          code: 'Review 4',
+          title: 'Rev 4 概念总整理',
+          subtitle: 'Concept Index',
+          link: 'Review/Review 4.md'
         }
       ]
     }
