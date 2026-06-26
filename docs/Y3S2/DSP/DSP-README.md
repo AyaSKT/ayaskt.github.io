@@ -5,8 +5,24 @@ pageClass: course-index-page
 
 # 数字信号处理<br>Digital Signal Processing<br><span class="h2-in-h1">UESTC4005 / UESTCHN4005</span>
 
-**要保持希望在每天清晨太阳升起。**
+---
 
+<LyricCard
+  title="僕の戦争"
+  artist="神聖かまってちゃん"
+  lang="ja"
+  album-cover="DSP-README.attachments/1782471638287.JPG"
+>
+  <LyricLine
+    original="帰(かえ)り道(みち)を無(な)くした風景(ふうけい) "
+    translation="遗失了归家路的风景"
+  />
+  <LyricLine
+    original="夕焼(ゆうや)けこやけ逆(さか)さまに"
+    translation="倒逆的夕阳"
+  />
+
+</LyricCard>
 
 
 <CourseIndex

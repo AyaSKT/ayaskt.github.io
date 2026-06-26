@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-06-10T18:09:22+08:00
+---
+
 # 2 Vector Analysis
 
 > [!TIP]

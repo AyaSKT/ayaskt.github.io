@@ -47,6 +47,7 @@ lastUpdated: 2026-06-03T16:35:12+08:00
   - [8-3-3 坡印廷矢量 Poynting Vector](#8-3-3-坡印廷矢量-poynting-vector)
   - [8-3-4 平均能流密度](#8-3-4-平均能流密度)
 - [总结 Summary](#总结-summary)
+  - [平面波参数列表](#平面波参数列表)
 
 
 ## 8-1 无损媒质中的平面波 Plane Waves in Lossless Media
@@ -1648,3 +1649,19 @@ $$
 4. 有损媒质中，$k_c=\beta-j\alpha$，波传播时同时发生相位变化与指数衰减；
 5. 良导体中 $\alpha\approx\beta\approx\sqrt{\pi f\mu\sigma}$，趋肤深度 $\delta=1/\alpha$；
 6. 电磁能量流用坡印廷矢量 $\vec S=\vec E\times\vec H$ 描述，平均功率用 $\frac12\operatorname{Re}(\dot{\vec E}\times\dot{\vec H}^*)$。
+
+### 平面波参数列表
+
+| 类别 | 参数 | 含义 | 常用关系 / 用法 |
+| --- | --- | --- | --- |
+| 阻抗 | $\eta,\eta_c,\eta_0$ | 本征阻抗、复本征阻抗、自由空间本征阻抗 | 无损 $\eta=\sqrt{\mu/\varepsilon}$；$\eta_0=120\pi\ \Omega$；有损 $\eta_c=\sqrt{\mu/\varepsilon_c}=\lvert\eta_c\rvert e^{j\phi}$ |
+| 空间 | $\lambda,k,\vec k$ | 波长、波数、波矢 | 无损 $k=2\pi/\lambda=\omega\sqrt{\mu\varepsilon}$，$\vec k=k\vec e_n$；相位因子为 $e^{-j\vec k\cdot\vec r}$ |
+| 速度 | $v_p,\vec v_e$ | 相速度、能量速度 | 无损 $v_p=\omega/k=1/\sqrt{\mu\varepsilon}$；有损 $v_p=\omega/\beta$；理想介质中 $\vec v_e=\vec e_n/\sqrt{\mu\varepsilon}$ |
+| 有损传播 | $k_c$ | 复波数 | $k_c=\omega\sqrt{\mu\varepsilon_c}=\beta-j\alpha$ |
+| 有损传播 | $\gamma$ | 传播常数 | $\gamma=jk_c=\alpha+j\beta$；$\dot{\vec E}=\dot{\vec E}_0e^{-\gamma s}$ |
+| 有损传播 | $\alpha$ | 衰减常数，单位 $\mathrm{Np/m}$ | 振幅因子为 $e^{-\alpha s}$；低损耗介质中 $\alpha\approx\frac{\sigma}{2}\sqrt{\frac{\mu}{\varepsilon}}$；良导体中 $\alpha\approx\sqrt{\pi f\mu\sigma}$ |
+| 有损传播 | $\beta$ | 相位常数，单位 $\mathrm{rad/m}$ | 相位因子为 $e^{-j\beta s}$；$\lambda=2\pi/\beta$，$v_p=\omega/\beta$；无损时 $\beta=k$ |
+| 有损传播 | $\delta$ | 趋肤深度 | $\delta=1/\alpha$；良导体中 $\delta=1/\sqrt{\pi f\mu\sigma}$ |
+| 极化 | $E_{xm},E_{ym},\phi_x,\phi_y,\Delta\phi$ | 两个正交电场分量的振幅与相位差 | $\Delta\phi=\phi_y-\phi_x$；$\Delta\phi=0,\pm\pi$ 为线极化；等幅且 $\Delta\phi=\pm\pi/2$ 为圆极化 |
+| 功率 | $\vec S,\vec S_{\mathrm{av}},P_{\mathrm{av}}$ | 坡印廷矢量、平均能流密度、平均功率 | $\vec S=\vec E\times\vec H$；$\vec S_{\mathrm{av}}=\frac12\operatorname{Re}(\dot{\vec E}\times\dot{\vec H}^*)$；$P_{\mathrm{av}}=\iint_S\vec S_{\mathrm{av}}\cdot d\vec S$ |
+| 能量 | $w_e,w_m,w,W$ | 电场能量密度、磁场能量密度、总能量密度、总能量 | $w_e=\frac12\vec E\cdot\vec D$，$w_m=\frac12\vec H\cdot\vec B$；理想平面波中 $w=\varepsilon\lvert\vec E\rvert^2=\mu\lvert\vec H\rvert^2$ |

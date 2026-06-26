@@ -159,8 +159,7 @@ $$
 
 ### 3-6-3 导体上的电势
 
-::: example 导体上的电势
-::: stem
+::: stem 导体上的电势
 ![alt text](<EMFT Chapter 3 P II.attachments/1774747795570.png>)
 
 球心点电荷 $+Q$；同心导体壳，内半径 $R_i$、外半径 $R_o$。静电平衡时内表面感应 $-Q$、外表面 $+Q$。取 $V(\infty)=0$。
@@ -188,7 +187,6 @@ R<R_i:\quad E=\frac{Q}{4\pi\varepsilon_0 R^2},\quad V=\frac{Q}{4\pi\varepsilon_0
 $$
 
 ![alt text](<EMFT Chapter 3 P II.attachments/1774748123197.png>)
-:::
 :::
 
 > [!IMPORTANT]
@@ -869,8 +867,7 @@ $$
 
 区别只在于：有时先从电荷出发求电压，有时先从电压出发求电荷。
 
-::: example 分层法求电容
-::: stem
+::: stem 分层法求电容
 ![alt text](<EMFT Chapter 3 P II.attachments/1774775436561.png>)
 
 这道题中的两种介质是**沿圆柱底面直径切分**的，也就是说，分界面是一个**经过圆柱轴线的平面**，而不是沿半径方向一层一层套起来。
@@ -956,7 +953,6 @@ $$
 C=\frac{\pi \varepsilon_0L\left(\varepsilon_{r1}+\varepsilon_{r2}\right)}{\ln(r_o/r_i)}
 }
 $$
-:::
 :::
 
 ## 3-11 静电能 Electrostatic Energy

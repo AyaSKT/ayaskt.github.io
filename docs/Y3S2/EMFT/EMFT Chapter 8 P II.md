@@ -42,6 +42,7 @@ lastUpdated: 2026-06-10T18:09:22+08:00
   - [8-5-5 典型例题](#8-5-5-典型例题)
   - [8-5-6 雷达低空盲区](#8-5-6-雷达低空盲区)
 - [总结 Summary](#总结-summary)
+  - [法向入射参数列表](#法向入射参数列表)
 
 
 
@@ -758,3 +759,20 @@ $$
 5. 驻波比 $S=\dfrac{1+\lvert\Gamma\rvert}{1-\lvert\Gamma\rvert}$ 用来描述反射强弱；
 6. 理想介质界面无损耗，平均能流满足 $\vec S_{1av}=\vec S_{2av}$；
 7. 雷达低空盲区来自直接波与地面反射波的相消。
+
+### 法向入射参数列表
+
+| 类别 | 参数 | 含义 | 常用关系 / 用法 |
+| --- | --- | --- | --- |
+| 区域阻抗 | $\eta_1,\eta_2,\eta_{1c},\eta_{2c}$ | 区域 1、区域 2 的本征阻抗 / 复本征阻抗 | 理想介质用 $\eta_1,\eta_2$；有损媒质用 $\eta_{1c},\eta_{2c}$；阻抗大小决定反射与透射 |
+| 波幅 | $E_{im},E_{rm},E_{tm}$ | 入射、反射、透射电场幅度 | $E_{rm}=\Gamma E_{im}$，$E_{tm}=\tau E_{im}$ |
+| 传播 | $\gamma_1,\gamma_2,\beta_1,\beta_2$ | 两侧媒质中的传播常数、相位常数 | 理想介质中 $\gamma_n=j\beta_n$；入射 / 透射波用 $e^{-\gamma z}$，反射波用 $e^{\gamma z}$ |
+| 系数 | $\Gamma$ | 电场反射系数 | $\Gamma=\dfrac{\eta_{2c}-\eta_{1c}}{\eta_{2c}+\eta_{1c}}$；$\Gamma<0$ 表示反射电场反相，$\Gamma>0$ 表示同相 |
+| 系数 | $\tau$ | 电场透射系数 | $\tau=\dfrac{2\eta_{2c}}{\eta_{2c}+\eta_{1c}}$；透射区电场幅度为 $\tau E_{im}$ |
+| 理想导体 | $\Gamma,\tau$ | 理想导体边界的极限系数 | $\eta_{2c}=0$，所以 $\Gamma=-1,\tau=0$；导体前方形成纯驻波 |
+| 合成场 | $\dot{\vec E}_1,\dot{\vec H}_1$ | 区域 1 中入射波与反射波的总场 | $\dot{\vec E}_1=\dot{\vec E}_i+\dot{\vec E}_r$，$\dot{\vec H}_1=\dot{\vec H}_i+\dot{\vec H}_r$；判断驻波、行驻波都从总场出发 |
+| 驻波位置 | $z_{\max},z_{\min},\lambda_1,n$ | 电场波腹、波节位置 | 理想导体前 $z_{\max}=-(2n+1)\lambda_1/4$，$z_{\min}=-n\lambda_1/2$；介质界面要先看 $\Gamma$ 的符号 |
+| 驻波比 | $S$ | 最大电场幅度与最小电场幅度之比 | $S=\dfrac{1+\lvert\Gamma\rvert}{1-\lvert\Gamma\rvert}$，反推 $\lvert\Gamma\rvert=\dfrac{S-1}{S+1}$ |
+| 能流 | $\vec S_{iav},\vec S_{rav},\vec S_{1av},\vec S_{2av}$ | 入射、反射、区域 1 净能流、区域 2 透射能流 | $\vec S_{1av}=\vec e_z\dfrac{E_{im}^2}{2\eta_1}(1-\Gamma^2)$；无损介质界面满足 $\vec S_{1av}=\vec S_{2av}$ |
+| 表面电流 | $\vec J_S$ | 理想导体表面感应电流密度 | $\vec J_S=\vec e_n\times\dot{\vec H}_1\vert_{z=0}$；由导体表面磁场跃变决定 |
+| 雷达 | $R,t,c,\Gamma_\perp,\Gamma_\parallel$ | 测距参数与擦地入射反射系数 | $R=ct/2$；擦地入射时 $\Gamma_\perp\approx-1,\Gamma_\parallel\approx-1$，直接波与地面反射波容易相消 |

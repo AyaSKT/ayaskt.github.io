@@ -4,7 +4,7 @@ lastUpdated: 2026-06-24T10:46:31+08:00
 
 # Rev 4 概念总整理 Concept Index
 
-
+![alt text](<Review 4.attachments/1782472605433.jpg>)
 
 本页只整理 CCD 笔记里出现的概念。公式推导看 Rev 3，电路图和框图看 Rev 2；这里负责回答一个问题：看到术语时，它属于哪一类，入口判断是什么。
 

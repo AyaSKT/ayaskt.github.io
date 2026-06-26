@@ -1,6 +1,7 @@
 ---
 aside: false
 pageClass: course-index-page
+lastUpdated: 2026-06-24T18:26:36+08:00
 ---
 
 # 电磁场与微波技术<br>Electromagnetic Field and Microwave Technology<br><span class="h2-in-h1">UESTC4002 / UESTCHN4007</span>

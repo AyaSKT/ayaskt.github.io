@@ -15,7 +15,7 @@ pageClass: course-index-page
 >
   <LyricLine
     original="I drew a picture of you I used to know, "
-    translation="“我画下脑海中曾经我所熟悉的你，"
+    translation="我画下脑海中曾经我所熟悉的你，"
   />
   <LyricLine
     original="Still don't recall the color of curtains on the window."

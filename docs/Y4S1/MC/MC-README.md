@@ -15,7 +15,7 @@ pageClass: course-index-page
 >
   <LyricLine
     original="8月の青空，"
-    translation="“8月的蓝天，"
+    translation="8月的蓝天，"
   />
   <LyricLine
     original="かき混ぜる たいに，"

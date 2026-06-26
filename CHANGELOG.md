@@ -12,6 +12,32 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.8.1 - 2026-06-26
+
+### 新增
+
+- 为 `stem` / `solution` 例题容器新增独立毛玻璃表面 token，统一浅色与深色模式下的背景、边框、分隔线、阴影和羽化效果。
+- 为答案折叠交互新增高度过渡、淡入淡出、轻微位移与模糊动画，并补充 `aria-expanded` 状态和 reduced motion 兜底。
+- 为 EMFT Chapter 8 Part I / Part II 追加“平面波参数列表”和“法向入射参数列表”，把阻抗、波数、传播常数、反射/透射系数、驻波比、能流等易混参数集中整理。
+- 为 DSP 课程首页新增 `LyricCard` 引言与本地封面素材，并为 CCD Review 4 补充页面封面图与课程封面缓存入口。
+
+### 调整
+
+- 将 EMFT Chapter 3 P II、Chapter 4、Chapter 5 中的例题结构从外层 `example` 包裹调整为直接暴露 `stem` / `solution`，保留原题目标题并迁移到 `stem` 标签。
+- 调整 `stem` / `solution` 的卡面间距、圆角、分隔方式与移动端 padding，使题干和答案在没有外层 `example` 容器时仍保持完整的例题块视觉层级。
+- 放慢 `solution` 展开/收起动画时长至 0.56s，使答案内容的高度展开、淡入淡出与模糊过渡更从容。
+- 为 EMFT Chapter 2 与 EMFT README 补充 `lastUpdated` frontmatter，锁定显示日期，避免后续提交改写页面更新时间。
+- 调整 Y4S1 `IS` 与 `MC` 课程首页歌词译文，去掉译文开头多余的中文引号。
+
+### 修复
+
+- 修复答案折叠按钮只改文字、不同步无障碍展开状态的问题。
+- 修复 `stem` / `solution` 脱离 `example` 外层后缺少独立表面和连续块边界的问题。
+
+### 删减
+
+- 移除 EMFT 笔记中所有外层 `example` 容器，避免题干和答案被额外容器套住。
+
 ## V6.8 - 2026-06-24
 
 ### 新增
