@@ -12,6 +12,30 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.9.1 - 2026-07-04
+
+### 新增
+
+- 扩展 IT Lecture 2 `Discrete Information Source and Self-Information` 正文，补全离散信息源、离散随机变量、信息量、自信息、自信息性质、联合自信息与条件自信息等章节。
+- 在 IT Lecture 2 中加入天气信源示意图、自信息性质图，以及 Barcelona / Liverpool 新闻自信息计算例题，并使用 `stem` / `solution` 容器放在章节末尾。
+- 为 IT Lecture 3、Lecture 4、Lecture 5 新增 `LyricCover` 页首封面歌词与本地封面附件，分别接入熵、多符号平稳信源、Markov source 章节占位。
+- 为 IT Lecture 6-11 补齐英文一级标题，覆盖 lossless source coding、mutual information、channel capacity、channel coding、continuous source/channel capacity 与 rate-distortion theory。
+
+### 调整
+
+- 为 IT Lecture 4 `Love 2000` 封面歌词补充日文 ruby shorthand 注音，并默认展开注音显示。
+- 刷新 IT 课程封面与课程预览生成缓存，使 Lecture 2 正文摘要、Lecture 3-5 封面图和 Lecture 6-11 标题预览进入课程卡片。
+- 清理 IT Lecture 3、Lecture 5 末尾多余空白，并统一新增 IT 占位页的 Markdown 结构。
+
+### 修复
+
+- 修正 IT Lecture 2 中“消息携带的信息信息”的重复用词。
+- 修复 IT Lecture 3、Lecture 5 的行尾空格和 EOF 空行，保证 `git diff --check` 通过。
+
+### 删减
+
+- 暂无
+
 ## V6.9 - 2026-07-04
 
 ### 新增
