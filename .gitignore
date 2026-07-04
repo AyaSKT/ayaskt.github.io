@@ -20,6 +20,7 @@ docs/.vitepress/cache/
 # 本地临时文件
 tmp/
 migration/
+output/
 
 # 开发文档 / 工具，不部署到 GitHub Pages
 docs/superpowers/

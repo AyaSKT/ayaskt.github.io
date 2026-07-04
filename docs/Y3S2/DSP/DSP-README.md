@@ -1,4 +1,5 @@
 ---
+lastUpdated: 2026-06-26T19:26:45+08:00
 aside: false
 pageClass: course-index-page
 ---

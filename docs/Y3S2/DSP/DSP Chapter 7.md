@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-06-16T00:03:58+08:00
+---
+
 # 7 LTI-DT Systems in the Transform Domain
 
 **愿你的青春如花般绽放。**

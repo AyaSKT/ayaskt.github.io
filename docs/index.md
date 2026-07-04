@@ -58,8 +58,11 @@ homeCourseGroups:
             link: /Y3S2/EPMF/EPMF-README.md
             variant: alt
       - items:
-          - text: 通信原理与系统（新） CPS
+          - text: 通信原理与系统 CPS
             link: /Y3S1/CPS_N/CPS-README.md
+            variant: alt
+          - text: 信息论基础 IT
+            link: /Y3S1/IT/IT-README.md
             variant: alt
           - text: 人工智能与机器学习 AI&ML
             link: /Y3S1/AIML/AIML-README.md

@@ -1,3 +1,7 @@
+---
+lastUpdated: 2026-06-16T00:03:58+08:00
+---
+
 # 9 IIR Digital Filter Design
 
 **目的虽有，却无路可循；我们称之为路的，无非是踌躇。**

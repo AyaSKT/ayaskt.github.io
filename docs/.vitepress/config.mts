@@ -1439,9 +1439,10 @@ export default defineConfig({
 
       {
         text: '第三学年',
-        activeMatch: '^/(Y3S1/(CPS_N|AIML)|Y3S2/(DSP|EMFT|CCD|EPMF))/',
+        activeMatch: '^/(Y3S1/(CPS_N|IT|AIML)|Y3S2/(DSP|EMFT|CCD|EPMF))/',
         items: [
           { text: '通信原理与系统（新） CPS', link: '/Y3S1/CPS_N/CPS-README.md', activeMatch: '^/Y3S1/CPS_N/' },
+          { text: '信息论基础 Information Theory', link: '/Y3S1/IT/IT-README.md', activeMatch: '^/Y3S1/IT/' },
           { text: '人工智能与机器学习 AIML', link: '/Y3S1/AIML/AIML-README.md', activeMatch: '^/Y3S1/AIML/' },
           { text: '数字信号处理 DSP', link: '/Y3S2/DSP/DSP-README.md', activeMatch: '^/Y3S2/DSP/' },
           { text: '电磁场与波 EMFT', link: '/Y3S2/EMFT/EMFT-README.md', activeMatch: '^/Y3S2/EMFT/' },
@@ -1646,32 +1647,32 @@ export default defineConfig({
           items: [
             { text: 'Introduction', link: '/Y3S2/DSP/DSP-README.md' },
             {
-              text: 'Block 1: 离散时间信号与系统',
+              text: 'Block 1 离散时间信号与系统',
               collapsed: false,
               items: [
-                { text: 'Ch 2: 时域离散时间信号', link: '/Y3S2/DSP/DSP Chapter 2' },
-                { text: 'Ch 3 I: 频域离散时间信号', link: '/Y3S2/DSP/DSP Chapter 3 I' },
-                { text: 'Ch 3 II: 频域离散时间信号', link: '/Y3S2/DSP/DSP Chapter 3 II' },
-                { text: 'Ch 4: 离散时间系统', link: '/Y3S2/DSP/DSP Chapter 4' },
+                { text: '2 时域离散时间信号', link: '/Y3S2/DSP/DSP Chapter 2' },
+                { text: '3 I 频域离散时间信号 上', link: '/Y3S2/DSP/DSP Chapter 3 I' },
+                { text: '3 II 频域离散时间信号 下', link: '/Y3S2/DSP/DSP Chapter 3 II' },
+                { text: '4 离散时间系统', link: '/Y3S2/DSP/DSP Chapter 4' },
               ],
             },
             {
-              text: 'Block 2: 离散变换',
+              text: 'Block 2 离散变换',
               collapsed: false,
               items: [
-                { text: 'Ch 5: 离散傅里叶变换 DFT', link: '/Y3S2/DSP/DSP Chapter 5' },
-                { text: 'Ch 6: Z 变换', link: '/Y3S2/DSP/DSP Chapter 6' },
-                { text: 'Ch 7: 变换域中的离散 LTI 系统', link: '/Y3S2/DSP/DSP Chapter 7' },
-                { text: 'Ch 11: 快速傅里叶变换 FFT', link: '/Y3S2/DSP/DSP Chapter 11' },
+                { text: '5 离散傅里叶变换 DFT', link: '/Y3S2/DSP/DSP Chapter 5' },
+                { text: '6 Z 变换', link: '/Y3S2/DSP/DSP Chapter 6' },
+                { text: '7 变换域中的离散 LTI 系统', link: '/Y3S2/DSP/DSP Chapter 7' },
+                { text: '11 快速傅里叶变换 FFT', link: '/Y3S2/DSP/DSP Chapter 11' },
               ],
             },
             {
-              text: 'Block 3: 数字滤波器设计',
+              text: 'Block 3 数字滤波器设计',
               collapsed: false,
               items: [
-                { text: 'Ch 8: 数字滤波器架构', link: '/Y3S2/DSP/DSP Chapter 8' },
-                { text: 'Ch 9: IIR 数字滤波器设计', link: '/Y3S2/DSP/DSP Chapter 9' },
-                { text: 'Ch 10: FIR 数字滤波器设计', link: '/Y3S2/DSP/DSP Chapter 10' },
+                { text: '8 数字滤波器架构', link: '/Y3S2/DSP/DSP Chapter 8' },
+                { text: '9 IIR 数字滤波器设计', link: '/Y3S2/DSP/DSP Chapter 9' },
+                { text: '10 FIR 数字滤波器设计', link: '/Y3S2/DSP/DSP Chapter 10' },
               ],
             },
           ],
@@ -1890,6 +1891,27 @@ export default defineConfig({
             },
           ]
         }
+      ],
+
+      // 信息论基础 Information Theory：当路径在 /Y3S1/IT/ 下时显示
+      '/Y3S1/IT/': [
+        {
+          text: '信息论基础 Information Theory 课程总览',
+          collapsed: false,
+          items: [
+            { text: '0 目录', link: '/Y3S1/IT/IT-README.md' },
+            { text: '2 离散信息源与自信息', link: '/Y3S1/IT/IT-Lecture-2' },
+            { text: '3 离散信息源的熵', link: '/Y3S1/IT/IT-Lecture-3' },
+            { text: '4 多符号平稳信源', link: '/Y3S1/IT/IT-Lecture-4' },
+            { text: '5 Markov 信源与冗余', link: '/Y3S1/IT/IT-Lecture-5' },
+            { text: '6 无损信源编码', link: '/Y3S1/IT/IT-Lecture-6' },
+            { text: '7 互自信息与互信息', link: '/Y3S1/IT/IT-Lecture-7' },
+            { text: '8 离散信道容量', link: '/Y3S1/IT/IT-Lecture-8' },
+            { text: '9 信道编码', link: '/Y3S1/IT/IT-Lecture-9' },
+            { text: '10 连续信息源与信道容量', link: '/Y3S1/IT/IT-Lecture-10' },
+            { text: '11 数据率失真理论', link: '/Y3S1/IT/IT-Lecture-11' },
+          ],
+        },
       ],
 
       // 人工智能与机器学习 AIML：当路径在 /Y3S1/AIML/ 下时显示

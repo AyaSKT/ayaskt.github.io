@@ -12,6 +12,33 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.9 - 2026-07-04
+
+### 新增
+
+- 新增 Y3S1 `信息论基础 IT` 课程入口，并接入首页第三学年课程区、顶部导航、课程侧栏与目录级 `activeMatch`。
+- 新增 IT 课程首页，使用 `LyricCard` 引言、课程封面附件与 `CourseIndex` 课程卡片，覆盖 Lecture 2-11 的中文标题、英文 subtitle 与页面链接。
+- 新增 IT Lecture 2 `Discrete Information Source and Self-Information` 初始页面，使用 `LyricCover` 封面歌词和本地封面图，并生成对应课程封面缓存。
+- 新增 IT Lecture 3-11 空白占位页面，方便后续逐讲补全内容，同时刷新课程预览缓存。
+
+### 调整
+
+- 调整第三学年首页文案，将 `通信原理与系统（新） CPS` 简化为 `通信原理与系统 CPS`，并新增 `信息论基础 IT` 入口。
+- 调整 IT 课程首页歌词块的日语语种标记与 ruby shorthand 注音，并保留两句中文译文作为短引言。
+- 调整 IT sidebar，从课程首页到 Lecture 2-11 均使用真实课程题名链接，保持课程目录可直接跳转。
+- 调整 DSP sidebar 展示文案，去掉 `Block` / `Ch` 条目中的冒号和重复前缀，让章节编号与标题更简洁。
+- 为 Y3S2 DSP README 与 Chapter 7-11 补充 `lastUpdated` frontmatter，锁定上传日期，避免后续提交刷新显示时间。
+- 将本地 `output/` 目录加入 `.gitignore`，避免导出产物进入工作树噪音。
+
+### 修复
+
+- 补齐 Y3S2 全部 Markdown 笔记的 `lastUpdated` 覆盖，使第三学年第二学期课程的显示日期不再依赖后续 git fallback。
+- 刷新 `course-covers.json` 与 `course-previews.json`，使 IT Lecture 2 封面与 IT 占位页面预览在课程卡片中可用。
+
+### 删减
+
+- 暂无
+
 ## V6.8.1 - 2026-06-26
 
 ### 新增
