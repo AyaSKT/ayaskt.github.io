@@ -1294,11 +1294,12 @@ export default defineConfig({
   ],
   buildConcurrency: 4,
 
-  // EPMF / CCD 笔记页面：右侧目录显式限定为 h2 ~ h3
+  // IT / EPMF / CCD 笔记页面：右侧目录显式限定为 h2 ~ h3
   transformPageData(pageData) {
     if (
       (
-        pageData.filePath.startsWith('Y3S2/EPMF/')
+        pageData.filePath.startsWith('Y3S1/IT/')
+        || pageData.filePath.startsWith('Y3S2/EPMF/')
         || pageData.filePath.startsWith('Y3S2/CCD/')
       )
       && !pageData.filePath.endsWith('-README.md')
