@@ -1443,7 +1443,7 @@ export default defineConfig({
         activeMatch: '^/(Y3S1/(CPS_N|IT|AIML)|Y3S2/(DSP|EMFT|CCD|EPMF))/',
         items: [
           { text: '通信原理与系统（新） CPS', link: '/Y3S1/CPS_N/CPS-README.md', activeMatch: '^/Y3S1/CPS_N/' },
-          { text: '信息论基础 Information Theory', link: '/Y3S1/IT/IT-README.md', activeMatch: '^/Y3S1/IT/' },
+          { text: '信息论基础 IT', link: '/Y3S1/IT/IT-README.md', activeMatch: '^/Y3S1/IT/' },
           { text: '人工智能与机器学习 AIML', link: '/Y3S1/AIML/AIML-README.md', activeMatch: '^/Y3S1/AIML/' },
           { text: '数字信号处理 DSP', link: '/Y3S2/DSP/DSP-README.md', activeMatch: '^/Y3S2/DSP/' },
           { text: '电磁场与波 EMFT', link: '/Y3S2/EMFT/EMFT-README.md', activeMatch: '^/Y3S2/EMFT/' },
