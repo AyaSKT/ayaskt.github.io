@@ -7,7 +7,7 @@
   lang="ja"
 >
   <LyricLine
-    original="Always I’m humming. humming. humming，"
+    original="Always I’m humming. humming. humming."
     translation="我一直低吟，低吟，低吟着，"
   />
   <LyricLine
