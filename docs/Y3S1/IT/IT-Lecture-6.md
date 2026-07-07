@@ -186,6 +186,8 @@ $$
 
 ::: definition 定长无失真信源编码定理 Fixed-Length Lossless Source Coding Theorem
 
+该定理又称**香农第一定理 Shannon's First Theorem**。
+
 对任意 $\varepsilon>0$ 与 $\delta>0$：
 
 若
