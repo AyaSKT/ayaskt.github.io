@@ -235,10 +235,15 @@ p(0\mid 1)=0.4,
 p(1\mid 1)=0.6.
 $$
 
+
+
 写出状态转移关系。
 ::::
 
 :::: solution
+
+![alt text](IT-Lecture-5.attachments/1783322408885.png)
+
 该信源为一阶 Markov 信源，状态就是前一个符号：
 
 $$
@@ -274,6 +279,9 @@ $$
 ::::
 
 :::: solution
+
+![alt text](IT-Lecture-5.attachments/1783322436229.png)
+
 二阶二元 Markov 信源的状态由两个历史符号组成：
 
 $$
@@ -421,6 +429,9 @@ $$
 ::::
 
 :::: solution
+
+![alt text](IT-Lecture-5.attachments/1783322475161.png)
+
 状态顺序取：
 
 $$
@@ -503,6 +514,8 @@ $$
 
 :::: stem IT5-E4
 给定一阶二元 Markov 信源：
+
+![alt text](IT-Lecture-5.attachments/1783322537919.png)
 
 $$
 p(0\mid 0)=0.8,
@@ -611,6 +624,8 @@ $$
 
 :::: stem IT5-E5
 给定二阶二元 Markov 信源。令：
+
+![alt text](IT-Lecture-5.attachments/1783322561814.png)
 
 $$
 E_1=00,

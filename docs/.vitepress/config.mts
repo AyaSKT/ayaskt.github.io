@@ -1846,7 +1846,7 @@ export default defineConfig({
       // 通信原理与系统（新） CPS：当路径在 /Y3S1/CPS_N/ 下时显示
       '/Y3S1/CPS_N/': [
         {
-          text: '通信原理与系统（新） CPS 课程总览',
+          text: '通信原理与系统（新）',
           collapsed: false,
           items: [
             { text: 'Introduction', link: '/Y3S1/CPS_N/CPS-README' },
@@ -1897,7 +1897,7 @@ export default defineConfig({
       // 信息论基础 Information Theory：当路径在 /Y3S1/IT/ 下时显示
       '/Y3S1/IT/': [
         {
-          text: '信息论基础 Information Theory 课程总览',
+          text: '信息论基础',
           collapsed: false,
           items: [
             { text: '0 目录', link: '/Y3S1/IT/IT-README.md' },
@@ -1918,7 +1918,7 @@ export default defineConfig({
       // 人工智能与机器学习 AIML：当路径在 /Y3S1/AIML/ 下时显示
       '/Y3S1/AIML/': [
         {
-          text: '人工智能与机器学习 AIML',
+          text: '人工智能与机器学习',
           collapsed: false,
           items: [
             { text: '课程总览', link: '/Y3S1/AIML/AIML-README' },
