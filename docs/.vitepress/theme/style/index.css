@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@200;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap');
+/* Google Fonts 改由 config.mts head 中的 <link> 加载（附 preconnect），避免 CSS @import 串行阻塞渲染 */
 @import '../vendor/open-props/easings.min.css';
 @import '../vendor/open-props/durations.min.css';
-@import '../vendor/animxyz/animxyz.min.css';
+@import '../vendor/animxyz/animxyz-subset.min.css';
 @import './transitions.css';
 @import './library-motion.css';
 @import './surface.css';
@@ -389,7 +389,6 @@
   filter: blur(3px);
   transform: translateY(-6px);
   transform-origin: center top;
-  will-change: height, opacity, transform, filter;
 }
 
 .example-solution:not([data-collapsed]) .solution-content {
@@ -399,20 +398,15 @@
   transform: translateY(0);
 }
 
+/* 动画期间才提示合成层，避免常驻 will-change 占用内存 */
 .solution-content.solution-content-motion {
-  --animate-duration: 0.56s;
-  animation-timing-function: var(--ease-ios-fade);
+  will-change: height, opacity, transform, filter;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .solution-content {
     filter: none;
     transform: none;
-    will-change: auto;
-  }
-
-  .solution-content.solution-content-motion {
-    animation: none !important;
   }
 }
 

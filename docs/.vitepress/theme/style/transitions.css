@@ -217,8 +217,8 @@ a:active, button:active, .VPNavBarMenuLink:active, .VPLink:active {
   border: 1.5px solid rgba(152, 203, 234, 0.5);
   pointer-events: none;
   z-index: 999998;
-  width: 200px;
-  height: 200px;
+  width: var(--ripple-size, 200px);
+  height: var(--ripple-size, 200px);
   transform: translate(-50%, -50%) scale(0);
   animation: rippleExpand var(--dur-ripple) var(--ease-ios-fade) forwards;
 }
@@ -226,15 +226,6 @@ a:active, button:active, .VPNavBarMenuLink:active, .VPLink:active {
 @keyframes rippleExpand {
   0%   { transform: translate(-50%, -50%) scale(0); opacity: 1; }
   100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
-}
-
-/* ---- Scroll Reveal ---- */
-.reveal-hidden:not(.xyz-in) {
-  opacity: 0;
-}
-
-.reveal-visible {
-  opacity: 1;
 }
 
 /* ---- Search Modal Entrance ---- */
@@ -260,11 +251,7 @@ a:active, button:active, .VPNavBarMenuLink:active, .VPLink:active {
     --dur-panel: 0.56s;
     --dur-ripple: 0.6s;
     --dur-reveal: 0.54s;
-  }
-
-  .ripple-ring {
-    width: 140px;
-    height: 140px;
+    --ripple-size: 140px;
   }
 }
 

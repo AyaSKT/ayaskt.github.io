@@ -1,21 +1,20 @@
 import Layout from './Layout.vue'
 import DefaultTheme from 'vitepress/theme'
-import 'animate.css'
+// animate.css 子集（仅含主题实际用到的动画），由 scripts/generate-motion-css-subsets.mjs 生成
+import './vendor/animate/animate-subset.min.css'
 import './style/index.css'
 import './custom.css'
+// 自定义令牌覆盖入口，最后导入以获得最高优先级（见 CUSTOMIZATION.md）
+import './custom/tokens.css'
 import { setupSolutionCollapse } from './solution-collapse'
+import { customComponents } from './custom/components'
+import { customEnhanceApp } from './custom/enhance'
 import { defineAsyncComponent } from 'vue'
 
 import MouseClick from './components/MouseClick.vue'
 
-import Mycomponent from './components/Linkcard.vue'
-
-import update from "./components/update.vue"
-
-import MyLayout from './components/MyLayout.vue'
 import BackToTop from './components/backtotop.vue'
 import PageTransition from './components/PageTransition.vue'
-import ScrollReveal from './components/ScrollReveal.vue'
 import DocMeta from './components/DocMeta.vue'
 import CourseIndex from './components/CourseIndex.vue'
 import LyricCard from './components/LyricCard.vue'
@@ -36,18 +35,16 @@ export default {
 
 
   
-  enhanceApp({app , router }) {
+  enhanceApp(ctx) {
+    const { app, router } = ctx
     // Solution 折叠功能
     setupSolutionCollapse(router)
     setupLinkWarmup(router)
 
-    app.component('Mycomponent' , Mycomponent)
     app.component('Confetti' , defineAsyncComponent(() => import('./components/confetti.vue')))
     app.component('MouseClick' , MouseClick)
-    app.component('update' , update)
     app.component('BackToTop', BackToTop)
     app.component('PageTransition', PageTransition)
-    app.component('ScrollReveal', ScrollReveal)
     app.component('DocMeta', DocMeta)
     app.component('CourseIndex', CourseIndex)
     app.component('LyricCard', LyricCard)
@@ -55,6 +52,12 @@ export default {
     app.component('LyricCover', LyricCover)
     app.component('SongCard', SongCard)
     app.component('MindMap', MindMapLoader)
+
+    // 用户自定义接口（见 CUSTOMIZATION.md）：全局组件 + enhanceApp 钩子
+    for (const [name, component] of Object.entries(customComponents)) {
+      app.component(name, component)
+    }
+    customEnhanceApp(ctx)
   },
 
   extends: DefaultTheme,

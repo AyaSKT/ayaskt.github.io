@@ -9,7 +9,7 @@ test('desktop nav flyouts are wired to AnimXYZ for open and close motion', () =>
   const css = read('docs/.vitepress/theme/style/library-motion.css')
   const index = read('docs/.vitepress/theme/style/index.css')
 
-  assert.match(index, /vendor\/animxyz\/animxyz\.min\.css/, 'AnimXYZ should be imported globally')
+  assert.match(index, /vendor\/animxyz\/animxyz-subset\.min\.css/, 'the AnimXYZ subset should be imported globally')
   assert.match(motion, /const NAV_MENU_XYZ = 'fade small-2 up-1/, 'nav flyouts should declare an AnimXYZ recipe')
   assert.match(motion, /function enhanceNavFlyouts\(\)/, 'LibraryMotion should enhance generated VitePress flyouts')
   assert.match(motion, /MutationObserver/, 'flyouts should react to aria-expanded changes')

@@ -4,7 +4,6 @@ import DefaultTheme from 'vitepress/theme'
 import { computed, defineAsyncComponent, nextTick, onMounted, ref, watch } from 'vue'
 import { useData, useRoute } from 'vitepress'
 import MouseClick from './MouseClick.vue'
-import GiscusComment from './GiscusComment.vue' // 评论模块
 import BackToTop from './backtotop.vue'
 import HeroHitokoto from './HeroHitokoto.vue'
 import HomeCourseActions from './HomeCourseActions.vue'
@@ -13,10 +12,32 @@ import LibraryMotion from './LibraryMotion.vue'
 import MathCopy from './MathCopy.vue'
 import TopProgress from './TopProgress.vue'
 import ReadingModeControl from './ReadingModeControl.vue'
+import { customSlots } from '../custom/slots'
+
+// 主题已占用的插槽：自定义组件追加在主题组件之后渲染；
+// 其余插槽名直接透传给 DefaultTheme.Layout（见 CUSTOMIZATION.md）
+const themeOwnedSlots = [
+  'layout-top',
+  'nav-bar-content-after',
+  'doc-after',
+  'home-hero-info-after',
+  'home-hero-image',
+]
+
+const passthroughSlots = Object.fromEntries(
+  Object.entries(customSlots).filter(([name]) => !themeOwnedSlots.includes(name)),
+)
+
+function slotComponents(name: string) {
+  return customSlots[name] ?? []
+}
 
 const LocalEditorHost = import.meta.env.DEV
   ? defineAsyncComponent(() => import('./LocalEditorHost.vue'))
   : null
+
+// 评论模块异步加载，不占首屏主 bundle
+const GiscusComment = defineAsyncComponent(() => import('./GiscusComment.vue'))
 
 const { frontmatter, isDark } = useData()
 const route = useRoute()
@@ -85,13 +106,24 @@ const showTooltip = ref(false)
 const tooltipX = ref(0)
 const tooltipY = ref(0)
 
+let heroPointerX = 0
+let heroPointerY = 0
+let heroTooltipFrame = 0
+
 function onHeroMouseMove(e: MouseEvent) {
   showTooltip.value = true
-  const wrapperRect = heroImageRef.value?.getBoundingClientRect()
-  if (wrapperRect) {
-    tooltipX.value = e.clientX - wrapperRect.left
-    tooltipY.value = e.clientY - wrapperRect.top
-  }
+  heroPointerX = e.clientX
+  heroPointerY = e.clientY
+  // rAF 节流：每帧最多读一次布局
+  if (heroTooltipFrame) return
+  heroTooltipFrame = window.requestAnimationFrame(() => {
+    heroTooltipFrame = 0
+    const wrapperRect = heroImageRef.value?.getBoundingClientRect()
+    if (wrapperRect) {
+      tooltipX.value = heroPointerX - wrapperRect.left
+      tooltipY.value = heroPointerY - wrapperRect.top
+    }
+  })
 }
 
 function onHeroMouseLeave() {
@@ -187,22 +219,31 @@ onMounted(() => {
       <TopProgress />
       <MouseClick />
       <MathCopy />
+      <component :is="comp" v-for="(comp, i) in slotComponents('layout-top')" :key="i" />
     </template>
 
     <template #nav-bar-content-after>
       <ReadingModeControl />
+      <component :is="comp" v-for="(comp, i) in slotComponents('nav-bar-content-after')" :key="i" />
     </template>
 
-    <!-- 文档内容之后的评论组件 -->
+    <!-- 文档内容之后的评论组件（frontmatter 可关：comments: false / backToTop: false） -->
     <template #doc-after>
-      <GiscusComment />
-      <BackToTop />
+      <GiscusComment v-if="frontmatter.comments !== false" />
+      <BackToTop v-if="frontmatter.backToTop !== false" />
       <LocalEditorHost v-if="LocalEditorHost" />
+      <component :is="comp" v-for="(comp, i) in slotComponents('doc-after')" :key="i" />
     </template>
 
     <template #home-hero-info-after>
       <HomeCourseActions />
       <HeroHitokoto class="mobile-hitokoto" />
+      <component :is="comp" v-for="(comp, i) in slotComponents('home-hero-info-after')" :key="i" />
+    </template>
+
+    <!-- 未被主题占用的插槽按名字透传 -->
+    <template v-for="(comps, name) in passthroughSlots" :key="name" #[name]>
+      <component :is="comp" v-for="(comp, i) in comps" :key="i" />
     </template>
 
     <template #home-hero-image>
@@ -242,6 +283,7 @@ onMounted(() => {
         <!-- 预加载全部 hero image，避免切换时重新请求 -->
         <img v-for="src in heroImagePool" :key="src" :src="src" class="hero-preload" aria-hidden="true">
         <HeroHitokoto class="desktop-hitokoto" />
+        <component :is="comp" v-for="(comp, i) in slotComponents('home-hero-image')" :key="i" />
       </div>
     </template>
   </DefaultTheme.Layout>

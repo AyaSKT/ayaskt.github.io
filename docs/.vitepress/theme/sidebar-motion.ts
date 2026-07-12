@@ -1,5 +1,8 @@
+import { readMotionDuration } from './motion-tokens'
+
+// 令牌 --dur-sidebar-collapse 可在 custom/tokens.css 覆盖，以下为兜底值
 const MOTION_DURATION = 260
-const MOTION_CLEANUP_DELAY = MOTION_DURATION + 80
+const MOTION_CLEANUP_BUFFER = 80
 const ANIMATE_CLASSES = ['animate__animated', 'animate__fadeIn', 'animate__fadeOut']
 
 type SidebarMotionCleanup = () => void
@@ -126,19 +129,21 @@ export function attachSidebarMotion(onSettled?: () => void): SidebarMotionCleanu
       return
     }
 
+    const motionMs = readMotionDuration('--dur-sidebar-collapse', MOTION_DURATION)
+
     setMotionRoot(true)
     clearAnimateClasses(items)
     items.setAttribute('data-sidebar-motion', collapsed ? 'collapse' : 'expand')
     items.style.display = 'block'
     items.style.overflow = 'hidden'
     items.style.willChange = 'height, opacity'
-    items.style.setProperty('--animate-duration', `${MOTION_DURATION}ms`)
+    items.style.setProperty('--animate-duration', `${motionMs}ms`)
     items.style.transition = 'none'
     items.style.height = `${fromHeight}px`
     items.classList.add('animate__animated', collapsed ? 'animate__fadeOut' : 'animate__fadeIn')
 
     items.offsetHeight
-    items.style.transition = `height ${MOTION_DURATION}ms var(--ease-ios-slide)`
+    items.style.transition = `height ${motionMs}ms var(--ease-ios-slide)`
     items.style.height = `${toHeight}px`
 
     let done = false
@@ -161,7 +166,7 @@ export function attachSidebarMotion(onSettled?: () => void): SidebarMotionCleanu
 
     running.set(items, { finish })
     items.addEventListener('transitionend', onTransitionEnd)
-    timer = window.setTimeout(finish, MOTION_CLEANUP_DELAY)
+    timer = window.setTimeout(finish, motionMs + MOTION_CLEANUP_BUFFER)
   }
 
   function handleSidebarItemMutation(target: EventTarget | null) {

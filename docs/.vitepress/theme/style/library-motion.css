@@ -47,16 +47,18 @@
   --xyz-out-ease: var(--ease-ios-press);
   --xyz-stagger: 0.018s;
   --xyz-stagger-rev: 0.006s;
-  will-change: opacity, transform;
 }
 
 .VPNavBar .VPFlyout > .menu.aya-nav-menu-motion .aya-nav-menu-motion-item {
   transform-origin: left center;
-  will-change: opacity, transform;
 }
 
-.reveal-hidden:not(.xyz-in) {
-  opacity: 0;
+/* 仅在菜单动画进行时提示合成层，关闭状态不常驻 will-change */
+.VPNavBar .VPFlyout > .menu.aya-nav-menu-motion.xyz-in,
+.VPNavBar .VPFlyout > .menu.aya-nav-menu-motion.xyz-out,
+.VPNavBar .VPFlyout > .menu.aya-nav-menu-motion.xyz-in .aya-nav-menu-motion-item,
+.VPNavBar .VPFlyout > .menu.aya-nav-menu-motion.xyz-out .aya-nav-menu-motion-item {
+  will-change: opacity, transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -68,9 +70,5 @@
   .VPNavBar .VPFlyout > .menu.aya-nav-menu-motion,
   .VPNavBar .VPFlyout > .menu.aya-nav-menu-motion .aya-nav-menu-motion-item {
     animation: none !important;
-  }
-
-  .reveal-hidden {
-    opacity: 1;
   }
 }

@@ -12,6 +12,55 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
+## V6.11.0 - 2026-07-12
+
+### 新增
+
+- 新增用户自定义层 `theme/custom/`（tokens.css / components.ts / slots.ts / enhance.ts），分别提供设计令牌覆盖、markdown 全局组件注册、布局插槽挂载（含未占用插槽按名透传）与 enhanceApp 钩子，全部已接线且默认空实现。
+- 新增 `theme/motion-tokens.ts`：`readMotionDuration` / `readMotionEasing` 让 JS 动画运行时读取 CSS 动效令牌。
+- 新增 JS 动画令牌 `--dur-solution`、`--ease-solution`、`--dur-sidebar-collapse`、`--dur-sidebar-indicator`、`--dur-outline-out`、`--dur-outline-in`、`--ripple-size`（声明于 `var.css`，兜底值与原硬编码值一致）。
+- 新增 frontmatter 开关：`comments: false`（评论）、`backToTop: false`（返回顶部）、`docMeta: false`（元信息栏）。
+- 新增根目录 `CUSTOMIZATION.md` 自定义接口规范：令牌总表、插槽清单、View Transition 类名钩子、自定义事件、动画子集扩展流程与源码修改约定。
+- 新增 `scripts/customization.test.mjs`（`npm run test:customization`）守护上述接口的接线。
+
+### 调整
+
+- `solution-collapse.ts`、`sidebar-motion.ts`、`outline-jump-motion.ts` 中的硬编码动画时长/缓动改为读取上述令牌；侧栏活跃指示器 0.38s 与涟漪 200px 同步变量化。行为默认值不变。
+
+### 修复
+
+- 暂无。
+
+### 删减
+
+- 暂无。
+
+## V6.10.0 - 2026-07-12
+
+### 新增
+
+- 新增 `scripts/generate-motion-css-subsets.mjs`，从 animate.css 与 AnimXYZ 全量文件中机械抽取主题实际用到的规则，生成本地子集（规则逐字节复制，动画表现与全量库一致）。
+
+### 调整
+
+- 首屏 CSS 从全量 animate.css（72 KB）与 AnimXYZ（103 KB）切换为本地子集（约 6 KB 与 29 KB），构建产物 `style.css` 由 437 KB 降至 296 KB。
+- Google Fonts 从 `index.css` 的 `@import` 迁移到 `config.mts` 的 `head` `<link>`，并新增 `preconnect` 预连接，避免 CSS 串行阻塞渲染。
+- Solution 折叠动画合并为单套 Web Animations API 动画（opacity 并入关键帧），不再叠加 animate.css class；`.solution-content` 的 `will-change` 改为仅动画期间生效。
+- 导航 flyout 菜单的 `will-change` 改为仅在 `xyz-in` / `xyz-out` 动画期间生效，菜单关闭时不再常驻合成层。
+- 首页 hero 图 tooltip 的 `mousemove` 改为 `requestAnimationFrame` 节流，每帧最多读一次布局。
+- Giscus 评论组件改为异步加载，不再打进首屏主 bundle。
+- `verify-outline-motion` / `verify-sidebar-motion` / `verify-nav-menu-motion` 断言同步更新为子集导入路径。
+
+### 修复
+
+- 修复首页进入笔记页时左侧目录「卡两下」的问题：真实 `.VPSidebar` 元素的 `fadeInLeft` 入场动画与 `::view-transition-new(sidebar)` 快照动画叠加、且起止时间错开，产生两次可见顿挫。新增 `vt-show-sidebar` 过渡类，View Transition 进场时真实元素跳过自身动画，仅由快照承担入场；硬加载与不支持 View Transitions 的浏览器不受影响。
+
+### 删减
+
+- 移除三个从未被内容使用的死代码组件：`ScrollReveal.vue`（全站无 `data-reveal`）、`update.vue`（已被 `DocMeta` 取代）、`Linkcard.vue`（注册为 `Mycomponent`，零使用），并清理相应注册与 `.reveal-hidden` / `.reveal-visible` 孤儿样式。
+- 取消 git 对已被 `.gitignore` 覆盖的 `tmp/`（12 个 CCD 提取临时文件）与 `output/pdf/` 下 1 个 PDF 的跟踪（本地文件保留）。
+- 删除根目录三张未被任何页面引用的图片（`chaoxing-ai-boundary-error.png`、`optical_transceiver_break_even.png`、`tower_crane_gantt.png`）。
+
 ## V6.9.2 - 2026-07-05
 
 ### 新增

@@ -10,11 +10,11 @@ test('sidebar expand and collapse motion uses the existing Animate.css library',
   const pkg = JSON.parse(read('package.json'))
   const deps = { ...pkg.dependencies, ...pkg.devDependencies }
 
-  assert.ok(deps['animate.css'], 'expected Animate.css to remain installed')
+  assert.ok(deps['animate.css'], 'expected Animate.css to remain installed (subset generation source)')
   assert.match(
     read('docs/.vitepress/theme/index.ts'),
-    /import ['"]animate\.css['"]/,
-    'expected Animate.css to be loaded by the theme'
+    /import ['"]\.\/vendor\/animate\/animate-subset\.min\.css['"]/,
+    'expected the Animate.css subset to be loaded by the theme'
   )
   assert.match(
     read('docs/.vitepress/theme/sidebar-motion.ts'),

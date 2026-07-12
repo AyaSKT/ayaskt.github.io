@@ -92,10 +92,10 @@
     border-radius: var(--aya-sidebar-active-radius);
     corner-shape: squircle;
     transition:
-      left 0.38s var(--ease-ios-slide),
-      top 0.38s var(--ease-ios-slide),
-      width 0.38s var(--ease-ios-slide),
-      height 0.38s var(--ease-ios-slide);
+      left var(--dur-sidebar-indicator, 0.38s) var(--ease-ios-slide),
+      top var(--dur-sidebar-indicator, 0.38s) var(--ease-ios-slide),
+      width var(--dur-sidebar-indicator, 0.38s) var(--ease-ios-slide),
+      height var(--dur-sidebar-indicator, 0.38s) var(--ease-ios-slide);
   }
 
   .sidebar-active-indicator::before {
@@ -253,6 +253,13 @@
 @media (min-width: 960px) and (prefers-reduced-motion: no-preference) {
   html:has(.VPDoc) .VPSidebar {
     animation: fadeInLeft var(--dur-sidebar-enter) var(--ease-ios-fade) both;
+  }
+
+  /* View Transition 进场（首页→文档等）时，入场动画由 ::view-transition-new(sidebar)
+     快照承担；真实元素跳到动画终点，避免两层 fadeInLeft 叠加造成进场卡顿。
+     用 0s 时长而非 animation: none：VT 结束移除类名后动画已过时长，不会重播。 */
+  html.vt-show-sidebar:has(.VPDoc) .VPSidebar {
+    animation-duration: 0s;
   }
 }
 

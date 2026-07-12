@@ -1,14 +1,10 @@
 import { watch, nextTick } from 'vue'
 import type { Router } from 'vitepress'
+import { readMotionDuration, readMotionEasing } from './motion-tokens'
 
+// 令牌 --dur-solution / --ease-solution 可在 custom/tokens.css 覆盖，以下为兜底值
 const SOLUTION_MOTION_MS = 560
 const SOLUTION_MOTION_EASE = 'cubic-bezier(0.16, 1, 0.3, 1)'
-const SOLUTION_MOTION_CLASSES = [
-  'solution-content-motion',
-  'animate__animated',
-  'animate__fadeIn',
-  'animate__fadeOut',
-]
 
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -16,8 +12,7 @@ function prefersReducedMotion() {
 
 function clearContentMotion(content: HTMLElement) {
   content.getAnimations().forEach((animation) => animation.cancel())
-  content.classList.remove(...SOLUTION_MOTION_CLASSES)
-  content.style.removeProperty('--animate-duration')
+  content.classList.remove('solution-content-motion')
   content.style.removeProperty('height')
   content.style.removeProperty('overflow')
   content.style.removeProperty('pointer-events')
@@ -29,8 +24,7 @@ function setButtonState(btn: HTMLElement, expanded: boolean) {
 }
 
 function settleContent(content: HTMLElement) {
-  content.classList.remove(...SOLUTION_MOTION_CLASSES)
-  content.style.removeProperty('--animate-duration')
+  content.classList.remove('solution-content-motion')
   content.style.removeProperty('height')
   content.style.removeProperty('overflow')
   content.style.removeProperty('pointer-events')
@@ -45,6 +39,8 @@ function animateSolution(
   index: number,
   storageKey: string,
 ) {
+  const motionMs = readMotionDuration('--dur-solution', SOLUTION_MOTION_MS)
+  const motionEase = readMotionEasing('--ease-solution', SOLUTION_MOTION_EASE)
   const currentHeight = content.getBoundingClientRect().height
   clearContentMotion(content)
 
@@ -58,10 +54,9 @@ function animateSolution(
   }
 
   el.setAttribute('data-solution-motion', expanded ? 'expanding' : 'collapsing')
-  content.style.setProperty('--animate-duration', `${SOLUTION_MOTION_MS}ms`)
   content.style.overflow = 'hidden'
   content.style.pointerEvents = 'none'
-  content.classList.add('solution-content-motion', 'animate__animated')
+  content.classList.add('solution-content-motion')
 
   if (expanded) {
     content.style.height = `${Math.max(currentHeight, 0)}px`
@@ -69,14 +64,13 @@ function animateSolution(
     setButtonState(btn, true)
 
     const targetHeight = content.scrollHeight
-    content.classList.add('animate__fadeIn')
 
     const animation = content.animate(
       [
-        { height: `${Math.max(currentHeight, 0)}px`, transform: 'translateY(-6px)', filter: 'blur(3px)' },
-        { height: `${targetHeight}px`, transform: 'translateY(0)', filter: 'blur(0)' },
+        { height: `${Math.max(currentHeight, 0)}px`, opacity: 0, transform: 'translateY(-6px)', filter: 'blur(3px)' },
+        { height: `${targetHeight}px`, opacity: 1, transform: 'translateY(0)', filter: 'blur(0)' },
       ],
-      { duration: SOLUTION_MOTION_MS, easing: SOLUTION_MOTION_EASE, fill: 'forwards' },
+      { duration: motionMs, easing: motionEase, fill: 'forwards' },
     )
 
     animation.finished
@@ -93,15 +87,14 @@ function animateSolution(
 
   const startHeight = currentHeight || content.scrollHeight
   content.style.height = `${startHeight}px`
-  content.classList.add('animate__fadeOut')
   setButtonState(btn, false)
 
   const animation = content.animate(
     [
-      { height: `${startHeight}px`, transform: 'translateY(0)', filter: 'blur(0)' },
-      { height: '0px', transform: 'translateY(-6px)', filter: 'blur(3px)' },
+      { height: `${startHeight}px`, opacity: 1, transform: 'translateY(0)', filter: 'blur(0)' },
+      { height: '0px', opacity: 0, transform: 'translateY(-6px)', filter: 'blur(3px)' },
     ],
-    { duration: SOLUTION_MOTION_MS, easing: SOLUTION_MOTION_EASE, fill: 'forwards' },
+    { duration: motionMs, easing: motionEase, fill: 'forwards' },
   )
 
   animation.finished

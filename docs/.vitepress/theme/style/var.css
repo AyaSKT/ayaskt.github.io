@@ -110,6 +110,14 @@
   --dur-tap: var(--duration-quick-2, 0.12s);
   --dur-ripple: 0.8s;
   --dur-reveal: 0.64s;
+  /* JS 动画令牌（motion-tokens.ts 读取，custom/tokens.css 可覆盖） */
+  --dur-solution: 0.56s;
+  --ease-solution: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-sidebar-collapse: 0.26s;
+  --dur-sidebar-indicator: 0.38s;
+  --dur-outline-out: 0.14s;
+  --dur-outline-in: 0.26s;
+  --ripple-size: 200px;
   --animate-duration: var(--dur-page);
   --animate-delay: 0.08s;
   --xyz-duration-default: var(--dur-reveal);

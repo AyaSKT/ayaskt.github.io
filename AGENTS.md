@@ -36,7 +36,7 @@ This is a **VitePress blog** for university engineering course notes (Chinese). 
 - `::: definition [title]` — definition blocks
 
 **Custom components** registered globally in `index.ts`:
-- `Mycomponent` (Linkcard), `Confetti` (canvas-confetti), `MouseClick` (DOM ripple), `update`, `BackToTop`, `PageTransition`, `ScrollReveal`, `DocMeta`, `CourseIndex`, `LyricCard`, `LyricLine`
+- `Confetti` (canvas-confetti), `MouseClick` (DOM ripple), `BackToTop`, `PageTransition`, `DocMeta`, `CourseIndex`, `LyricCard`, `LyricLine`, `LyricCover`, `SongCard`, `MindMap`
 
 Components usable in markdown must be registered in `enhanceApp` and placed in `MyLayout.vue` slots (or used inline in `.md` files).
 
@@ -95,6 +95,17 @@ Automatic title style defaults:
 
 Keep lyric excerpts short in committed docs. Do not paste long copyrighted lyrics.
 
+## Customization Layer (`theme/custom/`)
+
+User-facing customization entry points, wired and empty by default. **Spec: root `CUSTOMIZATION.md`** — consult/update it whenever interfaces change.
+
+- `custom/tokens.css` — design/motion token overrides, imported last (highest priority)
+- `custom/components.ts` — extra global markdown components
+- `custom/slots.ts` — mount components into any DefaultTheme layout slot (theme-owned slots append, others pass through dynamically in `MyLayout.vue`)
+- `custom/enhance.ts` — `customEnhanceApp(ctx)` hook at end of theme `enhanceApp`
+
+`theme/motion-tokens.ts` reads `--dur-*` / `--ease-*` CSS tokens at runtime for JS animations. New JS animation timings must go through tokens declared in `var.css`, never bare numbers. Per-page frontmatter switches: `comments: false`, `backToTop: false`, `docMeta: false`, `pdf: false`, `author`.
+
 ## Navigation Active State
 
 Course nav entries in `docs/.vitepress/config.mts` must highlight for the course README **and every note under the same directory, including nested subdirectories**. When adding or changing course nav links, set `activeMatch` to the course directory prefix, for example `^/Y3S2/CCD/`. Dropdown parents such as `第三学年` also need a parent-level `activeMatch` that aggregates all child course directories; otherwise README pages may highlight correctly while lecture pages do not.
@@ -103,7 +114,6 @@ Course nav entries in `docs/.vitepress/config.mts` must highlight for the course
 
 `PageTransition.vue` intercepts internal link clicks on `capture` phase, calls `document.startViewTransition()`, navigates via `useRouter().go()`, and the browser crossfades between old/new snapshots. Zero dependencies. Duration: `--dur-page: 0.8s` (mobile: `0.55s`).
 
-`ScrollReveal.vue` uses `IntersectionObserver` to add `reveal-visible` class to `[data-reveal]` elements on enter with staggered delay.
 
 ## Deploy Notes
 

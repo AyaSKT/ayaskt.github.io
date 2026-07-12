@@ -5,9 +5,12 @@ type RouteOptions = {
 
 type Navigate = () => Promise<void>
 
+import { readMotionDuration } from './motion-tokens'
+
 const OUTLINE_SELECTOR = '.VPDocAsideOutline a[href]'
 const MOTION_TARGET_SELECTOR = '.VPDoc .main'
 const PENDING_TTL = 1200
+// 令牌 --dur-outline-out / --dur-outline-in 可在 custom/tokens.css 覆盖，以下为兜底值
 const FADE_OUT_DURATION = 140
 const FADE_IN_DURATION = 260
 
@@ -178,7 +181,7 @@ export function createOutlineJumpMotion() {
     target.style.pointerEvents = 'none'
 
     try {
-      await playAnimateCss(target, 'animate__fadeOut', FADE_OUT_DURATION)
+      await playAnimateCss(target, 'animate__fadeOut', readMotionDuration('--dur-outline-out', FADE_OUT_DURATION))
       if (id !== runId) return
 
       target.style.opacity = '0'
@@ -188,7 +191,7 @@ export function createOutlineJumpMotion() {
       if (!findHashTarget(toUrl(to).hash)) return
       if (id !== runId) return
 
-      await playAnimateCss(target, 'animate__fadeIn', FADE_IN_DURATION)
+      await playAnimateCss(target, 'animate__fadeIn', readMotionDuration('--dur-outline-in', FADE_IN_DURATION))
     } finally {
       resetAnimateClasses(target)
       target.style.removeProperty('--animate-duration')

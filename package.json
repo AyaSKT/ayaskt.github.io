@@ -14,6 +14,7 @@
     "test:reading-mode": "node --test scripts/reading-mode.test.mjs",
     "test:frosted-surface": "node --test scripts/frosted-surface.test.mjs",
     "test:local-editor": "node --test scripts/local-editor.test.mjs",
+    "test:customization": "node --test scripts/customization.test.mjs",
     "test:pdf": "node --test scripts/verify-pdf-download.mjs",
     "postinstall": "node scripts/patch-mathjax.mjs"
   },

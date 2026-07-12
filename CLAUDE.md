@@ -12,7 +12,7 @@ npm run docs:preview   # Preview production build
 
 VitePress v2.0.0-alpha.16. Build output goes to `docs/.vitepress/dist/`.
 
-External CSS: `animate.css` (pre-built animation library, imported in `index.ts`).
+External CSS: local subsets of `animate.css` and AnimXYZ in `theme/vendor/` (only the animations the theme actually uses). Regenerate with `node scripts/generate-motion-css-subsets.mjs` after adding new animation names/tokens (allowlists are at the top of that script).
 
 ## Architecture
 
@@ -27,11 +27,11 @@ This is a **VitePress blog** for university engineering course notes (Chinese). 
 - `var.css` — brand colors (`#98CBEA → #C2C7F8 → #F1DCE4`), VitePress CSS variable overrides, iOS animation easing curves/durations, hero button gradient
 - `rainbow.css` — `@property`-based gradient animation for hero title
 - `home-hero-gradient-data.css` — `@property` registration for `--color-stop-*` custom properties (used by `rainbow.css`)
-- `transitions.css` — animation keyframes, View Transitions API rules for page crossfade, sidebar transitions (keep/switch), appearance toggle navbar animation (`fadeOutUp`/`fadeInDown`), button tap feedback, ripple, scroll reveal, search modal entrance
+- `transitions.css` — animation keyframes, View Transitions API rules for page crossfade, sidebar transitions (keep/switch), appearance toggle navbar animation (`fadeOutUp`/`fadeInDown`), button tap feedback, ripple, search modal entrance
 - `blur.css` — glassmorphism for nav search, local search panel (full restyle with glass capsules)
 - `nav-tabs.css` — SwiftUI-style glass capsules for desktop nav items (menu pills, search button, extra buttons, appearance/social at wide width). Includes flyout dropdown menu with glass blur, hamburger centering, mobile capsule styles. Border and shadow are slightly enhanced from defaults.
 - `sidebar-window.css` — desktop sidebar as floating glass window (rounded squircle, scrollbar on left via `direction: rtl`, cross-browser thin scrollbar with `scrollbar-width: thin` + `::-webkit-scrollbar`). Active item uses brand blue tint with floating indicator pill. Mobile `VPNavScreen` restyled as floating window.
-- `index.css` — imports all above + Google Fonts (Noto Sans SC body, Noto Serif SC headings), table/image centering, MathJax block display, custom `::: example/stem/solution` container styles, hero entrance animations, print styles
+- `index.css` — imports all above + table/image centering, MathJax block display, custom `::: example/stem/solution` container styles, hero entrance animations, print styles. Google Fonts (Noto Sans SC body, Noto Serif SC headings) are loaded via `<link>` in `config.mts` head (with preconnect), not CSS `@import`.
 
 **`custom.css`** (imported in `index.ts`, NOT in `index.css`) — academic callout restyling for VitePress built-in containers (`info`, `tip`, `warning`, `danger`, `caution`, `important`, `note`, `details`, `definition`). Flattened rectangle with left accent border. Does NOT affect `::: example` / `::: stem` / `::: solution`.
 
@@ -53,9 +53,22 @@ This is a **VitePress blog** for university engineering course notes (Chinese). 
 - `::: definition [title]` — definition blocks
 
 **Custom components** registered globally in `index.ts`:
-`Mycomponent` (Linkcard), `Confetti`, `MouseClick` (DOM ripple), `update`, `BackToTop`, `PageTransition`, `ScrollReveal`, `DocMeta` (word count / reading time)
+`Confetti`, `MouseClick` (DOM ripple), `BackToTop`, `PageTransition`, `DocMeta` (word count / reading time), `CourseIndex`, `LyricCard`, `LyricLine`, `LyricCover`, `SongCard`, `MindMap`
 
 **`solution-collapse.ts`** — client-side solution toggle with `localStorage` state persistence. Initialized in `enhanceApp`.
+
+## Customization Layer (`theme/custom/`)
+
+User-facing customization entry points, all wired and empty by default. **Spec: root `CUSTOMIZATION.md`** — always consult/update it when touching interfaces.
+
+- `custom/tokens.css` — token overrides, imported last in `index.ts` (highest priority)
+- `custom/components.ts` — extra global markdown components (`customComponents` record)
+- `custom/slots.ts` — mount components into any DefaultTheme layout slot (`customSlots`; theme-owned slots append after theme components, others pass through by dynamic slot name in `MyLayout.vue`)
+- `custom/enhance.ts` — `customEnhanceApp(ctx)` hook, called at end of theme `enhanceApp`
+
+`theme/motion-tokens.ts` — `readMotionDuration` / `readMotionEasing` read `--dur-*` / `--ease-*` tokens at runtime, so JS animations (`solution-collapse.ts`, `sidebar-motion.ts`, `outline-jump-motion.ts`) share CSS tokens (`--dur-solution`, `--dur-sidebar-collapse`, `--dur-outline-out/in`, etc. in `var.css`). New JS animation timings must go through tokens, never bare numbers.
+
+Per-page frontmatter switches: `comments: false`, `backToTop: false`, `docMeta: false`, `pdf: false`, `author`.
 
 ## Navigation Active State
 
@@ -67,8 +80,6 @@ Course nav entries in `docs/.vitepress/config.mts` must highlight for the course
 - **Same sidebar** (`vt-keep-sidebar`): content crossfades while sidebar stays static (old sidebar snapshot hidden, new shown). After transition, sidebar indicator slides to new active item.
 - **Sidebar switch** (`vt-switch-sidebar`): old sidebar fades out left, new fades in left with stagger. Indicator is rebuilt and positioned instantly.
 - **No sidebar change** (e.g. homepage → docs): default root crossfade. Indicator appears in new snapshot.
-
-`ScrollReveal.vue` uses `IntersectionObserver` for `[data-reveal]` elements.
 
 ## Git Commit Workflow
 

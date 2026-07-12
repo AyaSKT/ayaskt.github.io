@@ -288,12 +288,14 @@ onMounted(() => {
     const keepsSidebar = currentSidebarKey && currentSidebarKey === nextSidebarKey
     const switchesSidebar = Boolean(currentSidebarKey && nextSidebarKey && currentSidebarKey !== nextSidebarKey)
     const hidesSidebar = Boolean(currentSidebarKey && !nextSidebarKey)
+    const showsSidebar = Boolean(!currentSidebarKey && nextSidebarKey)
     const routeTransitionClass = `vt-${pageKindFor(window.location.href)}-to-${pageKindFor(to)}`
     const fromArticleContent = hasArticleContent(router.route.data)
 
     document.documentElement.classList.toggle('vt-keep-sidebar', Boolean(keepsSidebar))
     document.documentElement.classList.toggle('vt-switch-sidebar', switchesSidebar)
     document.documentElement.classList.toggle('vt-hide-sidebar', hidesSidebar)
+    document.documentElement.classList.toggle('vt-show-sidebar', showsSidebar)
     document.documentElement.classList.toggle('vt-doc-content-transition', fromArticleContent)
     document.documentElement.classList.toggle('vt-from-doc-content', fromArticleContent)
     document.documentElement.classList.add(routeTransitionClass)
@@ -335,6 +337,7 @@ onMounted(() => {
       document.documentElement.classList.remove('vt-keep-sidebar')
       document.documentElement.classList.remove('vt-switch-sidebar')
       document.documentElement.classList.remove('vt-hide-sidebar')
+      document.documentElement.classList.remove('vt-show-sidebar')
       document.documentElement.classList.remove('vt-doc-content-transition')
       document.documentElement.classList.remove('vt-from-doc-content')
       document.documentElement.classList.remove('vt-to-doc-content')

@@ -121,6 +121,8 @@ function getReadableWordCount(src: string) {
 function formatDocMeta(md: any, src: string, frontmatter: Record<string, any> = {}) {
   // 课程 README 页面不显示字数 / 日期 / 作者 / 下载 PDF
   if (frontmatter.pageClass === 'course-index-page') return ''
+  // frontmatter 接口：docMeta: false 可按页关闭元信息栏（见 CUSTOMIZATION.md）
+  if (frontmatter.docMeta === false) return ''
 
   const words = getReadableWordCount(src)
   const minutes = Math.max(1, Math.ceil(words / 500))
@@ -1337,6 +1339,9 @@ export default defineConfig({
   },
   head: [
     ['link', { rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon.ico?' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@200;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap' }],
   ],
   lastUpdated: true,
 
