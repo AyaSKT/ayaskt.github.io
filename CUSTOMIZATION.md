@@ -198,14 +198,16 @@ window.addEventListener('vt-transition-done', () => { /* 重新初始化依赖 D
 
 | 文件 | 令牌前缀 | 管什么 |
 |---|---|---|
-| `style/var.css` | `--aya-gradient-*`、`--vp-c-brand-*`、`--vp-home-hero-*` | 品牌渐变三色、hero 标题/光晕 |
+| `style/var.css` | `--aya-gradient-*`、`--aya-c-brand-*`、`--vp-c-brand-*`、`--vp-home-hero-*` | 品牌渐变三色、品牌色通道（tint/阴影复用）、hero 标题/光晕 |
 | `style/surface.css` | `--aya-surface-*`、`--aya-frosted-blur-*`、`--aya-shadow-*`、`--aya-search-*` | 全站毛玻璃表面、模糊半径梯度（sm/md/lg/panel/backdrop）、阴影体系 |
 | `style/sidebar-window.css` | `--aya-sidebar-*` | 侧栏浮窗：背景、圆角（`--aya-sidebar-radius`）、活跃色、毛玻璃 |
 | `style/nav-tabs.css` | `--aya-nav-tab-*`、`--aya-nav-menu-*`、`--aya-nav-pill-*` | 导航胶囊与下拉菜单 |
 | `style/reading-mode.css` | `--aya-reading-mode-*` | 纯净阅读模式 |
 | `custom.css` | `--aya-c-definition-*`、`--aya-c-warning-*`、`--aya-card-*` | 学术 callout 与卡片 |
 
-改品牌主色只需三个变量：`--aya-gradient-start / middle / end`（hero 渐变、按钮、彩虹动画、侧栏活跃色都引用它们或 `--vp-c-brand-*`）。
+改品牌主色只需三个变量：`--aya-gradient-start / middle / end`（hero 渐变、按钮、彩虹动画都引用）。全站半透明品牌 tint（例题背景、搜索高亮、侧栏活跃底色、卡片阴影等）统一走品牌通道变量 `--aya-c-brand-blue/-rgb`、`--aya-c-brand-lilac/-rgb`、`--aya-c-brand-pink/-rgb`，改这几个即可整体换肤。
+
+**整套换肤示例**：`custom/tokens.css` 当前内置一套完整的 [Nord](https://www.nordtheme.com/docs/colors-and-palettes) 调色盘，覆盖了品牌渐变、品牌通道、VitePress 基础背景/文字色（Snow Storm / Polar Night）、Aurora 语义色，以及 hero 标题渐变动画关键帧。可直接照它的结构改成任意配色；清空该文件即回退到主题默认的柔和渐变。
 
 ---
 

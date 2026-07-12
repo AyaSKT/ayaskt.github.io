@@ -328,7 +328,7 @@ const resolvedGroups = computed(() =>
     var(--aya-gradient-middle, #C2C7F8) 52%,
     var(--aya-gradient-end, #F1DCE4) 100%
   );
-  box-shadow: 0 0 0 4px rgb(152 203 234 / 13%);
+  box-shadow: 0 0 0 4px rgb(var(--aya-c-brand-blue-rgb, 152 203 234) / 13%);
 }
 
 .course-index-grid {

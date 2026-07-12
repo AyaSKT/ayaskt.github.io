@@ -4,9 +4,9 @@
   --aya-surface-bg-strong: rgb(255 255 255 / 64%);
   --aya-surface-bg-soft: rgb(255 255 255 / 34%);
   --aya-surface-bg-hover: rgb(255 255 255 / 18%);
-  --aya-surface-bg-active: rgb(152 203 234 / 20%);
+  --aya-surface-bg-active: rgb(var(--aya-c-brand-blue-rgb) / 20%);
   --aya-surface-border: rgb(255 255 255 / 54%);
-  --aya-surface-border-soft: rgb(152 203 234 / 30%);
+  --aya-surface-border-soft: rgb(var(--aya-c-brand-blue-rgb) / 30%);
   --aya-surface-text: rgb(56 69 83 / 70%);
   --aya-surface-text-strong: rgb(42 53 65 / 88%);
   --aya-surface-selected: #405769;
@@ -41,7 +41,7 @@
 
   --aya-search-backdrop-bg: rgb(247 250 253 / 10%);
   --aya-search-text-soft: rgb(61 72 85 / 72%);
-  --aya-search-mark-bg: rgb(152 203 234 / 68%);
+  --aya-search-mark-bg: rgb(var(--aya-c-brand-blue-rgb) / 68%);
   --aya-search-mark-text: #1d4258;
 
   --aya-nav-shadow-band-height: calc(var(--vp-nav-height, 64px) + 14px);
@@ -59,9 +59,9 @@
   --aya-surface-bg-strong: rgb(18 24 34 / 62%);
   --aya-surface-bg-soft: rgb(255 255 255 / 8%);
   --aya-surface-bg-hover: rgb(255 255 255 / 7%);
-  --aya-surface-bg-active: rgb(152 203 234 / 14%);
+  --aya-surface-bg-active: rgb(var(--aya-c-brand-blue-rgb) / 14%);
   --aya-surface-border: rgb(255 255 255 / 18%);
-  --aya-surface-border-soft: rgb(152 203 234 / 24%);
+  --aya-surface-border-soft: rgb(var(--aya-c-brand-blue-rgb) / 24%);
   --aya-surface-text: rgb(223 232 244 / 68%);
   --aya-surface-text-strong: rgb(247 250 255 / 88%);
   --aya-surface-selected: #f8fbff;
@@ -89,7 +89,7 @@
 
   --aya-search-backdrop-bg: rgb(5 9 14 / 22%);
   --aya-search-text-soft: rgb(220 230 242 / 72%);
-  --aya-search-mark-bg: rgb(152 203 234 / 54%);
+  --aya-search-mark-bg: rgb(var(--aya-c-brand-blue-rgb) / 54%);
   --aya-search-mark-text: #eef8ff;
 
   --aya-nav-shadow-band-bg: linear-gradient(

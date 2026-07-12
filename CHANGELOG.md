@@ -12,7 +12,7 @@
 - 同名版本或重复版本号会保留为独立条目，并使用短 hash 区分。
 - 条目中的统计来自对应 git commit 的 shortstat。
 
-## V6.11.0 - 2026-07-12
+## V6.10.0 - 2026-07-12
 
 ### 新增
 
@@ -22,24 +22,9 @@
 - 新增 frontmatter 开关：`comments: false`（评论）、`backToTop: false`（返回顶部）、`docMeta: false`（元信息栏）。
 - 新增根目录 `CUSTOMIZATION.md` 自定义接口规范：令牌总表、插槽清单、View Transition 类名钩子、自定义事件、动画子集扩展流程与源码修改约定。
 - 新增 `scripts/customization.test.mjs`（`npm run test:customization`）守护上述接口的接线。
-
-### 调整
-
-- `solution-collapse.ts`、`sidebar-motion.ts`、`outline-jump-motion.ts` 中的硬编码动画时长/缓动改为读取上述令牌；侧栏活跃指示器 0.38s 与涟漪 200px 同步变量化。行为默认值不变。
-
-### 修复
-
-- 暂无。
-
-### 删减
-
-- 暂无。
-
-## V6.10.0 - 2026-07-12
-
-### 新增
-
 - 新增 `scripts/generate-motion-css-subsets.mjs`，从 animate.css 与 AnimXYZ 全量文件中机械抽取主题实际用到的规则，生成本地子集（规则逐字节复制，动画表现与全量库一致）。
+- 全站配色切换为 [Nord](https://www.nordtheme.com/docs/colors-and-palettes) 主题：品牌渐变改为 Frost 冷蓝（`#5e81ac → #81a1c1 → #88c0d0`），页面基础色改为 Snow Storm（浅色）/ Polar Night（深色），语义色（tip/warning/danger/important/definition）改用 Aurora。整套配色写在 `custom/tokens.css` 覆盖层，清空该文件即可回退默认柔和渐变。
+- `var.css` 新增品牌色通道变量 `--aya-c-brand-blue/-rgb`、`--aya-c-brand-lilac/-rgb`、`--aya-c-brand-pink/-rgb`、`--aya-c-brand-blue-deep(-rgb)`、`--aya-c-brand-lilac-deep`。
 
 ### 调整
 
@@ -49,7 +34,11 @@
 - 导航 flyout 菜单的 `will-change` 改为仅在 `xyz-in` / `xyz-out` 动画期间生效，菜单关闭时不再常驻合成层。
 - 首页 hero 图 tooltip 的 `mousemove` 改为 `requestAnimationFrame` 节流，每帧最多读一次布局。
 - Giscus 评论组件改为异步加载，不再打进首屏主 bundle。
+- `solution-collapse.ts`、`sidebar-motion.ts`、`outline-jump-motion.ts` 中的硬编码动画时长/缓动改为读取上述令牌；侧栏活跃指示器 0.38s 与涟漪 200px 同步变量化。行为默认值不变。
+- 将 `var.css`、`surface.css`、`sidebar-window.css`、`blur.css`、`transitions.css`、`index.css` 及 `HomeCourseActions`/`CourseIndex`/`SongCard` 组件中散落的品牌色字面量（`rgb(152 203 234)` 等）统一收敛为品牌通道变量，实现「一处覆盖、整站换肤」。行为与默认视觉不变。
+- 左侧目录窗口背景改为纯色：浅色 `#E7E9ED`、深色 `#202530`（覆盖 `--aya-sidebar-bg`）。
 - `verify-outline-motion` / `verify-sidebar-motion` / `verify-nav-menu-motion` 断言同步更新为子集导入路径。
+- `CUSTOMIZATION.md` 补充品牌通道变量说明与整套换肤示例。
 
 ### 修复
 

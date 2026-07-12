@@ -214,7 +214,7 @@ a:active, button:active, .VPNavBarMenuLink:active, .VPLink:active {
 .ripple-ring {
   position: fixed;
   border-radius: 50%;
-  border: 1.5px solid rgba(152, 203, 234, 0.5);
+  border: 1.5px solid rgb(var(--aya-c-brand-blue-rgb) / 50%);
   pointer-events: none;
   z-index: 999998;
   width: var(--ripple-size, 200px);

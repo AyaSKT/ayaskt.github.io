@@ -5,6 +5,19 @@
     --aya-gradient-end: #F1DCE4;
     --aya-gradient-angle: 140deg;
 
+    /* 品牌三色通道（供半透明 tint / 阴影复用）。
+       换肤只需在 custom/tokens.css 覆盖这些变量与上方渐变，见 CUSTOMIZATION.md。 */
+    --aya-c-brand-blue: #98CBEA;
+    --aya-c-brand-blue-rgb: 152 203 234;
+    --aya-c-brand-lilac: #C2C7F8;
+    --aya-c-brand-lilac-rgb: 194 199 248;
+    --aya-c-brand-pink: #F1DCE4;
+    --aya-c-brand-pink-rgb: 241 220 228;
+    /* 例题标题的深色变体（浅色模式用） */
+    --aya-c-brand-blue-deep: #5a96b8;
+    --aya-c-brand-blue-deep-rgb: 90 150 184;
+    --aya-c-brand-lilac-deep: #7b80c5;
+
     --vp-c-brand-1: #98CBEA;
     --vp-c-brand-2: #C2C7F8;
     --vp-c-brand-3: #F1DCE4;
@@ -68,7 +81,7 @@
     );
     background-size: 220% 220%;
     background-position: 0% 50%;
-    box-shadow: 0 8px 24px rgb(194 199 248 / 38%);
+    box-shadow: 0 8px 24px rgb(var(--aya-c-brand-lilac-rgb) / 38%);
     transition:
       background-position 0.9s ease,
       transform 0.3s ease,
@@ -79,12 +92,12 @@
   .VPHome .VPHero .actions .VPButton.brand:focus-visible {
     background-position: 100% 50%;
     transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgb(194 199 248 / 52%);
+    box-shadow: 0 12px 30px rgb(var(--aya-c-brand-lilac-rgb) / 52%);
   }
 
   .VPHome .VPHero .actions .VPButton.brand:active {
     transform: translateY(0);
-    box-shadow: 0 6px 16px rgb(194 199 248 / 44%);
+    box-shadow: 0 6px 16px rgb(var(--aya-c-brand-lilac-rgb) / 44%);
   }
 
 /* iOS 风格过渡变量 */

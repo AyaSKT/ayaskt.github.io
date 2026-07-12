@@ -11,7 +11,7 @@
   --aya-sidebar-text-strong: rgb(42 53 65 / 88%);
   --aya-sidebar-hover: rgb(255 255 255 / 24%);
   --aya-sidebar-active: rgb(255 255 255 / 56%);
-  --aya-sidebar-active-bg: rgb(152 203 234 / 20%);
+  --aya-sidebar-active-bg: rgb(var(--aya-c-brand-blue-rgb) / 20%);
   --aya-sidebar-active-text: #3a7a9b;
   --aya-sidebar-window-shadow: 0 18px 42px rgb(92 102 114 / 18%);
   --aya-sidebar-frosted-blur: blur(22px);
@@ -27,8 +27,8 @@
   --aya-sidebar-text-strong: rgb(247 250 255 / 88%);
   --aya-sidebar-hover: rgb(255 255 255 / 7%);
   --aya-sidebar-active: rgb(255 255 255 / 10%);
-  --aya-sidebar-active-bg: rgb(152 203 234 / 14%);
-  --aya-sidebar-active-text: #98CBEA;
+  --aya-sidebar-active-bg: rgb(var(--aya-c-brand-blue-rgb) / 14%);
+  --aya-sidebar-active-text: var(--aya-c-brand-blue);
   --aya-sidebar-window-shadow: 0 18px 44px rgb(0 0 0 / 42%);
 }
 
@@ -105,11 +105,11 @@
     border-radius: var(--aya-sidebar-active-radius);
     corner-shape: squircle;
     background: var(--aya-sidebar-active-bg);
-    box-shadow: 0 0 0 1px rgb(152 203 234 / 32%), 0 8px 18px rgb(54 87 113 / 6%);
+    box-shadow: 0 0 0 1px rgb(var(--aya-c-brand-blue-rgb) / 32%), 0 8px 18px rgb(54 87 113 / 6%);
   }
 
   .dark .sidebar-active-indicator::before {
-    box-shadow: 0 0 0 1px rgb(152 203 234 / 22%), 0 8px 18px rgb(0 0 0 / 18%);
+    box-shadow: 0 0 0 1px rgb(var(--aya-c-brand-blue-rgb) / 22%), 0 8px 18px rgb(0 0 0 / 18%);
   }
 
   html:has(.VPDoc) .VPSidebar .group {

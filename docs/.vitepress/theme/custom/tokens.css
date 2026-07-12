@@ -1,29 +1,146 @@
 /* ================================================================
    自定义令牌覆盖入口（最后导入，优先级最高）
    ================================================================
-   在这里覆盖任何设计令牌 / 动画令牌，无需改动主题源文件。
-   完整令牌清单与说明见仓库根目录 CUSTOMIZATION.md。
+   当前主题：Nord（https://www.nordtheme.com/docs/colors-and-palettes）
 
-   命名空间：
-   - --aya-*   颜色、表面、阴影、毛玻璃（var.css / surface.css / sidebar-window.css / nav-tabs.css）
-   - --dur-*   动效时长（var.css，移动端覆盖在 transitions.css）
-   - --ease-*  缓动曲线（var.css，基于 open-props）
-   - --vp-*    VitePress 官方变量
+   Nord 调色盘参考：
+   - Polar Night：#2e3440 #3b4252 #434c5e #4c566a（深色背景）
+   - Snow Storm ：#d8dee9 #e5e9f0 #eceff4（浅色背景 / 文字）
+   - Frost      ：#8fbcbb #88c0d0 #81a1c1 #5e81ac（品牌强调）
+   - Aurora     ：#bf616a #d08770 #ebcb8b #a3be8c #b48ead（红/橙/黄/绿/紫语义色）
 
-   示例（去掉注释即可生效）：
+   想换回原始柔和渐变（#98CBEA→#C2C7F8→#F1DCE4）：清空本文件即可，
+   主题源文件仍保留默认值。完整令牌清单见仓库根目录 CUSTOMIZATION.md。
+   ================================================================ */
 
-   :root {
-     --aya-gradient-start: #98CBEA;
-     --aya-gradient-middle: #C2C7F8;
-     --aya-gradient-end: #F1DCE4;
+:root {
+  /* ---- 品牌渐变（hero 标题 / logo 光晕 / 主按钮）：Frost 冷蓝渐变 ---- */
+  --aya-gradient-start: #5e81ac;
+  --aya-gradient-middle: #81a1c1;
+  --aya-gradient-end: #88c0d0;
 
-     --dur-page: 0.76s;
-     --dur-sidebar-indicator: 0.38s;
-     --dur-solution: 0.56s;
-     --ripple-size: 200px;
-   }
+  /* ---- 品牌三色通道（半透明 tint / 阴影复用）---- */
+  --aya-c-brand-blue: #88c0d0;
+  --aya-c-brand-blue-rgb: 136 192 208;
+  --aya-c-brand-lilac: #81a1c1;
+  --aya-c-brand-lilac-rgb: 129 161 193;
+  --aya-c-brand-pink: #8fbcbb;
+  --aya-c-brand-pink-rgb: 143 188 187;
+  /* 例题标题深色变体（浅色模式需足够对比，用 nord10） */
+  --aya-c-brand-blue-deep: #5e81ac;
+  --aya-c-brand-blue-deep-rgb: 94 129 172;
+  --aya-c-brand-lilac-deep: #5e81ac;
 
-   .dark {
-     --aya-sidebar-bg: rgb(10 14 20 / 56%);
-   }
-*/
+  /* ---- hero 标题渐变动画停靠色（rainbow.css 读取）---- */
+  --home-hero-gradient-start: #5e81ac;
+  --home-hero-gradient-middle: #81a1c1;
+  --home-hero-gradient-end: #88c0d0;
+
+  /* ---- 链接 / 强调（浅色模式取较深 Frost 保证可读性）---- */
+  --vp-c-brand-1: #5e81ac;
+  --vp-c-brand-2: #81a1c1;
+  --vp-c-brand-3: #88c0d0;
+  --vp-c-brand-soft: rgb(136 192 208 / 14%);
+
+  /* ---- 页面基础色：Snow Storm ---- */
+  --vp-c-bg: #eceff4;
+  --vp-c-bg-alt: #e5e9f0;
+  --vp-c-bg-soft: #e5e9f0;
+  --vp-c-bg-elv: #eceff4;
+  --vp-c-text-1: #2e3440;
+  --vp-c-text-2: #434c5e;
+  --vp-c-text-3: #4c566a;
+  --vp-c-divider: #d8dee9;
+  --vp-c-border: #d8dee9;
+  --vp-c-gutter: #d8dee9;
+
+  /* ---- 语义色：Aurora ---- */
+  --vp-c-green-1: #7e9e63;   /* tip 绿（nord14 深化） */
+  --vp-c-green-2: #a3be8c;
+  --vp-c-green-3: #b5cda1;
+  --vp-c-green-soft: rgb(163 190 140 / 14%);
+  --vp-c-red-1: #b0505a;     /* danger / caution 红（nord11） */
+  --vp-c-red-2: #bf616a;
+  --vp-c-red-3: #cd7f86;
+  --vp-c-red-soft: rgb(191 97 106 / 14%);
+  --vp-c-purple-1: #a77ba0;  /* important 紫（nord15） */
+  --vp-c-purple-2: #b48ead;
+  --vp-c-purple-3: #c4a3bf;
+  --vp-c-purple-soft: rgb(180 142 173 / 14%);
+  --vp-c-yellow-1: #c9a45a;  /* 黄（nord13 深化） */
+  --vp-c-yellow-2: #ebcb8b;
+  --vp-c-yellow-3: #f0d7a5;
+  --vp-c-yellow-soft: rgb(235 203 139 / 14%);
+
+  /* warning 黄 / definition 橙（custom.css 专用变量） */
+  --aya-c-warning-1: #c9a45a;
+  --aya-c-warning-soft: rgb(235 203 139 / 16%);
+  --aya-c-definition-1: #c17a54;   /* nord12 橙深化 */
+  --aya-c-definition-soft: rgb(208 135 112 / 14%);
+
+  /* ---- 左侧目录窗口背景 ---- */
+  --aya-sidebar-bg: #e7e9ed;
+}
+
+.dark {
+  /* ---- 品牌通道（深色模式用更亮 Frost）---- */
+  --aya-c-brand-blue: #88c0d0;
+  --aya-c-brand-lilac: #81a1c1;
+  --aya-c-brand-pink: #8fbcbb;
+
+  --vp-c-brand-1: #88c0d0;
+  --vp-c-brand-2: #81a1c1;
+  --vp-c-brand-3: #8fbcbb;
+  --vp-c-brand-soft: rgb(136 192 208 / 16%);
+
+  /* ---- 页面基础色：Polar Night ---- */
+  --vp-c-bg: #2e3440;
+  --vp-c-bg-alt: #272c36;
+  --vp-c-bg-soft: #3b4252;
+  --vp-c-bg-elv: #3b4252;
+  --vp-c-text-1: #eceff4;
+  --vp-c-text-2: #d8dee9;
+  --vp-c-text-3: #9aa4b6;
+  --vp-c-divider: #3b4252;
+  --vp-c-border: #434c5e;
+  --vp-c-gutter: #21262e;
+
+  /* ---- 语义色：Aurora（深色下直接用原色）---- */
+  --vp-c-green-1: #a3be8c;
+  --vp-c-green-2: #b5cda1;
+  --vp-c-green-3: #93b07f;
+  --vp-c-green-soft: rgb(163 190 140 / 16%);
+  --vp-c-red-1: #bf616a;
+  --vp-c-red-2: #cd7f86;
+  --vp-c-red-3: #a8545c;
+  --vp-c-red-soft: rgb(191 97 106 / 16%);
+  --vp-c-purple-1: #b48ead;
+  --vp-c-purple-2: #c4a3bf;
+  --vp-c-purple-3: #9d789a;
+  --vp-c-purple-soft: rgb(180 142 173 / 16%);
+  --vp-c-yellow-1: #ebcb8b;
+  --vp-c-yellow-2: #f0d7a5;
+  --vp-c-yellow-3: #d4b673;
+  --vp-c-yellow-soft: rgb(235 203 139 / 16%);
+
+  --aya-c-warning-1: #ebcb8b;
+  --aya-c-warning-soft: rgb(235 203 139 / 16%);
+  --aya-c-definition-1: #d08770;
+  --aya-c-definition-soft: rgb(208 135 112 / 16%);
+
+  /* ---- 左侧目录窗口背景 ---- */
+  --aya-sidebar-bg: #202530;
+}
+
+/* hero 标题渐变动画：覆盖主题关键帧，让循环停靠色保持 Frost 冷蓝。 */
+@keyframes homeHeroGradient {
+  0%,
+  100% {
+    --home-hero-gradient-start: #5e81ac;
+    --home-hero-gradient-end: #88c0d0;
+  }
+  50% {
+    --home-hero-gradient-start: #88c0d0;
+    --home-hero-gradient-end: #5e81ac;
+  }
+}

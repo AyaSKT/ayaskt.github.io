@@ -329,19 +329,19 @@ watch(
   );
   background-size: 220% 220%;
   background-position: 0% 50%;
-  box-shadow: 0 6px 20px rgb(194 199 248 / 35%);
+  box-shadow: 0 6px 20px rgb(var(--aya-c-brand-lilac-rgb, 194 199 248) / 35%);
 }
 
 .home-course-button.brand:hover,
 .home-course-button.brand:focus-visible {
   background-position: 100% 50%;
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgb(194 199 248 / 50%);
+  box-shadow: 0 10px 28px rgb(var(--aya-c-brand-lilac-rgb, 194 199 248) / 50%);
 }
 
 .home-course-button.brand:active {
   transform: translateY(0);
-  box-shadow: 0 4px 14px rgb(194 199 248 / 40%);
+  box-shadow: 0 4px 14px rgb(var(--aya-c-brand-lilac-rgb, 194 199 248) / 40%);
 }
 
 /* Alt variant — subtle gray/white */
