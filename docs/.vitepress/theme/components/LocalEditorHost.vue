@@ -2,13 +2,16 @@
 import { computed, markRaw, onMounted, ref, shallowRef, watch } from 'vue'
 import type { Component } from 'vue'
 import { useData, useRoute } from 'vitepress'
+import LocalEditorNewNoteDialog from './LocalEditorNewNoteDialog.vue'
 
 const route = useRoute()
 const { page } = useData()
 
+const isDev = import.meta.env.DEV
 const mounted = ref(false)
 const isOpen = ref(false)
 const isLoadingPanel = ref(false)
+const isNewNoteOpen = ref(false)
 const editorPanel = shallowRef<Component | null>(null)
 
 const relativePath = computed(() => {
@@ -16,10 +19,24 @@ const relativePath = computed(() => {
   return typeof value === 'string' ? value : ''
 })
 
+const canShowHost = computed(() => isDev && mounted.value)
+
 const canEdit = computed(() => {
-  if (!import.meta.env.DEV || !mounted.value) return false
+  if (!isDev || !mounted.value) return false
   if (page.value?.isNotFound) return false
   return relativePath.value.endsWith('.md')
+})
+
+const defaultNoteDir = computed(() => {
+  const parts = relativePath.value.split('/').filter(Boolean)
+  if (parts.length < 2) return parts[0] || ''
+  return `${parts[0]}/${parts[1]}`
+})
+
+const defaultCoursePrefix = computed(() => {
+  const parts = relativePath.value.split('/').filter(Boolean)
+  if (parts.length < 2) return ''
+  return `/${parts[0]}/${parts[1]}/`
 })
 
 async function openEditor() {
@@ -41,6 +58,16 @@ function closeEditor() {
   isOpen.value = false
 }
 
+function openNewNoteDialog() {
+  if (!isDev || !mounted.value) return
+  isNewNoteOpen.value = true
+}
+
+function handleNoteCreated(payload: { path: string, link: string }) {
+  isNewNoteOpen.value = false
+  window.location.assign(payload.link)
+}
+
 watch(() => route.path, () => {
   isOpen.value = false
 })
@@ -51,17 +78,29 @@ onMounted(() => {
 </script>
 
 <template>
-  <Teleport v-if="canEdit" to="body">
-    <button
-      class="local-editor-trigger"
-      type="button"
-      :disabled="isLoadingPanel"
-      title="本地编辑"
-      aria-label="本地编辑"
-      @click="openEditor"
-    >
-      {{ isLoadingPanel ? '...' : '编辑' }}
-    </button>
+  <Teleport v-if="canShowHost" to="body">
+    <div class="local-editor-host-actions">
+      <button
+        class="local-editor-trigger"
+        type="button"
+        :disabled="!canEdit || isLoadingPanel"
+        title="本地编辑"
+        aria-label="本地编辑"
+        @click="openEditor"
+      >
+        {{ isLoadingPanel ? '...' : '编辑' }}
+      </button>
+
+      <button
+        class="local-editor-trigger is-secondary"
+        type="button"
+        title="新建笔记"
+        aria-label="新建笔记"
+        @click="openNewNoteDialog"
+      >
+        新建
+      </button>
+    </div>
 
     <component
       :is="editorPanel"
@@ -71,15 +110,29 @@ onMounted(() => {
       :page-path="route.path"
       @close="closeEditor"
     />
+
+    <LocalEditorNewNoteDialog
+      :open="isNewNoteOpen"
+      :default-dir="defaultNoteDir"
+      :default-prefix="defaultCoursePrefix"
+      @close="isNewNoteOpen = false"
+      @created="handleNoteCreated"
+    />
   </Teleport>
 </template>
 
 <style scoped>
-.local-editor-trigger {
+.local-editor-host-actions {
   position: fixed;
   z-index: 90;
   bottom: 22px;
   left: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.local-editor-trigger {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -103,6 +156,10 @@ onMounted(() => {
     transform 0.2s ease;
 }
 
+.local-editor-trigger.is-secondary {
+  min-width: 48px;
+}
+
 .local-editor-trigger:hover,
 .local-editor-trigger:focus-visible {
   border-color: color-mix(in srgb, var(--vp-c-brand-1) 42%, var(--vp-c-divider));
@@ -117,14 +174,14 @@ onMounted(() => {
 }
 
 @media (max-width: 768px) {
-  .local-editor-trigger {
+  .local-editor-host-actions {
     bottom: 16px;
     left: 16px;
   }
 }
 
 @media print {
-  .local-editor-trigger {
+  .local-editor-host-actions {
     display: none;
   }
 }

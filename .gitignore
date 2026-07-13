@@ -27,5 +27,8 @@ docs/superpowers/
 docs/public/animation-tuner.html
 docs/public/archive-gallery.html
 
+# 本地编辑器仅在 dev 模式启用；以下缓存不入库
+docs/.vitepress/cache/local-editor-drafts/
+
 # 本地配置文件
 .markdownlint.json

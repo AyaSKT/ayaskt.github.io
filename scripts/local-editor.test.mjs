@@ -63,6 +63,12 @@ test('local editor Vite middleware is serve-only', async () => {
   assert.equal(plugin.name, 'gp-blogs-local-markdown-editor')
   assert.equal(plugin.apply, 'serve')
   assert.equal(typeof plugin.configureServer, 'function')
+  assert.equal(typeof plugin.load, 'function')
+})
+
+test('local editor plugin is only registered during dev commands', () => {
+  const configSource = fs.readFileSync(path.join(root, 'docs/.vitepress/config.mts'), 'utf8')
+  assert.match(configSource, /plugins:\s*isDevCommand\s*\?\s*\[createLocalMarkdownEditorPlugin\(\)\]\s*:\s*\[\]/)
 })
 
 test('local editor host is wired into doc pages without eager wangEditor imports', () => {
@@ -74,31 +80,36 @@ test('local editor host is wired into doc pages without eager wangEditor imports
   assert.match(layoutSource, /defineAsyncComponent\(\(\) => import\(['"]\.\/LocalEditorHost\.vue['"]\)\)/)
   assert.match(layoutSource, /<LocalEditorHost v-if="LocalEditorHost" \/>/)
   assert.match(hostSource, /await import\(['"]\.\/LocalMarkdownEditor\.vue['"]\)/)
+  assert.match(hostSource, /LocalEditorNewNoteDialog/)
+  assert.match(hostSource, /新建/)
   assert.doesNotMatch(hostSource, /@wangeditor\/editor/)
   assert.match(editorSource, /@wangeditor\/editor-for-vue/)
   assert.match(editorSource, /@wangeditor\/editor\/dist\/css\/style\.css/)
 })
 
-test('local editor API exposes a local-only pasted image endpoint', () => {
+test('local editor API exposes draft, create-note and sidebar endpoints', () => {
   const configSource = fs.readFileSync(path.join(root, 'docs/.vitepress/config.mts'), 'utf8')
 
   assert.match(configSource, /url\.pathname === `\$\{localEditorApiPrefix\}\/asset`/)
-  assert.match(configSource, /resolveLocalEditorAttachmentPath/)
-  assert.match(configSource, /fs\.promises\.mkdir\(resolved\.attachmentDir,\s*\{ recursive: true \}\)/)
-  assert.match(configSource, /uniqueLocalEditorAssetPath/)
-  assert.match(configSource, /markdownPath/)
-  assert.match(configSource, /本地编辑器附件接口仅支持 POST/)
+  assert.match(configSource, /url\.pathname === `\$\{localEditorApiPrefix\}\/draft`/)
+  assert.match(configSource, /url\.pathname === `\$\{localEditorApiPrefix\}\/sidebar`/)
+  assert.match(configSource, /req\.method === 'POST'\)/)
+  assert.match(configSource, /setLocalEditorDraft/)
+  assert.match(configSource, /clearLocalEditorDraft/)
+  assert.match(configSource, /appendSidebarItem/)
 })
 
 test('local editor keeps markdown source as the saved content path', () => {
   const editorSource = fs.readFileSync(editorPath, 'utf8')
+  const registrySource = fs.readFileSync(path.join(root, 'docs/.vitepress/local-editor/registry.mjs'), 'utf8')
 
   assert.match(editorSource, /v-model="source"/)
   assert.match(editorSource, /body:\s*JSON\.stringify\(\{[\s\S]*content:\s*source\.value/s)
   assert.match(editorSource, /<iframe[\s\S]*class="local-markdown-editor-frame"/)
-  assert.match(editorSource, /<LyricCard/)
-  assert.match(editorSource, /::: example/)
-  assert.match(editorSource, /```mindmap/)
+  assert.match(editorSource, /local-editor\/registry\.mjs/)
+  assert.match(registrySource, /<LyricCard/)
+  assert.match(registrySource, /::: stem/)
+  assert.match(registrySource, /mindmap/)
 })
 
 test('local editor can paste clipboard images into markdown source', () => {
@@ -121,7 +132,7 @@ test('local editor can paste clipboard images into markdown source', () => {
 test('local editor uses two columns with switchable left editor modes', () => {
   const editorSource = fs.readFileSync(editorPath, 'utf8')
 
-  assert.match(editorSource, /type EditorTab = 'markdown' \| 'rich'/)
+  assert.match(editorSource, /type EditorTab = 'markdown' \| 'rich' \| 'frontmatter'/)
   assert.match(editorSource, /const activeEditorTab = ref<EditorTab>\('markdown'\)/)
   assert.match(editorSource, /class="local-markdown-editor-left"/)
   assert.match(editorSource, /class="local-markdown-editor-preview"/)
@@ -129,6 +140,8 @@ test('local editor uses two columns with switchable left editor modes', () => {
   assert.match(editorSource, /role="tablist"/)
   assert.match(editorSource, /v-show="activeEditorTab === 'markdown'"/)
   assert.match(editorSource, /v-show="activeEditorTab === 'rich'"/)
+  assert.match(editorSource, /v-show="activeEditorTab === 'frontmatter'"/)
+  assert.match(editorSource, /livePreviewEnabled/)
   assert.doesNotMatch(editorSource, /class="local-markdown-editor-side"/)
 })
 
@@ -141,6 +154,65 @@ test('local editor preserves preview scroll position across refreshes', () => {
   assert.match(editorSource, /function getPreviewScrollState/)
   assert.match(editorSource, /function restorePreviewScroll/)
   assert.match(editorSource, /pendingPreviewScroll\.value = getPreviewScrollState\(\)/)
-  assert.match(editorSource, /@load="restorePreviewScroll"/)
+  assert.match(editorSource, /@load="handlePreviewReady"/)
   assert.match(editorSource, /previewWindow\.scrollTo/)
+  assert.match(editorSource, /\/__local-editor__\/draft/)
+})
+
+test('local editor binds markdown and preview scroll positions', () => {
+  const editorSource = fs.readFileSync(editorPath, 'utf8')
+
+  assert.match(editorSource, /scrollSyncEnabled/)
+  assert.match(editorSource, /buildScrollAnchorPoints/)
+  assert.match(editorSource, /handleEditorScroll/)
+  assert.match(editorSource, /handlePreviewScroll/)
+  assert.match(editorSource, /@scroll="handleEditorScroll"/)
+  assert.match(editorSource, /interpolateSourceToPreview/)
+  assert.match(editorSource, /interpolatePreviewToSource/)
+})
+
+test('local editor registry can build lyric and container snippets', async () => {
+  const { buildRegistrySnippet } = await import('../docs/.vitepress/local-editor/registry.mjs')
+
+  const lyric = buildRegistrySnippet('lyric-card', {
+    title: '测试曲',
+    artist: '作者',
+    lang: 'zh',
+    lines: ['原文|译文'],
+  })
+  assert.match(lyric, /<LyricCard/)
+  assert.match(lyric, /translation="译文"/)
+
+  const example = buildRegistrySnippet('example', {
+    stem: '题干',
+    solution: '解答',
+  })
+  assert.match(example, /::: stem/)
+  assert.match(example, /::: solution/)
+  assert.doesNotMatch(example, /::: example/)
+})
+
+test('local editor sidebar patcher appends items into config blocks', async () => {
+  const { appendSidebarItem } = await import('../docs/.vitepress/local-editor/sidebar-patcher.mjs')
+  const sample = `sidebar: {
+      '/Y3S2/DSP/': [
+        {
+          text: '数字信号处理 DSP 课程总览',
+          collapsed: false,
+          items: [
+            { text: 'Introduction', link: '/Y3S2/DSP/DSP-README.md' },
+          ],
+        },
+      ],
+    }`
+
+  const patched = appendSidebarItem(sample, {
+    prefix: '/Y3S2/DSP/',
+    text: '12 新章节',
+    link: '/Y3S2/DSP/DSP Chapter 12',
+  })
+
+  assert.equal(patched.ok, true)
+  assert.equal(patched.changed, true)
+  assert.match(patched.content, /'\/Y3S2\/DSP\/DSP Chapter 12'/)
 })

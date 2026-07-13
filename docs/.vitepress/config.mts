@@ -3,6 +3,20 @@ import { execFileSync, spawnSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import {
+  clearLocalEditorDraft,
+  resolveDraftFromModuleId,
+  setLocalEditorDraft,
+} from './local-editor/draft-store.mjs'
+import { defaultNoteTemplate } from './local-editor/frontmatter.mjs'
+import {
+  appendSidebarItem,
+  coursePrefixFromRelativePath,
+  extractSidebarBlock,
+  listSidebarGroups,
+  listSidebarPrefixes,
+  markdownLinkFromRelativePath,
+} from './local-editor/sidebar-patcher.mjs'
 // 使用 MathJax 4 渲染数学公式（@mdit/plugin-mathjax 依赖 @mathjax/src@4）
 import { mathjax, createMathjaxInstance } from '@mdit/plugin-mathjax'
 
@@ -404,6 +418,7 @@ const TEX_MACROS = {
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const docsRoot = path.resolve(__dirname, '..')
 const publicRoot = path.resolve(docsRoot, 'public')
+const configFilePath = path.resolve(__dirname, 'config.mts')
 const localEditorApiPrefix = '/__local-editor__'
 const localEditorMaxBodyBytes = 16 * 1024 * 1024
 const isDevCommand = process.argv.includes('dev') || process.argv.includes('serve')
@@ -625,10 +640,92 @@ async function uniqueLocalEditorAssetPath(filePath: string) {
   throw new Error('无法生成唯一图片文件名')
 }
 
+function sanitizeLocalEditorFileName(value: unknown) {
+  if (typeof value !== 'string' || !value.trim()) return ''
+  const clean = value
+    .replace(/\\/g, '/')
+    .split(/[?#]/, 1)[0]
+    .trim()
+    .replace(/^\/+/, '')
+    .replace(/\.md$/i, '')
+    .replace(/[^a-zA-Z0-9\u4e00-\u9fff._\- /]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+  return clean ? `${clean}.md` : ''
+}
+
+function resolveLocalEditorDirectory(requestedDir: unknown): LocalEditorPathResult {
+  if (typeof requestedDir !== 'string' || !requestedDir.trim()) {
+    return { ok: false, error: '缺少目录路径' }
+  }
+
+  const cleanDir = requestedDir
+    .replace(/\\/g, '/')
+    .replace(/^\/+/, '')
+    .split(/[?#]/, 1)[0]
+    .replace(/\/+$/, '')
+
+  if (!cleanDir || cleanDir.includes('\0') || cleanDir.startsWith('.vitepress/') || cleanDir.startsWith('public/')) {
+    return { ok: false, error: '目录路径无效' }
+  }
+
+  const dirPath = path.resolve(docsRoot, cleanDir)
+  const relativePath = path.relative(docsRoot, dirPath)
+
+  if (relativePath === '' || relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
+    return { ok: false, error: '目录超出 docs 范围' }
+  }
+
+  return {
+    ok: true,
+    filePath: dirPath,
+    relativePath: relativePath.split(path.sep).join('/'),
+  }
+}
+
+async function listLocalEditorEntries(dirPath: string) {
+  const entries = await fs.promises.readdir(dirPath, { withFileTypes: true })
+  const items = await Promise.all(entries.map(async (entry) => {
+    const entryPath = path.join(dirPath, entry.name)
+    const relativePath = path.relative(docsRoot, entryPath).split(path.sep).join('/')
+    if (entry.isDirectory()) {
+      return {
+        type: 'dir',
+        name: entry.name,
+        relativePath,
+      }
+    }
+
+    if (!entry.isFile() || !entry.name.endsWith('.md')) return null
+
+    const stat = await fs.promises.stat(entryPath)
+    const content = await fs.promises.readFile(entryPath, 'utf8')
+    return {
+      type: 'file',
+      name: entry.name,
+      relativePath,
+      mtimeMs: stat.mtimeMs,
+      title: extractLocalEditorTitle(content, relativePath),
+    }
+  }))
+
+  return items
+    .filter((item): item is NonNullable<typeof item> => Boolean(item))
+    .sort((left, right) => {
+      if (left.type !== right.type) return left.type === 'dir' ? -1 : 1
+      return left.name.localeCompare(right.name, 'zh-CN')
+    })
+}
+
 export function createLocalMarkdownEditorPlugin() {
   return {
     name: 'gp-blogs-local-markdown-editor',
     apply: 'serve',
+    load(id: string) {
+      const draft = resolveDraftFromModuleId(id)
+      if (typeof draft === 'string') return draft
+      return null
+    },
     configureServer(server: any) {
       server.middlewares.use(async (req: any, res: any, next: any) => {
         const url = new URL(req.url ?? '/', 'http://local-editor.local')
@@ -639,14 +736,26 @@ export function createLocalMarkdownEditorPlugin() {
 
         const isArticleRoute = url.pathname === `${localEditorApiPrefix}/article`
         const isAssetRoute = url.pathname === `${localEditorApiPrefix}/asset`
-        if (!isArticleRoute && !isAssetRoute) {
+        const isDraftRoute = url.pathname === `${localEditorApiPrefix}/draft`
+        const isBrowseRoute = url.pathname === `${localEditorApiPrefix}/browse`
+        const isSidebarRoute = url.pathname === `${localEditorApiPrefix}/sidebar`
+        const isMetaRoute = url.pathname === `${localEditorApiPrefix}/meta`
+
+        if (!isArticleRoute && !isAssetRoute && !isDraftRoute && !isBrowseRoute && !isSidebarRoute && !isMetaRoute) {
           sendLocalEditorJson(res, 404, { error: '未知的本地编辑器接口' })
           return
         }
 
         if (req.method === 'OPTIONS') {
           res.statusCode = 204
-          res.setHeader('Allow', isArticleRoute ? 'GET, PUT, OPTIONS' : 'POST, OPTIONS')
+          const allow = isArticleRoute
+            ? 'GET, PUT, POST, OPTIONS'
+            : isAssetRoute || isDraftRoute
+              ? 'PUT, DELETE, POST, OPTIONS'
+              : isSidebarRoute
+                ? 'GET, PUT, OPTIONS'
+                : 'GET, OPTIONS'
+          res.setHeader('Allow', allow)
           res.end()
           return
         }
@@ -671,6 +780,48 @@ export function createLocalMarkdownEditorPlugin() {
               content,
               mtimeMs: stat.mtimeMs,
               title: extractLocalEditorTitle(content, resolved.relativePath),
+            })
+            return
+          }
+
+          if (isArticleRoute && req.method === 'POST') {
+            const payload = JSON.parse(await readLocalEditorBody(req))
+            const parent = resolveLocalEditorDirectory(payload?.parentDir)
+            if (!parent.ok || !parent.filePath || !parent.relativePath) {
+              sendLocalEditorJson(res, 400, { error: parent.error })
+              return
+            }
+
+            const fileName = sanitizeLocalEditorFileName(payload?.fileName || payload?.title)
+            if (!fileName) {
+              sendLocalEditorJson(res, 400, { error: '文件名无效' })
+              return
+            }
+
+            await fs.promises.mkdir(parent.filePath, { recursive: true })
+            const filePath = path.join(parent.filePath, fileName)
+            const relativePath = path.join(parent.relativePath, fileName).split(path.sep).join('/')
+            const exists = await fs.promises.stat(filePath).catch(() => undefined)
+            if (exists?.isFile()) {
+              sendLocalEditorJson(res, 409, { error: '同名笔记已存在' })
+              return
+            }
+
+            const content = typeof payload?.content === 'string' && payload.content.trim()
+              ? payload.content
+              : defaultNoteTemplate(relativePath, typeof payload?.title === 'string' ? payload.title : '')
+
+            await fs.promises.writeFile(filePath, content, 'utf8')
+            invalidateLocalEditorMarkdownModule(server, filePath)
+
+            const stat = await fs.promises.stat(filePath)
+            sendLocalEditorJson(res, 201, {
+              path: relativePath,
+              content,
+              mtimeMs: stat.mtimeMs,
+              title: extractLocalEditorTitle(content, relativePath),
+              link: markdownLinkFromRelativePath(relativePath),
+              coursePrefix: coursePrefixFromRelativePath(relativePath),
             })
             return
           }
@@ -703,6 +854,7 @@ export function createLocalMarkdownEditorPlugin() {
             }
 
             await fs.promises.writeFile(resolved.filePath, payload.content, 'utf8')
+            clearLocalEditorDraft(resolved.relativePath)
             invalidateLocalEditorMarkdownModule(server, resolved.filePath)
 
             const nextStat = await fs.promises.stat(resolved.filePath)
@@ -710,6 +862,107 @@ export function createLocalMarkdownEditorPlugin() {
               path: resolved.relativePath,
               mtimeMs: nextStat.mtimeMs,
               title: extractLocalEditorTitle(payload.content, resolved.relativePath),
+            })
+            return
+          }
+
+          if (isDraftRoute && req.method === 'PUT') {
+            const payload = JSON.parse(await readLocalEditorBody(req))
+            const resolved = resolveLocalEditorMarkdownPath(payload?.path)
+            if (!resolved.ok || !resolved.relativePath) {
+              sendLocalEditorJson(res, 400, { error: resolved.error })
+              return
+            }
+
+            if (typeof payload?.content !== 'string') {
+              sendLocalEditorJson(res, 400, { error: '草稿内容必须是字符串' })
+              return
+            }
+
+            setLocalEditorDraft(resolved.relativePath, payload.content)
+            if (resolved.filePath) {
+              invalidateLocalEditorMarkdownModule(server, resolved.filePath)
+            }
+
+            sendLocalEditorJson(res, 200, {
+              path: resolved.relativePath,
+              updatedAt: Date.now(),
+            })
+            return
+          }
+
+          if (isDraftRoute && req.method === 'DELETE') {
+            const resolved = resolveLocalEditorMarkdownPath(url.searchParams.get('path'))
+            if (!resolved.ok || !resolved.relativePath) {
+              sendLocalEditorJson(res, 400, { error: resolved.error })
+              return
+            }
+
+            clearLocalEditorDraft(resolved.relativePath)
+            if (resolved.filePath) {
+              invalidateLocalEditorMarkdownModule(server, resolved.filePath)
+            }
+
+            sendLocalEditorJson(res, 200, { path: resolved.relativePath })
+            return
+          }
+
+          if (isBrowseRoute && req.method === 'GET') {
+            const dir = resolveLocalEditorDirectory(url.searchParams.get('dir') || '')
+            const targetDir = dir.ok && dir.filePath ? dir.filePath : docsRoot
+            const items = await listLocalEditorEntries(targetDir)
+            sendLocalEditorJson(res, 200, {
+              dir: dir.ok ? dir.relativePath : '',
+              items,
+            })
+            return
+          }
+
+          if (isMetaRoute && req.method === 'GET') {
+            const configSource = await fs.promises.readFile(configFilePath, 'utf8')
+            sendLocalEditorJson(res, 200, {
+              sidebarPrefixes: listSidebarPrefixes(configSource),
+            })
+            return
+          }
+
+          if (isSidebarRoute && req.method === 'GET') {
+            const prefix = url.searchParams.get('prefix') || ''
+            const configSource = await fs.promises.readFile(configFilePath, 'utf8')
+            const extracted = extractSidebarBlock(configSource, prefix)
+            if (!extracted.ok || !extracted.block) {
+              sendLocalEditorJson(res, 400, { error: extracted.error })
+              return
+            }
+
+            sendLocalEditorJson(res, 200, {
+              prefix,
+              groups: listSidebarGroups(extracted.block),
+            })
+            return
+          }
+
+          if (isSidebarRoute && req.method === 'PUT') {
+            const payload = JSON.parse(await readLocalEditorBody(req))
+            const prefix = typeof payload?.prefix === 'string' ? payload.prefix : ''
+            const text = typeof payload?.text === 'string' ? payload.text : ''
+            const link = typeof payload?.link === 'string' ? payload.link : ''
+            const groupText = typeof payload?.groupText === 'string' ? payload.groupText : undefined
+
+            const configSource = await fs.promises.readFile(configFilePath, 'utf8')
+            const patched = appendSidebarItem(configSource, { prefix, groupText, text, link })
+            if (!patched.ok || !patched.content) {
+              sendLocalEditorJson(res, 400, { error: patched.error })
+              return
+            }
+
+            if (patched.changed) {
+              await fs.promises.writeFile(configFilePath, patched.content, 'utf8')
+            }
+
+            sendLocalEditorJson(res, 200, {
+              prefix,
+              changed: Boolean(patched.changed),
             })
             return
           }
@@ -765,9 +1018,7 @@ export function createLocalMarkdownEditorPlugin() {
           }
 
           sendLocalEditorJson(res, 405, {
-            error: isArticleRoute
-              ? '本地编辑器仅支持 GET 和 PUT'
-              : '本地编辑器附件接口仅支持 POST',
+            error: '该本地编辑器接口不支持当前请求方法',
           })
         } catch (error) {
           sendLocalEditorJson(res, 500, {
@@ -1314,9 +1565,7 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [
-      createLocalMarkdownEditorPlugin(),
-    ],
+    plugins: isDevCommand ? [createLocalMarkdownEditorPlugin()] : [],
     server: {
       watch: {
         awaitWriteFinish: {
@@ -1432,6 +1681,7 @@ export default defineConfig({
 
     nav: [
       { text: '主页', link: '/index' },
+      { text: '时间线', link: '/timeline', activeMatch: '^/timeline(?:\\.html)?$' },
 
       {
         text: '第四学年',
@@ -1494,7 +1744,8 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Introduction', link: '/Y4S1/ADC/ADC-README.md' },
-          ],
+                      { text: '1 数字通信', link: '/Y4S1/ADC/Lecture 2' },
+],
         },
       ],
 

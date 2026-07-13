@@ -2,7 +2,10 @@
 import '@wangeditor/editor/dist/css/style.css'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import type { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor'
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
+import { localEditorRegistry } from '../../local-editor/registry.mjs'
+import LocalEditorFrontmatterPanel from './LocalEditorFrontmatterPanel.vue'
+import LocalEditorInsertDialog from './LocalEditorInsertDialog.vue'
 
 interface ArticlePayload {
   path: string
@@ -24,9 +27,16 @@ interface PreviewScrollState {
   maxTop: number
   ratioLeft: number
   ratioTop: number
+  editorTop?: number
+  editorLine?: number
 }
 
-type EditorTab = 'markdown' | 'rich'
+interface ScrollAnchorPoint {
+  sourceLine: number
+  previewY: number
+}
+
+type EditorTab = 'markdown' | 'rich' | 'frontmatter'
 
 const props = defineProps<{
   relativePath: string
@@ -55,6 +65,17 @@ const previewNonce = ref(0)
 const richHtml = ref('<p></p>')
 const activeEditorTab = ref<EditorTab>('markdown')
 const pendingPreviewScroll = ref<PreviewScrollState | null>(null)
+const insertDialogOpen = ref(false)
+const insertDialogEntryId = ref('')
+const livePreviewEnabled = ref(true)
+const draftSyncTimer = ref<number | null>(null)
+const previewRefreshTimer = ref<number | null>(null)
+const isSyncingDraft = ref(false)
+const scrollSyncEnabled = ref(true)
+const scrollAnchorPoints = ref<ScrollAnchorPoint[]>([])
+const scrollSyncLock = ref<'editor' | 'preview' | null>(null)
+let scrollSyncReleaseTimer: number | null = null
+let previewScrollHandler: (() => void) | null = null
 
 const editorMode = 'default'
 const toolbarConfig: Partial<IToolbarConfig> = {
@@ -70,37 +91,75 @@ const editorConfig: Partial<IEditorConfig> = {
   scroll: false,
 }
 
-const snippets = [
-  {
-    label: '例题',
-    text: '\n::: example 例题\n\n::: stem\n题干\n:::\n\n::: solution\n解答\n:::\n\n:::\n',
-  },
-  {
-    label: '定义',
-    text: '\n::: definition 概念\n\n定义内容\n\n:::\n',
-  },
-  {
-    label: '歌词',
-    text: '\n<LyricCard title="标题" artist="作者" lang="zh">\n  <LyricLine original="原文" translation="译文" />\n</LyricCard>\n',
-  },
-  {
-    label: '歌曲',
-    text: '\n<SongCard song-id="网易云 ID" />\n',
-  },
-  {
-    label: '封面',
-    text: '\n<LyricCover image="./cover.jpg" title="标题" artist="作者">\n  <LyricLine original="原文" translation="译文" />\n</LyricCover>\n',
-  },
-  {
-    label: '导图',
-    text: '\n```mindmap 标题\n# 主题\n## 分支\n- 要点\n```\n',
-  },
-]
+const quickInserts = computed(() => localEditorRegistry.filter((entry) => !entry.dialog))
+const dialogInserts = computed(() => {
+  const groups = new Map<string, typeof localEditorRegistry>()
+  for (const entry of localEditorRegistry.filter((item) => item.dialog)) {
+    const bucket = groups.get(entry.category) ?? []
+    bucket.push(entry)
+    groups.set(entry.category, bucket)
+  }
+  return [...groups.entries()]
+})
 
 const isDirty = computed(() => source.value !== savedSource.value)
 const displayTitle = computed(() => title.value || loadedPath.value || props.relativePath)
 const lineCount = computed(() => source.value ? source.value.split(/\r\n|\r|\n/).length : 0)
 const sourceBytes = computed(() => new Blob([source.value]).size)
+const previewLabel = computed(() => {
+  if (!livePreviewEnabled.value) return isDirty.value ? '上次保存' : '当前文件'
+  if (isSyncingDraft.value) return '同步预览'
+  return isDirty.value ? '实时草稿' : '当前文件'
+})
+
+async function syncDraftPreview() {
+  if (!loadedPath.value || !livePreviewEnabled.value) return
+
+  isSyncingDraft.value = true
+  try {
+    normalizeSourceAttachmentImagePaths()
+    await fetch('/__local-editor__/draft', {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        path: loadedPath.value,
+        content: source.value,
+      }),
+    })
+    refreshPreview({ preserveScroll: true })
+  } catch {
+    // 预览失败时保留编辑体验，不阻断写作
+  } finally {
+    isSyncingDraft.value = false
+  }
+}
+
+function scheduleDraftPreview() {
+  if (!livePreviewEnabled.value || !loadedPath.value) return
+
+  if (draftSyncTimer.value) window.clearTimeout(draftSyncTimer.value)
+  draftSyncTimer.value = window.setTimeout(() => {
+    draftSyncTimer.value = null
+    void syncDraftPreview()
+  }, 420)
+
+  if (previewRefreshTimer.value) window.clearTimeout(previewRefreshTimer.value)
+  previewRefreshTimer.value = window.setTimeout(() => {
+    previewRefreshTimer.value = null
+  }, 420)
+}
+
+async function clearDraftPreview() {
+  if (!loadedPath.value) return
+  await fetch(
+    `/__local-editor__/draft?path=${encodeURIComponent(loadedPath.value)}`,
+    { method: 'DELETE', headers: { Accept: 'application/json' } },
+  ).catch(() => undefined)
+}
+
 const previewSrc = computed(() => {
   const pagePath = props.pagePath || '/'
   const joiner = pagePath.includes('?') ? '&' : '?'
@@ -177,6 +236,7 @@ async function saveArticle() {
     title.value = payload.title
     mtimeMs.value = payload.mtimeMs
     statusText.value = '已保存'
+    await clearDraftPreview()
     refreshPreview()
   } catch (error) {
     errorText.value = error instanceof Error ? error.message : '保存失败'
@@ -195,6 +255,7 @@ function getPreviewScrollState(): PreviewScrollState | null {
   const maxTop = Math.max(0, scrollRoot.scrollHeight - scrollRoot.clientHeight)
   const left = previewWindow.scrollX || scrollRoot.scrollLeft || 0
   const top = previewWindow.scrollY || scrollRoot.scrollTop || 0
+  const textarea = sourceTextarea.value
 
   return {
     left,
@@ -203,7 +264,240 @@ function getPreviewScrollState(): PreviewScrollState | null {
     maxTop,
     ratioLeft: maxLeft > 0 ? left / maxLeft : 0,
     ratioTop: maxTop > 0 ? top / maxTop : 0,
+    editorTop: textarea?.scrollTop,
+    editorLine: textarea ? getEditorFocusLine(textarea) : undefined,
   }
+}
+
+function normalizeHeadingText(value: string) {
+  return value
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/[#*_`~]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase()
+}
+
+function parseSourceAnchors(content: string) {
+  const lines = content.split(/\r\n|\r|\n/)
+  const anchors: { line: number, text: string }[] = []
+
+  lines.forEach((line, index) => {
+    const match = line.match(/^(#{1,6})\s+(.+?)\s*#*\s*$/)
+    if (match) {
+      anchors.push({ line: index, text: match[2].trim() })
+    }
+  })
+
+  return anchors
+}
+
+function getTextareaLineHeight(textarea: HTMLTextAreaElement) {
+  const style = window.getComputedStyle(textarea)
+  const lineHeight = Number.parseFloat(style.lineHeight)
+  if (Number.isFinite(lineHeight) && lineHeight > 0) return lineHeight
+
+  const fontSize = Number.parseFloat(style.fontSize) || 13
+  return fontSize * 1.7
+}
+
+function getEditorFocusLine(textarea: HTMLTextAreaElement) {
+  const lineHeight = getTextareaLineHeight(textarea)
+  const paddingTop = Number.parseFloat(window.getComputedStyle(textarea).paddingTop) || 0
+  return Math.max(0, Math.floor((textarea.scrollTop + paddingTop) / lineHeight))
+}
+
+function getPreviewContentElement(previewDocument: Document) {
+  return previewDocument.querySelector('.vp-doc, .VPDoc .content, .content-container')
+}
+
+function getElementDocumentY(element: Element, previewWindow: Window) {
+  const rect = element.getBoundingClientRect()
+  return rect.top + previewWindow.scrollY
+}
+
+function findPreviewHeadingElement(previewDocument: Document, headingText: string) {
+  const target = normalizeHeadingText(headingText)
+  if (!target) return null
+
+  const headings = previewDocument.querySelectorAll('.vp-doc h1, .vp-doc h2, .vp-doc h3, .vp-doc h4, .vp-doc h5, .vp-doc h6')
+  for (const heading of headings) {
+    const text = normalizeHeadingText(heading.textContent ?? '')
+    if (text === target || text.includes(target) || target.includes(text)) {
+      return heading
+    }
+  }
+
+  return null
+}
+
+function buildScrollAnchorPoints() {
+  const previewWindow = previewFrame.value?.contentWindow
+  const previewDocument = previewFrame.value?.contentDocument
+  if (!previewWindow || !previewDocument) {
+    scrollAnchorPoints.value = []
+    return
+  }
+
+  const content = getPreviewContentElement(previewDocument)
+  if (!content) {
+    scrollAnchorPoints.value = []
+    return
+  }
+
+  const lines = source.value.split(/\r\n|\r|\n/)
+  const points: ScrollAnchorPoint[] = [
+    {
+      sourceLine: 0,
+      previewY: getElementDocumentY(content, previewWindow),
+    },
+  ]
+
+  for (const anchor of parseSourceAnchors(source.value)) {
+    const element = findPreviewHeadingElement(previewDocument, anchor.text)
+    if (element) {
+      points.push({
+        sourceLine: anchor.line,
+        previewY: getElementDocumentY(element, previewWindow),
+      })
+    }
+  }
+
+  const textarea = sourceTextarea.value
+  const lineHeight = textarea ? getTextareaLineHeight(textarea) : 22
+  const contentBottom = getElementDocumentY(content, previewWindow) + content.scrollHeight
+  points.push({
+    sourceLine: Math.max(0, lines.length - 1),
+    previewY: Math.max(contentBottom - lineHeight, points[points.length - 1]?.previewY ?? 0),
+  })
+
+  scrollAnchorPoints.value = points
+    .sort((left, right) => left.sourceLine - right.sourceLine)
+    .filter((point, index, array) => index === 0 || point.sourceLine > array[index - 1].sourceLine)
+}
+
+function interpolateSourceToPreview(sourceLine: number, points: ScrollAnchorPoint[]) {
+  if (!points.length) return 0
+  if (sourceLine <= points[0].sourceLine) return points[0].previewY
+
+  for (let index = 1; index < points.length; index += 1) {
+    const previous = points[index - 1]
+    const next = points[index]
+    if (sourceLine <= next.sourceLine) {
+      const lineSpan = next.sourceLine - previous.sourceLine
+      const ratio = lineSpan > 0 ? (sourceLine - previous.sourceLine) / lineSpan : 0
+      return previous.previewY + ratio * (next.previewY - previous.previewY)
+    }
+  }
+
+  return points[points.length - 1].previewY
+}
+
+function interpolatePreviewToSource(previewY: number, points: ScrollAnchorPoint[]) {
+  if (!points.length) return 0
+  if (previewY <= points[0].previewY) return points[0].sourceLine
+
+  for (let index = 1; index < points.length; index += 1) {
+    const previous = points[index - 1]
+    const next = points[index]
+    if (previewY <= next.previewY) {
+      const previewSpan = next.previewY - previous.previewY
+      const ratio = previewSpan > 0 ? (previewY - previous.previewY) / previewSpan : 0
+      return previous.sourceLine + ratio * (next.sourceLine - previous.sourceLine)
+    }
+  }
+
+  return points[points.length - 1].sourceLine
+}
+
+function runScrollSync(source: 'editor' | 'preview', action: () => void) {
+  if (!scrollSyncEnabled.value || activeEditorTab.value !== 'markdown') return
+  if (scrollSyncLock.value && scrollSyncLock.value !== source) return
+
+  scrollSyncLock.value = source
+  action()
+
+  if (scrollSyncReleaseTimer) window.clearTimeout(scrollSyncReleaseTimer)
+  scrollSyncReleaseTimer = window.setTimeout(() => {
+    scrollSyncLock.value = null
+    scrollSyncReleaseTimer = null
+  }, 48)
+}
+
+function syncPreviewToEditorLine(sourceLine: number) {
+  const textarea = sourceTextarea.value
+  if (!textarea) return
+
+  const lineHeight = getTextareaLineHeight(textarea)
+  const paddingTop = Number.parseFloat(window.getComputedStyle(textarea).paddingTop) || 0
+  textarea.scrollTop = Math.max(0, sourceLine * lineHeight - paddingTop)
+}
+
+function syncEditorScrollToPreview() {
+  const textarea = sourceTextarea.value
+  const previewWindow = previewFrame.value?.contentWindow
+  if (!textarea || !previewWindow) return
+
+  if (!scrollAnchorPoints.value.length) buildScrollAnchorPoints()
+
+  const focusLine = getEditorFocusLine(textarea)
+  const paddingTop = Number.parseFloat(window.getComputedStyle(textarea).paddingTop) || 0
+  const targetTop = interpolateSourceToPreview(focusLine, scrollAnchorPoints.value) - paddingTop
+
+  previewWindow.scrollTo({
+    left: 0,
+    top: Math.max(0, targetTop),
+    behavior: 'auto',
+  })
+}
+
+function syncPreviewScrollToEditor() {
+  const textarea = sourceTextarea.value
+  const previewWindow = previewFrame.value?.contentWindow
+  if (!textarea || !previewWindow) return
+
+  if (!scrollAnchorPoints.value.length) buildScrollAnchorPoints()
+
+  const paddingTop = Number.parseFloat(window.getComputedStyle(textarea).paddingTop) || 0
+  const previewFocusY = previewWindow.scrollY + paddingTop
+  const sourceLine = interpolatePreviewToSource(previewFocusY, scrollAnchorPoints.value)
+  syncPreviewToEditorLine(sourceLine)
+}
+
+function handleEditorScroll() {
+  runScrollSync('editor', syncEditorScrollToPreview)
+}
+
+function handlePreviewScroll() {
+  runScrollSync('preview', syncPreviewScrollToEditor)
+}
+
+function detachPreviewScrollListener() {
+  const previewWindow = previewFrame.value?.contentWindow
+  if (previewWindow && previewScrollHandler) {
+    previewWindow.removeEventListener('scroll', previewScrollHandler)
+  }
+  previewScrollHandler = null
+}
+
+function attachPreviewScrollListener() {
+  detachPreviewScrollListener()
+
+  const previewWindow = previewFrame.value?.contentWindow
+  if (!previewWindow) return
+
+  previewScrollHandler = () => handlePreviewScroll()
+  previewWindow.addEventListener('scroll', previewScrollHandler, { passive: true })
+}
+
+function handlePreviewReady() {
+  restorePreviewScroll()
+  window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
+      buildScrollAnchorPoints()
+      attachPreviewScrollListener()
+    })
+  })
 }
 
 function refreshPreview({ preserveScroll = true } = {}) {
@@ -236,11 +530,24 @@ function restorePreviewScroll() {
         ? scrollState.ratioTop * maxTop
         : scrollState.top
 
+      scrollSyncLock.value = 'preview'
       previewWindow.scrollTo({
         left: Math.max(0, left),
         top: Math.max(0, top),
         behavior: 'auto',
       })
+
+      if (scrollState.editorLine !== undefined) {
+        syncPreviewToEditorLine(scrollState.editorLine)
+      } else if (scrollState.editorTop !== undefined) {
+        const textarea = sourceTextarea.value
+        if (textarea) textarea.scrollTop = scrollState.editorTop
+      }
+
+      window.setTimeout(() => {
+        if (scrollSyncLock.value === 'preview') scrollSyncLock.value = null
+      }, 48)
+
       pendingPreviewScroll.value = null
     })
   })
@@ -500,9 +807,31 @@ function insertRichText() {
   statusText.value = '已插入片段'
 }
 
+function openInsertDialog(entryId: string) {
+  insertDialogEntryId.value = entryId
+  insertDialogOpen.value = true
+}
+
+function insertQuickEntry(entryId: string) {
+  const entry = localEditorRegistry.find((item) => item.id === entryId)
+  if (!entry) return
+  if (entry.dialog) {
+    openInsertDialog(entryId)
+    return
+  }
+  insertAtCursor(entry.build({}))
+  statusText.value = `已插入 ${entry.label}`
+}
+
 function insertSnippet(text: string) {
   insertAtCursor(text)
   statusText.value = '已插入模板'
+}
+
+function applyFrontmatterContent(content: string) {
+  source.value = content
+  statusText.value = 'Frontmatter 已更新'
+  scheduleDraftPreview()
 }
 
 function handleKeydown(event: KeyboardEvent) {
@@ -523,8 +852,20 @@ onMounted(() => {
   void loadArticle(true)
 })
 
+watch(source, () => {
+  scheduleDraftPreview()
+  if (scrollSyncEnabled.value) {
+    window.requestAnimationFrame(() => buildScrollAnchorPoints())
+  }
+})
+
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', handleKeydown)
+  detachPreviewScrollListener()
+  if (draftSyncTimer.value) window.clearTimeout(draftSyncTimer.value)
+  if (previewRefreshTimer.value) window.clearTimeout(previewRefreshTimer.value)
+  if (scrollSyncReleaseTimer) window.clearTimeout(scrollSyncReleaseTimer)
+  void clearDraftPreview()
   editorRef.value?.destroy()
   editorRef.value = null
 })
@@ -555,6 +896,14 @@ onBeforeUnmount(() => {
           </span>
           <button type="button" @click="loadArticle(false)">重载</button>
           <button type="button" @click="refreshPreview">刷新预览</button>
+          <label class="local-markdown-editor-live-toggle">
+            <input v-model="livePreviewEnabled" type="checkbox">
+            <span>实时预览</span>
+          </label>
+          <label class="local-markdown-editor-live-toggle">
+            <input v-model="scrollSyncEnabled" type="checkbox">
+            <span>滚动联动</span>
+          </label>
           <button
             class="is-primary"
             type="button"
@@ -589,10 +938,20 @@ onBeforeUnmount(() => {
               >
                 富文本
               </button>
+              <button
+                type="button"
+                role="tab"
+                :aria-selected="activeEditorTab === 'frontmatter'"
+                :class="{ 'is-active': activeEditorTab === 'frontmatter' }"
+                @click="activeEditorTab = 'frontmatter'"
+              >
+                格式
+              </button>
             </div>
 
             <span v-if="activeEditorTab === 'markdown'">{{ lineCount }} 行 · {{ sourceBytes }} B</span>
-            <button v-else type="button" @click="insertRichText">插入 Markdown</button>
+            <button v-else-if="activeEditorTab === 'rich'" type="button" @click="insertRichText">插入 Markdown</button>
+            <span v-else>Frontmatter 与页面开关</span>
           </div>
 
           <div class="local-markdown-editor-edit-stack">
@@ -606,18 +965,42 @@ onBeforeUnmount(() => {
                 v-model="source"
                 class="local-markdown-editor-textarea"
                 spellcheck="false"
+                @scroll="handleEditorScroll"
               />
 
               <div class="local-markdown-editor-snippets" aria-label="插入模板">
                 <button
-                  v-for="snippet in snippets"
-                  :key="snippet.label"
+                  v-for="entry in quickInserts"
+                  :key="entry.id"
                   type="button"
-                  @click="insertSnippet(snippet.text)"
+                  @click="insertQuickEntry(entry.id)"
                 >
-                  {{ snippet.label }}
+                  {{ entry.label }}
                 </button>
+                <template v-for="[category, entries] in dialogInserts" :key="category">
+                  <button
+                    v-for="entry in entries"
+                    :key="entry.id"
+                    type="button"
+                    class="is-dialog"
+                    @click="openInsertDialog(entry.id)"
+                  >
+                    {{ entry.label }}
+                  </button>
+                </template>
+                <button type="button" class="is-dialog" @click="openInsertDialog('lyric-card')">插入向导</button>
               </div>
+            </section>
+
+            <section
+              v-show="activeEditorTab === 'frontmatter'"
+              class="local-markdown-editor-frontmatter-pane"
+              role="tabpanel"
+            >
+              <LocalEditorFrontmatterPanel
+                :source="source"
+                @apply="applyFrontmatterContent"
+              />
             </section>
 
             <section
@@ -647,7 +1030,7 @@ onBeforeUnmount(() => {
         <section class="local-markdown-editor-preview">
           <div class="local-markdown-editor-panel-head">
             <span>渲染预览</span>
-            <span>{{ isDirty ? '上次保存' : '当前文件' }}</span>
+            <span>{{ previewLabel }}</span>
           </div>
 
           <iframe
@@ -656,13 +1039,20 @@ onBeforeUnmount(() => {
             class="local-markdown-editor-frame"
             :src="previewSrc"
             title="本地渲染预览"
-            @load="restorePreviewScroll"
+            @load="handlePreviewReady"
           />
         </section>
       </main>
 
       <div v-if="loading" class="local-markdown-editor-loading">载入中</div>
     </div>
+
+    <LocalEditorInsertDialog
+      :open="insertDialogOpen"
+      :entry-id="insertDialogEntryId"
+      @close="insertDialogOpen = false"
+      @insert="insertSnippet"
+    />
   </div>
 </template>
 
@@ -810,7 +1200,8 @@ onBeforeUnmount(() => {
 
 .local-markdown-editor-edit-stack,
 .local-markdown-editor-source-pane,
-.local-markdown-editor-rich-pane {
+.local-markdown-editor-rich-pane,
+.local-markdown-editor-frontmatter-pane {
   min-width: 0;
   min-height: 0;
 }
@@ -820,10 +1211,16 @@ onBeforeUnmount(() => {
 }
 
 .local-markdown-editor-source-pane,
-.local-markdown-editor-rich-pane {
+.local-markdown-editor-rich-pane,
+.local-markdown-editor-frontmatter-pane {
   display: grid;
   grid-area: 1 / 1;
   grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.local-markdown-editor-frontmatter-pane {
+  grid-template-rows: minmax(0, 1fr);
+  overflow: auto;
 }
 
 .local-markdown-editor-panel-head {
@@ -843,10 +1240,23 @@ onBeforeUnmount(() => {
   align-items: center;
 }
 
+.local-markdown-editor-live-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--vp-c-text-3);
+  font-size: 12px;
+  user-select: none;
+}
+
+.local-markdown-editor-live-toggle input {
+  accent-color: var(--vp-c-brand-1);
+}
+
 .local-markdown-editor-tabs {
   display: inline-grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  width: 190px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 260px;
   min-width: 0;
   border: 1px solid color-mix(in srgb, var(--vp-c-divider) 82%, transparent);
   border-radius: 7px;
@@ -892,6 +1302,34 @@ onBeforeUnmount(() => {
   font: 13px/1.7 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   outline: none;
   tab-size: 2;
+  caret-color: var(--vp-c-brand-1);
+  transition: box-shadow 0.28s var(--ease-standard, ease), caret-color 0.28s ease;
+}
+
+.local-markdown-editor-textarea:focus {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 34%, transparent);
+  animation: local-editor-caret-glow 1.35s ease-in-out infinite;
+}
+
+@keyframes local-editor-caret-glow {
+  0%, 100% {
+    caret-color: var(--vp-c-brand-1);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 28%, transparent);
+  }
+
+  50% {
+    caret-color: color-mix(in srgb, var(--vp-c-brand-1) 72%, white);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 48%, transparent);
+  }
+}
+
+.local-markdown-editor-snippets .is-dialog {
+  border-style: dashed;
+}
+
+.local-markdown-editor-frontmatter-pane {
+  min-height: 0;
+  overflow: auto;
 }
 
 .local-markdown-editor-snippets {

@@ -320,7 +320,7 @@ watch(
 /* Brand variant — gradient matching VitePress hero brand button */
 .home-course-button.brand {
   color: #fff;
-  border-color: transparent;
+  border-color: var(--aya-gradient-start, #98CBEA);
   background-image: linear-gradient(
     var(--aya-gradient-angle, 140deg),
     var(--aya-gradient-start, #98CBEA) 0%,

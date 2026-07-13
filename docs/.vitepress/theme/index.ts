@@ -21,6 +21,7 @@ import LyricCard from './components/LyricCard.vue'
 import LyricLine from './components/LyricLine.vue'
 import LyricCover from './components/LyricCover.vue'
 import SongCard from './components/SongCard.vue'
+import TimelinePage from './components/TimelinePage.vue'
 import { setupLinkWarmup } from './link-warmup'
 
 const MindMapLoader = defineAsyncComponent({
@@ -51,6 +52,7 @@ export default {
     app.component('LyricLine', LyricLine)
     app.component('LyricCover', LyricCover)
     app.component('SongCard', SongCard)
+    app.component('TimelinePage', TimelinePage)
     app.component('MindMap', MindMapLoader)
 
     // 用户自定义接口（见 CUSTOMIZATION.md）：全局组件 + enhanceApp 钩子

@@ -1,0 +1,1141 @@
+[
+  {
+    "id": "it-2026-07-c6460297",
+    "period": "2026.07",
+    "course": "信息论基础 IT",
+    "title": "Lecture 2 - 11",
+    "description": "梦想和希望究竟是什么？ / 想做的事情就只有这些吗？",
+    "image": "/timeline-covers/1783151674756-1f54fc54a8-faded.png",
+    "hasCover": true,
+    "imageAlt": "信息论基础 IT 2026年07月笔记封面",
+    "imagePosition": "center",
+    "accent": "cyan",
+    "dateAccent": "cyan",
+    "noteMeta": "信息论基础 IT · 2026年07月 · 10 篇笔记",
+    "updatedAt": "2026-07-07T07:56:38.000Z",
+    "notes": [
+      {
+        "title": "2 Discrete Information Source and Self-Information",
+        "href": "/Y3S1/IT/IT-Lecture-2.html",
+        "updatedAt": "2026-07-04T11:36:29.000Z",
+        "locked": false
+      },
+      {
+        "title": "3 Entropy of Discrete Information Source",
+        "href": "/Y3S1/IT/IT-Lecture-3.html",
+        "updatedAt": "2026-07-05T08:11:38.000Z",
+        "locked": false
+      },
+      {
+        "title": "4 Multi-Symbol Stationary Information Source",
+        "href": "/Y3S1/IT/IT-Lecture-4.html",
+        "updatedAt": "2026-07-05T13:09:13.000Z",
+        "locked": false
+      },
+      {
+        "title": "5 Markov Source and Redundancy",
+        "href": "/Y3S1/IT/IT-Lecture-5.html",
+        "updatedAt": "2026-07-07T07:35:34.000Z",
+        "locked": false
+      },
+      {
+        "title": "6 Lossless Source Coding",
+        "href": "/Y3S1/IT/IT-Lecture-6.html",
+        "updatedAt": "2026-07-07T07:56:38.000Z",
+        "locked": false
+      },
+      {
+        "title": "7 Mutual Self-Information and Mutual Information",
+        "href": "/Y3S1/IT/IT-Lecture-7.html",
+        "updatedAt": "2026-07-07T07:35:34.000Z",
+        "locked": false
+      },
+      {
+        "title": "8 Discrete Channel Capacity",
+        "href": "/Y3S1/IT/IT-Lecture-8.html",
+        "updatedAt": "2026-07-07T07:56:38.000Z",
+        "locked": false
+      },
+      {
+        "title": "9 Channel Coding",
+        "href": "/Y3S1/IT/IT-Lecture-9.html",
+        "updatedAt": "2026-07-07T07:56:38.000Z",
+        "locked": false
+      },
+      {
+        "title": "10 Continuous Information Source and Channel Capacity",
+        "href": "/Y3S1/IT/IT-Lecture-10.html",
+        "updatedAt": "2026-07-07T07:56:38.000Z",
+        "locked": false
+      },
+      {
+        "title": "11 Rate-Distortion Theory",
+        "href": "/Y3S1/IT/IT-Lecture-11.html",
+        "updatedAt": "2026-07-07T07:56:38.000Z",
+        "locked": false
+      }
+    ]
+  },
+  {
+    "id": "epmf-2026-06-ffe88744",
+    "period": "2026.06",
+    "course": "工程项目管理与财务 EPM&F",
+    "title": "Lecture 2 - 16",
+    "description": "可是啊我仍感到迷茫，老师可否为我指引人生方向？",
+    "image": "/timeline-covers/1774261367954-a334228ac0-faded.png",
+    "hasCover": true,
+    "imageAlt": "工程项目管理与财务 EPM&F 2026年06月笔记封面",
+    "imagePosition": "center",
+    "accent": "blue",
+    "dateAccent": "blue",
+    "noteMeta": "工程项目管理与财务 EPM&F · 2026年06月 · 20 篇笔记",
+    "updatedAt": "2026-06-16T07:16:25.000Z",
+    "notes": [
+      {
+        "title": "Lec. 2 Project Scope Management, Project Schedule Management",
+        "href": "/Y3S2/EPMF/Block%201/Lecture%202.html",
+        "updatedAt": "2026-06-12T07:16:20.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 3 Project Cost Management, Project Resource Management",
+        "href": "/Y3S2/EPMF/Block%201/Lecture%203.html",
+        "updatedAt": "2026-06-12T07:16:20.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 4 Project Communications Management, Project Risk Management",
+        "href": "/Y3S2/EPMF/Block%201/Lecture%204.html",
+        "updatedAt": "2026-06-12T07:16:20.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 9 Introduction to Engineering Economics",
+        "href": "/Y3S2/EPMF/Block%203/Lecture%209.html",
+        "updatedAt": "2026-06-13T08:56:33.000Z",
+        "locked": true
+      },
+      {
+        "title": "Block 1 Mindmap",
+        "href": "/Y3S2/EPMF/Block%201/Mindmap.html",
+        "updatedAt": "2026-06-14T13:03:06.000Z",
+        "locked": true
+      },
+      {
+        "title": "Block 2 Mindmap",
+        "href": "/Y3S2/EPMF/Block%202/Mindmap.html",
+        "updatedAt": "2026-06-14T07:37:51.000Z",
+        "locked": true
+      },
+      {
+        "title": "Block 3 Mindmap",
+        "href": "/Y3S2/EPMF/Block%203/Mindmap.html",
+        "updatedAt": "2026-06-15T07:38:10.000Z",
+        "locked": true
+      },
+      {
+        "title": "Block 4 Mindmap",
+        "href": "/Y3S2/EPMF/Block%204/Mindmap.html",
+        "updatedAt": "2026-06-15T07:38:10.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 6 Quality Control, Cost of Quality",
+        "href": "/Y3S2/EPMF/Block%202/Lecture%206.html",
+        "updatedAt": "2026-06-15T13:18:53.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 7 Robust Manufacturing Design",
+        "href": "/Y3S2/EPMF/Block%202/Lecture%207.html",
+        "updatedAt": "2026-06-16T07:16:25.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 8 Six-Sigma & Process Capability",
+        "href": "/Y3S2/EPMF/Block%202/Lecture%208.html",
+        "updatedAt": "2026-06-16T07:12:29.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 10 Engineering Economics (Make or Buy)",
+        "href": "/Y3S2/EPMF/Block%203/Lecture%2010.html",
+        "updatedAt": "2026-06-13T08:56:33.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 11 Engineering Economics (Break-Even Analysis)",
+        "href": "/Y3S2/EPMF/Block%203/Lecture%2011.html",
+        "updatedAt": "2026-06-13T08:56:33.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 12 Engineering Economics (Outsourcing)",
+        "href": "/Y3S2/EPMF/Block%203/Lecture%2012.html",
+        "updatedAt": "2026-06-13T08:56:33.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 13-2 Extended Version",
+        "href": "/Y3S2/EPMF/Block%203/Lecture%2013-2%20Extended%20Version.html",
+        "updatedAt": "2026-06-13T08:56:33.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 13 Part 1 Engineering Economics (Discounted Cash Flow)",
+        "href": "/Y3S2/EPMF/Block%203/Lecture%2013%20Part%201.html",
+        "updatedAt": "2026-06-13T08:56:33.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 13 Part 2 Engineering Economics (Capex, Opex, and Total Cost of Ownership)",
+        "href": "/Y3S2/EPMF/Block%203/Lecture%2013%20Part%202.html",
+        "updatedAt": "2026-06-13T08:56:33.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 14 What is a Company",
+        "href": "/Y3S2/EPMF/Block%204/Lecture%2014.html",
+        "updatedAt": "2026-06-13T08:56:33.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 15 Company Structure",
+        "href": "/Y3S2/EPMF/Block%204/Lecture%2015.html",
+        "updatedAt": "2026-06-16T07:10:17.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 16 Company Strategy & Engineering Careers",
+        "href": "/Y3S2/EPMF/Block%204/Lecture%2016.html",
+        "updatedAt": "2026-06-13T08:56:33.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "dsp-2026-06-cccec770",
+    "period": "2026.06",
+    "course": "数字信号处理 DSP",
+    "title": "Chapter 7 - 11",
+    "description": "愿你的青春如花般绽放。",
+    "image": "/timeline-covers/1773645635605-a24c3950e9-faded.png",
+    "hasCover": true,
+    "imageAlt": "数字信号处理 DSP 2026年06月笔记封面",
+    "imagePosition": "center",
+    "accent": "purple",
+    "dateAccent": "blue",
+    "noteMeta": "数字信号处理 DSP · 2026年06月 · 5 篇笔记",
+    "updatedAt": "2026-06-15T16:03:58.000Z",
+    "notes": [
+      {
+        "title": "7 LTI-DT Systems in the Transform Domain",
+        "href": "/Y3S2/DSP/DSP%20Chapter%207.html",
+        "updatedAt": "2026-06-15T16:03:58.000Z",
+        "locked": true
+      },
+      {
+        "title": "8 Digital Filter Structure",
+        "href": "/Y3S2/DSP/DSP%20Chapter%208.html",
+        "updatedAt": "2026-06-15T16:03:58.000Z",
+        "locked": true
+      },
+      {
+        "title": "9 IIR Digital Filter Design",
+        "href": "/Y3S2/DSP/DSP%20Chapter%209.html",
+        "updatedAt": "2026-06-15T16:03:58.000Z",
+        "locked": true
+      },
+      {
+        "title": "10 FIR Digital Filter Design",
+        "href": "/Y3S2/DSP/DSP%20Chapter%2010.html",
+        "updatedAt": "2026-06-15T16:03:58.000Z",
+        "locked": true
+      },
+      {
+        "title": "11 Fast Fourier Transform",
+        "href": "/Y3S2/DSP/DSP%20Chapter%2011.html",
+        "updatedAt": "2026-06-15T16:03:58.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "emft-2026-06-b74ee275",
+    "period": "2026.06",
+    "course": "电磁场与波 EMFT",
+    "title": "Chapter 7 - 8",
+    "description": "季节交替之时 该换上什么衣服呢， / 春天与秋天 究竟去了哪里呢。",
+    "image": "/timeline-covers/1778750317994-0cb48afff0-faded.png",
+    "hasCover": true,
+    "imageAlt": "电磁场与波 EMFT 2026年06月笔记封面",
+    "imagePosition": "center",
+    "accent": "green",
+    "dateAccent": "blue",
+    "noteMeta": "电磁场与波 EMFT · 2026年06月 · 5 篇笔记",
+    "updatedAt": "2026-06-10T10:09:22.000Z",
+    "notes": [
+      {
+        "title": "7 Time-Varying Fields and Maxwell’s Equations",
+        "href": "/Y3S2/EMFT/EMFT%20Chapter%207.html",
+        "updatedAt": "2026-06-02T08:06:16.000Z",
+        "locked": true
+      },
+      {
+        "title": "8 Plane Electromagnetic Waves Part II",
+        "href": "/Y3S2/EMFT/EMFT%20Chapter%208%20P%20II.html",
+        "updatedAt": "2026-06-10T10:09:22.000Z",
+        "locked": true
+      },
+      {
+        "title": "8 Plane Electromagnetic Waves Part I",
+        "href": "/Y3S2/EMFT/EMFT%20Chapter%208%20P%20I.html",
+        "updatedAt": "2026-06-03T08:35:12.000Z",
+        "locked": true
+      },
+      {
+        "title": "Ex 2 概念复习 Concept Review",
+        "href": "/Y3S2/EMFT/EFMT%20Extra%202.html",
+        "updatedAt": "2026-06-02T08:43:38.000Z",
+        "locked": true
+      },
+      {
+        "title": "Ex 1 公式复习 Formula Review",
+        "href": "/Y3S2/EMFT/EFMT%20Extra%201.html",
+        "updatedAt": "2026-06-03T08:35:12.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "cps-n-2026-06-3506aca4",
+    "period": "2026.06",
+    "course": "通信原理与系统 CPS_N",
+    "title": "Lecture 1 - 19",
+    "description": "",
+    "image": "/timeline-covers/transparent-faded.png",
+    "hasCover": false,
+    "imageAlt": "",
+    "imagePosition": "center",
+    "accent": "frost",
+    "dateAccent": "blue",
+    "noteMeta": "通信原理与系统 CPS_N · 2026年06月 · 16 篇笔记",
+    "updatedAt": "2026-06-17T11:13:33.000Z",
+    "notes": [
+      {
+        "title": "Introduction",
+        "href": "/Y3S1/CPS_N/Part%201/CPS%20Lecture%201%20Introduction.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      },
+      {
+        "title": "Review of Signals and Systems",
+        "href": "/Y3S1/CPS_N/Part%201/CPS%20Lecture%202%20Review%20of%20Signals%20and%20Systems.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      },
+      {
+        "title": "LTI Systems and Fourier Transform",
+        "href": "/Y3S1/CPS_N/Part%201/CPS%20Lecture%203%20LTI%20Systems%20and%20Fourier%20Transform.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      },
+      {
+        "title": "Baseband and Passband Signals",
+        "href": "/Y3S1/CPS_N/Part%201/CPS%20Lecture%204%20Baseband%20and%20Passband%20Signals.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      },
+      {
+        "title": "DSB-SC Amplitude Modulation",
+        "href": "/Y3S1/CPS_N/Part%202/CPS%20Lecture%206%20DSB-SC%20Amplitude%20Modulation.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      },
+      {
+        "title": "Conventional AM",
+        "href": "/Y3S1/CPS_N/Part%202/CPS%20Lecture%207%20Conventional%20AM.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      },
+      {
+        "title": "Single Sideband Modulation",
+        "href": "/Y3S1/CPS_N/Part%202/CPS%20Lecture%208%20Single%20Sideband%20Modulation.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      },
+      {
+        "title": "Vestigial Sideband Modulation",
+        "href": "/Y3S1/CPS_N/Part%202/CPS%20Lecture%209%20Vestigial%20Sideband%20Modulation.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      },
+      {
+        "title": "CPS Lecture 11 FM and PM",
+        "href": "/Y3S1/CPS_N/Part%203/CPS%20Lecture%2011%20FM%20and%20PM.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      },
+      {
+        "title": "CPS Lecture 12 FM Bandwidth Analysis",
+        "href": "/Y3S1/CPS_N/Part%203/CPS%20Lecture%2012%20FM%20Bandwidth%20Analysis.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      },
+      {
+        "title": "CPS Lecture 13 FM Demodulation",
+        "href": "/Y3S1/CPS_N/Part%203/CPS%20Lecture%2013%20FM%20Demodulation.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      },
+      {
+        "title": "CPS Lecture 14 FM Generation",
+        "href": "/Y3S1/CPS_N/Part%203/CPS%20Lecture%2014%20FM%20Generation.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      },
+      {
+        "title": "CPS Lecture 15 Practice Problems",
+        "href": "/Y3S1/CPS_N/Part%203/CPS%20Lecture%2015%20Practice%20Problems.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      },
+      {
+        "title": "CPS Lecture 16-17 Analogue to Digital Conversion",
+        "href": "/Y3S1/CPS_N/Part%204/CPS%20Lecture%2016-17%20Analogue%20to%20Digital%20Conversion.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      },
+      {
+        "title": "CPS Lecture 18 Digital Modulation",
+        "href": "/Y3S1/CPS_N/Part%204/CPS%20Lecture%2018%20Digital%20Modulation.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      },
+      {
+        "title": "CPS Lecture 19 Noise in Digital Modulation",
+        "href": "/Y3S1/CPS_N/Part%204/CPS%20Lecture%2019%20Noise%20in%20Digital%20Modulation.html",
+        "updatedAt": "2026-06-17T11:13:33.000Z",
+        "locked": false
+      }
+    ]
+  },
+  {
+    "id": "ccd-2026-06-7c102f59",
+    "period": "2026.06",
+    "course": "通信电路设计 CCD",
+    "title": "Lecture 2 - 20",
+    "description": "今天我们一起出去走一走吧，抬起头来缓缓迈步； / 烟花绽放在夜空之中，散发着阵阵夏日气息。",
+    "image": "/timeline-covers/1779784870101-48996115e4-faded.png",
+    "hasCover": true,
+    "imageAlt": "通信电路设计 CCD 2026年06月笔记封面",
+    "imagePosition": "center",
+    "accent": "indigo",
+    "dateAccent": "blue",
+    "noteMeta": "通信电路设计 CCD · 2026年06月 · 16 篇笔记",
+    "updatedAt": "2026-06-24T02:46:31.000Z",
+    "notes": [
+      {
+        "title": "Lecture 2b Semiconductors and PN Junction 半导体与 PN 结",
+        "href": "/Y3S2/CCD/Part%201/CCD%20Lecture%202b%20Semiconductors%20Basics.html",
+        "updatedAt": "2026-06-11T17:40:38.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 3-4 Transistors 晶体管",
+        "href": "/Y3S2/CCD/Part%201/CCD%20Lecture%203-4%20Transistors.html",
+        "updatedAt": "2026-06-11T17:40:38.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 8 LC Circuits and Matching Networks LC 电路与匹配网络",
+        "href": "/Y3S2/CCD/Part%202/CCD%20Lecture%208%20LC%20Circuits%20and%20Matching%20Networks.html",
+        "updatedAt": "2026-06-11T17:40:38.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 9 Oscillators 振荡器",
+        "href": "/Y3S2/CCD/Part%202/CCD%20Lecture%209%20Oscillators.html",
+        "updatedAt": "2026-06-11T17:40:38.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 11-12 Amplitude Modulation 幅度调制",
+        "href": "/Y3S2/CCD/Part%203/CCD%20Lecture%2011-12%20Amplitude%20Modulation.html",
+        "updatedAt": "2026-06-11T17:40:38.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 13 Single-Sideband Communication (SSB) 单边带通信",
+        "href": "/Y3S2/CCD/Part%203/CCD%20Lecture%2013%20Single-Sideband%20Communication%20SSB.html",
+        "updatedAt": "2026-06-11T17:40:38.000Z",
+        "locked": true
+      },
+      {
+        "title": "Rev 1 考试分析与复习重点",
+        "href": "/Y3S2/CCD/Review/Review%201.html",
+        "updatedAt": "2026-06-22T04:19:18.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 14 Frequency Modulation (FM) & Phase Modulation (PM) 调频与调相",
+        "href": "/Y3S2/CCD/Part%203/CCD%20Lecture%2014%20Frequency%20Modulation%20and%20Phase%20Modulation.html",
+        "updatedAt": "2026-06-24T02:34:10.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 15 Antennas in a Circuit 天线",
+        "href": "/Y3S2/CCD/Part%203/CCD%20Lecture%2015%20Antennas%20in%20a%20Circuit.html",
+        "updatedAt": "2026-06-07T13:49:56.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 16 Phase-Locked Loop PLL 锁相环",
+        "href": "/Y3S2/CCD/Part%204/CCD%20Lecture%2016%20Phase-Locked%20Loop%20PLL.html",
+        "updatedAt": "2026-06-21T14:30:51.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 17 RF Receivers 射频接收机",
+        "href": "/Y3S2/CCD/Part%204/CCD%20Lecture%2017%20RF%20Receivers.html",
+        "updatedAt": "2026-06-21T14:47:31.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 18 Digital to Analog Conversion 数模转换",
+        "href": "/Y3S2/CCD/Part%204/CCD%20Lecture%2018%20Digital%20to%20Analog%20Conversion.html",
+        "updatedAt": "2026-06-12T07:16:20.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 19-20 ADC and Converter Errors 模数转换与转换器误差",
+        "href": "/Y3S2/CCD/Part%204/CCD%20Lecture%2019-20%20ADC%20and%20Converter%20Errors.html",
+        "updatedAt": "2026-06-12T07:16:20.000Z",
+        "locked": true
+      },
+      {
+        "title": "Rev 2 电路图与框图总整理",
+        "href": "/Y3S2/CCD/Review/Review%202.html",
+        "updatedAt": "2026-06-24T02:46:31.000Z",
+        "locked": true
+      },
+      {
+        "title": "Rev 3 公式总整理 Formula Index",
+        "href": "/Y3S2/CCD/Review/Review%203.html",
+        "updatedAt": "2026-06-22T04:19:36.000Z",
+        "locked": true
+      },
+      {
+        "title": "Rev 4 概念总整理 Concept Index",
+        "href": "/Y3S2/CCD/Review/Review%204.html",
+        "updatedAt": "2026-06-24T02:46:31.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "epmf-2026-05-df696ae0",
+    "period": "2026.05",
+    "course": "工程项目管理与财务 EPM&F",
+    "title": "Block 1 - 3",
+    "description": "落花风里，春意渐行渐远。",
+    "image": "/timeline-covers/1779869861405-6432a9109f-faded.png",
+    "hasCover": true,
+    "imageAlt": "工程项目管理与财务 EPM&F 2026年05月笔记封面",
+    "imagePosition": "center",
+    "accent": "rose",
+    "dateAccent": "purple",
+    "noteMeta": "工程项目管理与财务 EPM&F · 2026年05月 · 6 篇笔记",
+    "updatedAt": "2026-05-27T09:15:01.000Z",
+    "notes": [
+      {
+        "title": "Block 1 例题 Examples",
+        "href": "/Y3S2/EPMF/Block%201/Block%201%20Examples.html",
+        "updatedAt": "2026-05-27T08:47:21.000Z",
+        "locked": true
+      },
+      {
+        "title": "Block 2 例题",
+        "href": "/Y3S2/EPMF/Block%202/Block%202%20Examples.html",
+        "updatedAt": "2026-05-27T08:47:21.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 1 Introduction, The Role of the Project Manager",
+        "href": "/Y3S2/EPMF/Block%201/Lecture%201.html",
+        "updatedAt": "2026-05-27T08:47:21.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lec. 5 Introduction to DFM, Design for Sustainability",
+        "href": "/Y3S2/EPMF/Block%202/Lecture%205.html",
+        "updatedAt": "2026-05-27T08:18:51.000Z",
+        "locked": true
+      },
+      {
+        "title": "Block 3 Additional Reading (Not Required for Exam)",
+        "href": "/Y3S2/EPMF/Block%203/Block%203%20Additional%20Reading.html",
+        "updatedAt": "2026-05-27T09:15:01.000Z",
+        "locked": true
+      },
+      {
+        "title": "Engineering Economics Course Revisit",
+        "href": "/Y3S2/EPMF/Block%203/Course%20Revisit.html",
+        "updatedAt": "2026-05-27T09:15:01.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "emft-2026-05-32ea32e0",
+    "period": "2026.05",
+    "course": "电磁场与波 EMFT",
+    "title": "Chapter 3 - 6",
+    "description": "去做自己力所能及之事吧",
+    "image": "/timeline-covers/1774778776536-b74efa4815-faded.png",
+    "hasCover": true,
+    "imageAlt": "电磁场与波 EMFT 2026年05月笔记封面",
+    "imagePosition": "center",
+    "accent": "amber",
+    "dateAccent": "purple",
+    "noteMeta": "电磁场与波 EMFT · 2026年05月 · 4 篇笔记",
+    "updatedAt": "2026-05-25T13:50:22.000Z",
+    "notes": [
+      {
+        "title": "3 Static Electric Field Part I",
+        "href": "/Y3S2/EMFT/EMFT%20Chapter%203%20P%20I.html",
+        "updatedAt": "2026-05-12T08:26:43.000Z",
+        "locked": true
+      },
+      {
+        "title": "4 Solution of Electrostatic Problems",
+        "href": "/Y3S2/EMFT/EMFT%20Chapter%204.html",
+        "updatedAt": "2026-05-12T08:26:43.000Z",
+        "locked": true
+      },
+      {
+        "title": "5 Steady Electric Currents",
+        "href": "/Y3S2/EMFT/EMFT%20Chapter%205.html",
+        "updatedAt": "2026-05-11T02:05:08.000Z",
+        "locked": true
+      },
+      {
+        "title": "6 Static Magnetic Fields",
+        "href": "/Y3S2/EMFT/EMFT%20Chapter%206.html",
+        "updatedAt": "2026-05-25T13:50:22.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "ccd-2026-05-9ac31c34",
+    "period": "2026.05",
+    "course": "通信电路设计 CCD",
+    "title": "Lecture 1 - 10",
+    "description": "当你离去，我该如何自处？",
+    "image": "/timeline-covers/1779783811122-1dcf7e2030-faded.png",
+    "hasCover": true,
+    "imageAlt": "通信电路设计 CCD 2026年05月笔记封面",
+    "imagePosition": "center",
+    "accent": "teal",
+    "dateAccent": "purple",
+    "noteMeta": "通信电路设计 CCD · 2026年05月 · 5 篇笔记",
+    "updatedAt": "2026-05-31T06:55:30.000Z",
+    "notes": [
+      {
+        "title": "Lecture 1 Introduction 电子通信导论",
+        "href": "/Y3S2/CCD/Part%201/CCD%20Lecture%201%20Introduction.html",
+        "updatedAt": "2026-05-26T08:58:59.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 2 Electronic Communications 电子通信基础",
+        "href": "/Y3S2/CCD/Part%201/CCD%20Lecture%202%20Electronic%20Communications.html",
+        "updatedAt": "2026-05-26T08:20:25.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 5-6 Amplifiers 放大器",
+        "href": "/Y3S2/CCD/Part%201/CCD%20Lecture%205-6%20Amplifiers.html",
+        "updatedAt": "2026-05-30T07:33:21.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 7 Mixers 混频器",
+        "href": "/Y3S2/CCD/Part%202/CCD%20Lecture%207%20Mixers.html",
+        "updatedAt": "2026-05-31T06:55:30.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 10 Revision 复习",
+        "href": "/Y3S2/CCD/Part%202/CCD%20Lecture%2010%20Revision.html",
+        "updatedAt": "2026-05-31T06:55:30.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "emft-2026-04-3b0f160e",
+    "period": "2026.04",
+    "course": "电磁场与波 EMFT",
+    "title": "Chapter 3",
+    "description": "对不起，我欺骗了你。 / 对不起，未能说出口。",
+    "image": "/timeline-covers/1774776875485-211e6c5b02-faded.png",
+    "hasCover": true,
+    "imageAlt": "电磁场与波 EMFT 2026年04月笔记封面",
+    "imagePosition": "center",
+    "accent": "cyan",
+    "dateAccent": "green",
+    "noteMeta": "电磁场与波 EMFT · 2026年04月 · 1 篇笔记",
+    "updatedAt": "2026-04-04T08:23:47.000Z",
+    "notes": [
+      {
+        "title": "3 Static Electric Field Part II",
+        "href": "/Y3S2/EMFT/EMFT%20Chapter%203%20P%20II.html",
+        "updatedAt": "2026-04-04T08:23:47.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "dsp-2026-03-f50debfa",
+    "period": "2026.03",
+    "course": "数字信号处理 DSP",
+    "title": "Chapter 2 - 6",
+    "description": "时人不识凌云木，直待凌云始道高。",
+    "image": "/timeline-covers/1773557886618-e646ba216b-faded.png",
+    "hasCover": true,
+    "imageAlt": "数字信号处理 DSP 2026年03月笔记封面",
+    "imagePosition": "center",
+    "accent": "blue",
+    "dateAccent": "frost",
+    "noteMeta": "数字信号处理 DSP · 2026年03月 · 6 篇笔记",
+    "updatedAt": "2026-03-19T07:54:53.000Z",
+    "notes": [
+      {
+        "title": "2 Discrete-Time Signals in the Time Domain",
+        "href": "/Y3S2/DSP/DSP%20Chapter%202.html",
+        "updatedAt": "2026-03-16T09:38:46.000Z",
+        "locked": true
+      },
+      {
+        "title": "3 Discrete-Time Signals in the Frequency Domain Part I",
+        "href": "/Y3S2/DSP/DSP%20Chapter%203%20I.html",
+        "updatedAt": "2026-03-16T09:38:46.000Z",
+        "locked": true
+      },
+      {
+        "title": "3 Discrete-Time Signals in the Frequency Domain Part II",
+        "href": "/Y3S2/DSP/DSP%20Chapter%203%20II.html",
+        "updatedAt": "2026-03-16T09:38:46.000Z",
+        "locked": true
+      },
+      {
+        "title": "4 Discrete Time Systems",
+        "href": "/Y3S2/DSP/DSP%20Chapter%204.html",
+        "updatedAt": "2026-03-16T09:38:46.000Z",
+        "locked": true
+      },
+      {
+        "title": "5 Discrete Fourier Transform",
+        "href": "/Y3S2/DSP/DSP%20Chapter%205.html",
+        "updatedAt": "2026-03-16T09:38:46.000Z",
+        "locked": true
+      },
+      {
+        "title": "6 Z-Transform",
+        "href": "/Y3S2/DSP/DSP%20Chapter%206.html",
+        "updatedAt": "2026-03-19T07:54:53.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "emft-2026-03-784ab414",
+    "period": "2026.03",
+    "course": "电磁场与波 EMFT",
+    "title": "Chapter 2",
+    "description": "本章节作为基础数学工具，偏向于知识清单而并非理解工具。",
+    "image": "/timeline-covers/1773559063473-45fef84bb0-faded.png",
+    "hasCover": true,
+    "imageAlt": "电磁场与波 EMFT 2026年03月笔记封面",
+    "imagePosition": "center",
+    "accent": "purple",
+    "dateAccent": "frost",
+    "noteMeta": "电磁场与波 EMFT · 2026年03月 · 1 篇笔记",
+    "updatedAt": "2026-03-31T04:00:00.000Z",
+    "notes": [
+      {
+        "title": "2 Vector Analysis",
+        "href": "/Y3S2/EMFT/EMFT%20Chapter%202.html",
+        "updatedAt": "2026-03-31T04:00:00.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "aiml-2026-01-0b6d3f46",
+    "period": "2026.01",
+    "course": "人工智能与机器学习 AIML",
+    "title": "Lecture 1 - 5",
+    "description": "",
+    "image": "/timeline-covers/transparent-faded.png",
+    "hasCover": false,
+    "imageAlt": "",
+    "imagePosition": "center",
+    "accent": "green",
+    "dateAccent": "indigo",
+    "noteMeta": "人工智能与机器学习 AIML · 2026年01月 · 7 篇笔记",
+    "updatedAt": "2026-01-31T04:00:00.000Z",
+    "notes": [
+      {
+        "title": "EC Lecture 1 Optimization",
+        "href": "/Y3S1/AIML/EC%20Lecture%201.html",
+        "updatedAt": "2026-01-31T04:00:00.000Z",
+        "locked": true
+      },
+      {
+        "title": "EC Lecture 3 Constrained Optimization",
+        "href": "/Y3S1/AIML/EC%20Lecture%203.html",
+        "updatedAt": "2026-01-31T04:00:00.000Z",
+        "locked": true
+      },
+      {
+        "title": "EC Lecture 4 Combinatorial Optimization",
+        "href": "/Y3S1/AIML/EC%20Lecture%204.html",
+        "updatedAt": "2026-01-31T04:00:00.000Z",
+        "locked": true
+      },
+      {
+        "title": "ML Lecture 4 Part II Dimension Reduction",
+        "href": "/Y3S1/AIML/ML%20Lecture%204%20Part%20II.html",
+        "updatedAt": "2026-01-31T04:00:00.000Z",
+        "locked": true
+      },
+      {
+        "title": "ML Lecture 5 Support Vector Machine",
+        "href": "/Y3S1/AIML/ML%20Lecture%205.html",
+        "updatedAt": "2026-01-31T04:00:00.000Z",
+        "locked": true
+      },
+      {
+        "title": "特征选择 vs 数据降维：区别与联系",
+        "href": "/Y3S1/AIML/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9vs%E9%99%8D%E7%BB%B4%E5%8C%BA%E5%88%AB.html",
+        "updatedAt": "2026-01-31T04:00:00.000Z",
+        "locked": true
+      },
+      {
+        "title": "特征选择方法对比表",
+        "href": "/Y3S1/AIML/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94%E8%A1%A8.html",
+        "updatedAt": "2026-01-31T04:00:00.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "aiml-2025-12-3cba1cfe",
+    "period": "2025.12",
+    "course": "人工智能与机器学习 AIML",
+    "title": "Lecture 2 - 6",
+    "description": "",
+    "image": "/timeline-covers/transparent-faded.png",
+    "hasCover": false,
+    "imageAlt": "",
+    "imagePosition": "center",
+    "accent": "frost",
+    "dateAccent": "rose",
+    "noteMeta": "人工智能与机器学习 AIML · 2025年12月 · 6 篇笔记",
+    "updatedAt": "2025-12-13T02:23:04.000Z",
+    "notes": [
+      {
+        "title": "EC Lecture 2 Genetic Algorithm",
+        "href": "/Y3S1/AIML/EC%20Lecture%202.html",
+        "updatedAt": "2025-12-13T02:23:04.000Z",
+        "locked": true
+      },
+      {
+        "title": "ML Lecture 2 Machine Learning Fundamentals",
+        "href": "/Y3S1/AIML/ML%20Lecture%202.html",
+        "updatedAt": "2025-12-05T08:29:48.000Z",
+        "locked": true
+      },
+      {
+        "title": "ML Lecture 3 Part I Model Training Basics",
+        "href": "/Y3S1/AIML/ML%20Lecture%203%20Part%20I.html",
+        "updatedAt": "2025-12-05T08:29:48.000Z",
+        "locked": true
+      },
+      {
+        "title": "ML Lecture 3 Part II Data Preparation",
+        "href": "/Y3S1/AIML/ML%20Lecture%203%20Part%20II.html",
+        "updatedAt": "2025-12-05T08:29:48.000Z",
+        "locked": true
+      },
+      {
+        "title": "ML Lecture 4 Part I Feature Selection",
+        "href": "/Y3S1/AIML/ML%20Lecture%204%20Part%20I.html",
+        "updatedAt": "2025-12-11T07:55:57.000Z",
+        "locked": true
+      },
+      {
+        "title": "ML Lecture 6 Artificial Neural Network",
+        "href": "/Y3S1/AIML/ML%20Lecture%206.html",
+        "updatedAt": "2025-12-12T07:45:20.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "ep-2025-06-75094358",
+    "period": "2025.06",
+    "course": "嵌入式处理器 EP",
+    "title": "Lecture 1 - 7",
+    "description": "",
+    "image": "/timeline-covers/transparent-faded.png",
+    "hasCover": false,
+    "imageAlt": "",
+    "imagePosition": "center",
+    "accent": "indigo",
+    "dateAccent": "amber",
+    "noteMeta": "嵌入式处理器 EP · 2025年06月 · 8 篇笔记",
+    "updatedAt": "2025-06-14T15:52:51.000Z",
+    "notes": [
+      {
+        "title": "Lecture 1: Introduction to Embedded Processors",
+        "href": "/early/EP/Lecture1.html",
+        "updatedAt": "2025-06-08T06:19:04.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 2 : ARM Processors & Intro to Interfacing (ARM 处理器 & 接口)",
+        "href": "/early/EP/Lecture2.html",
+        "updatedAt": "2025-06-14T07:45:15.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 3 : Assembly and Machine Language",
+        "href": "/early/EP/Lecture3.html",
+        "updatedAt": "2025-06-14T12:51:04.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 4 : Embedded System & Project Development Cycle (嵌入式系统与项目开发周期)",
+        "href": "/early/EP/Lecture4.html",
+        "updatedAt": "2025-06-14T15:52:51.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 5 : Testing and Debugging - I",
+        "href": "/early/EP/Lecture5.html",
+        "updatedAt": "2025-06-14T12:51:04.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 6 : Testing & Debugging - II",
+        "href": "/early/EP/Lecture6.html",
+        "updatedAt": "2025-06-08T06:19:04.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 7 : ADC & Interrupts",
+        "href": "/early/EP/Lecture7.html",
+        "updatedAt": "2025-06-14T12:51:04.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 7 Fix : Working Principle of ADC (模数转换器工作原理)",
+        "href": "/early/EP/Lecture7_Fix.html",
+        "updatedAt": "2025-06-13T08:07:07.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "ep-2025-05-a78b0791",
+    "period": "2025.05",
+    "course": "嵌入式处理器 EP",
+    "title": "Lecture 8 - 12",
+    "description": "",
+    "image": "/timeline-covers/transparent-faded.png",
+    "hasCover": false,
+    "imageAlt": "",
+    "imagePosition": "center",
+    "accent": "rose",
+    "dateAccent": "teal",
+    "noteMeta": "嵌入式处理器 EP · 2025年05月 · 5 篇笔记",
+    "updatedAt": "2025-05-26T09:43:27.000Z",
+    "notes": [
+      {
+        "title": "Lecture 8 : DAC",
+        "href": "/early/EP/Lecture8.html",
+        "updatedAt": "2025-05-09T10:57:49.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 9 : Inter Integrated Circuit (I2C)",
+        "href": "/early/EP/Lecture9.html",
+        "updatedAt": "2025-05-12T10:01:15.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 10 : Serial Peripheral Interface (SPI)",
+        "href": "/early/EP/Lecture10.html",
+        "updatedAt": "2025-05-12T10:01:15.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 11 : Modular Programming (模块化编程)",
+        "href": "/early/EP/Lecture11.html",
+        "updatedAt": "2025-05-26T09:43:27.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 12 : Energy Efficient Embedded System (节能嵌入式系统)",
+        "href": "/early/EP/Lecture12.html",
+        "updatedAt": "2025-05-26T09:43:27.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "cad-2025-01-779a7918",
+    "period": "2025.01",
+    "course": "电路分析与设计 CAD",
+    "title": "Lecture 2 - 18",
+    "description": "",
+    "image": "/timeline-covers/transparent-faded.png",
+    "hasCover": false,
+    "imageAlt": "",
+    "imagePosition": "center",
+    "accent": "amber",
+    "dateAccent": "cyan",
+    "noteMeta": "电路分析与设计 CAD · 2025年01月 · 12 篇笔记",
+    "updatedAt": "2025-01-13T17:43:37.000Z",
+    "notes": [
+      {
+        "title": "Lecture 2 : Source（电源） & Element Signals（基本信号）",
+        "href": "/early/CAD/Lecture2.html",
+        "updatedAt": "2025-01-12T10:30:30.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 5 : Nodal Analysis & Supernode",
+        "href": "/early/CAD/Lecture5.html",
+        "updatedAt": "2025-01-12T10:30:30.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 6 : Mesh Analysis & Supermesh",
+        "href": "/early/CAD/Lecture6.html",
+        "updatedAt": "2025-01-12T10:30:30.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 10 : Capacitors",
+        "href": "/early/CAD/Lecture10.html",
+        "updatedAt": "2025-01-12T10:30:30.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 11 : Inductors",
+        "href": "/early/CAD/Lecture11.html",
+        "updatedAt": "2025-01-12T10:30:30.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 12 : RC Circuit",
+        "href": "/early/CAD/Lecture12.html",
+        "updatedAt": "2025-01-12T10:30:30.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 13 : RL Circuit",
+        "href": "/early/CAD/Lecture13.html",
+        "updatedAt": "2025-01-12T10:30:30.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 14 : RLC Circuits",
+        "href": "/early/CAD/Lecture14.html",
+        "updatedAt": "2025-01-12T10:30:30.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 15 : AC Circuits（交流电路）",
+        "href": "/early/CAD/Lecture15.html",
+        "updatedAt": "2025-01-13T17:43:37.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 16 : First-Order Filters",
+        "href": "/early/CAD/Lecture16.html",
+        "updatedAt": "2025-01-12T10:30:30.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 17 : Second-Order Filters",
+        "href": "/early/CAD/Lecture17.html",
+        "updatedAt": "2025-01-12T10:30:30.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 18 : Operational Amplifiers (运算放大器)",
+        "href": "/early/CAD/Lecture18.html",
+        "updatedAt": "2025-01-12T10:30:30.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "cad-2024-12-5f74815f",
+    "period": "2024.12",
+    "course": "电路分析与设计 CAD",
+    "title": "Lecture 7 - 8",
+    "description": "",
+    "image": "/timeline-covers/transparent-faded.png",
+    "hasCover": false,
+    "imageAlt": "",
+    "imagePosition": "center",
+    "accent": "teal",
+    "dateAccent": "blue",
+    "noteMeta": "电路分析与设计 CAD · 2024年12月 · 2 篇笔记",
+    "updatedAt": "2024-12-16T08:04:33.000Z",
+    "notes": [
+      {
+        "title": "Lecture 7 : Superposition & Source Transformation",
+        "href": "/early/CAD/Lecture7.html",
+        "updatedAt": "2024-12-16T08:04:33.000Z",
+        "locked": true
+      },
+      {
+        "title": "Lecture 8 : Thevenin's Theorem",
+        "href": "/early/CAD/Lecture8.html",
+        "updatedAt": "2024-12-16T08:04:33.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
+    "id": "cad-2024-11-99b12f7c",
+    "period": "2024.11",
+    "course": "电路分析与设计 CAD",
+    "title": "Lecture 9",
+    "description": "",
+    "image": "/timeline-covers/transparent-faded.png",
+    "hasCover": false,
+    "imageAlt": "",
+    "imagePosition": "center",
+    "accent": "cyan",
+    "dateAccent": "purple",
+    "noteMeta": "电路分析与设计 CAD · 2024年11月 · 1 篇笔记",
+    "updatedAt": "2024-11-05T09:49:11.000Z",
+    "notes": [
+      {
+        "title": "Lecture 9 : Norton's Theorem & Maximum Power Transfer Theorem",
+        "href": "/early/CAD/Lecture9.html",
+        "updatedAt": "2024-11-05T09:49:11.000Z",
+        "locked": true
+      }
+    ]
+  }
+]
