@@ -15,6 +15,7 @@ let indicatorReady = false
 let resizeTimer: ReturnType<typeof setTimeout> | undefined
 let indicatorFrame = 0
 let sidebarObserver: MutationObserver | undefined
+let sidebarResizeObserver: ResizeObserver | undefined
 let sidebarAttachTimer: ReturnType<typeof setTimeout> | undefined
 let sidebarAttachAttempts = 0
 let outlineJumpMotion: ReturnType<typeof createOutlineJumpMotion> | undefined
@@ -152,6 +153,7 @@ function updateSidebarIndicator() {
 
   try {
     const indicator = ensureIndicator()
+    syncSidebarScrollbarWidth(nav)
     const navRect = nav.getBoundingClientRect()
     const linkRect = activeLink.getBoundingClientRect()
 
@@ -166,9 +168,14 @@ function updateSidebarIndicator() {
       indicator.style.transition = 'none'
     }
 
+    // .nav 是滚动容器：绝对定位原点是它的 padding box（RTL 下位于左侧滚动条之后），
+    // 且不随内容滚动，所以要减去 client 边距、补回滚动偏移。
+    const originLeft = navRect.left + nav.clientLeft - nav.scrollLeft
+    const originTop = navRect.top + nav.clientTop - nav.scrollTop
+
     indicator.style.opacity = '1'
-    indicator.style.left = (linkRect.left - navRect.left) + 'px'
-    indicator.style.top = (linkRect.top - navRect.top) + 'px'
+    indicator.style.left = (linkRect.left - originLeft) + 'px'
+    indicator.style.top = (linkRect.top - originTop) + 'px'
     indicator.style.width = linkRect.width + 'px'
     indicator.style.height = linkRect.height + 'px'
 
@@ -218,7 +225,44 @@ function attachSidebarObserver() {
     scheduleSidebarIndicatorUpdate()
   })
   sidebarObserver.observe(sidebar, { attributes: true, subtree: true, attributeFilter: ['class'] })
+  observeSidebarLayout(sidebar)
   scheduleSidebarIndicatorUpdate()
+}
+
+// direction: rtl 让滚动条槽只占左侧，把内容整体右推，条目左右留白就不相等。
+// 槽宽取决于系统滚动条设置（覆盖式滚动条为 0），CSS 拿不到，只能量。
+// 量出的是槽本身，与当前 padding-left 无关，所以反复调用会收敛。
+function syncSidebarScrollbarWidth(nav: HTMLElement) {
+  const probe = nav.querySelector('.group')
+  if (!probe) return
+
+  const paddingLeft = Number.parseFloat(getComputedStyle(nav).paddingLeft) || 0
+  const gutter = probe.getBoundingClientRect().left - nav.getBoundingClientRect().left - paddingLeft
+  const next = `${Math.max(0, Math.round(gutter))}px`
+  if (nav.style.getPropertyValue('--aya-sidebar-scrollbar') === next) return
+
+  nav.style.setProperty('--aya-sidebar-scrollbar', next)
+}
+
+// document.fonts.ready 可能在 Web 字体的 @font-face 注册之前就 resolve，
+// 字体到达后条目会重新折行而指示器留在旧位置。观察实际尺寸变化兜底。
+function observeSidebarLayout(sidebar: Element) {
+  sidebarResizeObserver?.disconnect()
+  sidebarResizeObserver = undefined
+  if (typeof ResizeObserver === 'undefined') return
+
+  const nav = sidebar.querySelector('.nav')
+  if (!nav) return
+
+  const observer = new ResizeObserver(() => {
+    scheduleSidebarIndicatorUpdate()
+  })
+  observer.observe(nav)
+  // 指示器自身会被脚本改尺寸，纳入观察会自激。
+  nav.querySelectorAll(':scope > *:not(.sidebar-active-indicator)').forEach((child) => {
+    observer.observe(child)
+  })
+  sidebarResizeObserver = observer
 }
 
 function resetSidebarObserver() {
@@ -227,6 +271,8 @@ function resetSidebarObserver() {
   sidebarAttachAttempts = 0
   sidebarObserver?.disconnect()
   sidebarObserver = undefined
+  sidebarResizeObserver?.disconnect()
+  sidebarResizeObserver = undefined
   attachSidebarObserver()
   resetSidebarMotion()
 }
@@ -424,6 +470,8 @@ onUnmounted(() => {
   detachSidebarMotion = undefined
   sidebarObserver?.disconnect()
   sidebarObserver = undefined
+  sidebarResizeObserver?.disconnect()
+  sidebarResizeObserver = undefined
   if (indicatorFrame) {
     window.cancelAnimationFrame(indicatorFrame)
     indicatorFrame = 0

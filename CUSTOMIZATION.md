@@ -204,7 +204,7 @@ window.addEventListener('vt-transition-done', () => { /* 重新初始化依赖 D
 |---|---|---|
 | `style/var.css` | `--aya-gradient-*`、`--aya-c-brand-*`、`--vp-c-brand-*`、`--vp-home-hero-*` | 品牌渐变三色、品牌色通道（tint/阴影复用）、hero 标题/光晕 |
 | `style/surface.css` | `--aya-surface-*`、`--aya-frosted-blur-*`、`--aya-shadow-*`、`--aya-search-*` | 全站毛玻璃表面、模糊半径梯度（sm/md/lg/panel/backdrop）、阴影体系 |
-| `style/sidebar-window.css` | `--aya-sidebar-*` | 侧栏浮窗：背景、圆角（`--aya-sidebar-radius`）、活跃色、毛玻璃 |
+| `style/sidebar-window.css` | `--aya-sidebar-*` | 侧栏浮窗：背景、圆角（`--aya-sidebar-radius`）、版心对齐间距（`--aya-sidebar-gutter`）、活跃色、毛玻璃 |
 | `style/nav-tabs.css` | `--aya-nav-tab-*`、`--aya-nav-menu-*`、`--aya-nav-pill-*` | 导航胶囊与下拉菜单 |
 | `style/reading-mode.css` | `--aya-reading-mode-*` | 纯净阅读模式 |
 | `custom.css` | `--aya-c-definition-*`、`--aya-c-warning-*`、`--aya-card-*` | 学术 callout 与卡片 |

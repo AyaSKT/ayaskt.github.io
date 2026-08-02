@@ -1622,11 +1622,10 @@ export default defineConfig({
   },
   head: [
     ['link', { rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon.ico?' }],
-    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
-    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
-    // Google Fonts 样式表改为异步加载：若字体 CDN 不可达（如部分网络环境），
-    // 页面仍能立即渲染，不会因渲染阻塞样式表而白屏挂起。
-    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap', media: 'print', onload: "this.media='all'" }],
+    // 字体自托管:docs:assets 阶段由 scripts/download-fonts.mjs 从 Google Fonts
+    // 下载分片并生成本地 fonts.css(见 package.json / .github/workflows/deploy.yml),
+    // 避免运行时依赖 fonts.googleapis.com(慢速/不可达时页面渲染不受影响)。
+    ['link', { rel: 'stylesheet', href: '/fonts/fonts.css' }],
   ],
   lastUpdated: true,
 

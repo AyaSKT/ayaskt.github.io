@@ -25,6 +25,7 @@ output/
 # 开发文档 / 工具，不部署到 GitHub Pages
 docs/superpowers/
 docs/public/animation-tuner.html
+docs/public/fonts/
 docs/public/archive-gallery.html
 
 # 本地编辑器仅在 dev 模式启用；以下缓存不入库

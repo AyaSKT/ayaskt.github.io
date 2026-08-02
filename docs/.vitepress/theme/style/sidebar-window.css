@@ -17,6 +17,10 @@
   --aya-sidebar-frosted-blur: blur(22px);
   --aya-sidebar-item-frosted-blur: blur(12px);
   --aya-sidebar-layout-offset: max(0px, calc((100vw - var(--vp-layout-max-width)) / 2));
+  /* VitePress 版心左右留白，导航栏标题与右侧目录都按这个值内缩。 */
+  --aya-sidebar-gutter: 32px;
+  /* 侧栏条目到窗体边框的留白（左右一致）。 */
+  --aya-sidebar-pad-x: 21px;
 }
 
 .dark {
@@ -37,22 +41,20 @@
     display: none !important;
   }
 
+  /* 窗体本身不滚动：Chromium 在滚动容器上会把带滚动条那一侧的圆角画成直角，
+     所以滚动条必须落在内层 .nav 上，外层只负责圆角、边框、阴影和毛玻璃。 */
   html:has(.VPDoc) .VPSidebar {
-    top: calc(var(--vp-nav-height) + 44px);
+    /* 顶边与正文、右侧目录齐平。 */
+    top: calc(var(--vp-nav-height) + 48px);
     bottom: auto;
-    /* 视口 >1440px 时随布局居中；窄视口时留固定侧隙，
-       避免左侧贴边导致圆角“一边方一边圆”。 */
-    left: calc(var(--aya-sidebar-layout-offset) + clamp(12px, 1.4vw, 20px));
+    /* 左边缘对齐版心：与导航栏标题同一条竖线，也与右侧目录的边距互为镜像。 */
+    left: calc(var(--aya-sidebar-layout-offset) + var(--aya-sidebar-gutter));
+    display: flex;
     width: var(--vp-sidebar-width);
     height: auto;
-    max-height: calc(100dvh - var(--vp-nav-height) - 62px);
-    padding: 14px 21px 10px;
-    direction: rtl;
-    overflow: hidden auto;
-    overscroll-behavior: contain;
-    scrollbar-gutter: stable;
-    scrollbar-width: thin;
-    scrollbar-color: rgb(92 109 128 / 22%) transparent;
+    max-height: calc(100dvh - var(--vp-nav-height) - 66px);
+    padding: 0;
+    overflow: hidden;
     border: 1px solid var(--aya-sidebar-border);
     border-radius: var(--aya-sidebar-radius);
     corner-shape: squircle;
@@ -66,10 +68,6 @@
     isolation: isolate;
   }
 
-  html:has(.VPDoc) .VPSidebar > * {
-    direction: ltr;
-  }
-
   .dark html:has(.VPDoc) .VPSidebar,
   html.dark:has(.VPDoc) .VPSidebar {
     background: var(--aya-sidebar-bg);
@@ -80,10 +78,29 @@
     display: none;
   }
 
+  /* 真正的滚动容器。direction: rtl 把滚动条移到左侧，子元素再翻回 ltr。
+     滚动条槽只占左侧，会把内容整体右推，导致条目左右边距不等；槽宽由系统决定
+     （覆盖式滚动条时为 0），CSS 读不到，由 PageTransition 量出后写入
+     --aya-sidebar-scrollbar，这里从左内边距里扣掉，保证左右留白一致。 */
   html:has(.VPDoc) .VPSidebar .nav {
     position: relative;
+    flex: 1;
+    min-width: 0;
     width: auto;
-    padding: 4px 0 10px;
+    padding-top: 18px;
+    padding-right: var(--aya-sidebar-pad-x);
+    padding-bottom: 20px;
+    padding-left: max(0px, calc(var(--aya-sidebar-pad-x) - var(--aya-sidebar-scrollbar, 0px)));
+    direction: rtl;
+    overflow: hidden auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(92 109 128 / 22%) transparent;
+  }
+
+  html:has(.VPDoc) .VPSidebar .nav > * {
+    direction: ltr;
   }
 
   /* 活跃条目浮动指示器 */
@@ -181,6 +198,19 @@
     padding-left: 0;
   }
 
+  /* 行内左右内缩统一由 .link 承担。没有链接的分组标题（如“Block 1 …”）少了这层
+     内缩，文字和折叠箭头会比其它行往外突出，这里补齐；反之 level-0 若本身是链接，
+     则去掉 .item 上重复的一层，避免文字多缩进一次。 */
+  html:has(.VPDoc) .VPSidebar .VPSidebarItem:not(.level-0) > .item:not(:has(> .link)) {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  html:has(.VPDoc) .VPSidebar .VPSidebarItem.level-0 > .item:has(> .link) {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
   html:has(.VPDoc) .VPSidebar .VPSidebarItem .link {
     position: relative;
     z-index: 1;
@@ -224,22 +254,22 @@
     transform: scale(0.985);
   }
 
-  html:has(.VPDoc) .VPSidebar::-webkit-scrollbar {
+  html:has(.VPDoc) .VPSidebar .nav::-webkit-scrollbar {
     width: 4px;
   }
 
-  html:has(.VPDoc) .VPSidebar::-webkit-scrollbar-track {
+  html:has(.VPDoc) .VPSidebar .nav::-webkit-scrollbar-track {
     background: transparent;
     margin-top: 14px;
     margin-bottom: 14px;
   }
 
-  html:has(.VPDoc) .VPSidebar::-webkit-scrollbar-thumb {
+  html:has(.VPDoc) .VPSidebar .nav::-webkit-scrollbar-thumb {
     border-radius: 999px;
     background: rgb(92 109 128 / 22%);
   }
 
-  html:has(.VPDoc) .VPSidebar::-webkit-scrollbar-thumb:hover {
+  html:has(.VPDoc) .VPSidebar .nav::-webkit-scrollbar-thumb:hover {
     background: rgb(92 109 128 / 36%);
   }
 }
@@ -280,9 +310,10 @@
     right: 12px !important;
     bottom: auto !important;
     left: 12px !important;
+    display: flex;
     width: auto !important;
     max-height: calc(100dvh - var(--vp-nav-height) - 26px);
-    padding: 14px 18px 18px !important;
+    padding: 0 !important;
     border: 1px solid var(--aya-sidebar-border);
     border-radius: var(--aya-sidebar-radius);
     corner-shape: squircle;
@@ -291,15 +322,19 @@
     box-shadow: var(--aya-sidebar-window-shadow);
     backdrop-filter: var(--aya-sidebar-frosted-blur);
     -webkit-backdrop-filter: var(--aya-sidebar-frosted-blur);
-    overflow: hidden auto;
-    overscroll-behavior: contain;
+    overflow: hidden;
     isolation: isolate;
   }
 
+  /* 同桌面侧边栏：滚动条留在内层，避免圆角被滚动条那一侧切成直角。 */
   .VPNavScreen .container {
+    flex: 1;
+    min-width: 0;
     margin: 0;
-    padding: 4px 0 12px;
+    padding: 18px 18px 30px;
     max-width: none;
+    overflow: hidden auto;
+    overscroll-behavior: contain;
   }
 
   .VPNavScreen.fade-enter-active .container,

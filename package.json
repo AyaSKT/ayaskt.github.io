@@ -5,7 +5,7 @@
     "docs:dev": "npm run docs:assets && vitepress dev docs",
     "docs:build": "npm run docs:assets && vitepress build docs",
     "docs:preview": "vitepress preview docs",
-    "docs:assets": "npm run docs:thumbs && npm run docs:previews && npm run timeline:covers",
+    "docs:assets": "npm run fonts:download && npm run docs:thumbs && npm run docs:previews && npm run timeline:covers",
     "docs:thumbs": "node scripts/generate-course-thumbnails.mjs",
     "docs:previews": "node scripts/generate-course-previews.mjs",
     "timeline:covers": "node scripts/generate-timeline-covers.mjs",
@@ -17,7 +17,8 @@
     "test:local-editor": "node --test scripts/local-editor.test.mjs",
     "test:customization": "node --test scripts/customization.test.mjs",
     "test:pdf": "node --test scripts/verify-pdf-download.mjs",
-    "postinstall": "node scripts/patch-mathjax.mjs"
+    "postinstall": "node scripts/patch-mathjax.mjs",
+    "fonts:download": "node scripts/download-fonts.mjs"
   },
   "devDependencies": {
     "@mdit/plugin-mathjax": "^0.26.1",
