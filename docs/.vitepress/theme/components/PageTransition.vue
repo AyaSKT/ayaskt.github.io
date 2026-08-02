@@ -21,9 +21,9 @@ let outlineJumpMotion: ReturnType<typeof createOutlineJumpMotion> | undefined
 let detachOutlineJumpMotion: (() => void) | undefined
 let detachSidebarMotion: (() => void) | undefined
 
-const ARTICLE_IMAGE_LAYOUT_TIMEOUT = 180
+const ARTICLE_IMAGE_LAYOUT_TIMEOUT = 240
 const ARTICLE_IMAGE_LAYOUT_POLL_INTERVAL = 32
-const ARTICLE_IMAGE_WAIT_LIMIT = 6
+const ARTICLE_IMAGE_WAIT_LIMIT = 8
 const TIMELINE_EXIT_TIMEOUT_FALLBACK = 900
 
 interface TimelineExitRequestDetail {

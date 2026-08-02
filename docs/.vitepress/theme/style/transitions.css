@@ -113,6 +113,17 @@ html.vt-doc-content-transition::view-transition-new(doc-content) {
   animation: docFadeInRightShort var(--dur-doc-enter) var(--ease-ios-fade) both;
 }
 
+/* 正文内的毛玻璃/混合元素会烘进 view-transition 快照，切换时产生残影闪动；
+   过渡期间临时禁用，避免旧快照残留高矩形。 */
+html.vt-doc-content-transition .vp-doc .example-stem,
+html.vt-doc-content-transition .vp-doc .example-solution,
+html.vt-doc-content-transition .vp-doc .custom-block,
+html.vt-doc-content-transition .vp-doc .song-card,
+html.vt-doc-content-transition .vp-doc .lyric-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
 html.vt-doc-to-contentless::view-transition-old(doc-content) {
   animation: docFadeOutRightShort var(--dur-page-exit) var(--ease-ios-press) both;
 }
@@ -166,7 +177,7 @@ html.vt-doc-to-doc::view-transition-new(root) {
 @keyframes docFadeInRightShort {
   from {
     opacity: 0;
-    transform: translateX(18px);
+    transform: translateX(9px);
   }
   to {
     opacity: 1;
@@ -181,7 +192,7 @@ html.vt-doc-to-doc::view-transition-new(root) {
   }
   to {
     opacity: 0;
-    transform: translateX(18px);
+    transform: translateX(9px);
   }
 }
 
@@ -241,9 +252,9 @@ a:active, button:active, .VPNavBarMenuLink:active, .VPLink:active {
 /* ---- Mobile Optimization ---- */
 @media (max-width: 768px) {
   :root {
-    --dur-page: 0.66s;
-    --dur-page-exit: 0.42s;
-    --dur-doc-enter: 0.82s;
+    --dur-page: 0.5s;
+    --dur-page-exit: 0.36s;
+    --dur-doc-enter: 0.64s;
     --dur-sidebar-enter: 0.64s;
     --dur-sidebar-exit: 0.4s;
     --dur-appearance-enter: 0.6s;
@@ -251,9 +262,9 @@ a:active, button:active, .VPNavBarMenuLink:active, .VPLink:active {
     --dur-panel: 0.56s;
     --dur-ripple: 0.6s;
     --dur-reveal: 0.54s;
-    --dur-timeline-enter: 0.46s;
-    --dur-timeline-exit: 0.28s;
-    --dur-timeline-stagger: 0.045s;
+    --dur-timeline-enter: 0.38s;
+    --dur-timeline-exit: 0.24s;
+    --dur-timeline-stagger: 0.024s;
     --dur-timeline-exit-timeout: 0.78s;
     --ripple-size: 140px;
   }

@@ -40,7 +40,9 @@
   html:has(.VPDoc) .VPSidebar {
     top: calc(var(--vp-nav-height) + 44px);
     bottom: auto;
-    left: var(--aya-sidebar-layout-offset);
+    /* 视口 >1440px 时随布局居中；窄视口时留固定侧隙，
+       避免左侧贴边导致圆角“一边方一边圆”。 */
+    left: calc(var(--aya-sidebar-layout-offset) + clamp(12px, 1.4vw, 20px));
     width: var(--vp-sidebar-width);
     height: auto;
     max-height: calc(100dvh - var(--vp-nav-height) - 62px);

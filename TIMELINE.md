@@ -10,7 +10,7 @@
 | `docs/.vitepress/theme/components/TimelinePage.vue` | 页面结构、卡片、抽屉、响应式布局、动画与 Nord 样式；不保存卡片内容。 |
 | `scripts/generate-timeline-covers.mjs` | 读取 `timeline.md` 配置，扫描笔记、计算日期、按月分组、处理封面并生成时间线数据。 |
 | `docs/.vitepress/theme/generated/timeline-entries.json` | 自动生成的时间线数据，不应手工修改。 |
-| `docs/public/timeline-covers/` | 自动生成的 16:9 渐隐 PNG，不应手工修改。 |
+| `docs/public/timeline-covers/` | 自动生成的 16:9 渐隐 WebP，不应手工修改。 |
 | `scripts/timeline-covers/source/timeline-cover.jpg` | 有视觉信息但找不到自身封面时使用的通用兜底图。 |
 | `docs/.vitepress/config.mts` | 顶部导航中的“时间线”入口。 |
 | `docs/.vitepress/theme/index.ts` | 全局注册 `TimelinePage`。 |
@@ -99,7 +99,7 @@ timeline:
 3. 从右侧开始逐像素混合清晰图与模糊图；
 4. 再将右侧透明度平滑降到零，使图片自然隐入卡片背景。
 
-渐变参数位于脚本顶部：`blurStart`、`blurEnd`、`alphaStart`、`blurRadius`。调整后重新运行生成命令即可；脚本会依据源图和脚本修改时间刷新产物，并清理不再被引用的 `-faded.png`。
+渐变参数位于脚本顶部：`blurStart`、`blurEnd`、`alphaStart`、`blurRadius`。调整后重新运行生成命令即可；脚本会依据源图和脚本修改时间刷新产物，并清理不再被引用的 `-faded.webp`。
 
 不要在 CSS 中叠加一层强模糊遮罩，也不要手工编辑生成 PNG，否则下一次开发或构建会覆盖这些改动。
 

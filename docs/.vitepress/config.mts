@@ -1624,12 +1624,17 @@ export default defineConfig({
     ['link', { rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon.ico?' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
-    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@200;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap' }],
+    // Google Fonts 样式表改为异步加载：若字体 CDN 不可达（如部分网络环境），
+    // 页面仍能立即渲染，不会因渲染阻塞样式表而白屏挂起。
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap', media: 'print', onload: "this.media='all'" }],
   ],
   lastUpdated: true,
 
   markdown: {
     math: false,
+    image: {
+      lazyLoading: true,
+    },
     config: async (md) => {
       // MathJax 4：服务端 SVG 输出，$...$ 与 $$...$$ 分隔符。排除 bboldx 避免 "Invalid variant: -bboldx"。
       // 用 transformer 包裹 v-pre，防止 Vue  hydration 时把公式再处理一次导致重复显示。

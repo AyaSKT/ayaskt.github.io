@@ -110,9 +110,9 @@
   --ease-ios-slide:  var(--ease-out-4, cubic-bezier(0.25, 0.1, 0.25, 1));
   --ease-ios-fade:   var(--ease-out-3, cubic-bezier(0.16, 1, 0.3, 1));
   --ease-ios-press:  var(--ease-quad-out, cubic-bezier(0.25, 0.46, 0.45, 0.94));
-  --dur-page: 0.76s;
-  --dur-page-exit: 0.48s;
-  --dur-doc-enter: 0.94s;
+  --dur-page: 0.58s;
+  --dur-page-exit: 0.4s;
+  --dur-doc-enter: 0.7s;
   --dur-sidebar-enter: 0.72s;
   --dur-sidebar-exit: 0.46s;
   --dur-appearance-enter: 0.68s;
@@ -134,9 +134,10 @@
   --dur-sidebar-indicator: 0.38s;
   --dur-outline-out: 0.14s;
   --dur-outline-in: 0.26s;
-  --dur-timeline-enter: 0.52s;
-  --dur-timeline-exit: 0.3s;
-  --dur-timeline-stagger: 0.055s;
+  /* 时间线入场：短时长 + 极小错峰，卡片整体“一起进入” */
+  --dur-timeline-enter: 0.42s;
+  --dur-timeline-exit: 0.26s;
+  --dur-timeline-stagger: 0.026s;
   --dur-timeline-exit-timeout: 0.9s;
   --ripple-size: 200px;
   --animate-duration: var(--dur-page);

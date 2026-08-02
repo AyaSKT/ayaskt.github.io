@@ -399,7 +399,7 @@ async function generateCover(sourcePath, outputPath) {
   }
 
   await sharp(output, { raw: { width, height, channels: 4 } })
-    .png({ compressionLevel: 9 })
+    .webp({ quality: 82, effort: 5 })
     .toFile(outputPath)
 }
 
@@ -412,7 +412,7 @@ async function generateTransparentCover(outputPath) {
       background: { r: 0, g: 0, b: 0, alpha: 0 },
     },
   })
-    .png({ compressionLevel: 9 })
+    .webp({ quality: 82, effort: 5 })
     .toFile(outputPath)
 }
 
@@ -464,7 +464,7 @@ async function main() {
 
   for (const group of groups) {
     if (!group.hasCover) {
-      const outputName = 'transparent-faded.png'
+      const outputName = 'transparent-faded.webp'
       const outputPath = path.join(outputDir, outputName)
       if (!fs.existsSync(outputPath) || fs.statSync(outputPath).mtimeMs < scriptMtime) {
         await generateTransparentCover(outputPath)
@@ -486,7 +486,7 @@ async function main() {
         .replace(/^-|-$/g, '')
         .slice(0, 42) || 'cover'
       const hash = createHash('sha1').update(sourceKey).digest('hex').slice(0, 10)
-      outputName = `${sourceStem}-${hash}-faded.png`
+      outputName = `${sourceStem}-${hash}-faded.webp`
       const outputPath = path.join(outputDir, outputName)
       const outputMtime = fs.existsSync(outputPath) ? fs.statSync(outputPath).mtimeMs : 0
       const sourceMtime = fs.statSync(sourcePath).mtimeMs
@@ -503,7 +503,7 @@ async function main() {
   }
 
   for (const fileName of fs.readdirSync(outputDir)) {
-    if (fileName.endsWith('-faded.png') && !expectedOutputs.has(fileName)) {
+    if (fileName.endsWith('-faded.webp') && !expectedOutputs.has(fileName)) {
       fs.unlinkSync(path.join(outputDir, fileName))
     }
   }

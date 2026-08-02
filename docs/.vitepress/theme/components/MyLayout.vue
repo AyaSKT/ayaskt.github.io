@@ -45,10 +45,10 @@ const route = useRoute()
 const isHome = computed(() => route.path === '/' || route.path === '/index.html')
 
 const heroImagePool = [
-  '/IMG_4338.jpeg',
-  '/IMG_4520.png',
-  '/IMG_4521.png',
-  '/IMG_4522.png',
+  '/IMG_4338.webp',
+  '/IMG_4520.webp',
+  '/IMG_4521.webp',
+  '/IMG_4522.webp',
 ]
 
 const randomHeroSrc = ref('')
@@ -280,8 +280,7 @@ onMounted(() => {
           class="hero-tooltip"
           :style="{ left: tooltipX + 'px', top: tooltipY + 'px' }"
         >点我有惊喜 (≧▽≦)</span>
-        <!-- 预加载全部 hero image，避免切换时重新请求 -->
-        <img v-for="src in heroImagePool" :key="src" :src="src" class="hero-preload" aria-hidden="true">
+        <!-- 预加载仅当前选中的 hero 图（其余图片不再首屏下载） -->
         <HeroHitokoto class="desktop-hitokoto" />
         <component :is="comp" v-for="(comp, i) in slotComponents('home-hero-image')" :key="i" />
       </div>
