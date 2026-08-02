@@ -3,7 +3,8 @@
   --aya-sidebar-radius: 28px;
   --aya-sidebar-item-radius: 14px;
   --aya-sidebar-active-radius: 10px;
-  --aya-sidebar-active-left-inset: 4px;
+  /* 高亮胶囊与条目框对齐；非 0 会让它左右留白不等。 */
+  --aya-sidebar-active-left-inset: 0px;
   --aya-sidebar-bg: rgb(255 255 255 / 50%);
   --aya-sidebar-bg-strong: rgb(255 255 255 / 78%);
   --aya-sidebar-border: rgb(255 255 255 / 42%);
@@ -34,6 +35,14 @@
   --aya-sidebar-active-bg: rgb(var(--aya-c-brand-blue-rgb) / 14%);
   --aya-sidebar-active-text: var(--aya-c-brand-blue);
   --aya-sidebar-window-shadow: 0 18px 44px rgb(0 0 0 / 42%);
+}
+
+/* 指示器由脚本插入 .nav 末尾，靠内联 width/height 定尺寸。浮动窗一套样式只在桌面档
+   生效，窄屏若让它留成静态块元素，会在抽屉侧栏底部撑出一块空白。 */
+.sidebar-active-indicator {
+  display: none;
+  position: absolute;
+  pointer-events: none;
 }
 
 @media (min-width: 960px) {
@@ -103,11 +112,25 @@
     direction: ltr;
   }
 
-  /* 活跃条目浮动指示器 */
-  .sidebar-active-indicator {
-    position: absolute;
+  /* 分组展开到一半时内容才刚够溢出，滚动条会在动画中途冒出来。sidebar-motion 在
+     起点没有滚动条时打上这个标记，动画期间把它染透明；槽宽不变，也不影响滚动。
+     scrollbar-color 覆盖 Firefox 与新版 Chrome/Safari，伪元素覆盖旧版 WebKit。 */
+  html:has(.VPDoc) .VPSidebar .nav[data-sidebar-scrollbar="hidden"] {
+    scrollbar-color: transparent transparent;
+  }
+
+  html:has(.VPDoc) .VPSidebar .nav[data-sidebar-scrollbar="hidden"]::-webkit-scrollbar-thumb,
+  html:has(.VPDoc) .VPSidebar .nav[data-sidebar-scrollbar="hidden"]::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+  }
+
+  /* 活跃条目浮动指示器。定位参照是 .nav 的 position: relative，而那条规则挂在
+     html:has(.VPDoc) 上，所以这里同样要带前缀：不支持 :has() 的浏览器
+     （Firefox 121 之前）整套浮动窗样式都不生效，指示器得跟着一起留在隐藏态，
+     否则它会去找别的定位祖先，飘到页面上乱窜。 */
+  html:has(.VPDoc) .sidebar-active-indicator {
+    display: block;
     z-index: 0;
-    pointer-events: none;
     border-radius: var(--aya-sidebar-active-radius);
     corner-shape: squircle;
     transition:
@@ -131,7 +154,10 @@
     box-shadow: 0 0 0 1px rgb(var(--aya-c-brand-blue-rgb) / 22%), 0 8px 18px rgb(0 0 0 / 18%);
   }
 
+  /* VitePress 把 .group 宽度写死为 --vp-sidebar-width - 64px（按它自己的 32px 内边距算）。
+     我们的内边距不同，宽度就对不上；在 rtl 下这个偏窄的块会靠右排，左边空出一截。 */
   html:has(.VPDoc) .VPSidebar .group {
+    width: auto;
     padding: 0;
   }
 
@@ -299,6 +325,10 @@
   html:has(.VPDoc) .VPSidebar .VPSidebarItem > .items[data-sidebar-motion],
   html:has(.VPDoc) .VPSidebar .VPSidebarItem.collapsed > .items[data-sidebar-motion] {
     animation: none !important;
+    transition: none !important;
+  }
+
+  .sidebar-active-indicator {
     transition: none !important;
   }
 }

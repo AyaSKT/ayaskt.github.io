@@ -47,9 +47,30 @@ export function attachSidebarMotion(onSettled?: () => void): SidebarMotionCleanu
   const running = new WeakMap<HTMLElement, RunningMotion>()
   const pendingInteractions = new WeakSet<HTMLElement>()
 
+  // 展开/收起时 .items 的高度逐帧变化，滚动容器的内容高度会跨过「是否溢出」的分界，
+  // 滚动条于是在动画中途冒出来（覆盖式滚动条还会顺带淡入一下）。动画起点本就没有
+  // 滚动条时，标记一下让它在动画期间保持透明，滚动条便只在内容定型后出现一次。
+  // 这里不动 overflow：槽宽由 scrollbar-gutter 固定，改 overflow 在缺少该属性的
+  // 浏览器上会让内容左右跳，而染透明对任何环境都不影响布局，期间也照样能滚。
+  // 必须在起始高度写入之后再量：此时 Vue 已经切换过 .collapsed，直接读会读到终点状态。
+  function hideNavScrollbarDuringMotion() {
+    const nav = sidebar?.querySelector<HTMLElement>('.nav')
+    if (!nav || nav.scrollHeight - nav.clientHeight > 1) return
+
+    nav.dataset.sidebarScrollbar = 'hidden'
+  }
+
+  function restoreNavScrollbar() {
+    const nav = sidebar?.querySelector<HTMLElement>('.nav')
+    if (nav) delete nav.dataset.sidebarScrollbar
+  }
+
   function setMotionRoot(active: boolean) {
-    activeMotions += active ? 1 : -1
-    activeMotions = Math.max(activeMotions, 0)
+    const previous = activeMotions
+    activeMotions = Math.max(activeMotions + (active ? 1 : -1), 0)
+
+    if (previous > 0 && activeMotions === 0) restoreNavScrollbar()
+
     document.documentElement.classList.toggle('sidebar-motion-active', activeMotions > 0)
   }
 
@@ -107,6 +128,8 @@ export function attachSidebarMotion(onSettled?: () => void): SidebarMotionCleanu
       if (height > 0) openHeights.set(item, height)
     }
 
+    // 指示器在动画期间是隐藏的。这里必须同步、无过渡地把它放到终点，
+    // 否则它恢复显示时会带着 0.38s 过渡从旧位置可见地滑过来。
     setMotionRoot(false)
     onSettled?.()
   }
@@ -143,6 +166,9 @@ export function attachSidebarMotion(onSettled?: () => void): SidebarMotionCleanu
     items.classList.add('animate__animated', collapsed ? 'animate__fadeOut' : 'animate__fadeIn')
 
     items.offsetHeight
+    // 上一行的强制回流让布局落到动画起点，并发动画只由第一个负责处理滚动条。
+    if (activeMotions === 1) hideNavScrollbarDuringMotion()
+
     items.style.transition = `height ${motionMs}ms var(--ease-ios-slide)`
     items.style.height = `${toHeight}px`
 
@@ -241,6 +267,8 @@ export function attachSidebarMotion(onSettled?: () => void): SidebarMotionCleanu
       sidebar.removeEventListener('keydown', trackSidebarInteraction, { capture: true })
     }
 
+    restoreNavScrollbar()
+    activeMotions = 0
     document.documentElement.classList.remove('sidebar-motion-active')
   }
 }

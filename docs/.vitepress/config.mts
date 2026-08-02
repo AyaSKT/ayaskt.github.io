@@ -1621,7 +1621,8 @@ export default defineConfig({
     },
   },
   head: [
-    ['link', { rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon.ico?' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '256x256', href: '/site-logo.png?v=20260803' }],
+    ['link', { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico?v=20260803' }],
     // 字体自托管:docs:assets 阶段由 scripts/download-fonts.mjs 从 Google Fonts
     // 下载分片并生成本地 fonts.css(见 package.json / .github/workflows/deploy.yml),
     // 避免运行时依赖 fonts.googleapis.com(慢速/不可达时页面渲染不受影响)。
@@ -1712,7 +1713,7 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
 
-    logo: '/IMG_4825_transparent.png',
+    logo: '/site-logo.png',
 
     siteTitle: 'Ayaskt Workspace',
 

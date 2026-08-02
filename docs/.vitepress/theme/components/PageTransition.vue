@@ -136,7 +136,7 @@ function findActiveSidebarLink() {
   return null
 }
 
-function updateSidebarIndicator() {
+function updateSidebarIndicator(options?: { instant?: boolean }) {
   const nav = document.querySelector('.VPSidebar .nav') as HTMLElement | null
   const activeLink = findActiveSidebarLink()
 
@@ -164,7 +164,15 @@ function updateSidebarIndicator() {
       })
     activeLink.setAttribute('data-sidebar-current', 'true')
 
-    if (!indicatorReady) {
+    // 活跃项被收起的分组藏起来时依然占着布局位置，照着它定位会让指示器盖到别的行上，
+    // 或者跑出可视区。文字高亮留着，等分组重新展开再把胶囊放回去。
+    if (activeLink.closest('.VPSidebarItem')?.parentElement?.closest('.VPSidebarItem.collapsed')) {
+      indicator.style.opacity = '0'
+      return
+    }
+
+    const instant = options?.instant === true || !indicatorReady
+    if (instant) {
       indicator.style.transition = 'none'
     }
 
@@ -179,7 +187,7 @@ function updateSidebarIndicator() {
     indicator.style.width = linkRect.width + 'px'
     indicator.style.height = linkRect.height + 'px'
 
-    if (!indicatorReady) {
+    if (instant) {
       indicator.offsetHeight // force reflow
       indicator.style.transition = ''
       indicatorReady = true
@@ -194,6 +202,11 @@ function scheduleSidebarIndicatorUpdate() {
 
   indicatorFrame = window.requestAnimationFrame(() => {
     indicatorFrame = 0
+    // 展开/收起期间条目位置每帧都在变，而指示器此时是隐藏的。逐帧改它的目标
+    // 只会让那条 0.38s 过渡一直追不上，动画结束恢复显示时便从半路可见地滑回来。
+    // 收尾时 sidebar-motion 会同步定位一次，这里跳过即可。
+    if (document.documentElement.classList.contains('sidebar-motion-active')) return
+
     updateSidebarIndicator()
   })
 }
@@ -280,7 +293,7 @@ function resetSidebarObserver() {
 function resetSidebarMotion() {
   detachSidebarMotion?.()
   detachSidebarMotion = attachSidebarMotion(() => {
-    scheduleSidebarIndicatorUpdate()
+    updateSidebarIndicator({ instant: true })
   })
 }
 
