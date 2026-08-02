@@ -11,10 +11,10 @@
   --aya-nav-pill-feather-shadow: var(--aya-shadow-pill-feather);
   --aya-nav-tab-frosted-blur: var(--aya-frosted-blur-lg);
   --aya-nav-pill-frosted-blur: var(--aya-frosted-blur-sm);
-  --aya-nav-menu-bg: var(--aya-surface-bg-strong);
+  --aya-nav-menu-bg: var(--aya-nav-tab-bg);
   --aya-nav-menu-frosted-blur: var(--aya-frosted-blur-lg);
-  --aya-nav-menu-shadow: var(--aya-shadow-menu);
-  --aya-nav-menu-feather-shadow: var(--aya-shadow-menu-feather);
+  --aya-nav-menu-shadow: var(--aya-nav-tab-shadow);
+  --aya-nav-menu-feather-shadow: var(--aya-nav-tab-feather-shadow);
 }
 
 .VPNavBarTitle .title,
@@ -148,6 +148,24 @@
     height: 38px;
     padding: 4px;
     border-radius: 999px;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* The flyout is nested inside this pill. Keep the pill's blur on a pseudo-element
+     so the parent does not become a Backdrop Root that blocks flyout sampling. */
+  .VPNavBar .VPNavBarMenu::before {
+    inset: 0;
+    background: var(--aya-nav-tab-bg);
+    box-shadow:
+      var(--aya-nav-tab-feather-shadow),
+      var(--aya-nav-tab-shadow);
+    backdrop-filter: var(--aya-nav-tab-frosted-blur) !important;
+    -webkit-backdrop-filter: var(--aya-nav-tab-frosted-blur) !important;
+    opacity: 1;
   }
 
   .VPNavBar .VPNavBarMenu > * {
@@ -424,6 +442,10 @@
   .VPNavBar .VPMenu {
     position: relative;
     overflow: hidden auto;
+    border: 0;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none;
   }
 }
 
