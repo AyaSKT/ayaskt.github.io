@@ -4,6 +4,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import sharp from 'sharp'
+import { parse } from 'yaml'
 
 import {
   resolveFirstLyricCoverImage,
@@ -17,6 +18,7 @@ const rootDir = path.resolve(scriptDir, '..')
 const docsRoot = path.join(rootDir, 'docs')
 const previewsPath = path.join(rootDir, 'docs/.vitepress/theme/generated/course-previews.json')
 const entriesPath = path.join(rootDir, 'docs/.vitepress/theme/generated/timeline-entries.json')
+const timelinePagePath = path.join(docsRoot, 'timeline.md')
 const outputDir = path.join(rootDir, 'docs/public/timeline-covers')
 const genericCoverPath = path.join(scriptDir, 'timeline-covers/source/timeline-cover.jpg')
 
@@ -33,21 +35,7 @@ const timestampOverrides = new Map([
   ['Y3S2/EMFT/EMFT Chapter 2.md', Date.parse('2026-03-31T12:00:00+08:00')],
 ])
 const accentOrder = ['cyan', 'blue', 'purple', 'green', 'frost', 'indigo', 'rose', 'amber', 'teal']
-const courseLabels = {
-  ADC: '高阶数字通信 ADC',
-  AIML: '人工智能与机器学习 AIML',
-  CAD: '电路分析与设计 CAD',
-  CCD: '通信电路设计 CCD',
-  CPS: '通信原理与系统 CPS',
-  CPS_N: '通信原理与系统 CPS_N',
-  DSP: '数字信号处理 DSP',
-  EMFT: '电磁场与波 EMFT',
-  EPMF: '工程项目管理与财务 EPM&F',
-  EP: '嵌入式处理器 EP',
-  IS: '信息安全 IS',
-  IT: '信息论基础 IT',
-  MC: '移动通信 MC',
-}
+const allowedAccents = new Set(accentOrder)
 
 function walkMarkdown(directory, files = []) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
@@ -71,6 +59,52 @@ function isTimelineNote(notePath) {
 
 function frontmatter(markdown) {
   return markdown.match(/^\uFEFF?---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/)?.[1] ?? ''
+}
+
+function normalizeConfiguredCover(value, key) {
+  if (value === '') return ''
+  if (typeof value !== 'string') throw new TypeError(`Timeline entry ${key} has a non-string cover.`)
+
+  const normalized = value.replace(/^\/+/, '').replace(/\\/g, '/')
+  const resolved = path.resolve(docsRoot, normalized)
+  if (!resolved.startsWith(`${docsRoot}${path.sep}`) || !fs.existsSync(resolved)) {
+    throw new Error(`Timeline entry ${key} references a missing cover: ${value}`)
+  }
+  return normalized
+}
+
+function validateAccent(value, label) {
+  if (value !== undefined && !allowedAccents.has(value)) {
+    throw new Error(`${label} must be one of: ${accentOrder.join(', ')}.`)
+  }
+  return value
+}
+
+function loadTimelineConfig() {
+  const markdown = fs.readFileSync(timelinePagePath, 'utf8')
+  const pageData = parse(frontmatter(markdown)) ?? {}
+  const config = pageData.timeline ?? {}
+  const entries = Array.isArray(config.entries) ? config.entries : []
+  const entryMap = new Map()
+
+  for (const entry of entries) {
+    if (!entry || typeof entry.key !== 'string' || !entry.key.trim()) {
+      throw new Error('Every timeline.entries item in docs/timeline.md needs a non-empty key.')
+    }
+    if (entryMap.has(entry.key)) throw new Error(`Duplicate timeline entry key: ${entry.key}`)
+
+    const normalized = { ...entry }
+    if (Object.hasOwn(entry, 'cover')) normalized.cover = normalizeConfiguredCover(entry.cover, entry.key)
+    normalized.accent = validateAccent(entry.accent, `Timeline entry ${entry.key} accent`)
+    entryMap.set(entry.key, normalized)
+  }
+
+  const dateAccents = new Map()
+  for (const [period, accent] of Object.entries(config.dateAccents ?? {})) {
+    dateAccents.set(period, validateAccent(accent, `Timeline month ${period} dateAccent`))
+  }
+
+  return { entries: entryMap, dateAccents }
 }
 
 function frontmatterValue(markdown, name) {
@@ -124,8 +158,7 @@ function courseKey(notePath) {
 }
 
 function courseLabel(notePath) {
-  const key = courseKey(notePath)
-  return courseLabels[key] ?? key
+  return courseKey(notePath)
 }
 
 function monthPeriod(timestamp) {
@@ -268,7 +301,7 @@ function groupTitle(notes, course, period) {
   return `${course} · ${period.replace('.', ' / ')}`
 }
 
-function groupTimelineNotes(notes) {
+function groupTimelineNotes(notes, timelineConfig) {
   const grouped = new Map()
 
   for (const note of notes) {
@@ -293,18 +326,42 @@ function groupTimelineNotes(notes) {
       group.title = groupTitle(group.notes, group.course, group.period)
       group.coverDocsPath = group.notes[0].coverDocsPath
       group.description = group.notes[0].description
+      group.hasCover = !group.notes[0].noVisualMetadata
+      group.imagePosition = 'center'
       return group
     })
     .sort((left, right) => right.period.localeCompare(left.period) || left.course.localeCompare(right.course))
 
-  const epmfLecture5 = notes.find((note) => note.notePath === 'Y3S2/EPMF/Block 2/Lecture 5.md')
-  const epmfMay = groups.find((group) => group.courseKey === 'EPMF' && group.period === '2026.05')
-  if (epmfLecture5 && epmfMay) {
-    epmfMay.coverDocsPath = epmfLecture5.coverDocsPath
-    epmfMay.description = epmfLecture5.description
+  const matchedConfigKeys = new Set()
+  for (const group of groups) {
+    const config = timelineConfig.entries.get(group.key)
+    if (!config) continue
+    matchedConfigKeys.add(group.key)
+
+    if (typeof config.course === 'string') group.course = config.course
+    if (typeof config.title === 'string') group.title = config.title
+    if (typeof config.description === 'string') group.description = config.description
+    if (Object.hasOwn(config, 'cover')) {
+      group.coverDocsPath = config.cover
+      group.hasCover = Boolean(config.cover)
+    }
+    if (typeof config.imageAlt === 'string') group.imageAlt = config.imageAlt
+    if (typeof config.imagePosition === 'string') group.imagePosition = config.imagePosition
+    if (typeof config.noteMeta === 'string') group.noteMeta = config.noteMeta
+    if (config.accent) group.accent = config.accent
   }
 
-  return groups
+  for (const key of timelineConfig.entries.keys()) {
+    if (!matchedConfigKeys.has(key)) console.warn(`Timeline config has no matching note group: ${key}`)
+  }
+
+  const configuredOrder = new Map([...timelineConfig.entries.keys()].map((key, index) => [key, index]))
+  return groups.sort((left, right) => {
+    return right.period.localeCompare(left.period)
+      || (configuredOrder.get(left.key) ?? Number.MAX_SAFE_INTEGER)
+        - (configuredOrder.get(right.key) ?? Number.MAX_SAFE_INTEGER)
+      || left.course.localeCompare(right.course)
+  })
 }
 
 function smoothstep(start, end, value) {
@@ -360,6 +417,7 @@ async function generateTransparentCover(outputPath) {
 }
 
 async function main() {
+  const timelineConfig = loadTimelineConfig()
   const previews = fs.existsSync(previewsPath) ? JSON.parse(fs.readFileSync(previewsPath, 'utf8')) : {}
   const notes = []
   const missingOwnCovers = []
@@ -397,7 +455,7 @@ async function main() {
   }
 
   notes.sort((left, right) => right.timestamp - left.timestamp || left.notePath.localeCompare(right.notePath))
-  const groups = groupTimelineNotes(notes)
+  const groups = groupTimelineNotes(notes, timelineConfig)
   fs.mkdirSync(outputDir, { recursive: true })
 
   const scriptMtime = fs.statSync(scriptPath).mtimeMs
@@ -405,7 +463,7 @@ async function main() {
   const expectedOutputs = new Set()
 
   for (const group of groups) {
-    if (group.notes[0].noVisualMetadata) {
+    if (!group.hasCover) {
       const outputName = 'transparent-faded.png'
       const outputPath = path.join(outputDir, outputName)
       if (!fs.existsSync(outputPath) || fs.statSync(outputPath).mtimeMs < scriptMtime) {
@@ -454,7 +512,10 @@ async function main() {
   const entries = groups.map((group, index) => {
     const [year, month] = group.period.split('.')
     if (!periodAccents.has(group.period)) {
-      periodAccents.set(group.period, accentOrder[periodAccents.size % accentOrder.length])
+      periodAccents.set(
+        group.period,
+        timelineConfig.dateAccents.get(group.period) ?? accentOrder[periodAccents.size % accentOrder.length],
+      )
     }
     return {
       id: stableId(group.key),
@@ -463,12 +524,12 @@ async function main() {
       title: group.title,
       description: group.description,
       image: group.image,
-      hasCover: !group.notes[0].noVisualMetadata,
-      imageAlt: group.notes[0].noVisualMetadata ? '' : `${group.course} ${year}年${month}月笔记封面`,
-      imagePosition: 'center',
-      accent: accentOrder[index % accentOrder.length],
+      hasCover: group.hasCover,
+      imageAlt: group.imageAlt ?? (group.hasCover ? `${group.course} ${year}年${month}月笔记封面` : ''),
+      imagePosition: group.imagePosition,
+      accent: group.accent ?? accentOrder[index % accentOrder.length],
       dateAccent: periodAccents.get(group.period),
-      noteMeta: `${group.course} · ${year}年${month}月 · ${group.notes.length} 篇笔记`,
+      noteMeta: group.noteMeta ?? `${group.course} · ${year}年${month}月 · ${group.notes.length} 篇笔记`,
       updatedAt: new Date(group.timestamp).toISOString(),
       notes: group.notes.map((note) => ({
         title: note.title,

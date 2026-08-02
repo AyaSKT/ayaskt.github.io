@@ -12,6 +12,7 @@
 | 往页面任意位置插组件（页脚、侧栏上方…） | 布局插槽 | `theme/custom/slots.ts` |
 | 注册 Vue 插件 / 路由钩子 / 全局指令 | enhanceApp 钩子 | `theme/custom/enhance.ts` |
 | 按页关闭评论 / 返回顶部 / 元信息栏 | frontmatter 开关 | 各 `.md` 文件头部 |
+| 修改时间线标题、卡片文字、封面和配色 | `timeline` frontmatter | `docs/timeline.md`（详见 `TIMELINE.md`） |
 | 新增 animate.css / AnimXYZ 动画 | 子集允许清单 | `scripts/generate-motion-css-subsets.mjs` |
 | 在页面过渡前后做事 | `vt-*` 类名与自定义事件 | CSS / JS 监听 |
 
@@ -139,6 +140,9 @@ JS 动画令牌（由 `theme/motion-tokens.ts` 在运行时读取，同样可在
 | `--dur-sidebar-collapse` | 0.26s | 侧栏分组展开折叠 | `sidebar-motion.ts` |
 | `--dur-sidebar-indicator` | 0.38s | 侧栏活跃指示器滑动 | `sidebar-window.css` |
 | `--dur-outline-out` / `--dur-outline-in` | 0.14s / 0.26s | 大纲跳转正文淡出 / 淡入 | `outline-jump-motion.ts` |
+| `--dur-timeline-enter` / `--dur-timeline-exit` | 0.52s / 0.3s | 时间线卡片展开、滚动入场与离场收起 | `TimelinePage.vue` |
+| `--dur-timeline-stagger` | 0.055s | 时间线节点逐级进出场的间隔 | `TimelinePage.vue` |
+| `--dur-timeline-exit-timeout` | 0.9s | 路由等待时间线离场完成的安全上限 | `PageTransition.vue` |
 
 **约定**：以后在 JS 中写动画时长 / 缓动，一律先在 `var.css` 声明令牌，再用 `readMotionDuration(token, fallbackMs)` / `readMotionEasing(token, fallback)` 读取，兜底值与令牌默认值保持一致。不要在 JS 里留裸数字。
 

@@ -251,6 +251,10 @@ a:active, button:active, .VPNavBarMenuLink:active, .VPLink:active {
     --dur-panel: 0.56s;
     --dur-ripple: 0.6s;
     --dur-reveal: 0.54s;
+    --dur-timeline-enter: 0.46s;
+    --dur-timeline-exit: 0.28s;
+    --dur-timeline-stagger: 0.045s;
+    --dur-timeline-exit-timeout: 0.78s;
     --ripple-size: 140px;
   }
 }

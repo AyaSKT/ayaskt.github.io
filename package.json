@@ -30,7 +30,8 @@
     "markmap-view": "^0.18.12",
     "sharp": "^0.35.3",
     "vitepress": "^2.0.0-alpha.16",
-    "vue": "^3.5.30"
+    "vue": "^3.5.30",
+    "yaml": "^2.9.0"
   },
   "dependencies": {
     "@giscus/vue": "^3.1.1",

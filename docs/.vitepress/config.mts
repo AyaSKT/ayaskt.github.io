@@ -419,6 +419,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const docsRoot = path.resolve(__dirname, '..')
 const publicRoot = path.resolve(docsRoot, 'public')
 const configFilePath = path.resolve(__dirname, 'config.mts')
+const timelinePagePath = path.resolve(docsRoot, 'timeline.md')
+const timelineGeneratorPath = path.resolve(docsRoot, '../scripts/generate-timeline-covers.mjs')
 const localEditorApiPrefix = '/__local-editor__'
 const localEditorMaxBodyBytes = 16 * 1024 * 1024
 const isDevCommand = process.argv.includes('dev') || process.argv.includes('serve')
@@ -1030,6 +1032,36 @@ export function createLocalMarkdownEditorPlugin() {
   }
 }
 
+export function createTimelineConfigPlugin() {
+  let regenerating = false
+
+  return {
+    name: 'gp-blogs-timeline-config',
+    apply: 'serve',
+    handleHotUpdate(context: any) {
+      if (path.resolve(context.file) !== timelinePagePath || regenerating) return
+
+      regenerating = true
+      try {
+        const result = spawnSync(process.execPath, [timelineGeneratorPath], {
+          cwd: path.resolve(docsRoot, '..'),
+          encoding: 'utf8',
+        })
+        if (result.status !== 0) {
+          const details = [result.stdout, result.stderr].filter(Boolean).join('\n').trim()
+          throw new Error(`时间线配置生成失败${details ? `：\n${details}` : ''}`)
+        }
+
+        context.server.config.logger.info('timeline.md 已重新生成时间线数据。')
+        context.server.ws.send({ type: 'full-reload', path: '*' })
+        return []
+      } finally {
+        regenerating = false
+      }
+    },
+  }
+}
+
 interface ImageDimensions {
   width: number
   height: number
@@ -1565,7 +1597,9 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: isDevCommand ? [createLocalMarkdownEditorPlugin()] : [],
+    plugins: isDevCommand
+      ? [createLocalMarkdownEditorPlugin(), createTimelineConfigPlugin()]
+      : [],
     server: {
       watch: {
         awaitWriteFinish: {

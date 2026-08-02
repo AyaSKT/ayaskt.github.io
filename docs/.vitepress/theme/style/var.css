@@ -130,6 +130,10 @@
   --dur-sidebar-indicator: 0.38s;
   --dur-outline-out: 0.14s;
   --dur-outline-in: 0.26s;
+  --dur-timeline-enter: 0.52s;
+  --dur-timeline-exit: 0.3s;
+  --dur-timeline-stagger: 0.055s;
+  --dur-timeline-exit-timeout: 0.9s;
   --ripple-size: 200px;
   --animate-duration: var(--dur-page);
   --animate-delay: 0.08s;

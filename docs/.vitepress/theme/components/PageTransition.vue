@@ -2,6 +2,7 @@
 import { nextTick, onMounted, onUnmounted } from 'vue'
 import { useData, useRouter } from 'vitepress'
 import type { PageData } from 'vitepress'
+import { readMotionDuration } from '../motion-tokens'
 import { createOutlineJumpMotion } from '../outline-jump-motion'
 import { attachSidebarMotion } from '../sidebar-motion'
 
@@ -23,6 +24,12 @@ let detachSidebarMotion: (() => void) | undefined
 const ARTICLE_IMAGE_LAYOUT_TIMEOUT = 180
 const ARTICLE_IMAGE_LAYOUT_POLL_INTERVAL = 32
 const ARTICLE_IMAGE_WAIT_LIMIT = 6
+const TIMELINE_EXIT_TIMEOUT_FALLBACK = 900
+
+interface TimelineExitRequestDetail {
+  handled: boolean
+  complete: () => void
+}
 
 function sidebarKeyFor(to: string) {
   const sidebar = theme.value.sidebar
@@ -61,6 +68,41 @@ function canTransition(to: string, options?: { initialLoad?: boolean }) {
     nextUrl.origin === currentUrl.origin &&
     (nextUrl.pathname !== currentUrl.pathname || nextUrl.search !== currentUrl.search)
   )
+}
+
+function isTimelinePath(pathname: string) {
+  return pathname === '/timeline' || pathname === '/timeline.html'
+}
+
+async function requestTimelinePageExit(to: string) {
+  if (!document.documentElement.classList.contains('timeline-page-active')) return
+  if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return
+
+  const currentUrl = new URL(window.location.href)
+  const nextUrl = new URL(to, window.location.href)
+  if (!isTimelinePath(currentUrl.pathname) || isTimelinePath(nextUrl.pathname)) return
+
+  await new Promise<void>((resolve) => {
+    let settled = false
+    let timeout = 0
+    const finish = () => {
+      if (settled) return
+      settled = true
+      window.clearTimeout(timeout)
+      resolve()
+    }
+    const detail: TimelineExitRequestDetail = {
+      handled: false,
+      complete: finish,
+    }
+
+    timeout = window.setTimeout(
+      finish,
+      readMotionDuration('--dur-timeline-exit-timeout', TIMELINE_EXIT_TIMEOUT_FALLBACK),
+    )
+    window.dispatchEvent(new CustomEvent('timeline-page-exit-request', { detail }))
+    if (!detail.handled) finish()
+  })
 }
 
 function ensureIndicator(): HTMLDivElement {
@@ -275,6 +317,8 @@ onMounted(() => {
       })
       return
     }
+
+    await requestTimelinePageExit(to)
 
     if (!canTransition(to, options)) {
       await originalGo(to, options)

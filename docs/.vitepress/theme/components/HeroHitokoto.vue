@@ -1,33 +1,81 @@
 <script lang="ts">
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
 
-const sharedHitokotoText = ref(':D 你今天过得如何？')
-let pendingHitokoto: Promise<void> | undefined
+interface HitokotoState {
+  text: Ref<string>
+  pending?: Promise<void>
+}
 
-async function loadHitokoto() {
-  if (pendingHitokoto) return pendingHitokoto
+const hitokotoStates = new Map<string, HitokotoState>()
 
-  pendingHitokoto = (async () => {
+function normalizeScope(scope: string) {
+  return scope.trim() || 'home'
+}
+
+function fallbackHitokoto(scope: string) {
+  return scope === 'timeline'
+    ? '回望来路，每一页都算数。'
+    : ':D 你今天过得如何？'
+}
+
+function getHitokotoState(scope: string) {
+  const key = normalizeScope(scope)
+  const existing = hitokotoStates.get(key)
+  if (existing) return existing
+
+  const state: HitokotoState = {
+    text: ref(fallbackHitokoto(key)),
+  }
+  hitokotoStates.set(key, state)
+  return state
+}
+
+function isUsedByAnotherScope(scope: string, sentence: string) {
+  return [...hitokotoStates.entries()].some(([key, state]) => (
+    key !== scope && state.text.value === sentence
+  ))
+}
+
+async function loadHitokoto(scope: string) {
+  const key = normalizeScope(scope)
+  const state = getHitokotoState(key)
+  if (state.pending) return state.pending
+
+  state.pending = (async () => {
     try {
-      const res = await fetch('https://v1.hitokoto.cn')
-      const data = await res.json()
-      sharedHitokotoText.value = data.hitokoto
+      for (let attempt = 0; attempt < 4; attempt += 1) {
+        const res = await fetch('https://v1.hitokoto.cn', { cache: 'no-store' })
+        if (!res.ok) throw new Error(`Hitokoto request failed with ${res.status}`)
+
+        const data = await res.json()
+        const sentence = typeof data.hitokoto === 'string' ? data.hitokoto.trim() : ''
+        if (sentence && !isUsedByAnotherScope(key, sentence)) {
+          state.text.value = sentence
+          return
+        }
+      }
+
+      state.text.value = fallbackHitokoto(key)
     } catch {
-      sharedHitokotoText.value = ':D 你今天过得如何？'
+      state.text.value = fallbackHitokoto(key)
     }
   })()
 
-  return pendingHitokoto
+  return state.pending
 }
 </script>
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
 
-const hitokotoText = sharedHitokotoText
+const { scope = 'home' } = defineProps<{
+  scope?: string
+}>()
+
+const hitokotoText = getHitokotoState(scope).text
 
 onMounted(() => {
-  void loadHitokoto()
+  void loadHitokoto(scope)
 })
 </script>
 
