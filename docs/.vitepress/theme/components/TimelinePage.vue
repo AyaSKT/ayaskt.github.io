@@ -382,6 +382,7 @@ html.timeline-page-active .VPPage {
   padding: 0 clamp(18px, 5vw, 72px) 112px;
   color: var(--vp-c-text-1);
   background: transparent;
+  overflow-x: clip;
 }
 
 .dark .timeline-page {

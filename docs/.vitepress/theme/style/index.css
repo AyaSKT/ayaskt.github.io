@@ -106,6 +106,18 @@
   height: auto;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 8px;
+}
+
+/* 正文阅读宽度：小幅加宽，长公式/宽表格也不拥挤 */
+.VPDoc.has-aside .content-container {
+  max-width: var(--vp-doc-content-width, 720px) !important;
+}
+
+@media (max-width: 1279px) {
+  .VPDoc.has-aside .content-container {
+    max-width: var(--vp-doc-content-width-compact, 688px) !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -236,6 +248,65 @@
 
 .VPDocFooter .last-updated {
   display: none;
+}
+
+/* ---- Footer：顶部品牌渐变线 + 更舒展的间距 ----
+   VitePress 2.0 默认在带 sidebar 的文档页隐藏 footer；
+   桌面端恢复显示，移动端（sidebar 抽屉场景）保持默认隐藏。 */
+@media (min-width: 960px) {
+  .VPFooter.has-sidebar {
+    display: block !important;
+  }
+}
+
+.VPFooter {
+  position: relative;
+  border-top: 1px solid color-mix(in srgb, var(--vp-c-divider) 55%, transparent);
+}
+
+.VPFooter::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(420px, 72vw);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--aya-gradient-start) 30%,
+    var(--aya-gradient-middle) 50%,
+    var(--aya-gradient-end) 70%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+.VPFooter .container {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.VPFooter a {
+  transition: color 0.2s var(--ease-ios-fade);
+}
+
+.VPFooter a:hover {
+  color: var(--vp-c-brand-2);
+}
+
+/* 正文链接：hover 时品牌色 + 下划线变色 */
+.vp-doc a {
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--vp-c-brand-2) 55%, transparent);
+  transition:
+    color 0.18s var(--ease-ios-fade),
+    text-decoration-color 0.18s var(--ease-ios-fade);
+}
+
+.vp-doc a:hover {
+  text-decoration-color: currentColor;
 }
 
 .VPDocFooter .edit-info:has(> .last-updated:only-child) {

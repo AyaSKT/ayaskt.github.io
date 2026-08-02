@@ -33,6 +33,72 @@
     display: none !important;
   }
 
+  /* VitePress 默认把外观切换只放在 >=1280px 的导航条上；
+     本主题在 >=768px 已隐藏汉堡按钮，若沿用默认规则，
+     768–1279px 会出现“无外观切换入口”的死区，因此在此恢复显示。 */
+  .VPNavBar .VPNavBarAppearance {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    overflow: visible;
+    align-items: center;
+    height: 38px;
+    padding: 0 4px;
+    border: 1px solid var(--aya-nav-tab-border);
+    border-radius: 999px;
+    background: var(--aya-nav-tab-bg) !important;
+    background-color: var(--aya-nav-tab-bg) !important;
+    background-clip: padding-box;
+    box-shadow:
+      var(--aya-nav-tab-feather-shadow),
+      var(--aya-nav-tab-shadow);
+    backdrop-filter: var(--aya-nav-tab-frosted-blur) !important;
+    -webkit-backdrop-filter: var(--aya-nav-tab-frosted-blur) !important;
+  }
+
+  .VPNavBar .VPNavBarAppearance::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    z-index: 0;
+    border-radius: inherit;
+    background: none;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .VPNavBar .VPNavBarAppearance > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .VPNavBar .VPNavBarAppearance .VPSwitchAppearance {
+    width: 30px !important;
+    height: 30px;
+    border-color: transparent;
+    border-radius: 999px;
+    background: transparent;
+  }
+
+  .VPNavBar .VPNavBarAppearance .VPSwitchAppearance:hover {
+    background: var(--aya-nav-tab-hover) !important;
+    background-color: var(--aya-nav-tab-hover) !important;
+    backdrop-filter: var(--aya-nav-pill-frosted-blur) !important;
+    -webkit-backdrop-filter: var(--aya-nav-pill-frosted-blur) !important;
+  }
+
+  .VPNavBar .VPNavBarAppearance .VPSwitchAppearance .check {
+    top: 5px;
+    left: 5px;
+    width: 18px;
+    height: 18px;
+    background: transparent;
+    box-shadow: none;
+    transform: none !important;
+  }
+
   .VPNavBar .content-body {
     gap: 8px;
   }
