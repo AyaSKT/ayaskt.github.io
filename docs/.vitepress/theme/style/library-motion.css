@@ -40,7 +40,6 @@
 .VPLocalSearchBox[aria-expanded="true"] .result:nth-child(8) { animation-delay: 208ms; }
 
 .VPNavBar .VPFlyout > .menu.aya-nav-menu-motion {
-  transform-origin: top right;
   --xyz-duration: var(--dur-menu);
   --xyz-out-duration: var(--dur-menu-out, 0.22s);
   --xyz-ease: var(--ease-ios-fade);
@@ -53,9 +52,15 @@
   transform-origin: left center;
 }
 
-/* 仅在菜单动画进行时提示合成层，关闭状态不常驻 will-change */
+/* 菜单本体（玻璃层）只走 nav-tabs.css 的 opacity/visibility 过渡；
+   任何 keyframes/transform 都会让 Chromium/WebKit 的 backdrop-filter 退化为纯着色。
+   菜单项保留滑动/缩放动画——项上的 transform 不影响玻璃层的 backdrop 采样。 */
 .VPNavBar .VPFlyout > .menu.aya-nav-menu-motion.xyz-in,
-.VPNavBar .VPFlyout > .menu.aya-nav-menu-motion.xyz-out,
+.VPNavBar .VPFlyout > .menu.aya-nav-menu-motion.xyz-out {
+  animation: none !important;
+  will-change: opacity;
+}
+
 .VPNavBar .VPFlyout > .menu.aya-nav-menu-motion.xyz-in .aya-nav-menu-motion-item,
 .VPNavBar .VPFlyout > .menu.aya-nav-menu-motion.xyz-out .aya-nav-menu-motion-item {
   will-change: opacity, transform;

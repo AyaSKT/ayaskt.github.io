@@ -5,7 +5,7 @@ import { useRoute } from 'vitepress'
 const route = useRoute()
 
 const NAV_MENU_XYZ = 'fade small-2 up-1 stagger-1 stagger-rev-0.35 ease-out'
-const NAV_MENU_CLOSE_DELAY_FALLBACK = 100
+const NAV_MENU_CLOSE_DELAY_FALLBACK = 50
 const NAV_MENU_OUT_DURATION_FALLBACK = 220
 const NAV_MENU_ITEM_SELECTOR = [
   '.VPMenu .items > *',
@@ -150,6 +150,21 @@ function setNavMenuClosing(menu: HTMLElement) {
   menu.classList.add('xyz-out')
 }
 
+/* 打开任意菜单时立即无动画关闭其他所有菜单，避免横向划过导航时
+   多个下拉面板重叠（旧菜单还在退场、新菜单已打开）。 */
+function forceCloseOtherNavMenus(exceptMenu: HTMLElement) {
+  document.querySelectorAll<HTMLElement>('.VPNavBar .VPFlyout').forEach((other) => {
+    const otherMenu = other.querySelector<HTMLElement>(':scope > .menu')
+    if (!otherMenu || otherMenu === exceptMenu) return
+
+    const otherButton = other.querySelector<HTMLElement>(':scope > .button')
+    if (otherButton) otherButton.setAttribute('aria-expanded', 'false')
+
+    otherMenu.dataset.ayaNavMenuState = 'closed'
+    otherMenu.classList.remove('xyz-in', 'xyz-out')
+  })
+}
+
 function enhanceNavFlyout(flyout: HTMLElement) {
   if (flyout.dataset.ayaNavMotion === 'ready') return
 
@@ -184,10 +199,18 @@ function enhanceNavFlyout(flyout: HTMLElement) {
     syncFrame = 0
     const nextOpen = isNavFlyoutOpen(flyout, button)
 
+    if (!nextOpen && menu.dataset.ayaNavMenuState === 'closed') {
+      isOpen = false
+      clearCloseTimer()
+      clearCloseAnimationTimer()
+      return
+    }
+
     if (nextOpen) {
       clearCloseTimer()
       clearCloseAnimationTimer()
-      if (isOpen) return
+      forceCloseOtherNavMenus(menu)
+      if (isOpen && menu.dataset.ayaNavMenuState !== 'closed') return
 
       isOpen = true
       setNavMenuState(menu, true)
@@ -199,6 +222,7 @@ function enhanceNavFlyout(flyout: HTMLElement) {
     closeTimer = window.setTimeout(() => {
       closeTimer = undefined
       if (isNavFlyoutOpen(flyout, button)) return
+      if (menu.dataset.ayaNavMenuState === 'closed') return
 
       isOpen = false
       setNavMenuClosing(menu)

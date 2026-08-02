@@ -13,9 +13,11 @@ test('desktop nav flyouts are wired to AnimXYZ for open and close motion', () =>
   assert.match(motion, /const NAV_MENU_XYZ = 'fade small-2 up-1/, 'nav flyouts should declare an AnimXYZ recipe')
   assert.match(motion, /function enhanceNavFlyouts\(\)/, 'LibraryMotion should enhance generated VitePress flyouts')
   assert.match(motion, /MutationObserver/, 'flyouts should react to aria-expanded changes')
-  assert.match(motion, /const NAV_MENU_CLOSE_DELAY_FALLBACK = 100/, 'nav flyouts should define a 0.1s close-delay fallback')
+  assert.match(motion, /const NAV_MENU_CLOSE_DELAY_FALLBACK = 50/, 'nav flyouts should define a 0.05s close-delay fallback')
   assert.match(motion, /getPropertyValue\('--dur-menu-close-delay'\)/, 'nav close delay should be sourced from the theme duration token')
   assert.match(motion, /getPropertyValue\('--dur-menu-out'\)/, 'nav close finalization should wait for the existing exit duration')
+  assert.match(motion, /forceCloseOtherNavMenus\(menu\)/, 'opening one flyout should instantly force-close the others (no overlap)')
+  assert.match(motion, /aria-expanded', 'false'/, 'force-close should reset the other buttons aria-expanded')
   assert.match(motion, /window\.setTimeout\([\s\S]*getNavMenuCloseDelay\(flyout\)/, 'nav flyouts should delay close after pointer leave')
   assert.match(motion, /setNavMenuClosing\(menu\)/, 'nav flyouts should enter a closing state before being hidden')
   assert.match(motion, /menu\.dataset\.ayaNavMenuState = 'closing'[\s\S]*menu\.classList\.add\('xyz-out'\)/, 'closing state should play the original xyz-out exit animation')
@@ -38,10 +40,17 @@ test('nav menu fallback CSS keeps the panel visible long enough to close smoothl
   const css = read('docs/.vitepress/theme/style/library-motion.css')
 
   assert.match(vars, /--dur-menu-out: 0\.22s;/, 'close duration token should be defined')
-  assert.match(vars, /--dur-menu-close-delay: 0\.1s;/, 'close delay token should be defined')
+  assert.match(vars, /--dur-menu-close-delay: 0\.05s;/, 'close delay token should be defined')
   assert.match(navTabs, /visibility 0s linear var\(--dur-menu-out\)/, 'hidden state should delay visibility until close motion ends')
   assert.match(navTabs, /opacity var\(--dur-menu-out\)/, 'fallback close should transition opacity')
-  assert.match(navTabs, /transform var\(--dur-menu-out\)/, 'fallback close should transition transform')
+
+  const flyoutSection = navTabs.slice(
+    navTabs.indexOf('.VPNavBar .VPFlyout > .menu {'),
+    navTabs.indexOf('.VPNavBar .VPMenu {')
+  )
+  assert.doesNotMatch(flyoutSection, /transform|isolation:\s*isolate/, 'the glass layer must never carry a transform / isolation state (degrades backdrop-filter to tint-only)')
+  assert.match(flyoutSection, /backdrop-filter: var\(--aya-nav-menu-frosted-blur\)/, 'the frosted glass should live on the outer floating layer, not the inner panel')
+
   assert.match(navTabs, /menu\[data-aya-nav-menu-state="open"\]/, 'delayed close should keep the panel visible while the open state is held')
   assert.match(navTabs, /menu\[data-aya-nav-menu-state="closing"\][\s\S]*visibility: visible/, 'closing state should stay visible while the exit animation plays')
   assert.match(navTabs, /menu\[data-aya-nav-menu-state="closed"\][\s\S]*transition: none !important/, 'closed state should hide immediately after the exit animation finishes')
