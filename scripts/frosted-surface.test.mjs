@@ -79,6 +79,17 @@ test('global material styles no longer expose old reflection tokens', () => {
   }
 })
 
+test('desktop flyout uses the same frosted surface as the navbar tabs', () => {
+  const css = read('docs/.vitepress/theme/style/nav-tabs.css')
+
+  assert.match(css, /--aya-nav-menu-bg:\s*var\(--aya-nav-tab-bg\);/)
+  assert.match(css, /--aya-nav-menu-shadow:\s*var\(--aya-nav-tab-shadow\);/)
+  assert.match(css, /--aya-nav-menu-feather-shadow:\s*var\(--aya-nav-tab-feather-shadow\);/)
+  assert.match(css, /\.VPNavBar \.VPNavBarMenu\s*\{[^}]*backdrop-filter:\s*none\s*!important;/s)
+  assert.match(css, /\.VPNavBar \.VPNavBarMenu::before\s*\{[^}]*backdrop-filter:\s*var\(--aya-nav-tab-frosted-blur\)\s*!important;/s)
+  assert.match(css, /\.VPNavBar \.VPMenu\s*\{[^}]*background:\s*transparent\s*!important;[^}]*box-shadow:\s*none;/s)
+})
+
 test('content component surfaces no longer use reflection variables', () => {
   const files = [
     'docs/.vitepress/theme/components/MindMap.vue',
