@@ -40,8 +40,9 @@ This is a **VitePress blog** for university engineering course notes (Chinese). 
 **`custom.css`** (imported in `index.ts`, NOT in `index.css`) — academic callout restyling for VitePress built-in containers (`info`, `tip`, `warning`, `danger`, `caution`, `important`, `note`, `details`, `definition`). Flattened rectangle with left accent border. Does NOT affect `::: example` / `::: stem` / `::: solution`.
 
 **Named view-transition elements** (`transitions.css`):
-- `.VPNavBar`, `.VPLocalNav` — always static (old snapshot shown, new hidden)
+- `.VPNavBar` — extracted and frozen on `vt-doc-to-doc` (old hidden, new shown) so course-index ↔ lecture switches cannot drag the nav via root geometry morph
 - `.VPSidebar` — extracted for docs pages only (`html:has(.VPDoc)`). Same sidebar: old hidden, new shown (prevents backdrop-filter/shadow doubling). Switched sidebar: animated with `fadeInLeft`/`fadeOutLeft`.
+- Root group uses `animation: none` + `object-fit: none`; appearance toggle clears navbar/sidebar names so the circular clip covers the whole page
 - Appearance toggle: navbar uses `fadeOutUp`/`fadeInDown` from animate.css
 
 ## Sidebar Active Indicator (FLIP animation)

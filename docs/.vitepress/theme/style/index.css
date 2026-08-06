@@ -12,6 +12,13 @@
 @import './sidebar-window.css';
 @import './reading-mode.css';
 
+/* 短页/长页切换时（如 ADC README ↔ Lecture）滚动条显隐会改变 clientWidth，
+   导致用百分比 / 100vw 定位的导航栏左右跳动。预留 gutter 后宽度恒定；
+   覆盖式滚动条系统上通常不占位，不影响现有版心。 */
+html {
+  scrollbar-gutter: stable;
+}
+
 /* 正文字体 */
 .vp-doc {
   font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;

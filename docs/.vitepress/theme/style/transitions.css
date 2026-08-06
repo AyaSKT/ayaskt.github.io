@@ -7,12 +7,18 @@
    只有 doc 页面才把 sidebar 提取出来独立动画
    homepage 没有 VPDoc，这些元素不参与 view-transition，直接出现
    侧边栏在所有页面存在（homepage 为隐藏/空），用 :has(.VPDoc) 限定
-   Nav / Local nav 留在 root 快照中，避免 Chrome 对模糊导航表面生成
-   独立命名快照时出现异常缩放或重叠
+   Doc ↔ Doc 时把 navbar 也提出来并冻结：course-index（aside:false）与
+   普通讲义页切换时，旧/新 root 几何不一致，Chrome 会插值 root 组，
+   把仍留在 root 里的导航栏一起拖走。外观切换仍让 navbar 跟 root。
 ----------------------------------- */
 
 html:has(.VPDoc) .VPSidebar {
   view-transition-name: sidebar;
+}
+
+/* Doc ↔ Doc：导航栏提出独立快照并保持静止，避免 root 几何插值带动位移。 */
+html.vt-doc-to-doc:has(.VPDoc) .VPNavBar {
+  view-transition-name: navbar;
 }
 
 /* 有 sidebar -> 无 sidebar 时，先关闭真实元素的 backdrop-filter。
@@ -27,8 +33,9 @@ html.vt-doc-to-home:not(.vt-hide-sidebar):has(.VPDoc) .VPSidebar {
   view-transition-name: none;
 }
 
-/* 外观切换需要整页一起做圆形裁剪，否则 sidebar 命名元素会脱离 root 动画。 */
-html.vt-appearance .VPSidebar {
+/* 外观切换需要整页一起做圆形裁剪，否则命名元素会脱离 root 动画。 */
+html.vt-appearance .VPSidebar,
+html.vt-appearance .VPNavBar {
   view-transition-name: none;
 }
 
@@ -133,9 +140,40 @@ html.vt-doc-to-contentless::view-transition-new(doc-content) {
   opacity: 0;
 }
 
-/* ---- Root：只做淡入淡出，横向正文运动由 doc-content 承担 ---- */
+/* ---- Navbar：Doc ↔ Doc 时静止，旧快照隐藏、新快照直接显示 ---- */
+::view-transition-group(navbar) {
+  z-index: 5;
+  animation: none;
+}
+
+::view-transition-old(navbar) {
+  animation: none;
+  opacity: 0;
+}
+
+::view-transition-new(navbar) {
+  animation: none;
+  opacity: 1;
+}
+
+::view-transition-old(navbar),
+::view-transition-new(navbar) {
+  object-fit: none;
+  object-position: top left;
+}
+
+/* ---- Root：只做淡入淡出，横向正文运动由 doc-content 承担 ----
+   关闭 root 组几何插值，并固定 object-fit，避免旧/新快照尺寸不同时
+   把仍留在 root 中的固定 UI（未命名时的 navbar）挤偏。 */
 ::view-transition-group(root) {
   z-index: 0;
+  animation: none;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  object-fit: none;
+  object-position: top left;
 }
 
 ::view-transition-old(root) {

@@ -25,7 +25,7 @@ This is a **VitePress blog** for university engineering course notes (Chinese). 
 - `blur.css` — glassmorphism (backdrop-filter blur on nav, search, sidebar)
 - `index.css` — imports all of the above, plus table/image centering, MathJax block display, custom `::: example` / `::: definition` container styles
 
-**Named view-transition elements** (`transitions.css`): `.VPNavBar`, `.VPSidebar`, `.VPLocalNav` have `view-transition-name` set so they're excluded from the root crossfade snapshot — nav and sidebar stay visually stable during page transitions, only content area fades.
+**Named view-transition elements** (`transitions.css`): `.VPSidebar` is extracted on docs pages; `.VPNavBar` is extracted and frozen during `vt-doc-to-doc` so root geometry morphing cannot drag the nav. Root group uses `animation: none` + `object-fit: none`. Appearance toggle clears both names so the circular clip can cover the whole page.
 
 ## Custom Markdown Infrastructure
 
