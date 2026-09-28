@@ -111,6 +111,7 @@ timeline:
 - 日期精确到月份，年与月上下排列且没有中间圆点；月份大于年份并加粗。
 - 同一月份只显示第一次出现的日期，同月所有节点使用相同的 `dateAccent`。
 - `timeline.entries[].accent` 控制单张卡片配色，`timeline.dateAccents` 控制日期和节点配色，两者不要混用。
+- 页面配色跟随站点令牌：主标题复用首页 hero 的 `--home-hero-gradient-*` 渐变，小标题、分隔线和卡片边框取 `--vp-c-brand-1` / `--vp-c-brand-3`。组件中的颜色名 class 是夜间 Nord 色值；亮色模式在 `custom/tokens.css` 用 `--timeline-warm-*` 换成偏暖的低饱和版本，并覆盖 `--timeline-card-bg`、`--timeline-card-title-color`、`--timeline-drawer-bg`。
 - 卡片标题区域高度一致；长标题通过密度 class 缩小字体并允许多行，不应挤高卡片。
 - 抽屉最大层级是单篇笔记链接；点击卡片只展开或收起，不应让整张卡片淡出。
 
@@ -122,7 +123,7 @@ timeline:
 
 时间线动效由 `TimelinePage.vue` 与 `PageTransition.vue` 协作：首屏节点在页面过渡完成后从上到下逐级展开，尚未进入视口的节点由 `IntersectionObserver` 监听，滚动出现时从右侧滑入；离开页面前，可见节点从下到上逐级收起，再继续全站 View Transition。时长必须通过 `--dur-timeline-enter`、`--dur-timeline-exit`、`--dur-timeline-stagger` 和 `--dur-timeline-exit-timeout` 调整，不要在组件中写裸时间。`prefers-reduced-motion: reduce` 下必须直接显示内容并跳过路由等待。
 
-需要增加一种全新的颜色名称时，才需要同时更新生成脚本的 `accentOrder`、JSON 类型对应值以及 `TimelinePage.vue` 中相应颜色 class；仅调整现有月份或卡片颜色时，修改 `docs/timeline.md` 即可。
+需要增加一种全新的颜色名称时，才需要同时更新生成脚本的 `accentOrder`、JSON 类型对应值、`TimelinePage.vue` 中相应颜色 class 以及 `custom/tokens.css` 中的亮色 `--timeline-warm-*`；仅调整现有月份或卡片颜色时，修改 `docs/timeline.md` 即可。
 
 ## 修改导航或重新创建页面
 

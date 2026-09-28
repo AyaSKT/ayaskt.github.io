@@ -256,13 +256,13 @@ const resolvedGroups = computed(() =>
     var(--aya-card-hover-outline-shadow, 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 28%, transparent)),
     0 0 0 4px color-mix(in srgb, var(--vp-c-brand-1) 15%, transparent),
     0 0 28px 8px color-mix(in srgb, var(--vp-c-brand-1) 20%, transparent),
-    0 0 58px 14px color-mix(in srgb, #8839EF 12%, transparent);
+    0 0 58px 14px color-mix(in srgb, var(--vp-c-brand-3) 12%, transparent);
   --course-index-card-hover-feather-shadow: 0 0 22px 7px color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent);
   --course-index-card-hover-depth-shadow: 0 18px 42px color-mix(in srgb, var(--vp-c-brand-1) 14%, transparent);
   --course-index-preview-shadow:
     0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 58%, transparent),
     0 24px 70px rgb(34 42 60 / 18%);
-  --course-index-card-code-color: #8839EF;
+  --course-index-card-code-color: var(--vp-c-brand-1);
   container-type: inline-size;
   display: grid;
   box-sizing: border-box;
@@ -328,7 +328,7 @@ const resolvedGroups = computed(() =>
     var(--aya-gradient-middle, #C2C7F8) 52%,
     var(--aya-gradient-end, #F1DCE4) 100%
   );
-  box-shadow: 0 0 0 4px rgb(var(--aya-c-brand-blue-rgb, 152 203 234) / 13%);
+  box-shadow: 0 0 0 4px rgb(var(--aya-c-ui-accent-rgb, 152 203 234) / 13%);
 }
 
 .course-index-grid {

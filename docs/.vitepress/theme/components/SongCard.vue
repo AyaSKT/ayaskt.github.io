@@ -888,12 +888,12 @@ onBeforeUnmount(() => {
   --song-card-depth-shadow: var(--aya-card-shadow, 0 14px 34px rgb(92 102 114 / 10%));
   --song-card-inner-shadow: none;
   --song-card-hover-outline-shadow: var(--aya-card-hover-outline-shadow, 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 28%, transparent));
-  --song-card-hover-feather-shadow: 0 0 18px 5px rgb(var(--aya-c-brand-blue-rgb, 152 203 234) / 10%);
+  --song-card-hover-feather-shadow: 0 0 18px 5px rgb(var(--aya-c-ui-accent-rgb, 152 203 234) / 10%);
   --song-card-hover-depth-shadow: 0 18px 42px rgb(92 102 114 / 14%);
-  --song-card-player-accent: color-mix(in srgb, var(--vp-c-brand-1) 82%, #6f8ff7);
+  --song-card-player-accent: var(--vp-c-brand-1);
   --song-card-player-track: color-mix(in srgb, var(--vp-c-divider) 72%, transparent);
   --song-card-player-thumb: color-mix(in srgb, var(--vp-c-brand-1) 72%, #ffffff);
-  --song-card-volume-popover-bg: color-mix(in srgb, var(--vp-c-bg-soft) 88%, rgb(255 255 255 / 42%));
+  --song-card-volume-popover-bg: color-mix(in srgb, var(--vp-c-bg) 88%, transparent);
   --song-card-volume-popover-border: color-mix(in srgb, var(--song-card-border) 78%, var(--vp-c-brand-1));
   --song-card-volume-popover-shadow: 0 10px 26px rgb(92 102 114 / 14%);
   display: grid;
@@ -941,11 +941,11 @@ onBeforeUnmount(() => {
   --song-card-depth-shadow: var(--aya-card-shadow, 0 14px 34px rgb(0 0 0 / 30%));
   --song-card-inner-shadow: none;
   --song-card-hover-outline-shadow: var(--aya-card-hover-outline-shadow, 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 22%, transparent));
-  --song-card-hover-feather-shadow: 0 0 18px 5px rgb(var(--aya-c-brand-blue-rgb, 152 203 234) / 8%);
+  --song-card-hover-feather-shadow: 0 0 18px 5px rgb(var(--aya-c-ui-accent-rgb, 152 203 234) / 8%);
   --song-card-hover-depth-shadow: 0 18px 42px rgb(0 0 0 / 40%);
   --song-card-player-track: rgb(255 255 255 / 12%);
   --song-card-player-thumb: color-mix(in srgb, var(--vp-c-brand-1) 62%, #ffffff);
-  --song-card-volume-popover-bg: rgb(17 24 35 / 92%);
+  --song-card-volume-popover-bg: color-mix(in srgb, var(--vp-c-bg-soft) 92%, transparent);
   --song-card-volume-popover-border: color-mix(in srgb, var(--vp-c-brand-1) 22%, rgb(255 255 255 / 12%));
   --song-card-volume-popover-shadow: 0 12px 28px rgb(0 0 0 / 42%);
 }

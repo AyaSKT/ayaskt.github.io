@@ -1,7 +1,9 @@
 /* ================================================================
    自定义令牌覆盖入口（最后导入，优先级最高）
    ================================================================
-   当前主题：Nord（https://www.nordtheme.com/docs/colors-and-palettes）
+   当前主题：亮色陶土橙强调色，夜间与容器底色保留 Nord。
+   配色参考：https://cateds.github.io/Dynamics-Control.md/preface/
+   Nord：https://www.nordtheme.com/docs/colors-and-palettes
 
    Nord 调色盘参考：
    - Polar Night：#2e3440 #3b4252 #434c5e #4c566a（深色背景）
@@ -42,8 +44,8 @@
   --vp-c-brand-3: #88c0d0;
   --vp-c-brand-soft: rgb(136 192 208 / 14%);
 
-  /* ---- 页面基础色：Snow Storm ---- */
-  --vp-c-bg: #eceff4;
+  /* ---- 页面基础色：纯白背景，搭配 Snow Storm 辅助色 ---- */
+  --vp-c-bg: #ffffff;
   --vp-c-bg-alt: #e5e9f0;
   --vp-c-bg-soft: #e5e9f0;
   --vp-c-bg-elv: #eceff4;
@@ -79,7 +81,7 @@
   --aya-c-definition-soft: rgb(208 135 112 / 14%);
 
   /* ---- 左侧目录窗口背景 ---- */
-  --aya-sidebar-bg: #e7e9ed;
+  --aya-sidebar-bg: var(--vp-c-bg);
 }
 
 .dark {
@@ -129,7 +131,7 @@
   --aya-c-definition-soft: rgb(208 135 112 / 16%);
 
   /* ---- 左侧目录窗口背景 ---- */
-  --aya-sidebar-bg: #202530;
+  --aya-sidebar-bg: var(--vp-c-bg);
 }
 
 /* hero 标题渐变动画：覆盖主题关键帧，让循环停靠色保持 Frost 冷蓝。 */
@@ -142,5 +144,179 @@
   50% {
     --home-hero-gradient-start: #88c0d0;
     --home-hero-gradient-end: #5e81ac;
+  }
+}
+
+/* 仅正文插图使用直角；正文内嵌的卡片、时间线和音乐组件保留原样。 */
+.vp-doc img:not(:where(.course-index *, .timeline-page *, .song-card *, .lyric-card *, .lyric-cover *)) {
+  border-radius: 0;
+}
+
+/* 正文表格：中性浅灰表头与灰白交替行，仅作用于亮色模式。 */
+:root:not(.dark) .vp-doc table tr {
+  background-color: #ffffff;
+}
+
+:root:not(.dark) .vp-doc table tr:nth-child(2n),
+:root:not(.dark) .vp-doc table th {
+  background-color: #f5f5f5;
+}
+
+:root:not(.dark) .vp-doc table :is(tr, th, td) {
+  border-color: #e5e5e5;
+}
+
+/* 亮色陶土橙与暖灰配色；保留语义容器的 soft / RGB 通道。 */
+:root:not(.dark) {
+  --vp-c-bg: #fffefd;
+  --vp-c-text-1: #4f4d47;
+  --vp-c-text-2: #77736a;
+  --vp-c-text-3: #77736a;
+  --vp-c-divider: #ecebe7;
+  --vp-c-border: #ecebe7;
+  --vp-c-gutter: #ecebe7;
+  --aya-surface-text: #77736a;
+  --aya-surface-text-strong: #4f4d47;
+
+  /* 代码区域与灰白表格一致，语法高亮继续由 Shiki 提供。 */
+  --vp-code-bg: #f5f5f5;
+  --vp-code-block-bg: #f5f5f5;
+  --vp-code-block-color: #4f4d47;
+  --vp-code-block-divider-color: #e5e5e5;
+  --vp-code-line-highlight-color: #eaeaea;
+  --vp-code-copy-code-bg: #eeeeee;
+  --vp-code-copy-code-border-color: #e5e5e5;
+  --vp-code-copy-code-hover-bg: #ffffff;
+  --vp-code-copy-code-hover-border-color: #e5e5e5;
+
+  /* 固定原有卡片与例题底色，避免页面暖白传入这些表面。 */
+  --aya-card-surface-bg: #ffffff;
+  --aya-example-surface-bg: color-mix(in srgb, #ffffff 91%, var(--vp-c-bg-soft));
+
+  --vp-c-brand-1: #b85f45; /* 深陶土橙：链接与强调文字 */
+  --vp-c-brand-2: #a6533c; /* 悬停时略微加深 */
+  --vp-c-brand-3: #d97757; /* 主强调色 */
+
+  --aya-gradient-start: #ce7153;
+  --aya-gradient-middle: #d97757;
+  --aya-gradient-end: #df9276;
+  --home-hero-gradient-start: #b85f45;
+  --home-hero-gradient-middle: #ca7053;
+  --home-hero-gradient-end: #d97757;
+
+  --aya-c-brand-blue-deep: #b85f45;
+  --aya-c-brand-lilac-deep: #b85f45;
+  --aya-sidebar-active-text: #b85f45;
+  --aya-sidebar-active-bg: rgb(217 119 87 / 9%);
+  --aya-surface-selected: #b85f45;
+
+  /* 搜索、导航胶囊、点击涟漪等界面控件跟随陶土橙；正文容器的品牌通道不动。 */
+  --aya-c-ui-accent-rgb: 217 119 87;
+  --aya-search-mark-text: #5a2a1c;
+
+  /* 陶土橙按钮搭配白色文字。 */
+  --vp-button-brand-text: #ffffff;
+  --vp-button-brand-hover-text: #ffffff;
+  --vp-button-brand-active-text: #ffffff;
+}
+
+/* VitePress 标题默认继承正文色，在亮色模式单独使用暖黑。 */
+:root:not(.dark) .vp-doc :is(h1, h2, h3, h4, h5, h6),
+:root:not(.dark) .VPHero .text,
+:root:not(.dark) .course-index-card-title,
+:root:not(.dark) .course-index-preview-title,
+:root:not(.dark) .VPNavBarTitle .title {
+  color: #141413;
+}
+
+:root:not(.dark) .course-index {
+  --course-index-card-code-color: #b85f45;
+}
+
+/* 时间线：标题渐变沿用 hero 陶土橙，卡片与课程卡片同为白底暖黑标题。 */
+:root:not(.dark) .timeline-page {
+  --timeline-card-bg: var(--aya-card-surface-bg);
+  --timeline-card-title-color: #141413;
+  --timeline-drawer-bg: #f7f6f3;
+}
+
+/* 亮色条目强调色：降低饱和度并偏暖，与陶土橙和暖灰同处一个色调。 */
+:root:not(.dark) .timeline-page {
+  --timeline-warm-cyan: #4f8a84;
+  --timeline-warm-blue: #5b7899;
+  --timeline-warm-green: #6f8a52;
+  --timeline-warm-purple: #936a8c;
+  --timeline-warm-frost: #5d8596;
+  --timeline-warm-indigo: #6d6c9c;
+  --timeline-warm-rose: #b0626f;
+  --timeline-warm-amber: #b0773a;
+  --timeline-warm-teal: #b85f45;
+}
+
+:root:not(.dark) .timeline-entry--cyan { --timeline-accent: var(--timeline-warm-cyan); }
+:root:not(.dark) .timeline-entry--blue { --timeline-accent: var(--timeline-warm-blue); }
+:root:not(.dark) .timeline-entry--green { --timeline-accent: var(--timeline-warm-green); }
+:root:not(.dark) .timeline-entry--purple { --timeline-accent: var(--timeline-warm-purple); }
+:root:not(.dark) .timeline-entry--frost { --timeline-accent: var(--timeline-warm-frost); }
+:root:not(.dark) .timeline-entry--indigo { --timeline-accent: var(--timeline-warm-indigo); }
+:root:not(.dark) .timeline-entry--rose { --timeline-accent: var(--timeline-warm-rose); }
+:root:not(.dark) .timeline-entry--amber { --timeline-accent: var(--timeline-warm-amber); }
+:root:not(.dark) .timeline-entry--teal { --timeline-accent: var(--timeline-warm-teal); }
+
+:root:not(.dark) .timeline-date--cyan { --timeline-date-accent: var(--timeline-warm-cyan); }
+:root:not(.dark) .timeline-date--blue { --timeline-date-accent: var(--timeline-warm-blue); }
+:root:not(.dark) .timeline-date--green { --timeline-date-accent: var(--timeline-warm-green); }
+:root:not(.dark) .timeline-date--purple { --timeline-date-accent: var(--timeline-warm-purple); }
+:root:not(.dark) .timeline-date--frost { --timeline-date-accent: var(--timeline-warm-frost); }
+:root:not(.dark) .timeline-date--indigo { --timeline-date-accent: var(--timeline-warm-indigo); }
+:root:not(.dark) .timeline-date--rose { --timeline-date-accent: var(--timeline-warm-rose); }
+:root:not(.dark) .timeline-date--amber { --timeline-date-accent: var(--timeline-warm-amber); }
+:root:not(.dark) .timeline-date--teal { --timeline-date-accent: var(--timeline-warm-teal); }
+
+/* 单独切换动画名，避免全局 Nord 关键帧覆盖亮色渐变或影响夜间。 */
+:root:not(.dark) .VPHome .VPHero .name,
+:root:not(.dark) .VPHome .VPHero .image-bg {
+  animation-name: lightOrangeHeroGradient;
+}
+
+:root:not(.dark) .home-course-button.brand {
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgb(217 119 87 / 15%);
+}
+
+:root:not(.dark) .home-course-button.brand:hover,
+:root:not(.dark) .home-course-button.brand:focus-visible {
+  box-shadow: 0 10px 28px rgb(217 119 87 / 22%);
+}
+
+:root:not(.dark) .home-course-button.brand:active {
+  box-shadow: 0 4px 14px rgb(217 119 87 / 18%);
+}
+
+:root:not(.dark) .VPHome .VPHero .image-bg {
+  opacity: 0.35;
+}
+
+/* 只调整选中框，保留侧栏窗口及其他容器的背景与共享 RGB 通道。 */
+:root:not(.dark) .sidebar-active-indicator::before {
+  box-shadow: 0 0 0 1px rgb(217 119 87 / 22%), 0 8px 18px rgb(217 119 87 / 4%);
+}
+
+@keyframes lightOrangeHeroGradient {
+  0%,
+  100% {
+    --home-hero-gradient-start: #b85f45;
+    --home-hero-gradient-end: #d97757;
+  }
+  50% {
+    --home-hero-gradient-start: #d97757;
+    --home-hero-gradient-end: #b85f45;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root:not(.dark) .VPHome .VPHero .name,
+  :root:not(.dark) .VPHome .VPHero .image-bg {
+    animation: none;
   }
 }

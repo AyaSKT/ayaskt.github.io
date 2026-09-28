@@ -161,9 +161,9 @@
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .search-bar:focus-within {
-    border-color: rgb(var(--aya-c-brand-blue-rgb) / 86%);
+    border-color: rgb(var(--aya-c-ui-accent-rgb) / 86%);
     box-shadow:
-        0 0 0 3px rgb(var(--aya-c-brand-blue-rgb) / 18%),
+        0 0 0 3px rgb(var(--aya-c-ui-accent-rgb) / 18%),
         0 18px 40px rgb(54 87 113 / 14%);
 }
 
@@ -193,13 +193,13 @@
 .VPLocalSearchBox[aria-expanded="true"] .search-actions button:not([disabled]):hover,
 .VPLocalSearchBox[aria-expanded="true"] .toggle-layout-button.detailed-list {
     color: var(--vp-c-brand-1);
-    background-color: rgb(var(--aya-c-brand-blue-rgb) / 14%);
+    background-color: rgb(var(--aya-c-ui-accent-rgb) / 14%);
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .results {
     gap: 8px;
     padding-right: 2px;
-    scrollbar-color: rgb(var(--aya-c-brand-blue-rgb) / 48%) transparent;
+    scrollbar-color: rgb(var(--aya-c-ui-accent-rgb) / 48%) transparent;
 }
 
 .VPLocalSearchBox[aria-expanded="true"] .result {
@@ -221,7 +221,7 @@
 .VPLocalSearchBox[aria-expanded="true"] .result:hover,
 .VPLocalSearchBox[aria-expanded="true"] .result.selected {
     transform: translateY(-1px);
-    border-color: rgb(var(--aya-c-brand-blue-rgb) / 70%);
+    border-color: rgb(var(--aya-c-ui-accent-rgb) / 70%);
     background: var(--aya-surface-bg-hover);
     box-shadow: 0 12px 26px rgb(54 87 113 / 12%);
 }

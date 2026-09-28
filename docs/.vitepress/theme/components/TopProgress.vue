@@ -296,8 +296,13 @@ onUnmounted(() => {
 
 .top-progress-fill {
   transform-origin: left center;
-  background: linear-gradient(90deg, #60a5fa 0%, #8b5cf6 58%, #c084fc 100%);
-  box-shadow: 0 1px 10px rgb(139 92 246 / 28%);
+  background: linear-gradient(
+    90deg,
+    var(--aya-gradient-start) 0%,
+    var(--aya-gradient-middle) 58%,
+    var(--aya-gradient-end) 100%
+  );
+  box-shadow: 0 1px 10px color-mix(in srgb, var(--aya-gradient-middle) 32%, transparent);
   transition: transform 0.24s var(--ease-ios-fade);
 }
 

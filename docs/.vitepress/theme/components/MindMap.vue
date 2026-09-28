@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, useId, watch } from 'vue'
+import { useData } from 'vitepress'
 import katex from 'katex'
 import { Transformer } from 'markmap-lib'
 import { Markmap, deriveOptions } from 'markmap-view'
@@ -76,6 +77,7 @@ const isExpanded = ref(false)
 const isClosingExpanded = ref(false)
 const isExportMenuOpen = ref(false)
 const transformer = new Transformer()
+const { isDark } = useData()
 const exportMenuId = `${useId()}-export-menu`
 
 let markmap: Markmap | undefined
@@ -112,10 +114,14 @@ function prefersReducedMotion() {
     && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
+// markmap 把分支色写进 SVG stroke 属性，读不到 CSS 变量，只能按主题各给一套。
+const BRANCH_COLORS_LIGHT = ['#5b7899', '#b85f45', '#6f8a52', '#936a8c', '#b0773a']
+const BRANCH_COLORS_DARK = ['#81a1c1', '#d08770', '#a3be8c', '#b48ead', '#ebcb8b']
+
 function getOptions() {
   const reduceMotion = prefersReducedMotion()
   const jsonOptions: Partial<IMarkmapJSONOptions> = {
-    color: ['#6BAFD4', '#9EA7F4', '#E5B8CC', '#82C6A5', '#E6BD6D'],
+    color: isDark.value ? BRANCH_COLORS_DARK : BRANCH_COLORS_LIGHT,
     colorFreezeLevel: 2,
     duration: reduceMotion ? 0 : 360,
     fitRatio: 0.9,
@@ -404,12 +410,16 @@ function getExportSize() {
   }
 }
 
+function readRootColor(name: string, fallback: string) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim() || fallback
+}
+
 function getExportBackground() {
-  return document.documentElement.classList.contains('dark') ? '#131417' : '#fbfcfe'
+  return readRootColor('--vp-c-bg', isDark.value ? '#2e3440' : '#ffffff')
 }
 
 function getExportTextColor() {
-  return document.documentElement.classList.contains('dark') ? '#e8e8ec' : '#1f2937'
+  return readRootColor('--vp-c-text-1', isDark.value ? '#eceff4' : '#1f2937')
 }
 
 function getKatexExportStyle() {
@@ -698,6 +708,12 @@ watch(
     void renderMap()
   },
 )
+
+watch(isDark, async () => {
+  if (!markmap) return
+  markmap.setOptions(getOptions())
+  await markmap.renderData()
+})
 
 watch(
   isModalActive,
@@ -1361,12 +1377,12 @@ onBeforeUnmount(() => {
 
 :global(.dark .mind-map) {
   --mind-map-border: rgb(255 255 255 / 9%);
-  --mind-map-surface-bg: rgb(19 20 23 / 96%);
+  --mind-map-surface-bg: color-mix(in srgb, var(--vp-c-bg) 88%, var(--vp-c-bg-soft));
   --mind-map-surface-shadow:
     0 18px 42px rgb(0 0 0 / 30%),
     0 2px 10px rgb(0 0 0 / 18%);
   --mind-map-backdrop-bg: rgb(0 0 0 / 48%);
-  --mind-map-modal-bg: rgb(19 20 23 / 98%);
+  --mind-map-modal-bg: var(--vp-c-bg);
   --mind-map-modal-shadow:
     0 30px 90px rgb(0 0 0 / 48%),
     0 10px 28px rgb(0 0 0 / 28%);

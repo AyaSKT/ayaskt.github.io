@@ -11,7 +11,8 @@ hero:
   tagline: Daphne, Ficus, Iris, Maackia.
 
   image:
-    src: /IMG_4338.webp # 你的图片路径，放在 docs 下
+    light: /avatars/IMG_0490-light.webp
+    dark: /avatars/IMG_0490-dark.webp
     width: 240
     height: 240
     link: https://www.mcdonalds.com.cn/page/offical-channels/

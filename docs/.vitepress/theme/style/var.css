@@ -17,6 +17,8 @@
     --aya-c-brand-blue-deep: #5a96b8;
     --aya-c-brand-blue-deep-rgb: 90 150 184;
     --aya-c-brand-lilac-deep: #7b80c5;
+    /* 界面控件（搜索、导航胶囊、涟漪、卡片焦点）的强调色通道；正文容器仍用上面的品牌通道。 */
+    --aya-c-ui-accent-rgb: var(--aya-c-brand-blue-rgb);
 
     --vp-c-brand-1: #98CBEA;
     --vp-c-brand-2: #C2C7F8;

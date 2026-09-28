@@ -53,7 +53,13 @@ provide('toggle-appearance', async (event: MouseEvent) => {
     )}px at ${x}px ${y}px)`
   ]
 
-  document.documentElement.classList.add('vt-appearance')
+  const root = document.documentElement
+  const toLight = isDark.value
+  let animation: Animation | undefined
+
+  root.style.setProperty('--vt-appearance-x', `${x}px`)
+  root.style.setProperty('--vt-appearance-y', `${y}px`)
+  root.classList.add('vt-appearance', toLight ? 'vt-appearance-to-light' : 'vt-appearance-to-dark')
 
   try {
     const transition = document.startViewTransition(async () => {
@@ -63,19 +69,23 @@ provide('toggle-appearance', async (event: MouseEvent) => {
 
     await transition.ready
 
-    const animation = document.documentElement.animate(
-      { clipPath: isDark.value ? clipPath.reverse() : clipPath },
+    animation = root.animate(
+      { clipPath: toLight ? clipPath : clipPath.reverse() },
       {
         duration: 300,
         easing: 'ease-in',
         fill: 'forwards',
-        pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`
+        pseudoElement: `::view-transition-${toLight ? 'new' : 'old'}(root)`
       }
     )
 
     await Promise.allSettled([transition.finished, animation.finished])
   } finally {
-    document.documentElement.classList.remove('vt-appearance')
+    // fill: forwards 的动画不取消会一直挂在 html 上，下一次切换会作用到新生成的同名伪元素。
+    animation?.cancel()
+    root.classList.remove('vt-appearance', 'vt-appearance-to-light', 'vt-appearance-to-dark')
+    root.style.removeProperty('--vt-appearance-x')
+    root.style.removeProperty('--vt-appearance-y')
   }
 })
 </script>
@@ -93,6 +103,11 @@ provide('toggle-appearance', async (event: MouseEvent) => {
 ::view-transition-new(root),
 .dark::view-transition-old(root) {
   z-index: 9999;
+}
+
+/* 亮色新快照在上层，JS 裁剪动画要到 ready 之后才挂上，先用 CSS 收成一个点，免得首帧整页闪亮。 */
+html.vt-appearance-to-light::view-transition-new(root) {
+  clip-path: circle(0px at var(--vt-appearance-x, 50%) var(--vt-appearance-y, 50%));
 }
 
 .VPSwitchAppearance {

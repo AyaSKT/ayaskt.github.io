@@ -45,17 +45,18 @@ const route = useRoute()
 const isHome = computed(() => route.path === '/' || route.path === '/index.html')
 
 const heroImagePool = [
-  '/IMG_4338.webp',
-  '/IMG_4520.webp',
-  '/IMG_4521.webp',
-  '/IMG_4522.webp',
+  { light: '/avatars/IMG_0490-light.webp', dark: '/avatars/IMG_0490-dark.webp' },
+  { light: '/avatars/IMG_0489-light.webp', dark: '/avatars/IMG_0489-dark.webp' },
+  { light: '/avatars/IMG_0233-light.webp', dark: '/avatars/IMG_0233-dark.webp' },
+  { light: '/avatars/IMG_0232-light.webp', dark: '/avatars/IMG_0232-dark.webp' },
 ]
 
-const randomHeroSrc = ref('')
+// 只在进入首页时随机选角色；主题切换沿用同一角色的亮 / 暗版本。
+const randomHeroIndex = ref<number | null>(null)
 
 watch(() => route.path, (path) => {
   if (path === '/' || path === '/index.html') {
-    randomHeroSrc.value = heroImagePool[Date.now() % heroImagePool.length]
+    randomHeroIndex.value = Date.now() % heroImagePool.length
     nextTick(() => {
       setupHeroNameEntrance()
       setupHomeNavEntrance()
@@ -69,7 +70,10 @@ const heroImageData = computed(() => {
 })
 
 const heroImageSrc = computed(() => {
-  if (isHome.value && randomHeroSrc.value) return randomHeroSrc.value
+  if (isHome.value && randomHeroIndex.value !== null) {
+    const image = heroImagePool[randomHeroIndex.value]
+    return isDark.value ? image.dark : image.light
+  }
   const image = heroImageData.value
   if (!image) return ''
   if (typeof image === 'string') return image
@@ -198,8 +202,8 @@ onMounted(() => {
   // 仅在首次进入首页时 nav 从上方淡入，其他页面无入场动画
   if (isHomepage) {
     // 首次加载时随机选一张 hero image
-    if (!randomHeroSrc.value) {
-      randomHeroSrc.value = heroImagePool[Date.now() % heroImagePool.length]
+    if (randomHeroIndex.value === null) {
+      randomHeroIndex.value = Date.now() % heroImagePool.length
     }
     setupHomeNavEntrance(true)
   }

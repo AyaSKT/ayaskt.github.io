@@ -374,7 +374,18 @@ html.timeline-page-active .VPPage {
 
 .timeline-page {
   --timeline-accent: var(--vp-c-brand-1);
-  --timeline-editorial-accent: color-mix(in srgb, #8fbcbb 68%, #2e3440);
+  --timeline-editorial-accent: var(--vp-c-brand-3);
+  --timeline-kicker-color: var(--vp-c-brand-1);
+  --timeline-title-color: var(--vp-c-brand-1);
+  --timeline-title-gradient: linear-gradient(
+    var(--home-hero-gradient-angle, 140deg),
+    var(--home-hero-gradient-start, var(--vp-c-brand-1)) 0%,
+    var(--home-hero-gradient-middle, var(--vp-c-brand-2)) 52%,
+    var(--home-hero-gradient-end, var(--vp-c-brand-3)) 100%
+  );
+  --timeline-card-bg: color-mix(in srgb, var(--vp-c-bg-elv) 72%, transparent);
+  --timeline-card-title-color: var(--vp-c-text-1);
+  --timeline-drawer-bg: color-mix(in srgb, var(--vp-c-bg-soft) 42%, transparent);
   --timeline-card-radius: 18px;
   --timeline-drawer-radius: 12px;
   --timeline-serif: 'Noto Serif CJK SC', 'Noto Serif SC', 'Songti SC', 'STSong', serif;
@@ -386,7 +397,7 @@ html.timeline-page-active .VPPage {
 }
 
 .dark .timeline-page {
-  --timeline-editorial-accent: #8fbcbb;
+  --timeline-card-bg: color-mix(in srgb, var(--vp-c-bg-elv) 74%, transparent);
 }
 
 .timeline-intro,
@@ -416,20 +427,32 @@ html.timeline-page-active .VPPage {
 
 .timeline-kicker {
   margin: 0 0 clamp(24px, 3vw, 36px);
-  color: var(--timeline-editorial-accent);
+  color: var(--timeline-kicker-color);
   font-size: 0.72rem;
   font-weight: 740;
   letter-spacing: 0.19em;
 }
 
 .timeline-intro h1 {
-  margin: 0;
-  color: var(--timeline-editorial-accent);
+  width: fit-content;
+  padding: 0.12em 0.12em 0.12em 0;
+  margin: -0.12em 0;
+  color: var(--timeline-title-color);
   font-family: var(--timeline-serif);
   font-size: clamp(5.25rem, 10.4vw, 8.75rem);
   font-weight: 600;
   line-height: 0.88;
   letter-spacing: -0.075em;
+}
+
+/* line-height 小于字形高度，padding 把背景区撑大，渐变才不会裁掉笔画。 */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .timeline-intro h1 {
+    color: transparent;
+    background: var(--timeline-title-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
 }
 
 .timeline-lead {
@@ -680,18 +703,13 @@ html.timeline-page-active .VPPage {
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--timeline-editorial-accent) 18%, var(--vp-c-divider));
   border-radius: var(--timeline-card-radius);
-  background: color-mix(in srgb, var(--vp-c-bg-elv) 72%, transparent);
+  background: var(--timeline-card-bg);
   box-shadow: none;
   transition:
     border-color var(--dur-menu) var(--ease-ios-fade),
     box-shadow var(--dur-menu) var(--ease-ios-fade),
     translate var(--dur-menu) var(--ease-ios-spring);
   container-type: inline-size;
-}
-
-.dark .timeline-card {
-  background: color-mix(in srgb, var(--vp-c-bg-elv) 74%, transparent);
-  box-shadow: none;
 }
 
 @media (min-width: 761px) {
@@ -705,7 +723,7 @@ html.timeline-page-active .VPPage {
 .timeline-card:focus-within,
 .timeline-entry.is-open .timeline-card {
   border-color: color-mix(in srgb, var(--timeline-accent) 58%, var(--vp-c-divider));
-  background: color-mix(in srgb, var(--timeline-accent) 5%, var(--vp-c-bg-elv));
+  background: color-mix(in srgb, var(--timeline-accent) 5%, var(--timeline-card-bg));
   box-shadow: none;
   translate: 3px 0;
 }
@@ -801,6 +819,7 @@ html.timeline-page-active .VPPage {
   flex: 0 0 38px;
   height: 38px;
   overflow: hidden;
+  color: var(--timeline-card-title-color);
   font-family: var(--timeline-serif);
   font-size: clamp(1.24rem, 2vw, 1.56rem);
   font-weight: 650;
@@ -890,7 +909,7 @@ html.timeline-page-active .VPPage {
 
 .timeline-drawer {
   padding: 22px clamp(20px, 3vw, 28px) 26px;
-  background: color-mix(in srgb, var(--vp-c-bg-soft) 42%, transparent);
+  background: var(--timeline-drawer-bg);
   opacity: 0;
   translate: 0 -6px;
   transition:
@@ -913,13 +932,22 @@ html.timeline-page-active .VPPage {
 }
 
 .timeline-drawer nav {
+  --timeline-note-rule: color-mix(in srgb, var(--timeline-editorial-accent) 16%, var(--vp-c-divider));
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  border: 1px solid color-mix(in srgb, var(--timeline-editorial-accent) 16%, var(--vp-c-divider));
+  border: 1px solid var(--timeline-note-rule);
   border-radius: var(--timeline-drawer-radius);
-  background: color-mix(in srgb, var(--timeline-editorial-accent) 16%, var(--vp-c-divider));
+  background: var(--timeline-note-rule);
   gap: 1px;
   overflow: hidden;
+}
+
+/* 分隔线由网格底色透出；奇数篇时补一个空格子，免得末尾露出一整块底色。 */
+@media (min-width: 761px) {
+  .timeline-drawer nav:has(> .timeline-note-link:last-child:nth-child(odd))::after {
+    background: var(--vp-c-bg);
+    content: '';
+  }
 }
 
 .timeline-note-link {
