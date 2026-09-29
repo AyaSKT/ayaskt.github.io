@@ -305,6 +305,12 @@ html.reading-mode-aside-visible .reading-mode-aside-zone {
   }
 }
 
+@media (min-width: 768px) and (max-width: 899px) and (orientation: landscape) {
+  .VPNavBar .reading-mode-control {
+    padding: 0 2px;
+  }
+}
+
 @media (max-width: 767px) {
   .VPNavBar .reading-mode-control {
     width: 34px;

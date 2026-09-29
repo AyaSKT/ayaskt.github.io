@@ -884,6 +884,18 @@ html {
   }
 }
 
+/* 手机横屏按宽度算出的头像会比屏幕还高，改按视口高度限制，让标题留在首屏。 */
+@media (max-width: 959px) and (orientation: landscape) and (max-height: 540px) {
+  .VPHome .VPHero .image-container {
+    width: min(38svh, 190px) !important;
+    height: min(38svh, 190px) !important;
+  }
+
+  .VPHome .VPHero.has-image .image {
+    margin-bottom: 12px;
+  }
+}
+
 @media (min-width: 960px) {
   .VPHero a.image-src {
     max-width: 320px;

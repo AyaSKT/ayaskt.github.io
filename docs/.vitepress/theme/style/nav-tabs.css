@@ -472,14 +472,41 @@
   }
 }
 
-@media (min-width: 1280px) {
+/* 768–899px 同时放标题、搜索、六个菜单与右侧按钮，默认间距会顶住标题并溢出右边缘。 */
+@media (min-width: 768px) and (max-width: 899px) {
+  .VPNavBar .content-body {
+    gap: 6px;
+  }
+
+  .VPNavBar .VPNavBarMenuLink,
+  .VPNavBar .VPNavBarMenuGroup > .button {
+    padding: 0 5px;
+  }
+}
+
+/* 横屏时阅读模式按钮会额外出现，再省约 40px 才不会贴住标题。 */
+@media (min-width: 768px) and (max-width: 899px) and (orientation: landscape) {
+  .VPNavBar .content-body {
+    gap: 4px;
+  }
+
+  .VPNavBar .VPNavBarMenuLink,
+  .VPNavBar .VPNavBarMenuGroup > .button {
+    padding: 0 3px;
+  }
+}
+
+/* 外观切换在 >=768px 已单独成胶囊，VitePress 的竖向分隔线不限断点，不隐藏会在胶囊内留一截竖线和空白。 */
+@media (min-width: 768px) {
   .VPNavBar .menu + .appearance::before,
   .VPNavBar .menu + .social-links::before,
   .VPNavBar .translations + .appearance::before,
   .VPNavBar .appearance + .social-links::before {
     display: none !important;
   }
+}
 
+@media (min-width: 1280px) {
   .VPNavBar .VPNavBarAppearance,
   .VPNavBar .VPNavBarSocialLinks {
     position: relative;
@@ -572,6 +599,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .VPNavBar .content-body {
+    gap: 8px;
   }
 
   .VPNavBar .DocSearch-Button,

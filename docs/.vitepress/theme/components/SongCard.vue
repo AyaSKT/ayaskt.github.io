@@ -1498,6 +1498,7 @@ onBeforeUnmount(() => {
 @media (max-width: 640px) {
   .song-card {
     grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    align-items: start;
     gap: 12px;
     min-height: 124px;
     margin: 1.25rem 0 1.5rem;
