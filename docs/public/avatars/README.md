@@ -1,5 +1,7 @@
 # 首页主题头像
 
+当前首页使用用户提供的透明 PNG `hero-rose.png`，亮 / 暗主题共用同一张图片。`docs/index.md` 中的 `homeHero.image.src` 优先于下述随机头像池。
+
 四组头像：`IMG_0490`、`IMG_0489`、`IMG_0233`、`IMG_0232`。
 
 - `*-dark.webp`：用户提供的 HEIC 原图转换为 WebP。

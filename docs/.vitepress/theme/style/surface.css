@@ -1,5 +1,22 @@
 /* Flat frosted surface tokens: blur, tint, border, and shadow without directional light layers. */
 :root {
+  /* 圆角阶梯：组件只引用这些档位，不再手写像素值。≤767px 时 sm/md/lg/xl 各缩一档。 */
+  --aya-radius-xs: 6px;
+  --aya-radius-sm: 12px;
+  --aya-radius-md: 16px;
+  --aya-radius-lg: 20px;
+  --aya-radius-xl: 28px;
+  --aya-radius-pill: 999px;
+
+  /* 阴影层级：1 静止内容块（代码块等）· 2 卡片 · 3 浮动窗口（侧栏、导航胶囊）· 4 弹层（搜索、菜单） */
+  --aya-elevation-1:
+    0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 70%, transparent),
+    0 1px 2px rgb(92 102 114 / 4%),
+    0 6px 16px rgb(92 102 114 / 5%);
+  --aya-elevation-2: var(--aya-shadow-card-feather), var(--aya-shadow-card-depth);
+  --aya-elevation-3: var(--aya-shadow-nav-feather), var(--aya-shadow-sidebar-window);
+  --aya-elevation-4: var(--aya-shadow-menu-feather), var(--aya-shadow-menu);
+
   --aya-surface-bg: rgb(255 255 255 / 26%);
   --aya-surface-bg-strong: rgb(255 255 255 / 64%);
   --aya-surface-bg-soft: rgb(255 255 255 / 34%);
@@ -54,7 +71,21 @@
   );
 }
 
+@media (max-width: 767px) {
+  :root {
+    --aya-radius-sm: 10px;
+    --aya-radius-md: 14px;
+    --aya-radius-lg: 16px;
+    --aya-radius-xl: 22px;
+  }
+}
+
 .dark {
+  --aya-elevation-1:
+    0 0 0 1px color-mix(in srgb, var(--vp-c-divider) 80%, transparent),
+    0 1px 2px rgb(0 0 0 / 12%),
+    0 6px 16px rgb(0 0 0 / 16%);
+
   --aya-surface-bg: rgb(9 13 20 / 48%);
   --aya-surface-bg-strong: rgb(18 24 34 / 62%);
   --aya-surface-bg-soft: rgb(255 255 255 / 8%);

@@ -26,6 +26,7 @@ const ARTICLE_IMAGE_LAYOUT_TIMEOUT = 240
 const ARTICLE_IMAGE_LAYOUT_POLL_INTERVAL = 32
 const ARTICLE_IMAGE_WAIT_LIMIT = 8
 const TIMELINE_EXIT_TIMEOUT_FALLBACK = 900
+const HOME_EXIT_TIMEOUT_FALLBACK = 950
 
 interface TimelineExitRequestDetail {
   handled: boolean
@@ -102,6 +103,33 @@ async function requestTimelinePageExit(to: string) {
       readMotionDuration('--dur-timeline-exit-timeout', TIMELINE_EXIT_TIMEOUT_FALLBACK),
     )
     window.dispatchEvent(new CustomEvent('timeline-page-exit-request', { detail }))
+    if (!detail.handled) finish()
+  })
+}
+
+async function requestHomePageExit(to: string) {
+  if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return
+  if (pageKindFor(window.location.href) !== 'home' || pageKindFor(to) === 'home') return
+
+  await new Promise<void>((resolve) => {
+    let settled = false
+    let timeout = 0
+    const finish = () => {
+      if (settled) return
+      settled = true
+      window.clearTimeout(timeout)
+      resolve()
+    }
+    const detail: TimelineExitRequestDetail = {
+      handled: false,
+      complete: finish,
+    }
+
+    timeout = window.setTimeout(
+      finish,
+      readMotionDuration('--dur-home-exit-timeout', HOME_EXIT_TIMEOUT_FALLBACK),
+    )
+    window.dispatchEvent(new CustomEvent('home-page-exit-request', { detail }))
     if (!detail.handled) finish()
   })
 }
@@ -378,6 +406,7 @@ onMounted(() => {
     }
 
     await requestTimelinePageExit(to)
+    await requestHomePageExit(to)
 
     if (!canTransition(to, options)) {
       await originalGo(to, options)

@@ -11,6 +11,7 @@
 @import './nav-tabs.css';
 @import './sidebar-window.css';
 @import './reading-mode.css';
+@import './home-reveal.css';
 
 /* 短页/长页切换时（如 ADC README ↔ Lecture）滚动条显隐会改变 clientWidth，
    导致用百分比 / 100vw 定位的导航栏左右跳动。预留 gutter 后宽度恒定；
@@ -95,6 +96,31 @@ html {
   overflow-x: auto;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
+}
+
+/* 代码块：与正文卡片同一套圆角与静止阴影；窄屏也不再贴边出血 */
+.vp-doc div[class*='language-'],
+.vp-doc li div[class*='language-'] {
+  margin: 16px 0;
+  border-radius: var(--aya-radius-sm);
+  box-shadow: var(--aya-elevation-1);
+}
+
+/* 代码组：阴影与圆角挂在整组上，标签栏与代码块拼成一张卡片 */
+.vp-doc .vp-code-group {
+  border-radius: var(--aya-radius-sm);
+  box-shadow: var(--aya-elevation-1);
+}
+
+.vp-doc .vp-code-group .tabs {
+  margin-right: 0;
+  margin-left: 0;
+  border-radius: var(--aya-radius-sm) var(--aya-radius-sm) 0 0;
+}
+
+.vp-doc .vp-code-group div[class*='language-'] {
+  margin-bottom: 0;
+  box-shadow: none;
 }
 
 /* 文档内所有表格整体居中（覆盖默认 display:block，使表格按内容宽度再水平居中） */
@@ -367,7 +393,7 @@ html {
   min-width: 0;
   min-height: 7rem;
   border: 1px solid rgb(var(--aya-c-brand-lilac-rgb) / 45%);
-  border-radius: 8px;
+  border-radius: var(--aya-radius-lg);
   padding: 20px 24px 16px;
   margin: 16px 0;
   background: rgb(var(--aya-c-brand-blue-rgb) / 8%);
@@ -406,13 +432,10 @@ html {
   box-shadow:
     var(--aya-example-surface-feather),
     var(--aya-example-surface-shadow);
-  backdrop-filter: var(--aya-frosted-blur-sm);
-  -webkit-backdrop-filter: var(--aya-frosted-blur-sm);
-  transform: translateZ(0);
 }
 
 .example-stem {
-  border-radius: 18px 18px 0 0;
+  border-radius: var(--aya-radius-lg) var(--aya-radius-lg) 0 0;
   corner-shape: squircle;
   border-bottom: 0;
   padding-top: 32px;
@@ -422,8 +445,13 @@ html {
   clip-path: inset(-48px -48px 0 -48px);
 }
 
+.example-stem:not(:has(+ .example-solution)) {
+  border-bottom: 1px solid var(--aya-example-surface-border);
+  border-radius: var(--aya-radius-lg);
+}
+
 .example-solution {
-  border-radius: 0 0 18px 18px;
+  border-radius: 0 0 var(--aya-radius-lg) var(--aya-radius-lg);
   corner-shape: squircle;
   border-top-color: var(--aya-example-surface-divider);
 }
@@ -576,7 +604,7 @@ html {
   min-width: 0;
   padding: 7px 10px;
   border: 1px solid rgba(60, 60, 67, 0.1);
-  border-radius: 6px;
+  border-radius: var(--aya-radius-xs);
   line-height: 1.55;
 }
 
@@ -644,165 +672,6 @@ html {
   .example-stem {
     padding-top: 24px;
   }
-}
-
-/* ================================================================
-   Definition Container（定义容器）::: definition
-   ================================================================ */
-.custom-block.definition {
-  border: 1px solid rgba(237, 155, 64, 0.45);
-  border-radius: 8px;
-  padding: 20px 24px 16px;
-  margin: 16px 0;
-  background: rgba(237, 155, 64, 0.08);
-  color: #000;
-}
-
-.dark .custom-block.definition {
-  border-color: rgba(237, 155, 64, 0.25);
-  background: rgba(237, 155, 64, 0.06);
-  color: #fff;
-}
-
-.custom-block.definition > .custom-block-title {
-  font-weight: 700;
-  font-size: 1em;
-  color: #c57a1e;
-  margin: 0 0 14px;
-}
-
-.dark .custom-block.definition > .custom-block-title {
-  color: #ed9b40;
-}
-
-/* ================================================================
-   Callout Containers（TIP / WARNING / IMPORTANT / NOTE / CAUTION）
-   统一添加与 definition 容器一致的细线边框
-   ================================================================ */
-
-/* --- TIP --- */
-.custom-block.tip {
-  border: 1px solid rgba(100, 180, 130, 0.45);
-  border-radius: 8px;
-  padding: 20px 24px 16px;
-  margin: 16px 0;
-  background: rgba(100, 180, 130, 0.08);
-}
-
-.dark .custom-block.tip {
-  border-color: rgba(100, 180, 130, 0.25);
-  background: rgba(100, 180, 130, 0.06);
-}
-
-.custom-block.tip > .custom-block-title {
-  font-weight: 700;
-  font-size: 1em;
-  color: #3a7d4e;
-  margin: 0 0 14px;
-}
-
-.dark .custom-block.tip > .custom-block-title {
-  color: #64b482;
-}
-
-/* --- WARNING --- */
-.custom-block.warning {
-  border: 1px solid rgba(210, 160, 60, 0.45);
-  border-radius: 8px;
-  padding: 20px 24px 16px;
-  margin: 16px 0;
-  background: rgba(210, 160, 60, 0.08);
-}
-
-.dark .custom-block.warning {
-  border-color: rgba(210, 160, 60, 0.25);
-  background: rgba(210, 160, 60, 0.06);
-}
-
-.custom-block.warning > .custom-block-title {
-  font-weight: 700;
-  font-size: 1em;
-  color: #9a6b1e;
-  margin: 0 0 14px;
-}
-
-.dark .custom-block.warning > .custom-block-title {
-  color: #d2a03c;
-}
-
-/* --- IMPORTANT --- */
-.custom-block.important {
-  border: 1px solid rgba(140, 110, 200, 0.45);
-  border-radius: 8px;
-  padding: 20px 24px 16px;
-  margin: 16px 0;
-  background: rgba(140, 110, 200, 0.08);
-}
-
-.dark .custom-block.important {
-  border-color: rgba(140, 110, 200, 0.25);
-  background: rgba(140, 110, 200, 0.06);
-}
-
-.custom-block.important > .custom-block-title {
-  font-weight: 700;
-  font-size: 1em;
-  color: #6e4fa0;
-  margin: 0 0 14px;
-}
-
-.dark .custom-block.important > .custom-block-title {
-  color: #8c6ec8;
-}
-
-/* --- NOTE --- */
-.custom-block.note {
-  border: 1px solid rgba(90, 140, 190, 0.45);
-  border-radius: 8px;
-  padding: 20px 24px 16px;
-  margin: 16px 0;
-  background: rgba(90, 140, 190, 0.08);
-}
-
-.dark .custom-block.note {
-  border-color: rgba(90, 140, 190, 0.25);
-  background: rgba(90, 140, 190, 0.06);
-}
-
-.custom-block.note > .custom-block-title {
-  font-weight: 700;
-  font-size: 1em;
-  color: #3a6080;
-  margin: 0 0 14px;
-}
-
-.dark .custom-block.note > .custom-block-title {
-  color: #5a8cbe;
-}
-
-/* --- CAUTION --- */
-.custom-block.caution {
-  border: 1px solid rgba(210, 90, 90, 0.45);
-  border-radius: 8px;
-  padding: 20px 24px 16px;
-  margin: 16px 0;
-  background: rgba(210, 90, 90, 0.08);
-}
-
-.dark .custom-block.caution {
-  border-color: rgba(210, 90, 90, 0.25);
-  background: rgba(210, 90, 90, 0.06);
-}
-
-.custom-block.caution > .custom-block-title {
-  font-weight: 700;
-  font-size: 1em;
-  color: #a03232;
-  margin: 0 0 14px;
-}
-
-.dark .custom-block.caution > .custom-block-title {
-  color: #d25a5a;
 }
 
 /* ================================================================

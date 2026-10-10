@@ -71,9 +71,11 @@ export const customSlots: Record<string, Component[]> = {
 }
 ```
 
+首页 `homeHero.image.src`（或字符串形式的 `image`）指定固定图片，优先于随机头像池；未指定固定图片时沿用随机头像和亮 / 暗版本切换。
+
 两类插槽的行为不同：
 
-- **主题已占用的插槽**（`layout-top`、`nav-bar-content-after`、`doc-after`、`home-hero-info-after`、`home-hero-image`）：自定义组件**追加渲染在主题组件之后**。
+- **主题已占用的插槽**（`layout-top`、`nav-bar-content-after`、`doc-after`、`home-hero-before`、`home-hero-info-after`、`home-hero-image`、`home-features-before`、`home-features-after`）：自定义组件**追加渲染在主题组件之后**。其中 `home-hero-before`（轨道 hero）、`home-features-before`（`01 近期更新`、`02 友情链接` 标题）、`home-features-after`（标题栏式站点信息）只在首页 frontmatter 写了 `homeHero` 时由主题填充；近期更新取 `generated/timeline-entries.json` 的前 4 组。
 - **其余插槽**：按插槽名直接透传给 `DefaultTheme.Layout`。
 
 常用插槽速查（完整列表见 [VitePress 文档](https://vitepress.dev/guide/extending-default-theme#layout-slots)）：
@@ -131,6 +133,12 @@ export function customEnhanceApp({ app, router }: EnhanceAppContext) {
 | `--dur-list-item` | 0.52s | 列表项 stagger |
 | `--dur-tap` | 0.12s | 按钮按压 |
 | `--dur-ripple` / `--ripple-size` | 0.8s / 200px | 点击涟漪 |
+| `--dur-orbit-draw` / `--dur-orbit-fade` / `--dur-orbit-pop` / `--dur-orbit-panel` / `--orbit-step` | 1.6s / 1s / 0.8s / 0.42s / 0.1s | 首页轨道 hero 描线、淡入、节点弹出、课程面板与入场错峰 |
+| `--dur-home-reveal` / `--home-reveal-step` | 0.9s / 0.08s | 首页 hero 以下各区块（标题行、近期更新卡片、友情链接、站点信息）滚动进入视口时的入场时长与同批错峰 |
+| `--dur-home-orbit` / `--ease-home-orbit` | 1.3s / `cubic-bezier(0.22, 1, 0.36, 1)` | 首页进场：节点沿弧从起点滑行到位（越远越久），标题逐字升起与镜头张开共用该曲线 |
+| `--dur-home-iris` | 0.9s | 文档页回首页时，新页面从轨道弧心以椭圆光圈展开（弧心坐标由 hero 写入 `--home-iris-x/y`） |
+| `--dur-home-exit` / `--ease-home-exit` | 0.52s / `cubic-bezier(0.55, 0, 0.75, 0.2)` | 离开首页：节点收回弧起点、弧线回缩、镜头合拢、标题上浮虚化 |
+| `--dur-home-exit-timeout` | 0.95s | 首页离场动画的兜底超时，超时后直接跳转 |
 
 JS 动画令牌（由 `theme/motion-tokens.ts` 在运行时读取，同样可在 `tokens.css` 覆盖）：
 
@@ -204,6 +212,7 @@ window.addEventListener('vt-transition-done', () => { /* 重新初始化依赖 D
 |---|---|---|
 | `style/var.css` | `--aya-gradient-*`、`--aya-c-brand-*`、`--vp-c-brand-*`、`--vp-home-hero-*` | 品牌渐变三色、品牌色通道（tint/阴影复用）、hero 标题/光晕 |
 | `style/surface.css` | `--aya-surface-*`、`--aya-frosted-blur-*`、`--aya-shadow-*`、`--aya-search-*` | 全站毛玻璃表面、模糊半径梯度（sm/md/lg/panel/backdrop）、阴影体系 |
+| `style/surface.css` | `--aya-radius-{xs,sm,md,lg,xl,pill}`、`--aya-elevation-{1..4}` | 圆角阶梯（6/12/16/20/28/999px，≤767px 时 sm/md/lg/xl 缩为 10/14/16/22px）与阴影层级（1 静止内容块如代码块 · 2 卡片 · 3 浮动窗口 · 4 弹层）；新组件应引用这些档位而非手写数值 |
 | `style/sidebar-window.css` | `--aya-sidebar-*` | 侧栏浮窗：背景、圆角（`--aya-sidebar-radius`）、版心对齐间距（`--aya-sidebar-gutter`）、活跃色、毛玻璃 |
 | `style/nav-tabs.css` | `--aya-nav-tab-*`、`--aya-nav-menu-*`、`--aya-nav-pill-*` | 导航胶囊与下拉菜单 |
 | `style/reading-mode.css` | `--aya-reading-mode-*` | 纯净阅读模式 |

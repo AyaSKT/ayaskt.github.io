@@ -2,31 +2,19 @@
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
-hero:
-
-  name: "Ayaskt 工作站\nAyaskt Workspace"
+# 轨道 hero（HomeOrbitHero.vue）。改回 `hero:` 即恢复 VitePress 默认 hero。
+homeHero:
+  ghost: Ayaskt
+  title: 工作站
   text: "笔记 / 资源汇总"
-
-
   tagline: Daphne, Ficus, Iris, Maackia.
-
   image:
-    light: /avatars/IMG_0490-light.webp
-    dark: /avatars/IMG_0490-dark.webp
-    width: 240
-    height: 240
+    src: /avatars/hero-rose.png
     link: https://www.mcdonalds.com.cn/page/offical-channels/
-    # 加不加都行：圆形 + 阴影效果
-    style:
-      borderRadius: 50%
-      boxShadow: 0 10px 40px rgba(0,0,0,0.25)
-      object-fit: cover;
-
-  # actions intentionally empty — buttons rendered by HomeCourseActions.vue
 
 homeCourseGroups:
   - id: y4
-    label: Y4
+    label: 肆
     title: 第四学年 2026 Sep - 2027 Jun
     tone: "#4fb69f"
     variant: brand
@@ -41,7 +29,7 @@ homeCourseGroups:
             variant: alt
 
   - id: y3
-    label: Y3
+    label: 叁
     title: '第三学年 2025 Sep - 2026 Jul'
     tone: "#5fa8cf"
     variant: alt
@@ -70,7 +58,7 @@ homeCourseGroups:
             variant: alt
 
   - id: y1y2
-    label: Y1 & Y2
+    label: 先
     title: 早期课程 2023 Sep - 2025 Jul
     tone: "#ad8bc8"
     variant: alt

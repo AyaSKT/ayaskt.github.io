@@ -192,12 +192,22 @@ html.vt-home-to-doc::view-transition-new(root) {
   animation: fadeIn var(--dur-page) var(--ease-ios-fade) both;
 }
 
+/* 回首页：新页面从轨道弧心以椭圆光圈展开，旧页面后退虚化 */
 html.vt-doc-to-home::view-transition-old(root) {
-  animation: fadeOut var(--dur-page-exit) var(--ease-ios-press) both;
+  animation: home-iris-recede var(--dur-home-iris) var(--ease-ios-fade) both;
 }
 
 html.vt-doc-to-home::view-transition-new(root) {
-  animation: fadeIn var(--dur-page) var(--ease-ios-fade) both;
+  animation: home-iris-open var(--dur-home-iris) var(--ease-home-orbit) both;
+}
+
+@keyframes home-iris-open {
+  from { clip-path: ellipse(0 0 at var(--home-iris-x, 35%) var(--home-iris-y, 45%)); }
+  to { clip-path: ellipse(150vmax 150vmax at var(--home-iris-x, 35%) var(--home-iris-y, 45%)); }
+}
+
+@keyframes home-iris-recede {
+  to { opacity: 0; transform: scale(0.96); filter: blur(6px); }
 }
 
 html.vt-doc-to-doc::view-transition-new(root) {

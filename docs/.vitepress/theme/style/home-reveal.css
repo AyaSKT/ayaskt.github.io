@@ -1,0 +1,131 @@
+/* ================================================================
+   首页滚动入场（data-reveal 由 home-reveal.ts 写入）
+   out：等待进入视口；in：播放一次；done：已在视口上方，直接显示。
+   所有动画用 backwards 填充，结束后不覆盖卡片自身的 hover 位移。
+   ================================================================ */
+
+[data-reveal="out"] { opacity: 0; }
+
+@media print {
+  [data-reveal],
+  [data-reveal] * {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+
+[data-reveal="in"] {
+  --rv-dur: var(--dur-home-reveal, 0.9s);
+  --rv-ease: var(--ease-home-orbit, cubic-bezier(0.22, 1, 0.36, 1));
+  --rv-step: var(--home-reveal-step, 0.08s);
+  --rv-delay: calc(var(--reveal-i, 0) * var(--rv-step));
+}
+
+/* 轨道首页由滚动入场接管，关掉 VPFeature 默认的加载即播放 */
+.VPHome:has(> .orbit-hero) .VPFeatures .item .VPFeature { animation: none; }
+
+/* ---- 区块标题：描边序号滑入、标题升起、细线向右生长、更多按钮跟进 ---- */
+.home-section-head[data-reveal="in"] .home-section-num {
+  animation: home-rv-num var(--rv-dur) var(--rv-ease) var(--rv-delay) backwards;
+}
+
+.home-section-head[data-reveal="in"] > div {
+  animation: home-rv-rise var(--rv-dur) var(--rv-ease) calc(var(--rv-delay) + var(--rv-step)) backwards;
+}
+
+.home-section-head[data-reveal="in"] .home-section-rule {
+  transform-origin: left center;
+  animation: home-rv-grow-x calc(var(--rv-dur) * 1.4) var(--rv-ease) calc(var(--rv-delay) + var(--rv-step) * 2) backwards;
+}
+
+.home-section-head[data-reveal="in"] .home-section-more {
+  animation: home-rv-slide-l var(--rv-dur) var(--rv-ease) calc(var(--rv-delay) + var(--rv-step) * 4) backwards;
+}
+
+/* hero 下方的刻度尺跟随 01 标题一起从中间展开 */
+.home-recent:has(> .home-section-head[data-reveal="out"])::before { opacity: 0; }
+
+.home-recent:has(> .home-section-head[data-reveal="in"])::before {
+  animation: home-rv-ruler calc(var(--dur-home-reveal, 0.9s) * 1.6) var(--ease-home-orbit, ease-out) backwards;
+}
+
+/* ---- 卡片：自下方带一点前倾地立起 ---- */
+.recent-lead[data-reveal="in"],
+[data-reveal-kind="card"][data-reveal="in"],
+.colophon-block[data-reveal="in"] {
+  transform-origin: 50% 100%;
+  animation: home-rv-card var(--rv-dur) var(--rv-ease) var(--rv-delay) backwards;
+}
+
+/* 封面：主卡自左向右擦出，次卡由近推远 */
+.recent-lead[data-reveal="in"] .recent-lead-cover img {
+  animation: home-rv-wipe calc(var(--rv-dur) * 1.5) var(--rv-ease) calc(var(--rv-delay) + var(--rv-step) * 2) backwards;
+}
+
+.recent-card[data-reveal="in"] .recent-card-cover img {
+  animation: home-rv-zoom calc(var(--rv-dur) * 1.4) var(--rv-ease) var(--rv-delay) backwards;
+}
+
+.recent-lead[data-reveal="in"] .recent-lead-stamp {
+  animation: home-rv-rise var(--rv-dur) var(--rv-ease) calc(var(--rv-delay) + var(--rv-step) * 6) backwards;
+}
+
+/* 主卡正文逐行升起，笔记列表再逐条跟上 */
+.recent-lead[data-reveal="in"] .recent-lead-body > * {
+  animation: home-rv-rise var(--rv-dur) var(--rv-ease) calc(var(--rv-delay) + var(--rv-step) * (2 + var(--k, 0))) backwards;
+}
+
+.recent-lead-body > :nth-child(1) { --k: 1; }
+.recent-lead-body > :nth-child(2) { --k: 2; }
+.recent-lead-body > :nth-child(3) { --k: 3; }
+.recent-lead-body > :nth-child(4) { --k: 4; }
+.recent-lead-body > :nth-child(5) { --k: 5; }
+.recent-lead-body > :nth-child(6) { --k: 7; }
+
+.recent-lead[data-reveal="in"] .recent-notes li {
+  animation: home-rv-slide-r var(--rv-dur) var(--rv-ease) calc(var(--rv-delay) + var(--rv-step) * (6 + var(--k, 0))) backwards;
+}
+
+.recent-notes li:nth-child(1) { --k: 0; }
+.recent-notes li:nth-child(2) { --k: 0.7; }
+.recent-notes li:nth-child(3) { --k: 1.4; }
+.recent-notes li:nth-child(4) { --k: 2.1; }
+
+/* ---- 站点信息：描边字擦出，信息格依次亮起 ---- */
+.colophon-block[data-reveal="in"] .colophon-ghost {
+  animation: home-rv-wipe calc(var(--rv-dur) * 1.4) var(--rv-ease) calc(var(--rv-delay) + var(--rv-step) * 2) backwards;
+}
+
+.colophon-block[data-reveal="in"] .colophon-mark strong,
+.colophon-block[data-reveal="in"] .colophon-mark p {
+  animation: home-rv-rise var(--rv-dur) var(--rv-ease) calc(var(--rv-delay) + var(--rv-step) * 3) backwards;
+}
+
+.colophon-block[data-reveal="in"] .colophon-mark p { animation-delay: calc(var(--rv-delay) + var(--rv-step) * 4); }
+
+.colophon-block[data-reveal="in"] .colophon-cells > div {
+  animation: home-rv-cell var(--rv-dur) var(--rv-ease) calc(var(--rv-delay) + var(--rv-step) * (3 + var(--k, 0))) backwards;
+}
+
+.colophon-cells > div:nth-child(1) { --k: 0; }
+.colophon-cells > div:nth-child(2) { --k: 0.8; }
+.colophon-cells > div:nth-child(3) { --k: 1.6; }
+.colophon-cells > div:nth-child(4) { --k: 2.4; }
+.colophon-cells > div:nth-child(5) { --k: 3.2; }
+.colophon-cells > div:nth-child(6) { --k: 4; }
+
+@keyframes home-rv-rise { from { opacity: 0; transform: translateY(18px); } }
+@keyframes home-rv-slide-l { from { opacity: 0; transform: translateX(16px); } }
+@keyframes home-rv-slide-r { from { opacity: 0; transform: translateX(-14px); } }
+@keyframes home-rv-num { from { opacity: 0; transform: translateX(-28px); clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 -10% 0 0); } }
+@keyframes home-rv-grow-x { from { transform: scaleX(0); } }
+@keyframes home-rv-ruler { from { opacity: 0; transform: scaleX(0.15); } }
+@keyframes home-rv-card {
+  from { opacity: 0; transform: perspective(1400px) translateY(56px) rotateX(9deg) scale(0.97); }
+}
+@keyframes home-rv-wipe {
+  from { clip-path: inset(0 100% 0 0); transform: scale(1.08); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes home-rv-zoom { from { transform: scale(1.18); } }
+@keyframes home-rv-cell { from { opacity: 0; transform: translateY(10px); background-color: color-mix(in srgb, var(--vp-c-brand-1) 10%, transparent); } }

@@ -68,7 +68,9 @@ test('local editor Vite middleware is serve-only', async () => {
 
 test('local editor plugin is only registered during dev commands', () => {
   const configSource = fs.readFileSync(path.join(root, 'docs/.vitepress/config.mts'), 'utf8')
-  assert.match(configSource, /plugins:\s*isDevCommand\s*\?\s*\[createLocalMarkdownEditorPlugin\(\)\]\s*:\s*\[\]/)
+  // V6.11.1 起 dev 插件列表同时包含时间线配置插件，断言只锁定
+  // 「整个 plugins 数组由 isDevCommand 门控，且生产构建为空数组」。
+  assert.match(configSource, /plugins:\s*isDevCommand\s*\?[\s\S]*?createLocalMarkdownEditorPlugin\(\)[\s\S]*?:\s*\[\]/)
 })
 
 test('local editor host is wired into doc pages without eager wangEditor imports', () => {

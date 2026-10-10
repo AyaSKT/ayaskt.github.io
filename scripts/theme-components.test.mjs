@@ -385,7 +385,11 @@ test('MindMap exposes a compact interactive SVG surface', () => {
   assert.match(source, /\.mind-map\.is-modal-active\s+\.mind-map-panel\s*{[^}]*width:\s*auto;/s)
   assert.match(source, /:global\(html\.mind-map-modal-open\)/)
   assert.doesNotMatch(source, /--mind-map-border:[^;\n]*var\(--vp-c-brand-1\)/)
-  assert.match(source, /--mind-map-surface-bg:\s*rgb\(19 20 23 \/ 96%\)/)
+  // V6.12 起底板底色由写死的近黑色改为按主题令牌混色（亮 95% / 暗 88%），
+  // 断言改为锁定「两侧都读 --vp-c-bg」，避免硬编码底色回归。
+  assert.match(source, /--mind-map-surface-bg:\s*color-mix\(in srgb,\s*var\(--vp-c-bg\)\s*95%,\s*var\(--vp-c-bg-soft\)\)/)
+  assert.match(source, /\.dark \.mind-map\)\s*{[^}]*--mind-map-surface-bg:\s*color-mix\(in srgb,\s*var\(--vp-c-bg\)\s*88%,\s*var\(--vp-c-bg-soft\)\)/s)
+  assert.doesNotMatch(source, /--mind-map-surface-bg:\s*rgb\(19 20 23/)
 })
 
 test('LyricCard exposes a top-right album cover that leaves room for furigana controls', () => {
@@ -456,10 +460,15 @@ test('SongCard keeps the cover one third wide with a flat frosted floating card 
   assert.match(source, /border-radius:\s*8px/)
   assert.doesNotMatch(source, /--song-card-[\w-]*highlight/)
   assert.match(source, /\.song-card\s*{[^}]*background:\s*var\(--song-card-bg\);/s)
-  assert.match(source, /\.song-card:hover\s*{[^}]*background:\s*color-mix\(in srgb,\s*var\(--vp-c-brand-1\)\s*7%,\s*var\(--song-card-bg\)\);/s)
+  // V6.7 起悬浮不再叠品牌色 tint，改由阴影表达层次，卡片底色保持不变。
+  assert.match(source, /\.song-card:hover\s*{[^}]*background:\s*var\(--song-card-bg\);/s)
   assert.match(source, /--song-card-depth-shadow:/)
   assert.match(source, /\.song-card:hover/)
-  assert.match(source, /transform:\s*translate3d\(0,\s*-2px,\s*0\)/)
+  // V6.7 起取消悬浮上浮位移：卡片与悬浮态都固定在 translate3d(0, 0, 0)，
+  // 层次只由阴影变化承担，避免出现「扁平风格里仍会抬起」的回归。
+  assert.match(source, /\.song-card\s*{[^}]*transform:\s*translate3d\(0,\s*0,\s*0\);/s)
+  assert.match(source, /\.song-card:hover\s*{[^}]*transform:\s*translate3d\(0,\s*0,\s*0\);/s)
+  assert.doesNotMatch(source, /translate3d\(0,\s*-2px,\s*0\)/)
   assert.match(source, /class="song-card-meta"/)
   assert.match(source, /class="song-card-preview"/)
   assert.match(source, /<Transition name="song-card-lyric" appear>/)

@@ -8,7 +8,12 @@ test('reading mode control is mounted through the VitePress nav slot', () => {
   const layout = read('docs/.vitepress/theme/components/MyLayout.vue')
 
   assert.match(layout, /import ReadingModeControl from ['"]\.\/ReadingModeControl\.vue['"]/)
-  assert.match(layout, /<template #nav-bar-content-after>\s*<ReadingModeControl\s*\/>\s*<\/template>/)
+  // V6.12 起该插槽在 ReadingModeControl 之后追加渲染 custom/slots 的组件，
+  // 因此只锁定「控件仍是插槽内第一个子节点」，不再要求插槽闭合标签紧邻其后。
+  assert.match(
+    layout,
+    /<template #nav-bar-content-after>\s*<ReadingModeControl\s*\/>\s*<component/,
+  )
 })
 
 test('reading mode stylesheet is imported by the theme', () => {

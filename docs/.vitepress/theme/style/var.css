@@ -141,6 +141,22 @@
   --dur-timeline-exit: 0.26s;
   --dur-timeline-stagger: 0.026s;
   --dur-timeline-exit-timeout: 0.9s;
+  /* 首页轨道 hero：描线、淡入与入场错峰（每级 --orbit-step） */
+  --dur-orbit-draw: 1.6s;
+  --dur-orbit-fade: 1s;
+  --dur-orbit-pop: 0.8s;
+  --dur-orbit-panel: 0.42s;
+  --orbit-step: 0.1s;
+  /* 首页各区块滚动进入视口时的入场时长与同批错峰 */
+  --dur-home-reveal: 0.9s;
+  --home-reveal-step: 0.08s;
+  /* 首页进出场：节点沿弧滑行、从文档页回首页的椭圆光圈、离开首页的收束 */
+  --dur-home-orbit: 1.3s;
+  --dur-home-iris: 0.9s;
+  --dur-home-exit: 0.52s;
+  --dur-home-exit-timeout: 0.95s;
+  --ease-home-orbit: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-home-exit: cubic-bezier(0.55, 0, 0.75, 0.2);
   --ripple-size: 200px;
   --animate-duration: var(--dur-page);
   --animate-delay: 0.08s;

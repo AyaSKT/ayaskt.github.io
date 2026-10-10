@@ -7,12 +7,17 @@ import MouseClick from './MouseClick.vue'
 import BackToTop from './backtotop.vue'
 import HeroHitokoto from './HeroHitokoto.vue'
 import HomeCourseActions from './HomeCourseActions.vue'
+import HomeOrbitHero from './HomeOrbitHero.vue'
+import HomeSectionHead from './HomeSectionHead.vue'
+import HomeRecent from './HomeRecent.vue'
+import HomeColophon from './HomeColophon.vue'
 import PageTransition from './PageTransition.vue'
 import LibraryMotion from './LibraryMotion.vue'
 import MathCopy from './MathCopy.vue'
 import TopProgress from './TopProgress.vue'
 import ReadingModeControl from './ReadingModeControl.vue'
 import { customSlots } from '../custom/slots'
+import { setupHomeReveal } from '../home-reveal'
 
 // 主题已占用的插槽：自定义组件追加在主题组件之后渲染；
 // 其余插槽名直接透传给 DefaultTheme.Layout（见 CUSTOMIZATION.md）
@@ -20,8 +25,11 @@ const themeOwnedSlots = [
   'layout-top',
   'nav-bar-content-after',
   'doc-after',
+  'home-hero-before',
   'home-hero-info-after',
   'home-hero-image',
+  'home-features-before',
+  'home-features-after',
 ]
 
 const passthroughSlots = Object.fromEntries(
@@ -54,6 +62,18 @@ const heroImagePool = [
 // 只在进入首页时随机选角色；主题切换沿用同一角色的亮 / 暗版本。
 const randomHeroIndex = ref<number | null>(null)
 
+let disposeHomeReveal = () => {}
+
+function startHomeReveal() {
+  disposeHomeReveal()
+  disposeHomeReveal = () => {}
+  nextTick(() => {
+    window.requestAnimationFrame(() => {
+      disposeHomeReveal = setupHomeReveal()
+    })
+  })
+}
+
 watch(() => route.path, (path) => {
   if (path === '/' || path === '/index.html') {
     randomHeroIndex.value = Date.now() % heroImagePool.length
@@ -61,23 +81,31 @@ watch(() => route.path, (path) => {
       setupHeroNameEntrance()
       setupHomeNavEntrance()
     })
+    startHomeReveal()
+  } else {
+    disposeHomeReveal()
+    disposeHomeReveal = () => {}
   }
 })
 
+// homeHero：轨道 hero（HomeOrbitHero）；未设置时回退到 VitePress 默认 hero
+const orbitHero = computed(() => (frontmatter.value as any)?.homeHero ?? null)
+
 const heroImageData = computed(() => {
-  const hero = (frontmatter.value as any)?.hero
-  return hero?.image ?? null
+  const fm = frontmatter.value as any
+  return (fm?.hero ?? fm?.homeHero)?.image ?? null
 })
 
 const heroImageSrc = computed(() => {
+  const image = heroImageData.value
+  // 显式指定图片时固定显示，避免首页随机头像覆盖配置。
+  if (typeof image === 'string') return image
+  if (image?.src) return image.src
   if (isHome.value && randomHeroIndex.value !== null) {
     const image = heroImagePool[randomHeroIndex.value]
     return isDark.value ? image.dark : image.light
   }
-  const image = heroImageData.value
   if (!image) return ''
-  if (typeof image === 'string') return image
-  if (image.src) return image.src
   if (image.light || image.dark) {
     return isDark.value ? (image.dark ?? image.light ?? '') : (image.light ?? image.dark ?? '')
   }
@@ -207,6 +235,7 @@ onMounted(() => {
     }
     setupHomeNavEntrance(true)
   }
+  if (isHome.value) startHomeReveal()
   // 仅首次加载：hero name 入场动画
   // 导航回到首页时由 View Transitions root crossfade 自然淡入
   setupHeroNameEntrance()
@@ -237,6 +266,24 @@ onMounted(() => {
       <BackToTop v-if="frontmatter.backToTop !== false" />
       <LocalEditorHost v-if="LocalEditorHost" />
       <component :is="comp" v-for="(comp, i) in slotComponents('doc-after')" :key="i" />
+    </template>
+
+    <template #home-hero-before>
+      <HomeOrbitHero v-if="orbitHero" :image="heroImageSrc" />
+      <component :is="comp" v-for="(comp, i) in slotComponents('home-hero-before')" :key="i" />
+    </template>
+
+    <template #home-features-before>
+      <template v-if="orbitHero">
+        <HomeRecent />
+        <HomeSectionHead num="02" label="LINKS" title="友情链接" />
+      </template>
+      <component :is="comp" v-for="(comp, i) in slotComponents('home-features-before')" :key="i" />
+    </template>
+
+    <template #home-features-after>
+      <HomeColophon v-if="orbitHero" />
+      <component :is="comp" v-for="(comp, i) in slotComponents('home-features-after')" :key="i" />
     </template>
 
     <template #home-hero-info-after>
