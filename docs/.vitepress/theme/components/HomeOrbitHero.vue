@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, useTemplateRef, watch } from 'vue'
 import { useData, withBase } from 'vitepress'
 import HeroHitokoto from './HeroHitokoto.vue'
 import timelineEntries from '../generated/timeline-entries.json'
@@ -107,6 +107,7 @@ const yearRange = computed(() => {
 })
 
 const root = ref<HTMLElement | null>(null)
+const figure = useTemplateRef<HTMLElement>('figure')
 const stage = ref<SVGSVGElement | null>(null)
 const titleEl = ref<HTMLElement | null>(null)
 const panelEl = ref<HTMLElement | null>(null)
@@ -369,6 +370,40 @@ function motionEnabled() {
   return window.matchMedia('(prefers-reduced-motion: no-preference)').matches
 }
 
+let heroPointerFrame = 0
+let heroPointerX = 0
+let heroPointerY = 0
+
+function resetHeroPointer() {
+  if (heroPointerFrame) window.cancelAnimationFrame(heroPointerFrame)
+  heroPointerFrame = 0
+  figure.value?.style.removeProperty('--orbit-pointer-x')
+  figure.value?.style.removeProperty('--orbit-pointer-y')
+}
+
+function onHeroPointerMove(event: PointerEvent) {
+  if (event.pointerType !== 'mouse' || openIndex.value >= 0 || leaving.value || !motionEnabled()) {
+    resetHeroPointer()
+    return
+  }
+
+  heroPointerX = event.clientX
+  heroPointerY = event.clientY
+  if (heroPointerFrame) return
+  heroPointerFrame = window.requestAnimationFrame(() => {
+    heroPointerFrame = 0
+    const target = figure.value
+    if (!target) return
+    // 读取固定外框，避免移动后的图片反过来改变指针坐标，造成边缘抖动。
+    const rect = target.getBoundingClientRect()
+    if (!rect.width || !rect.height) return
+    const x = Math.max(-1, Math.min(1, (heroPointerX - rect.left) / rect.width * 2 - 1))
+    const y = Math.max(-1, Math.min(1, (heroPointerY - rect.top) / rect.height * 2 - 1))
+    target.style.setProperty('--orbit-pointer-x', `${-x * 5}px`)
+    target.style.setProperty('--orbit-pointer-y', `${-y * 5}px`)
+  })
+}
+
 /** 沿弧从 fromDeg 走到 toDeg 的 translate 关键帧，终点落在节点自身位置 */
 function orbitFrames(g: Geometry, fromDeg: number, toDeg: number, home: [number, number], fade: 'in' | 'out') {
   const steps = 18
@@ -491,6 +526,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  resetHeroPointer()
   window.clearTimeout(resizeTimer)
   window.clearTimeout(exitTimer)
   window.removeEventListener('home-page-exit-request', onHomeExitRequest)
@@ -502,6 +538,7 @@ onBeforeUnmount(() => {
 })
 
 watch(() => groups.value, () => nextTick(layout))
+watch([openIndex, leaving], resetHeroPointer)
 </script>
 
 <template>
@@ -515,7 +552,15 @@ watch(() => groups.value, () => nextTick(layout))
     <div class="orbit-dotgrid" aria-hidden="true" />
     <svg ref="stage" class="orbit-stage" :class="{ 'is-static': !entering }" aria-hidden="true" />
 
-    <div class="orbit-figure" :class="{ art: geo?.art }">
+    <div
+      ref="figure"
+      class="orbit-figure"
+      :class="{ art: geo?.art }"
+      @pointerenter="onHeroPointerMove"
+      @pointermove="onHeroPointerMove"
+      @pointerleave="resetHeroPointer"
+      @pointercancel="resetHeroPointer"
+    >
       <img v-if="props.image" class="orbit-haze" :src="props.image" alt="" aria-hidden="true" />
       <a
         v-if="photoLink"
@@ -784,7 +829,7 @@ watch(() => groups.value, () => nextTick(layout))
 }
 
 .orbit-hero.is-ready .orbit-haze {
-  animation: orbit-fade-in calc(var(--dur-orbit-fade) * 1.6) var(--o-ease) calc(var(--orbit-step) * 6) backwards;
+  animation: orbit-haze-in calc(var(--dur-orbit-fade) * 1.6) var(--o-ease) calc(var(--orbit-step) * 6) backwards;
 }
 
 .orbit-hero .orbit-haze {
@@ -803,11 +848,11 @@ watch(() => groups.value, () => nextTick(layout))
 
 .orbit-hero .orbit-photo { position: relative; }
 
-.orbit-hero .orbit-photo img {
-  transition: scale 0.8s var(--o-ease);
+.orbit-hero .orbit-photo img,
+.orbit-hero .orbit-haze {
+  translate: var(--orbit-pointer-x, 0px) var(--orbit-pointer-y, 0px);
+  transition: translate var(--dur-orbit-panel) var(--o-ease);
 }
-
-.orbit-hero a.orbit-photo:hover img { scale: 1.02; }
 
 .orbit-hero .orbit-caption {
   position: absolute;
@@ -989,8 +1034,8 @@ watch(() => groups.value, () => nextTick(layout))
   box-shadow: var(--aya-elevation-2);
   font-family: var(--o-serif-latin);
   font-size: calc(var(--size) * 0.3);
-  font-style: italic;
-  font-weight: 500;
+  font-style: normal;
+  font-weight: 700;
   color: var(--o-accent);
   transition:
     translate var(--dur-menu, 0.32s) var(--o-ease),
@@ -1167,6 +1212,8 @@ watch(() => groups.value, () => nextTick(layout))
 @keyframes orbit-draw { to { stroke-dashoffset: 0; } }
 @keyframes orbit-undraw { from { stroke-dashoffset: 0; } to { stroke-dashoffset: var(--len); } }
 @keyframes orbit-fade-in { to { opacity: 1; } }
+/* 光晕淡入到当前主题的静态透明度，避免动画结束时从 1 突然回落。 */
+@keyframes orbit-haze-in { from { opacity: 0; } }
 @keyframes orbit-fade-out { to { opacity: 0; } }
 @keyframes orbit-grid-in { from { opacity: 0; transform: scale(1.12); } to { opacity: 1; transform: none; } }
 @keyframes orbit-dots-flow { from { opacity: 0; stroke-dashoffset: 180; } to { opacity: 1; stroke-dashoffset: 0; } }
@@ -1254,6 +1301,11 @@ watch(() => groups.value, () => nextTick(layout))
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .orbit-hero .orbit-photo img,
+  .orbit-hero .orbit-haze {
+    translate: none !important;
+  }
+
   .orbit-hero *,
   .orbit-hero *::before,
   .orbit-hero *::after {
