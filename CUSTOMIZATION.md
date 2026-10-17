@@ -125,6 +125,13 @@ export function customEnhanceApp({ app, router }: EnhanceAppContext) {
 | 令牌 | 默认 | 用途 |
 |---|---|---|
 | `--dur-page` / `--dur-page-exit` | 0.76s / 0.48s | 页面过渡进 / 出 |
+| `--dur-doc-orbit-rail` / `--dur-doc-orbit-node` / `--dur-doc-orbit-toc` / `--dur-doc-orbit-card` / `--doc-orbit-step` | 0.8s / 0.42s / 0.32s / 0.46s / 0.035s | 正文刻度、节点、目录（含珠子滑行）、课程卡片与错峰；收尾等待实际动画结束 |
+| `--dur-doc-orbit-exit` / `--ease-doc-orbit-exit` / `--dur-doc-orbit-exit-timeout` | 0.24s / 同 `--ease-home-exit` / 0.7s | 离开正文页前装饰收回；超时只防动画事件丢失 |
+| `--dur-doc-orbit-reveal` | 0.6s | 滚入视口时标题刻度、例题刻度、翻页点线的描出 |
+| `--dur-doc-defocus` / `--ease-doc-defocus` | 0.22s / `cubic-bezier(0.4, 0, 1, 1)` | 正文页之间：旧页失焦退场 |
+| `--dur-doc-focus` / `--ease-doc-focus` / `--dur-doc-focus-step` / `--dur-doc-focus-delay` | 0.7s / `cubic-bezier(0.2, 0.7, 0.1, 1)` / 50ms / 30ms | 正文页之间：新页首屏逐块对焦与错峰 |
+| `--doc-defocus-blur` / `--doc-focus-blur` | 5px / 6px | 失焦 / 对焦的模糊半径 |
+| `--dur-doc-focus-lag` | 0.2s | 对焦进场时点阵与十字额外延后的时间 |
 | `--dur-doc-enter` | 0.94s | 正文横向进场 |
 | `--dur-sidebar-enter` / `--dur-sidebar-exit` | 0.72s / 0.46s | 侧栏进 / 出场 |
 | `--dur-appearance-enter` / `--dur-appearance-exit` / `--dur-appearance-gap` | 0.68s / 0.42s / 0.14s | 日夜切换 |
@@ -184,12 +191,45 @@ html.vt-doc-to-doc .my-widget {
 
 | 事件（window 上派发） | 时机 |
 |---|---|
-| `vt-transition-done` | 每次页面过渡（含降级路径）结束后 |
+| `vt-transition-done` | 路由 View Transition 收尾后（无 VT 的降级路径不触发） |
 | `aya-fonts-ready` | Web 字体加载完成、布局刷新之后 |
 
 ```ts
 window.addEventListener('vt-transition-done', () => { /* 重新初始化依赖 DOM 的东西 */ })
 ```
+
+正文轨道装饰使用 `html[data-doc-orbit]`：
+
+| 值 | 时机 | 动的是什么 |
+|---|---|---|
+| `enter` | 首次加载 / 正文页之间换页 | 装饰描出；首次加载时正文局部进场（元信息、目录文字、课程卡片），正文页之间换页时改为首屏对焦（见下） |
+| `pending` | 路由 VT 中（首页 → 正文等），新快照已截、动画未开始 | 装饰暂时隐藏 |
+| `draw` | 收到 `vt-transition-ready` 之后 | 只描装饰（刻度、节点、轨道、珠子），与 VT 整页淡入同时播放 |
+| `exit` | 离开正文页前 | 装饰收回（`doc-orbit-out-*`）；去首页 / 时间线时收完才截旧快照 |
+| `idle` | 以上动画结束 | 静态 |
+
+**正文页之间不走 View Transition。** `PageTransition.vue` 在两个正文页（包括课程目录页）之间导航时：
+
+1. 在 `<html>` 上写 `data-doc-leaving`，正文容器和右侧目录播放 `doc-orbit-defocus`（轻度失焦并淡出）；切换课程时值为 `sidebar`，侧栏条目列表 `.VPSidebar .nav` 也一起失焦，窗框不动。装饰同时进入 `exit`。
+2. 退场与新页模块加载并行：路由在 `onAfterPageLoad` 里等退场结束才替换页面。退场播完会写 `data-doc-left`，把旧容器改成静态隐藏。
+3. 换页后 `doc-orbit.ts` 给首屏内的块写 `data-orbit-focus` 与 `--orbit-focus-i`，`<html>` 写 `data-doc-arrive`，各块按序号错峰播放 `doc-orbit-focus`（模糊对焦）；点阵与十字再晚 `--dur-doc-focus-lag`。收尾时这些属性全部清除。
+
+不要给 `.VPSidebar` 本身加失焦 / 对焦：它带着首次加载的 `fadeInLeft`，覆盖后再撤掉会让那段淡入重播。同理不要作用在 `.aside` 上（`filter` / `transform` 会让它成为内部 fixed 容器的包含块），用 `.aside-content`。
+
+走 View Transition 的路由（首页 → 正文等）由 VT 承担正文进场，`draw` 里不要给正文、目录文字或课程卡片加动画，也不要在 `vt-transition-done` 后再隐藏并播放它们（`scripts/verify-doc-orbit-motion.mjs` 会检查）。`PageTransition.vue` 在 `transition.ready` 时派发 `vt-transition-ready`。
+
+首屏以下的 h2 / h3 刻度与节点、例题刻度条、翻页点线在滚入视口后才描出：`doc-orbit.ts` 给它们写 `data-orbit-in`，样式用 transition 而不是 keyframes，所以不影响上面的状态收尾。
+
+`doc-orbit.ts` 在文档页还会写入以下状态，可在 `custom/tokens.css` 里按需改样式：
+
+| 状态 | 位置 | 含义 |
+|---|---|---|
+| `data-orbit-passed` | 正文 `h2`、右侧目录一级 `li` | 已越过阅读线（视口 32%）/ 已读到的目录条目，节点点亮 |
+| `data-orbit-has-active` | `.VPDocAsideOutline .content` | 目录存在当前条目，显示已读实线 |
+| `--doc-orbit-toc-y` | `.VPDocAsideOutline .content` | 当前条目珠子的 `top`，取自 VitePress 的 `.outline-marker` |
+| `--doc-orbit-sheet` | `<html>` | 刻度尺右端的图纸标签字符串（路由目录段，如 `Y3S2 · CCD · PART 2`），根目录页不写入 |
+
+右侧目录的珠子就是 VitePress 自带的 `.outline-marker`。不要给目录的 `li` 加 `position`：VitePress 按链接相对 `.root` 的 `offsetTop` 定位 marker，`li` 成为定位祖先后珠子会停在错误的行上。
 
 ### 2.4 animate.css / AnimXYZ 子集扩展
 
@@ -243,6 +283,12 @@ comments: false
 docMeta: false
 ---
 ```
+
+**Giscus 评论外观**：`GiscusComment.vue` 把 `theme` 指向 `docs/public/giscus/aya-light.css` / `aya-dark.css`，两者各自导入官方主题后再导入公用的 `aya-base.css`（形状、排版、动画，并导入站点的 `/fonts/fonts.css`）。改配色改前两份，改形状和动效改 `aya-base.css`。
+
+- 这些样式在 giscus.app 的 iframe 里生效，读不到站点的 CSS 变量和动效令牌，颜色和曲线是手抄的；改 `custom/tokens.css` 的配色后要同步这里。
+- iframe 会跨域请求这些文件：线上 GitHub Pages 自带 `Access-Control-Allow-Origin`，开发服务器靠 `config.mts` 里的 `vite.server.cors` 放行 `https://giscus.app`。
+- 主题给 iframe 内部留了 10px 边距放阴影，`GiscusComment.vue` 的外层容器相应左右各外扩 10px，两边要一起改。
 
 ### 4.2 内置全局组件
 

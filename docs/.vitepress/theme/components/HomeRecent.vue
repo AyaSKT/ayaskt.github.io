@@ -44,12 +44,11 @@ function byRecent(notes: TimelineNote[]) {
   return [...notes].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
 }
 
-const cards = computed(() => entries.slice(0, 4).map((entry, i) => {
+const cards = computed(() => entries.slice(0, 4).map((entry) => {
   const notes = byRecent(entry.notes)
   return {
     ...entry,
     ...splitCourse(entry.course),
-    index: String(i + 1).padStart(2, '0'),
     notes,
     href: notes[0] ? withBase(notes[0].href) : withBase('/timeline'),
     allLocked: notes.every((n) => n.locked),
@@ -93,8 +92,6 @@ const timelineHref = withBase('/timeline')
 
         <div class="recent-lead-body">
           <p class="recent-kicker">
-            <span>N-{{ lead.index }}</span>
-            <i />
             <span>{{ lead.notes.length }} NOTES</span>
           </p>
           <h3>
@@ -136,8 +133,6 @@ const timelineHref = withBase('/timeline')
         <span class="recent-card-body">
           <span class="recent-kicker">
             <span>{{ card.period }}</span>
-            <i />
-            <span>N-{{ card.index }}</span>
           </span>
           <strong>{{ card.name }}<em v-if="card.code">{{ card.code }}</em></strong>
           <span class="recent-range">{{ card.title }}</span>
@@ -230,7 +225,7 @@ const timelineHref = withBase('/timeline')
   height: 100%;
   object-fit: cover;
   filter: saturate(0.78) contrast(0.96);
-  transition: scale var(--dur-menu, 0.32s) var(--ease-ios-fade), filter var(--dur-menu, 0.32s) var(--ease-ios-fade);
+  transition: filter var(--dur-menu, 0.32s) var(--ease-ios-fade);
 }
 
 /* 封面图自带向右的白色淡出，叠一层卡片底色让深色模式也能接上 */
@@ -244,7 +239,6 @@ const timelineHref = withBase('/timeline')
 
 .recent-lead:hover .recent-lead-cover img,
 .recent-card:hover .recent-card-cover img {
-  scale: 1.025;
   filter: saturate(0.95) contrast(1);
 }
 

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 // 1. 再次导入必要的组件
 import DefaultTheme from 'vitepress/theme'
-import { computed, defineAsyncComponent, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, defineAsyncComponent, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useData, useRoute } from 'vitepress'
 import MouseClick from './MouseClick.vue'
 import BackToTop from './backtotop.vue'
@@ -18,6 +18,7 @@ import TopProgress from './TopProgress.vue'
 import ReadingModeControl from './ReadingModeControl.vue'
 import { customSlots } from '../custom/slots'
 import { setupHomeReveal } from '../home-reveal'
+import { playDocOrbitEntrance, stopDocOrbitEntrance, vtInFlight } from '../doc-orbit'
 
 // 主题已占用的插槽：自定义组件追加在主题组件之后渲染；
 // 其余插槽名直接透传给 DefaultTheme.Layout（见 CUSTOMIZATION.md）
@@ -63,6 +64,7 @@ const heroImagePool = [
 const randomHeroIndex = ref<number | null>(null)
 
 let disposeHomeReveal = () => {}
+let docOrbitRun = 0
 
 function startHomeReveal() {
   disposeHomeReveal()
@@ -74,7 +76,19 @@ function startHomeReveal() {
   })
 }
 
+// 在路由变化当下记录 VT 状态，不能等到 RAF 才判断（快照可能已结束）。
+function startDocOrbit() {
+  const run = ++docOrbitRun
+  const usesViewTransition = vtInFlight()
+  nextTick(() => {
+    if (run !== docOrbitRun) return
+    playDocOrbitEntrance({ viaTransition: usesViewTransition || vtInFlight() })
+  })
+}
+
 watch(() => route.path, (path) => {
+  docOrbitRun += 1
+  stopDocOrbitEntrance()
   if (path === '/' || path === '/index.html') {
     randomHeroIndex.value = Date.now() % heroImagePool.length
     nextTick(() => {
@@ -85,6 +99,7 @@ watch(() => route.path, (path) => {
   } else {
     disposeHomeReveal()
     disposeHomeReveal = () => {}
+    startDocOrbit()
   }
 })
 
@@ -236,9 +251,16 @@ onMounted(() => {
     setupHomeNavEntrance(true)
   }
   if (isHome.value) startHomeReveal()
+  else startDocOrbit()
   // 仅首次加载：hero name 入场动画
   // 导航回到首页时由 View Transitions root crossfade 自然淡入
   setupHeroNameEntrance()
+})
+
+onBeforeUnmount(() => {
+  disposeHomeReveal()
+  docOrbitRun += 1
+  stopDocOrbitEntrance()
 })
 </script>
 

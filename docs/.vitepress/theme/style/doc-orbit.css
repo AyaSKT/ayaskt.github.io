@@ -1,0 +1,1088 @@
+/* ================================================================
+   doc-orbit.css — 正文页轨道设计语言（V7.1）
+   把首页的点线 / 刻度 / 节点语言延伸到文档页。
+   原则：不改配色与排版，只加装饰层与动效层；装饰一律不占布局。
+
+   首次加载 / 无 VT 导航的进场由 html[data-doc-orbit="enter"] 驱动（见 doc-orbit.ts）。
+
+   ── 为什么装饰不放在内容栏外侧 ──
+   VitePress 的 .header-anchor 悬停时出现在标题左侧：
+     h1  -27.84 … -9.70
+     h2  -20.88 … -7.28
+   而实测「侧栏右边缘 → 正文内容栏左边缘」的 gutter 最小只有 32px
+   （course-index @1280，滚动条占位吃掉了几个像素）。
+   32 < 28 + 节点半径，所以外侧放不下轨道。
+   因此改为让节点骑在标题**已有的横线**上：h2 用它自己的 border-top，
+   h3 补一条很短的虚线；节点在横线上，位于文字上方，天然不碰文字与锚点。
+   ================================================================ */
+
+:root {
+  --doc-orbit-accent: var(--vp-c-brand-1);
+  --doc-orbit-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+}
+
+
+/* ================================================================
+   1. 文档顶部的刻度尺
+   放在内容栏内部（left/right 0），不依赖 gutter。
+   ================================================================ */
+
+@media (min-width: 960px) {
+  .VPDoc .content-container {
+    position: relative;
+  }
+
+  .VPDoc .content-container::before {
+    content: "";
+    position: absolute;
+    top: -26px;
+    left: 0;
+    right: 0;
+    height: 7px;
+    background-image:
+      repeating-linear-gradient(90deg, color-mix(in srgb, var(--doc-orbit-accent) 42%, transparent) 0 1px, transparent 1px 48px),
+      repeating-linear-gradient(90deg, color-mix(in srgb, var(--doc-orbit-accent) 18%, transparent) 0 1px, transparent 1px 8px);
+    background-size: 100% 7px, 100% 3px;
+    background-position: left top, left bottom;
+    background-repeat: no-repeat;
+    mask-image: linear-gradient(90deg, #000 0%, #000 72%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 72%, transparent 100%);
+    transform-origin: left center;
+    pointer-events: none;
+  }
+
+  html:is([data-doc-orbit="enter"], [data-doc-orbit="draw"]) .VPDoc .content-container::before {
+    animation: doc-orbit-ruler var(--dur-doc-orbit-rail) var(--ease-doc-orbit) both;
+  }
+}
+
+
+/* ================================================================
+   2. h2：节点 + 刻度，都骑在它自带的 border-top 线上
+
+   坐标（相对 h2 的 padding box，即 border-top 内侧）：
+     border-top 1px 画在 y = -1 … 0
+     文字从 padding-top 24px 开始 → y = 24
+   节点 10px，中心对准横线：top = -5.5px → 取 -5px（y = -5 … 5）
+   刻度条高 5px，紧贴横线下方：top = 1px（y = 1 … 6）
+   两者都在 y ≤ 6，距文字 18px，绝无重叠。
+   水平：left: 0 即文字左边缘，不需要 gutter。
+   ================================================================ */
+
+@media (min-width: 960px) {
+  html[data-doc-orbit] .vp-doc > div > h2 {
+    position: relative;
+  }
+
+  /* 节点圆盘：骑在横线左端 */
+  html[data-doc-orbit] .vp-doc > div > h2::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--vp-c-bg);
+    box-shadow:
+      0 0 0 1.5px color-mix(in srgb, var(--doc-orbit-accent) 58%, transparent),
+      0 0 0 5px color-mix(in srgb, var(--doc-orbit-accent) 9%, transparent);
+    pointer-events: none;
+    transition:
+      background-color 0.36s var(--ease-ios-fade),
+      box-shadow 0.3s var(--ease-ios-fade);
+  }
+
+  html[data-doc-orbit] .vp-doc > div > h2:hover::before {
+    box-shadow:
+      0 0 0 1.5px var(--doc-orbit-accent),
+      0 0 0 7px color-mix(in srgb, var(--doc-orbit-accent) 14%, transparent);
+  }
+
+  /* 刻度：长格 64px + 短格 8px，向右淡出 */
+  html[data-doc-orbit] .vp-doc > div > h2::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background-image:
+      repeating-linear-gradient(90deg, color-mix(in srgb, var(--doc-orbit-accent) 34%, transparent) 0 1px, transparent 1px 64px),
+      repeating-linear-gradient(90deg, color-mix(in srgb, var(--doc-orbit-accent) 14%, transparent) 0 1px, transparent 1px 8px);
+    background-size: 100% 5px, 100% 2px;
+    background-position: left top, left bottom;
+    background-repeat: no-repeat;
+    mask-image: linear-gradient(90deg, #000 0%, #000 30%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 30%, transparent 100%);
+    transform-origin: left center;
+    pointer-events: none;
+  }
+}
+
+
+/* ================================================================
+   3. h3：短虚线 + 小节点
+   h3 没有 border-top 也没有 padding，所以把装饰画在它上方
+   32px 的 margin 间隙里（绝对定位可以画进 margin）。
+     短虚线：top: -13px，高 1px，宽 64px
+     小节点：5px，中心对准虚线 → top: -15px
+   h3 的 .header-anchor 在 top: 0 / left: -17.4px，
+   与 y ≤ -11 的装饰完全不重叠。
+   ================================================================ */
+
+@media (min-width: 960px) {
+  html[data-doc-orbit] .vp-doc > div > h3 {
+    position: relative;
+  }
+
+  html[data-doc-orbit] .vp-doc > div > h3::after {
+    content: "";
+    position: absolute;
+    top: -13px;
+    left: 0;
+    width: 64px;
+    height: 1px;
+    background-image: repeating-linear-gradient(90deg, color-mix(in srgb, var(--doc-orbit-accent) 30%, transparent) 0 3px, transparent 3px 6px);
+    pointer-events: none;
+    transform-origin: left center;
+  }
+
+  html[data-doc-orbit] .vp-doc > div > h3::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: -1px;
+    width: 5px;
+    height: 5px;
+    border: 1.5px solid color-mix(in srgb, var(--doc-orbit-accent) 50%, transparent);
+    border-radius: 50%;
+    background: var(--vp-c-bg);
+    pointer-events: none;
+    transition:
+      border-color 0.24s var(--ease-ios-fade),
+      background-color 0.24s var(--ease-ios-fade);
+  }
+
+  html[data-doc-orbit] .vp-doc > div > h3:hover::before {
+    border-color: var(--doc-orbit-accent);
+    background-color: color-mix(in srgb, var(--doc-orbit-accent) 35%, var(--vp-c-bg));
+  }
+
+  html:is([data-doc-orbit="enter"], [data-doc-orbit="draw"]) .vp-doc > div > :is(h2, h3)::before {
+    animation: doc-orbit-node var(--dur-doc-orbit-node) var(--ease-ios-spring) 0.3s backwards;
+  }
+
+  html:is([data-doc-orbit="enter"], [data-doc-orbit="draw"]) .vp-doc > div > h2::after {
+    animation: doc-orbit-ruler 0.7s var(--ease-doc-orbit) 0.16s backwards;
+  }
+
+  /* 第一个 h2（章节目录）上方紧邻 DocMeta，不需要额外刻度 */
+  html[data-doc-orbit] .doc-meta + h2::after { content: none; }
+
+  /* 已读：节点越过视口 32% 的阅读线后点亮，像首页刻点随描线亮起 */
+  html[data-doc-orbit] .vp-doc > div > h2[data-orbit-passed]::before {
+    background: var(--doc-orbit-accent);
+    box-shadow:
+      0 0 0 1.5px var(--doc-orbit-accent),
+      0 0 0 5px color-mix(in srgb, var(--doc-orbit-accent) 14%, transparent);
+  }
+
+  /* 只在非退场状态脉冲；这条比退场规则多一个属性选择器，不排除就会盖掉收回动画 */
+  html:not([data-doc-orbit="exit"])[data-doc-orbit] .vp-doc > div > h2[data-orbit-passed]::before {
+    animation: doc-orbit-pass 0.56s var(--ease-ios-spring);
+  }
+}
+
+
+/* ================================================================
+   3b. 图纸框架：套准十字 / 标题点阵 / 刻度尺标签
+   十字固定在视口四角，内缩 11px；侧栏从 x = 32 开始、
+   目录在右侧 32px 之内结束，十字（11…22px）落在两者之外的空白里。
+   点阵与 hero 同为 22px 网格，只在标题右上方以椭圆淡出。
+   ================================================================ */
+
+@media (min-width: 960px) {
+  html[data-doc-orbit] body::after {
+    content: "";
+    position: fixed;
+    inset: var(--vp-nav-height) 0 0 0;
+    z-index: 0;
+    background-color: color-mix(in srgb, var(--doc-orbit-accent) 50%, transparent);
+    --doc-orbit-cross: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11'%3E%3Cpath d='M5.5 0v11M0 5.5h11' stroke='%23000'/%3E%3C/svg%3E");
+    mask-image: var(--doc-orbit-cross), var(--doc-orbit-cross), var(--doc-orbit-cross), var(--doc-orbit-cross);
+    -webkit-mask-image: var(--doc-orbit-cross), var(--doc-orbit-cross), var(--doc-orbit-cross), var(--doc-orbit-cross);
+    mask-position: left 11px top 11px, right 11px top 11px, left 11px bottom 11px, right 11px bottom 11px;
+    -webkit-mask-position: left 11px top 11px, right 11px top 11px, left 11px bottom 11px, right 11px bottom 11px;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  html:is([data-doc-orbit="enter"], [data-doc-orbit="draw"]) body::after {
+    animation: doc-orbit-frame 0.6s var(--ease-ios-fade) 0.06s backwards;
+  }
+
+  .VPDoc .content-container::after {
+    content: "";
+    position: absolute;
+    top: -48px;
+    right: -40px;
+    z-index: -1;
+    width: 62%;
+    height: 300px;
+    background-image: radial-gradient(circle, color-mix(in srgb, var(--doc-orbit-accent) 30%, transparent) 1px, transparent 1.4px);
+    background-size: 22px 22px;
+    background-position: right top;
+    mask-image: radial-gradient(ellipse 70% 80% at 100% 0%, #000 0%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 80% at 100% 0%, #000 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  html:is([data-doc-orbit="enter"], [data-doc-orbit="draw"]) .VPDoc .content-container::after {
+    animation: doc-orbit-grid 1s var(--ease-ios-fade) backwards;
+  }
+
+  /* 刻度尺右端的图纸标签：刻度在这里已淡出，用纸色衬底切开残余刻线 */
+  html[data-doc-orbit] .vp-doc > div > h1:first-child::before {
+    content: "— " var(--doc-orbit-sheet);
+    position: absolute;
+    top: -31px;
+    right: 0;
+    padding-left: 10px;
+    font: 500 10px/14px var(--doc-orbit-mono);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--doc-orbit-accent);
+    background: var(--vp-c-bg);
+    pointer-events: none;
+  }
+
+  html:is([data-doc-orbit="enter"], [data-doc-orbit="draw"]) .vp-doc > div > h1:first-child::before {
+    animation: doc-orbit-wipe 0.7s var(--ease-doc-orbit) 0.3s backwards;
+  }
+}
+
+
+/* ================================================================
+   4. 文档元信息：点线分隔
+   ================================================================ */
+
+.vp-doc .doc-meta {
+  position: relative;
+  border-bottom-color: transparent;
+}
+
+.vp-doc .doc-meta::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--doc-orbit-accent) 55%, transparent) 0.8px, transparent 1px);
+  background-size: 6px 1px;
+  mask-image: linear-gradient(90deg, #000 0%, #000 76%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 76%, transparent 100%);
+  transform-origin: left center;
+}
+
+html[data-doc-orbit="enter"]:not([data-doc-arrive]) .vp-doc .doc-meta {
+  animation: doc-orbit-rise 0.5s var(--ease-doc-orbit) 0.05s backwards;
+}
+
+html:is([data-doc-orbit="enter"], [data-doc-orbit="draw"]) .vp-doc .doc-meta::after {
+  animation: doc-orbit-grow-x 0.7s var(--ease-doc-orbit) 0.12s backwards;
+}
+
+
+/* ================================================================
+   5. 代码块：悬停时左侧轨道光线自上下行
+   用 background-image + background-size 表达，不改 overflow 也不占布局。
+   ================================================================ */
+
+.vp-doc div[class*='language-'] {
+  background-image: linear-gradient(180deg,
+    var(--doc-orbit-accent) 0%,
+    color-mix(in srgb, var(--doc-orbit-accent) 45%, transparent) 60%,
+    transparent 100%);
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-size: 2px 0%;
+  transition:
+    background-color 0.5s,
+    background-size 0.42s var(--ease-doc-orbit);
+}
+
+.vp-doc div[class*='language-']:hover {
+  background-size: 2px 100%;
+}
+
+/* 代码组由整组承担表面，内部子块不重复画光线 */
+.vp-doc .vp-code-group div[class*='language-'] {
+  background-image: none;
+}
+
+
+/* ================================================================
+   6. 例题：顶部刻度条 + 题干环
+   ================================================================ */
+
+.vp-doc .custom-block.example {
+  position: relative;
+}
+
+.vp-doc .custom-block.example::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 4px;
+  background-image: repeating-linear-gradient(90deg, color-mix(in srgb, var(--aya-c-brand-blue) 40%, transparent) 0 1px, transparent 1px 6px);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  pointer-events: none;
+}
+
+/* PROBLEM 标题前的实心刻点 */
+.vp-doc .example-stem > .example-section-title::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 8px;
+  vertical-align: 0.18em;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 16%, transparent);
+}
+
+/* SOLUTION 标题是 flex 容器，刻点用绝对定位放在左侧 */
+.vp-doc .example-solution > .example-section-title {
+  position: relative;
+  padding-left: 14px;
+}
+
+.vp-doc .example-solution > .example-section-title::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+}
+
+
+/* ================================================================
+   7. 右侧目录：竖向点线轨道
+   VitePress 的 .outline-marker 已按当前链接写 top（链接顶 + 7px，高 18px），
+   这里把它改成沿轨道滑行的珠子；doc-orbit.ts 把同一个 top 写进
+   --doc-orbit-toc-y，画出从起点圆环到珠子的已读实线。
+   轨道中心 x = 6.5px，全部画在 .content 自己的左内边距里：
+   .aside-container 是 overflow: hidden，越过 .content 左边缘就会被裁掉；
+   .outline-link 自己也是 overflow: hidden，所以刻点挂在 li 上而不是链接上。
+     起点圆环：标题行中心 y = 16
+     一级刻点：li 内链接行中心 y = 16，x = -13.5（相对 li 起点，li 起点为 20px）
+     珠子中心：marker top + 9
+   ================================================================ */
+
+.VPDocAsideOutline .content {
+  border-left: none;
+  padding-left: 20px;
+}
+
+.VPDocAsideOutline .outline-title {
+  position: relative;
+  font: 500 11px/32px var(--doc-orbit-mono);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--doc-orbit-accent);
+}
+
+.VPDocAsideOutline .outline-title::before {
+  content: "";
+  position: absolute;
+  top: 12.5px;
+  left: -17px;
+  width: 7px;
+  height: 7px;
+  box-sizing: border-box;
+  border: 1px solid var(--doc-orbit-accent);
+  border-radius: 50%;
+  background: var(--vp-c-bg);
+  z-index: 3;
+}
+
+/* 底轨：1px 点，每 5px 一个 */
+.VPDocAsideOutline .content::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  bottom: 8px;
+  left: 6px;
+  width: 1px;
+  background-image: linear-gradient(180deg, color-mix(in srgb, var(--doc-orbit-accent) 48%, transparent) 0 1px, transparent 1px 5px);
+  background-size: 1px 5px;
+  mask-image: linear-gradient(180deg, #000 0%, #000 82%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 82%, transparent 100%);
+  transform-origin: center top;
+  pointer-events: none;
+}
+
+/* 已读实线：起点圆环 → 当前珠子 */
+.VPDocAsideOutline .content::after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 6px;
+  width: 1px;
+  height: max(0px, calc(var(--doc-orbit-toc-y, 16px) + 9px - 16px));
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--doc-orbit-accent) 30%, transparent),
+    var(--doc-orbit-accent));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    height var(--dur-doc-orbit-toc) var(--ease-doc-orbit),
+    opacity 0.3s var(--ease-ios-fade);
+}
+
+.VPDocAsideOutline .content[data-orbit-has-active]::after {
+  opacity: 1;
+}
+
+.VPDocAsideOutline .outline-marker {
+  left: 3px;
+  z-index: 2;
+  width: 7px;
+  height: 7px;
+  margin-top: 5.5px;
+  border-radius: 50%;
+  background-color: var(--doc-orbit-accent);
+  box-shadow:
+    0 0 0 2px var(--vp-c-bg),
+    0 0 0 4px color-mix(in srgb, var(--doc-orbit-accent) 22%, transparent);
+  transition:
+    top var(--dur-doc-orbit-toc) var(--ease-doc-orbit),
+    opacity 0.25s var(--ease-ios-fade);
+}
+
+/* li 不能定位：VitePress 用链接的 offsetTop（相对 .root）算 marker，
+   li 一旦成为 offsetParent，嵌套链接的珠子就会停在错误的行上。
+   刻点不写 top/left，借绝对定位的静态位置贴在 li 起点，再用 margin 偏移。 */
+.VPDocAsideOutline .VPDocOutlineItem.root > li::before {
+  content: "";
+  position: absolute;
+  margin: 13.5px 0 0 -16px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--vp-c-bg);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--doc-orbit-accent) 50%, transparent);
+  pointer-events: none;
+  transition:
+    background-color 0.36s var(--ease-ios-fade),
+    box-shadow 0.36s var(--ease-ios-fade);
+}
+
+.VPDocAsideOutline .VPDocOutlineItem.root > li[data-orbit-passed]::before {
+  background: color-mix(in srgb, var(--doc-orbit-accent) 70%, var(--vp-c-bg));
+  box-shadow: 0 0 0 1px var(--doc-orbit-accent);
+}
+
+.VPDocAsideOutline .VPDocOutlineItem .outline-link.active {
+  color: var(--doc-orbit-accent);
+}
+
+html[data-doc-orbit="enter"]:not([data-doc-arrive]) .VPDocAsideOutline .content {
+  animation: doc-orbit-fade 0.36s var(--ease-ios-fade) 0.1s backwards;
+}
+
+html:is([data-doc-orbit="enter"], [data-doc-orbit="draw"]) .VPDocAsideOutline .content::before {
+  animation: doc-orbit-rail-y var(--dur-doc-orbit-rail) var(--ease-doc-orbit) 0.2s backwards;
+}
+
+html:is([data-doc-orbit="enter"], [data-doc-orbit="draw"]) .VPDocAsideOutline .outline-title::before {
+  animation: doc-orbit-node var(--dur-doc-orbit-node) var(--ease-ios-spring) 0.12s backwards;
+}
+
+html[data-doc-orbit="enter"]:not([data-doc-arrive]) .VPDocAsideOutline .VPDocOutlineItem.root > li {
+  animation: doc-orbit-slide var(--dur-doc-orbit-toc) var(--ease-doc-orbit) calc(0.16s + var(--toc-i, 0) * var(--doc-orbit-step)) backwards;
+}
+
+.VPDocAsideOutline .VPDocOutlineItem.root > li:nth-child(2) { --toc-i: 1; }
+.VPDocAsideOutline .VPDocOutlineItem.root > li:nth-child(3) { --toc-i: 2; }
+.VPDocAsideOutline .VPDocOutlineItem.root > li:nth-child(4) { --toc-i: 3; }
+.VPDocAsideOutline .VPDocOutlineItem.root > li:nth-child(5) { --toc-i: 4; }
+.VPDocAsideOutline .VPDocOutlineItem.root > li:nth-child(6) { --toc-i: 5; }
+.VPDocAsideOutline .VPDocOutlineItem.root > li:nth-child(7) { --toc-i: 6; }
+.VPDocAsideOutline .VPDocOutlineItem.root > li:nth-child(8) { --toc-i: 7; }
+.VPDocAsideOutline .VPDocOutlineItem.root > li:nth-child(9) { --toc-i: 8; }
+.VPDocAsideOutline .VPDocOutlineItem.root > li:nth-child(n + 10) { --toc-i: 9; }
+
+/* ================================================================
+   8. 课程目录页（frontmatter: pageClass: course-index-page）
+   每组上方一条刻度尺，组标题圆点外挂虚线轨道环，
+   卡片组内错峰立起，悬停时封面底部点线展开。
+   课程分组标题使用组件自身样式，不匹配正文的直接子标题选择器。
+   ================================================================ */
+
+.course-index-group::before {
+  content: "";
+  display: block;
+  height: 7px;
+  margin-bottom: 20px;
+  background-image:
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--vp-c-brand-1) 42%, transparent) 0 1px, transparent 1px 48px),
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--vp-c-brand-1) 16%, transparent) 0 1px, transparent 1px 8px);
+  background-size: 100% 7px, 100% 3px;
+  background-position: left top, left bottom;
+  background-repeat: no-repeat;
+  mask-image: linear-gradient(90deg, #000 0%, #000 58%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 58%, transparent 100%);
+  transform-origin: left center;
+}
+
+.course-index .course-index-group-title {
+  position: relative;
+}
+
+/* 组标题圆点外的虚线轨道环 */
+.course-index .course-index-group-dot {
+  position: relative;
+}
+
+.course-index .course-index-group-dot::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 1px dashed color-mix(in srgb, var(--vp-c-brand-1) 45%, transparent);
+  border-radius: 50%;
+  animation: doc-orbit-spin 16s linear infinite;
+}
+
+/* 组间顺延，组内卡片逐张错峰 */
+.course-index-group:nth-child(2) { --group-delay: 0.12s; }
+.course-index-group:nth-child(3) { --group-delay: 0.24s; }
+.course-index-group:nth-child(n + 4) { --group-delay: 0.32s; }
+
+.course-index-grid > .course-index-card:nth-child(2) { --card-i: 1; }
+.course-index-grid > .course-index-card:nth-child(3) { --card-i: 2; }
+.course-index-grid > .course-index-card:nth-child(4) { --card-i: 3; }
+.course-index-grid > .course-index-card:nth-child(5) { --card-i: 4; }
+.course-index-grid > .course-index-card:nth-child(n + 6) { --card-i: 5; }
+
+html:is([data-doc-orbit="enter"], [data-doc-orbit="draw"]) .course-index-group::before {
+  animation: doc-orbit-ruler 0.7s var(--ease-doc-orbit) var(--group-delay, 0s) backwards;
+}
+
+html[data-doc-orbit="enter"]:not([data-doc-arrive]) .course-index .course-index-group-title {
+  animation: doc-orbit-slide 0.44s var(--ease-doc-orbit) calc(var(--group-delay, 0s) + 0.06s) backwards;
+}
+
+html[data-doc-orbit="enter"]:not([data-doc-arrive]) .course-index-grid > .course-index-card {
+  animation: doc-orbit-card var(--dur-doc-orbit-card) var(--ease-doc-orbit)
+    calc(var(--group-delay, 0s) + 0.12s + var(--card-i, 0) * var(--doc-orbit-step)) backwards;
+}
+
+/* 卡片底部点线：悬停自左展开 */
+.course-index .course-index-card-body::before {
+  content: "";
+  position: absolute;
+  left: 13px;
+  right: 13px;
+  bottom: 8px;
+  z-index: 3;
+  height: 1px;
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-brand-1) 70%, transparent) 0.8px, transparent 1px);
+  background-size: 5px 1px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.42s var(--ease-doc-orbit);
+  pointer-events: none;
+}
+
+.course-index-card:hover .course-index-card-body::before,
+.course-index-card:focus-visible .course-index-card-body::before {
+  transform: scaleX(1);
+}
+
+
+/* ================================================================
+   9. 顶部阅读进度条：进度前沿光晕
+   不用脉动圆点——.top-progress-fill 带 scaleX，伪元素会被压扁。
+   ================================================================ */
+
+.top-progress-fill {
+  box-shadow:
+    0 1px 10px color-mix(in srgb, var(--aya-gradient-middle, #C2C7F8) 42%, transparent),
+    0 0 18px 2px color-mix(in srgb, var(--aya-gradient-start, #98CBEA) 24%, transparent);
+}
+
+
+/* ================================================================
+   10. 返回顶部：外圈虚线轨道环
+   ================================================================ */
+
+.back-top-container::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border: 1px dashed color-mix(in srgb, var(--vp-c-brand-2) 40%, transparent);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: doc-orbit-spin 20s linear infinite;
+}
+
+
+/* ================================================================
+   10b. 分隔线与引用：实线换成点线
+   引用原本 2px 实线 + 16px 内距，点轨占同样的 2px，文字位置不变。
+   ================================================================ */
+
+.vp-doc hr {
+  height: 1px;
+  border-top: none;
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--doc-orbit-accent) 60%, transparent) 0.8px, transparent 1px);
+  background-size: 6px 1px;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.vp-doc blockquote {
+  border-left: none;
+  padding-left: 18px;
+  background-image: linear-gradient(180deg, color-mix(in srgb, var(--doc-orbit-accent) 50%, transparent) 0 2px, transparent 2px 6px);
+  background-size: 2px 6px;
+  background-repeat: repeat-y;
+  background-position: left top;
+}
+
+
+/* ================================================================
+   10c. 左侧目录：嵌套层的实线换成点轨，当前条目在轨上落一颗珠子
+   VitePress 用 .items 的 1px border-left 画竖线，这里把它染透明、
+   背景画在同一 1px 里，轨道中心相对 .item 为 x = -0.5。
+   珠子在选中胶囊的左内距里，胶囊 FLIP 滑动时珠子随 is-active 淡入。
+   ================================================================ */
+
+@media (min-width: 960px) {
+  html:has(.VPDoc) .VPSidebar .VPSidebarItem.level-1 .items {
+    border-left-color: transparent;
+    background-image: linear-gradient(180deg, color-mix(in srgb, var(--doc-orbit-accent) 40%, transparent) 0 1px, transparent 1px 5px);
+    background-size: 1px 5px;
+    background-repeat: repeat-y;
+    background-position: left top;
+  }
+
+  html:has(.VPDoc) .VPSidebar .VPSidebarItem:is(.level-2, .level-3).is-link > .item::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -3px;
+    z-index: 1;
+    width: 5px;
+    height: 5px;
+    margin-top: -2.5px;
+    border-radius: 50%;
+    background: var(--doc-orbit-accent);
+    box-shadow: 0 0 0 2px var(--aya-sidebar-bg, var(--vp-c-bg));
+    opacity: 0;
+    scale: 0.3;
+    pointer-events: none;
+    transition:
+      opacity 0.24s var(--ease-ios-fade),
+      scale 0.42s var(--ease-ios-spring);
+  }
+
+  html:has(.VPDoc) .VPSidebar .VPSidebarItem:is(.level-2, .level-3).is-active > .item::before {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+
+/* ================================================================
+   10d. 翻页：两端节点 + 点线，像首页主图下的 NEURO ······ AYASKT
+   .prev-next 自带 24px 上内距，点线画在其中 y = 8。
+   ================================================================ */
+
+.VPDocFooter .prev-next {
+  position: relative;
+  border-top-color: transparent;
+}
+
+.VPDocFooter .prev-next::before,
+.VPDocFooter .prev-next::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  height: 9px;
+  pointer-events: none;
+}
+
+.VPDocFooter .prev-next::before {
+  left: 12px;
+  right: 12px;
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--doc-orbit-accent) 55%, transparent) 0.8px, transparent 1px);
+  background-size: 6px 1px;
+  background-position: left center;
+  background-repeat: repeat-x;
+  transform-origin: left center;
+}
+
+.VPDocFooter .prev-next::after {
+  left: 0;
+  right: 0;
+  background:
+    radial-gradient(circle, var(--doc-orbit-accent) 0 2px, transparent 2.4px) left center / 9px 9px no-repeat,
+    radial-gradient(circle, transparent 0 2.6px, var(--doc-orbit-accent) 3px 3.8px, transparent 4.2px) right center / 9px 9px no-repeat;
+}
+
+.VPDocFooter .pager-link .desc {
+  font: 500 10px/1.6 var(--doc-orbit-mono);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--doc-orbit-accent);
+}
+
+.VPDocFooter .pager-link .title {
+  transition: transform 0.42s var(--ease-doc-orbit), color 0.25s;
+}
+
+.VPDocFooter .pager-link:hover {
+  border-color: color-mix(in srgb, var(--doc-orbit-accent) 50%, transparent);
+}
+
+.VPDocFooter .pager-link.prev:hover .title { transform: translateX(-4px); }
+.VPDocFooter .pager-link.next:hover .title { transform: translateX(4px); }
+
+.VPDocFooter .VPLastUpdated {
+  font-family: var(--doc-orbit-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+
+/* ================================================================
+   10e. 动效编排（状态见 doc-orbit.ts 顶部）
+   ================================================================ */
+
+/* 右侧目录隐藏时（960–1279）正文栏右侧只剩十字所在的窄 gutter，点阵收回栏内 */
+@media (min-width: 960px) and (max-width: 1279px) {
+  .VPDoc .content-container::after { right: 0; }
+}
+
+/* ---- 滚动描出：首屏以下的装饰等进入视口再画，正文本身不隐藏 ---- */
+@media (min-width: 960px) {
+  html[data-doc-orbit] .vp-doc > div > h2::before {
+    transition:
+      opacity 0.4s var(--ease-ios-fade),
+      scale var(--dur-doc-orbit-node) var(--ease-ios-spring),
+      background-color 0.36s var(--ease-ios-fade),
+      box-shadow 0.3s var(--ease-ios-fade);
+  }
+
+  html[data-doc-orbit] .vp-doc > div > h3::before {
+    transition:
+      opacity 0.4s var(--ease-ios-fade),
+      scale var(--dur-doc-orbit-node) var(--ease-ios-spring),
+      border-color 0.24s var(--ease-ios-fade),
+      background-color 0.24s var(--ease-ios-fade);
+  }
+
+  html[data-doc-orbit] .vp-doc > div > :is(h2, h3)::after {
+    transition:
+      opacity 0.5s var(--ease-ios-fade),
+      transform var(--dur-doc-orbit-reveal) var(--ease-doc-orbit) 0.08s;
+  }
+
+  html[data-doc-orbit] .vp-doc > div > :is(h2, h3):not([data-orbit-in])::before {
+    opacity: 0;
+    scale: 0.2;
+  }
+
+  html[data-doc-orbit] .vp-doc > div > :is(h2, h3):not([data-orbit-in])::after {
+    opacity: 0;
+    transform: scaleX(0.08);
+  }
+}
+
+html[data-doc-orbit] .vp-doc .custom-block.example::before {
+  transform-origin: left center;
+  transition:
+    opacity 0.5s var(--ease-ios-fade),
+    transform var(--dur-doc-orbit-reveal) var(--ease-doc-orbit);
+}
+
+html[data-doc-orbit] .vp-doc .custom-block.example:not([data-orbit-in])::before {
+  opacity: 0;
+  transform: scaleX(0.08);
+}
+
+html[data-doc-orbit] .VPDocFooter .prev-next::before {
+  transition: transform var(--dur-doc-orbit-reveal) var(--ease-doc-orbit) 0.12s;
+}
+
+html[data-doc-orbit] .VPDocFooter .prev-next::after {
+  transition: opacity 0.42s var(--ease-ios-fade);
+}
+
+html[data-doc-orbit] .VPDocFooter .prev-next:not([data-orbit-in])::before {
+  transform: scaleX(0);
+}
+
+html[data-doc-orbit] .VPDocFooter .prev-next:not([data-orbit-in])::after {
+  opacity: 0;
+}
+
+/* ---- 进场补充：目录珠子 / 已读实线 / 一级刻点、侧栏珠子 ---- */
+html:is([data-doc-orbit="enter"], [data-doc-orbit="draw"]) .VPDocAsideOutline .outline-marker {
+  animation: doc-orbit-node var(--dur-doc-orbit-node) var(--ease-ios-spring) 0.36s backwards;
+}
+
+html:is([data-doc-orbit="enter"], [data-doc-orbit="draw"]) .VPDocAsideOutline .content::after {
+  transform-origin: center top;
+  animation: doc-orbit-rail-y var(--dur-doc-orbit-rail) var(--ease-doc-orbit) 0.24s backwards;
+}
+
+html:is([data-doc-orbit="enter"], [data-doc-orbit="draw"]) .VPDocAsideOutline .VPDocOutlineItem.root > li::before {
+  animation: doc-orbit-node var(--dur-doc-orbit-toc) var(--ease-ios-spring)
+    calc(0.2s + var(--toc-i, 0) * var(--doc-orbit-step)) backwards;
+}
+
+@media (min-width: 960px) {
+  html:is([data-doc-orbit="enter"], [data-doc-orbit="draw"]) .VPSidebar .VPSidebarItem.is-active > .item::before {
+    animation: doc-orbit-node var(--dur-doc-orbit-node) var(--ease-ios-spring) 0.22s backwards;
+  }
+}
+
+/* ---- pending：路由 VT 已截新快照、动画尚未开始，装饰先藏起来，ready 后由 draw 描出 ---- */
+html[data-doc-orbit="pending"] :is(
+  .VPDoc .content-container,
+  .vp-doc > div > :is(h1:first-child, h2, h3),
+  .VPDocAsideOutline .content,
+  .VPDocAsideOutline .outline-title,
+  .VPDocAsideOutline .VPDocOutlineItem.root > li,
+  .VPSidebar .VPSidebarItem.is-active > .item,
+  .course-index-group
+)::before,
+html[data-doc-orbit="pending"] :is(
+  .VPDoc .content-container,
+  .vp-doc > div > :is(h2, h3),
+  .vp-doc .doc-meta,
+  .VPDocAsideOutline .content
+)::after,
+html[data-doc-orbit="pending"] body::after,
+html[data-doc-orbit="pending"] .VPDocAsideOutline .outline-marker {
+  opacity: 0 !important;
+}
+
+/* ---- exit：离开正文页前收回，刻线回缩到起点、节点收拢、轨道向上收起 ---- */
+/* 伪元素不能写进 :is()，这里逐条列出 */
+html[data-doc-orbit="exit"] .VPDoc .content-container::before,
+html[data-doc-orbit="exit"] .vp-doc > div > :is(h2, h3)::after,
+html[data-doc-orbit="exit"] .vp-doc .doc-meta::after,
+html[data-doc-orbit="exit"] .vp-doc .custom-block.example::before,
+html[data-doc-orbit="exit"] .VPDocFooter .prev-next::before,
+html[data-doc-orbit="exit"] .course-index-group::before {
+  animation: doc-orbit-out-x var(--dur-doc-orbit-exit) var(--ease-doc-orbit-exit) forwards;
+}
+
+html[data-doc-orbit="exit"] .vp-doc > div > :is(h2, h3)::before,
+html[data-doc-orbit="exit"] .VPDocAsideOutline .outline-title::before,
+html[data-doc-orbit="exit"] .VPDocAsideOutline .VPDocOutlineItem.root > li::before,
+html[data-doc-orbit="exit"] .VPSidebar .VPSidebarItem.is-active > .item::before,
+html[data-doc-orbit="exit"] .VPDocAsideOutline .outline-marker {
+  animation: doc-orbit-out-node var(--dur-doc-orbit-exit) var(--ease-doc-orbit-exit) forwards;
+}
+
+html[data-doc-orbit="exit"] .VPDocAsideOutline .content::before,
+html[data-doc-orbit="exit"] .VPDocAsideOutline .content::after {
+  transform-origin: center top;
+  animation: doc-orbit-out-y var(--dur-doc-orbit-exit) var(--ease-doc-orbit-exit) forwards;
+}
+
+html[data-doc-orbit="exit"] .vp-doc > div > h1:first-child::before {
+  animation: doc-orbit-out-wipe var(--dur-doc-orbit-exit) var(--ease-doc-orbit-exit) forwards;
+}
+
+html[data-doc-orbit="exit"] .VPDoc .content-container::after,
+html[data-doc-orbit="exit"] .VPDocFooter .prev-next::after,
+html[data-doc-orbit="exit"] body::after {
+  animation: doc-orbit-out-fade var(--dur-doc-orbit-exit) var(--ease-doc-orbit-exit) forwards;
+}
+
+/* ---- 正文页之间：旧页失焦退场，新页首屏按块错峰对焦 ---- */
+/* 目录用 .aside-content 而不是 .aside：filter / transform 会让 .aside 成为
+   内部 fixed 容器的包含块，目录会整块跳位。 */
+html[data-doc-leaving] :is(.VPDoc .content-container, .VPDoc .aside-content) {
+  animation: doc-orbit-defocus var(--dur-doc-defocus) var(--ease-doc-defocus) both;
+  pointer-events: none;
+}
+
+/* 退场播完后改为静态隐藏：等待换页期间若容器被重建，不会重播一遍失焦。 */
+html[data-doc-leaving][data-doc-left] :is(.VPDoc .content-container, .VPDoc .aside-content) {
+  animation: none;
+  opacity: 0;
+}
+
+/* 切换课程只让侧栏条目失焦，窗框不动：.VPSidebar 自身带首载 fadeInLeft，
+   覆盖它的 animation 再撤掉会让那段淡入重播。 */
+@media (min-width: 960px) {
+  html[data-doc-leaving="sidebar"] .VPSidebar .nav {
+    animation: doc-orbit-defocus var(--dur-doc-defocus) var(--ease-doc-defocus) both;
+    pointer-events: none;
+  }
+
+  html[data-doc-leaving="sidebar"][data-doc-left] .VPSidebar .nav {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+html[data-doc-arrive] [data-orbit-focus] {
+  animation: doc-orbit-focus var(--dur-doc-focus) var(--ease-doc-focus)
+    calc(var(--orbit-focus-i, 0) * var(--dur-doc-focus-step) + var(--dur-doc-focus-delay)) backwards;
+}
+
+@media (max-width: 959px) {
+  html[data-doc-arrive] .VPSidebar .nav[data-orbit-focus] { animation: none; }
+}
+
+/* 点阵与十字晚一拍：正文先对焦，图纸背景再浮出来 */
+@media (min-width: 960px) {
+  html[data-doc-arrive] body::after {
+    animation-delay: calc(0.06s + var(--dur-doc-focus-lag));
+  }
+
+  html[data-doc-arrive] .VPDoc .content-container::after {
+    animation-delay: var(--dur-doc-focus-lag);
+  }
+}
+
+
+/* ================================================================
+   11. 关键帧
+   ================================================================ */
+
+@keyframes doc-orbit-frame {
+  from { opacity: 0; }
+}
+
+@keyframes doc-orbit-defocus {
+  to { opacity: 0; filter: blur(var(--doc-defocus-blur)); }
+}
+
+@keyframes doc-orbit-focus {
+  0% { opacity: 0; filter: blur(var(--doc-focus-blur)); transform: translateY(4px); }
+  40% { opacity: 1; }
+  100% { opacity: 1; filter: none; transform: none; }
+}
+
+@keyframes doc-orbit-out-x {
+  to { opacity: 0; transform: scaleX(0); }
+}
+
+@keyframes doc-orbit-out-y {
+  to { opacity: 0; transform: scaleY(0); }
+}
+
+@keyframes doc-orbit-out-node {
+  to { opacity: 0; scale: 0.2; }
+}
+
+@keyframes doc-orbit-out-fade {
+  to { opacity: 0; }
+}
+
+@keyframes doc-orbit-out-wipe {
+  to { opacity: 0; clip-path: inset(0 0 0 100%); }
+}
+
+@keyframes doc-orbit-rail-y {
+  from { opacity: 0; transform: scaleY(0); }
+}
+
+@keyframes doc-orbit-pass {
+  0% { scale: 1; }
+  35% { scale: 1.45; }
+  100% { scale: 1; }
+}
+
+@keyframes doc-orbit-grid {
+  from { opacity: 0; transform: scale(1.08); transform-origin: right top; }
+}
+
+@keyframes doc-orbit-wipe {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes doc-orbit-ruler {
+  from { opacity: 0; transform: scaleX(0.12); }
+}
+
+@keyframes doc-orbit-node {
+  from { opacity: 0; scale: 0.2; }
+}
+
+@keyframes doc-orbit-rise {
+  from { opacity: 0; transform: translateY(10px); }
+}
+
+@keyframes doc-orbit-grow-x {
+  from { transform: scaleX(0); }
+}
+
+@keyframes doc-orbit-fade {
+  from { opacity: 0; }
+}
+
+@keyframes doc-orbit-slide {
+  from { opacity: 0; transform: translateX(-12px); }
+}
+
+@keyframes doc-orbit-card {
+  from { opacity: 0; transform: perspective(1200px) translateY(36px) rotateX(8deg) scale(0.97); }
+}
+
+@keyframes doc-orbit-spin {
+  to { rotate: 360deg; }
+}
+
+
+/* ================================================================
+   12. 窄屏 / 打印
+   ================================================================ */
+
+@media (max-width: 959px) {
+  .course-index-group::before { margin-bottom: 14px; }
+  .back-top-container::before { display: none; }
+}
+
+@media print {
+  .VPDoc .content-container::before,
+  .VPDoc .content-container::after,
+  .vp-doc > div > :is(h1, h2, h3)::before,
+  .vp-doc > div > :is(h2, h3)::after,
+  .vp-doc .doc-meta::after,
+  .vp-doc .custom-block.example::before,
+  .course-index-group::before,
+  .back-top-container::before,
+  html[data-doc-orbit] body::after,
+  .VPDocFooter .prev-next::before,
+  .VPDocFooter .prev-next::after {
+    display: none !important;
+  }
+
+  .vp-doc div[class*='language-'] { background-image: none !important; }
+  .vp-doc blockquote { border-left: 2px solid #ccc; padding-left: 16px; background-image: none; }
+  .vp-doc hr { border-top: 1px solid #ccc; background-image: none; mask-image: none; }
+}

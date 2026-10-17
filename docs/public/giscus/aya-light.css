@@ -1,0 +1,65 @@
+/* giscus 亮色主题：暖灰纸面 + 陶土橙，对应 custom/tokens.css 的亮色配色。
+   官方主题提供代码高亮等其余变量，这里只覆盖需要和站点对齐的部分。 */
+@import url("https://giscus.app/themes/light.css");
+@import url("./aya-base.css");
+
+main {
+  --aya-accent: #b85f45;
+  --aya-accent-line: rgb(217 119 87 / 38%);
+  --aya-accent-ring: rgb(217 119 87 / 12%);
+  --aya-accent-soft: rgb(217 119 87 / 9%);
+  --aya-accent-glow: rgb(217 119 87 / 24%);
+  --aya-dot: rgb(184 95 69 / 55%);
+  --aya-shadow-tint: rgb(79 77 71 / 8%);
+  --aya-shadow: 0 1px 2px rgb(79 77 71 / 4%), 0 6px 18px rgb(79 77 71 / 5%);
+  --aya-shadow-hover: 0 2px 4px rgb(79 77 71 / 5%), 0 12px 28px rgb(79 77 71 / 8%);
+  --aya-shadow-pop: 0 4px 10px rgb(79 77 71 / 8%), 0 18px 40px rgb(79 77 71 / 12%);
+
+  --color-fg-default: #4f4d47;
+  --color-fg-muted: #77736a;
+  --color-fg-subtle: #9a968c;
+  --color-canvas-default: #ffffff;
+  --color-canvas-overlay: #ffffff;
+  --color-canvas-inset: #fbfaf8;
+  --color-canvas-subtle: #f7f6f3;
+  --color-border-default: #ecebe7;
+  --color-border-muted: #f0efeb;
+  --color-neutral-muted: rgb(119 115 106 / 12%);
+  --color-accent-fg: #b85f45;
+  --color-accent-emphasis: #d97757;
+  --color-accent-muted: rgb(217 119 87 / 38%);
+  --color-accent-subtle: rgb(217 119 87 / 9%);
+  --color-primer-shadow-inset: none;
+
+  --color-btn-text: #4f4d47;
+  --color-btn-bg: #ffffff;
+  --color-btn-border: #ecebe7;
+  --color-btn-shadow: none;
+  --color-btn-inset-shadow: none;
+  --color-btn-hover-bg: #f7f6f3;
+  --color-btn-hover-border: #e3e1db;
+  --color-btn-active-bg: #f0efeb;
+  --color-btn-active-border: #e3e1db;
+  --color-btn-selected-bg: #f0efeb;
+  --color-btn-primary-text: #ffffff;
+  --color-btn-primary-bg: #d97757;
+  --color-btn-primary-border: transparent;
+  --color-btn-primary-shadow: none;
+  --color-btn-primary-inset-shadow: none;
+  --color-btn-primary-hover-bg: #c96a4c;
+  --color-btn-primary-hover-border: transparent;
+  --color-btn-primary-selected-bg: #b85f45;
+  --color-btn-primary-selected-shadow: none;
+  --color-btn-primary-disabled-text: rgb(255 255 255 / 80%);
+  --color-btn-primary-disabled-bg: #ebb8a6;
+  --color-btn-primary-disabled-border: transparent;
+
+  --color-segmented-control-bg: #f0efeb;
+  --color-segmented-control-button-bg: #ffffff;
+  --color-segmented-control-button-selected-border: #e3e1db;
+  --color-action-list-item-default-hover-bg: rgb(217 119 87 / 8%);
+  --color-scale-gray-1: #f0efeb;
+  --color-scale-blue-1: rgb(217 119 87 / 16%);
+  --color-social-reaction-bg-hover: rgb(217 119 87 / 8%);
+  --color-social-reaction-bg-reacted-hover: rgb(217 119 87 / 16%);
+}

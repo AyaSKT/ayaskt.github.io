@@ -1,5 +1,31 @@
 /* var.css */
 :root {
+    /* 正文轨道进场：可在 custom/tokens.css 覆盖。 */
+    --dur-doc-orbit-rail: 0.8s;
+    --dur-doc-orbit-node: 0.42s;
+    --dur-doc-orbit-toc: 0.32s;
+    --dur-doc-orbit-card: 0.46s;
+    --doc-orbit-step: 0.035s;
+    --ease-doc-orbit: var(--ease-home-orbit, cubic-bezier(0.22, 1, 0.36, 1));
+    /* 离开正文页前装饰收回；超时兜底只防动画事件丢失，不参与正常节奏。 */
+    --dur-doc-orbit-exit: 0.24s;
+    --dur-doc-orbit-exit-timeout: 0.7s;
+    --ease-doc-orbit-exit: var(--ease-home-exit, cubic-bezier(0.55, 0, 0.75, 0.2));
+    /* 滚动进入视口时标题刻度 / 例题刻度 / 翻页点线的描出时长。 */
+    --dur-doc-orbit-reveal: 0.6s;
+    /* 正文页之间的切换：旧页失焦退场与新页加载并行，新页首屏按块错峰对焦。 */
+    --dur-doc-defocus: 0.22s;
+    --ease-doc-defocus: cubic-bezier(0.4, 0, 1, 1);
+    --dur-doc-focus: 0.7s;
+    --ease-doc-focus: cubic-bezier(0.2, 0.7, 0.1, 1);
+    --dur-doc-focus-step: 50ms;
+    --dur-doc-focus-delay: 30ms;
+    /* 失焦 / 对焦的模糊半径。 */
+    --doc-defocus-blur: 5px;
+    --doc-focus-blur: 6px;
+    /* 点阵与十字比正文晚一拍对焦。 */
+    --dur-doc-focus-lag: 0.2s;
+
     --aya-gradient-start: #98CBEA;
     --aya-gradient-middle: #C2C7F8;
     --aya-gradient-end: #F1DCE4;

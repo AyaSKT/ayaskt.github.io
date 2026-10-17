@@ -1601,6 +1601,8 @@ export default defineConfig({
       ? [createLocalMarkdownEditorPlugin(), createTimelineConfigPlugin()]
       : [],
     server: {
+      // giscus 的 iframe 跨域加载 /giscus/*.css 主题与 /fonts/ 字体
+      cors: { origin: ['https://giscus.app'] },
       watch: {
         awaitWriteFinish: {
           stabilityThreshold: 10000,

@@ -1,0 +1,64 @@
+/* giscus 暗色主题：Nord Polar Night + Frost，对应 custom/tokens.css 的 .dark 配色。 */
+@import url("https://giscus.app/themes/dark.css");
+@import url("./aya-base.css");
+
+main {
+  --aya-accent: #88c0d0;
+  --aya-accent-line: rgb(136 192 208 / 36%);
+  --aya-accent-ring: rgb(136 192 208 / 12%);
+  --aya-accent-soft: rgb(136 192 208 / 12%);
+  --aya-accent-glow: rgb(136 192 208 / 18%);
+  --aya-dot: rgb(136 192 208 / 45%);
+  --aya-shadow-tint: rgb(0 0 0 / 22%);
+  --aya-shadow: 0 1px 2px rgb(0 0 0 / 14%), 0 6px 18px rgb(0 0 0 / 14%);
+  --aya-shadow-hover: 0 2px 4px rgb(0 0 0 / 16%), 0 12px 28px rgb(0 0 0 / 22%);
+  --aya-shadow-pop: 0 4px 10px rgb(0 0 0 / 22%), 0 18px 40px rgb(0 0 0 / 30%);
+
+  --color-fg-default: #eceff4;
+  --color-fg-muted: #d8dee9;
+  --color-fg-subtle: #9aa4b6;
+  --color-canvas-default: #333a47;
+  --color-canvas-overlay: #3b4252;
+  --color-canvas-inset: #2e3440;
+  --color-canvas-subtle: #303744;
+  --color-border-default: #434c5e;
+  --color-border-muted: #3b4252;
+  --color-neutral-muted: rgb(216 222 233 / 10%);
+  --color-accent-fg: #88c0d0;
+  --color-accent-emphasis: #81a1c1;
+  --color-accent-muted: rgb(136 192 208 / 36%);
+  --color-accent-subtle: rgb(136 192 208 / 12%);
+  --color-primer-shadow-inset: none;
+
+  --color-btn-text: #eceff4;
+  --color-btn-bg: #3b4252;
+  --color-btn-border: #434c5e;
+  --color-btn-shadow: none;
+  --color-btn-inset-shadow: none;
+  --color-btn-hover-bg: #434c5e;
+  --color-btn-hover-border: #4c566a;
+  --color-btn-active-bg: #4c566a;
+  --color-btn-active-border: #4c566a;
+  --color-btn-selected-bg: #434c5e;
+  --color-btn-primary-text: #2e3440;
+  --color-btn-primary-bg: #88c0d0;
+  --color-btn-primary-border: transparent;
+  --color-btn-primary-shadow: none;
+  --color-btn-primary-inset-shadow: none;
+  --color-btn-primary-hover-bg: #9bcbd9;
+  --color-btn-primary-hover-border: transparent;
+  --color-btn-primary-selected-bg: #81a1c1;
+  --color-btn-primary-selected-shadow: none;
+  --color-btn-primary-disabled-text: rgb(46 52 64 / 70%);
+  --color-btn-primary-disabled-bg: rgb(136 192 208 / 45%);
+  --color-btn-primary-disabled-border: transparent;
+
+  --color-segmented-control-bg: #2e3440;
+  --color-segmented-control-button-bg: #3b4252;
+  --color-segmented-control-button-selected-border: #4c566a;
+  --color-action-list-item-default-hover-bg: rgb(136 192 208 / 10%);
+  --color-scale-gray-1: #3b4252;
+  --color-scale-blue-1: rgb(136 192 208 / 18%);
+  --color-social-reaction-bg-hover: rgb(136 192 208 / 10%);
+  --color-social-reaction-bg-reacted-hover: rgb(136 192 208 / 18%);
+}

@@ -85,7 +85,9 @@ Course nav entries in `docs/.vitepress/config.mts` must highlight for the course
 
 ## Page Transition System
 
-`PageTransition.vue` intercepts internal link clicks, calls `document.startViewTransition()`, navigates via `useRouter().go()`. Three modes:
+**Doc ↔ doc navigation (including course index pages) skips View Transitions.** `goBetweenDocs` sets `html[data-doc-leaving]` (old content/outline play `doc-orbit-defocus`; on a course switch the value is `sidebar` and `.VPSidebar .nav` defocuses too), runs it in parallel with the page module load by awaiting it inside `router.onAfterPageLoad`, then swaps instantly; `doc-orbit.ts` marks above-the-fold blocks with `data-orbit-focus` / `--orbit-focus-i` and staggers `doc-orbit-focus`. Never animate `.VPSidebar` itself (overriding and then clearing its animation replays the first-load `fadeInLeft`) or `.aside` (filter/transform turns it into the containing block of its fixed child). See `CUSTOMIZATION.md`.
+
+For all other routes, `PageTransition.vue` intercepts internal link clicks, calls `document.startViewTransition()`, navigates via `useRouter().go()`. Three modes:
 - **Same sidebar** (`vt-keep-sidebar`): content crossfades while sidebar stays static (old sidebar snapshot hidden, new shown). After transition, sidebar indicator slides to new active item.
 - **Sidebar switch** (`vt-switch-sidebar`): old sidebar fades out left, new fades in left with stagger. Indicator is rebuilt and positioned instantly.
 - **No sidebar change** (e.g. homepage → docs): default root crossfade. Indicator appears in new snapshot.

@@ -118,11 +118,17 @@ const leaving = ref(false)
 const titleChars = computed(() => [...String(hero.value.title ?? '工作站')])
 const geo = ref<Geometry | null>(null)
 const openIndex = ref(-1)
-const panelPos = ref<{ left: number, top: number } | null>(null)
+const panelPos = ref<{ left: number, top: number, origin: string } | null>(null)
+const tether = ref<{ x: number, y: number, length: number, angle: number } | null>(null)
 const titleStyle = ref<Record<string, string>>({})
 const minHeight = ref('')
 
 const openNode = computed(() => (openIndex.value >= 0 ? nodes.value[openIndex.value] : null))
+// 关闭时面板要带着内容一起退场，所以内容跟随最后一次打开的节点，而不是 openIndex
+const panelIndex = ref(-1)
+const panelNode = computed(() => (panelIndex.value >= 0 ? nodes.value[panelIndex.value] : null))
+// 每次打开或切换都换一个 key，让面板内容和连接线重新播放入场
+const panelRun = ref(0)
 
 const NS = 'http://www.w3.org/2000/svg'
 const rad = (d: number) => d * Math.PI / 180
@@ -334,21 +340,57 @@ function place() {
   const g = geo.value
   const hero = root.value
   const panel = panelEl.value
+  if (panel) panel.style.maxHeight = ''
   if (!g || !hero || !panel || g.mode === 'mobile') {
     panelPos.value = null
+    tether.value = null
     return
   }
   const w = panel.offsetWidth
-  const h = panel.offsetHeight
-  panelPos.value = {
-    top: Math.max(84, Math.min(g.fy - h / 2, hero.clientHeight - h - 24)),
-    left: Math.max(24, Math.min(hero.clientWidth - w - 24, g.fx - w / 2)),
+  const natural = panel.offsetHeight
+  const left = Math.max(24, Math.min(hero.clientWidth - w - 24, g.fx - w / 2))
+
+  // 面板底边停在横向重叠的圆盘（含 NOW 角标和选中环）上方；放不下时列表在面板内滚动
+  const s = g.size / 2
+  let floor = hero.clientHeight - 24
+  for (const a of g.angles) {
+    const [x, y] = pt(g, a)
+    if (x + s + 12 > left && x - s - 12 < left + w) floor = Math.min(floor, y - s - 16)
   }
+  const h = Math.min(natural, Math.max(200, floor - 84))
+  if (h < natural) panel.style.maxHeight = `${h}px`
+  const top = Math.max(84, Math.min(g.fy - h / 2, floor - h))
+
+  // 点线从圆盘外缘连到面板边上离它最近的点；面板以圆盘方向为原点展开
+  const index = openIndex.value >= 0 ? openIndex.value : panelIndex.value
+  const [nx, ny] = pt(g, g.angles[index] ?? g.angles[g.angles.length - 1])
+  const inset = 18
+  let px = Math.max(left + inset, Math.min(left + w - inset, nx))
+  let py = Math.max(top + inset, Math.min(top + h - inset, ny))
+  if (ny >= top + h) py = top + h
+  else if (ny <= top) py = top
+  else if (nx >= left + w) px = left + w
+  else if (nx <= left) px = left
+  const dx = px - nx
+  const dy = py - ny
+  const dist = Math.hypot(dx, dy)
+  const gap = g.size / 2 + 10
+  panelPos.value = { top, left, origin: `${(nx - left).toFixed(1)}px ${(ny - top).toFixed(1)}px` }
+  tether.value = dist > gap + 12
+    ? {
+        x: nx + (dx / dist) * gap,
+        y: ny + (dy / dist) * gap,
+        length: dist - gap,
+        angle: Math.atan2(dy, dx) * 180 / Math.PI,
+      }
+    : null
 }
 
 function toggle(i: number) {
   if (openIndex.value === i) return close()
   openIndex.value = i
+  panelIndex.value = i
+  panelRun.value += 1
   nextTick(place)
 }
 
@@ -615,22 +657,44 @@ watch([openIndex, leaving], resetHeroPointer)
     </nav>
 
     <div
+      v-if="tether"
+      :key="`tether-${panelRun}`"
+      class="orbit-tether"
+      :class="{ open: !!openNode }"
+      aria-hidden="true"
+      :style="{
+        left: `${tether.x}px`,
+        top: `${tether.y}px`,
+        width: `${tether.length}px`,
+        transform: `rotate(${tether.angle}deg)`,
+      }"
+    />
+
+    <div
       id="orbit-panel"
       ref="panelEl"
       class="orbit-panel"
       :class="{ open: !!openNode }"
       role="dialog"
-      :aria-label="openNode?.title"
-      :style="panelPos ? { left: `${panelPos.left}px`, top: `${panelPos.top}px` } : undefined"
+      :aria-label="panelNode?.title"
+      :aria-hidden="!openNode"
+      :inert="openNode ? undefined : true"
+      :style="panelPos ? { left: `${panelPos.left}px`, top: `${panelPos.top}px`, transformOrigin: panelPos.origin } : undefined"
     >
-      <button type="button" class="orbit-panel-close" aria-label="关闭" @click="close">×</button>
-      <template v-if="openNode">
-        <header>
-          <small>{{ openNode.id }} · {{ openNode.meta }}</small>
-          <h3>{{ openNode.title }}</h3>
+      <button type="button" class="orbit-panel-close" aria-label="关闭" @click="close">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" /></svg>
+      </button>
+      <div v-if="panelNode" :key="`panel-${panelRun}`" class="orbit-panel-body">
+        <header style="--r: 0">
+          <small>{{ panelNode.meta }}</small>
+          <div class="orbit-panel-heading">
+            <h3>{{ panelNode.title }}</h3>
+            <span class="orbit-panel-count">{{ String(panelNode.courses.length).padStart(2, '0') }} COURSES</span>
+          </div>
         </header>
+        <i class="orbit-panel-rule" aria-hidden="true" />
         <ul>
-          <li v-for="c in openNode.courses" :key="c.code + c.name">
+          <li v-for="(c, ci) in panelNode.courses" :key="c.code + c.name" :style="{ '--r': ci + 2 }">
             <a
               :href="c.href"
               :target="c.external ? '_blank' : undefined"
@@ -638,11 +702,11 @@ watch([openIndex, leaving], resetHeroPointer)
             >
               <code>{{ c.code }}</code>
               <span>{{ c.name }}</span>
-              <i>{{ c.note || '→' }}</i>
+              <i>{{ c.note || '' }}<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" /></svg></i>
             </a>
           </li>
         </ul>
-      </template>
+      </div>
     </div>
     <div class="orbit-scrim" @click="close" />
   </section>
@@ -1046,9 +1110,13 @@ watch([openIndex, leaving], resetHeroPointer)
 .orbit-hero .orbit-node:hover .orbit-node-disc,
 .orbit-hero .orbit-node:focus-visible .orbit-node-disc,
 .orbit-hero .orbit-node[aria-expanded="true"] .orbit-node-disc {
-  translate: 0 -3px;
   border-color: color-mix(in srgb, var(--o-accent) 45%, transparent);
   box-shadow: var(--aya-elevation-3);
+}
+
+/* 选中的圆盘是点线的起点，不再上浮 */
+.orbit-hero .orbit-node:not([aria-expanded="true"]):is(:hover, :focus-visible) .orbit-node-disc {
+  translate: 0 -3px;
 }
 
 .orbit-hero .orbit-node:focus-visible { outline: none; }
@@ -1087,72 +1155,160 @@ watch([openIndex, leaving], resetHeroPointer)
   letter-spacing: 0.1em;
 }
 
-/* 课程面板 */
+/* 课程面板：从被点的圆盘方向展开（transform-origin 由 place() 写入），内容逐行对焦 */
 .orbit-hero .orbit-panel {
+  --panel-in: var(--dur-orbit-panel);
+  --panel-out: var(--dur-menu-out, 0.22s);
   position: absolute;
   z-index: 10;
-  width: 340px;
-  padding: 20px 18px 12px;
+  display: flex;
+  flex-direction: column;
+  width: 352px;
+  overflow: hidden;
+  padding: 20px 14px 10px;
   border: 1px solid color-mix(in srgb, var(--vp-c-divider) 70%, transparent);
   border-radius: var(--aya-radius-lg);
-  background: color-mix(in srgb, var(--o-card) 94%, transparent);
+  background: color-mix(in srgb, var(--o-card) 92%, transparent);
   box-shadow: var(--aya-elevation-4);
   backdrop-filter: var(--aya-frosted-blur-panel, blur(30px)) saturate(170%);
   -webkit-backdrop-filter: var(--aya-frosted-blur-panel, blur(30px)) saturate(170%);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(8px) scale(0.98);
+  filter: blur(6px);
+  transform: scale(0.94);
   pointer-events: none;
   transition:
-    opacity var(--dur-orbit-panel) var(--o-ease),
-    transform var(--dur-orbit-panel) var(--o-ease),
-    visibility 0s linear var(--dur-orbit-panel);
+    opacity var(--panel-out) var(--ease-home-exit, ease-in),
+    filter var(--panel-out) var(--ease-home-exit, ease-in),
+    transform var(--panel-out) var(--ease-home-exit, ease-in),
+    visibility 0s linear var(--panel-out);
 }
 
 .orbit-hero .orbit-panel.open {
   opacity: 1;
   visibility: visible;
+  filter: none;
   transform: none;
   pointer-events: auto;
-  transition-delay: 0s;
+  transition:
+    opacity calc(var(--panel-in) * 0.7) var(--o-ease),
+    filter var(--panel-in) var(--o-ease),
+    transform var(--panel-in) var(--ease-home-orbit),
+    visibility 0s;
+}
+
+.orbit-hero .orbit-panel-body > header,
+.orbit-hero .orbit-panel-body li {
+  animation: orbit-panel-row calc(var(--panel-in) * 1.15) var(--o-ease)
+    calc(var(--panel-in) * 0.25 + var(--r, 0) * var(--orbit-step) * 0.5) backwards;
 }
 
 .orbit-hero .orbit-panel header {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 0 6px 12px;
-  border-bottom: 1px solid var(--o-line);
+  padding: 0 8px 12px;
 }
 
 .orbit-hero .orbit-panel header small {
-  font: 500 10.5px/1 var(--o-mono);
+  padding-right: 30px;
+  font: 500 10.5px/1.5 var(--o-mono);
   letter-spacing: 0.16em;
   color: var(--o-accent);
+}
+
+.orbit-hero .orbit-panel-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.orbit-hero .orbit-panel-count {
+  flex-shrink: 0;
+  font: 500 10px/1 var(--o-mono);
+  letter-spacing: 0.14em;
+  color: var(--o-ink-3);
 }
 
 .orbit-hero .orbit-panel h3 {
   margin: 0;
   font-family: var(--o-serif-zh);
-  font-size: 19px;
+  font-size: 21px;
+  font-weight: 700;
   line-height: 1.3;
+  color: var(--o-ink);
 }
 
-.orbit-hero .orbit-panel ul { margin: 6px 0 0; padding: 0; list-style: none; }
+:root:not(.dark) .orbit-hero .orbit-panel h3 { color: #141413; }
+
+/* 标题下的点线：和正文刻度同一套语言，从左向右描出 */
+.orbit-hero .orbit-panel-rule {
+  display: block;
+  height: 1px;
+  margin: 0 8px 4px;
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--o-accent) 60%, transparent) 0.8px, transparent 1px);
+  background-size: 6px 1px;
+  mask-image: linear-gradient(90deg, #000 0%, #000 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 70%, transparent 100%);
+  transform-origin: left center;
+  animation: orbit-grow-x calc(var(--panel-in) * 1.6) var(--ease-home-orbit) calc(var(--panel-in) * 0.3) backwards;
+}
+
+.orbit-hero .orbit-panel-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.orbit-hero .orbit-panel ul {
+  position: relative;
+  min-height: 0;
+  margin: 2px 0 0;
+  padding: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  list-style: none;
+}
 
 .orbit-hero .orbit-panel li a {
+  position: relative;
   display: grid;
-  grid-template-columns: 54px 1fr auto;
+  grid-template-columns: 56px 1fr auto;
   align-items: center;
   gap: 10px;
-  padding: 11px 6px;
+  padding: 11px 8px;
   border-radius: var(--aya-radius-sm);
-  transition: background-color 0.2s;
+  color: var(--o-ink);
+  text-decoration: none;
+  transition: background-color var(--dur-menu, 0.32s) var(--o-ease);
+}
+
+.orbit-hero .orbit-panel li + li a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8px;
+  right: 8px;
+  height: 1px;
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-divider) 100%, transparent) 0.7px, transparent 1px);
+  background-size: 4px 1px;
+  transition: opacity var(--dur-menu, 0.32s) var(--o-ease);
 }
 
 .orbit-hero .orbit-panel li a:hover,
 .orbit-hero .orbit-panel li a:focus-visible {
+  outline: none;
   background: color-mix(in srgb, var(--o-accent) 8%, transparent);
+}
+
+.orbit-hero .orbit-panel li a:hover::before,
+.orbit-hero .orbit-panel li a:focus-visible::before,
+.orbit-hero .orbit-panel li:has(a:hover) + li a::before,
+.orbit-hero .orbit-panel li:has(a:focus-visible) + li a::before {
+  opacity: 0;
 }
 
 .orbit-hero .orbit-panel li code {
@@ -1160,21 +1316,145 @@ watch([openIndex, leaving], resetHeroPointer)
   background: none;
   font: italic 400 15px/1 var(--o-serif-latin);
   color: var(--o-accent);
+  transition: translate var(--dur-menu, 0.32s) var(--o-ease);
 }
 
-.orbit-hero .orbit-panel li span { font-size: 14px; }
-.orbit-hero .orbit-panel li i { font-size: 12px; font-style: normal; color: var(--o-ink-3); }
+.orbit-hero .orbit-panel li span {
+  font-size: 14px;
+  transition: color var(--dur-menu, 0.32s) var(--o-ease);
+}
+
+.orbit-hero .orbit-panel li i {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-style: normal;
+  color: var(--o-ink-3);
+}
+
+.orbit-hero .orbit-panel li i svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: translate var(--dur-menu, 0.32s) var(--ease-ios-spring), color var(--dur-menu, 0.32s) var(--o-ease);
+}
+
+.orbit-hero .orbit-panel li a:is(:hover, :focus-visible) code { translate: 3px 0; }
+.orbit-hero .orbit-panel li a:is(:hover, :focus-visible) span { color: var(--o-accent); }
+.orbit-hero .orbit-panel li a:is(:hover, :focus-visible) i svg { translate: 4px 0; color: var(--o-accent); }
 
 .orbit-hero .orbit-panel-close {
   position: absolute;
+  z-index: 1;
   top: 12px;
   right: 12px;
-  display: none;
-  width: 30px;
-  height: 30px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   color: var(--o-ink-3);
-  font-size: 18px;
+  transition:
+    background-color var(--dur-menu, 0.32s) var(--o-ease),
+    color var(--dur-menu, 0.32s) var(--o-ease),
+    rotate var(--dur-menu, 0.32s) var(--ease-ios-spring);
+}
+
+.orbit-hero .orbit-panel-close svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.orbit-hero .orbit-panel-close:is(:hover, :focus-visible) {
+  outline: none;
+  rotate: 90deg;
+  color: var(--o-accent);
+  background: color-mix(in srgb, var(--o-accent) 9%, transparent);
+}
+
+/* 圆盘到面板的点线：从圆盘一端描出，末端一枚小圆点 */
+.orbit-hero .orbit-tether {
+  position: absolute;
+  z-index: 9;
+  height: 1px;
+  margin-top: -0.5px;
+  transform-origin: 0 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-menu-out, 0.22s) var(--ease-home-exit, ease-in);
+}
+
+.orbit-hero .orbit-tether.open {
+  opacity: 1;
+  transition: none;
+}
+
+.orbit-hero .orbit-tether::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--o-accent) 70%, transparent) 0.9px, transparent 1.2px);
+  background-size: 6px 1px;
+  transform-origin: left center;
+  animation: orbit-grow-x calc(var(--dur-orbit-panel) * 1.3) var(--ease-home-orbit) backwards;
+}
+
+.orbit-hero .orbit-tether::after {
+  content: "";
+  position: absolute;
+  top: -2.5px;
+  right: -3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--o-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--o-accent) 16%, transparent);
+  animation: orbit-tether-dot calc(var(--dur-orbit-panel) * 0.9) var(--ease-ios-spring)
+    calc(var(--dur-orbit-panel) * 0.9) backwards;
+}
+
+/* 选中的圆盘：强调色底 + 一圈慢转的点线环；其余节点退后 */
+.orbit-hero .orbit-node-disc::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border: 1.5px dotted color-mix(in srgb, var(--o-accent) 70%, transparent);
+  border-radius: 50%;
+  opacity: 0;
+  scale: 0.8;
+  pointer-events: none;
+  transition: opacity var(--dur-menu, 0.32s) var(--o-ease), scale var(--dur-orbit-panel) var(--ease-ios-spring);
+}
+
+.orbit-hero .orbit-node[aria-expanded="true"] .orbit-node-disc {
+  background: color-mix(in srgb, var(--o-accent) 10%, var(--o-card));
+}
+
+.orbit-hero .orbit-node[aria-expanded="true"] .orbit-node-disc::after {
+  opacity: 1;
+  scale: 1;
+  animation: orbit-ring-spin 14s linear infinite;
+}
+
+.orbit-hero .orbit-node .orbit-node-label {
+  transition: opacity var(--dur-menu, 0.32s) var(--o-ease);
+}
+
+.orbit-hero.panel-open .orbit-node:not([aria-expanded="true"]) .orbit-node-label {
+  opacity: 0.5;
+}
+
+.orbit-hero.panel-open .orbit-node[aria-expanded="true"] .orbit-node-label b {
+  color: var(--o-accent);
 }
 
 .orbit-hero .orbit-scrim { display: none; }
@@ -1249,6 +1529,9 @@ watch([openIndex, leaving], resetHeroPointer)
 @keyframes orbit-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 @keyframes orbit-slide-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @keyframes orbit-pop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes orbit-panel-row { from { opacity: 0; transform: translateY(6px); filter: blur(4px); } }
+@keyframes orbit-tether-dot { from { opacity: 0; scale: 0; } }
+@keyframes orbit-ring-spin { to { rotate: 360deg; } }
 
 /* 竖屏平板：标题与下方区块共用 48px 内容栏 */
 @media (min-width: 640px) and (max-width: 799px) {
@@ -1280,11 +1563,27 @@ watch([openIndex, leaving], resetHeroPointer)
     width: auto;
     max-height: 70svh;
     overflow-y: auto;
+    padding-top: 26px;
     border-radius: var(--aya-radius-xl);
-    transform: translateY(24px);
+    filter: none;
+    transform: translateY(calc(100% + 24px));
+    transform-origin: center bottom !important;
   }
-  .orbit-hero .orbit-panel-close { display: block; }
-  .orbit-hero .orbit-panel header { padding-right: 36px; }
+  .orbit-hero .orbit-panel.open { transform: none; }
+  /* 底部抽屉的把手 */
+  .orbit-hero .orbit-panel::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    left: 50%;
+    width: 36px;
+    height: 4px;
+    margin-left: -18px;
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--o-ink-3) 30%, transparent);
+  }
+  .orbit-hero .orbit-panel-close { top: 16px; }
+  .orbit-hero .orbit-tether { display: none; }
   .orbit-hero .orbit-scrim {
     position: fixed;
     inset: 0;

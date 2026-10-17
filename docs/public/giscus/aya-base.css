@@ -1,0 +1,511 @@
+/* giscus 公用外观：形状、排版与动效。颜色由 aya-light.css / aya-dark.css 提供。
+   这份样式运行在 giscus.app 的 iframe 里，读不到站点的 CSS 变量与动效令牌，
+   时长与曲线按站点的 --ease-ios-fade / --ease-ios-spring 手抄一份。 */
+
+/* 站点自托管字体：fonts.css 里的 /fonts/... 按本样式表的来源解析，按 unicode-range 分片按需加载 */
+@import url("../fonts/fonts.css");
+
+main {
+  --aya-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --aya-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --aya-radius: 14px;
+  --aya-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  /* 外侧容器向两边各扩 10px，这里补回，让卡片阴影不被 iframe 边缘裁掉 */
+  padding: 4px 10px 18px;
+  font-family: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: var(--color-fg-default);
+}
+
+/* ---- 标题：等宽小字 + 点线，和正文的刻度标签同一套语言 ---- */
+.gsc-reactions-count,
+.gsc-comments-count {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--aya-accent);
+}
+
+.gsc-comments-count a,
+.gsc-left-header a,
+.gsc-comment-author a {
+  color: inherit;
+  text-decoration: none !important;
+  transition: color 0.2s var(--aya-ease);
+}
+
+.gsc-left-header em {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--color-fg-subtle);
+}
+
+.gsc-left-header em a:hover,
+.gsc-comment-author a:hover {
+  color: var(--aya-accent);
+}
+
+/* 排序：分段胶囊 */
+.gsc-right-header.BtnGroup {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--color-canvas-subtle);
+  box-shadow: inset 0 0 0 1px var(--color-border-muted);
+}
+
+.gsc-right-header .BtnGroup-item .btn {
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 2px 12px;
+  font-size: 12px;
+  color: var(--color-fg-muted);
+  background: transparent;
+  box-shadow: none;
+}
+
+.gsc-right-header .BtnGroup-item .btn:hover {
+  transform: none;
+  color: var(--color-fg-default);
+}
+
+.gsc-right-header .BtnGroup-item--selected .btn {
+  color: var(--aya-accent);
+  background: var(--color-canvas-default);
+  box-shadow: 0 1px 2px var(--aya-shadow-tint), 0 0 0 1px var(--color-border-muted);
+}
+
+.gsc-reactions {
+  animation: aya-rise 0.6s var(--aya-ease) backwards;
+}
+
+.gsc-header {
+  position: relative;
+  align-items: center;
+  padding-bottom: 12px;
+  margin-bottom: 4px;
+  animation: aya-rise 0.6s var(--aya-ease) 0.06s backwards;
+}
+
+.gsc-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background-image: radial-gradient(circle, var(--aya-dot) 0.8px, transparent 1px);
+  background-size: 6px 1px;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 72%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 72%, transparent 100%);
+  transform-origin: left center;
+  animation: aya-draw 0.9s var(--aya-ease) 0.16s backwards;
+}
+
+/* ---- 评论输入框 ---- */
+.gsc-comment-box:not(.gsc-comment-box-is-reply) {
+  overflow: hidden;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--aya-radius);
+  background: var(--color-canvas-default);
+  box-shadow: var(--aya-shadow);
+  transition: border-color 0.3s var(--aya-ease), box-shadow 0.4s var(--aya-ease);
+  animation: aya-focus 0.7s var(--aya-ease) 0.12s backwards;
+}
+
+.gsc-comment-box:not(.gsc-comment-box-is-reply):focus-within {
+  border-color: var(--aya-accent-line);
+  box-shadow: var(--aya-shadow), 0 0 0 4px var(--aya-accent-ring);
+}
+
+.gsc-comment-box-tabs {
+  padding: 6px 6px 0;
+  border-color: var(--color-border-muted);
+  background: var(--color-canvas-subtle);
+}
+
+.gsc-comment-box-tabs button {
+  margin-bottom: 6px;
+  border-color: transparent !important;
+  border-radius: 999px !important;
+  padding: 4px 14px !important;
+  color: var(--color-fg-muted);
+  background: transparent;
+  transition: background-color 0.25s var(--aya-ease), color 0.25s var(--aya-ease), box-shadow 0.25s var(--aya-ease);
+}
+
+.gsc-comment-box-tabs button:hover {
+  color: var(--color-fg-default);
+}
+
+.gsc-comment-box-tabs button.color-bg-canvas {
+  color: var(--aya-accent);
+  background: var(--color-canvas-default);
+  box-shadow: 0 1px 2px var(--aya-shadow-tint), 0 0 0 1px var(--color-border-muted);
+}
+
+.gsc-toolbar-item {
+  border-radius: 8px;
+  transition: background-color 0.2s var(--aya-ease), color 0.2s var(--aya-ease);
+}
+
+.gsc-toolbar-item:hover {
+  color: var(--aya-accent);
+  background: var(--aya-accent-soft);
+}
+
+.gsc-comment-box-write {
+  border: 1px solid var(--color-border-muted);
+  border-radius: 10px;
+  background: var(--color-canvas-inset);
+  transition: border-color 0.3s var(--aya-ease), background-color 0.3s var(--aya-ease);
+}
+
+.gsc-comment-box-write:focus-within {
+  border-color: var(--aya-accent-line);
+  background: var(--color-canvas-default);
+  box-shadow: none;
+}
+
+.gsc-comment-box-textarea {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  line-height: 1.7;
+}
+
+.gsc-comment-box-textarea::placeholder {
+  color: var(--color-fg-subtle);
+}
+
+.gsc-comment-box-preview {
+  border-color: var(--color-border-muted);
+}
+
+.gsc-comment-box-markdown-hint {
+  color: var(--color-fg-subtle);
+  transition: color 0.2s var(--aya-ease);
+}
+
+.gsc-comment-box-markdown-hint:hover {
+  color: var(--aya-accent);
+}
+
+/* ---- 按钮：胶囊、轻抬起、按下回弹 ---- */
+.btn {
+  border-radius: 999px;
+  padding-inline: 16px;
+  font-weight: 500;
+  transition:
+    transform 0.32s var(--aya-spring),
+    background-color 0.2s var(--aya-ease),
+    border-color 0.2s var(--aya-ease),
+    box-shadow 0.32s var(--aya-ease);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: scale(0.97);
+  transition-duration: 0.08s;
+}
+
+.btn-primary {
+  box-shadow: 0 4px 14px var(--aya-accent-glow);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 22px var(--aya-accent-glow);
+}
+
+.btn-primary svg {
+  transition: transform 0.4s var(--aya-spring);
+}
+
+.btn-primary:hover svg {
+  transform: rotate(-12deg) scale(1.08);
+}
+
+/* ---- 评论卡片：逐条对焦入场 ---- */
+.gsc-timeline > .gsc-comment {
+  animation: aya-focus 0.7s var(--aya-ease) backwards;
+}
+
+.gsc-timeline > .gsc-comment:nth-child(1) { animation-delay: 0.08s; }
+.gsc-timeline > .gsc-comment:nth-child(2) { animation-delay: 0.14s; }
+.gsc-timeline > .gsc-comment:nth-child(3) { animation-delay: 0.2s; }
+.gsc-timeline > .gsc-comment:nth-child(4) { animation-delay: 0.26s; }
+.gsc-timeline > .gsc-comment:nth-child(5) { animation-delay: 0.32s; }
+.gsc-timeline > .gsc-comment:nth-child(n + 6) { animation-delay: 0.38s; }
+
+/* 不能 overflow: hidden：向上弹出的表情菜单会被卡片裁掉，回复区的圆角单独补 */
+.gsc-comment > div:first-child {
+  border-color: var(--color-border-default) !important;
+  border-radius: var(--aya-radius) !important;
+  background: var(--color-canvas-default);
+  box-shadow: var(--aya-shadow);
+  transition: border-color 0.3s var(--aya-ease), box-shadow 0.4s var(--aya-ease), transform 0.4s var(--aya-ease);
+}
+
+.gsc-comment > div:first-child:hover {
+  border-color: var(--aya-accent-line) !important;
+  box-shadow: var(--aya-shadow-hover);
+  transform: translateY(-1px);
+}
+
+.gsc-comment-header {
+  padding-top: 12px;
+}
+
+/* 头像来自 avatars.githubusercontent.com，加载慢或失败时露出底色而不是空白 */
+.gsc-comment-author-avatar img,
+.gsc-reply-author-avatar img {
+  background: var(--aya-accent-soft);
+}
+
+.gsc-comment-author-avatar img {
+  box-shadow: 0 0 0 2px var(--color-canvas-default), 0 0 0 3px var(--aya-accent-line);
+  transition: transform 0.4s var(--aya-spring);
+}
+
+.gsc-comment > div:first-child:hover .gsc-comment-author-avatar img {
+  transform: scale(1.06);
+}
+
+.gsc-comment-author time {
+  font-size: 12px;
+  color: var(--color-fg-subtle);
+}
+
+.gsc-comment-content {
+  line-height: 1.75;
+}
+
+.gsc-comment-footer {
+  position: relative;
+}
+
+.gsc-comment-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background-image: radial-gradient(circle, var(--aya-dot) 0.8px, transparent 1px);
+  background-size: 6px 1px;
+  opacity: 0.7;
+}
+
+/* 回复：左侧点线串起来 */
+.gsc-replies {
+  position: relative;
+  border-color: var(--color-border-muted) !important;
+  border-end-start-radius: var(--aya-radius);
+  border-end-end-radius: var(--aya-radius);
+  background: var(--color-canvas-subtle);
+}
+
+.gsc-reply {
+  animation: aya-rise 0.5s var(--aya-ease) backwards;
+}
+
+.gsc-reply-author-avatar img {
+  box-shadow: 0 0 0 2px var(--color-canvas-subtle);
+}
+
+.gsc-tl-line {
+  background-color: transparent;
+  background-image: radial-gradient(circle, var(--aya-dot) 0.9px, transparent 1.2px);
+  background-size: 2px 6px;
+  background-repeat: repeat-y;
+  background-position: center top;
+}
+
+.gsc-reply-box {
+  border-color: var(--color-border-muted) !important;
+}
+
+.gsc-reply-box button {
+  border-radius: 10px;
+  transition: border-color 0.25s var(--aya-ease), background-color 0.25s var(--aya-ease);
+}
+
+.gsc-reply-box button:hover {
+  border-color: var(--aya-accent-line);
+}
+
+/* ---- 表态：胶囊，悬停时表情轻弹 ---- */
+.gsc-social-reaction-summary-item {
+  border-radius: 999px !important;
+  transition:
+    transform 0.32s var(--aya-spring),
+    background-color 0.2s var(--aya-ease),
+    border-color 0.2s var(--aya-ease),
+    color 0.2s var(--aya-ease);
+}
+
+.gsc-social-reaction-summary-item:not(.cursor-not-allowed):hover {
+  transform: translateY(-1px);
+}
+
+.gsc-social-reaction-summary-item:not(.cursor-not-allowed):active {
+  transform: scale(0.94);
+  transition-duration: 0.08s;
+}
+
+.gsc-social-reaction-summary-item.has-reacted {
+  color: var(--aya-accent);
+  border-color: var(--aya-accent-line) !important;
+  background: var(--aya-accent-soft) !important;
+}
+
+.gsc-emoji,
+.gsc-direct-reaction-button-emoji {
+  display: inline-block;
+  transition: transform 0.42s var(--aya-spring);
+}
+
+.gsc-emoji-button:hover .gsc-emoji,
+.gsc-direct-reaction-button:hover .gsc-direct-reaction-button-emoji,
+.gsc-upvote-button:hover .gsc-direct-reaction-button-emoji {
+  transform: scale(1.22) rotate(-8deg);
+}
+
+.gsc-reactions-button svg {
+  transition: transform 0.5s var(--aya-spring);
+}
+
+.gsc-reactions-button:hover svg {
+  transform: rotate(18deg) scale(1.1);
+}
+
+.gsc-emoji-button {
+  border-radius: 10px;
+  transition: background-color 0.2s var(--aya-ease), transform 0.3s var(--aya-spring);
+}
+
+.gsc-emoji-button:hover {
+  background: var(--aya-accent-soft);
+}
+
+/* giscus 用 .open 切换 scale 0.5 → 1 的过渡，这里只换成更柔的曲线并补上淡入 */
+.gsc-reactions-popover {
+  opacity: 0;
+  border-color: var(--color-border-default) !important;
+  border-radius: var(--aya-radius) !important;
+  box-shadow: var(--aya-shadow-pop) !important;
+  --tw-scale-x: 0.86;
+  --tw-scale-y: 0.86;
+  transition-duration: 0.34s;
+  transition-timing-function: var(--aya-spring);
+}
+
+.gsc-reactions-popover.open {
+  opacity: 1;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+}
+
+.gsc-reactions-popover.top { transform-origin: 16px bottom; }
+.gsc-reactions-popover.bottom { transform-origin: 16px top; }
+
+/* ---- 分页与加载 ---- */
+.gsc-pagination-button {
+  border-radius: 999px;
+  transition: color 0.2s var(--aya-ease), background-color 0.2s var(--aya-ease);
+}
+
+.gsc-pagination-button:hover {
+  color: var(--aya-accent);
+  background: var(--aya-accent-soft);
+}
+
+main .pagination-loader-container {
+  background-image: radial-gradient(circle, var(--aya-dot) 0.9px, transparent 1.2px);
+  background-size: 2px 6px;
+}
+
+main .gsc-loading-image {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  margin-inline: auto;
+  background-image: none;
+}
+
+main .gsc-loading-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1.5px dotted var(--aya-accent);
+  border-radius: 50%;
+  animation: aya-spin 1.6s linear infinite;
+}
+
+main .gsc-loading-image::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  border-radius: 50%;
+  background: var(--aya-accent);
+  transform-origin: 2.5px 16px;
+  animation: aya-spin 1.6s var(--aya-ease) infinite;
+}
+
+.gsc-loading-text {
+  font-family: var(--aya-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--color-fg-subtle);
+}
+
+/* ---- 正文 markdown ---- */
+.markdown a {
+  color: var(--aya-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--aya-accent-line);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s var(--aya-ease);
+}
+
+.markdown a:hover {
+  text-decoration-color: currentColor;
+}
+
+.markdown code {
+  border-radius: 6px;
+}
+
+.markdown pre {
+  border-radius: 10px;
+}
+
+.markdown blockquote {
+  border-left-color: var(--aya-accent-line);
+}
+
+/* ---- 关键帧 ---- */
+@keyframes aya-rise {
+  from { opacity: 0; transform: translateY(6px); }
+}
+
+@keyframes aya-focus {
+  0% { opacity: 0; filter: blur(6px); transform: translateY(8px); }
+  40% { opacity: 1; }
+  100% { opacity: 1; filter: none; transform: none; }
+}
+
+@keyframes aya-draw {
+  from { opacity: 0; transform: scaleX(0); }
+}
+
+@keyframes aya-spin {
+  to { transform: rotate(360deg); }
+}

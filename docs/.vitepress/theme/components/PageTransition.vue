@@ -5,6 +5,7 @@ import type { PageData } from 'vitepress'
 import { readMotionDuration } from '../motion-tokens'
 import { createOutlineJumpMotion } from '../outline-jump-motion'
 import { attachSidebarMotion } from '../sidebar-motion'
+import { finishDocLeave, playDocLeave, playDocOrbitExit } from '../doc-orbit'
 
 const router = useRouter()
 const { theme } = useData()
@@ -390,6 +391,47 @@ async function waitForArticleMediaLayout() {
   main.getBoundingClientRect()
 }
 
+function isDocToDoc(to: string) {
+  if (!document.querySelector('.VPDoc')) return false
+  if (pageKindFor(to) !== 'doc') return false
+  if (isTimelinePath(new URL(to, window.location.href).pathname)) return false
+  return normalizePath(to) !== normalizePath(window.location.href)
+}
+
+// 不用 View Transition：VitePress 在页面模块加载完、替换路由之前调用 onAfterPageLoad，
+// 在这里等失焦退场，加载与退场并行，两者都完成才换页，新页再由 doc-orbit 对焦进场。
+async function goBetweenDocs(
+  go: typeof router.go,
+  to: string,
+  options?: Parameters<typeof router.go>[1],
+) {
+  const currentSidebarKey = sidebarKeyFor(window.location.href)
+  const nextSidebarKey = sidebarKeyFor(to)
+  const keepsSidebar = Boolean(currentSidebarKey) && currentSidebarKey === nextSidebarKey
+  const leave = playDocLeave({ sidebar: !keepsSidebar })
+  const previousAfterPageLoad = router.onAfterPageLoad
+
+  router.onAfterPageLoad = async (href) => {
+    await leave
+    await previousAfterPageLoad?.(href)
+  }
+  try {
+    await go(to, options)
+  } finally {
+    router.onAfterPageLoad = previousAfterPageLoad
+  }
+
+  await nextTick()
+  resetSidebarObserver()
+  if (!keepsSidebar) {
+    sidebarIndicator?.remove()
+    sidebarIndicator = null
+    indicatorReady = false
+    updateSidebarIndicator()
+  }
+  requestAnimationFrame(() => requestAnimationFrame(finishDocLeave))
+}
+
 onMounted(() => {
   const originalGo = router.go.bind(router)
   outlineJumpMotion = createOutlineJumpMotion()
@@ -405,8 +447,14 @@ onMounted(() => {
       return
     }
 
+    if (isDocToDoc(to)) {
+      await goBetweenDocs(originalGo, to, options)
+      return
+    }
+
     await requestTimelinePageExit(to)
     await requestHomePageExit(to)
+    if (normalizePath(to) !== normalizePath(window.location.href)) await playDocOrbitExit()
 
     if (!canTransition(to, options)) {
       await originalGo(to, options)
@@ -457,6 +505,9 @@ onMounted(() => {
           updateSidebarIndicator()
         }
       })
+      transition.ready
+        .then(() => window.dispatchEvent(new CustomEvent('vt-transition-ready')))
+        .catch(() => {})
 
       await transition.finished
 
