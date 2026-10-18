@@ -49,6 +49,14 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y webp imagemagick
       - name: Install dependencies
         run: npm ci # 或 pnpm install / yarn install / bun install
+      # 构建结束时 dist 里的图片会转成 WebP（scripts/optimize-dist-images.mjs），
+      # 按原图内容缓存编码结果，只有新增/改动的图片需要重新编码
+      - name: Restore WebP cache
+        uses: actions/cache@v4
+        with:
+          path: docs/.vitepress/cache/dist-webp
+          key: dist-webp-${{ github.run_id }}
+          restore-keys: dist-webp-
       - name: Build with VitePress
         run: npm run docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
       - name: Upload artifact

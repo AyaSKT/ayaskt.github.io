@@ -142,6 +142,7 @@ export function customEnhanceApp({ app, router }: EnhanceAppContext) {
 | `--dur-ripple` / `--ripple-size` | 0.8s / 200px | 点击涟漪 |
 | `--dur-orbit-draw` / `--dur-orbit-fade` / `--dur-orbit-pop` / `--dur-orbit-panel` / `--orbit-step` | 1.6s / 1s / 0.8s / 0.42s / 0.1s | 首页轨道 hero 描线、淡入、节点弹出、课程面板与入场错峰 |
 | `--dur-home-reveal` / `--home-reveal-step` | 0.9s / 0.08s | 首页 hero 以下各区块（标题行、近期更新卡片、友情链接、站点信息）滚动进入视口时的入场时长与同批错峰 |
+| `--home-reveal-blur` | 10px | 上述区块入场的失焦半径：卡片取全值，卡内文字取一半；设为 `0px` 即关闭模糊 |
 | `--dur-home-orbit` / `--ease-home-orbit` | 1.3s / `cubic-bezier(0.22, 1, 0.36, 1)` | 首页进场：节点沿弧从起点滑行到位（越远越久），标题逐字升起与镜头张开共用该曲线 |
 | `--dur-home-iris` | 0.9s | 文档页回首页时，新页面从轨道弧心以椭圆光圈展开（弧心坐标由 hero 写入 `--home-iris-x/y`） |
 | `--dur-home-exit` / `--ease-home-exit` | 0.52s / `cubic-bezier(0.55, 0, 0.75, 0.2)` | 离开首页：节点收回弧起点、弧线回缩、镜头合拢、标题上浮虚化 |
@@ -155,8 +156,11 @@ JS 动画令牌（由 `theme/motion-tokens.ts` 在运行时读取，同样可在
 | `--dur-sidebar-collapse` | 0.26s | 侧栏分组展开折叠 | `sidebar-motion.ts` |
 | `--dur-sidebar-indicator` | 0.38s | 侧栏活跃指示器滑动 | `sidebar-window.css` |
 | `--dur-outline-out` / `--dur-outline-in` | 0.14s / 0.26s | 大纲跳转正文淡出 / 淡入 | `outline-jump-motion.ts` |
-| `--dur-timeline-enter` / `--dur-timeline-exit` | 0.52s / 0.3s | 时间线卡片展开、滚动入场与离场收起 | `TimelinePage.vue` |
-| `--dur-timeline-stagger` | 0.055s | 时间线节点逐级进出场的间隔 | `TimelinePage.vue` |
+| `--dur-timeline-enter` / `--dur-timeline-exit` | 0.78s / 0.26s | 时间线卡片由虚到实对焦入场、失焦离场；抬头标题逐字对焦也按它缩放 | `TimelinePage.vue` |
+| `--dur-timeline-stagger` / `--dur-timeline-lead` | 0.07s / 0.36s | 同批卡片的错峰间隔；首屏卡片等抬头起势的提前量（统计数字也从这里开始滚动） | `TimelinePage.vue` |
+| `--dur-timeline-rail` | 1.2s | 点线底轨自上而下描出 | `TimelinePage.vue` |
+| `--dur-timeline-fill` / `--dur-timeline-follow` | 0.34s / 0.12s | 进度实线追随滚动的时间常数：首次铺开 / 平时跟手（越大越"拖"） | `TimelinePage.vue` |
+| `--timeline-focus-blur` | 10px（≤768px 为 8px） | 时间线对焦入场的起始模糊半径 | `TimelinePage.vue` |
 | `--dur-timeline-exit-timeout` | 0.9s | 路由等待时间线离场完成的安全上限 | `PageTransition.vue` |
 
 **约定**：以后在 JS 中写动画时长 / 缓动，一律先在 `var.css` 声明令牌，再用 `readMotionDuration(token, fallbackMs)` / `readMotionEasing(token, fallback)` 读取，兜底值与令牌默认值保持一致。不要在 JS 里留裸数字。

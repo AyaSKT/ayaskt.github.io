@@ -17,6 +17,7 @@ import {
   listSidebarPrefixes,
   markdownLinkFromRelativePath,
 } from './local-editor/sidebar-patcher.mjs'
+import { optimizeDistImages } from '../../scripts/optimize-dist-images.mjs'
 // 使用 MathJax 4 渲染数学公式（@mdit/plugin-mathjax 依赖 @mathjax/src@4）
 import { mathjax, createMathjaxInstance } from '@mdit/plugin-mathjax'
 
@@ -1578,6 +1579,12 @@ export default defineConfig({
     'superpowers/**/*.md',
   ],
   buildConcurrency: 4,
+
+  // 所有页面写盘后，把 dist 里的 PNG / JPG / GIF 转成 WebP 并改写引用
+  async buildEnd(siteConfig) {
+    if (process.env.SKIP_WEBP === '1') return
+    await optimizeDistImages({ outDir: siteConfig.outDir, base: siteConfig.site.base })
+  },
 
   // IT / EPMF / CCD 笔记页面：右侧目录显式限定为 h2 ~ h3
   transformPageData(pageData) {

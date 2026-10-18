@@ -3,6 +3,7 @@
  * 生成本地 fonts.css,供站点自托管(避免运行时访问 fonts.googleapis.com 的
  * 慢速/不可达问题)。CI 与本地构建都会通过 docs:assets 调用本脚本;
  * 下载过的分片会被跳过(URL 自带内容 hash,天然幂等)。
+ * dev 使用 --offline,保留已有字体;首次运行时生成空样式表并使用系统字体。
  */
 import { createWriteStream, existsSync, mkdirSync, readdirSync, statSync, unlinkSync } from 'node:fs'
 import { join, resolve } from 'node:path'
@@ -122,6 +123,17 @@ function writeLocalCss(faces) {
 }
 
 async function main() {
+  if (process.argv.includes('--offline')) {
+    if (existsSync(outputCssPath)) {
+      console.log('Fonts: using local fonts.css (offline dev mode).')
+    } else {
+      mkdirSync(fontsDir, { recursive: true })
+      writeFileSync(outputCssPath, '/* Offline dev: use system fonts until npm run fonts:download is run. */\n')
+      console.log('Fonts: no local fonts; using system fonts. Run "npm run fonts:download" to download them.')
+    }
+    return
+  }
+
   const cssText = await fetchCss()
   const faces = parseFontFaces(cssText)
   if (!faces.length) throw new Error('No @font-face rules found in Google Fonts response')

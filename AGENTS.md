@@ -10,6 +10,8 @@ npm run docs:build     # Production build
 npm run docs:preview   # Preview production build
 ```
 
+Build output images are converted to WebP in `buildEnd` (`scripts/optimize-dist-images.mjs`): PNG/JPG/GIF in `dist` become WebP and all references in HTML/JS/CSS are rewritten. Source images stay untouched; head icons are skipped; cache lives in `docs/.vitepress/cache/dist-webp`; `SKIP_WEBP=1` disables it.
+
 VitePress v2.0.0-alpha.16. Build output goes to `docs/.vitepress/dist/`.
 
 ## Architecture

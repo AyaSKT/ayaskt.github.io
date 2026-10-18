@@ -12,6 +12,8 @@ npm run docs:preview   # Preview production build
 
 VitePress v2.0.0-alpha.16. Build output goes to `docs/.vitepress/dist/`.
 
+**WebP pipeline**: `buildEnd` in `config.mts` runs `scripts/optimize-dist-images.mjs` after all pages are written. It converts every PNG/JPG/GIF in `dist` to WebP (sharp; long edge capped at 2400px, EXIF orientation applied, animated GIFs stay animated), deletes the originals and rewrites absolute, URL-encoded and page-relative references in HTML/JS/CSS. Favicons / `og:image` found in `<head>` keep their format; images that would not shrink by ≥5% are kept. If `foo.webp` already exists the output becomes `foo.png.webp`. Results are cached by content hash in `docs/.vitepress/cache/dist-webp` (restored via `actions/cache` in CI). Bump `WEBP_SETTINGS.version` to force re-encoding; `SKIP_WEBP=1` disables the step. Source files are never modified, and dev mode is unaffected.
+
 External CSS: local subsets of `animate.css` and AnimXYZ in `theme/vendor/` (only the animations the theme actually uses). Regenerate with `node scripts/generate-motion-css-subsets.mjs` after adding new animation names/tokens (allowlists are at the top of that script).
 
 ## Architecture

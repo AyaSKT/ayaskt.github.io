@@ -162,11 +162,18 @@
   --dur-sidebar-indicator: 0.38s;
   --dur-outline-out: 0.14s;
   --dur-outline-in: 0.26s;
-  /* 时间线入场：短时长 + 极小错峰，卡片整体“一起进入” */
-  --dur-timeline-enter: 0.42s;
+  /* 时间线：卡片由虚到实对焦，同批逐张错峰；首屏先等抬头标题起势 */
+  --dur-timeline-enter: 0.78s;
   --dur-timeline-exit: 0.26s;
-  --dur-timeline-stagger: 0.026s;
+  --dur-timeline-stagger: 0.07s;
+  --dur-timeline-lead: 0.36s;
   --dur-timeline-exit-timeout: 0.9s;
+  /* 底轨自上而下描出；进度实线追随滚动的时间常数（首次铺开 / 平时跟手） */
+  --dur-timeline-rail: 1.2s;
+  --dur-timeline-fill: 0.34s;
+  --dur-timeline-follow: 0.12s;
+  /* 抬头统计数字滚动到位 */
+  --timeline-focus-blur: 10px;
   /* 首页轨道 hero：描线、淡入与入场错峰（每级 --orbit-step） */
   --dur-orbit-draw: 1.6s;
   --dur-orbit-fade: 1s;
@@ -176,6 +183,8 @@
   /* 首页各区块滚动进入视口时的入场时长与同批错峰 */
   --dur-home-reveal: 0.9s;
   --home-reveal-step: 0.08s;
+  /* 入场时的失焦半径：卡片取全值，卡内文字取一半 */
+  --home-reveal-blur: 10px;
   /* 首页进出场：节点沿弧滑行、从文档页回首页的椭圆光圈、离开首页的收束 */
   --dur-home-orbit: 1.3s;
   --dur-home-iris: 0.9s;

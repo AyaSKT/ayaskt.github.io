@@ -114,18 +114,35 @@
 .colophon-cells > div:nth-child(5) { --k: 3.2; }
 .colophon-cells > div:nth-child(6) { --k: 4; }
 
-@keyframes home-rv-rise { from { opacity: 0; transform: translateY(18px); } }
-@keyframes home-rv-slide-l { from { opacity: 0; transform: translateX(16px); } }
-@keyframes home-rv-slide-r { from { opacity: 0; transform: translateX(-14px); } }
-@keyframes home-rv-num { from { opacity: 0; transform: translateX(-28px); clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 -10% 0 0); } }
+/* 所有入场都由虚到实：先失焦，透明度在前 40–45% 就到位，模糊再慢慢收清 */
+@keyframes home-rv-rise {
+  from { opacity: 0; filter: blur(calc(var(--home-reveal-blur, 10px) * 0.5)); transform: translateY(18px); }
+  45% { opacity: 1; }
+}
+@keyframes home-rv-slide-l {
+  from { opacity: 0; filter: blur(calc(var(--home-reveal-blur, 10px) * 0.5)); transform: translateX(16px); }
+  45% { opacity: 1; }
+}
+@keyframes home-rv-slide-r {
+  from { opacity: 0; filter: blur(calc(var(--home-reveal-blur, 10px) * 0.4)); transform: translateX(-14px); }
+  45% { opacity: 1; }
+}
+@keyframes home-rv-num {
+  from { opacity: 0; filter: blur(var(--home-reveal-blur, 10px)); transform: translateX(-28px); clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 -10% 0 0); }
+}
 @keyframes home-rv-grow-x { from { transform: scaleX(0); } }
 @keyframes home-rv-ruler { from { opacity: 0; transform: scaleX(0.15); } }
 @keyframes home-rv-card {
-  from { opacity: 0; transform: perspective(1400px) translateY(56px) rotateX(9deg) scale(0.97); }
+  from { opacity: 0; filter: blur(var(--home-reveal-blur, 10px)); transform: perspective(1400px) translateY(56px) rotateX(9deg) scale(0.97); }
+  40% { opacity: 1; }
 }
 @keyframes home-rv-wipe {
   from { clip-path: inset(0 100% 0 0); transform: scale(1.08); }
   to { clip-path: inset(0 0 0 0); }
 }
 @keyframes home-rv-zoom { from { transform: scale(1.18); } }
-@keyframes home-rv-cell { from { opacity: 0; transform: translateY(10px); background-color: color-mix(in srgb, var(--vp-c-brand-1) 10%, transparent); } }
+@keyframes home-rv-cell {
+  from { opacity: 0; filter: blur(calc(var(--home-reveal-blur, 10px) * 0.4)); transform: translateY(10px); background-color: color-mix(in srgb, var(--vp-c-brand-1) 10%, transparent); }
+  45% { opacity: 1; }
+}

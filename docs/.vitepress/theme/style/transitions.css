@@ -310,9 +310,10 @@ a:active, button:active, .VPNavBarMenuLink:active, .VPLink:active {
     --dur-panel: 0.56s;
     --dur-ripple: 0.6s;
     --dur-reveal: 0.54s;
-    --dur-timeline-enter: 0.38s;
+    --dur-timeline-enter: 0.66s;
     --dur-timeline-exit: 0.24s;
-    --dur-timeline-stagger: 0.024s;
+    --dur-timeline-stagger: 0.06s;
+    --timeline-focus-blur: 8px;
     --dur-timeline-exit-timeout: 0.78s;
     --ripple-size: 140px;
   }
