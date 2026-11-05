@@ -17,6 +17,8 @@
 
 `package.json` 中的 `timeline:covers` 负责单独生成时间线资源；它已经接入 `docs:assets`，因此 `npm run docs:dev` 和 `npm run docs:build` 都会先自动刷新时间线。
 
+首页「近期更新」及笔记统计也读取同一份时间线数据。新增课程收录后，重新生成数据即可同步更新首页。
+
 ## 在 timeline.md 中修改卡片
 
 `timeline.entries` 中每项对应“同一门课程 + 同一个月份”的一张卡片。`key` 必须写成 `课程目录名::YYYY.MM`，例如：
@@ -72,7 +74,7 @@ timeline:
 
 - `timestampOverrides`：按相对路径锁定单篇笔记的月份。当前 EMFT Chapter 2 固定在 2026 年 3 月。
 - AIML 的特殊判断：当前将原属 2026 年 3 月的 Lecture 1–5 归入 2026 年 1 月。以后若只需覆盖少数明确文件，优先改为在 `timestampOverrides` 中逐项列出。
-- `excludedSegments`：整门课程不进入时间线。当前为 ADC、MS。
+- `excludedSegments`：整门课程不进入时间线。当前为 MS；ADC 按普通课程规则收录。
 - `noVisualCourses`：课程进入时间线，但不读取封面和歌词。当前为 AIML、CAD、CPS_N、EP。
 - CPS 2026 年 3 月：当前在扫描阶段单独排除，其他月份的 CPS 不受影响。
 - `earliestTimestamp`：普通课程的最早收录时间。

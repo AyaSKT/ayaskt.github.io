@@ -228,6 +228,7 @@ const frameStyle = computed<Record<string, string>>(() => {
   max-width: 100%;
   height: auto;
   margin: 0;
+  border-radius: 0;
   object-fit: contain;
   object-position: var(--lyric-cover-image-position);
   transform: translate3d(0, 0, 0);
@@ -269,6 +270,7 @@ const frameStyle = computed<Record<string, string>>(() => {
   width: 100%;
   height: 100%;
   margin: 0;
+  border-radius: 0;
   object-fit: cover;
   object-position: var(--lyric-cover-image-position);
   filter: blur(22px) saturate(1.08);

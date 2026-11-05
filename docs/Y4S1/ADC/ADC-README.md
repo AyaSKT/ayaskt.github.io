@@ -24,3 +24,88 @@ pageClass: course-index-page
 </LyricCard>
 
 ---
+
+
+<CourseIndex
+  course="ADC"
+  basePath="Y4S1/ADC"
+  :groups="[
+    {
+      title: 'Lectures',
+      items: [
+        {
+          code: 'Lecture 01',
+          title: '数字通信系统',
+          subtitle: 'Digital Communication System',
+          link: 'Lecture 1.md'
+        },
+        {
+          code: 'Lecture 02',
+          title: '传输介质',
+          subtitle: 'Transmission Media',
+          link: 'Lecture 2.md'
+        },
+        {
+          code: 'Lecture 03',
+          title: '链路预算',
+          subtitle: 'Link Budget Analysis',
+          link: 'Lecture 3.md'
+        },
+        {
+          code: 'Lecture 04-05',
+          title: '信道编码与错误控制',
+          subtitle: 'Channel Coding',
+          link: 'Lecture 4-5.md'
+        },
+        {
+          code: 'Lecture 06-07',
+          title: '双工、复用与多址',
+          subtitle: 'Duplexing, Multiplexing and Multiple Access',
+          link: 'Lecture 6-7.md'
+        },
+        {
+          code: 'Lecture 08',
+          title: '线路编码',
+          subtitle: 'Line Coding',
+          link: 'Lecture 8.md'
+        },
+        {
+          code: 'Lecture 09',
+          title: '无线接入网',
+          subtitle: 'Introduction to Radio Access Networks',
+          link: 'Lecture 9.md'
+        },
+        {
+          code: 'Lecture 11',
+          title: '解调与检测',
+          subtitle: 'Demodulation and Detection',
+          link: 'Lecture 11.md'
+        },
+        {
+          code: 'Lecture 12',
+          title: '误码性能',
+          subtitle: 'BER Performance',
+          link: 'Lecture 12.md'
+        },
+        {
+          code: 'Lecture 13',
+          title: '眼图与脉冲成形',
+          subtitle: 'Eye Diagram and Pulse Shaping',
+          link: 'Lecture 13.md'
+        },
+        {
+          code: 'Lecture 14',
+          title: '信道均衡',
+          subtitle: 'Channel Equalisation',
+          link: 'Lecture 14.md'
+        },
+        {
+          code: 'Lecture 15',
+          title: '正交频分复用',
+          subtitle: 'OFDM',
+          link: 'Lecture 15.md'
+        }
+      ]
+    }
+  ]"
+/>

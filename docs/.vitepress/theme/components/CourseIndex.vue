@@ -32,7 +32,7 @@ const props = withDefaults(defineProps<{
   basePath: '',
 })
 
-const courseThumbnailUrls = import.meta.glob('../../../Y3S*/**/*.thumb.webp', {
+const courseThumbnailUrls = import.meta.glob('../../../Y*/**/*.thumb.webp', {
   eager: true,
   query: '?url',
   import: 'default',
@@ -446,6 +446,7 @@ const resolvedGroups = computed(() =>
   width: 100%;
   height: 100%;
   display: block;
+  border-radius: 0;
   object-fit: cover;
 }
 
@@ -504,6 +505,7 @@ const resolvedGroups = computed(() =>
   max-width: none;
   height: calc(100% + 36px);
   margin: 0;
+  border-radius: 0;
   object-fit: cover;
   filter: blur(22px) saturate(1.24);
   opacity: 0.96;

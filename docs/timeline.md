@@ -17,6 +17,7 @@ timeline:
 
   # 同一月份的日期和节点共用一种颜色。
   dateAccents:
+    '2026.11': amber
     '2026.07': cyan
     '2026.06': blue
     '2026.05': purple
@@ -33,6 +34,15 @@ timeline:
   # key 固定为“课程目录名::YYYY.MM”。条目顺序也决定同月卡片的顺序。
   # cover 是相对于 docs/ 的原图路径；留空即为无封面卡片。
   entries:
+    - key: 'ADC::2026.11'
+      course: '高阶数字通信 ADC'
+      title: 'Lecture 1 - 9 / 11 - 15'
+      description: '为了我自己，只是如此，就仅仅是如此而已。'
+      cover: 'Y4S1/ADC/Lecture 1.attachments/1793780893664.jpg'
+      imageAlt: '高阶数字通信 ADC 2026年11月笔记封面'
+      imagePosition: center
+      accent: amber
+
     - key: 'IT::2026.07'
       course: '信息论基础 IT'
       title: 'Lecture 2 - 11'

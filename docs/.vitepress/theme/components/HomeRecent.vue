@@ -8,7 +8,6 @@ interface TimelineNote {
   title: string
   href: string
   updatedAt: string
-  locked: boolean
 }
 
 interface TimelineEntry {
@@ -51,7 +50,6 @@ const cards = computed(() => entries.slice(0, 4).map((entry) => {
     ...splitCourse(entry.course),
     notes,
     href: notes[0] ? withBase(notes[0].href) : withBase('/timeline'),
-    allLocked: notes.every((n) => n.locked),
     image: withBase(entry.image),
   }
 }))
@@ -105,10 +103,6 @@ const timelineHref = withBase('/timeline')
               <a :href="withBase(note.href)">
                 <time>{{ shortDate(note.updatedAt) }}</time>
                 <span>{{ note.title }}</span>
-                <svg v-if="note.locked" class="recent-lock" viewBox="0 0 16 16" aria-label="需要密码">
-                  <rect x="3.5" y="7" width="9" height="6.5" rx="1.6" />
-                  <path d="M5.5 7V5.2a2.5 2.5 0 0 1 5 0V7" />
-                </svg>
               </a>
             </li>
           </ol>
@@ -138,10 +132,6 @@ const timelineHref = withBase('/timeline')
           <span class="recent-range">{{ card.title }}</span>
           <span class="recent-card-foot">
             <span>{{ card.notes.length }} 篇笔记</span>
-            <svg v-if="card.allLocked" class="recent-lock" viewBox="0 0 16 16" aria-label="需要密码">
-              <rect x="3.5" y="7" width="9" height="6.5" rx="1.6" />
-              <path d="M5.5 7V5.2a2.5 2.5 0 0 1 5 0V7" />
-            </svg>
             <svg class="recent-arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" /></svg>
           </span>
         </span>
@@ -354,7 +344,7 @@ const timelineHref = withBase('/timeline')
 
 .recent-notes a {
   display: grid;
-  grid-template-columns: 46px minmax(0, 1fr) auto;
+  grid-template-columns: 46px minmax(0, 1fr);
   align-items: center;
   gap: 12px;
   padding: 10px 2px;
@@ -380,14 +370,6 @@ const timelineHref = withBase('/timeline')
   line-height: 1.4;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.recent-lock {
-  width: 14px;
-  height: 14px;
-  fill: none;
-  stroke: var(--vp-c-text-3);
-  stroke-width: 1.3;
 }
 
 .recent-more {

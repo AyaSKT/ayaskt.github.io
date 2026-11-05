@@ -29,7 +29,7 @@ const blurEnd = 0.9
 const alphaStart = 0.58
 const blurRadius = 7
 const earliestTimestamp = Date.parse('2026-01-01T00:00:00+08:00')
-const excludedSegments = new Set(['ADC', 'MS'])
+const excludedSegments = new Set(['MS'])
 const noVisualCourses = new Set(['AIML', 'CAD', 'CPS_N', 'EP'])
 const timestampOverrides = new Map([
   ['Y3S2/EMFT/EMFT Chapter 2.md', Date.parse('2026-03-31T12:00:00+08:00')],
@@ -542,7 +542,7 @@ async function main() {
 
   fs.writeFileSync(entriesPath, `${JSON.stringify(entries, null, 2)}\n`)
   console.log(`Generated ${entries.length} timeline groups from ${notes.length} notes and ${generatedCovers.size} covers.`)
-  console.log('Excluded courses: ADC, MS.')
+  console.log(`Excluded courses: ${[...excludedSegments].join(', ')}.`)
   if (missingOwnCovers.length) {
     console.warn(`${missingOwnCovers.length} notes use the generic fallback cover:`)
     for (const notePath of missingOwnCovers) console.warn(`- ${notePath}`)

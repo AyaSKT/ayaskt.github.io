@@ -1,5 +1,94 @@
 [
   {
+    "id": "adc-2026-11-70b99638",
+    "period": "2026.11",
+    "course": "高阶数字通信 ADC",
+    "title": "Lecture 1 - 9 / 11 - 15",
+    "description": "为了我自己，只是如此，就仅仅是如此而已。",
+    "image": "/timeline-covers/1793780893664-b8108f6461-faded.webp",
+    "hasCover": true,
+    "imageAlt": "高阶数字通信 ADC 2026年11月笔记封面",
+    "imagePosition": "center",
+    "accent": "amber",
+    "dateAccent": "amber",
+    "noteMeta": "高阶数字通信 ADC · 2026年11月 · 12 篇笔记",
+    "updatedAt": "2026-11-05T08:41:57.000Z",
+    "notes": [
+      {
+        "title": "1 Digital Communication System",
+        "href": "/Y4S1/ADC/Lecture%201.html",
+        "updatedAt": "2026-11-03T14:47:32.000Z",
+        "locked": true
+      },
+      {
+        "title": "2 Transmission Media",
+        "href": "/Y4S1/ADC/Lecture%202.html",
+        "updatedAt": "2026-11-04T02:34:19.000Z",
+        "locked": true
+      },
+      {
+        "title": "3 Link Budget Analysis",
+        "href": "/Y4S1/ADC/Lecture%203.html",
+        "updatedAt": "2026-11-04T07:12:58.000Z",
+        "locked": true
+      },
+      {
+        "title": "4-5 Channel Coding and Error Control",
+        "href": "/Y4S1/ADC/Lecture%204-5.html",
+        "updatedAt": "2026-11-04T08:48:26.000Z",
+        "locked": true
+      },
+      {
+        "title": "6-7 Duplexing, Multiplexing and Multiple Access",
+        "href": "/Y4S1/ADC/Lecture%206-7.html",
+        "updatedAt": "2026-11-04T11:42:07.000Z",
+        "locked": true
+      },
+      {
+        "title": "8 Line Coding",
+        "href": "/Y4S1/ADC/Lecture%208.html",
+        "updatedAt": "2026-11-04T13:15:44.000Z",
+        "locked": true
+      },
+      {
+        "title": "9 Introduction to Radio Access Networks",
+        "href": "/Y4S1/ADC/Lecture%209.html",
+        "updatedAt": "2026-11-04T14:58:31.000Z",
+        "locked": true
+      },
+      {
+        "title": "11 Demodulation and Detection",
+        "href": "/Y4S1/ADC/Lecture%2011.html",
+        "updatedAt": "2026-11-05T01:47:12.000Z",
+        "locked": true
+      },
+      {
+        "title": "12 BER Performance",
+        "href": "/Y4S1/ADC/Lecture%2012.html",
+        "updatedAt": "2026-11-05T03:23:38.000Z",
+        "locked": true
+      },
+      {
+        "title": "13 Eye Diagram and Pulse Shaping",
+        "href": "/Y4S1/ADC/Lecture%2013.html",
+        "updatedAt": "2026-11-05T05:56:05.000Z",
+        "locked": true
+      },
+      {
+        "title": "14 Channel Equalisation",
+        "href": "/Y4S1/ADC/Lecture%2014.html",
+        "updatedAt": "2026-11-05T07:18:49.000Z",
+        "locked": true
+      },
+      {
+        "title": "15 Orthogonal Frequency Division Multiplexing",
+        "href": "/Y4S1/ADC/Lecture%2015.html",
+        "updatedAt": "2026-11-05T08:41:57.000Z",
+        "locked": true
+      }
+    ]
+  },
+  {
     "id": "it-2026-07-c6460297",
     "period": "2026.07",
     "course": "信息论基础 IT",
